@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="2DGameFramework">
+      <UniqueIdentifier>{0357af01-3edc-4c39-a3d9-2b8ff468a91e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed">
+      <UniqueIdentifier>{1cefc68e-8b1d-4ce0-b8e8-9205494e8468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\Scene">
+      <UniqueIdentifier>{41a11635-02c4-4193-a075-4e3348247087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\UI">
+      <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\Player">
+      <UniqueIdentifier>{4034af17-4b69-457e-97f8-6c3df58dd7ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\Enemy">
+      <UniqueIdentifier>{053ceacc-322a-4912-aaa8-2df7309d11b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\Enemy\Boss">
+      <UniqueIdentifier>{367166ca-ab94-4406-8aee-d969a435713d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\Stage">
+      <UniqueIdentifier>{9a0e7d88-bd8a-4386-a524-7bab0e407516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Animation">
+      <UniqueIdentifier>{520fca63-5cd4-4d8a-80a5-93408525a7d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\D2DRenderer">
+      <UniqueIdentifier>{2098b4a6-1398-4a0a-821f-79fe04dcbb04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Effect">
+      <UniqueIdentifier>{f4666868-421e-4923-bb0d-efc43cb14c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\GameObject">
+      <UniqueIdentifier>{1f3a64a1-057a-49ad-9839-331873b87e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Image">
+      <UniqueIdentifier>{c5a8407b-e905-46d7-909d-0a91bc453b21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Manager">
+      <UniqueIdentifier>{db7e9f0d-ad9b-4998-99df-aa14108c1921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\ProgressBar">
+      <UniqueIdentifier>{8a394e58-ee3b-4b2e-b861-9bab4c355775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\SingletonBase">
+      <UniqueIdentifier>{14d2192f-6396-4b0d-bddb-2328c615fe03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Timer">
+      <UniqueIdentifier>{51ac7ca8-0db0-4538-b0aa-abc6b5454b9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Utils">
+      <UniqueIdentifier>{40367b04-14d5-4d7e-91d9-15ddbf431719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\GameNode">
+      <UniqueIdentifier>{cad5ca17-2639-45f7-9bbe-f37611b6fb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Manager\Camera">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\Enum">
+      <UniqueIdentifier>{b9efc908-0e29-4eca-a912-9a87c94bced3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="windowsAPI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>2DGameFramework\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraEvent.h">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraShakeEvent.h">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="D2DRenderer.h">
+      <Filter>2DGameFramework\D2DRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>2DGameFramework\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatRect.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryHeader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>2DGameFramework\ProgressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="randomFunction.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="AllEnums.h">
+      <Filter>Dungreed\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>Dungreed\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearFunc.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>2DGameFramework\GameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>2DGameFramework\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>2DGameFramework\SingletonBase</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround.h">
+      <Filter>Dungreed</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>2DGameFramework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>2DGameFramework\Image</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="windowsAPI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>2DGameFramework\GameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>2DGameFramework\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraEvent.cpp">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraShakeEvent.cpp">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DRenderer.cpp">
+      <Filter>2DGameFramework\D2DRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DRenderer+Draw.cpp">
+      <Filter>2DGameFramework\D2DRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>2DGameFramework\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatRect.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>2DGameFramework\ProgressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearFunc.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>2DGameFramework\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround.cpp">
+      <Filter>Dungreed</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>2DGameFramework\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>2DGameFramework\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>헤더 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Dungreed.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Dungreed.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
