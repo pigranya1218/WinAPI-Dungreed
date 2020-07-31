@@ -34,5 +34,4 @@ void MainScene::render()
 	_birdImage->aniRender(Vector2(WINSIZEX / 2 - 200, WINSIZEY / 2 + 200), _ani, false);
 	_birdImage->setScale(3);
 	_birdImage->aniRender(Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2 + 200), _ani, true);
-
 }

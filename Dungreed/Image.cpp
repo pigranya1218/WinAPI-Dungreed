@@ -135,42 +135,14 @@ void Image::frameRender(const Vector2& position, const int frameX, const int fra
 {
 	//현재 프레임인덱스 
 	int frame = frameY * _maxFrameX + frameX;
-	Vector2 size = _size * _scale;
-
-	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
-	D2D1::Matrix3x2F translateMatrix;
-	D2D1::Matrix3x2F lrMatrix;
-	if (bisymmetry)
-	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x + size.x / 2.f, position.y - size.y / 2.f);
-		lrMatrix = D2D1::Matrix3x2F(-1, 0, 0, 1, 0, 0);
-	}
-	else
-	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x - size.x / 2.f, position.y - size.y / 2.f);
-		lrMatrix = D2D1::Matrix3x2F(1, 0, 0, 1, 0, 0);
-	}
-
-	//그릴 영역 세팅 
-	D2D1_RECT_F dxArea = D2D1::RectF(0.0f, 0.0f, _size.x, _size.y);
-	D2D1_RECT_F dxSrc = D2D1::RectF((float)_frameInfo[frame].x * _scale, (float)_frameInfo[frame].y * _scale,
-		(float)(_frameInfo[frame].x + _frameInfo[frame].width) * _scale,
-		(float)(_frameInfo[frame].y + _frameInfo[frame].height) * _scale);
-	//최종행렬 세팅
-	D2D_RENDERER->getRenderTarget()->SetTransform(scaleMatrix * rotateMatrix * lrMatrix * translateMatrix);
-	//렌더링 요청
-	D2D_RENDERER->getRenderTarget()->DrawBitmap(_bitmap, dxArea, _alpha,
-		D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, &dxSrc);
-
-	this->resetRenderOption();
+	this->render(position, Vector2(_frameInfo[frame].x, _frameInfo[frame].y), Vector2(_frameInfo[frame].width, _frameInfo[frame].height), bisymmetry);
 }
 
 void Image::aniRender(const Vector2 & position, Animation * ani, bool bisymmetry)
 {
 	POINT sourPos = ani->getFramePos();
 	POINT sourSize = { ani->getFrameWidth(), ani->getFrameHeight() };
-	render(position, Vector2(sourPos), Vector2(sourSize), bisymmetry);
+	this->render(position, Vector2(sourPos), Vector2(sourSize), bisymmetry);
 	
 }
 
