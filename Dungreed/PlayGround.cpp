@@ -22,6 +22,16 @@ HRESULT playGround::init()
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * MAIN SCENE
 	IMAGE_MANAGER->addImage("MAIN_SCENE/LOGO", L"resources/images/MainScene/MainLogo.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/COPYRIGHT", L"resources/images/MainScene/Copyright.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/TEAM_LOGO", L"resources/images/MainScene/TeamLogo.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/PLAY_ON", L"resources/images/MainScene/PlayOn_Kor.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/PLAY_OFF", L"resources/images/MainScene/PlayOff_Kor.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/OPTION_ON", L"resources/images/MainScene/OptionOn_Kor.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/OPTION_OFF", L"resources/images/MainScene/OptionOff_Kor.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/EXIT_ON", L"resources/images/MainScene/ExitOn_Kor.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/EXIT_OFF", L"resources/images/MainScene/ExitOff_Kor.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/FRONT_CLOUD", L"resources/images/MainScene/FrontCloud.png");
+	IMAGE_MANAGER->addImage("MAIN_SCENE/BACK_CLOUD", L"resources/images/MainScene/BackCloud.png");
 	IMAGE_MANAGER->addFrameImage("MAIN_SCENE/BIRD", L"resources/images/MainScene/bird.png", 8, 1);
 	
 	// * STAGE SCENE
