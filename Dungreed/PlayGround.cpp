@@ -24,6 +24,15 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MAIN_SCENE/LOGO", L"resources/images/MainScene/MainLogo.png");
 	IMAGE_MANAGER->addFrameImage("MAIN_SCENE/BIRD", L"resources/images/MainScene/bird.png", 8, 1);
 	
+	// * STAGE SCENE
+	// ** VILLIGE
+
+	// ** DUNGEON
+
+	// ** ENEMY
+
+	
+
 	// 모든 씬 SCENE_MANAGER에 등록
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->changeScene("MAIN");	

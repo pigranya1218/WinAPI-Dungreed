@@ -23,6 +23,7 @@ void MainScene::update()
 
 void MainScene::render()
 {
+	// background
 	D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, WINSIZEY), 106, 174, 247, 1);
 
 	IMAGE_MANAGER->findImage("MAIN_SCENE/LOGO")->setScale(3);
