@@ -47,6 +47,8 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->changeScene("MAIN");	
 
+	TIME_MANAGER->update();
+
 	return S_OK;
 }
 

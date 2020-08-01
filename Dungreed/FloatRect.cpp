@@ -14,7 +14,7 @@ FloatRect::FloatRect(const float& left, const float& top, const float& right, co
 FloatRect::FloatRect(const int& left, const int& top, const int& right, const int& bottom)
 	: left((float)left), top((float)top), right((float)right), bottom((float)bottom) {}
 
-FloatRect::FloatRect(const Vector2& pos, const Vector2& size, const Pivot& pivot)
+FloatRect::FloatRect(const Vector2& pos, const Vector2& size, const PIVOT& pivot)
 {
 	*this = rectMakePivot(pos, size, pivot);
 }
@@ -62,7 +62,7 @@ Vector2 FloatRect::getSize()
 
 FLOATRECT 정보 갱신
 **************************************************************************************************/
-void FloatRect::update(const Vector2& pos, const Vector2& size, const Pivot& pivot)
+void FloatRect::update(const Vector2& pos, const Vector2& size, const PIVOT& pivot)
 {
 	*this = ::rectMakePivot(pos, size, pivot);
 }

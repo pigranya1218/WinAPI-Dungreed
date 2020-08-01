@@ -284,7 +284,7 @@ void D2DRenderer::drawRectangle(const FloatRect& rc, const DefaultBrush& default
 ************************************************************************************************/
 void D2DRenderer::drawEllipse(const Vector2& origin, const float radius, const DefaultBrush& defaultBrush, const float strokeWidth)
 {
-	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), Pivot::Center);
+	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), PIVOT::CENTER);
 	Vector2 pos = origin;
 	float tempRadius = radius;
 
@@ -308,7 +308,7 @@ void D2DRenderer::drawEllipse(const Vector2& origin, const float radius, const D
 void D2DRenderer::drawEllipse(const Vector2& origin, const float radius, const D2D1::ColorF::Enum& color,
 	const float alpha, const float strokeWidth)
 {
-	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), Pivot::Center);
+	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), PIVOT::CENTER);
 	Vector2 pos = origin;
 	float tempRadius = radius;
 
@@ -428,7 +428,7 @@ void D2DRenderer::fillRectangle(const FloatRect& rc, const DefaultBrush& default
 ************************************************************************************************/
 void D2DRenderer::fillEllipse(const Vector2& origin, const float radius, const D2D1::ColorF::Enum& color,const float alpha)
 {
-	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), Pivot::Center);
+	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), PIVOT::CENTER);
 	Vector2 pos = origin;
 	float tempRadius = radius;
 
@@ -469,7 +469,7 @@ void D2DRenderer::fillEllipse(const Vector2 & origin, const Vector2 & radius, co
 ************************************************************************************************/
 void D2DRenderer::fillEllipse(const Vector2& origin, const float radius, const DefaultBrush& brush)
 {
-	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), Pivot::Center);
+	FloatRect rc = rectMakePivot(origin, Vector2(radius, radius), PIVOT::CENTER);
 	Vector2 pos = origin;
 	float tempRadius = radius;
 

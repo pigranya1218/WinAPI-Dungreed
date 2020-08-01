@@ -17,7 +17,9 @@ enum class DIRECTION : unsigned int
 	RIGHT
 };
 
-enum class Pivot : int
+enum class PIVOT : int
 {
-	LeftTop, Center, Bottom
+	LEFT_TOP, 
+	CENTER, 
+	BOTTOM
 };

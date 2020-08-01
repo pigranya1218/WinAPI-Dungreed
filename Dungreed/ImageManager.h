@@ -5,9 +5,6 @@
 class ImageManager : public SingletonBase<ImageManager>
 {
 private:
-	using ImageIter = map<string, class Image*>::iterator;
-
-private:
 	map<string, class Image*> _imageList;
 
 	IWICImagingFactory* _wicFactory;

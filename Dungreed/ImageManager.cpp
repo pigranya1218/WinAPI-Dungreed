@@ -73,7 +73,7 @@ Image * ImageManager::addFrameImage(const string& key,const wstring& file,const 
 **********************************************************************/
 Image * ImageManager::findImage(const string& key)
 {
-	ImageIter iter = _imageList.find(key);
+	auto iter = _imageList.find(key);
 	if (iter != _imageList.end())
 		return iter->second;
 	return nullptr;
@@ -140,7 +140,7 @@ ID2D1Bitmap * ImageManager::createD2DBitmapFromFile(const wstring & file)
 **********************************************************************/
 void ImageManager::deleteAll()
 {
-	ImageIter iter = _imageList.begin();
+	auto iter = _imageList.begin();
 	for (; iter != _imageList.end(); ++iter)
 	{
 		SAFE_DELETE(iter->second);

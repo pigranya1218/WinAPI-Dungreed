@@ -13,7 +13,7 @@ public:
 	FloatRect();
 	explicit FloatRect(const float& left, const float& top, const float& right, const float& bottom);
 	explicit FloatRect(const int& left, const int& top, const int& right, const int& bottom);
-	explicit FloatRect(const Vector2& pos, const Vector2& size, const Pivot& pivot);
+	explicit FloatRect(const Vector2& pos, const Vector2& size, const PIVOT& pivot);
 	explicit FloatRect(const RECT& rc);
 
 	const RECT getRect();
@@ -22,7 +22,7 @@ public:
 	Vector2 getCenter();
 	Vector2 getBottom();
 	Vector2 getSize();
-	void update(const Vector2& pos, const Vector2& size, const Pivot& pivot);
+	void update(const Vector2& pos, const Vector2& size, const PIVOT& pivot);
 	void move(const Vector2& moveValue);
 
 	const FloatRect& operator=(const RECT& rc);
@@ -30,24 +30,24 @@ public:
 	static bool intersect(FloatRect rc1, FloatRect rc2);
 };
 
-inline FloatRect rectMakePivot(const Vector2& pos, const Vector2& size, const Pivot& pivot)
+inline FloatRect rectMakePivot(const Vector2& pos, const Vector2& size, const PIVOT& pivot)
 {
 	FloatRect result;
 	switch (pivot)
 	{
-	case Pivot::LeftTop:
+	case PIVOT::LEFT_TOP:
 		result.left = pos.x;
 		result.top = pos.y;
 		result.right = pos.x + size.x;
 		result.bottom = pos.y + size.y;
 		return result;
-	case Pivot::Center:
+	case PIVOT::CENTER:
 		result.left = pos.x - size.x / 2.f;
 		result.top = pos.y - size.y / 2.f;
 		result.right = pos.x + size.x / 2.f;
 		result.bottom = pos.y + size.y / 2.f;
 		return result;
-	case Pivot::Bottom:
+	case PIVOT::BOTTOM:
 		result.left = pos.x - size.x / 2.f;
 		result.top = pos.y - size.y;
 		result.right = pos.x + size.x / 2.f;
