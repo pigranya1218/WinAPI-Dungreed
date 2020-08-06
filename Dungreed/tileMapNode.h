@@ -15,8 +15,11 @@ struct  tagPalette
 
 class tileMapNode : public GameNode
 {
-
+private:
 	tagPalette _sampleTile;
+
+public:
+
 
 };
 
