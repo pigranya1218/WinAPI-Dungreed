@@ -58,6 +58,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmd
 	setWindowsSize(WINSTARTX, WINSTARTY, WINSIZEX, WINSIZEY);
 
 	ShowWindow(_hWnd, cmdShow);
+	ShowCursor(false);
 
 	//초기화 호출
 	if (FAILED(_pg.init()))

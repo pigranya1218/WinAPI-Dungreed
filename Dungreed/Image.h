@@ -45,6 +45,7 @@ private:
 	Image operator = (const Image& image) {}
 public:
 	void render(const Vector2& position, bool bisymmetry = false);
+	void render(const Vector2& position, const Vector2& size, bool bisymmetry = false);
 	void render(const Vector2& position, const Vector2& sourPos, const Vector2& sourSize, bool bisymmetry = false);	
 	void frameRender(const Vector2& position, const int frameX, const int frameY, bool bisymmetry = false);
 	void aniRender(const Vector2& position, Animation* ani, bool bisymmetry = false);
@@ -59,7 +60,8 @@ public:
 	float getScale() { return _scale; }
 	float getAngle() { return _angle; }
 	float getAlpha() { return _alpha; }
-	
+	float getRatio() { return (_size.y / _size.x); }
+
 	void setSkew(const Vector2& pos, const Vector2& angle) { this->_skewPos = pos; this->_skewAngle = angle; }
 
 	const int getMaxFrameX()const{ return _maxFrameX; }

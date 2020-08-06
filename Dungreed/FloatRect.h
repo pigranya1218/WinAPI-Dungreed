@@ -24,6 +24,8 @@ public:
 	Vector2 getSize();
 	void update(const Vector2& pos, const Vector2& size, const PIVOT& pivot);
 	void move(const Vector2& moveValue);
+	bool ptInRect(POINT pt) const;
+
 
 	const FloatRect& operator=(const RECT& rc);
 

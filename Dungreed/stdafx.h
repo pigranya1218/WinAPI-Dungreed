@@ -34,6 +34,7 @@ using namespace std;
 #include "CameraManager.h"
 #include "EffectManager.h"
 #include "DebugManager.h"
+#include "ConfigManager.h"
 
 // using namespace TTYONE_UTIL;
 
@@ -60,6 +61,7 @@ using namespace std;
 #define CAMERA_MANAGER CameraManager::getSingleton()
 #define EFFECT_MANAGER EffectManager::getSingleton()
 #define DEBUG_MANAGER DebugManager::getSingleton()
+#define CONFIG_MANAGER ConfigManager::getSingleton()
 
 #define SAFE_DELETE(p)		{if(p) {delete(p); (p) = NULL;}}
 #define SAFE_RELEASE(p)		{if(p) {(p)->release(); (p) = NULL;}}
