@@ -347,28 +347,28 @@ void CameraManager::rectangle(FloatRect rect, D2D1::ColorF::Enum color, float al
 	D2D_RENDERER->drawRectangle(relativeRc, color, alpha, strokeWidth);
 }
 
-void CameraManager::render(Image * img, Vector2 center)
+void CameraManager::render(Image * img, Vector2 center, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->render(drawPos);
+	img->render(drawPos, bisymmetry);
 }
 
-void CameraManager::render(Image * img, Vector2 center, Vector2 sourLT, Vector2 sourSize)
+void CameraManager::render(Image * img, Vector2 center, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->render(drawPos, sourLT, sourSize);
+	img->render(drawPos, sourLT, sourSize, bisymmetry);
 }
 
 
-void CameraManager::frameRender(Image * img, Vector2 center, int frameX, int frameY)
+void CameraManager::frameRender(Image * img, Vector2 center, int frameX, int frameY, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->frameRender(drawPos, frameX, frameY);
+	img->frameRender(drawPos, frameX, frameY, bisymmetry);
 }
 
-void CameraManager::aniRender(Image * img, Vector2 center, Animation * ani)
+void CameraManager::aniRender(Image * img, Vector2 center, Animation * ani, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->aniRender(drawPos, ani);
+	img->aniRender(drawPos, ani, bisymmetry);
 }
 
