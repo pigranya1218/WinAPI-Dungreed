@@ -177,8 +177,11 @@
     <ClInclude Include="Image.h">
       <Filter>2DGameFramework\Image</Filter>
     </ClInclude>
-    <ClInclude Include="ConfigManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
+    <ClInclude Include="Player.h">
+      <Filter>Dungreed\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Dungreed\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,8 +266,11 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ConfigManager.cpp">
-      <Filter>2DGameFramework\Manager</Filter>
+    <ClCompile Include="Player.cpp">
+      <Filter>Dungreed\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
