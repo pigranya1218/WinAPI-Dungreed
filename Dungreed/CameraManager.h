@@ -16,6 +16,7 @@ public:
 	struct tagZImage
 	{
 		Image* img;
+
 		float scale;
 		float angle;
 		float alpha;
