@@ -36,7 +36,7 @@ HRESULT MainScene::init()
 	for (int i = 0; i < static_cast<UINT>(MENU::END); i++)
 	{
 		int posY = WINSIZEY / 2 + 160 + i * 70;
-		_selectedRc[i] = FloatRect(Vector2(WINSIZEX / 2, posY), Vector2(300, 70), PIVOT::CENTER);
+		_selectedRc[i] = FloatRect(Vector2(WINSIZEX / 2, posY), Vector2(400, 70), PIVOT::CENTER);
 	}
 
 	return S_OK;
