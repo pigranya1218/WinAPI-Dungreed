@@ -36,7 +36,7 @@ HRESULT MainScene::init()
 	for (int i = 0; i < static_cast<UINT>(MENU::END); i++)
 	{
 		int posY = WINSIZEY / 2 + 160 + i * 70;
-		_selectedRc[i] = FloatRect(Vector2(WINSIZEX / 2, posY), Vector2(300, 70), PIVOT::CENTER);
+		_selectedRc[i] = FloatRect(Vector2(WINSIZEX / 2, posY), Vector2(400, 70), PIVOT::CENTER);
 	}
 
 	return S_OK;
@@ -48,7 +48,30 @@ void MainScene::release()
 
 void MainScene::update()
 {
-	if (CONFIG_MANAGER->isActive()) return;
+	if (CONFIG_MANAGER->isActive()) 
+	{ 
+		CONFIG_MANAGER->update();
+		return; 
+	}
+
+	_frontX += _frontSpeed;
+	if (_frontX >= _frontCloud->getWidth() * 5)
+	{
+		_frontX -= _frontCloud->getWidth() * 5;
+	}
+	_backX += _backSpeed;
+	if (_backX >= _backCloud->getWidth() * 5)
+	{
+		_backX -= _backCloud->getWidth() * 5;
+	}
+
+	_birdAni->frameUpdate(TIME_MANAGER->getElapsedTime());
+
+	if (DATA_MANAGER->isActive())
+	{
+		DATA_MANAGER->update();
+		return;
+	}
 
 	if ((_lastMousePt.x != _ptMouse.x || _lastMousePt.y != _ptMouse.y) || KEY_MANAGER->isStayKeyDown(VK_LBUTTON))
 	{
@@ -76,7 +99,7 @@ void MainScene::update()
 		{
 		case MENU::PLAY:
 		{
-
+			DATA_MANAGER->setActive(true);
 		}
 		break;
 		case MENU::OPTION:
@@ -103,27 +126,22 @@ void MainScene::update()
 
 
 
-	_frontX += _frontSpeed;
-	if (_frontX >= _frontCloud->getWidth() * 5)
-	{
-		_frontX -= _frontCloud->getWidth() * 5;
-	}
-	_backX += _backSpeed;
-	if (_backX >= _backCloud->getWidth() * 5)
-	{
-		_backX -= _backCloud->getWidth() * 5;
-	}
-
-	_birdAni->frameUpdate(TIME_MANAGER->getElapsedTime());
+	
 }
 
 void MainScene::render()
 {
-	if (CONFIG_MANAGER->isActive()) return;
+	if (CONFIG_MANAGER->isActive())
+	{
+		CONFIG_MANAGER->render();
+		return;
+	}
 
 	// background
 	D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, WINSIZEY), 106, 174, 247, 1);
 	
+
+
 	_backCloud->setScale(5);
 	_backCloud->render(Vector2(_backX, WINSIZEY / 2), false);
 	_backCloud->render(Vector2(_backX - _backCloud->getWidth() * 5, WINSIZEY / 2), false);
@@ -150,6 +168,12 @@ void MainScene::render()
 	_birdImage->aniRender(Vector2(WINSIZEX / 2 - 200, static_cast<int>(_selectedRc[static_cast<UINT>(_selected)].getCenter().y)), _birdAni, false);
 	_birdImage->setScale(5);
 	_birdImage->aniRender(Vector2(WINSIZEX / 2 + 200, static_cast<int>(_selectedRc[static_cast<UINT>(_selected)].getCenter().y)), _birdAni, true);
+
+	if (DATA_MANAGER->isActive())
+	{
+		DATA_MANAGER->render();
+		return;
+	}
 
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->setScale(5);
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->render(Vector2(_ptMouse.x, _ptMouse.y));

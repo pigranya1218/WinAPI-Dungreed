@@ -37,6 +37,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("BUTTON_EXIT", L"resources/images/common/button/FullWindowExitButton.png");
 	IMAGE_MANAGER->addImage("BUTTON_EXIT_SELECTED", L"resources/images/common/button/FullWindowExitButton_Selected.png");
 
+	// ** SOUND BAR
+	IMAGE_MANAGER->addImage("SOUND_BAR", L"resources/images/common/option/OptionSoundBar.png");
+	IMAGE_MANAGER->addImage("SOUND_HANDLE", L"resources/images/common/option/OptionSoundHandle.png");
+
 	// * MAIN SCENE
 	IMAGE_MANAGER->addImage("MAIN_SCENE/LOGO", L"resources/images/mainScene/MainLogo.png");
 	IMAGE_MANAGER->addImage("MAIN_SCENE/COPYRIGHT", L"resources/images/mainScene/Copyright.png");
@@ -50,7 +54,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MAIN_SCENE/FRONT_CLOUD", L"resources/images/mainScene/FrontCloud.png");
 	IMAGE_MANAGER->addImage("MAIN_SCENE/BACK_CLOUD", L"resources/images/mainScene/BackCloud.png");
 	IMAGE_MANAGER->addFrameImage("MAIN_SCENE/BIRD", L"resources/images/mainScene/bird.png", 8, 1);
-	
+
 	// * STAGE SCENE
 	// ** VILLIGE
 
@@ -68,6 +72,7 @@ HRESULT playGround::init()
 	TIME_MANAGER->update();
 
 	CONFIG_MANAGER->init();
+	DATA_MANAGER->init();
 	return S_OK;
 }
 
@@ -84,7 +89,6 @@ void playGround::update()
 
 	SCENE_MANAGER->update();
 	DEBUG_MANAGER->update();
-	CONFIG_MANAGER->update();
 }
 
 //그리기 전용
@@ -93,8 +97,6 @@ void playGround::render()
 	D2D_RENDERER->beginRender(D2D1::ColorF::Black);
 	{
 		SCENE_MANAGER->render();
-		CONFIG_MANAGER->render();
-
 	}
 	D2D_RENDERER->endRender();
 }

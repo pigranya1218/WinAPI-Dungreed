@@ -35,6 +35,7 @@ using namespace std;
 #include "EffectManager.h"
 #include "DebugManager.h"
 #include "ConfigManager.h"
+#include "DataManager.h"
 
 // using namespace TTYONE_UTIL;
 
@@ -62,6 +63,7 @@ using namespace std;
 #define EFFECT_MANAGER EffectManager::getSingleton()
 #define DEBUG_MANAGER DebugManager::getSingleton()
 #define CONFIG_MANAGER ConfigManager::getSingleton()
+#define DATA_MANAGER DataManager::getSingleton()
 
 #define SAFE_DELETE(p)		{if(p) {delete(p); (p) = NULL;}}
 #define SAFE_RELEASE(p)		{if(p) {(p)->release(); (p) = NULL;}}
