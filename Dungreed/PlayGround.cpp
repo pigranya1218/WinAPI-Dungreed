@@ -41,10 +41,10 @@ HRESULT playGround::init()
 	// ** DUNGEON
 
 	// ** PLAYER
-	IMAGE_MANAGER->addFrameImage("PLAYER/IDLE", L"resources/images/characters/player/player_idle.png", 5, 1);
-	IMAGE_MANAGER->addFrameImage("PLAYER/RUN", L"resources/images/characters/player/player_run.png", 8, 1);
-	IMAGE_MANAGER->addImage("PLAYER/JUMP", L"resources/images/characters/player/player_jump.png");
-	IMAGE_MANAGER->addImage("PLAYER/DIE", L"resources/images/characters/player/player_die.png");
+	IMAGE_MANAGER->addFrameImage("PLAYER/IDLE", L"resources/images/Characters/Player/player_idle.png", 5, 1);
+	IMAGE_MANAGER->addFrameImage("PLAYER/RUN", L"resources/images/Characters/Player/player_run.png", 8, 1);
+	IMAGE_MANAGER->addImage("PLAYER/JUMP", L"resources/images/Characters/Player/player_jump.png");
+	IMAGE_MANAGER->addImage("PLAYER/DIE", L"resources/images/Characters/Player/player_die.png");
 
 	// ** ENEMY
 
@@ -79,7 +79,7 @@ void playGround::update()
 //그리기 전용
 void playGround::render()
 {	
-	D2D_RENDERER->beginRender(D2D1::ColorF::Black);
+	D2D_RENDERER->beginRender(D2D1::ColorF::White);
 	{
 		SCENE_MANAGER->render();		
 	}

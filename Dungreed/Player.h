@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
 
+class TestScene;
+
 enum PLAYER_STATE
 {
 	IDLE, 
@@ -12,9 +14,13 @@ enum PLAYER_STATE
 class Player : public GameObject
 {
 private:
+	TestScene* _testScene;
 	Animation* _ani;
 	Image* _img;
 	PLAYER_STATE _state;
+	
+	Synthesize(DIRECTION, _direction, Direction)
+
 
 	//½ºÅÈ
 	float _satiety;			//Æ÷¸¸°¨
@@ -42,5 +48,7 @@ public:
 	void release();
 	void update();
 	void render();
+
+	void setTestScene(TestScene* testScene) { _testScene = testScene; }
 };
 
