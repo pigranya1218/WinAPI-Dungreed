@@ -177,8 +177,8 @@
     <ClInclude Include="Image.h">
       <Filter>2DGameFramework\Image</Filter>
     </ClInclude>
-    <ClInclude Include="tileMapNode.h">
-      <Filter>Dungreed\Stage</Filter>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -263,8 +263,8 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="tileMapNode.cpp">
-      <Filter>Dungreed\Stage</Filter>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
