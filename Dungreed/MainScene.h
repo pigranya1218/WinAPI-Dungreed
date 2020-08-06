@@ -23,6 +23,9 @@ private:
 	int _backSpeed;
 	int _selectIndex;
 
+	bool _mouseMove;
+	POINT _lastMousePt;
+
 	MENU _selected;
 	FloatRect _selectedRc[static_cast<UINT>(MENU::END)];
 
