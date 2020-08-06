@@ -62,7 +62,7 @@ void MainScene::update()
 	}
 	if (KEY_MANAGER->isOnceKeyDown(VK_UP))
 	{
-		_selected = static_cast<MENU>(max(0, static_cast<UINT>(_selected) - 1));
+		_selected = static_cast<MENU>(max(0, static_cast<int>(_selected) - 1));
 	}
 	
 	_birdAni->frameUpdate(TIME_MANAGER->getElapsedTime());
