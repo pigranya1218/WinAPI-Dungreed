@@ -38,6 +38,7 @@ void ConfigManager::update()
 		if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
 		{
 			_isActive = false;
+			return;
 		}
 	}
 	else
@@ -93,8 +94,8 @@ void ConfigManager::render()
 	D2D_RENDERER->renderTextField(0, 210, L"»ç¿îµå", RGB(189, 189, 189), 50, WINSIZEX, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
 	for (int i = 0; i < 2; i++)
 	{
-		D2D_RENDERER->renderTextField(_progressVolume[i].textRc.left, _progressVolume[i].textRc.top, _progressVolume[i].name, 45, 
-			_progressVolume[i].textRc.getSize().x, 45, D2DRenderer::DefaultBrush::White, DWRITE_TEXT_ALIGNMENT_TRAILING);
+		D2D_RENDERER->renderTextField(_progressVolume[i].textRc.left, _progressVolume[i].textRc.top, _progressVolume[i].name, RGB(255, 255, 255), 45, 
+			_progressVolume[i].textRc.getSize().x, 45, DWRITE_TEXT_ALIGNMENT_TRAILING);
 		_soundBar->render(_progressVolume[i].progressRc.getCenter(), _progressVolume[i].progressRc.getSize());
 		_soundHandle->setScale(4);
 		_soundHandle->render(Vector2(_progressVolume[i].handleRc.getCenter()));

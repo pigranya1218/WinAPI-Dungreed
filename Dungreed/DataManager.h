@@ -19,9 +19,14 @@ private:
 	Image* _exitButton;
 	FloatRect _exitRc;
 
+	Image* _slotImg;
+
 	bool _isActive; // 로드 UI를 띄울 것인지 결정하는 불 변수
 	tagLoadInfo _loadInfos[3];
 	FloatRect _loadRc[3];
+	FloatRect _deleteRc[3];
+	int _selectedSlot;
+	int _selectedDelete;
 
 public:
 	void init(); // 로드 데이터 존재한다면 읽음
