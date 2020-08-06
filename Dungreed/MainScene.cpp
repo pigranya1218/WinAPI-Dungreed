@@ -134,7 +134,7 @@ void MainScene::render()
 	IMAGE_MANAGER->findImage("MAIN_SCENE/LOGO")->setScale(5);
 	IMAGE_MANAGER->findImage("MAIN_SCENE/LOGO")->render(Vector2(WINSIZEX / 2, WINSIZEY / 2 - 180), false);
 
-	IMAGE_MANAGER->findImage("MAIN_SCENE/COPYRIGHT")->setScale(5);
+	IMAGE_MANAGER->findImage("MAIN_SCENE/COPYRIGHT")->setScale(4);
 	IMAGE_MANAGER->findImage("MAIN_SCENE/COPYRIGHT")->render(Vector2(WINSIZEX / 2, WINSIZEY - 30), false);
 
 	IMAGE_MANAGER->findImage("MAIN_SCENE/TEAM_LOGO")->render(Vector2(WINSIZEX - 120, WINSIZEY - 120), false);
