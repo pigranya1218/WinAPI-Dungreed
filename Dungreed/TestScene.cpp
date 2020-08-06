@@ -6,6 +6,7 @@ HRESULT TestScene::init()
 {
 	_player = new Player;
 	_player->init();
+	setPlayer(_player);
 
 	return S_OK;
 }

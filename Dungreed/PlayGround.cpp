@@ -4,6 +4,8 @@
 #include "MainScene.h"
 #include "TestScene.h"
 
+#include "Player.h"
+
 #include <string>
 
 playGround::playGround()

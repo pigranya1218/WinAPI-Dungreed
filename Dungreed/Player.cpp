@@ -13,6 +13,16 @@ void Player::init()
 
 	_direction == DIRECTION::RIGHT;
 	_state = IDLE;
+
+	_img = IMAGE_MANAGER->findImage("PLAYER/IDLE");
+	//_img->setScale(2);
+	_ani = new Animation;
+	_ani->init(_img->getWidth(), _img->getHeight(),
+		_img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setFPS(10);
+	_ani->setPlayFrame(0, 5, false, true);
+	_ani->start();
+
 }
 
 void Player::release()
@@ -30,22 +40,25 @@ void Player::update()
 	{
 	case IDLE:
 	{
-		_img = IMAGE_MANAGER->findImage("PLAYER/IDLE");
-		//_img->setScale(2);
-		_ani = new Animation;
-		_ani->init(_img->getWidth(), _img->getHeight(), 
-			_img->getMaxFrameX(), _img->getMaxFrameY());
-		_ani->setFPS(10);
-		if (_direction == DIRECTION::RIGHT)
+		if (!_ani->isPlay())
 		{
-			_ani->setPlayFrame(0, 5, false, false);
-		}
-		else if (_direction == DIRECTION::LEFT)
-		{
-			
-		}
-		_ani->start();
+			_img = IMAGE_MANAGER->findImage("PLAYER/IDLE");
+			//_img->setScale(2);
+			_ani = new Animation;
+			_ani->init(_img->getWidth(), _img->getHeight(),
+				_img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setFPS(10);
+			if (_direction == DIRECTION::RIGHT)
+			{
+				_ani->setPlayFrame(0, 5, false, true);
+			}
+			else if (_direction == DIRECTION::LEFT)
+			{
+				//ÁÂ¿ì¹ÝÀü
 
+			}
+			_ani->start();
+		}
 	}
 	break;
 	case MOVE:
@@ -64,10 +77,12 @@ void Player::update()
 	}
 	break;
 	}
+
+	_ani->frameUpdate(TIME_MANAGER->getElapsedTime());
 }
 
 void Player::render()
 {
-	_img->setScale(2);
+	_img->setScale(3);
 	CAMERA_MANAGER->aniRender(_img, Vector2(WINSIZEX/2, WINSIZEY/2), _ani);
 }
