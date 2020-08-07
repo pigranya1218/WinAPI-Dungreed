@@ -99,9 +99,6 @@
     <ClInclude Include="CameraEvent.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
@@ -186,6 +183,12 @@
     <ClInclude Include="TestScene.h">
       <Filter>Dungreed\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="DataManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -198,9 +201,6 @@
       <Filter>2DGameFramework\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
@@ -277,6 +277,12 @@
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>Dungreed\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

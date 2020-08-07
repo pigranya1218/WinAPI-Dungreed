@@ -27,14 +27,15 @@ using namespace std;
 #include "KeyManager.h"
 #include "Utils.h"
 #include "D2DRenderer.h"
+#include "Image.h"
 #include "ImageManager.h"
 #include "TimeManager.h"
 #include "SoundManager.h"
 #include "SceneManager.h"
-#include "CameraManager.h"
 #include "EffectManager.h"
 #include "DebugManager.h"
 #include "ConfigManager.h"
+#include "DataManager.h"
 
 // using namespace TTYONE_UTIL;
 
@@ -58,10 +59,10 @@ using namespace std;
 #define SOUND_MANAGER SoundManager::getSingleton()
 #define SCENE_MANAGER SceneManager::getSingleton()
 #define D2D_RENDERER D2DRenderer::getSingleton()
-#define CAMERA_MANAGER CameraManager::getSingleton()
 #define EFFECT_MANAGER EffectManager::getSingleton()
 #define DEBUG_MANAGER DebugManager::getSingleton()
 #define CONFIG_MANAGER ConfigManager::getSingleton()
+#define DATA_MANAGER DataManager::getSingleton()
 
 #define SAFE_DELETE(p)		{if(p) {delete(p); (p) = NULL;}}
 #define SAFE_RELEASE(p)		{if(p) {(p)->release(); (p) = NULL;}}

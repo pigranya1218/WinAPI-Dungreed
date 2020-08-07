@@ -154,10 +154,11 @@
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="CameraEvent.h" />
-    <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="D2DRenderer.h" />
+    <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
@@ -191,11 +192,12 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
-    <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
+    <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
