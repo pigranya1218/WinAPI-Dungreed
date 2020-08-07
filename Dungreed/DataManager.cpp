@@ -5,7 +5,7 @@ void DataManager::init()
 {
 	_isActive = false;
 	_exitButton = IMAGE_MANAGER->findImage("BUTTON_EXIT");
-	_exitRc = FloatRect(WINSIZEX - 135, 15, WINSIZEX - 5, 125);
+	_exitRc = FloatRect(WINSIZEX - 150, 30, WINSIZEX - 20, 130);
 
 	// TODO : 데이터 읽음
 

@@ -5,7 +5,7 @@ void CameraShakeEvent::processEvent()
 {
 	if (_direction == DIRECTION::LEFT)
 	{
-		CAMERA_MANAGER->movePivot(0, _power);
+		// CAMERA_MANAGER->movePivot(0, _power);
 		_direction = DIRECTION::RIGHT;
 	}
 	else

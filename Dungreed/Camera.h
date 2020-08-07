@@ -2,35 +2,9 @@
 #include "Image.h"
 #include "CameraEvent.h"
 
-class CameraManager : public SingletonBase<CameraManager>
+class Camera
 {
-public:
-	enum class IMAGE_RENDER_TYPE : UINT
-	{
-		RENDER,
-		RENDER_WITH_SOURCE_POS,
-		FRAME_RENDER,
-		ANIMATION_RENDER
-	};
-
-	struct tagZImage
-	{
-		Image* img;
-		float scale;
-		float angle;
-		float alpha;
-		float offsetZ;
-		Vector2 pos;
-		Vector2 size;
-		Vector2 sourPos; // render with sour
-		Vector2 sourSize; // render with sour 
-		int frameX, frameY; // frameRender
-		Animation* ani; // aniRender
-		IMAGE_RENDER_TYPE renderType;
-	};
-
 private:
-	vector<tagZImage> _renderList;
 	queue<CameraEvent*> _eventQueue;
 
 	float _offsetL, _offsetT; // 카메라 LEFT, TOP을 그리기 시작할 윈도우 위치 
@@ -51,14 +25,9 @@ private:
 	float _minX, _maxX; // x 좌표의 가능한 범위
 	float _minY, _maxY; // y 좌표의 가능한 범위
 
-private:
-	void merge(int s, int e);
-	void sort(int s, int e);
-	void render(tagZImage imageInfo);
-
 public:
-	CameraManager();
-	~CameraManager();
+	Camera();
+	~Camera();
 
 	HRESULT init();
 	void release();
@@ -86,6 +55,7 @@ public:
 	LONG getRelativeX(LONG left);
 	float getRelativeY(float top);
 	LONG getRelativeY(LONG top);
+	POINT getRelativePt(POINT pt);
 	Vector2 getRelativeV2(Vector2 vec2);
 	FloatRect getRelativeFR(FloatRect rc);
 
@@ -93,6 +63,7 @@ public:
 	LONG getAbsoluteX(LONG left);
 	float getAbsoluteY(float top);
 	LONG getAbsoluteY(LONG top);
+	POINT getAbsolutePt(POINT pt);
 	Vector2 getAbsoluteV2(Vector2 vec2);
 	FloatRect getAbsoluteFR(FloatRect rc);
 
