@@ -167,6 +167,8 @@ void Player::update()
 void Player::render()
 {
 	_img->setScale(5);
-	/*if(!_isJump)*/ CAMERA_MANAGER->aniRender(_img, _position, _ani);
+	//CAMERA_MANAGER->aniRender(_img, _position, _ani);
+	//Camera::aniRender(_img, _position, _ani, false);
+	//Image::aniRender();
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
 }

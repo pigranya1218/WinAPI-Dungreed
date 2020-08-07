@@ -29,7 +29,7 @@ void TestScene::update()
 
 void TestScene::render()
 {
-	CAMERA_MANAGER->rectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
+	//CAMERA_MANAGER->rectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(5);
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
 	_player->render();
