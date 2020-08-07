@@ -5,7 +5,9 @@
 
 struct tagTestPlayer
 {
+	
 	float x, y;
+	
 	FloatRect rc;
 
 
@@ -18,7 +20,11 @@ class TestScene : public GameNode
 
 private:
 
-
+	float playerx, playery;
+	float angle;
+	float speed;
+	float x, y;
+	FloatRect RC[2];
 
 
 
