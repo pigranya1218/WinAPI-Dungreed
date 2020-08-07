@@ -158,6 +158,7 @@
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="D2DRenderer.h" />
+    <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
@@ -167,10 +168,13 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
+    <ClInclude Include="MacroUtil.h" />
     <ClInclude Include="MainScene.h" />
+    <ClInclude Include="MeleeWeapon.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
@@ -186,6 +190,7 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="Weapon.h" />
     <ClInclude Include="windowsAPI.h" />
   </ItemGroup>
   <ItemGroup>
@@ -196,17 +201,19 @@
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
+    <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="MeleeWeapon.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
@@ -218,6 +225,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="windowsAPI.cpp" />
   </ItemGroup>
   <ItemGroup>

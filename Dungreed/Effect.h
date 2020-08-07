@@ -17,6 +17,7 @@ public:
 	Effect();
 	~Effect();
 
+	virtual void init();
 	virtual void init(Image* effectImage, int fps);
 	virtual void release();
 	virtual void update();

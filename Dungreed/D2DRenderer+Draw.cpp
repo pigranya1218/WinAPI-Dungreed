@@ -16,7 +16,7 @@
 기본 정의해둔 브러쉬로 텍스트 렌더링
 ************************************************************************************************/
 void D2DRenderer::renderText(const int x, const int y, const wstring& text, const int size,
-	const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align,const wstring& font, float angle)
+	const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align, const wstring& font, float angle)
 {
 	locale::global(locale("kor"));
 	Vector2 pos(x, y);
@@ -39,12 +39,12 @@ void D2DRenderer::renderText(const int x, const int y, const wstring& text, cons
 
 	layout->SetFontSize((float)size, range);
 	layout->SetTextAlignment(align);
+	layout->SetFontWeight(DWRITE_FONT_WEIGHT_BOLD, range);
 
-	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	// 회전 행렬 생성
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
-
-	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(pos.x, pos.y), layout,
+	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(0, 0)));
+	
+	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(x, y), layout,
 		_defaultBrushList[(UINT)defaultBrush]);
 
 	NEW_SAFE_RELEASE(layout);
@@ -113,38 +113,37 @@ void D2DRenderer::renderText(const int x, const int y, const wstring& text, cons
 
 영역내에서 기본 브러쉬로 글자 출력
 ************************************************************************************************/
-void D2DRenderer::renderTextField(const int x, const int y, const wstring& text, const int size,
-	const int width, const int height, const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align, const wstring& font, float angle)
-{
-	Vector2 pos(x, y);
-
-	IDWriteTextLayout* layout = nullptr;
-	_DWFactory->CreateTextLayout(
-		text.c_str(),
-		text.length(),
-		_fontList[font],
-		(float)width,
-		(float)height,
-		&layout
-	);
-
-	//레이아웃 셋업
-	DWRITE_TEXT_RANGE range;
-	range.startPosition = 0;
-	range.length = text.length();
-	layout->SetFontSize((float)size, range);
-
-	layout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-	layout->SetTextAlignment(align);
-
-	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-	// 회전 행렬 생성
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
-
-	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(pos.x, pos.y), layout, _defaultBrushList[(UINT)defaultBrush]);
-
-	NEW_SAFE_RELEASE(layout);
-}
+//void D2DRenderer::renderTextField(const int x, const int y, const wstring& text, const int size,
+//	const int width, const int height, const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align, const wstring& font, float angle)
+//{
+//	Vector2 pos(x, y);
+//
+//	IDWriteTextLayout* layout = nullptr;
+//	_DWFactory->CreateTextLayout(
+//		text.c_str(),
+//		text.length(),
+//		_fontList[font],
+//		(float)width,
+//		(float)height,
+//		&layout
+//	);
+//
+//	//레이아웃 셋업
+//	DWRITE_TEXT_RANGE range;
+//	range.startPosition = 0;
+//	range.length = text.length();
+//	layout->SetFontSize((float)size, range);
+//	layout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+//	layout->SetTextAlignment(align);
+//
+//	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+//	// 회전 행렬 생성
+//	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
+//
+//	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(pos.x, pos.y), layout, _defaultBrushList[(UINT)defaultBrush]);
+//
+//	NEW_SAFE_RELEASE(layout);
+//}
 /**********************************************************************************************
 ## RenderText ##
 @@ int x : 그릴 좌표
@@ -188,7 +187,6 @@ void D2DRenderer::renderTextField(const int x, const int y, const wstring& text,
 	ID2D1SolidColorBrush* brush;
 	_D2DRenderTarget->CreateSolidColorBrush(D2D1::ColorF(color, alpha), &brush);
 
-	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	// 회전 행렬 생성
 	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
 

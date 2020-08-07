@@ -101,11 +101,11 @@ public:
 
 	void rectangle(FloatRect rect, D2D1::ColorF::Enum color, float alpha, float strokeWidth);
 
-	void render(Image* img, Vector2 center);
-	void render(Image* img, Vector2 center, Vector2 sourLT, Vector2 sourSize);
+	void render(Image* img, Vector2 center, bool bisymmetry = false);
+	void render(Image* img, Vector2 center, Vector2 sourLT, Vector2 sourSize, bool bisymmetry = false);
 
-	void frameRender(Image* img, Vector2 center, int frameX, int frameY);
+	void frameRender(Image* img, Vector2 center, int frameX, int frameY, bool bisymmetry = false);
 
-	void aniRender(Image* img, Vector2 center, Animation* ani);
+	void aniRender(Image* img, Vector2 center, Animation* ani, bool bisymmetry = false);
 	
 };
