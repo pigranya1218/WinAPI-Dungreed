@@ -109,7 +109,7 @@ void MainScene::update()
 		break;
 		case MENU::EXIT:
 		{
-
+			PostQuitMessage(0);
 		}
 		break;
 		}
@@ -124,7 +124,10 @@ void MainScene::update()
 		_selected = static_cast<MENU>(max(0, static_cast<int>(_selected) - 1));
 	}
 
-
+	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		PostQuitMessage(0);
+	}
 
 	
 }

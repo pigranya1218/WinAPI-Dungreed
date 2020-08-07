@@ -55,6 +55,10 @@ void DataManager::update()
 		}
 	}
 	
+	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		_isActive = false;
+	}
 }
 
 void DataManager::render()

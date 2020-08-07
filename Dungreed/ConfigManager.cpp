@@ -81,6 +81,11 @@ void ConfigManager::update()
 	{
 		_dragIndex = -1;
 	}
+
+	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		_isActive = false;
+	}
 }
 
 void ConfigManager::render()
