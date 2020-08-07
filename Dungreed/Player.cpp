@@ -8,13 +8,13 @@ void Player::move(Vector2 moveDir)
 
 void Player::setAni(PLAYER_ANIMATION setAni)
 {
+	_aniState = setAni;
 	switch (setAni)
 	{
-	case IDLE:
+	case PLAYER_ANIMATION::IDLE:
 	{
 		_ani->stop();
 		_img = IMAGE_MANAGER->findImage("PLAYER/IDLE");
-		//_ani = new Animation;
 		_ani->init(_img->getWidth(), _img->getHeight(),
 			_img->getMaxFrameX(), _img->getMaxFrameY());
 		_ani->setFPS(10);
@@ -22,11 +22,10 @@ void Player::setAni(PLAYER_ANIMATION setAni)
 		_ani->start();
 	}
 	break;
-	case MOVE:
+	case PLAYER_ANIMATION::MOVE:
 	{
 		_ani->stop();
 		_img = IMAGE_MANAGER->findImage("PLAYER/RUN");
-		//_ani = new Animation;
 		_ani->init(_img->getWidth(), _img->getHeight(),
 			_img->getMaxFrameX(), _img->getMaxFrameY());
 		_ani->setFPS(10);
@@ -47,22 +46,14 @@ void Player::init()
 {
 	setSize(Vector2(80, 110));
 	setPosition(Vector2(200, WINSIZEY - 150));
-	_direction == DIRECTION::RIGHT;
+	_direction = DIRECTION::RIGHT;
 	_jumpCount = 2;
-	_jumpPower = 6.f;
-	_gravity = 5.f;
-	_jumpSpeed = 0;
+	_xGravity = 5.f;
+	_yGravity = 5.f;
 	_isJump = false;
 
-	_img = IMAGE_MANAGER->findImage("PLAYER/IDLE");
-	//_img->setScale(2);
 	_ani = new Animation;
-	_ani->init(_img->getWidth(), _img->getHeight(),
-		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(10);
-	_ani->setPlayFrame(0, 5, false, true);
-	_ani->start();
-
+	setAni(PLAYER_ANIMATION::IDLE);
 }
 
 void Player::release()
@@ -76,11 +67,11 @@ void Player::update()
 	//방향 조정
 	if (_ptMouse.x < _position.x)
 	{
-		//좌측
+		_direction = DIRECTION::LEFT;
 	}
 	else
 	{
-		//우측
+		_direction = DIRECTION::RIGHT;
 	}
 
 	//이동
@@ -88,57 +79,56 @@ void Player::update()
 	{
 		if (!_isJump)
 		{
-			if(_setAni != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-			_setAni = PLAYER_ANIMATION::MOVE;
+			if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
+			_aniState = PLAYER_ANIMATION::MOVE;
 			_position.x -= 200 * TIME_MANAGER->getElapsedTime();
 		}
 		else _position.x -= 150 * TIME_MANAGER->getElapsedTime();
 	}
 	if (KEY_MANAGER->isOnceKeyUp('A'))
 	{
-		if (_setAni != PLAYER_ANIMATION::IDLE)
+		if (_aniState != PLAYER_ANIMATION::IDLE)
 		{
 			setAni(PLAYER_ANIMATION::IDLE);
-			_setAni = PLAYER_ANIMATION::IDLE;
+			_aniState = PLAYER_ANIMATION::IDLE;
 		}
 	}
 	if (KEY_MANAGER->isStayKeyDown('D'))
 	{
 		if (!_isJump)
 		{
-			if (_setAni != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-			_setAni = PLAYER_ANIMATION::MOVE;
+			if (_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
+			_aniState = PLAYER_ANIMATION::MOVE;
 			_position.x += 200 * TIME_MANAGER->getElapsedTime();
 		}
 		else _position.x += 150 * TIME_MANAGER->getElapsedTime();
 	}
 	if (KEY_MANAGER->isOnceKeyUp('D'))
 	{
-		if (_setAni != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-		_setAni = PLAYER_ANIMATION::IDLE;
+		if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
+		_aniState = PLAYER_ANIMATION::IDLE;
 	}
 	if (KEY_MANAGER->isOnceKeyDown(VK_SPACE) && _jumpCount > 0)
 	{
-		_setAni = PLAYER_ANIMATION::DEFALT;
+		_aniState = PLAYER_ANIMATION::DEFAULT;
 		_jumpCount -= 1;
 		_isJump = true;
 	}
 	
-	//점프 처리
+	////점프 처리
 	if (_isJump)
 	{
 		_ani->stop();
 		_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
-		_gravity -= 3.f;
-		_position.y -= _jumpPower + _gravity * TIME_MANAGER->getElapsedTime() * 2;
-		//착지
+		_yGravity -= 3.f;
+		_position.y -= _jumpPower + _yGravity * TIME_MANAGER->getElapsedTime() * 2;
 		if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
 		{
 			_position.y = _testScene->getGroundRect().top - _size.y / 2;
-			if (_setAni != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-			_setAni = PLAYER_ANIMATION::IDLE;
+			if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
+			_aniState = PLAYER_ANIMATION::IDLE;
 			_jumpCount = 2;
-			_gravity = 5.f;
+			_yGravity = 5.f;
 			_isJump = false;
 		}
 	}
@@ -167,8 +157,13 @@ void Player::update()
 void Player::render()
 {
 	_img->setScale(5);
-	//CAMERA_MANAGER->aniRender(_img, _position, _ani);
-	//Camera::aniRender(_img, _position, _ani, false);
-	//Image::aniRender();
+	if (_aniState == PLAYER_ANIMATION::DEFAULT)
+	{
+		_img->render(_position, _direction == DIRECTION::LEFT);
+	}
+	else
+	{
+		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
+	}
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
 }

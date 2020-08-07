@@ -24,13 +24,20 @@ void TestScene::release()
 
 void TestScene::update()
 {
+	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		PostQuitMessage(0);
+	}
+
 	_player->update();
 }
 
 void TestScene::render()
 {
-	//CAMERA_MANAGER->rectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
-	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(5);
-	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
+	D2D_RENDERER->drawRectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
+	
 	_player->render();
+	
+	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
+	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
 }
