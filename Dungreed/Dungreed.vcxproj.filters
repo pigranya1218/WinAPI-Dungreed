@@ -76,6 +76,9 @@
     <Filter Include="Dungreed\Enum">
       <UniqueIdentifier>{b9efc908-0e29-4eca-a912-9a87c94bced3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\Bullet">
+      <UniqueIdentifier>{63d05001-b638-40fe-bfbb-6eb20ac65cc9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -183,6 +186,18 @@
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Dungreed\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Banshee.h">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -271,6 +286,18 @@
     </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Dungreed\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Banshee.cpp">
+      <Filter>Dungreed\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
