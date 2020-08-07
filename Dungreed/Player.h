@@ -3,12 +3,14 @@
 
 class TestScene;
 
-enum PLAYER_STATE
+//애니메이션 재생용 (상태패턴 아님)
+enum PLAYER_ANIMATION
 {
+	DEFALT,	//점프나 사망과 같이 애니렌더를 사용하지 않는 경우.
 	IDLE, 
-	MOVE, //점프 중이 아닌 경우에만
-	JUMP, //점프 중일 때도 좌 우 이동은 가능하지만 점프 상태는 그대로
-	DIE	  //사망
+	MOVE	//점프 중이 아닌 경우에만
+	//JUMP	//점프 중일 때도 좌 우 이동은 가능하지만 점프 상태는 그대로
+	//DIE	  //사망
 };
 
 class Player : public GameObject
@@ -17,10 +19,17 @@ private:
 	TestScene* _testScene;
 	Animation* _ani;
 	Image* _img;
-	PLAYER_STATE _state;
-	
+	PLAYER_ANIMATION _setAni;
 	Synthesize(DIRECTION, _direction, Direction)
 
+	Vector2 _moveDir;
+
+	//점프
+	int _jumpCount;			//점프 횟수
+	float _jumpPower;		//점프력
+	float _gravity;			//중력가속도
+	float _jumpSpeed;		//점프속도
+	bool _isJump;			//점프 처리(지면과 떨어진 상태)
 
 	//스탯
 	float _satiety;			//포만감
@@ -43,6 +52,7 @@ public:
 	~Player() {};
 
 	void move(Vector2 moveDir);
+	void setAni(PLAYER_ANIMATION setAni);
 
 	void init();
 	void release();
@@ -50,5 +60,10 @@ public:
 	void render();
 
 	void setTestScene(TestScene* testScene) { _testScene = testScene; }
+
+	//플레이어의 position 설정자
+	//void setPosition()
+	//플레이어의 position 접근자
+	Vector2 getPosition() { return _position; }
 };
 
