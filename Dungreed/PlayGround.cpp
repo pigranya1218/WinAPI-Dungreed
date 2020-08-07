@@ -67,6 +67,10 @@ HRESULT playGround::init()
 
 	// ** ENEMY
 
+	// * WEAPON
+
+	// **MELEE WEAPON
+
 	
 
 	// 모든 씬 SCENE_MANAGER에 등록
