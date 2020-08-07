@@ -6,7 +6,7 @@ void Player::move(Vector2 moveDir)
 }
 
 void Player::init()
-{
+{	
 	setPosition(Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	setSize(Vector2(80, 120));
 }
