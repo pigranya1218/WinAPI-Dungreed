@@ -19,6 +19,7 @@ protected:
 	float _itemPosX, _itemPosY;		//받을 x, y 위치
 	float _width, _height;			//각도 구하기 위한 높이, 너비
 	float _angle;					//마우스와 플레이어 위치 사이의 각도 값
+	float _speed;					//속도
 public:
 	//Item();
 	Item(Vector2 pos, DIRECTION direction, ITEM_TYPE type);
