@@ -168,9 +168,11 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="Item.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
+    <ClInclude Include="MacroUtil.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
@@ -201,9 +203,9 @@
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
-    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />
