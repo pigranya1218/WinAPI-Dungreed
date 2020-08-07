@@ -49,7 +49,7 @@ void Player::init()
 	setPosition(Vector2(200, WINSIZEY - 150));
 	_direction == DIRECTION::RIGHT;
 	_jumpCount = 2;
-	_jumpPower = 5.f;
+	_jumpPower = 6.f;
 	_gravity = 5.f;
 	_jumpSpeed = 0;
 	_isJump = false;
@@ -131,6 +131,7 @@ void Player::update()
 		_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
 		_gravity -= 3.f;
 		_position.y -= _jumpPower + _gravity * TIME_MANAGER->getElapsedTime() * 2;
+		//ÂøÁö
 		if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
 		{
 			_position.y = _testScene->getGroundRect().top - _size.y / 2;
