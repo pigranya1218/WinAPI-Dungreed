@@ -189,6 +189,9 @@
     <ClInclude Include="MeleeWeapon.h">
       <Filter>Dungreed\Player</Filter>
     </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Dungreed\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="MeleeWeapon.cpp">
       <Filter>Dungreed\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
