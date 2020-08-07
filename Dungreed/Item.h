@@ -13,6 +13,7 @@ protected:
 	Image* _itemImg;				//아이템 이미지
 	Animation* _itemAni;			//아이템 애니메이션
 	Animation* _itemEffect;			//아이템 이펙트
+	ITEM_TYPE _type;
 	float _imgScale = 3;			//크기
 	float _radius;					//범위를 위한 반지름
 	float _itemPosX, _itemPosY;		//받을 x, y 위치
