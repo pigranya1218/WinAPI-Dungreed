@@ -192,6 +192,15 @@
     <ClInclude Include="MacroUtil.h">
       <Filter>Dungreed\Enum</Filter>
     </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Dungreed\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MeleeWeapon.h">
+      <Filter>Dungreed\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Dungreed\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -277,6 +286,15 @@
     </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Dungreed\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MeleeWeapon.cpp">
+      <Filter>Dungreed\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\Item</Filter>

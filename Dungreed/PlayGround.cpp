@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "PlayGround.h"
-
+#include "TestScene.h"
 #include "MainScene.h"
 
 #include <string>
@@ -69,11 +69,19 @@ HRESULT playGround::init()
 
 	// ** ENEMY
 
+	// * WEAPON
+
+	// **MELEE WEAPON
+
+	IMAGE_MANAGER->addFrameImage("MAIN_SCENE/BIRD", L"resources/images/MeleeWeapon", 8, 1);
 	
 
 	// 모든 씬 SCENE_MANAGER에 등록
-	SCENE_MANAGER->addScene("MAIN", new MainScene);
-	SCENE_MANAGER->changeScene("MAIN");	
+	/*SCENE_MANAGER->addScene("MAIN", new MainScene);
+	SCENE_MANAGER->changeScene("MAIN");*/
+	
+	SCENE_MANAGER->addScene("Test", new TestScene);
+	SCENE_MANAGER->changeScene("Test");
 
 	TIME_MANAGER->update();
 
@@ -100,7 +108,7 @@ void playGround::update()
 //그리기 전용
 void playGround::render()
 {	
-	D2D_RENDERER->beginRender(D2D1::ColorF::Black);
+	D2D_RENDERER->beginRender(D2D1::ColorF::White);
 	{
 		SCENE_MANAGER->render();
 	}
