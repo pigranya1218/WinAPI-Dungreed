@@ -22,9 +22,9 @@ public:
 	//Item();
 	Item(Vector2 pos, DIRECTION direction, ITEM_TYPE type);
 
-	void init();
+	//void init();
 	void update();
-	void release();
+	//void release();
 	void render();
 	//bool attack(Player* ganeObject);
 };
