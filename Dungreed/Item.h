@@ -17,7 +17,7 @@ protected:
 	float _imgScale = 3;			//크기
 	float _radius;					//범위를 위한 반지름
 	float _itemPosX, _itemPosY;		//받을 x, y 위치
-	float _width, _height;			
+	float _width, _height;			//각도 구하기 위한 높이, 너비
 	float _angle;					//마우스와 플레이어 위치 사이의 각도 값
 public:
 	//Item();
