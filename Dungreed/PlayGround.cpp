@@ -2,6 +2,9 @@
 #include "PlayGround.h"
 
 #include "MainScene.h"
+#include "TestScene.h"
+
+#include "Player.h"
 
 #include <string>
 
@@ -126,13 +129,20 @@ HRESULT playGround::init()
 
 	// ** DUNGEON
 
+	// ** PLAYER
+	IMAGE_MANAGER->addFrameImage("PLAYER/IDLE", L"resources/images/Characters/Player/player_idle.png", 5, 1);
+	IMAGE_MANAGER->addFrameImage("PLAYER/RUN", L"resources/images/Characters/Player/player_run.png", 8, 1);
+	IMAGE_MANAGER->addImage("PLAYER/JUMP", L"resources/images/Characters/Player/player_jump.png");
+	IMAGE_MANAGER->addImage("PLAYER/DIE", L"resources/images/Characters/Player/player_die.png");
+
 	// ** ENEMY
 
 	
 
 	// 모든 씬 SCENE_MANAGER에 등록
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
-	SCENE_MANAGER->changeScene("MAIN");	
+	SCENE_MANAGER->addScene("TEST", new TestScene);
+	SCENE_MANAGER->changeScene("TEST");	
 
 	TIME_MANAGER->update();
 
@@ -159,7 +169,7 @@ void playGround::update()
 //그리기 전용
 void playGround::render()
 {	
-	D2D_RENDERER->beginRender(D2D1::ColorF::Black);
+	D2D_RENDERER->beginRender(D2D1::ColorF::White);
 	{
 		SCENE_MANAGER->render();
 	}
