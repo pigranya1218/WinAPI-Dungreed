@@ -23,7 +23,8 @@ HRESULT playGround::init()
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
 
-	IMAGE_MANAGER->addFrameImage("smapleTile", L"resources/images/Map/tileAtlas.png",10,10);
+	IMAGE_MANAGER->addFrameImage("sampleTile", L"resources/images/Map/tileAtlas.png", 10, 10);
+	
 
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");
@@ -65,7 +66,7 @@ HRESULT playGround::init()
 	
 
 	// 모든 씬 SCENE_MANAGER에 등록
-	//SCENE_MANAGER->addScene("MAIN", new MainScene);
+	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->changeScene("MapTool");	
 

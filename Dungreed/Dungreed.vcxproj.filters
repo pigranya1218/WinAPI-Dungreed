@@ -183,11 +183,11 @@
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="tileMapNode.h">
-      <Filter>Dungreed\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="MapToolScene.h">
       <Filter>Dungreed\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Dungreed\Stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -278,11 +278,11 @@
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="tileMapNode.cpp">
-      <Filter>Dungreed\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="MapToolScene.cpp">
       <Filter>Dungreed\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Dungreed\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -2,13 +2,13 @@
 #include "GameNode.h"
 
 
-class tileMapNode;
+class MapTool;
 
 class MapToolScene : public GameNode
 {
 private:
 	
-	tileMapNode* _tileMapTool;
+	MapTool* _tileMapTool;
 
 public:
 	virtual HRESULT init();			// 초기화 전용 함수
