@@ -109,7 +109,7 @@ void MainScene::update()
 		break;
 		case MENU::EXIT:
 		{
-
+			PostQuitMessage(0);
 		}
 		break;
 		}
@@ -124,7 +124,10 @@ void MainScene::update()
 		_selected = static_cast<MENU>(max(0, static_cast<int>(_selected) - 1));
 	}
 
-
+	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		PostQuitMessage(0);
+	}
 
 	
 }
@@ -144,9 +147,11 @@ void MainScene::render()
 
 	_backCloud->setScale(5);
 	_backCloud->render(Vector2(_backX, WINSIZEY / 2), false);
+	_backCloud->setScale(5);
 	_backCloud->render(Vector2(_backX - _backCloud->getWidth() * 5, WINSIZEY / 2), false);
 	_frontCloud->setScale(5);
 	_frontCloud->render(Vector2(_frontX, WINSIZEY / 2), false);
+	_frontCloud->setScale(5);
 	_frontCloud->render(Vector2(_frontX - _frontCloud->getWidth() * 5, WINSIZEY / 2), false);
 
 	IMAGE_MANAGER->findImage("MAIN_SCENE/LOGO")->setScale(5);

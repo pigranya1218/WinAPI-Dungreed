@@ -99,9 +99,6 @@
     <ClInclude Include="CameraEvent.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
@@ -180,14 +177,17 @@
     <ClInclude Include="ConfigManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Dungreed\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
+      <Filter>Dungreed\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="MapToolScene.h">
-      <Filter>Dungreed\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="MapTool.h">
-      <Filter>Dungreed\Stage</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -201,9 +201,6 @@
       <Filter>2DGameFramework\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
@@ -275,14 +272,17 @@
     <ClCompile Include="ConfigManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Dungreed\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="MapToolScene.cpp">
-      <Filter>Dungreed\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="MapTool.cpp">
-      <Filter>Dungreed\Stage</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

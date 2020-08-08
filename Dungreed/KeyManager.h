@@ -27,6 +27,7 @@ public:
 	//키가 토글되면(?) 캡스롹 생각해라
 	bool isToggleKey(int key);
 
+	int getWhichKeyDown();
 	bitset<KEYMAX> getKeyUp() { return _keyUp; }
 	bitset<KEYMAX> getKeyDown() { return _keyDown; }
 
