@@ -102,9 +102,6 @@
     <ClInclude Include="CameraEvent.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="CameraManager.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
@@ -204,6 +201,24 @@
     <ClInclude Include="TestScene.h">
       <Filter>Dungreed\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Banshee.h">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -213,9 +228,6 @@
       <Filter>2DGameFramework\GameNode</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraManager.cpp">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
@@ -284,9 +296,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Dungreed\Player</Filter>
-    </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>Dungreed\Scene</Filter>
     </ClCompile>
@@ -296,14 +305,29 @@
     <ClCompile Include="Weapon.cpp">
       <Filter>Dungreed\Player</Filter>
     </ClCompile>
-    <ClCompile Include="MeleeWeapon.cpp">
-      <Filter>Dungreed\Player</Filter>
-    </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>Dungreed\Scene</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Banshee.cpp">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Dungreed\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

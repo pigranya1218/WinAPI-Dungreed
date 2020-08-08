@@ -216,6 +216,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("TEST", new TestScene);
 	SCENE_MANAGER->changeScene("TEST");	
+	//SCENE_MANAGER->changeScene("MAIN");
 
 	TIME_MANAGER->update();
 
