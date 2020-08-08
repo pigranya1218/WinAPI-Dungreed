@@ -8,6 +8,7 @@ protected:
 	Synthesize(Vector2, _size,Size)
 	Synthesize(FloatRect, _rect,Rect)
 	Synthesize(bool, _active,Active)
+
 public:
 	GameObject();
 	virtual ~GameObject();

@@ -4,12 +4,15 @@
 class Bullet : public GameObject
 {
 private:	
+	Image* _img;
+
 	float _speed;	// 속도
 	float _range;	// 사정거리
-	float _test;
-	dasd
+	
+
 public:
-	void init();
+	void init(string imageName);
+	void release();
 	void update();
 	void render();
 
