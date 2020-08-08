@@ -76,8 +76,8 @@
     <Filter Include="Dungreed\Enum">
       <UniqueIdentifier>{b9efc908-0e29-4eca-a912-9a87c94bced3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\Bullet">
-      <UniqueIdentifier>{94c0fc8b-31a3-41ff-8ccb-62d440a3b74f}</UniqueIdentifier>
+    <Filter Include="Dungreed\Item">
+      <UniqueIdentifier>{7b2300fd-038d-42c6-bc10-bb33b7e229b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +100,9 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CameraEvent.h">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
@@ -177,9 +180,6 @@
     <ClInclude Include="Image.h">
       <Filter>2DGameFramework\Image</Filter>
     </ClInclude>
-    <ClInclude Include="ConfigManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Dungreed\Player</Filter>
     </ClInclude>
@@ -189,20 +189,20 @@
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+    <ClInclude Include="Item.h">
+      <Filter>Dungreed\Item</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>Dungreed\Enemy</Filter>
+    <ClInclude Include="MacroUtil.h">
+      <Filter>Dungreed\Enum</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Dungreed\Enemy</Filter>
+    <ClInclude Include="Weapon.h">
+      <Filter>Dungreed\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Banshee.h">
-      <Filter>Dungreed\Enemy</Filter>
+    <ClInclude Include="MeleeWeapon.h">
+      <Filter>Dungreed\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Dungreed\Bullet</Filter>
+    <ClInclude Include="TestScene.h">
+      <Filter>Dungreed\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,10 +212,10 @@
     <ClCompile Include="GameNode.cpp">
       <Filter>2DGameFramework\GameNode</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>2DGameFramework\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
+      <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
@@ -284,9 +284,6 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>헤더 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ConfigManager.cpp">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Dungreed\Player</Filter>
     </ClCompile>
@@ -296,20 +293,17 @@
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Dungreed\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Banshee.cpp">
-      <Filter>Dungreed\Enemy</Filter>
+    <ClCompile Include="MeleeWeapon.cpp">
+      <Filter>Dungreed\Player</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Dungreed\Enemy</Filter>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>Dungreed\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Dungreed\Bullet</Filter>
+    <ClCompile Include="Item.cpp">
+      <Filter>Dungreed\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

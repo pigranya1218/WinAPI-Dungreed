@@ -1,43 +1,69 @@
-#include "stdafx.h"
 #include "TestScene.h"
-#include "Player.h"
 
 HRESULT TestScene::init()
 {
-	_player = new Player;
-	_player->init();
-	_player->setTestScene(this);
-	setPlayer(_player);
 
-	//지형 세팅
-	_center = Vector2(WINSIZEX / 2, WINSIZEY - 50);
-	_size = Vector2(WINSIZEX, 100);
-	_ground = rectMakePivot(_center, _size, PIVOT::CENTER);
+	playerx = WINSIZEX / 2;
+	playery = WINSIZEY / 2;
+
+	x = 0;
+	y = 0;
+
+	angle = PI / 2;
+	speed = 1.5f;
+
+	RC[0] = FloatRect(Vector2(playerx + x, playery + y), Vector2(25, 25), PIVOT::CENTER);
+
+	RC[1] = FloatRect(Vector2(playerx , playery ), Vector2(50, 50), PIVOT::CENTER);
+
+
+
+
+
+
+
 
 	return S_OK;
 }
 
 void TestScene::release()
 {
-	_player->release();
 }
 
 void TestScene::update()
 {
-	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	if (KEY_MANAGER->isStayKeyDown(VK_LEFT))
 	{
-		PostQuitMessage(0);
+		playerx -= 4;
+	}
+	if (KEY_MANAGER->isStayKeyDown(VK_RIGHT))
+	{
+		playerx += 4;
+	}
+	if (KEY_MANAGER->isStayKeyDown(VK_UP))
+	{
+		playery -= 4;
+	}
+	if (KEY_MANAGER->isStayKeyDown(VK_DOWN))
+	{
+		playery += 4;
 	}
 
-	_player->update();
+
+	angle += 0.033f;
+	x = cosf(angle)*speed * 80; // 30이 공전 반지름 이라 늘리면 거리가늘어남
+	y = -sinf(angle)*speed * 80;
+
+
+	RC[0] = FloatRect(Vector2(playerx + x, playery + y), Vector2(25, 25), PIVOT::CENTER);
+
+	RC[1] = FloatRect(Vector2(playerx, playery), Vector2(50, 50), PIVOT::CENTER);
 }
 
 void TestScene::render()
 {
-	D2D_RENDERER->drawRectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
-	
-	_player->render();
-	
-	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
-	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
+	Rectangle(_hdc, RC[0].left, RC[0].top, RC[0].right, RC[0].bottom);
+	Rectangle(_hdc, RC[1].left, RC[1].top, RC[1].right, RC[1].bottom);
+
 }
+

@@ -5,9 +5,9 @@ enum class DEBUG_TYPE : unsigned int
 	END
 };
 
-enum class OBJECT_TEAM : unsigned int
+enum class OBJECT_TEAM : int
 {
-	PLAYER,
+	PLAYER = 0,
 	ENEMY
 };
 
@@ -65,4 +65,16 @@ enum class SOUND_TYPE
 {
 	BGM, // 배경음
 	EFFECT // 효과음
+};
+
+enum class ITEM_TYPE
+{
+	ITEM_ACCESSARIES,
+	ITEM_WEAPON
+};
+
+enum class WEAPON_SIZE
+{
+	ONE_HAND,
+	TWO_HAND
 };
