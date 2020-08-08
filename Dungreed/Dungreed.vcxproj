@@ -156,7 +156,7 @@
     <ClInclude Include="Banshee.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="CameraEvent.h" />
-    <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="D2DRenderer.h" />
@@ -176,6 +176,7 @@
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
     <ClInclude Include="MainScene.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="randomFunction.h" />
@@ -185,6 +186,7 @@
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TestScene.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Utils.h" />
@@ -196,7 +198,7 @@
     <ClCompile Include="Banshee.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
-    <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
@@ -215,11 +217,13 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Utils.cpp" />

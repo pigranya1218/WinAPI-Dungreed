@@ -1,5 +1,4 @@
 #pragma once
-#include "allEnums.h"
 
 class GameObject
 {
