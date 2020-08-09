@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "gameNode.h"
+#include "EnemyManager.h"
 
 
 struct tagTestPlayer
@@ -26,7 +27,7 @@ private:
 	float x, y;
 	FloatRect RC[2];
 
-
+	EnemyManager* _em;
 
 
 

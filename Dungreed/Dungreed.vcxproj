@@ -154,7 +154,9 @@
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Banshee.h" />
+    <ClInclude Include="BatRed.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraShakeEvent.h" />
@@ -200,7 +202,9 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Banshee.cpp" />
+    <ClCompile Include="BatRed.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
@@ -215,6 +219,7 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="Item.cpp" />

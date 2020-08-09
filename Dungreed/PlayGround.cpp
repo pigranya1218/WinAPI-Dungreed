@@ -207,7 +207,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Skel/Magician_Ice/Attack"		, L"resources/images/Enemy/Skel/Magician_Ice/attack.png"		, 12, 1);	// 해골 얼음마법사 공격
 	IMAGE_MANAGER->addFrameImage("Skel/Magician_Ice/Attack_Shot", L"resources/images/Enemy/Skel/Magician_Ice/attack_shot.png"	, 12, 1);	// 해골 얼음마법사 공격 피격
 
-
+	// * 에너미 불릿
+	IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// 박쥐 총알 작은 거
+	IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// 박쥐 총알 작은 거 삭제
 
 
 

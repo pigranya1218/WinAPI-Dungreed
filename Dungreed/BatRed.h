@@ -2,10 +2,12 @@
 #include "Enemy.h"
 #include "BulletManager.h"
 
-class Banshee : public Enemy
+class BatRed : public Enemy
 {
 private:
-	BulletManager* _bullet;
+	tagAttackInfo _shooting;
+
+	BulletManager* _bm;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

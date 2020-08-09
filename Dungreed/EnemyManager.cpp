@@ -41,12 +41,20 @@ void EnemyManager::spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction)
 	switch (enemyType)
 	{
 		case ENEMY_TYPE::BANSHEE: 
-			enemy = new Banshee; 
+		{
+			enemy = new Banshee;
+			enemy->init(pos, direction);
+			break;
+		}			
+		case ENEMY_TYPE::BAT_BOMB:
 		break;
-	case ENEMY_TYPE::BAT_BOMB:
-		break;
-	case ENEMY_TYPE::BAT_RED:
-		break;
+		case ENEMY_TYPE::BAT_RED:
+		{
+			enemy = new BatRed;
+			enemy->init(pos, direction);
+			break;
+		}
+		
 	case ENEMY_TYPE::BAT_NORMAL:
 		break;
 	case ENEMY_TYPE::BAT_ICE:
@@ -72,6 +80,6 @@ void EnemyManager::spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction)
 	}
 
 
-
+	
 	_vEnemy.push_back(enemy);
 }

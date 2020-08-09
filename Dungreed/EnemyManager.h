@@ -2,6 +2,7 @@
 #include "GameNode.h"
 #include "Enemy.h"
 #include "Banshee.h"
+#include "BatRed.h"
 
 class EnemyManager
 {
@@ -18,6 +19,6 @@ public:
 	void update();
 	void render();
 
-	void spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction = DIRECTION::RIGHT);
+	void spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction = DIRECTION::LEFT);
 };
 

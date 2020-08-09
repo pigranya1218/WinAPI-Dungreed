@@ -19,6 +19,10 @@ HRESULT TestScene::init()
 
 
 
+	// 에너미 테스트입니다.
+	_em = new EnemyManager;
+	_em->init();
+	_em->spawn(Vector2(WINSIZEX / 2, WINSIZEY / 2), ENEMY_TYPE::BAT_RED);
 
 
 
@@ -32,6 +36,11 @@ void TestScene::release()
 
 void TestScene::update()
 {
+	// 에너미 테스트입니다.
+	_em->update();
+
+
+
 	if (KEY_MANAGER->isStayKeyDown(VK_LEFT))
 	{
 		playerx -= 4;
@@ -58,6 +67,8 @@ void TestScene::update()
 	RC[0] = FloatRect(Vector2(playerx + x, playery + y), Vector2(25, 25), PIVOT::CENTER);
 
 	RC[1] = FloatRect(Vector2(playerx, playery), Vector2(50, 50), PIVOT::CENTER);
+
+	
 }
 
 void TestScene::render()
@@ -65,5 +76,8 @@ void TestScene::render()
 	Rectangle(_hdc, RC[0].left, RC[0].top, RC[0].right, RC[0].bottom);
 	Rectangle(_hdc, RC[1].left, RC[1].top, RC[1].right, RC[1].bottom);
 
+
+	// 에머니 테스트입니다.
+	_em->render();
 }
 
