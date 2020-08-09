@@ -189,6 +189,15 @@
     <ClInclude Include="Camera.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Dungreed\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolScene.h">
+      <Filter>Dungreed\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleStage.h">
+      <Filter>Dungreed\Stage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -283,6 +292,15 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Dungreed\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleStage.cpp">
+      <Filter>Dungreed\Stage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

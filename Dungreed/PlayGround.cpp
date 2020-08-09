@@ -131,6 +131,10 @@ HRESULT playGround::init()
 
 	// * STAGE SCENE
 	// ** VILLIGE
+	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
+	IMAGE_MANAGER->addImage("Town_BG", L"resources/images/Map/TownBG_Day.png");
+	IMAGE_MANAGER->addImage("Town_BG2", L"resources/images/Map/TownLayer_Day.png");
+	IMAGE_MANAGER->addImage("Town_Floor", L"resources/images/Map/TownFloor.png");
 
 	// ** DUNGEON
 

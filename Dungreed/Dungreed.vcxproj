@@ -172,11 +172,14 @@
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
     <ClInclude Include="MainScene.h" />
+    <ClInclude Include="MapTool.h" />
+    <ClInclude Include="MapToolScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SampleStage.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SoundManager.h" />
@@ -209,9 +212,12 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="MapTool.cpp" />
+    <ClCompile Include="MapToolScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="SampleStage.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="stdafx.cpp" />

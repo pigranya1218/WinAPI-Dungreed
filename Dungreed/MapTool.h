@@ -1,6 +1,6 @@
 #pragma once
 #include "GameNode.h"
-
+#include <commdlg.h>
 
 
 #define TILESIZE 32
@@ -46,9 +46,12 @@ private:
 			ERASE,
 	};
 
-	HWND _saveBtn;
-	HWND _loadBtn;
+	//HWND _saveBtn;
+	//HWND _loadBtn;
 	
+	FloatRect _save;
+	FloatRect _load;
+	FloatRect _erase;
 
 	Image* _paletteImage;
 	tagTileMap _tile[TILEX * TILEY];
