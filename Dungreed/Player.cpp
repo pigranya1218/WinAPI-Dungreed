@@ -74,6 +74,21 @@ void Player::update()
 		_direction = DIRECTION::RIGHT;
 	}
 
+	//대쉬 처리
+	if (KEY_MANAGER->isOnceKeyDown(VK_RBUTTON))
+	{
+		//우클릭 된 지점이 캐릭터보다 우측
+		if (_position.x <= _ptMouse.x)
+		{
+
+		}
+		//우클릭 된 지점이 캐릭터보다 좌측
+		else
+		{
+
+		}
+	}
+
 	//이동
 	if (KEY_MANAGER->isStayKeyDown('A'))
 	{
@@ -87,7 +102,7 @@ void Player::update()
 	}
 	if (KEY_MANAGER->isOnceKeyUp('A'))
 	{
-		if (_aniState != PLAYER_ANIMATION::IDLE)
+		if (_aniState != PLAYER_ANIMATION::IDLE && !_isJump)
 		{
 			setAni(PLAYER_ANIMATION::IDLE);
 			_aniState = PLAYER_ANIMATION::IDLE;
@@ -105,8 +120,11 @@ void Player::update()
 	}
 	if (KEY_MANAGER->isOnceKeyUp('D'))
 	{
-		if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-		_aniState = PLAYER_ANIMATION::IDLE;
+		if (_aniState != PLAYER_ANIMATION::IDLE && !_isJump)
+		{
+			setAni(PLAYER_ANIMATION::IDLE);
+			_aniState = PLAYER_ANIMATION::IDLE;
+		}
 	}
 	if (KEY_MANAGER->isOnceKeyDown(VK_SPACE) && _jumpCount > 0)
 	{
@@ -122,6 +140,7 @@ void Player::update()
 		_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
 		_yGravity -= 3.f;
 		_position.y -= _jumpPower + _yGravity * TIME_MANAGER->getElapsedTime() * 2;
+		//착지
 		if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
 		{
 			_position.y = _testScene->getGroundRect().top - _size.y / 2;

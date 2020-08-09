@@ -51,7 +51,7 @@ private:
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
 	const float	_dashPower = 20;	// 대쉬파워
-	const float	_jumpPower = 20;	// 점프파워
+	const float	_jumpPower = 5;	// 점프파워
 	float	_xGravity;				// 대쉬 저항
 	float	_yGravity;				// 점프 저항
 	
