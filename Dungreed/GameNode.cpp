@@ -93,12 +93,12 @@ LRESULT GameNode::MainProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lPara
 
 	case WM_KEYDOWN:
 	{
-		switch (wParam)
+		/*switch (wParam)
 		{
 		case VK_ESCAPE:
 			PostQuitMessage(0);
 			break;
-		}
+		}*/
 	}
 	break;
 

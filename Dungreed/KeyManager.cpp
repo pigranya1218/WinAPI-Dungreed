@@ -68,3 +68,17 @@ bool KeyManager::isToggleKey(int key)
 
 	return false;
 }
+
+int KeyManager::getWhichKeyDown()
+{
+	int result = -1;
+	for (int i = 0x20; i < KEYMAX; i++)
+	{
+		if (isOnceKeyDown(i))
+		{
+			result = i;
+			break;
+		}
+	}
+	return result;
+}
