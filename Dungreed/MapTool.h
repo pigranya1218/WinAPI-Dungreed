@@ -37,6 +37,15 @@ struct tagSelectTile
 class MapTool : public GameNode
 {
 private:
+
+	enum class TOOLMENU
+	{
+			SAVE,
+			LOAD,
+			SELECTTILE,
+			ERASE,
+	};
+
 	HWND _saveBtn;
 	HWND _loadBtn;
 	
