@@ -47,17 +47,19 @@ void MapTool::render()
 
 	for (int i = 0; i < TILEX*TILEY; ++i)
 	{
-		CAMERA_MANAGER->rectangle(_tile[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
-		_paletteImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+		_paletteImage->setScale(2);
+		CAMERA_MANAGER->rectangle(_vTileMap[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
+		_paletteImage->frameRender(_vTileMap[i].rc.getCenter(), _vTileMap[i].tileFrameX, _vTileMap[i].tileFrameY);
 	}
 	
-	
+	FloatRect temp = FloatRect(Vector2(WINSIZEX - 200, WINSIZEY - 200), Vector2(100, 50), PIVOT::LEFT_TOP);
+	CAMERA_MANAGER->rectangle(temp, D2D1::ColorF::Blue, 1, 0.5f);
 	
 }
 
 void MapTool::setup()
 {
-	
+	_saveBtn = CreateWindow("button", "save", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, WINSIZEX - 200,WINSIZEY- 200, 100,50, _hWnd, HMENU(0), _hInstance, NULL);
 
 
 	for (int i = 0; i < SAMPLETILEY; ++i)
@@ -76,13 +78,14 @@ void MapTool::setup()
 			_tile[TILEX*i + j].tileFrameX = j;
 			_tile[TILEX*i + j].tileFrameY = i;
 			_tile[TILEX*i + j].rc = FloatRect(Vector2(128 + j * TILESIZE, 96 + TILESIZE * i), Vector2(32, 32), PIVOT::CENTER);
+			_vTileMap.push_back(_tile[TILEX * i + j]);
 		}
 	}
 
 	for (int i = 0; i < TILEX*TILEY; ++i)
 	{
-		_tile[i].tileFrameX = 0;
-		_tile[i].tileFrameY = 0;
+		_vTileMap[i].tileFrameX = 0;
+		_vTileMap[i].tileFrameY = 0;
 	}
 
 }
@@ -93,7 +96,7 @@ void MapTool::setMap()
 	//setSelectTile();
 	if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
-		for (int i = 0; i < SAMPLETILEX*SAMPLETILEY; ++i)
+		for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
 		{
 
 			if (_sampleTile[i].rc.ptInRect(_ptMouse))
@@ -107,7 +110,9 @@ void MapTool::setMap()
 			}
 
 		}
-
+	}
+	if (KEY_MANAGER->isStayKeyDown(VK_LBUTTON))
+	{
 	    for (int i = 0; i < TILEX*TILEY; ++i)
 	    {
 		
@@ -115,8 +120,8 @@ void MapTool::setMap()
 			{
 				for (int j=0;j<_vSelectTile.size();++j)
 				{
-					_tile[i].tileFrameX = _vSelectTile[_vSelectTile.size()-1].x;
-					_tile[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;
+					_vTileMap[i].tileFrameX = _vSelectTile[_vSelectTile.size()-1].x;
+					_vTileMap[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;
 					releaseSelectTile();
 					break;
 				}

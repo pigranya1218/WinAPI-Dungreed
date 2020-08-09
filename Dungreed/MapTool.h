@@ -48,6 +48,9 @@ private:
 	vector<tagSelectTile> _vSelectTile;
 	vector<tagSelectTile>::iterator _viSelectTile;
 
+	vector<tagTileMap> _vTileMap;
+	vector<tagTileMap>::iterator _viTileMap;
+
 public:
 	HRESULT init();
 	
