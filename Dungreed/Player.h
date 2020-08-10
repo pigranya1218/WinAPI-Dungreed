@@ -1,7 +1,9 @@
 #pragma once
 #include "GameObject.h"
 
-class TestScene;
+class Item;
+class GameScene;
+class Projectile;
 
 //애니메이션 재생용 (상태패턴 아님)
 enum class PLAYER_ANIMATION
@@ -11,6 +13,14 @@ enum class PLAYER_ANIMATION
 	MOVE		//점프 중이 아닌 경우에만
 	// JUMP		//점프 중일 때도 좌 우 이동은 가능하지만 점프 상태는 그대로
 	// DIE		//사망
+};
+
+// 공격 관련 정보
+struct tagAttackInfo
+{
+	int attackID; // 어택 아이디, 공격에 대한 중복검사 판별을 위해서 사용
+	float damage; // 대미지
+	float knockBack; // 넉백 (밀어내는 힘)
 };
 
 struct tagStat
@@ -39,7 +49,7 @@ class Player : public GameObject
 Synthesize(DIRECTION, _direction, Direction)
 
 private:
-	TestScene* _testScene;
+	GameScene* _gameScene;
 	Animation* _ani;
 	Image* _img;
 	PLAYER_ANIMATION _aniState;
@@ -52,26 +62,36 @@ private:
 
 	const float	_dashPower = 20;	// 대쉬파워
 	const float	_jumpPower = 20;	// 점프파워
-	float	_xGravity;				// 대쉬 저항
-	float	_yGravity;				// 점프 저항
+	float	_xGravity;				// x 저항
+	float	_yGravity;				// y 저항
 	
-	bool	_isJump;				// 점프 처리 (지면과 떨어진 상태)
+	bool	_isLanded;				// 공중에 떠있는지 판단하는 불 변수
 
-	tagStat _stat; // 스탯
-	
+	tagStat _baseStat; // 기본 스탯, 아이템으로 변하지 않는 스탯
+	tagStat _adjustStat; // 아이템으로 변화된 스탯
+
+	vector<Item*> _inventory; // 인벤토리
+	vector<Item*> _equippedWeapon; // 장착된 무기
+	int _currWeaponIndex; // 현재 사용하는 무기 인덱스, 0 or 1
+	vector<Item*> _equippedAcc; // 장착된 악세사리
 
 public:
 	Player() {};
 	~Player() {};
 
+	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; };
+
 	void move(Vector2 force);
 	void setAni(PLAYER_ANIMATION setAni);
 
-	void init();
-	void release();
-	void update();
-	void render();
+	// 아이템들이 호출할 함수들
+	void attack(FloatRect rect, tagAttackInfo info);
+	void attack(FloatCircle circle, tagAttackInfo info);
+	void attack(Projectile* projectile, tagAttackInfo info);
 
-	void setTestScene(TestScene* testScene) { _testScene = testScene; }
+	virtual void init() override;
+	virtual void release() override;
+	virtual void update(float const timeElapsed) override;
+	virtual void render() override;
 };
 

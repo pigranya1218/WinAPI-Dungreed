@@ -23,6 +23,7 @@ using namespace std;
 #include "LibraryHeader.h"
 #include "Vector2.h"
 #include "FloatRect.h"
+#include "FloatCircle.h"
 #include "RandomFunction.h"
 #include "KeyManager.h"
 #include "Utils.h"

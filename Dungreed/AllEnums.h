@@ -13,8 +13,11 @@ enum class OBJECT_TEAM : unsigned int
 
 enum class DIRECTION : unsigned int
 {
-	LEFT,
-	RIGHT
+	LEFT = 0,
+	RIGHT,
+	UP,
+	DOWN,
+	END
 };
 
 enum class PIVOT : int

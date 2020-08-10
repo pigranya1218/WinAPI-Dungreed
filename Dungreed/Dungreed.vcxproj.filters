@@ -85,6 +85,18 @@
     <Filter Include="Dungreed\TestScene">
       <UniqueIdentifier>{41a11635-02c4-4193-a075-4e3348247087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Projectile">
+      <UniqueIdentifier>{59eb532c-177e-4d86-bcdd-cf24bc40a955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item">
+      <UniqueIdentifier>{21b99b21-fb28-44de-9187-ec8a4b85d545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\TestStage">
+      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Village">
+      <UniqueIdentifier>{d2dd7050-886e-48eb-944a-8ab14e1433db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -210,6 +222,33 @@
     <ClInclude Include="ObjectManager.h">
       <Filter>Dungreed\GameScene\Object</Filter>
     </ClInclude>
+    <ClInclude Include="ProjectileManager.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatCircle.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="testStage.h">
+      <Filter>Dungreed\GameScene\Stage\TestStage</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -217,9 +256,6 @@
     </ClCompile>
     <ClCompile Include="GameNode.cpp">
       <Filter>2DGameFramework\GameNode</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>2DGameFramework\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
       <Filter>2DGameFramework\Manager\Camera</Filter>
@@ -316,6 +352,21 @@
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Dungreed\GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatCircle.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="testStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\TestStage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

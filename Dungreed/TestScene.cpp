@@ -6,7 +6,7 @@ HRESULT TestScene::init()
 {
 	_player = new Player;
 	_player->init();
-	_player->setTestScene(this);
+	// _player->setTestScene(this);
 	setPlayer(_player);
 
 	//지형 세팅
@@ -29,7 +29,7 @@ void TestScene::update()
 		PostQuitMessage(0);
 	}
 
-	_player->update();
+	// _player->update();
 }
 
 void TestScene::render()

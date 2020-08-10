@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Player.h"
-#include "TestScene.h"
+#include "GameScene.h"
+#include "Item.h"
 
 void Player::move(Vector2 moveDir)
 {
@@ -42,6 +43,18 @@ void Player::setAni(PLAYER_ANIMATION setAni)
 	}
 }
 
+void Player::attack(FloatRect rect, tagAttackInfo info)
+{
+}
+
+void Player::attack(FloatCircle circle, tagAttackInfo info)
+{
+}
+
+void Player::attack(Projectile * projectile, tagAttackInfo info)
+{
+}
+
 void Player::init()
 {
 	setSize(Vector2(80, 110));
@@ -50,7 +63,7 @@ void Player::init()
 	_jumpCount = 2;
 	_xGravity = 5.f;
 	_yGravity = 5.f;
-	_isJump = false;
+	_isLanded = false;
 
 	_ani = new Animation;
 	setAni(PLAYER_ANIMATION::IDLE);
@@ -62,7 +75,7 @@ void Player::release()
 	SAFE_DELETE(_ani);
 }
 
-void Player::update()
+void Player::update(float const timeElapsed)
 {
 	//방향 조정
 	if (_ptMouse.x < _position.x)
@@ -77,7 +90,7 @@ void Player::update()
 	//이동
 	if (KEY_MANAGER->isStayKeyDown('A'))
 	{
-		if (!_isJump)
+		if (!_isLanded)
 		{
 			if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
 			_aniState = PLAYER_ANIMATION::MOVE;
@@ -95,7 +108,7 @@ void Player::update()
 	}
 	if (KEY_MANAGER->isStayKeyDown('D'))
 	{
-		if (!_isJump)
+		if (!_isLanded)
 		{
 			if (_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
 			_aniState = PLAYER_ANIMATION::MOVE;
@@ -112,42 +125,42 @@ void Player::update()
 	{
 		_aniState = PLAYER_ANIMATION::DEFAULT;
 		_jumpCount -= 1;
-		_isJump = true;
+		_isLanded = true;
 	}
 	
-	////점프 처리
-	if (_isJump)
+	//점프 처리
+	if (_isLanded)
 	{
 		_ani->stop();
 		_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
 		_yGravity -= 3.f;
 		_position.y -= _jumpPower + _yGravity * TIME_MANAGER->getElapsedTime() * 2;
-		if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
+		/*if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
 		{
 			_position.y = _testScene->getGroundRect().top - _size.y / 2;
 			if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
 			_aniState = PLAYER_ANIMATION::IDLE;
 			_jumpCount = 2;
 			_yGravity = 5.f;
-			_isJump = false;
-		}
+			_isLanded = false;
+		}*/
 	}
 
 	//착지 처리
 	//캐릭터 이미지의 height 값이 그라운드의 top보다 작으면
-	if (!_isJump)
+	if (!_isLanded)
 	{
-		if (_position.y + _size.y / 2 < _testScene->getGroundRect().top)
-		{
-			_position.y += 20 * TIME_MANAGER->getElapsedTime();
-		}
-		else // 착지 하면
-		{
-			_position.y = _testScene->getGroundRect().top - _size.y / 2;
-			_jumpCount = 2;
-			/*if (_setAni != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-			_setAni = PLAYER_ANIMATION::IDLE;*/
-		}
+		//if (_position.y + _size.y / 2 < _testScene->getGroundRect().top)
+		//{
+		//	_position.y += 20 * TIME_MANAGER->getElapsedTime();
+		//}
+		//else // 착지 하면
+		//{
+		//	_position.y = _testScene->getGroundRect().top - _size.y / 2;
+		//	_jumpCount = 2;
+		//	/*if (_setAni != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
+		//	_setAni = PLAYER_ANIMATION::IDLE;*/
+		//}
 	}
 
 	_ani->frameUpdate(TIME_MANAGER->getElapsedTime());
