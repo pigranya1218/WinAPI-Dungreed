@@ -179,6 +179,7 @@
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MapToolScene.h" />
+    <ClInclude Include="MatchLockGun.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="Object.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MapToolScene.cpp" />
+    <ClCompile Include="MatchLockGun.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
