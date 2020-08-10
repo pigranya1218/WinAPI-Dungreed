@@ -23,6 +23,7 @@ using namespace std;
 #include "LibraryHeader.h"
 #include "Vector2.h"
 #include "FloatRect.h"
+#include "FloatCircle.h"
 #include "RandomFunction.h"
 #include "KeyManager.h"
 #include "Utils.h"
@@ -37,7 +38,7 @@ using namespace std;
 #include "ConfigManager.h"
 #include "DataManager.h"
 
-// using namespace TTYONE_UTIL;
+using namespace TTYONE_UTIL;
 
 //MS VS버전이 올라가면서 기존의 문자열 함수의 안정성을 올리기위해
 //_s를 붙인 함수를 사용하게끔 경고하는 메시지를 무시해준다
