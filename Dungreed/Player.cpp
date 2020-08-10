@@ -85,7 +85,7 @@ void Player::init()
 	setSize(Vector2(80, 110));
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
-	_jumpCount = 2;
+	_jumpCount = 1;
 	_xGravity = 2000.f;
 	_yGravity = 1600.f;
 	_isLanded = false;
@@ -154,7 +154,7 @@ void Player::update(float const elapsedTime)
 
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _jumpCount > 0)
 	{
-		_force.y -= 800;
+		_force.y -= _jumpPower;
 		_aniState = PLAYER_ANIMATION::DEFAULT;
 		_jumpCount -= 1;
 		_isLanded = true;
@@ -163,8 +163,8 @@ void Player::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)))
 	{
 		float angle = atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x));
-		_force.x = cosf(angle) * 1100;
-		_force.y = -sinf(angle) * 1000;
+		_force.x = cosf(angle) * _dashPower;
+		_force.y = -sinf(angle) * _dashPower;
 	}
 	
 	if (_force.x != 0) // 대쉬 상태라면
@@ -190,9 +190,9 @@ void Player::update(float const elapsedTime)
 	_force.y += _yGravity * elapsedTime;
 	moveDir.y = _force.y * elapsedTime;
 
-	Vector2 currPos = _position;
+	Vector2 lastPos = _position;
 	_gameScene->moveTo(this, moveDir);
-	if (moveDir.y != 0 && currPos.y == _position.y)
+	if (moveDir.y != 0 && lastPos.y == _position.y) // 땅에 착지
 	{
 		_isLanded = false;
 		_force.y = 0;

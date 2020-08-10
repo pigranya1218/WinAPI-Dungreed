@@ -62,10 +62,10 @@ private:
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
-	const float	_dashPower = 20;	// 대쉬파워
-	const float	_jumpPower = 20;	// 점프파워
-	float	_xGravity;				// x 저항
-	float	_yGravity;				// y 저항
+	float	_dashPower = 1100;	// 대쉬파워
+	float	_jumpPower = 800;	// 점프파워
+	float	_xGravity = 2000;	// x 저항
+	float	_yGravity = 1600;	// y 저항
 	
 	bool	_isLanded;				// 공중에 떠있는지 판단하는 불 변수
 
