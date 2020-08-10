@@ -1,7 +1,7 @@
 #pragma once
 #include "GameNode.h"
 #include <commdlg.h>
-
+#include "LinearFunc.h"
 
 #define TILESIZE 32
 #define TILEX 30
@@ -33,7 +33,6 @@ struct tagSelectTile
 };
 
 
-
 class MapTool : public GameNode
 {
 private:
@@ -49,6 +48,7 @@ private:
 	//HWND _saveBtn;
 	//HWND _loadBtn;
 	
+	LinearFunc _line;
 	Camera _camera;
 
 	FloatRect _save;

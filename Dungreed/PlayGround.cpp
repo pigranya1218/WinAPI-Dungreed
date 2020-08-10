@@ -153,6 +153,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("SECOND", new SecondTestScene);
+	SCENE_MANAGER->addScene("TEST", new TestScene);
 	SCENE_MANAGER->changeScene("MapTool");	
 
 	TIME_MANAGER->update();

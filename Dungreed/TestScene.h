@@ -9,7 +9,7 @@ class TestScene : public GameNode
 {
 private:
 	Player* _player;
-	
+	Camera _camera;
 
 	//ÁöÇü
 	//Synthesize(PIVOT, _pivot, rectMakePivot)
