@@ -4,6 +4,7 @@
 #include "MainScene.h"
 #include "MapToolScene.h"
 #include "TestScene.h"
+#include "SecondTestScene.h"
 
 #include "Player.h"
 
@@ -151,6 +152,7 @@ HRESULT playGround::init()
 	// 모든 씬 SCENE_MANAGER에 등록
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
+	SCENE_MANAGER->addScene("SECOND", new SecondTestScene);
 	SCENE_MANAGER->changeScene("MapTool");	
 
 	TIME_MANAGER->update();

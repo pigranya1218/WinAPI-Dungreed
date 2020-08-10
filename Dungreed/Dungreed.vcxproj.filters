@@ -198,6 +198,12 @@
     <ClInclude Include="SampleStage.h">
       <Filter>Dungreed\Stage</Filter>
     </ClInclude>
+    <ClInclude Include="TownStage.h">
+      <Filter>Dungreed\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondTestScene.h">
+      <Filter>Dungreed\Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -301,6 +307,12 @@
     </ClCompile>
     <ClCompile Include="SampleStage.cpp">
       <Filter>Dungreed\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="TownStage.cpp">
+      <Filter>Dungreed\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondTestScene.cpp">
+      <Filter>Dungreed\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

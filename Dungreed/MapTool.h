@@ -49,6 +49,8 @@ private:
 	//HWND _saveBtn;
 	//HWND _loadBtn;
 	
+	Camera _camera;
+
 	FloatRect _save;
 	FloatRect _load;
 	FloatRect _erase;
@@ -63,21 +65,26 @@ private:
 	vector<tagTileMap> _vTileMap;
 	vector<tagTileMap>::iterator _viTileMap;
 
+	vector<TCHAR*> _vLoad;
+	vector<TCHAR*>::iterator _viLoad;
+
 public:
 	HRESULT init();
 	
 	void release();
 	void update();
 	void render();
-
+	
 
 	void setup();
 	void setMap();
 	void save();
 	void load();
-
+	void mapLoad();
 	void setSelectTile();
 	void releaseSelectTile();
 
+	Image* getImage() {	return _paletteImage;}
+	tagTileMap getTile() { return _tile[TILEX * TILEY]; }
 };
 

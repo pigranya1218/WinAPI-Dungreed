@@ -2,12 +2,14 @@
 #include "GameNode.h"
 #include "GameObject.h"
 
+
 class Player;
 
 class TestScene : public GameNode
 {
 private:
 	Player* _player;
+	
 
 	//지형
 	//Synthesize(PIVOT, _pivot, rectMakePivot)
@@ -28,6 +30,8 @@ public:
 	void setPlayer(Player* player) { _player = player; }
 	//충돌처리
 	void moveObject(GameObject* object, Vector2 moveDir);
+
+
 
 	//지형 렉트 접근자
 	const FloatRect getGroundRect() { return _ground; }

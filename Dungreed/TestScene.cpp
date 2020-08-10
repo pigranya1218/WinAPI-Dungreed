@@ -2,6 +2,7 @@
 #include "TestScene.h"
 #include "Player.h"
 
+
 HRESULT TestScene::init()
 {
 	_player = new Player;
@@ -41,3 +42,5 @@ void TestScene::render()
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
 }
+
+

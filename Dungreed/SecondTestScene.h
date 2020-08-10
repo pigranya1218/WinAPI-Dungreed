@@ -1,15 +1,12 @@
 #pragma once
 #include "GameNode.h"
 
+class SampleStage;
 
-class MapTool;
-
-class MapToolScene : public GameNode
+class SecondTestScene :public GameNode
 {
 private:
-	
-	MapTool* _tileMapTool;
-	Camera _camera;
+	SampleStage* _stage;
 
 public:
 	virtual HRESULT init();			// 초기화 전용 함수

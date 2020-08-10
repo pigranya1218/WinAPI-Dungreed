@@ -32,6 +32,9 @@ void MapTool::update()
 
 void MapTool::render()
 {
+
+	_camera.render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
+
 	Vector2 size = _paletteImage->getSize();
 	size.x *= _paletteImage->getMaxFrameX();
 	size.y *= _paletteImage->getMaxFrameY();
@@ -57,7 +60,7 @@ void MapTool::render()
 		_paletteImage->setScale(2);
 		//D2D_RENDERER->drawRectangle(_vTileMap[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
 		//_paletteImage->frameRender(_vTileMap[i].rc.getCenter(), _vTileMap[i].tileFrameX, _vTileMap[i].tileFrameY);
-		D2D_RENDERER->drawRectangle(_tile[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
+		//D2D_RENDERER->drawRectangle(_tile[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
 		_paletteImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
 		
 	}
@@ -164,6 +167,8 @@ void MapTool::setMap()
 
 void MapTool::save()
 {
+	
+	SetCursor;
 
 	TCHAR szFile[260] = _T("");
 	OPENFILENAME ofn;
@@ -182,6 +187,7 @@ void MapTool::save()
 
 	TCHAR* return_path = ofn.lpstrFile;
 
+	
 
 	HANDLE stageFile;
 	DWORD write;
@@ -213,6 +219,8 @@ void MapTool::load()
 	if (::GetOpenFileName(&ofn) == false) return;
 	TCHAR* return_path = ofn.lpstrFile;
 
+	
+
 	HANDLE stageFile;
 	DWORD read;
 
@@ -222,6 +230,27 @@ void MapTool::load()
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);
 
 	CloseHandle(stageFile);
+
+
+}
+
+void MapTool::mapLoad()
+{
+	if (_vLoad.size() == 0)return;
+	HANDLE stageFile;
+	DWORD read;
+	
+	for (int i = 0; i < _vLoad.size(); ++i)
+	{
+		stageFile = CreateFile(_vLoad[i], GENERIC_READ, NULL, NULL,
+			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+	
+	ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);
+	
+
+
+	CloseHandle(stageFile);
+	}
 }
 
 void MapTool::setSelectTile()
