@@ -2,16 +2,14 @@
 #include "GameNode.h"
 #include "GameObject.h"
 
-class Player;
-class Item;
-class Matchlock;
 
+class Player;
+class Weapon;
 class TestScene : public GameNode
 {
 private:
 	Player* _player;
-	Item* _item;
-	Matchlock* _matchlock;
+	Camera _camera;
 
 	//지형
 	//Synthesize(PIVOT, _pivot, rectMakePivot)
@@ -21,6 +19,10 @@ private:
 
 	bool _mouseMove;
 	POINT _lastMousePt;
+
+	Image* _weapon;
+	Image* _item;
+
 
 
 
@@ -34,6 +36,8 @@ public:
 	void setItem(Item* item) { _item = item; }
 	//충돌처리
 	void moveObject(GameObject* object, Vector2 moveDir);
+
+
 
 	//지형 렉트 접근자
 	const FloatRect getGroundRect() { return _ground; }

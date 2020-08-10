@@ -4,22 +4,24 @@
 #include "Item.h"
 #include "Matchlock.h"
 
+
 HRESULT TestScene::init()
 {
+	
+
+
+
 	_player = new Player;
 	_player->init();
-	_player->setTestScene(this);
+	// _player->setTestScene(this);
 	setPlayer(_player);
-
-	/*_item = new Item(_player->getPosition(), _player->getDirection());
-	_item->init();
-	_item->setTestScene(this);
-	setItem(_item);*/
 	
-	/*_matchlock = new Matchlock(_player->getPosition(), _player->getDirection());
-	_matchlock->init();
-	_matchlock->setTestScene(this);
-	setItem(_matchlock);*/
+
+	
+
+
+
+	_item = IMAGE_MANAGER->findImage("ShortSpear");
 
 	//지형 세팅
 	_center = Vector2(WINSIZEX / 2, WINSIZEY - 50);
@@ -41,13 +43,22 @@ void TestScene::update()
 		PostQuitMessage(0);
 	}
 
-	_player->update();
-	//_matchlock->update(_player->getPosition(), _player->getDirection());
+	// _player->update();
 }
 
 void TestScene::render()
 {
+	IMAGE_MANAGER->findImage("Town_BGL")->setScale(5);
+	_camera.render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	IMAGE_MANAGER->findImage("Town_BG")->setScale(5);
+	_camera.render(IMAGE_MANAGER->findImage("Town_BG"), Vector2(WINSIZEX / 2, WINSIZEY / 2 + 200));
+	IMAGE_MANAGER->findImage("Town_BG2")->setScale(5);
+	_camera.render(IMAGE_MANAGER->findImage("Town_BG2"), Vector2(WINSIZEX / 2, WINSIZEY / 2 + 200));
+
 	D2D_RENDERER->drawRectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
+
+
+
 	
 	_player->render();
 	//_matchlock->render();
@@ -55,3 +66,5 @@ void TestScene::render()
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
 }
+
+

@@ -19,24 +19,6 @@
     <Filter Include="Dungreed">
       <UniqueIdentifier>{1cefc68e-8b1d-4ce0-b8e8-9205494e8468}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\Scene">
-      <UniqueIdentifier>{41a11635-02c4-4193-a075-4e3348247087}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dungreed\UI">
-      <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dungreed\Player">
-      <UniqueIdentifier>{4034af17-4b69-457e-97f8-6c3df58dd7ec}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dungreed\Enemy">
-      <UniqueIdentifier>{053ceacc-322a-4912-aaa8-2df7309d11b2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dungreed\Enemy\Boss">
-      <UniqueIdentifier>{367166ca-ab94-4406-8aee-d969a435713d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dungreed\Stage">
-      <UniqueIdentifier>{9a0e7d88-bd8a-4386-a524-7bab0e407516}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2DGameFramework\Animation">
       <UniqueIdentifier>{520fca63-5cd4-4d8a-80a5-93408525a7d3}</UniqueIdentifier>
     </Filter>
@@ -70,14 +52,62 @@
     <Filter Include="2DGameFramework\GameNode">
       <UniqueIdentifier>{cad5ca17-2639-45f7-9bbe-f37611b6fb8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2DGameFramework\Manager\Camera">
-      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\Enum">
       <UniqueIdentifier>{b9efc908-0e29-4eca-a912-9a87c94bced3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\Item">
-      <UniqueIdentifier>{eca7e800-f8dd-4c79-96cd-f89d15a4c1a5}</UniqueIdentifier>
+    <Filter Include="Dungreed\MainScene">
+      <UniqueIdentifier>{903493cd-7c18-443b-91dd-1ab6ad8965cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene">
+      <UniqueIdentifier>{73b1e60c-9850-47f8-a28b-31eba2de0026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player">
+      <UniqueIdentifier>{4034af17-4b69-457e-97f8-6c3df58dd7ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Enemy">
+      <UniqueIdentifier>{053ceacc-322a-4912-aaa8-2df7309d11b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Enemy\Boss">
+      <UniqueIdentifier>{367166ca-ab94-4406-8aee-d969a435713d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage">
+      <UniqueIdentifier>{9a0e7d88-bd8a-4386-a524-7bab0e407516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\UI">
+      <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object">
+      <UniqueIdentifier>{f89c22bc-65c8-4c41-98b1-bbff413b7784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Projectile">
+      <UniqueIdentifier>{59eb532c-177e-4d86-bcdd-cf24bc40a955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item">
+      <UniqueIdentifier>{21b99b21-fb28-44de-9187-ec8a4b85d545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Village">
+      <UniqueIdentifier>{d2dd7050-886e-48eb-944a-8ab14e1433db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon">
+      <UniqueIdentifier>{7e8e49aa-110b-4327-a474-bd2b96273960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Test">
+      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Camera">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Npc">
+      <UniqueIdentifier>{f27c1b85-e2e6-4efe-ac36-0a247dd856a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MapToolScene">
+      <UniqueIdentifier>{074ba322-124e-4072-a364-88a006739539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MapToolScene\MapTool">
+      <UniqueIdentifier>{0669a0e9-7d5e-4ffe-8a51-5fe5ca0e4bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MapToolScene\Test">
+      <UniqueIdentifier>{4d6d20c6-2019-497e-b474-4e544706d11a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,10 +130,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CameraEvent.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -134,9 +164,6 @@
     </ClInclude>
     <ClInclude Include="AllEnums.h">
       <Filter>Dungreed\Enum</Filter>
-    </ClInclude>
-    <ClInclude Include="MainScene.h">
-      <Filter>Dungreed\Scene</Filter>
     </ClInclude>
     <ClInclude Include="LinearFunc.h">
       <Filter>2DGameFramework\Utils</Filter>
@@ -181,27 +208,78 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Dungreed\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>Dungreed\Scene</Filter>
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>Dungreed\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Dungreed\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileManager.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Dungreed\Item</Filter>
+      <Filter>Dungreed\GameScene\Item</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>Dungreed\Item</Filter>
+    <ClInclude Include="FloatCircle.h">
+      <Filter>2DGameFramework\Utils</Filter>
     </ClInclude>
-    <ClInclude Include="Matchlock.h">
-      <Filter>Dungreed\Item</Filter>
+    <ClInclude Include="Stage.h">
+      <Filter>Dungreed\GameScene\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="ItemManager.h">
+    <ClInclude Include="NpcManager.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolScene.h">
+      <Filter>Dungreed\MapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Dungreed\MapToolScene\MapTool</Filter>
+    </ClInclude>
+    <ClInclude Include="SampleStage.h">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondTestScene.h">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TownStage.h">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TestStage.h">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
   </ItemGroup>
@@ -212,14 +290,11 @@
     <ClCompile Include="GameNode.cpp">
       <Filter>2DGameFramework\GameNode</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>2DGameFramework\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -244,9 +319,6 @@
     </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>2DGameFramework\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="MainScene.cpp">
-      <Filter>Dungreed\Scene</Filter>
     </ClCompile>
     <ClCompile Include="LinearFunc.cpp">
       <Filter>2DGameFramework\Utils</Filter>
@@ -288,28 +360,64 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Dungreed\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>Dungreed\Scene</Filter>
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Dungreed\Item</Filter>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>Dungreed\MainScene</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>Dungreed\Item</Filter>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Dungreed\GameScene</Filter>
     </ClCompile>
-    <ClCompile Include="Matchlock.cpp">
-      <Filter>Dungreed\Item</Filter>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>Dungreed\GameScene\Stage</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>Dungreed\Item</Filter>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatCircle.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcManager.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolScene.cpp">
+      <Filter>Dungreed\MapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Dungreed\MapToolScene\MapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="SampleStage.cpp">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondTestScene.cpp">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TownStage.cpp">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TestStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

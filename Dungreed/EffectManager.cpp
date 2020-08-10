@@ -28,14 +28,14 @@ void EffectManager::release()
 	}
 }
 
-void EffectManager::update()
+void EffectManager::update(float elapsedTime)
 {
 	for (auto iter = _totalEffect.begin(); iter != _totalEffect.end(); iter++)
 	{
 		vEffects effects = iter->second;
 		for (int i = 0; i < effects.size(); i++)
 		{
-			effects[i]->update();
+			effects[i]->update(elapsedTime);
 		}
 	}
 }
@@ -75,22 +75,7 @@ void EffectManager::addEffect(string effectName, const char * imageName, int fps
 	_totalEffect.insert(pair<string, vEffects>(effectName, vEffectBuffer));
 }
 
-//void EffectManager::play(string effectName, int x, int y)
-//{
-//	for (auto iter = _totalEffect.begin(); iter != _totalEffect.end(); iter++)
-//	{
-//		if (iter->first != effectName) continue;
-//		vEffects effects = iter->second;
-//		for (int i = 0; i < effects.size(); i++)
-//		{
-//			if (effects[i]->getIsRunning()) continue;
-//			effects[i]->startEffect(x, y);
-//			return;
-//		}
-//	}
-//}
-
-void EffectManager::playZ(string effectName, Vector2 pos, float scale)
+void EffectManager::play(string effectName, int x, int y)
 {
 	for (auto iter = _totalEffect.begin(); iter != _totalEffect.end(); iter++)
 	{
@@ -99,13 +84,28 @@ void EffectManager::playZ(string effectName, Vector2 pos, float scale)
 		for (int i = 0; i < effects.size(); i++)
 		{
 			if (effects[i]->getIsRunning()) continue;
-			effects[i]->startEffectZ(pos, scale);
+			effects[i]->startEffect(x, y);
 			return;
 		}
 	}
 }
 
-//void EffectManager::play(string effectName, int x, int y, int width, int height)
+void EffectManager::play(string effectName, int x, int y, int width, int height)
+{
+	for (auto iter = _totalEffect.begin(); iter != _totalEffect.end(); iter++)
+	{
+		if (iter->first != effectName) continue;
+		vEffects effects = iter->second;
+		for (int i = 0; i < effects.size(); i++)
+		{
+			if (effects[i]->getIsRunning()) continue;
+			effects[i]->startEffect(x, y, width, height);
+			return;
+		}
+	}
+}
+
+//void EffectManager::playZ(string effectName, Vector2 pos, float scale)
 //{
 //	for (auto iter = _totalEffect.begin(); iter != _totalEffect.end(); iter++)
 //	{
@@ -114,8 +114,10 @@ void EffectManager::playZ(string effectName, Vector2 pos, float scale)
 //		for (int i = 0; i < effects.size(); i++)
 //		{
 //			if (effects[i]->getIsRunning()) continue;
-//			effects[i]->startEffect(x, y, width, height);
+//			effects[i]->startEffectZ(pos, scale);
 //			return;
 //		}
 //	}
 //}
+
+

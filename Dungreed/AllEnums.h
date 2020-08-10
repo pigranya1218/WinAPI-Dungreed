@@ -5,16 +5,36 @@ enum class DEBUG_TYPE : unsigned int
 	END
 };
 
-enum class OBJECT_TEAM : unsigned int
+enum class OBJECT_TEAM : int
 {
-	PLAYER,
+	PLAYER = 0,
 	ENEMY
+};
+
+enum class ENEMY_TYPE : unsigned int
+{
+	BANSHEE,			// 수녀
+	BAT_BOMB,			// 박쥐 자폭
+	BAT_RED,			// 박쥐 빨강
+	BAT_NORMAL,			// 박쥐 기본
+	BAT_ICE,			// 박쥐 얼음
+	BAT_GIANT_RED,		// 박쥐 거대 빨강
+	BAT_GIANT_NORMAL,	// 박쥐 거대 기본
+	GHOST,				// 유령
+	LILITH,				// 서큐버스
+	SKEL_BIG_NORMAL,	// 해골기사 기본
+	SKEL_BIG_ICE,		// 해골기사 얼음
+	SKEL_DOG,			// 해골강아지
+	SKEL_MAGICIAN_ICE	// 해골마법사 얼음
 };
 
 enum class DIRECTION : unsigned int
 {
-	LEFT,
-	RIGHT
+	LEFT = 0,
+	RIGHT,
+	UP,
+	DOWN,
+	END
 };
 
 enum class PIVOT : int

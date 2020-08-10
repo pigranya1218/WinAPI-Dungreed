@@ -1,20 +1,22 @@
 #pragma once
+#include "stdafx.h"
 
 class GameObject
 {
 protected:
 	Synthesize(OBJECT_TEAM, _team, Team)
 	Synthesize(Vector2, _position, Position) // x, y
-	Synthesize(Vector2, _size,Size)
-	Synthesize(FloatRect, _rect,Rect)
-	Synthesize(bool, _active,Active)
-public:
-	GameObject();
-	virtual ~GameObject();
+	Synthesize(Vector2, _size, Size)
+	Synthesize(FloatRect, _rect, Rect)
+	Synthesize(bool, _active, Active)
 
-	virtual void init();
-	virtual void release();
-	virtual void update();
-	virtual void render();
+public:
+	GameObject() {}
+	virtual ~GameObject() {}
+
+	virtual void init() = 0;
+	virtual void release() = 0;
+	virtual void update(float timeElapsed) = 0;
+	virtual void render() = 0;
 };
 

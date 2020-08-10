@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "gameNode.h"
 
 class MainScene : public GameNode
