@@ -52,9 +52,6 @@
     <Filter Include="2DGameFramework\GameNode">
       <UniqueIdentifier>{cad5ca17-2639-45f7-9bbe-f37611b6fb8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2DGameFramework\Manager\Camera">
-      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\Enum">
       <UniqueIdentifier>{b9efc908-0e29-4eca-a912-9a87c94bced3}</UniqueIdentifier>
     </Filter>
@@ -100,6 +97,12 @@
     <Filter Include="Dungreed\GameScene\Stage\Test">
       <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2DGameFramework\Camera">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Npc">
+      <UniqueIdentifier>{f27c1b85-e2e6-4efe-ac36-0a247dd856a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -121,10 +124,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CameraEvent.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -208,7 +211,7 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>Dungreed\MainScene</Filter>
@@ -252,6 +255,12 @@
     <ClInclude Include="testStage.h">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClInclude>
+    <ClInclude Include="NpcManager.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -261,10 +270,10 @@
       <Filter>2DGameFramework\GameNode</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -339,7 +348,7 @@
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>2DGameFramework\Manager\Camera</Filter>
+      <Filter>2DGameFramework\Camera</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
       <Filter>Dungreed\MainScene</Filter>
@@ -369,7 +378,13 @@
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcManager.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

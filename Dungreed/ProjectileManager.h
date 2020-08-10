@@ -9,7 +9,7 @@ private:
 public:
 	void init();
 	void release();
-	void update(float const timeElapsed);
+	void update(float const elapsedTime);
 	void render();
 };
 

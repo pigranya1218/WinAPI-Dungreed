@@ -177,6 +177,8 @@
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
     <ClInclude Include="MainScene.h" />
+    <ClInclude Include="Npc.h" />
+    <ClInclude Include="NpcManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
@@ -224,6 +226,8 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="Npc.cpp" />
+    <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayGround.cpp" />

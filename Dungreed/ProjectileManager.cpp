@@ -7,12 +7,24 @@ void ProjectileManager::init()
 
 void ProjectileManager::release()
 {
+	for (int i = 0; i < _projectiles.size(); i++)
+	{
+		_projectiles[i]->release();
+	}
 }
 
-void ProjectileManager::update(float const timeElapsed)
+void ProjectileManager::update(float const elapsedTime)
 {
+	for (int i = 0; i < _projectiles.size(); i++)
+	{
+		_projectiles[i]->update(elapsedTime);
+	}
 }
 
 void ProjectileManager::render()
 {
+	for (int i = 0; i < _projectiles.size(); i++)
+	{
+		_projectiles[i]->render();
+	}
 }

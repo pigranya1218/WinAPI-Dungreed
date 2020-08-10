@@ -7,6 +7,10 @@ void EnemyManager::init()
 
 void EnemyManager::release()
 {
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		_enemies[i]->release();
+	}
 }
 
 void EnemyManager::update(float const timeElapsed)
