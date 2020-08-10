@@ -211,7 +211,7 @@ void Player::update(float const elapsedTime)
 
 	Vector2 lastPos = _position;
 	_gameScene->moveTo(this, moveDir);
-	if (moveDir.y != 0 && lastPos.y == _position.y) // ¶¥¿¡ ÂøÁö
+	if (moveDir.y > 0 && lastPos.y == _position.y) // ¶¥¿¡ ÂøÁö
 	{
 		_isLanded = false;
 		_force.y = 0;
