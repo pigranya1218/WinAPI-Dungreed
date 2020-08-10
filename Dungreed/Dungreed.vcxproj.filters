@@ -282,6 +282,9 @@
     <ClInclude Include="TimeManager.h">
       <Filter>2DGameFramework\ProgressBar</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerStat.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -418,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="TestStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStat.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

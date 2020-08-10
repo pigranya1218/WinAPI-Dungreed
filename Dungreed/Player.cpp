@@ -2,6 +2,19 @@
 #include "GameScene.h"
 #include "Item.h"
 
+void Player::setBaseStat()
+{
+	_baseStat.maxHp = 75;
+	_baseStat.maxJumpCount = 1;
+	_baseStat.maxDashCount = 2;
+	_baseStat.maxSatiety = 100;
+	_baseStat.dashXPower = 2400;
+	_baseStat.dashYPower = 1700;
+	_baseStat.jumpPower = 1700;
+	_baseStat.xGravity = 10000;
+	_baseStat.yGravity = 6000;
+}
+
 void Player::setAni(PLAYER_ANIMATION setAni)
 {
 	_aniState = setAni;
@@ -85,7 +98,11 @@ void Player::init()
 	setSize(Vector2(40, 90));
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
-	_jumpCount = 1;
+	
+	_currJumpCount = _baseStat.maxJumpCount;
+	_currHp = _baseStat.maxHp;
+	_currSatiety = 0;
+
 	_force = Vector2(0, 0);
 
 	_ani = new Animation;
@@ -167,25 +184,25 @@ void Player::update(float const elapsedTime)
 		_aniState = PLAYER_ANIMATION::IDLE;
 	}*/
 
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _jumpCount > 0)
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _currJumpCount > 0)
 	{
-		_force.y = -_jumpPower;
+		_force.y = -_baseStat.jumpPower;
 		// _aniState = PLAYER_ANIMATION::DEFAULT;
-		_jumpCount -= 1;
+		_currJumpCount -= 1;
 	}
 
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)))
 	{
 		float angle = atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x));
-		_force.x = cosf(angle) * _dashXPower;
-		_force.y = -sinf(angle) * _dashYPower;
+		_force.x = cosf(angle) * _baseStat.dashXPower;
+		_force.y = -sinf(angle) * _baseStat.dashYPower;
 	}
 	
 	if (_force.x != 0) // 대쉬 상태라면
 	{
 		if (_force.x > 0)
 		{
-			_force.x -= _xGravity * elapsedTime;
+			_force.x -= _baseStat.xGravity * elapsedTime;
 			if (_force.x < 0)
 			{
 				_force.x = 0;
@@ -193,7 +210,7 @@ void Player::update(float const elapsedTime)
 		}
 		else
 		{
-			_force.x += _xGravity * elapsedTime;
+			_force.x += _baseStat.xGravity * elapsedTime;
 			if (_force.x > 0)
 			{
 				_force.x = 0;
@@ -201,14 +218,14 @@ void Player::update(float const elapsedTime)
 		}
 		moveDir.x = _force.x * elapsedTime;
 	}
-	_force.y += _yGravity * elapsedTime;
+	_force.y += _baseStat.yGravity * elapsedTime;
 	moveDir.y = _force.y * elapsedTime;
 
 	_gameScene->moveTo(this, moveDir);
 	if (_isStand) // 땅에 착지
 	{
 		_force.y = 0;
-		_jumpCount = 1;
+		_currJumpCount = 1;
 	}
 
 	////점프 처리
