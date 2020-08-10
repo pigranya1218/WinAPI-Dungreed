@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TestScene.h"
 #include "Player.h"
+#include "Item.h"
+#include "Matchlock.h"
 
 
 HRESULT TestScene::init()
@@ -59,6 +61,7 @@ void TestScene::render()
 
 	
 	_player->render();
+	//_matchlock->render();
 	
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));

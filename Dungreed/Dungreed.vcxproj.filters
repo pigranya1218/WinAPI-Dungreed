@@ -285,6 +285,18 @@
     <ClInclude Include="TestStage.h">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Matchlock.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -424,6 +436,18 @@
     </ClCompile>
     <ClCompile Include="TestStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Dungreed\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Dungreed\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Matchlock.cpp">
+      <Filter>Dungreed\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Dungreed\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

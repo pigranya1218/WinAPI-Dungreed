@@ -28,7 +28,8 @@ private:
 	Vector2				_size;			
 	float				_scale;			
 	float				_angle;
-	
+	Vector2				_anglePos;
+
 	Vector2				_skewPos, _skewAngle;	// Âî±×·¯Æ®¸± ÁÂÇ¥, °¢µµ
 
 	tagLoadedImageInfo	_loadInfo;
@@ -56,6 +57,7 @@ public:
 	void setAlpha(const float alpha) { this->_alpha = alpha; }
 	void setScale(const float scale) { this->_scale = scale; }
 	void setAngle(const float angle) { this->_angle = angle; }
+	void setAnglePos(const Vector2& vec) { this->_anglePos = vec; }
 
 	float getScale() { return _scale; }
 	float getAngle() { return _angle; }

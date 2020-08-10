@@ -33,6 +33,7 @@ public:
 	virtual void render();			// 그리기 전용
 
 	void setPlayer(Player* player) { _player = player; }
+	void setItem(Item* item) { _item = item; }
 	//충돌처리
 	void moveObject(GameObject* object, Vector2 moveDir);
 

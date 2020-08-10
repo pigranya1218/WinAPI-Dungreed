@@ -184,6 +184,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="Projectile.h" />
@@ -228,6 +229,8 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />
@@ -237,6 +240,7 @@
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="SampleStage.cpp" />
