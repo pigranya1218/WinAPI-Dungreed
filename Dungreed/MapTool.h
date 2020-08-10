@@ -1,7 +1,7 @@
 #pragma once
 #include "GameNode.h"
 #include <commdlg.h>
-
+#include "LinearFunc.h"
 
 #define TILESIZE 32
 #define TILEX 30
@@ -32,9 +32,11 @@ struct tagSelectTile
 	int y;
 };
 
-class MapTool
+
+class MapTool : public GameNode
 {
 private:
+
 	enum class TOOLMENU
 	{
 			SAVE,
@@ -45,7 +47,8 @@ private:
 
 	//HWND _saveBtn;
 	//HWND _loadBtn;
-private:
+	
+	LinearFunc _line;
 	Camera _camera;
 
 	FloatRect _save;
@@ -57,9 +60,13 @@ private:
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
 
 	vector<tagSelectTile> _vSelectTile;
+	vector<tagSelectTile>::iterator _viSelectTile;
+
 	vector<tagTileMap> _vTileMap;
+	vector<tagTileMap>::iterator _viTileMap;
 
 	vector<TCHAR*> _vLoad;
+	vector<TCHAR*>::iterator _viLoad;
 
 public:
 	HRESULT init();
@@ -68,6 +75,7 @@ public:
 	void update();
 	void render();
 	
+
 	void setup();
 	void setMap();
 	void save();

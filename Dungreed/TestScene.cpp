@@ -5,6 +5,10 @@
 
 HRESULT TestScene::init()
 {
+	
+
+
+
 	_player = new Player;
 	_player->init();
 	// _player->setTestScene(this);
@@ -35,7 +39,17 @@ void TestScene::update()
 
 void TestScene::render()
 {
+	IMAGE_MANAGER->findImage("Town_BGL")->setScale(5);
+	_camera.render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	IMAGE_MANAGER->findImage("Town_BG")->setScale(5);
+	_camera.render(IMAGE_MANAGER->findImage("Town_BG"), Vector2(WINSIZEX / 2, WINSIZEY / 2 + 200));
+	IMAGE_MANAGER->findImage("Town_BG2")->setScale(5);
+	_camera.render(IMAGE_MANAGER->findImage("Town_BG2"), Vector2(WINSIZEX / 2, WINSIZEY / 2 + 200));
+
 	D2D_RENDERER->drawRectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
+
+
+
 	
 	_player->render();
 	

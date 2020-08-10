@@ -169,7 +169,7 @@ void MapTool::save()
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFile = szFile;
 	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = _T("Avi Files(*.avi)\0*.avi\0All Files (*.*)\0*.*\0");
+	ofn.lpstrFilter = _T("map Files(*.map)\0*.map\0All Files (*.*)\0*.*\0");
 	ofn.nFilterIndex = 1;
 	ofn.lpstrFileTitle = NULL;
 	ofn.nMaxFileTitle = 0;
@@ -202,7 +202,7 @@ void MapTool::load()
 	ofn.hwndOwner = NULL;
 	ofn.lpstrFile = szFilePath;
 	ofn.nMaxFile = sizeof(szFilePath);
-	ofn.lpstrFilter = _T("Avi Files(*.avi)\0*.avi\0All Files (*.*)\0*.*\0");
+	ofn.lpstrFilter = _T("map Files(*.map)\0*.map\0All Files (*.*)\0*.*\0");
 	ofn.nFilterIndex = 1;
 	ofn.lpstrFileTitle = NULL;
 	ofn.nMaxFileTitle = 0;
