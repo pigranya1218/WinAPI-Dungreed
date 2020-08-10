@@ -45,8 +45,8 @@ protected:
 
 	struct tagMoveInfo
 	{
-		float _moveSpeed;
-		float _moveAngle;
+		float speed;
+		float angle;
 
 		float delay;
 		float count;

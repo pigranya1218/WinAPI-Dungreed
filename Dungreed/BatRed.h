@@ -5,6 +5,7 @@ class BatRed : public Enemy
 {
 private:
 	tagShootingInfo _shooting;
+	tagMoveInfo		_moving;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

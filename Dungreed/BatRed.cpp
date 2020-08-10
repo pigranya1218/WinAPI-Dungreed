@@ -10,10 +10,15 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_scale = 5;
+	_scale = 3;
 
 	ZeroMemory(&_shooting, sizeof(_shooting));
 	_shooting.delay = 30;
+
+	ZeroMemory(&_moving, sizeof(_moving));
+	_moving.delay = 50;
+	_moving.speed = 350;
+	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	_size = _img->getFrameSize() * _scale;
 
@@ -34,6 +39,18 @@ void BatRed::update(float const timeElapsed)
 	{
 		case ENEMY_STATE::MOVE:
 		{
+			Vector2 moveDir(0, 0);
+
+			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.speed);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.speed);
+
+			_enemyManager->moveEnemy(this, moveDir);
+
+			if (_moving.update(timeElapsed * 10))
+			{
+				_moving.angle = RANDOM->getFromFloatTo(0, PI2);
+			}
+
 			if (_shooting.update(timeElapsed * 10))
 			{
 				setState(ENEMY_STATE::ATTACK);
