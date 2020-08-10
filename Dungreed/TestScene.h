@@ -3,11 +3,15 @@
 #include "GameObject.h"
 
 class Player;
+class Item;
+class Matchlock;
 
 class TestScene : public GameNode
 {
 private:
 	Player* _player;
+	Item* _item;
+	Matchlock* _matchlock;
 
 	//지형
 	//Synthesize(PIVOT, _pivot, rectMakePivot)
@@ -19,6 +23,7 @@ private:
 	POINT _lastMousePt;
 
 
+
 public:
 	virtual HRESULT init();			// 초기화 전용 함수
 	virtual void release();			// 메모리 해제 전용
@@ -26,6 +31,7 @@ public:
 	virtual void render();			// 그리기 전용
 
 	void setPlayer(Player* player) { _player = player; }
+	void setItem(Item* item) { _item = item; }
 	//충돌처리
 	void moveObject(GameObject* object, Vector2 moveDir);
 

@@ -73,7 +73,8 @@ void Image::render(const Vector2& position, bool bisymmetry)
 	//스케일 행렬을 만들어준다
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
 	//회전 행렬을 만들어준다. 
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
+	Vector2 anglePos = _anglePos * _scale;
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(anglePos.x, anglePos.y));
 	//이동 행렬을 만들어준다.
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;
@@ -99,7 +100,8 @@ void Image::render(const Vector2 & position, const Vector2 & size, bool bisymmet
 	//스케일 행렬을 만들어준다
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
 	//회전 행렬을 만들어준다. 
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
+	Vector2 anglePos = _anglePos * _scale;
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(anglePos.x, anglePos.y));
 	//이동 행렬을 만들어준다.
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;
@@ -127,7 +129,8 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	Vector2 size = _size * _scale;
 
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(size.x / 2.f, size.y / 2.f));
+	Vector2 anglePos = _anglePos * _scale;
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(_angle, D2D1::Point2F(anglePos.x, anglePos.y));
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
@@ -182,6 +185,7 @@ void Image::resetRenderOption()
 	this->_alpha = 1.0f;
 	this->_scale = 1.0f;
 	this->_angle = 0.f;
+	this->_anglePos = Vector2(_size.x / 2.f, _size.y / 2.f);
 	this->_skewAngle = Vector2(0, 0);
 	this->_skewPos = Vector2(0, 0);
 

@@ -76,6 +76,9 @@
     <Filter Include="Dungreed\Enum">
       <UniqueIdentifier>{b9efc908-0e29-4eca-a912-9a87c94bced3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\Item">
+      <UniqueIdentifier>{eca7e800-f8dd-4c79-96cd-f89d15a4c1a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -189,6 +192,18 @@
     <ClInclude Include="Camera.h">
       <Filter>2DGameFramework\Manager\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Matchlock.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -283,6 +298,18 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>2DGameFramework\Manager\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Dungreed\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Dungreed\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Matchlock.cpp">
+      <Filter>Dungreed\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
