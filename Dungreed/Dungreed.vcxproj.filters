@@ -91,11 +91,14 @@
     <Filter Include="Dungreed\GameScene\Item">
       <UniqueIdentifier>{21b99b21-fb28-44de-9187-ec8a4b85d545}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\GameScene\Stage\TestStage">
-      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Stage\Village">
       <UniqueIdentifier>{d2dd7050-886e-48eb-944a-8ab14e1433db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon">
+      <UniqueIdentifier>{7e8e49aa-110b-4327-a474-bd2b96273960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Test">
+      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +250,7 @@
       <Filter>Dungreed\GameScene\Stage</Filter>
     </ClInclude>
     <ClInclude Include="testStage.h">
-      <Filter>Dungreed\GameScene\Stage\TestStage</Filter>
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -363,7 +366,7 @@
       <Filter>2DGameFramework\Utils</Filter>
     </ClCompile>
     <ClCompile Include="testStage.cpp">
-      <Filter>Dungreed\GameScene\Stage\TestStage</Filter>
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>소스 파일</Filter>

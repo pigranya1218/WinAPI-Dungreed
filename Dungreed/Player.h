@@ -1,4 +1,5 @@
 #pragma once
+#include "stdafx.h"
 #include "GameObject.h"
 
 class Item;
@@ -18,6 +19,7 @@ enum class PLAYER_ANIMATION
 // 공격 관련 정보
 struct tagAttackInfo
 {
+	OBJECT_TEAM team;
 	int attackID; // 어택 아이디, 공격에 대한 중복검사 판별을 위해서 사용
 	float damage; // 대미지
 	float knockBack; // 넉백 (밀어내는 힘)
@@ -85,9 +87,9 @@ public:
 	void setAni(PLAYER_ANIMATION setAni);
 
 	// 아이템들이 호출할 함수들
-	void attack(FloatRect rect, tagAttackInfo info);
-	void attack(FloatCircle circle, tagAttackInfo info);
-	void attack(Projectile* projectile, tagAttackInfo info);
+	void attack(FloatRect* rect, tagAttackInfo* info);
+	void attack(FloatCircle* circle, tagAttackInfo* info);
+	void attack(Projectile* projectile, tagAttackInfo* info);
 
 	virtual void init() override;
 	virtual void release() override;

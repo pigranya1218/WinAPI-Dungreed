@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Player.h"
 #include "GameScene.h"
 #include "Item.h"
@@ -43,16 +42,46 @@ void Player::setAni(PLAYER_ANIMATION setAni)
 	}
 }
 
-void Player::attack(FloatRect rect, tagAttackInfo info)
+void Player::attack(FloatRect* rect, tagAttackInfo* info)
 {
+	// 아이템 효과 적용
+	for (int i = 0; i < _equippedAcc.size(); i++)
+	{
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->attack(rect, info);
+		}
+	}
+
+	// 플레이어 스탯 적용
 }
 
-void Player::attack(FloatCircle circle, tagAttackInfo info)
+void Player::attack(FloatCircle* circle, tagAttackInfo* info)
 {
+	// 아이템 효과 적용
+	for (int i = 0; i < _equippedAcc.size(); i++)
+	{
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->attack(circle, info);
+		}
+	}
+
+	// 플레이어 스탯 적용
 }
 
-void Player::attack(Projectile * projectile, tagAttackInfo info)
+void Player::attack(Projectile* projectile, tagAttackInfo* info)
 {
+	// 아이템 효과 적용
+	for (int i = 0; i < _equippedAcc.size(); i++)
+	{
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->attack(projectile, info);
+		}
+	}
+
+	// 플레이어 스탯 적용
 }
 
 void Player::init()
@@ -88,7 +117,7 @@ void Player::update(float const timeElapsed)
 	}
 
 	//이동
-	if (KEY_MANAGER->isStayKeyDown('A'))
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
 	{
 		if (!_isLanded)
 		{
