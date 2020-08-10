@@ -128,28 +128,54 @@ void Player::update(float const elapsedTime)
 
 	//이동
 	Vector2 moveDir(0, 0);
+	//좌측 이동중
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
 	{
 		moveDir.x -= 350 * elapsedTime;
-		/*if (!_isLanded)
+		if (!_isLanded)
 		{
-			if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-			_aniState = PLAYER_ANIMATION::MOVE;
-			_position.x -= 200 * TIME_MANAGER->getElapsedTime();
+			if (_aniState != PLAYER_ANIMATION::MOVE)
+			{
+				setAni(PLAYER_ANIMATION::MOVE);
+				_aniState = PLAYER_ANIMATION::MOVE;
+			}
+			//_position.x -= 200 * TIME_MANAGER->getElapsedTime();
 		}
-		else _position.x -= 150 * TIME_MANAGER->getElapsedTime();*/
+		//else _position.x -= 150 * TIME_MANAGER->getElapsedTime();*/
 	}
+	//좌측 정지
+	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
+	{
+		if (_aniState != PLAYER_ANIMATION::IDLE)
+		{
+			setAni(PLAYER_ANIMATION::IDLE);
+			_aniState = PLAYER_ANIMATION::IDLE;
+		}
+	}
+	//우측 이동중
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))
 	{
 		moveDir.x += 350 * elapsedTime;
 
-		/*if (!_isLanded)
+		if (!_isLanded)
 		{
-			if (_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-			_aniState = PLAYER_ANIMATION::MOVE;
-			_position.x += 200 * TIME_MANAGER->getElapsedTime();
+			if (_aniState != PLAYER_ANIMATION::MOVE)
+			{
+				setAni(PLAYER_ANIMATION::MOVE);
+				_aniState = PLAYER_ANIMATION::MOVE;
+			}
+			//_position.x += 200 * TIME_MANAGER->getElapsedTime();
 		}
-		else _position.x += 150 * TIME_MANAGER->getElapsedTime();*/
+		//else _position.x += 150 * TIME_MANAGER->getElapsedTime();
+	}
+	//우측 정지
+	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))
+	{
+		if (_aniState != PLAYER_ANIMATION::IDLE)
+		{
+			setAni(PLAYER_ANIMATION::IDLE);
+			_aniState = PLAYER_ANIMATION::IDLE;
+		}
 	}
 	/*if (KEY_MANAGER->isOnceKeyUp('A'))
 	{
@@ -200,35 +226,40 @@ void Player::update(float const elapsedTime)
 		}
 		moveDir.x = _force.x * elapsedTime;
 	}
+	//점프 하강
 	_force.y += _yGravity * elapsedTime;
 	moveDir.y = _force.y * elapsedTime;
 
 	Vector2 lastPos = _position;
 	_gameScene->moveTo(this, moveDir);
+	//착지
 	if (moveDir.y != 0 && lastPos.y == _position.y) // 땅에 착지
 	{
+		if(_aniState == PLAYER_ANIMATION::DEFAULT) setAni(PLAYER_ANIMATION::IDLE);
+		_aniState = PLAYER_ANIMATION::IDLE;
 		_isLanded = false;
 		_force.y = 0;
 		_jumpCount = 1;
 	}
 
-	////점프 처리
-	//if (_isLanded)
-	//{
-	//	_ani->stop();
-	//	_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
-	//	_yGravity -= 3.f;
-	//	_position.y -= _jumpPower + _yGravity * TIME_MANAGER->getElapsedTime() * 2;
-	//	/*if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
-	//	{
-	//		_position.y = _testScene->getGroundRect().top - _size.y / 2;
-	//		if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-	//		_aniState = PLAYER_ANIMATION::IDLE;
-	//		_jumpCount = 2;
-	//		_yGravity = 5.f;
-	//		_isLanded = false;
-	//	}*/
-	//}
+	//점프 처리
+	if (_isLanded)
+	{
+		_ani->stop();
+		_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
+		_aniState = PLAYER_ANIMATION::DEFAULT;
+		//_yGravity -= 3.f;
+		//_position.y -= _jumpPower + _yGravity * TIME_MANAGER->getElapsedTime();
+		/*if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
+		{
+			_position.y = _testScene->getGroundRect().top - _size.y / 2;
+			if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
+			_aniState = PLAYER_ANIMATION::IDLE;
+			_jumpCount = 2;
+			_yGravity = 5.f;
+			_isLanded = false;
+		}*/
+	}
 
 	//착지 처리
 	//캐릭터 이미지의 height 값이 그라운드의 top보다 작으면
@@ -262,4 +293,8 @@ void Player::render()
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
 	}
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
+	wstring str = L" isLanded[0 = 착지상태 / 1 = 체공상태] : " + to_wstring((int)_isLanded);
+	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	str = L" aniState[0 = DEFAULT / 1 = IDLE / 2 = MOVE] : " + to_wstring(int(_aniState));
+	D2D_RENDERER->renderText(0, 20, str, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 }

@@ -67,7 +67,7 @@ private:
 	float	_xGravity = 2000;	// x 저항
 	float	_yGravity = 1600;	// y 저항
 	
-	bool	_isLanded;				// 공중에 떠있는지 판단하는 불 변수
+	bool	_isLanded;			// 공중에 떠있는지 판단하는 불 변수
 
 	tagStat _baseStat; // 기본 스탯, 아이템으로 변하지 않는 스탯
 	tagStat _adjustStat; // 아이템으로 변화된 스탯
