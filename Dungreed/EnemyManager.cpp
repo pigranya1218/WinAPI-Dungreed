@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Stage.h"
 #include "EnemyManager.h"
 
 void EnemyManager::init()
@@ -27,4 +28,9 @@ void EnemyManager::render()
 	{
 		_enemies[i]->render();
 	}
+}
+
+Vector2 EnemyManager::getPlayerPos()
+{
+	return _stage->getPlayerPos();
 }
