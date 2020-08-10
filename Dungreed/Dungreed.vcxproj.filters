@@ -79,9 +79,6 @@
     <Filter Include="Dungreed\GameScene\Object">
       <UniqueIdentifier>{f89c22bc-65c8-4c41-98b1-bbff413b7784}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\TestScene">
-      <UniqueIdentifier>{41a11635-02c4-4193-a075-4e3348247087}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Projectile">
       <UniqueIdentifier>{59eb532c-177e-4d86-bcdd-cf24bc40a955}</UniqueIdentifier>
     </Filter>
@@ -213,9 +210,6 @@
     <ClInclude Include="Player.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>Dungreed\TestScene</Filter>
-    </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
@@ -286,15 +280,6 @@
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
-      <Filter>Dungreed\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>Dungreed\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="Matchlock.h">
-      <Filter>Dungreed\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemManager.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
   </ItemGroup>
@@ -377,9 +362,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>Dungreed\TestScene</Filter>
-    </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
@@ -436,18 +418,6 @@
     </ClCompile>
     <ClCompile Include="TestStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Dungreed\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>Dungreed\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="Matchlock.cpp">
-      <Filter>Dungreed\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>Dungreed\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

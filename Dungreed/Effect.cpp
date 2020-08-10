@@ -14,11 +14,6 @@ Effect::~Effect()
 {
 }
 
-void Effect::init()
-{
-	return;
-}
-
 void Effect::init(Image * effectImage, int fps)
 {
 	if (!effectImage) return;
