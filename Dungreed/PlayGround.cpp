@@ -2,7 +2,9 @@
 #include "PlayGround.h"
 
 #include "MainScene.h"
+#include "MapToolScene.h"
 #include "TestScene.h"
+#include "SecondTestScene.h"
 
 #include "Player.h"
 
@@ -24,6 +26,10 @@ HRESULT playGround::init()
 
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
+
+	IMAGE_MANAGER->addFrameImage("sampleTile", L"resources/images/Map/tileAtlas.png", 10, 10);
+	
+
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");
 	IMAGE_MANAGER->addImage("CURSOR_SHOOTING", L"resources/images/common/cursor/ShootingCursor2.png");
@@ -126,6 +132,10 @@ HRESULT playGround::init()
 
 	// * STAGE SCENE
 	// ** VILLIGE
+	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
+	IMAGE_MANAGER->addImage("Town_BG", L"resources/images/Map/TownBG_Day.png");
+	IMAGE_MANAGER->addImage("Town_BG2", L"resources/images/Map/TownLayer_Day.png");
+	IMAGE_MANAGER->addImage("Town_Floor", L"resources/images/Map/TownFloor.png");
 
 	// ** DUNGEON
 
@@ -141,8 +151,9 @@ HRESULT playGround::init()
 
 	// 모든 씬 SCENE_MANAGER에 등록
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
-	SCENE_MANAGER->addScene("TEST", new TestScene);
-	SCENE_MANAGER->changeScene("TEST");	
+	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
+	SCENE_MANAGER->addScene("SECOND", new SecondTestScene);
+	SCENE_MANAGER->changeScene("MapTool");	
 
 	TIME_MANAGER->update();
 

@@ -177,6 +177,8 @@
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
     <ClInclude Include="MainScene.h" />
+    <ClInclude Include="MapTool.h" />
+    <ClInclude Include="MapToolScene.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="Object.h" />
@@ -188,7 +190,9 @@
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SampleStage.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SecondTestScene.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Stage.h" />
@@ -199,6 +203,7 @@
     <ClInclude Include="testStage.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TownStage.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
@@ -226,14 +231,18 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />
+    <ClCompile Include="MapTool.cpp" />
+    <ClCompile Include="MapToolScene.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="SampleStage.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SecondTestScene.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />
@@ -243,6 +252,7 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UIManager.cpp" />
+    <ClCompile Include="TownStage.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="windowsAPI.cpp" />
