@@ -113,6 +113,19 @@ void Player::update(float const elapsedTime)
 		_direction = DIRECTION::RIGHT;
 	}
 
+	// 공격
+	/*if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	{
+		_equippedWeapon[_currWeaponIndex]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
+		for (int i = 0; i < 4; i++)
+		{
+			if (_equippedAcc[i] != nullptr)
+			{
+				_equippedAcc[i]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
+			}
+		}
+	}*/
+
 	//이동
 	Vector2 moveDir(0, 0);
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))

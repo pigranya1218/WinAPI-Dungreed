@@ -32,7 +32,7 @@ public:
 	virtual void render(Vector2 pos, float angle) = 0;
 	virtual void displayInfo() = 0; // 인벤토리에서 보여질 정보들
 
-	virtual void attack(Vector2 const position, Vector2 const angle) = 0; // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
+	virtual void attack(Vector2 const position, float const angle) = 0; // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
 	virtual void attack(FloatRect* rect, tagAttackInfo* info) = 0; // 공격 렉트를 변경시키는 함수 
 	virtual void attack(FloatCircle* circle, tagAttackInfo* info) = 0; // 공격 써클을 변경시키는 함수
 	virtual void attack(Projectile* projectile, tagAttackInfo* info) = 0; // 탄환을 변경시키는 함수
