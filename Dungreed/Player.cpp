@@ -12,7 +12,15 @@ void Player::setBaseStat()
 	_baseStat.dashYPower = 1700;
 	_baseStat.jumpPower = 1700;
 	_baseStat.xGravity = 10000;
-	_baseStat.yGravity = 6000;
+	_baseStat.yGravity = 5000;
+}
+
+// 장착 아이템 및 스킬에 따른 스탯 변화주기
+void Player::updateAdjustStat()
+{
+	_adjustStat = _baseStat;
+	
+
 }
 
 void Player::setAni(PLAYER_ANIMATION setAni)
@@ -99,8 +107,11 @@ void Player::init()
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
-	_currJumpCount = _baseStat.maxJumpCount;
-	_currHp = _baseStat.maxHp;
+
+	setBaseStat();
+	updateAdjustStat();
+	_currJumpCount = _adjustStat.maxJumpCount;
+	_currHp = _adjustStat.maxHp;
 	_currSatiety = 0;
 
 	_force = Vector2(0, 0);
@@ -117,8 +128,8 @@ void Player::release()
 
 void Player::update(float const elapsedTime)
 {
-
-	
+	// 아이템, 스킬에 따른 스탯 조정 (변경이 생길 때)
+	// updateAdjustStat();
 
 	//방향 조정
 	if (_ptMouse.x < _position.x)
@@ -186,7 +197,7 @@ void Player::update(float const elapsedTime)
 
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _currJumpCount > 0)
 	{
-		_force.y = -_baseStat.jumpPower;
+		_force.y = -_adjustStat.jumpPower;
 		// _aniState = PLAYER_ANIMATION::DEFAULT;
 		_currJumpCount -= 1;
 	}
@@ -194,15 +205,15 @@ void Player::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)))
 	{
 		float angle = atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x));
-		_force.x = cosf(angle) * _baseStat.dashXPower;
-		_force.y = -sinf(angle) * _baseStat.dashYPower;
+		_force.x = cosf(angle) * _adjustStat.dashXPower;
+		_force.y = -sinf(angle) * _adjustStat.dashYPower;
 	}
 	
 	if (_force.x != 0) // 대쉬 상태라면
 	{
 		if (_force.x > 0)
 		{
-			_force.x -= _baseStat.xGravity * elapsedTime;
+			_force.x -= _adjustStat.xGravity * elapsedTime;
 			if (_force.x < 0)
 			{
 				_force.x = 0;
@@ -210,7 +221,7 @@ void Player::update(float const elapsedTime)
 		}
 		else
 		{
-			_force.x += _baseStat.xGravity * elapsedTime;
+			_force.x += _adjustStat.xGravity * elapsedTime;
 			if (_force.x > 0)
 			{
 				_force.x = 0;
@@ -218,14 +229,14 @@ void Player::update(float const elapsedTime)
 		}
 		moveDir.x = _force.x * elapsedTime;
 	}
-	_force.y += _baseStat.yGravity * elapsedTime;
+	_force.y += _adjustStat.yGravity * elapsedTime;
 	moveDir.y = _force.y * elapsedTime;
 
 	_gameScene->moveTo(this, moveDir);
 	if (_isStand) // 땅에 착지
 	{
-		_force.y = 0;
-		_currJumpCount = 1;
+		_force.y = 200;
+		_currJumpCount = _adjustStat.maxJumpCount;
 	}
 
 	////점프 처리
