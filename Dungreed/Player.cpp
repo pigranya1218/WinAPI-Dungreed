@@ -159,6 +159,7 @@ void Player::update(float const elapsedTime)
 
 		if (!_isLanded)
 		{
+			// if(moveDir.x == 0) 이때 IDLE
 			if (_aniState != PLAYER_ANIMATION::MOVE)
 			{
 				setAni(PLAYER_ANIMATION::MOVE);
@@ -208,6 +209,9 @@ void Player::update(float const elapsedTime)
 	
 	if (_force.x != 0) // 대쉬 상태라면
 	{
+		//점프 이미지로 교체 해야 함.
+
+
 		if (_force.x > 0)
 		{
 			_force.x -= _xGravity * elapsedTime;
