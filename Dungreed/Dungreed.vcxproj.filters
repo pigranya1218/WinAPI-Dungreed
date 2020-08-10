@@ -195,13 +195,13 @@
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
-    <ClInclude Include="ItemManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
     <ClInclude Include="Matchlock.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
   </ItemGroup>
@@ -302,13 +302,13 @@
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\Item</Filter>
     </ClCompile>
-    <ClCompile Include="ItemManager.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Dungreed\Item</Filter>
     </ClCompile>
     <ClCompile Include="Matchlock.cpp">
+      <Filter>Dungreed\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
       <Filter>Dungreed\Item</Filter>
     </ClCompile>
   </ItemGroup>

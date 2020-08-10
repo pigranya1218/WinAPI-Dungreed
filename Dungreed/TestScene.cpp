@@ -16,10 +16,10 @@ HRESULT TestScene::init()
 	_item->setTestScene(this);
 	setItem(_item);*/
 	
-	_matchlock = new Matchlock(_player->getPosition(), _player->getDirection());
+	/*_matchlock = new Matchlock(_player->getPosition(), _player->getDirection());
 	_matchlock->init();
 	_matchlock->setTestScene(this);
-	setItem(_matchlock);
+	setItem(_matchlock);*/
 
 	//지형 세팅
 	_center = Vector2(WINSIZEX / 2, WINSIZEY - 50);
@@ -42,7 +42,7 @@ void TestScene::update()
 	}
 
 	_player->update();
-	_matchlock->update(_player->getPosition(), _player->getDirection());
+	//_matchlock->update(_player->getPosition(), _player->getDirection());
 }
 
 void TestScene::render()
@@ -50,7 +50,7 @@ void TestScene::render()
 	D2D_RENDERER->drawRectangle(_ground, D2D1::ColorF::Magenta, 1, 1);
 	
 	_player->render();
-	_matchlock->render();
+	//_matchlock->render();
 	
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
 	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
