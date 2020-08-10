@@ -10,10 +10,14 @@ void Enemy::release()
 {
 }
 
-void Enemy::update()
+void Enemy::update(const float timeElapsed)
 {
 }
 
 void Enemy::render()
+{
+}
+
+void Enemy::setState(ENEMY_STATE state)
 {
 }

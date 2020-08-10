@@ -5,19 +5,17 @@
 void BatRed::init(const Vector2& pos, DIRECTION direction)
 {
 	_ani = new Animation;
-	setState(ENEMY_STATE::MOVE);
 
-	ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.delay = 30;
+	setState(ENEMY_STATE::MOVE);	
 
 	_position = pos;
 	_direction = direction;
 	_scale = 5;
 
-	_size.x = _img->getFrameSize().x - 10;
-	_size.y = _img->getFrameSize().y - 2;
+	ZeroMemory(&_shooting, sizeof(_shooting));
+	_shooting.delay = 30;
 
-	_size = _size * _scale;
+	_size = _img->getFrameSize() * _scale;
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
@@ -28,16 +26,15 @@ void BatRed::release()
 	SAFE_DELETE(_ani);
 }
 
-void BatRed::update()
+void BatRed::update(float const timeElapsed)
 {
+	_direction = _enemyManager->getPlayerPos().x > _position.x ? DIRECTION::RIGHT : DIRECTION::LEFT;
+
 	switch (_state)
 	{
 		case ENEMY_STATE::MOVE:
 		{
-			//_position.x -= 10;			
-			_em->moveEnemy(this, _position);
-
-			if (_shooting.update(TIME_MANAGER->getElapsedTime() * 10))
+			if (_shooting.update(timeElapsed * 10))
 			{
 				setState(ENEMY_STATE::ATTACK);
 			}
@@ -73,6 +70,7 @@ void BatRed::render()
 void BatRed::setState(ENEMY_STATE state)
 {
 	_state = state;
+
 	switch (state)
 	{
 		case ENEMY_STATE::MOVE:

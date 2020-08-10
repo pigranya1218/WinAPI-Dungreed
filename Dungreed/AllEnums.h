@@ -13,7 +13,7 @@ enum class OBJECT_TEAM : int
 
 enum class ENEMY_TYPE : unsigned int
 {
-	BANSHEE,			// ¼ö³à
+	BANSHEE = 0,		// ¼ö³à
 	BAT_BOMB,			// ¹ÚÁã ÀÚÆø
 	BAT_RED,			// ¹ÚÁã »¡°­
 	BAT_NORMAL,			// ¹ÚÁã ±âº»
