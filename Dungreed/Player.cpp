@@ -4,6 +4,7 @@
 
 void Player::setAni(PLAYER_ANIMATION setAni)
 {
+
 	_aniState = setAni;
 	switch (setAni)
 	{
@@ -103,14 +104,19 @@ void Player::release()
 
 void Player::update(float const elapsedTime)
 {
+
+	
+
 	//방향 조정
 	if (_ptMouse.x < _position.x)
 	{
 		_direction = DIRECTION::LEFT;
+
 	}
 	else
 	{
 		_direction = DIRECTION::RIGHT;
+
 	}
 
 	// 공격
@@ -253,13 +259,46 @@ void Player::update(float const elapsedTime)
 void Player::render()
 {
 	_img->setScale(5);
+	_weapon->setScale(5);
+	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
+	float angle =  atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)) * (180 / PI) - 90;
+	
+
+	_weapon->setAngle(angle);
+
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
+		
+		//D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
 		_img->render(_position, _direction == DIRECTION::LEFT);
+		
 	}
 	else
 	{
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
+		//D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
 	}
+	
+	
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
+	_weapon->render(_position, false);
+
+	D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
+	D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
+	/*D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle, Vector2(_position.x - _leftHand.getCenter().x, _position.y - _leftHand.getCenter().y));
+	D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle, Vector2(_position.x - _rightHand.getCenter().x, _position.y - _rightHand.getCenter().y));
+	*/
+
+}
+
+void Player::attack()
+{
+
+	if (_isAttack)
+	{
+
+	}
+		
+
+
 }

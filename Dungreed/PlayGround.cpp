@@ -148,7 +148,10 @@ HRESULT playGround::init()
 
 	// ** ENEMY
 
-	
+	// *Weapon
+
+	//**MeleeWeapon
+	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
 
 	// 모든 씬 SCENE_MANAGER에 등록
 	SCENE_MANAGER->addScene("MAIN", new MainScene);

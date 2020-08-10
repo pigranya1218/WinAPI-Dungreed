@@ -4,7 +4,7 @@
 
 
 class Player;
-
+class Weapon;
 class TestScene : public GameNode
 {
 private:
@@ -19,6 +19,11 @@ private:
 
 	bool _mouseMove;
 	POINT _lastMousePt;
+
+	Image* _weapon;
+	Image* _item;
+
+
 
 
 public:

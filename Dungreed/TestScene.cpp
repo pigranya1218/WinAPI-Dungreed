@@ -13,6 +13,13 @@ HRESULT TestScene::init()
 	_player->init();
 	// _player->setTestScene(this);
 	setPlayer(_player);
+	
+
+	
+
+
+
+	_item = IMAGE_MANAGER->findImage("ShortSpear");
 
 	//지형 세팅
 	_center = Vector2(WINSIZEX / 2, WINSIZEY - 50);

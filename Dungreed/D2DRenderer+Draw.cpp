@@ -375,7 +375,7 @@ void D2DRenderer::fillRectangle(const FloatRect& rc, const D2D1::ColorF::Enum& c
 @@ float blue : RGB blue, (0 ~ 1)
 @@ float alpha  : 알파 값
 ************************************************************************************************/
-void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const float green, const float blue, const float alpha)
+void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const float green, const float blue, const float alpha, const float angle, const Vector2& anglePos)
 {
 	FloatRect rect = rc;
 
@@ -385,8 +385,19 @@ void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const flo
 	clr.g = green;
 	clr.b = blue;
 	clr.a = alpha;
+
+	D2D1::Matrix3x2F rotate = D2D1::Matrix3x2F::Rotation(360 - angle, D2D1::Point2F(anglePos.x, anglePos.y));
+
+
 	_D2DRenderTarget->CreateSolidColorBrush(clr, &brush);
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	if (angle != 0)
+	{
+		_D2DRenderTarget->SetTransform(rotate);
+	}
+	else
+	{
+		_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
 	_D2DRenderTarget->FillRectangle(D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom), brush);
 
 	NEW_SAFE_RELEASE(brush);
@@ -399,9 +410,9 @@ void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const flo
 @@ int blue : RGB blue, (0 ~ 255)
 @@ float alpha  : 알파 값
 ************************************************************************************************/
-void D2DRenderer::fillRectangle(const FloatRect & rc, const int red, const int green, const int blue, const float alpha)
+void D2DRenderer::fillRectangle(const FloatRect & rc, const int red, const int green, const int blue, const float alpha, const float angle, const Vector2& anglePos)
 {
-	fillRectangle(rc, static_cast<float>(red) / 255, static_cast<float>(green) / 255, static_cast<float>(blue) / 255, alpha);
+	fillRectangle(rc, static_cast<float>(red) / 255, static_cast<float>(green) / 255, static_cast<float>(blue) / 255, alpha, angle, anglePos);
 }
 /**********************************************************************************************
 ## FillRectangle  ##
