@@ -180,9 +180,6 @@
     <ClInclude Include="SoundManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="GameNode.h">
       <Filter>2DGameFramework\GameNode</Filter>
     </ClInclude>
@@ -281,6 +278,9 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>2DGameFramework\ProgressBar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

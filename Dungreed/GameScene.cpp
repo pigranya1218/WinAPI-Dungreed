@@ -15,6 +15,7 @@ HRESULT GameScene::init()
 	_uiMgr = new UIManager;
 	_uiMgr->init();
 	_uiMgr->setGameScene(this);
+	_uiMgr->setPlayer(_player);
 
 	return S_OK;
 }

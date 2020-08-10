@@ -38,19 +38,20 @@ void Stage::render()
 
 void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 {
+	object->setIsStand(false);
 	Vector2 newCenter = object->getPosition() + moveDir;
 	float radiusX = object->getSize().x / 2;
 	float radiusY = object->getSize().y / 2;
-	int calculatePoint[2][2] = { {0, -1}, {0, 1} }; // 정수리, 발바닥
-	Vector2 points[2];
-	for (int i = 0; i < 2; i++)
+	int calculatePoint[4][2] = { {-1, -1}, {1, -1}, {1, 1}, {-1, 1}}; // 좌상, 우상, 우하, 좌하
+	Vector2 points[4];
+	for (int i = 0; i < 4; i++)
 	{
 		points[i] = Vector2(newCenter.x + calculatePoint[i][0] * radiusX, newCenter.y + calculatePoint[i][1] * radiusY);
 	}
 
 	for (int i = 0; i < _collisions.size(); i++)
 	{
-		for (int j = 0; j < 2; j++) // 각 꼭짓점별 검사
+		for (int j = 0; j < 4; j++) // 각 꼭짓점별 검사
 		{
 			bool isCollision = false;
 			if (_collisions[i].func.a == LinearFunc::INF_A) // 수직선
@@ -72,13 +73,14 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 					{
 						points[j].y = _collisions[i].func.getY(points[j].x);
 						isCollision = true;
+						object->setIsStand(true); // 땅에 서있는 경우
 					}
 				}
 			}
 			if (isCollision)
 			{
 				newCenter = Vector2(points[j].x - calculatePoint[j][0] * radiusX, points[j].y - calculatePoint[j][1] * radiusY);
-				for (int k = 0; k < 2; k++)
+				for (int k = 0; k < 4; k++)
 				{
 					points[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
 				}

@@ -4,7 +4,6 @@
 
 void Player::setAni(PLAYER_ANIMATION setAni)
 {
-
 	_aniState = setAni;
 	switch (setAni)
 	{
@@ -83,13 +82,10 @@ void Player::attack(Projectile* projectile, tagAttackInfo* info)
 
 void Player::init()
 {
-	setSize(Vector2(80, 110));
+	setSize(Vector2(40, 90));
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	_jumpCount = 1;
-	_xGravity = 2000.f;
-	_yGravity = 1600.f;
-	_isLanded = false;
 	_force = Vector2(0, 0);
 
 	_ani = new Animation;
@@ -173,17 +169,16 @@ void Player::update(float const elapsedTime)
 
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _jumpCount > 0)
 	{
-		_force.y -= _jumpPower;
-		_aniState = PLAYER_ANIMATION::DEFAULT;
+		_force.y = -_jumpPower;
+		// _aniState = PLAYER_ANIMATION::DEFAULT;
 		_jumpCount -= 1;
-		_isLanded = true;
 	}
 
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)))
 	{
 		float angle = atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x));
-		_force.x = cosf(angle) * _dashPower;
-		_force.y = -sinf(angle) * _dashPower;
+		_force.x = cosf(angle) * _dashXPower;
+		_force.y = -sinf(angle) * _dashYPower;
 	}
 	
 	if (_force.x != 0) // ´ë½¬ »óÅÂ¶ó¸é
@@ -209,11 +204,9 @@ void Player::update(float const elapsedTime)
 	_force.y += _yGravity * elapsedTime;
 	moveDir.y = _force.y * elapsedTime;
 
-	Vector2 lastPos = _position;
 	_gameScene->moveTo(this, moveDir);
-	if (moveDir.y > 0 && lastPos.y == _position.y) // ¶¥¿¡ ÂøÁö
+	if (_isStand) // ¶¥¿¡ ÂøÁö
 	{
-		_isLanded = false;
 		_force.y = 0;
 		_jumpCount = 1;
 	}
@@ -258,11 +251,11 @@ void Player::update(float const elapsedTime)
 
 void Player::render()
 {
-	_img->setScale(5);
+	_img->setScale(4);
 	_weapon = IMAGE_MANAGER->findImage("ShortSpear");
-	_weapon->setScale(5);
+	_weapon->setScale(4);
 	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
-	float angle =  atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)) * (180 / PI) - 90;
+	float angle =  atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) - 90;
 	
 
 	_weapon->setAngle(angle);
@@ -282,7 +275,9 @@ void Player::render()
 	
 	
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
-	_weapon->render(_position, false);
+	Vector2 weaponDraw = _position;
+	weaponDraw.y += 15;
+	_weapon->render(weaponDraw, false);
 
 	//D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
 	//D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
