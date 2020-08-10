@@ -3,6 +3,7 @@
 #include <commdlg.h>
 #include "LinearFunc.h"
 
+
 #define TILESIZE 32
 #define TILEX 30
 #define TILEY 20
@@ -14,7 +15,7 @@ struct tagTileMap
 	FloatRect rc;
 	int tileFrameX;
 	int tileFrameY;
-
+	LinearFunc line;
 };
 
 struct  tagPalette
@@ -22,7 +23,7 @@ struct  tagPalette
 	FloatRect rc;
 	int tileFrameX;
 	int tileFrameY;
-
+	LinearFunc line;
 };
 
 struct tagSelectTile
@@ -48,7 +49,7 @@ private:
 	//HWND _saveBtn;
 	//HWND _loadBtn;
 	
-	LinearFunc _line;
+	
 	Camera _camera;
 
 	FloatRect _save;
@@ -67,6 +68,8 @@ private:
 
 	vector<TCHAR*> _vLoad;
 	vector<TCHAR*>::iterator _viLoad;
+
+	vector<>
 
 public:
 	HRESULT init();
