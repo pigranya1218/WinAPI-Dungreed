@@ -32,12 +32,9 @@ struct tagSelectTile
 	int y;
 };
 
-
-
-class MapTool : public GameNode
+class MapTool
 {
 private:
-
 	enum class TOOLMENU
 	{
 			SAVE,
@@ -48,7 +45,7 @@ private:
 
 	//HWND _saveBtn;
 	//HWND _loadBtn;
-	
+private:
 	Camera _camera;
 
 	FloatRect _save;
@@ -60,13 +57,9 @@ private:
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
 
 	vector<tagSelectTile> _vSelectTile;
-	vector<tagSelectTile>::iterator _viSelectTile;
-
 	vector<tagTileMap> _vTileMap;
-	vector<tagTileMap>::iterator _viTileMap;
 
 	vector<TCHAR*> _vLoad;
-	vector<TCHAR*>::iterator _viLoad;
 
 public:
 	HRESULT init();
@@ -75,7 +68,6 @@ public:
 	void update();
 	void render();
 	
-
 	void setup();
 	void setMap();
 	void save();

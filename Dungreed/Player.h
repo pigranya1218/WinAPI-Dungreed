@@ -83,7 +83,6 @@ public:
 
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; };
 
-	void move(Vector2 force);
 	void setAni(PLAYER_ANIMATION setAni);
 
 	// 아이템들이 호출할 함수들
@@ -93,7 +92,7 @@ public:
 
 	virtual void init() override;
 	virtual void release() override;
-	virtual void update(float const timeElapsed) override;
+	virtual void update(float const elapsedTime) override;
 	virtual void render() override;
 };
 

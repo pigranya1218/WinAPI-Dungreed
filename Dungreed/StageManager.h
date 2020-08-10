@@ -2,6 +2,7 @@
 
 class Stage;
 class GameScene;
+#include "GameObject.h"
 
 enum class STAGE_TYPE : int
 {
@@ -27,6 +28,9 @@ public:
 	void release();
 	void update(float const elapsedTime);
 	void render();
+
+	// 스테이지 내 충돌 처리 및 이동
+	void moveTo(GameObject* object, Vector2 moveDir);
 
 	// 스테이지 타입 이동
 	void nextStage();

@@ -16,7 +16,7 @@ LINEAR_VALUE_TYPE LinearFunc::getValueType(float x, float y)
 		{
 			return LINEAR_VALUE_TYPE::ON;
 		}
-		else if (result < 0)
+		else if (result <= 0)
 		{
 			return LINEAR_VALUE_TYPE::UP;
 		}
@@ -27,7 +27,7 @@ LINEAR_VALUE_TYPE LinearFunc::getValueType(float x, float y)
 	}
 	else
 	{
-		if (x == b)
+		if (FLOAT_EQUAL(x, b))
 		{
 			return LINEAR_VALUE_TYPE::ON;
 		}
@@ -43,6 +43,30 @@ LINEAR_VALUE_TYPE LinearFunc::getValueType(float x, float y)
 	
 }
 
+Vector2 LinearFunc::getStart()
+{
+	if (a == INF_A)
+	{
+		return Vector2(b, start);
+	}
+	else
+	{
+		return Vector2(start, getY(start));
+	}
+}
+
+Vector2 LinearFunc::getEnd()
+{
+	if (a == INF_A)
+	{
+		return Vector2(b, end);
+	}
+	else
+	{
+		return Vector2(end, getY(end));
+	}
+}
+
 LinearFunc LinearFunc::getLinearFuncFromPoints(Vector2 start, Vector2 end)
 {
 	LinearFunc newFunc;
@@ -52,11 +76,15 @@ LinearFunc LinearFunc::getLinearFuncFromPoints(Vector2 start, Vector2 end)
 	{
 		newFunc.a = INF_A;
 		newFunc.b = start.x;
+		newFunc.start = start.y;
+		newFunc.end = end.y;
 	}
 	else
 	{
 		newFunc.a = differY / differX; // x 변화량에 대한 y 변화량 비율
 		newFunc.b = start.y - (start.x * newFunc.a); // y 절편
+		newFunc.start = start.x;
+		newFunc.end = end.x;
 	}
 	return newFunc;
 }

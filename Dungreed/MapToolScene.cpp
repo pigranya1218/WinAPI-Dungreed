@@ -13,6 +13,7 @@ HRESULT MapToolScene::init()
 
 void MapToolScene::release()
 {
+	_tileMapTool->release();
 }
 
 void MapToolScene::update()
@@ -24,6 +25,7 @@ void MapToolScene::render()
 {
 
 	_tileMapTool->render();
+
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->setScale(5);
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->render(Vector2(_ptMouse.x, _ptMouse.y));
 }

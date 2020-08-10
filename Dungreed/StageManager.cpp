@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StageManager.h"
 #include "Stage.h"
+#include "TestStage.h"
 
 void StageManager::init()
 {
@@ -23,6 +24,11 @@ void StageManager::render()
 	_currStage->render();
 }
 
+void StageManager::moveTo(GameObject* object, Vector2 moveDir)
+{
+	_currStage->moveTo(object, moveDir);
+}
+
 void StageManager::nextStage()
 {
 	_currStageType = static_cast<STAGE_TYPE>(static_cast<int>(_currStageType) + 1);
@@ -32,6 +38,8 @@ void StageManager::nextStage()
 
 void StageManager::makeStage()
 {
+	_currStage = new TestStage();
+	_currStage->init();
 }
 
 void StageManager::releaseStage()

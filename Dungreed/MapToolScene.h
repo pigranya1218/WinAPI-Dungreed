@@ -7,9 +7,7 @@ class MapTool;
 class MapToolScene : public GameNode
 {
 private:
-	
 	MapTool* _tileMapTool;
-	Camera _camera;
 
 public:
 	virtual HRESULT init();			// 초기화 전용 함수

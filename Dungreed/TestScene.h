@@ -10,7 +10,6 @@ class TestScene : public GameNode
 private:
 	Player* _player;
 	
-
 	//ÁöÇü
 	//Synthesize(PIVOT, _pivot, rectMakePivot)
 	FloatRect _ground;

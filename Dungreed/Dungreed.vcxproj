@@ -200,7 +200,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TestScene.h" />
-    <ClInclude Include="testStage.h" />
+    <ClInclude Include="TestStage.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TownStage.h" />
@@ -248,7 +248,7 @@
     <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="TestScene.cpp" />
-    <ClCompile Include="testStage.cpp" />
+    <ClCompile Include="TestStage.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UIManager.cpp" />

@@ -103,6 +103,15 @@
     <Filter Include="Dungreed\GameScene\Npc">
       <UniqueIdentifier>{f27c1b85-e2e6-4efe-ac36-0a247dd856a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\MapToolScene">
+      <UniqueIdentifier>{074ba322-124e-4072-a364-88a006739539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MapToolScene\MapTool">
+      <UniqueIdentifier>{0669a0e9-7d5e-4ffe-8a51-5fe5ca0e4bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MapToolScene\Test">
+      <UniqueIdentifier>{4d6d20c6-2019-497e-b474-4e544706d11a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -252,29 +261,29 @@
     <ClInclude Include="Stage.h">
       <Filter>Dungreed\GameScene\Stage</Filter>
     </ClInclude>
-    <ClInclude Include="testStage.h">
-      <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClInclude>
     <ClInclude Include="NpcManager.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
     <ClInclude Include="Npc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="MapTool.h">
-      <Filter>Dungreed\Stage</Filter>
-    </ClInclude>
     <ClInclude Include="MapToolScene.h">
-      <Filter>Dungreed\Scene</Filter>
+      <Filter>Dungreed\MapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Dungreed\MapToolScene\MapTool</Filter>
     </ClInclude>
     <ClInclude Include="SampleStage.h">
-      <Filter>Dungreed\Stage</Filter>
-    </ClInclude>
-    <ClInclude Include="TownStage.h">
-      <Filter>Dungreed\Stage</Filter>
+      <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClInclude>
     <ClInclude Include="SecondTestScene.h">
-      <Filter>Dungreed\Scene</Filter>
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TownStage.h">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="TestStage.h">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,9 +398,6 @@
     <ClCompile Include="FloatCircle.cpp">
       <Filter>2DGameFramework\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="testStage.cpp">
-      <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClCompile>
     <ClCompile Include="Stage.cpp">
       <Filter>Dungreed\GameScene\Stage</Filter>
     </ClCompile>
@@ -401,20 +407,23 @@
     <ClCompile Include="Npc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="MapTool.cpp">
-      <Filter>Dungreed\Stage</Filter>
-    </ClCompile>
     <ClCompile Include="MapToolScene.cpp">
-      <Filter>Dungreed\Scene</Filter>
+      <Filter>Dungreed\MapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Dungreed\MapToolScene\MapTool</Filter>
     </ClCompile>
     <ClCompile Include="SampleStage.cpp">
-      <Filter>Dungreed\Stage</Filter>
-    </ClCompile>
-    <ClCompile Include="TownStage.cpp">
-      <Filter>Dungreed\Stage</Filter>
+      <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClCompile>
     <ClCompile Include="SecondTestScene.cpp">
-      <Filter>Dungreed\Scene</Filter>
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TownStage.cpp">
+      <Filter>Dungreed\MapToolScene\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="TestStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

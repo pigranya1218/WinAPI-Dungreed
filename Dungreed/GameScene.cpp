@@ -3,6 +3,7 @@
 
 HRESULT GameScene::init()
 {
+	_timeSpeed = 1;
 	_player = new Player;
 	_player->init();
 	_player->setGameScene(this);
@@ -27,6 +28,11 @@ void GameScene::release()
 
 void GameScene::update()
 {
+	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		PostQuitMessage(0);
+	}
+
 	// 배속 관리
 	float elapsedTime = TIME_MANAGER->getElapsedTime() * _timeSpeed;
 	
@@ -44,6 +50,9 @@ void GameScene::render()
 	EFFECT_MANAGER->render();
 
 	_uiMgr->render();
+
+	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
+	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
 }
 
 
@@ -51,4 +60,9 @@ void GameScene::render()
 void GameScene::loadInfo(tagLoadInfo const info)
 {
 	
+}
+
+void GameScene::moveTo(GameObject * object, Vector2 moveDir)
+{
+	_stageMgr->moveTo(object, moveDir);
 }

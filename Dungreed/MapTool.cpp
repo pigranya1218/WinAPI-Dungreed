@@ -1,13 +1,9 @@
 #include "stdafx.h"
 #include "MapTool.h"
 
-
-
-
 HRESULT MapTool::init()
 {
 	_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
-	
 	setup();
 
 	return S_OK;
@@ -23,24 +19,20 @@ void MapTool::update()
 	
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
 	{
-		if(_save.ptInRect(_ptMouse))save();
-		if(_load.ptInRect(_ptMouse))load();
-		
+		if(_save.ptInRect(_ptMouse)) save();
+		if(_load.ptInRect(_ptMouse)) load();
 	}
-	
 }
 
 void MapTool::render()
 {
-
 	_camera.render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
 
 	Vector2 size = _paletteImage->getSize();
 	size.x *= _paletteImage->getMaxFrameX();
 	size.y *= _paletteImage->getMaxFrameY();
 	
-
-	for (int i = 0; i < SAMPLETILEX*SAMPLETILEY; ++i)
+	for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
 	{
 		D2D_RENDERER->drawRectangle(_sampleTile[i].rc, D2D1::ColorF::Red, 1, 0.5f);
 	}
@@ -50,8 +42,8 @@ void MapTool::render()
 		for (int j = 0; j < SAMPLETILEX; ++j)
 		{
 			_paletteImage->setScale(2);
-			if (j >= _paletteImage->getMaxFrameX()||i>=_paletteImage->getMaxFrameY())continue;
-			else _paletteImage->frameRender( _sampleTile[SAMPLETILEX*i + j].rc.getCenter(), j, i);
+			if (j >= _paletteImage->getMaxFrameX() || i >= _paletteImage->getMaxFrameY()) continue;
+			else _paletteImage->frameRender( _sampleTile[SAMPLETILEX * i + j].rc.getCenter(), j, i);
 		}
 	}
 
@@ -62,8 +54,8 @@ void MapTool::render()
 		//_paletteImage->frameRender(_vTileMap[i].rc.getCenter(), _vTileMap[i].tileFrameX, _vTileMap[i].tileFrameY);
 		//D2D_RENDERER->drawRectangle(_tile[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
 		_paletteImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
-		
 	}
+
 	wstring text(L"save");
 	D2D_RENDERER->renderText(210, WINSIZEY - 100, text,30,D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING,L"µÕ±Ù¸ð²Ã",0.0f);
 	D2D_RENDERER->drawRectangle(_save, D2D1::ColorF::Blue, 1, 0.5f);
@@ -75,12 +67,12 @@ void MapTool::render()
 	wstring text3(L"erase");
 	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_erase, D2D1::ColorF::Blue, 1, 0.5f);
-	
 }
 
 void MapTool::setup()
 {
-	//_saveBtn = CreateWindow("button", "save", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, WINSIZEX - 200,WINSIZEY- 200, 100,50, _hWnd, HMENU(0), _hInstance, NULL);
+	// _camera.setConfig(100, 100, )
+	// _saveBtn = CreateWindow("button", "save", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, WINSIZEX - 200,WINSIZEY- 200, 100,50, _hWnd, HMENU(0), _hInstance, NULL);
 	_save = FloatRect(Vector2(200, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_load = FloatRect(Vector2(400, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_erase = FloatRect(Vector2(600, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
@@ -89,9 +81,9 @@ void MapTool::setup()
 	{
 		for (int j = 0; j < SAMPLETILEX; ++j)
 		{
-			_sampleTile[SAMPLETILEX*i + j].tileFrameX = j;
-			_sampleTile[SAMPLETILEX*i + j].tileFrameY = i;
-			_sampleTile[SAMPLETILEX*i + j].rc = FloatRect(Vector2(1196+j*TILESIZE, 96+TILESIZE*i), Vector2(32, 32), PIVOT::CENTER);
+			_sampleTile[SAMPLETILEX * i + j].tileFrameX = j;
+			_sampleTile[SAMPLETILEX * i + j].tileFrameY = i;
+			_sampleTile[SAMPLETILEX * i + j].rc = FloatRect(Vector2(1196 + j * TILESIZE, 96 + TILESIZE * i), Vector2(32, 32), PIVOT::CENTER);
 		}
 	}
 	for (int i = 0; i < TILEY; ++i)
@@ -219,8 +211,6 @@ void MapTool::load()
 	if (::GetOpenFileName(&ofn) == false) return;
 	TCHAR* return_path = ofn.lpstrFile;
 
-	
-
 	HANDLE stageFile;
 	DWORD read;
 
@@ -230,8 +220,6 @@ void MapTool::load()
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);
 
 	CloseHandle(stageFile);
-
-
 }
 
 void MapTool::mapLoad()
@@ -245,11 +233,9 @@ void MapTool::mapLoad()
 		stageFile = CreateFile(_vLoad[i], GENERIC_READ, NULL, NULL,
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 	
-	ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);
+		ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);
 	
-
-
-	CloseHandle(stageFile);
+		CloseHandle(stageFile);
 	}
 }
 
@@ -270,7 +256,6 @@ void MapTool::setSelectTile()
 			}
 		}
 	}
-
 }
 
 void MapTool::releaseSelectTile()
