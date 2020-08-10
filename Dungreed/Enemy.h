@@ -20,21 +20,25 @@ protected:
 
 	float _moveAngle;
 	float _moveSpeed;
+	
+	float _scale;
+
+	class EnemyManager* _em;
 
 	struct tagAttackInfo	// 공격 관련 변수들
 	{
-		FloatRect _rect;	// 근접 공격 시 렉트
-		float _delay;		// 공격 주기
-		float _count;		// 공격 주기 계산용
-		float _angle;		// 탄막 사용시 각도
+		FloatRect rect;	// 근접 공격 시 렉트
+		float delay;	// 공격 주기
+		float count;	// 공격 주기 계산용
+		float angle;	// 탄막 사용시 각도
 
 		bool update(float elapseTime)
 		{
-			_count += elapseTime;
+			count += elapseTime;
 
-			if (_count >= _delay)
+			if (count >= delay)
 			{
-				_count -= _delay;
+				count -= delay;
 				return true;
 			}
 			return false;
@@ -54,5 +58,7 @@ public:
 	virtual void render();
 
 	virtual void setState(ENEMY_STATE state) {}
+
+	void setEnemyManager(class EnemyManager* em) { _em = em; }
 };
 

@@ -1,11 +1,10 @@
 #pragma once
 #include "Enemy.h"
-#include "BulletManager.h"
 
-class BatRed : public Enemy
+class SkelBigIce : public Enemy
 {
 private:
-	tagAttackInfo _shooting;
+	tagAttackInfo _attack;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

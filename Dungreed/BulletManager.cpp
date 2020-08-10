@@ -23,6 +23,19 @@ void BulletManager::update()
 	{
 		_vBullet[i].update();
 	}
+
+	for (int i = 0; i < _vBullet.size();)
+	{
+		if (_vBullet[i].getDelete())
+		{
+			_vBullet.erase(_vBullet.begin() + i);
+			break;
+		}
+		else
+		{
+			i++;
+		}
+	}
 }
 
 void BulletManager::render()
@@ -33,11 +46,11 @@ void BulletManager::render()
 	}
 }
 
-void BulletManager::createBullet(string imageName, const Vector2& pos, float speed, float angle, float range)
+void BulletManager::createBullet(string imageName, const Vector2& pos, float speed, float angle, float range, float scale)
 {
 	Bullet bullet;
 
-	bullet.init(imageName, pos, angle, speed, range);
+	bullet.init(imageName, pos, angle, speed, range, scale);
 
 
 	_vBullet.push_back(bullet);

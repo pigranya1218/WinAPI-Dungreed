@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "EnemyManager.h"
+#include "TestScene.h"
 
 EnemyManager::EnemyManager()
 {
@@ -33,9 +34,11 @@ void EnemyManager::render()
 	{
 		_vEnemy[i]->render();
 	}
+
+	
 }
 
-void EnemyManager::spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction)
+void EnemyManager::spawn(const Vector2& pos, ENEMY_TYPE enemyType, DIRECTION direction)
 {
 	Enemy* enemy;
 	switch (enemyType)
@@ -52,12 +55,16 @@ void EnemyManager::spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction)
 		{
 			enemy = new BatRed;
 			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 			break;
 		}
 		
 	case ENEMY_TYPE::BAT_NORMAL:
 		break;
-	case ENEMY_TYPE::BAT_ICE:
+		case ENEMY_TYPE::BAT_ICE:
+		{
+
+		}
 		break;
 	case ENEMY_TYPE::BAT_GIANT_RED:
 		break;
@@ -69,8 +76,13 @@ void EnemyManager::spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction)
 		break;
 	case ENEMY_TYPE::SKEL_BIG_NORMAL:
 		break;
-	case ENEMY_TYPE::SKEL_BIG_ICE:
-		break;
+		case ENEMY_TYPE::SKEL_BIG_ICE:
+		{
+			enemy = new SkelBigIce;
+			enemy->init(pos, direction);
+			break;
+		}
+		
 	case ENEMY_TYPE::SKEL_DOG:
 		break;
 	case ENEMY_TYPE::SKEL_MAGICIAN_ICE:
@@ -78,8 +90,11 @@ void EnemyManager::spawn(Vector2 pos, ENEMY_TYPE enemyType, DIRECTION direction)
 	default:
 		break;
 	}
-
-
 	
 	_vEnemy.push_back(enemy);
+}
+
+void EnemyManager::moveEnemy(GameObject * gObject, Vector2& pos)
+{
+	_scene->moveGameObject(gObject, pos);
 }

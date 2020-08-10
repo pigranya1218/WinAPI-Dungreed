@@ -22,6 +22,7 @@ HRESULT TestScene::init()
 	// 에너미 테스트입니다.
 	_em = new EnemyManager;
 	_em->init();
+	_em->setScene(this);
 	_em->spawn(Vector2(WINSIZEX / 2, WINSIZEY / 2), ENEMY_TYPE::BAT_RED);
 
 
@@ -79,5 +80,15 @@ void TestScene::render()
 
 	// 에머니 테스트입니다.
 	_em->render();
+}
+
+void TestScene::moveGameObject(GameObject * gObject, Vector2& movePos)
+{
+	if (gObject->getRect().left <= 0)
+	{
+		FloatRect temp(0.0f, gObject->getRect().getSize().x, gObject->getRect().top, gObject->getRect().bottom);
+
+		movePos = temp.getCenter();
+	}
 }
 

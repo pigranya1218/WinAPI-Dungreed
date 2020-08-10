@@ -228,6 +228,9 @@
     <ClInclude Include="BatRed.h">
       <Filter>Dungreed\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="SkelBigIce.h">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -345,6 +348,9 @@
       <Filter>Dungreed\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="BatRed.cpp">
+      <Filter>Dungreed\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigIce.cpp">
       <Filter>Dungreed\Enemy</Filter>
     </ClCompile>
   </ItemGroup>

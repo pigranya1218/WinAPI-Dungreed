@@ -37,6 +37,8 @@ public:
 	virtual void release();			// 메모리 해제 전용
 	virtual void update();			// 연산 전용
 	virtual void render();			// 그리기 전용
+
+	void moveGameObject(GameObject* gObject, Vector2& movePos);
 	
 };
 
