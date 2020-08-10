@@ -85,6 +85,9 @@
     <Filter Include="Dungreed\TestScene">
       <UniqueIdentifier>{41a11635-02c4-4193-a075-4e3348247087}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\Weapon">
+      <UniqueIdentifier>{470b658f-dde0-4b00-9454-4b425c23c0e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">

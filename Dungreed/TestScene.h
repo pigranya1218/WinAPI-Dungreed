@@ -3,12 +3,12 @@
 #include "GameObject.h"
 
 class Player;
-
+class Weapon;
 class TestScene : public GameNode
 {
 private:
 	Player* _player;
-
+	Weapon* _Weapon;
 	//ÁöÇü
 	//Synthesize(PIVOT, _pivot, rectMakePivot)
 	FloatRect _ground;
@@ -17,6 +17,11 @@ private:
 
 	bool _mouseMove;
 	POINT _lastMousePt;
+
+	Image* _weapon;
+	Image* _item;
+
+
 
 
 public:

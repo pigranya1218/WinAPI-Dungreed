@@ -42,6 +42,7 @@ private:
 	TestScene* _testScene;
 	Animation* _ani;
 	Image* _img;
+	Image* _weapon;
 	PLAYER_ANIMATION _aniState;
 
 	// 현재 상태
@@ -56,9 +57,10 @@ private:
 	float	_yGravity;				// 점프 저항
 	
 	bool	_isJump;				// 점프 처리 (지면과 떨어진 상태)
-
+	bool	_isAttack;				// 마우스 좌클릭시 공격
 	tagStat _stat; // 스탯
-	
+	FloatRect _leftHand; // 왼손 
+	FloatRect _rightHand; // 오른손
 
 public:
 	Player() {};
@@ -71,6 +73,7 @@ public:
 	void release();
 	void update();
 	void render();
+	void attack();
 
 	void setTestScene(TestScene* testScene) { _testScene = testScene; }
 };
