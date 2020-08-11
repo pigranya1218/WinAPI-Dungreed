@@ -13,6 +13,7 @@ private:
 	int _bulletCount;
 	float _reloadCount;
 	float _angle;
+	bool _isLeft;
 public:
 
 	virtual void init();
