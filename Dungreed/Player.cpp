@@ -300,7 +300,7 @@ void Player::render()
 	//_weapon = IMAGE_MANAGER->findImage("ShortSpear");
 	//_weapon->setScale(4);
 	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
-	float angle =  atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI);
+	float angle =  fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
 	
 
 	//_weapon->setAngle(angle);

@@ -39,7 +39,7 @@ void ShortSpear::update(float const elapsedTime)
 	}
 	else
 	{
-		_attackMove.x = min(cosf(_attackAngle) * 40, _attackMove.x + abs(cosf(_attackAngle) * 40 * ratio));
+		_attackMove.x = min(abs(cosf(_attackAngle) * 40), _attackMove.x + abs(cosf(_attackAngle) * 40 * ratio));
 		_attackMove.y = min(abs(-sinf(_attackAngle) * 40), _attackMove.y + abs((-sinf(_attackAngle)) * 40 * ratio));
 
 		if (_currAttackDelay <= _baseAttackDelay * 0.88)
@@ -55,23 +55,19 @@ void ShortSpear::update(float const elapsedTime)
 void ShortSpear::render(Vector2 pos, float angle)
 {
 	Vector2 renderPos = pos;
-	if (angle > 360)
-	{
-		angle = fmod(angle, 360);
-	}
 	bool isLeft = false;
 	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
 	{
 		isLeft = true;
+		angle = fmod((180 - angle) + 360, 360);
 	}
 	
-	
-	renderPos.x += ((isLeft)?(-_attackMove.x):(_attackMove.x));
+	renderPos.x += ((isLeft)?(-10 - _attackMove.x):(10 + _attackMove.x));
 	renderPos.y += 15 + ((angle >= 180) ? (_attackMove.y) : (-_attackMove.y));
 
 	_img->setAngle(angle);
-	//_img->setAnglePos(Vector2(_img->getWidth() * 0.5f, _img->getHeight() * 0.5f));
-	_img->render(renderPos);
+	_img->setAnglePos(Vector2(_img->getWidth() * 0.3f, _img->getHeight() * 0.5f));
+	_img->render(renderPos, isLeft);
 }
 
 void ShortSpear::displayInfo()
