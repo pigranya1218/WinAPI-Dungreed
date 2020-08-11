@@ -38,10 +38,11 @@ void Stage::render()
 
 void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 {
+	object->setIsStand(false);
 	Vector2 newCenter = object->getPosition() + moveDir;
 	float radiusX = object->getSize().x / 2;
 	float radiusY = object->getSize().y / 2;
-	int calculatePoint[4][2] = { {-1, 1}, {1, 1}, {1, -1}, {-1, -1} }; // 좌상, 우상, 우하, 좌하
+	int calculatePoint[4][2] = { {-1, -1}, {1, -1}, {1, 1}, {-1, 1}}; // 좌상, 우상, 우하, 좌하
 	Vector2 points[4];
 	for (int i = 0; i < 4; i++)
 	{
@@ -72,6 +73,7 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 					{
 						points[j].y = _collisions[i].func.getY(points[j].x);
 						isCollision = true;
+						object->setIsStand(true); // 땅에 서있는 경우
 					}
 				}
 			}

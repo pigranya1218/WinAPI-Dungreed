@@ -180,9 +180,6 @@
     <ClInclude Include="SoundManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="GameNode.h">
       <Filter>2DGameFramework\GameNode</Filter>
     </ClInclude>
@@ -282,8 +279,11 @@
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
-    <ClInclude Include="MatchLockGun.h">
-      <Filter>Dungreed\GameScene\Item</Filter>
+    <ClInclude Include="TimeManager.h">
+      <Filter>2DGameFramework\ProgressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStat.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -422,8 +422,8 @@
     <ClCompile Include="TestStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClCompile>
-    <ClCompile Include="MatchLockGun.cpp">
-      <Filter>Dungreed\GameScene\Item</Filter>
+    <ClCompile Include="PlayerStat.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

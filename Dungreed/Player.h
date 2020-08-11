@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "GameObject.h"
+#include "PlayerStat.h"
 
 class Item;
 class GameScene;
@@ -25,27 +26,6 @@ struct tagAttackInfo
 	float knockBack; // 넉백 (밀어내는 힘)
 };
 
-struct tagStat
-{
-	// 스탯 정보
-	int		_maxJumpCount;		// 최대 점프 횟수
-	int		_maxHp;				// 최대 체력
-	int		_maxDashCount;		// 최대 대쉬 횟수
-	float	_satiety;			// 포만감
-	float	_power;				// 위력 (위력 수치 1당 피해량 1% 상승)
-	float	_damage;			// 무기 공격력 // 몬스터에게 들어가는 데미지 = (무기공격력 * (1+위력/100))
-	float	_trueDamage;		// 고정 데미지
-	float	_criticalChance;	// 크리티컬 확률
-	float	_criticalDamage;	// 크리티컬 데미지
-	float	_dashDamage;		// 대쉬 공격력
-	float	_toughness;			// 강인함
-	float	_defense;			// 방어력
-	float	_block;				// 막기
-	float	_evasion;			// 회피
-	float	_attackSpeed;		// 공격속도
-	float	_moveSpeed;			// 이동속도
-};
-
 class Player : public GameObject
 {
 Synthesize(DIRECTION, _direction, Direction)
@@ -58,25 +38,23 @@ private:
 	PLAYER_ANIMATION _aniState;
 
 	// 현재 상태
-	int		_currHp;			// 현재 체력
-	int		_jumpCount;			// 현재 남은 점프 카운트
+	int		_currHp;				// 현재 체력
+	int		_currJumpCount;			// 현재 남은 점프 카운트
+	int		_currSatiety;			// 현재 포만감
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
-	float	_dashPower = 1100;	// 대쉬파워
-	float	_jumpPower = 800;	// 점프파워
-	float	_xGravity = 2000;	// x 저항
-	float	_yGravity = 1600;	// y 저항
-	
-	bool	_isLanded;				// 공중에 떠있는지 판단하는 불 변수
-
-	tagStat _baseStat; // 기본 스탯, 아이템으로 변하지 않는 스탯
-	tagStat _adjustStat; // 아이템으로 변화된 스탯
+	PlayerStat _baseStat; // 기본 스탯, 아이템으로 변하지 않는 스탯
+	PlayerStat _adjustStat; // 아이템으로 변화된 스탯
 
 	vector<Item*> _inventory; // 인벤토리
 	vector<Item*> _equippedWeapon; // 장착된 무기
 	int _currWeaponIndex; // 현재 사용하는 무기 인덱스, 0 or 1
 	vector<Item*> _equippedAcc; // 장착된 악세사리
+
+private:
+	void setBaseStat();
+	void updateAdjustStat();
 
 public:
 	Player() {};
