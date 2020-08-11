@@ -25,7 +25,7 @@ void TestStage::init()
 	_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT });
 	_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT });
 
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
+	/*_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	mapLoad();
 
 
@@ -120,7 +120,7 @@ void TestStage::init()
 		
 	}
 
-
+*/
 
 }
 
@@ -136,11 +136,11 @@ void TestStage::update(float const elapsedTime)
 
 void TestStage::render()
 {
-	for (int i = 0; i < TILEX*TILEY; ++i)
-	{
-		_tileImage->setScale(2);
-		_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
-	}
+	//for (int i = 0; i < TILEX*TILEY; ++i)
+	//{
+	//	_tileImage->setScale(2);
+	//	_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+	//}
 
 	for (int i = 0; i < _collisions.size(); i++)
 	{
