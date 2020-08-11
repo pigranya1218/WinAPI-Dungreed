@@ -2,6 +2,8 @@
 #include "GameScene.h"
 #include "Item.h"
 #include "ShortSpear.h"
+#include "MatchLockGun.h"
+#include "Matchlock.h"
 
 void Player::setBaseStat()
 {
@@ -121,7 +123,12 @@ void Player::init()
 	setAni(PLAYER_ANIMATION::IDLE);
 
 	//test 
-	ShortSpear* testWeapon = new ShortSpear;
+	/*ShortSpear* testWeapon = new ShortSpear;
+	testWeapon->init();
+	_equippedWeapon.push_back(testWeapon);
+	_currWeaponIndex = 0;*/
+
+	MatchLockGun* testWeapon = new MatchLockGun;
 	testWeapon->init();
 	_equippedWeapon.push_back(testWeapon);
 	_currWeaponIndex = 0;
@@ -290,8 +297,8 @@ void Player::update(float const elapsedTime)
 void Player::render()
 {
 	_img->setScale(4);
-	_weapon = IMAGE_MANAGER->findImage("ShortSpear");
-	_weapon->setScale(4);
+	//_weapon = IMAGE_MANAGER->findImage("ShortSpear");
+	//_weapon->setScale(4);
 	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
 	float angle =  atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI);
 	

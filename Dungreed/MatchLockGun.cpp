@@ -5,6 +5,7 @@ void MatchLockGun::init()
 	_img = IMAGE_MANAGER->findImage("MatchlockGun");
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
+
 	_price = 250;
 	_minDamage = 30;
 	_maxDamage = 40;
@@ -28,6 +29,7 @@ void MatchLockGun::render(Vector2 pos, float angle)
 	_img->setAnglePos(_centerPos);
 	_img->setAngle(angle);
 	_img->render(pos);
+	//D2DRenderer::renderText(50, 50, );
 }
 
 void MatchLockGun::displayInfo()
