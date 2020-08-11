@@ -6,6 +6,8 @@
 #include "SpikeBall.h"
 #include "babyGreenBat.h"
 #include "bombPouch.h"
+#include "MatchLockGun.h"
+#include "Matchlock.h"
 
 void Player::setBaseStat()
 {
@@ -142,7 +144,12 @@ void Player::init()
 	setAni(PLAYER_ANIMATION::IDLE);
 
 	//test 
-	ShortSpear* testWeapon = new ShortSpear;
+	/*ShortSpear* testWeapon = new ShortSpear;
+	testWeapon->init();
+	_equippedWeapon.push_back(testWeapon);
+	_currWeaponIndex = 0;*/
+
+	MatchLockGun* testWeapon = new MatchLockGun;
 	testWeapon->init();
 	_equippedWeapon.push_back(testWeapon);
 	_currWeaponIndex = 0;
@@ -363,6 +370,9 @@ void Player::render()
 	_img->setScale(4);
 
 	float angle = fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
+	
+
+	//_weapon->setAngle(angle);
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
