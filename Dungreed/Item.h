@@ -18,7 +18,7 @@ enum class ITEM_RANK
 
 class Item
 {
-private:
+protected:
 	ITEM_TYPE _type; // 아이템 타입
 	ITEM_RANK _rank; // 아이템 등급
 	Image* _img; // 아이템 이미지

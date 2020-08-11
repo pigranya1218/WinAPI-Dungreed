@@ -285,6 +285,9 @@
     <ClInclude Include="PlayerStat.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
+    <ClInclude Include="MatchLockGun.h">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -424,6 +427,9 @@
     </ClCompile>
     <ClCompile Include="PlayerStat.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchLockGun.cpp">
+      <Filter>Dungreed\GameScene\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
