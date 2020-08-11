@@ -352,7 +352,7 @@ void Player::render()
 	_equippedWeapon[_currWeaponIndex]->frontRender(_position, angle);
 	
 	wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);
-	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Blue, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	str = L" 무기 교체 딜레이 시간 : " + to_wstring(_currWeaponChangeCoolTime);
-	D2D_RENDERER->renderText(600, 0, str, 20, D2DRenderer::DefaultBrush::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(600, 0, str, 20, D2DRenderer::DefaultBrush::Green, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 }
