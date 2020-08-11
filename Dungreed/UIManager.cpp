@@ -29,11 +29,16 @@ void UIManager::init()
 	_goldUI.ani->setDefPlayFrame(false, true);
 	_goldUI.ani->setFPS(15);
 	_goldUI.ani->start();
-	_goldUI.imgRc = FloatRect(30, 800, 58, 828);
-	_goldUI.textRc = FloatRect(80, 800, 200, 828);
-	_goldUI.fontSize = 28;
+	_goldUI.imgRc = FloatRect(30, 796, 56, 822);
+	_goldUI.textRc = FloatRect(80, 795, 200, 821);
+	_goldUI.fontSize = 26;
 
 	// SATIETY UI
+	_satietyUI.img = IMAGE_MANAGER->findImage("UI/FOOD");
+	_satietyUI.imgRc = FloatRect(20, 835, 70, 880);
+	_satietyUI.textRc = FloatRect(80, 835, 200, 850);
+	_satietyUI.fontSize = 25;
+	_satietyProgress.progressRc = FloatRect(80, 860, 200, 870);
 
 }
 
@@ -84,7 +89,16 @@ void UIManager::render()
 
 		// PLAYER GOLD
 		_goldUI.img->aniRender(_goldUI.imgRc.getCenter(), _goldUI.imgRc.getSize(), _goldUI.ani);
-		D2D_RENDERER->renderTextField(_goldUI.textRc.left, _goldUI.textRc.top, to_wstring(_player->getGold()), RGB(255, 255, 255),
+		D2D_RENDERER->renderTextField(_goldUI.textRc.left, _goldUI.textRc.top, to_wstring(_player->getGold()) + L" ¿ø", RGB(255, 255, 255),
 			_goldUI.fontSize, _goldUI.textRc.getSize().x, _goldUI.textRc.getSize().y, 1);
+
+		// PLAYER SATIETY
+		_satietyUI.img->render(_satietyUI.imgRc.getCenter(), _satietyUI.imgRc.getSize());
+		D2D_RENDERER->renderTextField(_satietyUI.textRc.left, _satietyUI.textRc.top, to_wstring(_player->getSatiety()) + L" / " + to_wstring(_player->getMaxSatiety()), RGB(255, 255, 255),
+			_satietyUI.fontSize, _satietyUI.textRc.getSize().x, _satietyUI.textRc.getSize().y, 1);
+		D2D_RENDERER->fillRectangle(_satietyProgress.progressRc, 34, 32, 52, 1);
+		FloatRect satietyGauge = _satietyProgress.progressRc;
+		satietyGauge.right = satietyGauge.left + (static_cast<float>(_player->getSatiety()) / _player->getMaxSatiety()) * satietyGauge.getSize().x;
+		D2D_RENDERER->fillRectangle(satietyGauge, 255, 206, 78, 1);
 	}
 }

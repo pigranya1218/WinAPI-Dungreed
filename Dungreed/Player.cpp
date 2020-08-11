@@ -137,7 +137,7 @@ void Player::init()
 	_currDashCoolTime = 0;
 	//_currHp = _adjustStat.maxHp;
 	_currHp = 40;
-	_currSatiety = 0;
+	_currSatiety = 30;
 	_currGold = 1000;
 	_force = Vector2(0, 0);
 

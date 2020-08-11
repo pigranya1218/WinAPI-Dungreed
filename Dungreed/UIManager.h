@@ -39,9 +39,7 @@ private:
 
 	struct tagProgressUI
 	{
-		Image* bg;
-		Image* bar;
-		FloatRect imgRc;
+		FloatRect progressRc;
 	};
 
 	struct tagWeaponUI // 현재 장착한 무기들

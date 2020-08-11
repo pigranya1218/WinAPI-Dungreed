@@ -137,6 +137,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BAR", L"resources/images/gameScene/ui/LifeBar.png");
 	IMAGE_MANAGER->addFrameImage("UI/PLAYER_LIFE_WAVE", L"resources/images/gameScene/ui/LifeWave.png", 7, 1);
 	IMAGE_MANAGER->addFrameImage("UI/GOLD", L"resources/images/gameScene/ui/gold.png", 8, 1);
+	IMAGE_MANAGER->addImage("UI/FOOD", L"resources/images/gameScene/ui/Food.png");
 
 
 	// ** VILLIGE
