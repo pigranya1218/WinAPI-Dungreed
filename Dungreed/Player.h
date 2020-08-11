@@ -39,6 +39,8 @@ private:
 	// 현재 상태
 	int		_currHp;				// 현재 체력
 	int		_currJumpCount;			// 현재 남은 점프 카운트
+	int		_currDashCount;			// 현재 남은 대쉬 카운트
+	float	_currDashCoolTime;		// 현재 대쉬 쿨타임
 	int		_currSatiety;			// 현재 포만감
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
