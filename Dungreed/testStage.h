@@ -8,13 +8,13 @@ private:
 	Image* _tileImage;
 	tagTileMap _tile[TILEX*TILEY];
 	Camera _camera;
-
+	int _currentIndex;
 public:
 	virtual void init();
 	virtual void release();
 	virtual void update(float const elapsedTime);
 	virtual void render();
 
-	virtual void mapLoad();
+	void mapLoad();
 };
 
