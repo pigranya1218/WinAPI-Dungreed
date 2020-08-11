@@ -24,11 +24,12 @@ protected:
 	Animation*		_ani;			// 애니메이션
 	string			_imageName;		// 이미지 이름
 
-	struct tagShootingInfo
+	struct tagAttackInfo
 	{
 		float delay;	// 딜레이
 		float count;	// 카운트용
 		float angle;	// 각도
+		float distance;	// 거리
 
 		bool update(float const timeElapsed)
 		{
@@ -41,12 +42,16 @@ protected:
 			}
 			return false;
 		}
+
+		
 	};
 
 	struct tagMoveInfo
 	{
 		float speed;
 		float angle;
+		float gravity;
+		float jumpPower;
 
 		float delay;
 		float count;
@@ -64,8 +69,9 @@ protected:
 		}
 	};
 
-	bool	_isDetect;	// 플레이어를 감지하였는가
-	float	_scale;		// 렉트와 출력에 사용할 스케일
+	bool	_isDetect;		// 플레이어를 감지하였는가
+	float	_scale;			// 렉트와 출력에 사용할 스케일
+	float	_detectRange;	// 플레이어 감지 거리
 
 public:
 	void init() {}
@@ -77,5 +83,6 @@ public:
 	virtual void setState(ENEMY_STATE state) = 0;
 
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
+
 };
 

@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "Banshee.h"
 #include "BatRed.h"
+#include "SkelBigIce.h"
 
 class Stage;
 
@@ -23,6 +24,9 @@ public:
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
+
+	// 에너미 관련 함수
+	bool detectPlayer(GameObject* object, const float distance);
 
 	void setStage(Stage* stage) { _stage = stage; }
 };

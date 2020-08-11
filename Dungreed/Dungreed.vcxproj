@@ -196,6 +196,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SecondTestScene.h" />
     <ClInclude Include="SingletonBase.h" />
+    <ClInclude Include="SkelBigIce.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SecondTestScene.cpp" />
+    <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />

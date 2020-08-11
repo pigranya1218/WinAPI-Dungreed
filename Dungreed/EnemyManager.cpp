@@ -88,6 +88,10 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		}
 		case ENEMY_TYPE::SKEL_BIG_ICE:
 		{
+			enemy = new SkelBigIce;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
+
 			break;
 		}
 		case ENEMY_TYPE::SKEL_DOG:
@@ -111,4 +115,17 @@ void EnemyManager::moveEnemy(GameObject* object, const Vector2 moveDir)
 Vector2 EnemyManager::getPlayerPos()
 {
 	return _stage->getPlayerPos();
+}
+
+bool EnemyManager::detectPlayer(GameObject* object, const float distance)
+{
+	const Vector2 playerPos = _stage->getPlayerPos();
+	const Vector2 enemyPos = object->getPosition();
+	
+	if (getDistance(playerPos.x, playerPos.y, enemyPos.x, enemyPos.y) < distance)
+	{
+		return true;
+	}
+	
+	return false;
 }
