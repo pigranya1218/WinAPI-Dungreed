@@ -56,7 +56,6 @@ void Punch::backRender(Vector2 pos, float angle)
 	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
 	{
 		isLeft = true;
-		angle = fmod((180 - angle) + 360, 360);
 	}
 	if (isLeft)
 	{
@@ -65,8 +64,8 @@ void Punch::backRender(Vector2 pos, float angle)
 		renderPosLeft.y += ((angle >= 180)?(_attackMove.y):(-_attackMove.y));
 
 		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_leftHand, D2DRenderer::DefaultBrush::Black, 4.f);
-		D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
+		D2D_RENDERER->drawRectangle(_leftHand, D2DRenderer::DefaultBrush::Black, 4.f, angle, _leftHand.getCenter());
+		D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1, angle, _leftHand.getCenter());
 	}
 	else
 	{
@@ -75,8 +74,8 @@ void Punch::backRender(Vector2 pos, float angle)
 		renderPosRight.y += ((angle >= 270) ? (_attackMove.y) : (-_attackMove.y));
 
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f);
-		D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
+		D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f, angle, _rightHand.getCenter());
+		D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1, angle, _rightHand.getCenter());
 	}
 }
 
@@ -86,7 +85,6 @@ void Punch::frontRender(Vector2 pos, float angle)
 	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
 	{
 		isLeft = true;
-		angle = fmod((180 - angle) + 360, 360);
 	}
 	if (isLeft)
 	{
