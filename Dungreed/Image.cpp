@@ -129,8 +129,7 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	Vector2 size = _size * _scale;
 
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
-	Vector2 anglePos = _anglePos * _scale;
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(anglePos.x, anglePos.y));
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(_anglePos.x, _anglePos.y));
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
@@ -161,8 +160,7 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 void Image::render(const Vector2 & originPos, const Vector2 & originSize, const Vector2 & sourPos, const Vector2 & sourSize, bool bisymmetry)
 {
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(1, 1, D2D1::Point2F(0, 0));
-	Vector2 anglePos = _anglePos;
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(anglePos.x, anglePos.y));
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(originSize.x * 0.5, originSize.y * 0.5));
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
@@ -232,7 +230,7 @@ void Image::resetRenderOption()
 	this->_alpha = 1.0f;
 	this->_scale = 1.0f;
 	this->_angle = 0.f;
-	this->_anglePos = Vector2(_size.x / 2.f, _size.y / 2.f);
+	
 	this->_skewAngle = Vector2(0, 0);
 	this->_skewPos = Vector2(0, 0);
 
@@ -246,4 +244,5 @@ void Image::resetRenderOption()
 		this->_size.x = _frameInfo[0].width;
 		this->_size.y = _frameInfo[0].height;
 	}
+	this->_anglePos = Vector2(_size.x / 2.f, _size.y / 2.f);
 }

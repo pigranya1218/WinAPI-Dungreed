@@ -50,16 +50,18 @@ void Punch::update(Player* player, float const elapsedTime)
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
-void Punch::backRender(Vector2 pos, float angle)
+void Punch::backRender(Player* player)
 {
-	bool isLeft = false;
-	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
-	{
-		isLeft = true;
-	}
+	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	Vector2 pos = player->getPosition();
 	if (isLeft)
 	{
 		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 20);
+		float angle = atan2f(-(_ptMouse.y - renderPosLeft.y), (_ptMouse.x - renderPosLeft.x)) * (180 / PI) + 360;
+		if (angle > 360)
+		{
+			angle -= 360;
+		}
 		renderPosLeft.x += -_attackMove.x;
 		renderPosLeft.y += ((angle >= 180)?(_attackMove.y):(-_attackMove.y));
 
@@ -70,6 +72,11 @@ void Punch::backRender(Vector2 pos, float angle)
 	else
 	{
 		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 20);
+		float angle = atan2f(-(_ptMouse.y - renderPosRight.y), (_ptMouse.x - renderPosRight.x)) * (180 / PI) + 360;
+		if (angle > 360)
+		{
+			angle -= 360;
+		}
 		renderPosRight.x += _attackMove.x;
 		renderPosRight.y += ((angle >= 270) ? (_attackMove.y) : (-_attackMove.y));
 
@@ -79,13 +86,11 @@ void Punch::backRender(Vector2 pos, float angle)
 	}
 }
 
-void Punch::frontRender(Vector2 pos, float angle)
+void Punch::frontRender(Player* player)
 {
-	bool isLeft = false;
-	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
-	{
-		isLeft = true;
-	}
+	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	Vector2 pos = player->getPosition();
+
 	if (isLeft)
 	{
 		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 20);

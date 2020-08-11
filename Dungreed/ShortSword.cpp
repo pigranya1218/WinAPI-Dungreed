@@ -41,15 +41,23 @@ void ShortSword::update(Player* player, float const elapsedTime)
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
-void ShortSword::backRender(Vector2 pos, float angle)
+void ShortSword::backRender(Player* player)
 {
 
 }
 
-void ShortSword::frontRender(Vector2 pos, float angle)
+void ShortSword::frontRender(Player* player)
 {
-
+	Vector2 pos = player->getPosition();
 	Vector2 renderPos = pos;
+
+	float angle = atan2f(-(_ptMouse.y - renderPos.y), (_ptMouse.x - renderPos.x)) * (180 / PI) + 360;
+	if (angle > 360)
+	{
+		angle -= 360;
+	}
+
+
 	bool isLeft = false;
 	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
 	{

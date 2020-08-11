@@ -56,14 +56,11 @@ void Effect::render()
 	{
 		_effectImage->setAngle(_angle);
 		CAMERA->aniRender(_effectImage, _position, _size, _effectAnimation);
-		//_effectImage->aniRender(_position, _size, _effectAnimation);
-
 	}
 	else
 	{
 		_effectImage->setAngle(_angle);
 		CAMERA->aniRender(_effectImage, _position, _effectAnimation);
-		//_effectImage->aniRender(_position, _effectAnimation);
 	}
 }
 

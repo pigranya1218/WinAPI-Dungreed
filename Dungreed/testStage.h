@@ -7,8 +7,8 @@ class TestStage : public Stage
 private:
 	Image* _tileImage;
 	tagTileMap _tile[TILEX*TILEY];
-	Camera _camera;
 	int _currentIndex;
+
 public:
 	virtual void init();
 	virtual void release();

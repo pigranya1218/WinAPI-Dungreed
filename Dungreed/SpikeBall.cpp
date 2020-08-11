@@ -28,16 +28,16 @@ void SpikeBall::update(Player* player, float const elapsedTime)
 	_angle += 0.033f;
 }
 
-void SpikeBall::frontRender(Vector2 pos, float angle)
+void SpikeBall::frontRender(Player* player)
 {
 }
 
-void SpikeBall::backRender(Vector2 pos, float angle)
+void SpikeBall::backRender(Player* player)
 {
 	x = cosf(_angle) * 70;
 	y = -sinf(_angle) * 70;
 
-	Vector2 renderPos = pos;
+	Vector2 renderPos = player->getPosition();
 	renderPos.x = renderPos.x + x;
 	renderPos.y = renderPos.y + y;
 	_img->setScale(4);

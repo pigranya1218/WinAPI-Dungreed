@@ -22,13 +22,17 @@ void MatchLockGun::update(Player* player, float const elapsedTime)
 
 }
 
-void MatchLockGun::render(Vector2 pos, float angle)
+void MatchLockGun::backRender(Player* player)
+{
+}
+
+void MatchLockGun::frontRender(Player* player)
 {
 	Vector2 _centerPos = Vector2(_img->getSize().x / 3, _img->getSize().y / 2);
 	_img->setScale(3);
 	_img->setAnglePos(_centerPos);
 
-	_img->setAngle(angle);
+	/*_img->setAngle(angle);
 
 	if (angle < 90.0f && angle >= 0.0f && angle > 270.0f && angle <= 360.0f)
 	{
@@ -39,7 +43,7 @@ void MatchLockGun::render(Vector2 pos, float angle)
 		_isLeft = true;
 	}
 
-	_img->render(pos, _isLeft);
+	_img->render(pos, _isLeft);*/
 
 	//D2DRenderer::renderText(50, 50, );
 }

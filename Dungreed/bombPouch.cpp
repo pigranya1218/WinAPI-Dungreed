@@ -42,14 +42,14 @@ void bombPouch::update(Player* player, float const elapsedTime)
 	}
 }
 
-void bombPouch::frontRender(Vector2 pos, float angle)
+void bombPouch::frontRender(Player* player)
 {
 
 }
 
-void bombPouch::backRender(Vector2 pos, float angle)
+void bombPouch::backRender(Player* player)
 {
-	renderPos = pos;
+	renderPos = player->getPosition();
 	D2D_RENDERER->drawRectangle(RC);
 }
 

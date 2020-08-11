@@ -41,13 +41,13 @@ void babyGreenBat::update(Player* player, float const elapsedTime)
 
 }
 
-void babyGreenBat::frontRender(Vector2 pos, float angle)
+void babyGreenBat::frontRender(Player* player)
 {
 }
 
-void babyGreenBat::backRender(Vector2 pos, float angle)
+void babyGreenBat::backRender(Player* player)
 {
-	renderPos = pos;
+	renderPos = player->getPosition();
 	if (x > renderPos.x + 60)
 	{
 		x -= 6;

@@ -29,8 +29,8 @@ public:
 	virtual void init() = 0;
 	virtual void release() = 0;
 	virtual void update(Player* player, float const elapsedTime) = 0;
-	virtual void backRender(Vector2 pos, float angle) = 0;
-	virtual void frontRender(Vector2 pos, float angle) = 0;
+	virtual void backRender(Player* player) = 0;
+	virtual void frontRender(Player* player) = 0;
 	virtual void displayInfo() = 0; // 인벤토리에서 보여질 정보들
 
 	virtual void attack(Vector2 const position, float const angle) = 0; // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
