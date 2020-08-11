@@ -318,6 +318,9 @@
     <ClInclude Include="Punch.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
+    <ClInclude Include="ShortSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -486,6 +489,9 @@
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Punch.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortSword.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
   </ItemGroup>
