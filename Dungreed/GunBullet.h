@@ -1,9 +1,9 @@
 #pragma once
 #include "Projectile.h"
 
-class ProjectileManager;
+//class ProjectileManager;
 
-class ItemBullet : public Projectile
+class GunBullet : public Projectile
 {
 private:
 	Image* _img;								//이미지
@@ -14,6 +14,7 @@ private:
 	Vector2 _position;
 	float _angle;								//발사각
 	Animation* _ani;
+	//vector<>
 public:
 	virtual void init(int itemType, Vector2 pos);
 	virtual void release();

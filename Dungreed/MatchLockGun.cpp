@@ -17,8 +17,9 @@ void MatchLockGun::init()
 
 	_effectAni01 = new Animation;
 	_effectAni01->init(_dustEffect->getWidth(), _dustEffect->getHeight(), 10, 1);
-	_effectAni01->setDefPlayFrame(false, false);
+	_effectAni01->setDefPlayFrame(false, true);
 	_effectAni01->setFPS(20);
+
 }
 
 void MatchLockGun::release()
@@ -35,6 +36,7 @@ void MatchLockGun::update(float const elapsedTime)
 		}*/
 
 		_effectAni01->frameUpdate(elapsedTime);
+		//_bullet->update(elapsedTime);
 	}
 }
 
@@ -60,14 +62,14 @@ void MatchLockGun::render(Vector2 pos, float angle)
 	_img->render(_gunPos, _isLeft);
 
 	Vector2 _pos;
-	Vector2 _centerPos02 = Vector2(_img->getSize().x / 2 , _img->getSize().y / 2 + 24);
+	Vector2 _centerPos02 = Vector2(_img->getSize().x * 0.25f, _img->getSize().y / 2);
 	_dustEffect->setScale(4);
 	_dustEffect->setAnglePos(_centerPos02);
 	if (_isAttack)
 	{
 		_dustEffect->setScale(4);
 		//_dustEffect->setAnglePos(_centerPos);
-		if (!_isLeft)
+		/*if (!_isLeft)
 		{
 			_pos = Vector2(pos.x + 30, pos.y + 5);
 
@@ -75,10 +77,10 @@ void MatchLockGun::render(Vector2 pos, float angle)
 		else
 		{
 			_pos = Vector2(pos.x - 30, pos.y + 5);
-		}
+		}*/
 		_dustEffect->setAngle(angle);
-		_dustEffect->aniRender(_pos, _effectAni01, _isLeft);
-		
+		_dustEffect->aniRender(_gunPos, _effectAni01, _isLeft);
+		//_bullet->render();
 	}
 
 	//D2DRenderer::renderText(50, 50, );
@@ -92,6 +94,9 @@ void MatchLockGun::attack(Vector2 const position, float const angle)
 {
 	_isAttack = true;
 	_effectAni01->start();
+	//_bullet->init(1, position);
+	//_bullet->fire(position, angle);
+
 }
 
 void MatchLockGun::attack(FloatRect * rect, tagAttackInfo * info)

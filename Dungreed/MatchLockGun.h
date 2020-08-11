@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.h"
+#include "GunBullet.h"
 
 class MatchLockGun : public Item
 {
@@ -18,6 +19,8 @@ private:
 	Vector2 _gunPos;
 
 	bool _isAttack;
+
+	GunBullet* _bullet;
 public:
 
 	virtual void init();

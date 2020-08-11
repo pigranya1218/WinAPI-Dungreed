@@ -4,6 +4,7 @@
 class ProjectileManager
 {
 private:
+protected:
 	vector<Projectile*> _projectiles;
 
 public:

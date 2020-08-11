@@ -174,7 +174,7 @@
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="ItemBullet.h" />
+    <ClInclude Include="GunBullet.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
@@ -233,7 +233,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
-    <ClCompile Include="ItemBullet.cpp" />
+    <ClCompile Include="GunBullet.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />

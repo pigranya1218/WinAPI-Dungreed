@@ -1,8 +1,8 @@
-#include "ItemBullet.h"
-#include "ProjectileManager.h"
+#include "GunBullet.h"
+//#include "ProjectileManager.h"
 
 
-void ItemBullet::init(int itemType, Vector2 pos)
+void GunBullet::init(int itemType, Vector2 pos)
 {
 	switch (itemType)
 	{
@@ -45,17 +45,16 @@ void ItemBullet::init(int itemType, Vector2 pos)
 	}
 }
 
-void ItemBullet::release()
+void GunBullet::release()
 {
 }
 
-void ItemBullet::update(float timeElapsed)
+void GunBullet::update(float timeElapsed)
 {
 	move();
-	_bulletRect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
-void ItemBullet::render()
+void GunBullet::render()
 {
 	_img->setAngle(_angle);
 	_img->setScale(4);
@@ -63,12 +62,13 @@ void ItemBullet::render()
 	D2D_RENDERER->drawRectangle(_bulletRect);
 }
 
-void ItemBullet::fire(Vector2 const pos, float const angle)
+void GunBullet::fire(Vector2 const pos, float const angle)
 {
 	_angle = angle;
+	_bulletRect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
-void ItemBullet::move()
+void GunBullet::move()
 {
 	_position.x += cosf(_angle);
 	_position.y += -sinf(_angle);

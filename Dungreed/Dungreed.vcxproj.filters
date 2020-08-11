@@ -297,11 +297,11 @@
     <ClInclude Include="MatchLockGun.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
-    <ClInclude Include="ItemBullet.h">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="Boomerang.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="GunBullet.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -449,11 +449,11 @@
     <ClCompile Include="MatchLockGun.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
-    <ClCompile Include="ItemBullet.cpp">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="Boomerang.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="GunBullet.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
