@@ -52,7 +52,11 @@ void ShortSpear::update(float const elapsedTime)
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
-void ShortSpear::render(Vector2 pos, float angle)
+void ShortSpear::backRender(Vector2 pos, float angle)
+{
+}
+
+void ShortSpear::frontRender(Vector2 pos, float angle)
 {
 	Vector2 renderPos = pos;
 	bool isLeft = false;

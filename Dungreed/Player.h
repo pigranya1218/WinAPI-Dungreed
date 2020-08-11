@@ -6,16 +6,7 @@
 class Item;
 class GameScene;
 class Projectile;
-
-//애니메이션 재생용 (상태패턴 아님)
-enum class PLAYER_ANIMATION
-{
-	DEFAULT,		//점프나 사망과 같이 애니렌더를 사용하지 않는 경우.
-	IDLE,		
-	MOVE		//점프 중이 아닌 경우에만
-	// JUMP		//점프 중일 때도 좌 우 이동은 가능하지만 점프 상태는 그대로
-	// DIE		//사망
-};
+class Ability;
 
 // 공격 관련 정보
 struct tagAttackInfo
@@ -31,15 +22,28 @@ class Player : public GameObject
 Synthesize(DIRECTION, _direction, Direction)
 
 private:
+	//애니메이션 재생용 (상태패턴 아님)
+	enum class PLAYER_ANIMATION
+	{
+		DEFAULT,		//점프나 사망과 같이 애니렌더를 사용하지 않는 경우.
+		IDLE,
+		MOVE		//점프 중이 아닌 경우에만
+	};
+
+private:
 	GameScene* _gameScene;
 	Animation* _ani;	
 	Image* _img;	
 	PLAYER_ANIMATION _aniState;
 
 	// 현재 상태
+	int		_level;					// 현재 레벨
 	int		_currHp;				// 현재 체력
 	int		_currJumpCount;			// 현재 남은 점프 카운트
+	int		_currDashCount;			// 현재 남은 대쉬 카운트
+	float	_currDashCoolTime;		// 현재 대쉬 쿨타임
 	int		_currSatiety;			// 현재 포만감
+	int		_currGold;				// 현재 골드
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
@@ -72,5 +76,16 @@ public:
 	virtual void release() override;
 	virtual void update(float const elapsedTime) override;
 	virtual void render() override;
+
+	// GETTER & SETTER
+	int getLevel() const noexcept { return _level; }
+	int getMaxHp() const noexcept { return _adjustStat.maxHp; }
+	int getCurrHp() const noexcept { return _currHp; }
+
+	int getGold() const noexcept { return _currGold; }
+	int getMaxSatiety() const noexcept { return _adjustStat.maxSatiety; }
+	int getSatiety() const noexcept { return _currSatiety; }
+
+	int getMaxDash() const noexcept { return _adjustStat.maxDashCount; }
 };
 

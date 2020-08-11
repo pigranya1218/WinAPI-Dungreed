@@ -1,13 +1,11 @@
 #pragma once
 #include "Enemy.h"
 
-class SkelBigIce : public Enemy
+class BatIce : public Enemy
 {
 private:
+	tagAttackInfo	_shooting;
 	tagMoveInfo		_moving;
-
-	tagAttackInfo	_attack;
-	tagAttackInfo	_skill;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

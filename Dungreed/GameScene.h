@@ -28,7 +28,7 @@ public:
 	void loadInfo(tagLoadInfo const info);
 
 	// 플레이어 관련 함수
-	
+	Vector2 getPlayerPos() { return _player->getPosition(); }
 
 
 	// 스테이지 관련 함수

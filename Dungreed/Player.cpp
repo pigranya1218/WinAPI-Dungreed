@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "Item.h"
 #include "ShortSpear.h"
+#include "Punch.h"
 #include "SpikeBall.h"
 #include "babyGreenBat.h"
 
@@ -10,6 +11,7 @@ void Player::setBaseStat()
 	_baseStat.maxHp = 80;
 	_baseStat.maxJumpCount = 1;
 	_baseStat.maxDashCount = 2;
+	_baseStat.dashCoolTime = 1.5f;
 	_baseStat.maxSatiety = 100;
 	_baseStat.power = 5;
 	_baseStat.damage = 0; //0 ~ 4
@@ -125,10 +127,14 @@ void Player::init()
 
 	setBaseStat();
 	updateAdjustStat();
+	_level = 1;
 	_currJumpCount = _adjustStat.maxJumpCount;
-	_currHp = _adjustStat.maxHp;
+	_currDashCount = _adjustStat.maxDashCount;
+	_currDashCoolTime = 0;
+	//_currHp = _adjustStat.maxHp;
+	_currHp = 40;
 	_currSatiety = 0;
-
+	_currGold = 1000;
 	_force = Vector2(0, 0);
 
 	_ani = new Animation;
@@ -148,6 +154,16 @@ void Player::init()
 	testbabyGreenBat->init();
 	_equippedAcc.push_back(testbabyGreenBat);
 
+	//ShortSpear* testWeapon = new ShortSpear;
+	ShortSpear* testWeapon1 = new ShortSpear;
+	testWeapon1->init();
+	_equippedWeapon.push_back(testWeapon1);
+	
+	Punch* testWeapon2 = new Punch;
+	testWeapon2->init();
+	_equippedWeapon.push_back(testWeapon2);
+
+	_currWeaponIndex = 1;
 }
 
 void Player::release()
@@ -246,9 +262,10 @@ void Player::update(float const elapsedTime)
 		// _aniState = PLAYER_ANIMATION::DEFAULT;
 		_currJumpCount -= 1;
 	}
-
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)))
+	//대쉬
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
+		_currDashCount -= 1;
 		float angle = atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
@@ -274,6 +291,18 @@ void Player::update(float const elapsedTime)
 		}
 		moveDir.x = _force.x * elapsedTime;
 	}
+
+	//대쉬 쿨타임
+	if (_currDashCount < _adjustStat.maxDashCount)
+	{
+		_currDashCoolTime += elapsedTime;
+		if (_currDashCoolTime > _adjustStat.dashCoolTime)
+		{
+			_currDashCount += 1;
+			_currDashCoolTime = 0;
+		}
+	}
+
 	//하강중
 	_force.y += _adjustStat.yGravity * elapsedTime;
 	moveDir.y = 1.5 + _force.y * elapsedTime;
@@ -310,20 +339,17 @@ void Player::update(float const elapsedTime)
 
 void Player::render()
 {
-
 	_img->setScale(4);
 
 	float angle = fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
-		//D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
 		_img->render(_position, _direction == DIRECTION::LEFT);
 	}
 	else
 	{
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
-		//D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
 	}
 
 	_equippedAcc[1]->render(_position, angle);
@@ -331,4 +357,9 @@ void Player::render()
 	_equippedWeapon[_currWeaponIndex]->render(_position, angle);
 
 	
+	
+	_equippedWeapon[_currWeaponIndex]->frontRender(_position, angle);
+	
+	wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);
+	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 }

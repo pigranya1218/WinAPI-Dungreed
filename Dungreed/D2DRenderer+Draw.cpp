@@ -263,11 +263,19 @@ void D2DRenderer::drawRectangle(const FloatRect& rc, const D2D1::ColorF::Enum& c
 @@ DefaultBrush brush : 그릴 브러쉬
 @@ float stroke : 선 굵기
 ************************************************************************************************/
-void D2DRenderer::drawRectangle(const FloatRect& rc, const DefaultBrush& defaultBrush, const float strokeWidth)
+void D2DRenderer::drawRectangle(const FloatRect& rc, const DefaultBrush& defaultBrush, const float strokeWidth, const float angle, const Vector2& anglePos)
 {
 	FloatRect rect = rc;
 
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	if (angle != 0)
+	{
+		D2D1::Matrix3x2F rotate = D2D1::Matrix3x2F::Rotation(360 - angle, D2D1::Point2F(anglePos.x, anglePos.y));
+		_D2DRenderTarget->SetTransform(rotate);
+	}
+	else
+	{
+		_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
 
 	_D2DRenderTarget->DrawRectangle(D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom),
 		_defaultBrushList[(UINT)defaultBrush], strokeWidth);

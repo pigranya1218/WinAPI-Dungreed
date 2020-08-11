@@ -1,12 +1,12 @@
 #include "stdafx.h"
 #include "EnemyManager.h"
-#include "BatRed.h"
+#include "BatIce.h"
 
-void BatRed::init(const Vector2& pos, DIRECTION direction)
+void BatIce::init(const Vector2 & pos, DIRECTION direction)
 {
 	_ani = new Animation;
 
-	setState(ENEMY_STATE::MOVE);	
+	setState(ENEMY_STATE::MOVE);
 
 	_position = pos;
 	_direction = direction;
@@ -15,12 +15,12 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 
 	// 공격 관련 변수 초기화
 	ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.delay = 3;
+	_shooting.delay = 2;
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
-	_moving.speed = 350;
+	_moving.speed = 400;
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	// 사이즈 설정
@@ -33,13 +33,13 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	_isDetect = 0;
 }
 
-void BatRed::release()
+void BatIce::release()
 {
 	_ani->release();
 	SAFE_DELETE(_ani);
 }
 
-void BatRed::update(float const timeElapsed)
+void BatIce::update(float const timeElapsed)
 {
 	// 플레이어 좌표따라 방햘 설정
 	_direction = _enemyManager->getPlayerPos().x > _position.x ? DIRECTION::RIGHT : DIRECTION::LEFT;
@@ -110,7 +110,7 @@ void BatRed::update(float const timeElapsed)
 		case ENEMY_STATE::DIE:
 		{
 			break;
-		}		
+		}
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -118,7 +118,7 @@ void BatRed::update(float const timeElapsed)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
-void BatRed::render()
+void BatIce::render()
 {
 	_img->setScale(_scale);
 
@@ -127,7 +127,7 @@ void BatRed::render()
 	_img->aniRender(_position, _ani, !(unsigned)_direction);
 }
 
-void BatRed::setState(ENEMY_STATE state)
+void BatIce::setState(ENEMY_STATE state)
 {
 	_state = state;
 
@@ -137,18 +137,18 @@ void BatRed::setState(ENEMY_STATE state)
 		case ENEMY_STATE::MOVE:
 		{
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Red/Move");
+			_img = IMAGE_MANAGER->findImage("Bat/Ice/Move");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(10);
 			_ani->start();
 
 			break;
-		}		
+		}
 		case ENEMY_STATE::ATTACK:
 		{
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Red/Attack");
+			_img = IMAGE_MANAGER->findImage("Bat/Ice/Attack");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(10);

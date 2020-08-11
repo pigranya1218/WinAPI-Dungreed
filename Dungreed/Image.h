@@ -48,8 +48,11 @@ public:
 	void render(const Vector2& position, bool bisymmetry = false);
 	void render(const Vector2& position, const Vector2& size, bool bisymmetry = false);
 	void render(const Vector2& position, const Vector2& sourPos, const Vector2& sourSize, bool bisymmetry = false);	
+	void render(const Vector2& position,const Vector2& size, const Vector2& sourPos, const Vector2& sourSize, bool bisymmetry = false);	
 	void frameRender(const Vector2& position, const int frameX, const int frameY, bool bisymmetry = false);
+	void frameRender(const Vector2& position, const Vector2& size, const int frameX, const int frameY, bool bisymmetry = false);
 	void aniRender(const Vector2& position, Animation* ani, bool bisymmetry = false);
+	void aniRender(const Vector2& position, const Vector2& size, Animation* ani, bool bisymmetry = false);
 
 	void resetRenderOption();
 
