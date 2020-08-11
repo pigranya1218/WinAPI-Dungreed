@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StageManager.h"
 #include "Stage.h"
+#include "GameScene.h"
 #include "TestStage.h"
 
 void StageManager::init()
@@ -39,6 +40,7 @@ void StageManager::nextStage()
 void StageManager::makeStage()
 {
 	_currStage = new TestStage();
+	_currStage->setStageManager(this);
 	_currStage->init();
 }
 
@@ -49,4 +51,9 @@ void StageManager::releaseStage()
 		_stages[i]->release();
 		delete _stages[i];
 	}
+}
+
+Vector2 StageManager::getPlayerPos()
+{
+	return _gameScene->getPlayerPos();
 }

@@ -282,6 +282,15 @@
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
+    <ClInclude Include="Banshee.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatRed.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelBigIce.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>2DGameFramework\ProgressBar</Filter>
     </ClInclude>
@@ -427,6 +436,15 @@
     </ClCompile>
     <ClCompile Include="TestStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="Banshee.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatRed.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStat.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>

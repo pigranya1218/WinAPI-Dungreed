@@ -1,3 +1,4 @@
+#include "StageManager.h"
 #include "Stage.h"
 
 void Stage::init()
@@ -89,4 +90,9 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 	}
 
 	object->setPosition(newCenter);
+}
+
+Vector2 Stage::getPlayerPos()
+{
+	return _stageManager->getPlayerPos();
 }
