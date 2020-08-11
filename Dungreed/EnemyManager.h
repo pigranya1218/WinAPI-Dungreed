@@ -2,7 +2,12 @@
 #include "Enemy.h"
 #include "Banshee.h"
 #include "BatRed.h"
+#include "BatIce.h"
+#include "BatNormal.h"
 #include "SkelBigIce.h"
+#include "SkelBigNormal.h"
+#include "SkelMagicianIce.h"
+#include "SkelSmallBow.h"
 
 class Stage;
 

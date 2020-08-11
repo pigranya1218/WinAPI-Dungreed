@@ -60,10 +60,16 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		}
 		case ENEMY_TYPE::BAT_NORMAL:
 		{
+			enemy = new BatNormal;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 			break;
 		}
 		case ENEMY_TYPE::BAT_ICE:
 		{
+			enemy = new BatIce;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 			break;
 		}
 		case ENEMY_TYPE::BAT_GIANT_RED:
@@ -84,6 +90,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		}
 		case ENEMY_TYPE::SKEL_BIG_NORMAL:
 		{
+			enemy = new SkelBigNormal;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 			break;
 		}
 		case ENEMY_TYPE::SKEL_BIG_ICE:
@@ -100,6 +109,18 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		}
 		case ENEMY_TYPE::SKEL_MAGICIAN_ICE:
 		{
+			enemy = new SkelMagicianIce;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
+
+			break;
+		}
+		case ENEMY_TYPE::SKEL_SMALL_BOW:
+		{
+			enemy = new SkelSmallBow;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
+
 			break;
 		}
 	}

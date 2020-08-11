@@ -300,6 +300,21 @@
     <ClInclude Include="ShortSpear.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
+    <ClInclude Include="SkelBigNormal.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelMagicianIce.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatNormal.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatIce.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallBow.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="Punch.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
@@ -454,6 +469,21 @@
     </ClCompile>
     <ClCompile Include="ShortSpear.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelMagicianIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallBow.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Punch.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
