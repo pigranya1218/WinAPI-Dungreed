@@ -73,7 +73,7 @@ void babyGreenBat::displayInfo()
 {
 }
 
-void babyGreenBat::attack(Vector2 const position, float const angle)
+void babyGreenBat::attack(Player* player)
 {
 }
 

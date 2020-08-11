@@ -131,9 +131,22 @@ void ShortSpear::displayInfo()
 {
 }
 
-void ShortSpear::attack(Vector2 const position, float const angle)
+void ShortSpear::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	Vector2 pos = player->getPosition();
+
+	Vector2 renderPosHand = pos;
+	renderPosHand.x += ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4)); // 손의 위치는 무기의 회전 중심점
+	renderPosHand.y += 20; // 플레이어의 중점으로부터 무기를 들고 있는 높이
+	// 손으로부터 마우스 에임까지의 각도
+	float angle = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) + PI2;
+	if (angle > PI2)
+	{
+		angle -= PI2;
+	}
 
 	_reverseMove = false;
 	_attackAngle = angle;

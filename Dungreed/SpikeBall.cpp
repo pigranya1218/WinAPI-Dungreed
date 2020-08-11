@@ -50,7 +50,7 @@ void SpikeBall::displayInfo()
 {
 }
 
-void SpikeBall::attack(Vector2 const position, float const angle)
+void SpikeBall::attack(Player* player)
 {
 }
 

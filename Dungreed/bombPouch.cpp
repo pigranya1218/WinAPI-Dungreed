@@ -57,7 +57,7 @@ void bombPouch::displayInfo()
 {
 }
 
-void bombPouch::attack(Vector2 const position, float const angle)
+void bombPouch::attack(Player* player)
 {
 }
 

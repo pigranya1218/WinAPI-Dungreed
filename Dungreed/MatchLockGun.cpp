@@ -52,7 +52,7 @@ void MatchLockGun::displayInfo()
 {
 }
 
-void MatchLockGun::attack(Vector2 const position, float const angle)
+void MatchLockGun::attack(Player* player)
 {
 }
 

@@ -11,9 +11,9 @@ void Punch::init()
 	//보조 옵션 없음
 	
 	_attackMove = Vector2(0, 0);
-	_minDamage = 0;
+	_minDamage = 1;
 	_maxDamage = 4;
-	_baseAttackDelay = 0.5;
+	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 
@@ -78,7 +78,7 @@ void Punch::backRender(Player* player)
 			angle -= 360;
 		}
 		renderPosRight.x += _attackMove.x;
-		renderPosRight.y += ((angle >= 270) ? (_attackMove.y) : (-_attackMove.y));
+		renderPosRight.y += ((angle >= 180) ? (_attackMove.y) : (-_attackMove.y));
 
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
 		D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f, angle, _rightHand.getCenter());
@@ -112,9 +112,22 @@ void Punch::displayInfo()
 	//장비를 착용하지 않음
 }
 
-void Punch::attack(Vector2 const position, float const angle)
+void Punch::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	Vector2 pos = player->getPosition();
+
+	Vector2 renderPosHand = pos; // 손의 위치
+	renderPosHand.x += ((isLeft) ? (-20) : (20)); 
+	renderPosHand.y += 20; 
+	// 손으로부터 마우스 에임까지의 각도
+	float angle = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) + PI2;
+	if (angle > PI2)
+	{
+		angle -= PI2;
+	}
 
 	_reverseMove = false;
 	_attackAngle = angle;

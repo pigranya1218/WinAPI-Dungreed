@@ -220,7 +220,7 @@ void Player::update(float const elapsedTime)
 	// АјАн
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
-		_equippedWeapon[_currWeaponIndex]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
+		_equippedWeapon[_currWeaponIndex]->attack(this);
 		/*for (int i = 0; i < 4; i++)
 		{
 			if (_equippedAcc[i] != nullptr)
