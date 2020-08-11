@@ -168,7 +168,8 @@ void Player::init()
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
 
-	_currWeaponIndex = 0;
+	_currWeaponIndex = 1;
+	_currWeaponChangeCoolTime = 0;
 }
 
 void Player::release()
@@ -192,6 +193,20 @@ void Player::update(float const elapsedTime)
 	{
 		_direction = DIRECTION::RIGHT;
 
+	}
+
+	// 장비 교체
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::CHANGE_WEAPON)) && _currWeaponChangeCoolTime == 0)
+	{
+		_currWeaponIndex == 0 ? _currWeaponIndex = 1 : _currWeaponIndex = 0;
+		_currWeaponChangeCoolTime = 1;
+	}
+
+	// 장비 교체 시간 딜레이
+	if (_currWeaponChangeCoolTime > 0)
+	{
+		_currWeaponChangeCoolTime -= elapsedTime;
+		if (_currWeaponChangeCoolTime < 0) _currWeaponChangeCoolTime = 0;
 	}
 
 	// 공격
@@ -368,5 +383,7 @@ void Player::render()
 	_equippedWeapon[_currWeaponIndex]->frontRender(_position, angle);
 	
 	wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);
-	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Blue, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	str = L" 무기 교체 딜레이 시간 : " + to_wstring(_currWeaponChangeCoolTime);
+	D2D_RENDERER->renderText(600, 0, str, 20, D2DRenderer::DefaultBrush::Green, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 }

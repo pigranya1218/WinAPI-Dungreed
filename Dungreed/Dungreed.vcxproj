@@ -163,6 +163,8 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
+    <ClInclude Include="Costume.h" />
+    <ClInclude Include="CostumeManager.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
@@ -234,6 +236,8 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
     <ClCompile Include="ConfigManager.cpp" />
+    <ClCompile Include="Costume.cpp" />
+    <ClCompile Include="CostumeManager.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="DataManager.cpp" />

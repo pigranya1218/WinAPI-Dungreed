@@ -50,10 +50,11 @@ private:
 	PlayerStat _baseStat; // 기본 스탯, 아이템으로 변하지 않는 스탯
 	PlayerStat _adjustStat; // 아이템으로 변화된 스탯
 
-	vector<Item*> _inventory; // 인벤토리
-	vector<Item*> _equippedWeapon; // 장착된 무기
-	int _currWeaponIndex; // 현재 사용하는 무기 인덱스, 0 or 1
-	vector<Item*> _equippedAcc; // 장착된 악세사리
+	vector<Item*> _inventory;				// 인벤토리
+	vector<Item*> _equippedWeapon;			// 장착된 무기
+	int			  _currWeaponIndex;			// 현재 사용하는 무기 인덱스, 0 or 1
+	float		  _currWeaponChangeCoolTime;// 무기 교체 딜레이 쿨타임
+	vector<Item*> _equippedAcc;				// 장착된 악세사리
 
 private:
 	void setBaseStat();

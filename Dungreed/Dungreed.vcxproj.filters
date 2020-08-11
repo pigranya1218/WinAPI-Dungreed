@@ -112,6 +112,9 @@
     <Filter Include="Dungreed\GameScene\Item\Melee">
       <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Costume">
+      <UniqueIdentifier>{d01a2838-1c1c-4035-b841-2308d2d14be2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dungreed\GameScene\Item\Accessories">
       <UniqueIdentifier>{6cd4b808-2924-4835-ae3b-9c78ec86045a}</UniqueIdentifier>
     </Filter>
@@ -330,6 +333,12 @@
     <ClInclude Include="bombPouch.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="Costume.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeManager.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -499,6 +508,12 @@
     </ClCompile>
     <ClCompile Include="Punch.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Costume.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeManager.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
     <ClCompile Include="SpikeBall.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
