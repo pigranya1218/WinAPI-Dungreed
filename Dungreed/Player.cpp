@@ -123,10 +123,12 @@ void Player::init()
 
 	setBaseStat();
 	updateAdjustStat();
+	_level = 1;
 	_currJumpCount = _adjustStat.maxJumpCount;
-	_currHp = _adjustStat.maxHp;
+	//_currHp = _adjustStat.maxHp;
+	_currHp = 40;
 	_currSatiety = 0;
-
+	_currGold = 1000;
 	_force = Vector2(0, 0);
 
 	_ani = new Animation;

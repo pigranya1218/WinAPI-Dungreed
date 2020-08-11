@@ -131,6 +131,14 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("MAIN_SCENE/BIRD", L"resources/images/mainScene/bird.png", 8, 1);
 
 	// * STAGE SCENE
+	// ** UI
+	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BG", L"resources/images/gameScene/ui/PlayerLifeBack.png");
+	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_FRAME", L"resources/images/gameScene/ui/PlayerLifeBase 1.png");
+	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BAR", L"resources/images/gameScene/ui/LifeBar.png");
+	IMAGE_MANAGER->addFrameImage("UI/PLAYER_LIFE_WAVE", L"resources/images/gameScene/ui/LifeWave.png", 7, 1);
+	IMAGE_MANAGER->addFrameImage("UI/GOLD", L"resources/images/gameScene/ui/gold.png", 8, 1);
+
+
 	// ** VILLIGE
 	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
 	IMAGE_MANAGER->addImage("Town_BG", L"resources/images/Map/TownBG_Day.png");
@@ -287,7 +295,7 @@ void playGround::update()
 //그리기 전용
 void playGround::render()
 {	
-	D2D_RENDERER->beginRender(D2D1::ColorF::White);
+	D2D_RENDERER->beginRender(D2D1::ColorF::Gray);
 	{
 		SCENE_MANAGER->render();
 	}
