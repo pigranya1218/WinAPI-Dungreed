@@ -14,6 +14,9 @@ private:
 	float _attackAngle;
 	bool _reverseMove;
 
+	FloatRect _hand;
+	Vector2 _handSize;
+
 public:
 	virtual void init();
 	virtual void release();

@@ -11,14 +11,14 @@ void ShortSpear::init()
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 
-
+	_handSize = Vector2(7, 7);
 
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
 	_minDamage = 7;
 	_maxDamage = 10;
-	_baseAttackDelay = 0.5;
+	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 }
@@ -31,7 +31,7 @@ void ShortSpear::update(float const elapsedTime)
 {
 	if (_currAttackDelay == 0) return;
 
-	float ratio = elapsedTime / (_baseAttackDelay * 0.08);
+	float ratio = elapsedTime / (_baseAttackDelay * 0.15);
 	if (_reverseMove)
 	{
 		_attackMove.x = max(0, _attackMove.x - abs(cosf(_attackAngle) * 40 * ratio));
@@ -42,7 +42,7 @@ void ShortSpear::update(float const elapsedTime)
 		_attackMove.x = min(abs(cosf(_attackAngle) * 40), _attackMove.x + abs(cosf(_attackAngle) * 40 * ratio));
 		_attackMove.y = min(abs(-sinf(_attackAngle) * 40), _attackMove.y + abs((-sinf(_attackAngle)) * 40 * ratio));
 
-		if (_currAttackDelay <= _baseAttackDelay * 0.88)
+		if (_currAttackDelay <= _baseAttackDelay * 0.8)
 		{
 			_reverseMove = true;
 		}
@@ -54,25 +54,61 @@ void ShortSpear::update(float const elapsedTime)
 
 void ShortSpear::backRender(Vector2 pos, float angle)
 {
+	bool isLeft = false;
+	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
+	{
+		isLeft = true;
+	}
+	if (isLeft)
+	{
+		Vector2 renderPos = Vector2(pos.x - 22, pos.y + 20);
+
+		_hand = rectMakePivot(renderPos, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->drawRectangle(_hand, D2DRenderer::DefaultBrush::Black, 4.f);
+		D2D_RENDERER->fillRectangle(_hand, 251, 206, 177, 1);
+	}
+	else
+	{
+		Vector2 renderPos = Vector2(pos.x + 22, pos.y + 20);
+
+		_hand = rectMakePivot(renderPos, Vector2(_handSize), PIVOT::CENTER);
+		D2D_RENDERER->drawRectangle(_hand, D2DRenderer::DefaultBrush::Black, 4.f);
+		D2D_RENDERER->fillRectangle(_hand, 251, 206, 177, 1);
+	}
 }
 
 void ShortSpear::frontRender(Vector2 pos, float angle)
 {
 	Vector2 renderPos = pos;
+	float renderAngle = angle;
 	bool isLeft = false;
 	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
 	{
 		isLeft = true;
-		angle = fmod((180 - angle) + 360, 360);
+		renderAngle = fmod((180 - angle) + 360, 360);
 	}
-	
+
 	renderPos.x += ((isLeft)?(-10 - _attackMove.x):(10 + _attackMove.x));
-	renderPos.y += 15 + ((angle >= 180) ? (_attackMove.y) : (-_attackMove.y));
+	renderPos.y += 15 + ((renderAngle >= 180) ? (_attackMove.y) : (-_attackMove.y));
 
 	_img->setScale(4);
-	_img->setAngle(angle);
-	_img->setAnglePos(Vector2(_img->getWidth() * 0.3f, _img->getHeight() * 0.5f));
+	_img->setAngle(renderAngle);
+	_img->setAnglePos(Vector2(0.3f * _img->getWidth(), 0.5f * _img->getHeight()));
 	_img->render(renderPos, isLeft);
+
+	Vector2 renderPosHand = Vector2(renderPos.x, renderPos.y);
+	if (isLeft)
+	{
+		renderPosHand.x += 25;
+	}
+	else
+	{
+		renderPosHand.x -= 25;
+	}
+	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+
+	D2D_RENDERER->drawRectangle(_hand, D2DRenderer::DefaultBrush::Black, 4.f, angle, renderPosHand);
+	D2D_RENDERER->fillRectangle(_hand, 251, 206, 177, 1, angle, renderPosHand);
 }
 
 void ShortSpear::displayInfo()

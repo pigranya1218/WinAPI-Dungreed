@@ -148,7 +148,7 @@ void Player::init()
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
 
-	_currWeaponIndex = 1;
+	_currWeaponIndex = 0;
 }
 
 void Player::release()
