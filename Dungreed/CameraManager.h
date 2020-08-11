@@ -2,7 +2,7 @@
 #include "Image.h"
 #include "CameraEvent.h"
 
-class Camera
+class CameraManager : SingletonBase<CameraManager>
 {
 private:
 	queue<CameraEvent*> _eventQueue;
@@ -26,8 +26,8 @@ private:
 	float _minY, _maxY; // y 좌표의 가능한 범위
 
 public:
-	Camera();
-	~Camera();
+	CameraManager();
+	~CameraManager();
 
 	HRESULT init();
 	void release();

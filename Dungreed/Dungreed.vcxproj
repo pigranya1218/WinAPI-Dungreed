@@ -160,7 +160,7 @@
     <ClInclude Include="babyGreenBat.h" />
     <ClInclude Include="bombPouch.h" />
     <ClInclude Include="CameraEvent.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="Costume.h" />
@@ -236,7 +236,7 @@
     <ClCompile Include="babyGreenBat.cpp" />
     <ClCompile Include="bombPouch.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="Costume.cpp" />
