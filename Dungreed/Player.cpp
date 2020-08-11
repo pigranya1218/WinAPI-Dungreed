@@ -140,9 +140,14 @@ void Player::init()
 
 	//test 
 	//ShortSpear* testWeapon = new ShortSpear;
-	Punch* testWeapon = new Punch;
-	testWeapon->init();
-	_equippedWeapon.push_back(testWeapon);
+	ShortSpear* testWeapon1 = new ShortSpear;
+	testWeapon1->init();
+	_equippedWeapon.push_back(testWeapon1);
+	
+	Punch* testWeapon2 = new Punch;
+	testWeapon2->init();
+	_equippedWeapon.push_back(testWeapon2);
+
 	_currWeaponIndex = 0;
 }
 
