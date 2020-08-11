@@ -19,6 +19,7 @@ public:
 	float	evasion;			// 회피
 	float	attackSpeed;		// 공격속도
 	float	moveSpeed;			// 이동속도
+	float	reloadSpeed;		// 재장전속도
 	float	dashXPower;			// 대시 x 속도
 	float	dashYPower;			// 대시 y 속도
 	float	jumpPower;			// 점프 파워

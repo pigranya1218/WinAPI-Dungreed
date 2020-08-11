@@ -65,6 +65,7 @@ void ShortSpear::render(Vector2 pos, float angle)
 	renderPos.x += ((isLeft)?(-10 - _attackMove.x):(10 + _attackMove.x));
 	renderPos.y += 15 + ((angle >= 180) ? (_attackMove.y) : (-_attackMove.y));
 
+	_img->setScale(4);
 	_img->setAngle(angle);
 	_img->setScale(3);
 	_img->setAnglePos(Vector2(_img->getWidth() * 0.3f, _img->getHeight() * 0.5f));

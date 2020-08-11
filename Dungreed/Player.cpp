@@ -7,10 +7,22 @@
 
 void Player::setBaseStat()
 {
-	_baseStat.maxHp = 75;
+	_baseStat.maxHp = 80;
 	_baseStat.maxJumpCount = 1;
 	_baseStat.maxDashCount = 2;
 	_baseStat.maxSatiety = 100;
+	_baseStat.power = 5;
+	_baseStat.damage = 0; //0 ~ 4
+	_baseStat.trueDamage = 0;
+	_baseStat.criticalChance = 2;
+	_baseStat.criticalDamage = 1; // + 100%
+	_baseStat.toughness = 0;
+	_baseStat.defense = 0;
+	_baseStat.block = 0;
+	_baseStat.evasion = 0;
+	_baseStat.attackSpeed = 0;
+	_baseStat.reloadSpeed = 0; // --
+	_baseStat.moveSpeed = 350;
 	_baseStat.dashXPower = 2400;
 	_baseStat.dashYPower = 1700;
 	_baseStat.jumpPower = 1700;
@@ -172,28 +184,43 @@ void Player::update(float const elapsedTime)
 
 	//이동
 	Vector2 moveDir(0, 0);
+	//좌측 이동중
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
 	{
-		moveDir.x -= 350 * elapsedTime;
-		/*if (!_isLanded)
+		moveDir.x -= _baseStat.moveSpeed * elapsedTime;
+		if (_isStand)
 		{
-			if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-			_aniState = PLAYER_ANIMATION::MOVE;
-			_position.x -= 200 * TIME_MANAGER->getElapsedTime();
+			if (moveDir.x == 0)
+			{
+				if(_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
+				_aniState = PLAYER_ANIMATION::IDLE;
+			}
+			else if (moveDir.x != 0)
+			{
+				if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
+				_aniState = PLAYER_ANIMATION::MOVE;
+			}
 		}
-		else _position.x -= 150 * TIME_MANAGER->getElapsedTime();*/
 	}
+	//우측 이동중
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))
 	{
-		moveDir.x += 350 * elapsedTime;
+		moveDir.x += _baseStat.moveSpeed * elapsedTime;
 
-		/*if (!_isLanded)
+		if (_isStand)
 		{
-			if (_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-			_aniState = PLAYER_ANIMATION::MOVE;
-			_position.x += 200 * TIME_MANAGER->getElapsedTime();
+			// if(moveDir.x == 0) 이때 IDLE
+			if (moveDir.x == 0)
+			{
+				if(_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
+				_aniState = PLAYER_ANIMATION::IDLE;
+			}
+			else if(moveDir.x != 0)
+			{
+				if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
+				_aniState = PLAYER_ANIMATION::MOVE;
+			}
 		}
-		else _position.x += 150 * TIME_MANAGER->getElapsedTime();*/
 	}
 	/*if (KEY_MANAGER->isOnceKeyUp('A'))
 	{
@@ -243,50 +270,30 @@ void Player::update(float const elapsedTime)
 		}
 		moveDir.x = _force.x * elapsedTime;
 	}
+	//하강중
 	_force.y += _adjustStat.yGravity * elapsedTime;
-	moveDir.y = _force.y * elapsedTime;
+	moveDir.y = 1.5 + _force.y * elapsedTime;
 
 	_gameScene->moveTo(this, moveDir);
-	if (_isStand) // 땅에 착지
+	//착지
+	if (_isStand)
 	{
 		_force.y = 200;
 		_currJumpCount = _adjustStat.maxJumpCount;
+		if (moveDir.x == 0 && _aniState != PLAYER_ANIMATION::IDLE)
+		{
+			setAni(PLAYER_ANIMATION::IDLE);
+			_aniState = PLAYER_ANIMATION::IDLE;
+		}
 	}
 
-	////점프 처리
-	//if (_isLanded)
-	//{
-	//	_ani->stop();
-	//	_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
-	//	_yGravity -= 3.f;
-	//	_position.y -= _jumpPower + _yGravity * TIME_MANAGER->getElapsedTime() * 2;
-	//	/*if (_position.y + _size.y / 2 > _testScene->getGroundRect().top)
-	//	{
-	//		_position.y = _testScene->getGroundRect().top - _size.y / 2;
-	//		if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-	//		_aniState = PLAYER_ANIMATION::IDLE;
-	//		_jumpCount = 2;
-	//		_yGravity = 5.f;
-	//		_isLanded = false;
-	//	}*/
-	//}
-
-	//착지 처리
-	//캐릭터 이미지의 height 값이 그라운드의 top보다 작으면
-	//if (!_isLanded)
-	//{
-	//	//if (_position.y + _size.y / 2 < _testScene->getGroundRect().top)
-	//	//{
-	//	//	_position.y += 20 * TIME_MANAGER->getElapsedTime();
-	//	//}
-	//	//else // 착지 하면
-	//	//{
-	//	//	_position.y = _testScene->getGroundRect().top - _size.y / 2;
-	//	//	_jumpCount = 2;
-	//	//	/*if (_setAni != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-	//	//	_setAni = PLAYER_ANIMATION::IDLE;*/
-	//	//}
-	//}
+	//점프 처리
+	if (!_isStand)
+	{
+		_ani->stop();
+		_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
+		_aniState = PLAYER_ANIMATION::DEFAULT;
+	}
 
 	_ani->frameUpdate(elapsedTime);
 
@@ -307,10 +314,8 @@ void Player::render()
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
-		
 		//D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
 		_img->render(_position, _direction == DIRECTION::LEFT);
-		
 	}
 	else
 	{
@@ -318,9 +323,5 @@ void Player::render()
 		//D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
 	}
 	
-	
-	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
-	
-	// 무기 렌더
 	_equippedWeapon[_currWeaponIndex]->render(_position, angle);
 }
