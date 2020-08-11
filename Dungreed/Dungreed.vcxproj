@@ -191,6 +191,7 @@
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileManager.h" />
+    <ClInclude Include="Punch.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SampleStage.h" />
@@ -246,6 +247,7 @@
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="Punch.cpp" />
     <ClCompile Include="SampleStage.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />

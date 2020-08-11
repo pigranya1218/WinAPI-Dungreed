@@ -40,6 +40,8 @@ private:
 	int		_level;					// 현재 레벨
 	int		_currHp;				// 현재 체력
 	int		_currJumpCount;			// 현재 남은 점프 카운트
+	int		_currDashCount;			// 현재 남은 대쉬 카운트
+	float	_currDashCoolTime;		// 현재 대쉬 쿨타임
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	
