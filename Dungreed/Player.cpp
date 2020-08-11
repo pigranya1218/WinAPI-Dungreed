@@ -150,10 +150,10 @@ void Player::init()
 	_equippedWeapon.push_back(testWeapon);
 	_currWeaponIndex = 0;*/
 
-	MatchLockGun* testWeapon = new MatchLockGun;
+	/*MatchLockGun* testWeapon = new MatchLockGun;
 	testWeapon->init();
 	_equippedWeapon.push_back(testWeapon);
-	_currWeaponIndex = 0;
+	_currWeaponIndex = 0;*/
 	
 	SpikeBall* testAcc = new SpikeBall;
 	testAcc->init();
