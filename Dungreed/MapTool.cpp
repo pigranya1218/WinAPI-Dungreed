@@ -31,7 +31,7 @@ void MapTool::update()
 
 void MapTool::render()
 {
-	_camera.render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
+	CAMERA->render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
 
 	Vector2 size = _paletteImage->getSize();
 	size.x *= _paletteImage->getMaxFrameX();

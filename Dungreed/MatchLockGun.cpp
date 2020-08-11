@@ -17,7 +17,7 @@ void MatchLockGun::release()
 {
 }
 
-void MatchLockGun::update(float const elapsedTime)
+void MatchLockGun::update(Player* player, float const elapsedTime)
 {
 
 }

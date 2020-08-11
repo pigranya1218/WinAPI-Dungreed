@@ -271,10 +271,22 @@ void CameraManager::render(Image * img, Vector2 center, bool bisymmetry)
 	img->render(drawPos, bisymmetry);
 }
 
+void CameraManager::render(Image* img, Vector2 center, Vector2 size, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->render(drawPos, size, bisymmetry);
+}
+
 void CameraManager::render(Image * img, Vector2 center, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
 	img->render(drawPos, sourLT, sourSize, bisymmetry);
+}
+
+void CameraManager::render(Image* img, Vector2 center, Vector2 size, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->render(drawPos, size, sourLT, sourSize, bisymmetry);
 }
 
 
@@ -288,5 +300,11 @@ void CameraManager::aniRender(Image * img, Vector2 center, Animation * ani, bool
 {
 	Vector2 drawPos = getRelativeV2(center);
 	img->aniRender(drawPos, ani, bisymmetry);
+}
+
+void CameraManager::aniRender(Image* img, Vector2 center, Vector2 size, Animation* ani, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->aniRender(drawPos, size, ani, bisymmetry);
 }
 

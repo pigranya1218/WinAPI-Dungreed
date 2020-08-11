@@ -359,10 +359,12 @@ void Player::update(float const elapsedTime)
 	_ani->frameUpdate(elapsedTime);
 
 	// 무기 업데이트
-	_equippedWeapon[_currWeaponIndex]->update(elapsedTime);
-	_equippedAcc[1]->update(elapsedTime);
-	_equippedAcc[0]->update(elapsedTime);
-	_equippedAcc[2]->update(elapsedTime);
+	_equippedWeapon[0]->update(this, elapsedTime);
+	_equippedWeapon[1]->update(this, elapsedTime);
+	// 악세사리 업데이트
+	_equippedAcc[1]->update(this, elapsedTime);
+	_equippedAcc[0]->update(this, elapsedTime);
+	_equippedAcc[2]->update(this, elapsedTime);
 	
 }
 
@@ -372,8 +374,10 @@ void Player::render()
 
 	float angle = fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
 	
-
-	//_weapon->setAngle(angle);
+	_equippedAcc[0]->backRender(_position, angle);
+	_equippedAcc[1]->backRender(_position, angle);
+	_equippedAcc[2]->backRender(_position, angle);
+	_equippedWeapon[_currWeaponIndex]->backRender(_position, angle);
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
@@ -384,13 +388,9 @@ void Player::render()
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
 	}
 
-	_equippedAcc[0]->backRender(_position, angle);
-	_equippedAcc[1]->backRender(_position, angle);
-	_equippedAcc[2]->backRender(_position, angle);
-	
-
-	
-	
+	_equippedAcc[0]->frontRender(_position, angle);
+	_equippedAcc[1]->frontRender(_position, angle);
+	_equippedAcc[2]->frontRender(_position, angle);
 	_equippedWeapon[_currWeaponIndex]->frontRender(_position, angle);
 	
 	wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);

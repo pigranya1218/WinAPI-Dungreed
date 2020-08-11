@@ -23,7 +23,7 @@ void SpikeBall::release()
 {
 }
 
-void SpikeBall::update(float const elapsedTime)
+void SpikeBall::update(Player* player, float const elapsedTime)
 {
 	_angle += 0.033f;
 }

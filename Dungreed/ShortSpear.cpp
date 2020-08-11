@@ -21,13 +21,14 @@ void ShortSpear::init()
 	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
+	_drawEffect = false;
 }
 
 void ShortSpear::release()
 {
 }
 
-void ShortSpear::update(float const elapsedTime)
+void ShortSpear::update(Player* player, float const elapsedTime)
 {
 	if (_currAttackDelay == 0) return;
 
@@ -45,6 +46,7 @@ void ShortSpear::update(float const elapsedTime)
 		if (_currAttackDelay <= _baseAttackDelay * 0.8)
 		{
 			_reverseMove = true;
+			_drawEffect = true;
 		}
 	}
 
@@ -109,6 +111,17 @@ void ShortSpear::frontRender(Vector2 pos, float angle)
 
 	D2D_RENDERER->drawRectangle(_hand, D2DRenderer::DefaultBrush::Black, 4.f, angle, renderPosHand);
 	D2D_RENDERER->fillRectangle(_hand, 251, 206, 177, 1, angle, renderPosHand);
+
+	if (_drawEffect) // 이펙트를 그린다
+	{
+		_drawEffect = false;
+		Vector2 effectPos = renderPosHand;
+		float length = _img->getWidth() * 4 * 0.8;
+		effectPos.x += cosf(angle * (PI / 180)) * length;
+		effectPos.y += -sinf(angle * (PI / 180)) * length;
+		EFFECT_MANAGER->play("EFFECT_STAB", effectPos, Vector2(35, 35), angle);
+		//EFFECT_MANAGER->play("EFFECT_STAB", effectPos, angle);
+	}
 }
 
 void ShortSpear::displayInfo()

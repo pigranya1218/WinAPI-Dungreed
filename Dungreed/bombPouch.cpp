@@ -16,7 +16,7 @@ void bombPouch::release()
 {
 }
 
-void bombPouch::update(float const elapsedTime)
+void bombPouch::update(Player* player, float const elapsedTime)
 {
 	renderPos;
 	

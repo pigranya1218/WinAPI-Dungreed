@@ -69,7 +69,6 @@ private:
 	//HWND _loadBtn;
 	
 	LinearFunc _line;
-	Camera _camera;
 
 	FloatRect _save;
 	FloatRect _load;

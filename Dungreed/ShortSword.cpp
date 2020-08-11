@@ -16,7 +16,7 @@ void ShortSword::release()
 {
 }
 
-void ShortSword::update(float const elapsedTime)
+void ShortSword::update(Player* player, float const elapsedTime)
 {
 	if (_currAttackDelay == 0) return;
 

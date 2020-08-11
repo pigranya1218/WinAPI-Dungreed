@@ -203,12 +203,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
 	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
 	//***MeleeWeaponEffect
-	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png",3,1);
-	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png",4,1);
-
-
-
-
+	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
+	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
+	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 30, 10);
+	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 30, 10);
 
 
 	IMAGE_MANAGER->addFrameImage("Bat/Giant_Normal/Idle"		, L"resources/images/Enemy/Bat/Giant_Normal/idle.png"		,  7, 1);	// 박쥐 (거대 기본) 기본
@@ -321,7 +319,7 @@ HRESULT playGround::init()
 
 
 
-	// 모든 씬 SCENE_MANAGER에 등록
+	// 모든 씬 SCENE_MANAGER에 
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);

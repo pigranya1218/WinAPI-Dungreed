@@ -52,26 +52,38 @@ void Effect::render()
 	if (!_isRunning) return;
 
 	_effectImage->setScale(_scale);
-	//CAMERA_MANAGER->aniRenderZ(_effectImage, _position, Vector3(10, 10, 30), _effectAnimation);
+	if (_size.x != 0 && _size.y != 0)
+	{
+		_effectImage->setAngle(_angle);
+		CAMERA->aniRender(_effectImage, _position, _size, _effectAnimation);
+		//_effectImage->aniRender(_position, _size, _effectAnimation);
+
+	}
+	else
+	{
+		_effectImage->setAngle(_angle);
+		CAMERA->aniRender(_effectImage, _position, _effectAnimation);
+		//_effectImage->aniRender(_position, _effectAnimation);
+	}
 }
 
-void Effect::startEffect(int x, int y)
+void Effect::startEffect(Vector2 pos, float angle)
 {
+	_isRunning = true;
+	_effectAnimation->start();
+	_position = pos;
+	_size = Vector2(0, 0);
+	_angle = angle;
 }
 
-void Effect::startEffect(int x, int y, int width, int height)
+void Effect::startEffect(Vector2 pos, Vector2 size, float angle)
 {
+	_isRunning = true;
+	_effectAnimation->start();
+	_position = pos;
+	_size = size;
+	_angle = angle;
 }
-
-//void Effect::startEffectZ(Vector2 pos, float scale)
-//{
-//	if (!_effectImage || !_effectAnimation) return;
-//
-//	_position = pos;
-//	_scale = scale;
-//	_isRunning = true;
-//	_effectAnimation->start();
-//}
 
 void Effect::killEffect()
 {

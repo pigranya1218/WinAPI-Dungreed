@@ -28,7 +28,7 @@ protected:
 public:
 	virtual void init() = 0;
 	virtual void release() = 0;
-	virtual void update(float const elapsedTime) = 0;
+	virtual void update(Player* player, float const elapsedTime) = 0;
 	virtual void backRender(Vector2 pos, float angle) = 0;
 	virtual void frontRender(Vector2 pos, float angle) = 0;
 	virtual void displayInfo() = 0; // 인벤토리에서 보여질 정보들

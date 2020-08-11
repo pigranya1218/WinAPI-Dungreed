@@ -21,7 +21,7 @@ void babyGreenBat::release()
 	
 }
 
-void babyGreenBat::update(float const elapsedTime)
+void babyGreenBat::update(Player* player, float const elapsedTime)
 {
 	if (_ptMouse.x < renderPos.x)
 	{

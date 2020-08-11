@@ -167,7 +167,6 @@ void ConfigManager::init()
 	_scrollBar.ratio = 0;
 	_scrollBar.bgRc = FloatRect(1550, 180, 1590, 895);
 	_scrollBar.scrollRc = FloatRect(1550.0, 180.0, 1590.0, 180 + ((static_cast<float>(_scrollBar.height) / _scrollBar.totalHeight) * (_scrollBar.bgRc.bottom - _scrollBar.bgRc.top)));
-	_camera.setConfig(0, 180, WINSIZEX, _scrollBar.height, 0, 0, 0, _scrollBar.totalHeight - _scrollBar.height);
 
 	_keyChangeRemain = 0;
 
@@ -200,6 +199,8 @@ void ConfigManager::init()
 
 void ConfigManager::update()
 {
+	CAMERA->setConfig(0, 180, WINSIZEX, _scrollBar.height, 0, 0, 0, _scrollBar.totalHeight - _scrollBar.height);
+
 	if (_keyChangeRemain > 0)
 	{
 		int newKey = KEY_MANAGER->getWhichKeyDown();
@@ -233,7 +234,7 @@ void ConfigManager::update()
 	_keyButtonIndex = -1;
 	for (int i = 0; i < static_cast<int>(ACTION_TYPE::END); i++)
 	{
-		if (_keyMapButton[i].buttonRc.ptInRect(_camera.getAbsolutePt(_ptMouse)))
+		if (_keyMapButton[i].buttonRc.ptInRect(CAMERA->getAbsolutePt(_ptMouse)))
 		{
 			_keyButtonIndex = i;
 			break;
@@ -245,11 +246,11 @@ void ConfigManager::update()
 		// 음량 조절
 		for(int i = 0 ; i < 2 ; i++)
 		{ 
-			if (_progressVolume[i].handleRc.ptInRect(_camera.getAbsolutePt(_ptMouse)))
+			if (_progressVolume[i].handleRc.ptInRect(CAMERA->getAbsolutePt(_ptMouse)))
 			{
 				_dragSoundIndex = i;
 			}
-			else if (_progressVolume[i].progressRc.ptInRect(_camera.getAbsolutePt(_ptMouse)))
+			else if (_progressVolume[i].progressRc.ptInRect(CAMERA->getAbsolutePt(_ptMouse)))
 			{
 				_progressVolume[i].ratio = (_ptMouse.x - _progressVolume[i].progressRc.left) / _progressVolume[i].progressRc.getSize().x;
 				_progressVolume[i].handleRc = FloatRect(round(_progressVolume[i].progressRc.left + _progressVolume[i].progressRc.getSize().x * _progressVolume[i].ratio - 20), 
@@ -260,7 +261,7 @@ void ConfigManager::update()
 		}
 
 		// 화면 흔들림 조정
-		if (_cameraShake.boxRc.ptInRect(_camera.getAbsolutePt(_ptMouse)))
+		if (_cameraShake.boxRc.ptInRect(CAMERA->getAbsolutePt(_ptMouse)))
 		{
 			_cameraShake.isCheck = !_cameraShake.isCheck;
 		}
@@ -268,7 +269,7 @@ void ConfigManager::update()
 		// 키 조정
 		for (int i = 0; i < static_cast<int>(ACTION_TYPE::END); i++)
 		{
-			if (_keyMapButton[i].buttonRc.ptInRect(_camera.getAbsolutePt(_ptMouse)))
+			if (_keyMapButton[i].buttonRc.ptInRect(CAMERA->getAbsolutePt(_ptMouse)))
 			{
 				_keyChangeRemain = 3;
 				break;
@@ -303,7 +304,7 @@ void ConfigManager::update()
 		_scrollBar.scrollRc = FloatRect(currCenter, _scrollBar.scrollRc.getSize(), PIVOT::CENTER);
 		_scrollBar.ratio = (currCenter.y - (_scrollBar.bgRc.top + (_scrollBar.scrollRc.getSize().y / 2))) 
 			/ ((_scrollBar.bgRc.bottom - (_scrollBar.scrollRc.getSize().y / 2)) - (_scrollBar.bgRc.top + (_scrollBar.scrollRc.getSize().y / 2)));
-		_camera.setT((_scrollBar.totalHeight - _scrollBar.height) * _scrollBar.ratio);
+		CAMERA->setT((_scrollBar.totalHeight - _scrollBar.height) * _scrollBar.ratio);
 	}
 
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
@@ -336,51 +337,51 @@ void ConfigManager::render()
 	_background->render(Vector2(WINSIZEX / 2, WINSIZEY / 2), Vector2(WINSIZEX + 100, WINSIZEY + 100));
 
 	// VOLUME
-	D2D_RENDERER->renderTextField(0, static_cast<int>(_camera.getRelativeY(20.0f)), L"사운드", RGB(189, 189, 189), 50, WINSIZEX, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
+	D2D_RENDERER->renderTextField(0, static_cast<int>(CAMERA->getRelativeY(20.0f)), L"사운드", RGB(189, 189, 189), 50, WINSIZEX, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
 	for (int i = 0; i < 2; i++)
 	{
-		D2D_RENDERER->renderTextField(_progressVolume[i].textRc.left, _camera.getRelativeY(_progressVolume[i].textRc.top), _progressVolume[i].name, RGB(255, 255, 255), 45, 
+		D2D_RENDERER->renderTextField(_progressVolume[i].textRc.left, CAMERA->getRelativeY(_progressVolume[i].textRc.top), _progressVolume[i].name, RGB(255, 255, 255), 45,
 			_progressVolume[i].textRc.getSize().x, 45, DWRITE_TEXT_ALIGNMENT_TRAILING);
-		_soundBar->render(_camera.getRelativeV2(_progressVolume[i].progressRc.getCenter()), _progressVolume[i].progressRc.getSize());
+		_soundBar->render(CAMERA->getRelativeV2(_progressVolume[i].progressRc.getCenter()), _progressVolume[i].progressRc.getSize());
 		_soundHandle->setScale(4);
-		_soundHandle->render(_camera.getRelativeV2(Vector2(_progressVolume[i].handleRc.getCenter())));
+		_soundHandle->render(CAMERA->getRelativeV2(Vector2(_progressVolume[i].handleRc.getCenter())));
 	}
 
 
 	// GAME PLAY
-	D2D_RENDERER->renderTextField(0, static_cast<int>(_camera.getRelativeY(215.0f)), L"게임 플레이", RGB(189, 189, 189), 50, WINSIZEX, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
-	D2D_RENDERER->renderTextField(_cameraShake.textRc.left, _camera.getRelativeY(_cameraShake.textRc.top), _cameraShake.name, RGB(255, 255, 255), 45,
+	D2D_RENDERER->renderTextField(0, static_cast<int>(CAMERA->getRelativeY(215.0f)), L"게임 플레이", RGB(189, 189, 189), 50, WINSIZEX, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
+	D2D_RENDERER->renderTextField(_cameraShake.textRc.left, CAMERA->getRelativeY(_cameraShake.textRc.top), _cameraShake.name, RGB(255, 255, 255), 45,
 		_cameraShake.textRc.getSize().x, 45, DWRITE_TEXT_ALIGNMENT_TRAILING);
-	D2D_RENDERER->drawRectangle(_camera.getRelativeFR(_cameraShake.boxRc), D2D1::ColorF::Enum::White, 1, 5);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_cameraShake.boxRc), D2D1::ColorF::Enum::White, 1, 5);
 	{
 		Vector2 size = _cameraShake.boxRc.getSize();
 		size.x -= 15;
 		size.y -= 15;
-		D2D_RENDERER->fillRectangle(_camera.getRelativeFR(FloatRect(_cameraShake.boxRc.getCenter(), size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, _cameraShake.alpha);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(FloatRect(_cameraShake.boxRc.getCenter(), size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, _cameraShake.alpha);
 	}
 
 	
 	// CONTROL
-	D2D_RENDERER->renderTextField(0, _camera.getRelativeY(380.0f), L"컨트롤", RGB(189, 189, 189), 50, WINSIZEX, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
-	D2D_RENDERER->renderTextField(WINSIZEX * 0.25, _camera.getRelativeY(450.0f), L"액션", RGB(189, 189, 189), 40, WINSIZEX * 0.25, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
-	D2D_RENDERER->renderTextField(WINSIZEX * 0.5, _camera.getRelativeY(450.0f), L"입력", RGB(189, 189, 189), 40, WINSIZEX * 0.25, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
+	D2D_RENDERER->renderTextField(0, CAMERA->getRelativeY(380.0f), L"컨트롤", RGB(189, 189, 189), 50, WINSIZEX, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
+	D2D_RENDERER->renderTextField(WINSIZEX * 0.25, CAMERA->getRelativeY(450.0f), L"액션", RGB(189, 189, 189), 40, WINSIZEX * 0.25, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
+	D2D_RENDERER->renderTextField(WINSIZEX * 0.5, CAMERA->getRelativeY(450.0f), L"입력", RGB(189, 189, 189), 40, WINSIZEX * 0.25, 50, 1.0, DWRITE_TEXT_ALIGNMENT_CENTER);
 
 	for (int i = 0; i < static_cast<int>(ACTION_TYPE::END); i++)
 	{
-		IMAGE_MANAGER->findImage("KEYMAP_HEADER")->render(_camera.getRelativeV2(_keyMapButton[i].nameRc.getCenter()), _keyMapButton[i].nameRc.getSize());
-		D2D_RENDERER->renderTextField(_camera.getRelativeX(_keyMapButton[i].nameRc.left), _camera.getRelativeY(_keyMapButton[i].nameRc.top), _keyMapButton[i].actionName, RGB(255, 255, 255),
+		IMAGE_MANAGER->findImage("KEYMAP_HEADER")->render(CAMERA->getRelativeV2(_keyMapButton[i].nameRc.getCenter()), _keyMapButton[i].nameRc.getSize());
+		D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_keyMapButton[i].nameRc.left), CAMERA->getRelativeY(_keyMapButton[i].nameRc.top), _keyMapButton[i].actionName, RGB(255, 255, 255),
 			30, _keyMapButton[i].nameRc.getSize().x, _keyMapButton[i].nameRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
 		
 		if (_keyButtonIndex == i)
 		{
-			IMAGE_MANAGER->findImage("KEYMAP_BUTTON_SELECTED")->render(_camera.getRelativeV2(_keyMapButton[i].buttonRc.getCenter()), _keyMapButton[i].buttonRc.getSize());
+			IMAGE_MANAGER->findImage("KEYMAP_BUTTON_SELECTED")->render(CAMERA->getRelativeV2(_keyMapButton[i].buttonRc.getCenter()), _keyMapButton[i].buttonRc.getSize());
 		}
 		else
 		{
-			IMAGE_MANAGER->findImage("KEYMAP_BUTTON")->render(_camera.getRelativeV2(_keyMapButton[i].buttonRc.getCenter()), _keyMapButton[i].buttonRc.getSize());
+			IMAGE_MANAGER->findImage("KEYMAP_BUTTON")->render(CAMERA->getRelativeV2(_keyMapButton[i].buttonRc.getCenter()), _keyMapButton[i].buttonRc.getSize());
 		}
 		getKeyImage(_keyMap.find(static_cast<ACTION_TYPE>(i))->second)->setScale(4);
-		getKeyImage(_keyMap.find(static_cast<ACTION_TYPE>(i))->second)->render(_camera.getRelativeV2(_keyMapButton[i].buttonRc.getCenter()));
+		getKeyImage(_keyMap.find(static_cast<ACTION_TYPE>(i))->second)->render(CAMERA->getRelativeV2(_keyMapButton[i].buttonRc.getCenter()));
 	}
 
 	if (_keyChangeRemain)

@@ -13,7 +13,7 @@ public:
 
 	virtual void init();
 	virtual void release();
-	virtual void update(float const elapsedTime);
+	virtual void update(Player* player, float const elapsedTime);
 	virtual void frontRender(Vector2 pos, float angle);
 	virtual void backRender(Vector2 pos, float angle);
 	virtual void displayInfo(); // 인벤토리에서 보여질 정보들

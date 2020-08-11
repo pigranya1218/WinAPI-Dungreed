@@ -25,7 +25,7 @@ void Punch::release()
 {
 }
 
-void Punch::update(float const elapsedTime)
+void Punch::update(Player* player, float const elapsedTime)
 {
 	if (_currAttackDelay == 0) return;
 

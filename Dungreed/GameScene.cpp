@@ -3,6 +3,9 @@
 
 HRESULT GameScene::init()
 {
+	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 0, 0);
+	CAMERA->setLT(Vector2(0, 0));
+
 	_timeSpeed = 1;
 	_player = new Player;
 	_player->init();
@@ -38,8 +41,8 @@ void GameScene::update()
 	// 배속 관리
 	float elapsedTime = TIME_MANAGER->getElapsedTime() * _timeSpeed;
 	
-	_player->update(elapsedTime);
 	_stageMgr->update(elapsedTime);
+	_player->update(elapsedTime);
 	EFFECT_MANAGER->update(elapsedTime);
 
 	_uiMgr->update(elapsedTime);
@@ -47,8 +50,8 @@ void GameScene::update()
 
 void GameScene::render()
 {
-	_player->render();
 	_stageMgr->render();
+	_player->render();
 	EFFECT_MANAGER->render();
 
 	_uiMgr->render();

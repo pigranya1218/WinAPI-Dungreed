@@ -13,6 +13,7 @@ private:
 	float _currAttackDelay; // 남은 공격 쿨타임
 	float _attackAngle;
 	bool _reverseMove;
+	bool _drawEffect;
 
 	FloatRect _hand;
 	Vector2 _handSize;
@@ -20,7 +21,7 @@ private:
 public:
 	virtual void init();
 	virtual void release();
-	virtual void update(float const elapsedTime);
+	virtual void update(Player* player, float const elapsedTime);
 	virtual void backRender(Vector2 pos, float angle);
 	virtual void frontRender(Vector2 pos, float angle);
 	virtual void displayInfo(); // 인벤토리에서 보여질 정보들
