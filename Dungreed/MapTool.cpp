@@ -84,8 +84,12 @@ void MapTool::setup()
 			_sampleTile[SAMPLETILEX * i + j].tileFrameX = j;
 			_sampleTile[SAMPLETILEX * i + j].tileFrameY = i;
 			_sampleTile[SAMPLETILEX * i + j].rc = FloatRect(Vector2(1196 + j * TILESIZE, 96 + TILESIZE * i), Vector2(32, 32), PIVOT::CENTER);
+
 		}
 	}
+
+	
+
 	for (int i = 0; i < TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)
@@ -138,6 +142,15 @@ void MapTool::setMap()
 				{
 					_tile[i].tileFrameX = _vSelectTile[_vSelectTile.size() - 1].x;
 					_tile[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;
+					if (i == 51)
+					{
+						
+					
+					
+					
+						//LinearFunc::getLinearFuncFromPoints
+						//(Vector2(_tile[i].rc.left, _tile[i].rc.top), Vector2(_tile[i].rc.right, _tile[i].rc.top));
+					}
 					releaseSelectTile();
 					break;
 				}

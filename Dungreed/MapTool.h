@@ -14,7 +14,7 @@ struct tagTileMap
 	FloatRect rc;
 	int tileFrameX;
 	int tileFrameY;
-
+	int linePos[2][2];
 };
 
 struct  tagPalette
@@ -22,7 +22,7 @@ struct  tagPalette
 	FloatRect rc;
 	int tileFrameX;
 	int tileFrameY;
-
+	int linePos[2][2];
 };
 
 struct tagSelectTile
