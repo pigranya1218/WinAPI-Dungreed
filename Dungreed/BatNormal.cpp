@@ -10,7 +10,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_scale = 3;
+	_scale = 4;
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));

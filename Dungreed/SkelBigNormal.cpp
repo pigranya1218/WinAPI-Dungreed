@@ -10,7 +10,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_scale = 5;
+	_scale = 4;
 	_detectRange = 100;
 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);

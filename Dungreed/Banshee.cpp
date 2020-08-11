@@ -10,7 +10,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_scale = 5;
+	_scale = 4;
 
 	_size = _img->getFrameSize() * _scale;
 

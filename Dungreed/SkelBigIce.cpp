@@ -10,7 +10,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_scale = 5;
+	_scale = 4;
 	_detectRange = 100;
 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
@@ -108,7 +108,7 @@ void SkelBigIce::update(float const timeElapsed)
 	}
 
 	_moving.jumpPower += _moving.gravity * timeElapsed;
-	moveDir.y = _moving.jumpPower * timeElapsed;
+	moveDir.y = 1.5 + _moving.jumpPower * timeElapsed;
 	
 
 	// 이동할 포지션 최종

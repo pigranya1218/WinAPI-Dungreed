@@ -10,7 +10,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_scale = 3;
+	_scale = 4;
 	_detectRange = 100;
 
 	// 공격 관련 변수 초기화
