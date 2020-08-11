@@ -28,3 +28,16 @@ void TestStage::render()
 	Stage::render();
 
 }
+
+void TestStage::mapLoad()
+{
+	HANDLE stageFile;
+	DWORD read;
+
+	stageFile = CreateFile("stage.map", GENERIC_READ, NULL, NULL,
+		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
+
+	ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);
+
+	CloseHandle(stageFile);
+}
