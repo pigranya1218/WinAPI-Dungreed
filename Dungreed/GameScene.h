@@ -4,6 +4,8 @@
 #include "StageManager.h"
 #include "UIManager.h"
 
+
+
 class GameScene : public GameNode
 {
 private:
@@ -26,7 +28,7 @@ public:
 	void loadInfo(tagLoadInfo const info);
 
 	// 플레이어 관련 함수
-
+	
 
 
 	// 스테이지 관련 함수

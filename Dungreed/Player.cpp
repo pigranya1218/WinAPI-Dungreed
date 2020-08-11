@@ -2,6 +2,27 @@
 #include "GameScene.h"
 #include "Item.h"
 
+void Player::setBaseStat()
+{
+	_baseStat.maxHp = 75;
+	_baseStat.maxJumpCount = 1;
+	_baseStat.maxDashCount = 2;
+	_baseStat.maxSatiety = 100;
+	_baseStat.dashXPower = 2400;
+	_baseStat.dashYPower = 1700;
+	_baseStat.jumpPower = 1700;
+	_baseStat.xGravity = 10000;
+	_baseStat.yGravity = 5000;
+}
+
+// 장착 아이템 및 스킬에 따른 스탯 변화주기
+void Player::updateAdjustStat()
+{
+	_adjustStat = _baseStat;
+	
+
+}
+
 void Player::setAni(PLAYER_ANIMATION setAni)
 {
 	_aniState = setAni;
@@ -82,13 +103,17 @@ void Player::attack(Projectile* projectile, tagAttackInfo* info)
 
 void Player::init()
 {
-	setSize(Vector2(80, 110));
+	setSize(Vector2(40, 90));
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
-	_jumpCount = 1;
-	_xGravity = 2000.f;
-	_yGravity = 1600.f;
-	_isLanded = false;
+	
+
+	setBaseStat();
+	updateAdjustStat();
+	_currJumpCount = _adjustStat.maxJumpCount;
+	_currHp = _adjustStat.maxHp;
+	_currSatiety = 0;
+
 	_force = Vector2(0, 0);
 
 	_ani = new Animation;
@@ -103,14 +128,19 @@ void Player::release()
 
 void Player::update(float const elapsedTime)
 {
+	// 아이템, 스킬에 따른 스탯 조정 (변경이 생길 때)
+	// updateAdjustStat();
+
 	//방향 조정
 	if (_ptMouse.x < _position.x)
 	{
 		_direction = DIRECTION::LEFT;
+
 	}
 	else
 	{
 		_direction = DIRECTION::RIGHT;
+
 	}
 
 	// 공격
@@ -192,19 +222,18 @@ void Player::update(float const elapsedTime)
 		_aniState = PLAYER_ANIMATION::IDLE;
 	}*/
 
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _jumpCount > 0)
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _currJumpCount > 0)
 	{
-		_force.y -= _jumpPower;
-		_aniState = PLAYER_ANIMATION::DEFAULT;
-		_jumpCount -= 1;
-		_isLanded = true;
+		_force.y = -_adjustStat.jumpPower;
+		// _aniState = PLAYER_ANIMATION::DEFAULT;
+		_currJumpCount -= 1;
 	}
 
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)))
 	{
 		float angle = atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x));
-		_force.x = cosf(angle) * _dashPower;
-		_force.y = -sinf(angle) * _dashPower;
+		_force.x = cosf(angle) * _adjustStat.dashXPower;
+		_force.y = -sinf(angle) * _adjustStat.dashYPower;
 	}
 	
 	if (_force.x != 0) // 대쉬 상태라면
@@ -214,7 +243,7 @@ void Player::update(float const elapsedTime)
 
 		if (_force.x > 0)
 		{
-			_force.x -= _xGravity * elapsedTime;
+			_force.x -= _adjustStat.xGravity * elapsedTime;
 			if (_force.x < 0)
 			{
 				_force.x = 0;
@@ -222,7 +251,7 @@ void Player::update(float const elapsedTime)
 		}
 		else
 		{
-			_force.x += _xGravity * elapsedTime;
+			_force.x += _adjustStat.xGravity * elapsedTime;
 			if (_force.x > 0)
 			{
 				_force.x = 0;
@@ -230,20 +259,14 @@ void Player::update(float const elapsedTime)
 		}
 		moveDir.x = _force.x * elapsedTime;
 	}
-	//점프 하강
-	_force.y += _yGravity * elapsedTime;
+	_force.y += _adjustStat.yGravity * elapsedTime;
 	moveDir.y = _force.y * elapsedTime;
 
-	Vector2 lastPos = _position;
 	_gameScene->moveTo(this, moveDir);
-	//착지
-	if (moveDir.y != 0 && lastPos.y == _position.y) // 땅에 착지
+	if (_isStand) // 땅에 착지
 	{
-		if(_aniState == PLAYER_ANIMATION::DEFAULT) setAni(PLAYER_ANIMATION::IDLE);
-		_aniState = PLAYER_ANIMATION::IDLE;
-		_isLanded = false;
-		_force.y = 0;
-		_jumpCount = 1;
+		_force.y = 200;
+		_currJumpCount = _adjustStat.maxJumpCount;
 	}
 
 	//점프 처리
@@ -287,18 +310,38 @@ void Player::update(float const elapsedTime)
 
 void Player::render()
 {
-	_img->setScale(5);
+	_img->setScale(4);
+	_weapon = IMAGE_MANAGER->findImage("ShortSpear");
+	_weapon->setScale(4);
+	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
+	float angle =  atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) - 90;
+	
+
+	_weapon->setAngle(angle);
+
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
+		
+		//D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
 		_img->render(_position, _direction == DIRECTION::LEFT);
+		
 	}
 	else
 	{
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
+		//D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
 	}
+	
+	
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
-	wstring str = L" isLanded[0 = 착지상태 / 1 = 체공상태] : " + to_wstring((int)_isLanded);
-	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
-	str = L" aniState[0 = DEFAULT / 1 = IDLE / 2 = MOVE] : " + to_wstring(int(_aniState));
-	D2D_RENDERER->renderText(0, 20, str, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	Vector2 weaponDraw = _position;
+	weaponDraw.y += 15;
+	_weapon->render(weaponDraw, false);
+
+	//D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
+	//D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
+	/*D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle, Vector2(_position.x - _leftHand.getCenter().x, _position.y - _leftHand.getCenter().y));
+	D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle, Vector2(_position.x - _rightHand.getCenter().x, _position.y - _rightHand.getCenter().y));
+	*/
+
 }

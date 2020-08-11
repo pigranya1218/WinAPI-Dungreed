@@ -79,9 +79,6 @@
     <Filter Include="Dungreed\GameScene\Object">
       <UniqueIdentifier>{f89c22bc-65c8-4c41-98b1-bbff413b7784}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\TestScene">
-      <UniqueIdentifier>{41a11635-02c4-4193-a075-4e3348247087}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Projectile">
       <UniqueIdentifier>{59eb532c-177e-4d86-bcdd-cf24bc40a955}</UniqueIdentifier>
     </Filter>
@@ -183,9 +180,6 @@
     <ClInclude Include="SoundManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="TimeManager.h">
-      <Filter>2DGameFramework\Manager</Filter>
-    </ClInclude>
     <ClInclude Include="GameNode.h">
       <Filter>2DGameFramework\GameNode</Filter>
     </ClInclude>
@@ -212,9 +206,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Dungreed\GameScene\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="TestScene.h">
-      <Filter>Dungreed\TestScene</Filter>
     </ClInclude>
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
@@ -284,6 +275,15 @@
     </ClInclude>
     <ClInclude Include="TestStage.h">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>2DGameFramework\ProgressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStat.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -365,9 +365,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
-    <ClCompile Include="TestScene.cpp">
-      <Filter>Dungreed\TestScene</Filter>
-    </ClCompile>
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
@@ -424,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="TestStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStat.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
