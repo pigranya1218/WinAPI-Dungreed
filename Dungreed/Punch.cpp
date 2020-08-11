@@ -32,13 +32,13 @@ void Punch::update(float const elapsedTime)
 	float ratio = elapsedTime / (_baseAttackDelay * 0.08);
 	if (_reverseMove)
 	{
-		_attackMove.x = max(0, _attackMove.x - abs(cosf(_attackAngle) * 40 * ratio));
-		_attackMove.y = max(0, _attackMove.y - abs(-sinf(_attackAngle) * 40 * ratio));
+		_attackMove.x = max(0, _attackMove.x - abs(cosf(_attackAngle) * 30 * ratio));
+		_attackMove.y = max(0, _attackMove.y - abs(-sinf(_attackAngle) * 30 * ratio));
 	}
 	else
 	{
-		_attackMove.x = min(abs(cosf(_attackAngle) * 40), _attackMove.x + abs(cosf(_attackAngle) * 40 * ratio));
-		_attackMove.y = min(abs(-sinf(_attackAngle) * 40), _attackMove.y + abs((-sinf(_attackAngle)) * 40 * ratio));
+		_attackMove.x = min(abs(cosf(_attackAngle) * 30), _attackMove.x + abs(cosf(_attackAngle) * 30 * ratio));
+		_attackMove.y = min(abs(-sinf(_attackAngle) * 30), _attackMove.y + abs((-sinf(_attackAngle)) * 30 * ratio));
 
 		if (_currAttackDelay <= _baseAttackDelay * 0.88)
 		{
@@ -50,34 +50,58 @@ void Punch::update(float const elapsedTime)
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
-void Punch::render(Vector2 pos, float angle)
+void Punch::backRender(Vector2 pos, float angle)
 {
-	Vector2 renderPosLeft = Vector2(pos.x - 25, pos.y + 20);
-	Vector2 renderPosRight = Vector2(pos.x + 25, pos.y + 20);
 	bool isLeft = false;
 	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
 	{
 		isLeft = true;
 		angle = fmod((180 - angle) + 360, 360);
 	}
+	if (isLeft)
+	{
+		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 20);
+		renderPosLeft.x += -_attackMove.x;
+		renderPosLeft.y += ((angle >= 180)?(_attackMove.y):(-_attackMove.y));
 
-	renderPosLeft.x += ((isLeft) ? (-_attackMove.x) : 0);
-	renderPosLeft.y += ((isLeft && angle < 180) ? (-_attackMove.y) : 0);
-	renderPosLeft.y += ((isLeft && angle >= 180) ? (_attackMove.y) : 0);
-	renderPosRight.x += ((isLeft) ? 0 : (_attackMove.x));
-	renderPosRight.y += ((!isLeft && angle < 90) ? 0 : (_attackMove.y));
-	renderPosRight.y += ((!isLeft && angle >= 270) ? 0 : (-_attackMove.y));
+		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
+		D2D_RENDERER->drawRectangle(_leftHand, D2DRenderer::DefaultBrush::Black, 4.f);
+		D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
+	}
+	else
+	{
+		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 20);
+		renderPosRight.x += _attackMove.x;
+		renderPosRight.y += ((angle >= 270) ? (_attackMove.y) : (-_attackMove.y));
 
-	//_img->setScale(4);
-	//_img->setAngle(angle);
-	//_img->setAnglePos(Vector2(_img->getWidth() * 0.3f, _img->getHeight() * 0.5f));
-	//_img->render(renderPos, isLeft);
-	_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-	_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(_leftHand, D2DRenderer::DefaultBrush::Black, 4.f);
-	D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f);
-	D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
-	D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
+		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
+		D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f);
+		D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
+	}
+}
+
+void Punch::frontRender(Vector2 pos, float angle)
+{
+	bool isLeft = false;
+	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
+	{
+		isLeft = true;
+		angle = fmod((180 - angle) + 360, 360);
+	}
+	if (isLeft)
+	{
+		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 20);
+		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
+		D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f);
+		D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
+	}
+	else
+	{
+		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 20);
+		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
+		D2D_RENDERER->drawRectangle(_leftHand, D2DRenderer::DefaultBrush::Black, 4.f);
+		D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
+	}
 }
 
 void Punch::displayInfo()

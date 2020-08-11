@@ -148,7 +148,7 @@ void Player::init()
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
 
-	_currWeaponIndex = 0;
+	_currWeaponIndex = 1;
 }
 
 void Player::release()
@@ -321,21 +321,20 @@ void Player::update(float const elapsedTime)
 
 void Player::render()
 {
-	_img->setScale(4);
-	float angle =  fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
+	float angle = fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
 
+	_equippedWeapon[_currWeaponIndex]->backRender(_position, angle);
+	_img->setScale(4);
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
-		//D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
 		_img->render(_position, _direction == DIRECTION::LEFT);
 	}
 	else
 	{
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
-		//D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
 	}
 	
-	_equippedWeapon[_currWeaponIndex]->render(_position, angle);
+	_equippedWeapon[_currWeaponIndex]->frontRender(_position, angle);
 	
 	wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);
 	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Red, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
