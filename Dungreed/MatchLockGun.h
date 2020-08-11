@@ -6,6 +6,10 @@ class MatchLockGun :
 private:
 	float _angle;
 
+	int _minDamage;
+	int _maxDamage;
+	int _bulletCount;
+	float _reloadCount;
 public:
 
 	void init();

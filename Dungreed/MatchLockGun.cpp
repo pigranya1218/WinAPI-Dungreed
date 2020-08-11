@@ -6,6 +6,10 @@ void MatchLockGun::init()
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
 	_price = 250;
+	_minDamage = 30;
+	_maxDamage = 40;
+	_bulletCount = 1;
+	_reloadCount = 3.0f;
 }
 
 void MatchLockGun::release()
@@ -22,6 +26,7 @@ void MatchLockGun::render(Vector2 pos, float angle)
 	Vector2 _centerPos = Vector2(_img->getSize().x / 3, _img->getSize().y / 2);
 	_img->setScale(3);
 	_img->setAnglePos(_centerPos);
+	_img->setAngle(angle);
 	_img->render(pos);
 }
 
