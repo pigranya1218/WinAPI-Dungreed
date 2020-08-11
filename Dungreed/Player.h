@@ -34,7 +34,6 @@ private:
 	GameScene* _gameScene;
 	Animation* _ani;
 	Image* _img;
-	Image* _weapon;
 	PLAYER_ANIMATION _aniState;
 
 	// 현재 상태

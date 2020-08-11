@@ -297,13 +297,7 @@ void Player::update(float const elapsedTime)
 void Player::render()
 {
 	_img->setScale(4);
-	_weapon = IMAGE_MANAGER->findImage("ShortSpear");
-	_weapon->setScale(4);
-	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
 	float angle =  fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
-	
-
-	_weapon->setAngle(angle);
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
@@ -316,16 +310,5 @@ void Player::render()
 		//D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
 	}
 	
-	
-	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
-	Vector2 weaponDraw = _position;
-	weaponDraw.y += 15;
-	_weapon->render(weaponDraw, false);
-
-	//D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
-	//D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
-	/*D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle, Vector2(_position.x - _leftHand.getCenter().x, _position.y - _leftHand.getCenter().y));
-	D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle, Vector2(_position.x - _rightHand.getCenter().x, _position.y - _rightHand.getCenter().y));
-	*/
-
+	_equippedWeapon[_currWeaponIndex]->render(_position, angle);
 }
