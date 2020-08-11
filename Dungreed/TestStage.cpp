@@ -4,10 +4,10 @@ void TestStage::init()
 {
 	Stage::init();
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN});
-	//_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 100), Vector2(WINSIZEX, -1200)), LINEAR_VALUE_TYPE::DOWN});
+	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 100), Vector2(WINSIZEX, -1200)), LINEAR_VALUE_TYPE::DOWN});
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT});
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT});
-	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
+	_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
 	
 	// 에너미 테스트입니다.
 	_enemyMgr->setStage(this);
