@@ -5,8 +5,9 @@
 class TestStage : public Stage
 {
 private:
-
-	tagTileMap _tile;
+	Image* _tileImage;
+	tagTileMap _tile[TILEX*TILEY];
+	Camera _camera;
 
 public:
 	virtual void init();
