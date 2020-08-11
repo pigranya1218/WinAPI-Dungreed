@@ -339,6 +339,9 @@
     <ClInclude Include="CostumeManager.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
+    <ClInclude Include="VillageStage.h">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -523,6 +526,9 @@
     </ClCompile>
     <ClCompile Include="bombPouch.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="VillageStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

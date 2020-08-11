@@ -5,7 +5,7 @@ HRESULT MapTool::init()
 {
 	_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
 	setup();
-
+	
 	return S_OK;
 }
 
@@ -16,11 +16,16 @@ void MapTool::release()
 void MapTool::update()
 {
 	setMap();
-	
+
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
 	{
-		if(_save.ptInRect(_ptMouse)) save();
-		if(_load.ptInRect(_ptMouse)) load();
+		if (_save.ptInRect(_ptMouse)) save();
+		if (_load.ptInRect(_ptMouse)) load();
+	}
+	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
+	{
+		paletteChange();
+		
 	}
 }
 
@@ -67,6 +72,10 @@ void MapTool::render()
 	wstring text3(L"erase");
 	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_erase, D2D1::ColorF::Blue, 1, 0.5f);
+
+	wstring text4(L"Palette");
+	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->drawRectangle(_paletteLoad, D2D1::ColorF::Blue, 1, 0.5f);
 }
 
 void MapTool::setup()
@@ -76,6 +85,7 @@ void MapTool::setup()
 	_save = FloatRect(Vector2(200, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_load = FloatRect(Vector2(400, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_erase = FloatRect(Vector2(600, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+	_paletteLoad=FloatRect(Vector2(1000, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 
 	for (int i = 0; i < SAMPLETILEY; ++i)
 	{
@@ -84,8 +94,12 @@ void MapTool::setup()
 			_sampleTile[SAMPLETILEX * i + j].tileFrameX = j;
 			_sampleTile[SAMPLETILEX * i + j].tileFrameY = i;
 			_sampleTile[SAMPLETILEX * i + j].rc = FloatRect(Vector2(1196 + j * TILESIZE, 96 + TILESIZE * i), Vector2(32, 32), PIVOT::CENTER);
+			
 		}
 	}
+
+	
+
 	for (int i = 0; i < TILEY; ++i)
 	{
 		for (int j = 0; j < TILEX; ++j)
@@ -103,6 +117,7 @@ void MapTool::setup()
 		//_vTileMap[i].tileFrameY = 0;
 		_tile[i].tileFrameX = 0;
 		_tile[i].tileFrameY = 0;
+		_tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
 	}
 
 }
@@ -138,6 +153,16 @@ void MapTool::setMap()
 				{
 					_tile[i].tileFrameX = _vSelectTile[_vSelectTile.size() - 1].x;
 					_tile[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;
+					//setLinePos(_tile[i].tileFrameX, _tile[i].tileFrameY);
+					//_tile[i].linePos = _drawLinePos;
+
+					if (_tile[i].tileFrameX == 1 && _tile[i].tileFrameY == 8)_tile[i].linePos = DRAW_LINE_POSITION::TOP;
+					if (_tile[i].tileFrameX == 1 && _tile[i].tileFrameY == 6)_tile[i].linePos = DRAW_LINE_POSITION::BOTTOM;
+					if (_tile[i].tileFrameX == 2 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT;
+					if (_tile[i].tileFrameX == 0 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT;
+					
+					else _tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
+
 					releaseSelectTile();
 					break;
 				}
@@ -222,6 +247,30 @@ void MapTool::load()
 	CloseHandle(stageFile);
 }
 
+void MapTool::paletteChange()
+{
+	/*TCHAR szFilePath[MAX_PATH] = {0,};
+	OPENFILENAME ofn;
+	ZeroMemory(&ofn, sizeof(OPENFILENAME));
+	ofn.lStructSize = sizeof(OPENFILENAME);
+	ofn.hwndOwner = NULL;
+	ofn.lpstrFile = szFilePath;
+	ofn.nMaxFile=	sizeof(szFilePath);
+	ofn.lpstrFilter = _T("png Files(*.png)\0*.png\0All Files (*.*)\0*.*\0");
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	if (::GetOpenFileName(&ofn) == false) return;
+	TCHAR* return_path = ofn.lpstrFile;*/
+	
+	if (_paletteImage == IMAGE_MANAGER->findImage("sampleTile"))_paletteImage = IMAGE_MANAGER->findImage("sampleTile2");
+
+	else if (_paletteImage == IMAGE_MANAGER->findImage("sampleTile2"))_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
+		
+}
+
 void MapTool::mapLoad()
 {
 	if (_vLoad.size() == 0)return;
@@ -261,4 +310,16 @@ void MapTool::setSelectTile()
 void MapTool::releaseSelectTile()
 {
 	
+}
+
+void MapTool::setLinePos(int frameX, int frameY)
+{
+	if (frameX == 1 && frameY == 8)_drawLinePos=DRAW_LINE_POSITION::TOP;
+	if(frameX==1 && frameY==6)_drawLinePos = DRAW_LINE_POSITION::BOTTOM;
+	if(frameX==0 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::RIGHT;
+	if(frameX==2 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT;
+	else _drawLinePos = DRAW_LINE_POSITION::NOLINE;
+	/*if((frameX==6||frameX==8)&&frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+	if ((frameX == 7 || frameX == 9) && frameY == 7)_drawLinePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+	*/
 }
