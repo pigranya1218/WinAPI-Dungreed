@@ -348,6 +348,9 @@
     <ClInclude Include="MatchLockGun.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
+    <ClInclude Include="ShortSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -538,6 +541,9 @@
     </ClCompile>
     <ClCompile Include="MatchLockGun.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
