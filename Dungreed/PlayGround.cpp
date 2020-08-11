@@ -27,8 +27,8 @@ HRESULT playGround::init()
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
 
-	IMAGE_MANAGER->addFrameImage("sampleTile", L"resources/images/Map/tileAtlas.png", 10, 10);
-	
+	IMAGE_MANAGER->addFrameImage("sampleTile", L"resources/images/Map/tileAtlas3.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
 
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");

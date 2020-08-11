@@ -282,6 +282,9 @@
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
+    <ClInclude Include="VillageStage.h">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -418,6 +421,9 @@
     </ClCompile>
     <ClCompile Include="TestStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="VillageStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
