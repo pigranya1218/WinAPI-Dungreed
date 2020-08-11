@@ -109,6 +109,9 @@
     <Filter Include="Dungreed\MapToolScene\Test">
       <UniqueIdentifier>{4d6d20c6-2019-497e-b474-4e544706d11a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Melee">
+      <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -285,6 +288,9 @@
     <ClInclude Include="PlayerStat.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
+    <ClInclude Include="ShortSpear.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
     <ClInclude Include="MatchLockGun.h">
       <Filter>Dungreed\GameScene\Item</Filter>
     </ClInclude>
@@ -427,6 +433,9 @@
     </ClCompile>
     <ClCompile Include="PlayerStat.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortSpear.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
     <ClCompile Include="MatchLockGun.cpp">
       <Filter>Dungreed\GameScene\Item</Filter>

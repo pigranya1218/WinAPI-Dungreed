@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameScene.h"
 #include "Item.h"
+#include "ShortSpear.h"
 
 void Player::setBaseStat()
 {
@@ -118,6 +119,12 @@ void Player::init()
 
 	_ani = new Animation;
 	setAni(PLAYER_ANIMATION::IDLE);
+
+	//test 
+	ShortSpear* testWeapon = new ShortSpear;
+	testWeapon->init();
+	_equippedWeapon.push_back(testWeapon);
+	_currWeaponIndex = 0;
 }
 
 void Player::release()
@@ -144,17 +151,17 @@ void Player::update(float const elapsedTime)
 	}
 
 	// 공격
-	/*if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
 		_equippedWeapon[_currWeaponIndex]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
-		for (int i = 0; i < 4; i++)
+		/*for (int i = 0; i < 4; i++)
 		{
 			if (_equippedAcc[i] != nullptr)
 			{
 				_equippedAcc[i]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
 			}
-		}
-	}*/
+		}*/
+	}
 
 	//이동
 	Vector2 moveDir(0, 0);
@@ -275,6 +282,9 @@ void Player::update(float const elapsedTime)
 	//}
 
 	_ani->frameUpdate(elapsedTime);
+
+	// 무기 업데이트
+	_equippedWeapon[_currWeaponIndex]->update(elapsedTime);
 }
 
 void Player::render()
@@ -283,7 +293,7 @@ void Player::render()
 	_weapon = IMAGE_MANAGER->findImage("ShortSpear");
 	_weapon->setScale(4);
 	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
-	float angle =  atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) - 90;
+	float angle =  atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI);
 	
 
 	//_weapon->setAngle(angle);
@@ -303,14 +313,7 @@ void Player::render()
 	
 	
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER));
-	Vector2 weaponDraw = _position;
-	weaponDraw.y += 15;
-	_weapon->render(weaponDraw, false);
-
-	//D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
-	//D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle + 90, Vector2(_position.x, _position.y));
-	/*D2D_RENDERER->fillRectangle(_leftHand, 213, 205, 198, 1, angle, Vector2(_position.x - _leftHand.getCenter().x, _position.y - _leftHand.getCenter().y));
-	D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle, Vector2(_position.x - _rightHand.getCenter().x, _position.y - _rightHand.getCenter().y));
-	*/
-
+	
+	// 무기 렌더
+	_equippedWeapon[_currWeaponIndex]->render(_position, angle);
 }

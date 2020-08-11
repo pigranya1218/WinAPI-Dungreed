@@ -23,6 +23,7 @@ protected:
 	ITEM_RANK _rank; // 아이템 등급
 	Image* _img; // 아이템 이미지
 	int _price; // 가격
+	PlayerStat _addStat; // 아이템 스탯 옵션
 
 public:
 	virtual void init() = 0;
@@ -38,7 +39,7 @@ public:
 
 	virtual void getHit(Vector2 const position) = 0; // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
-	virtual PlayerStat equip() = 0; // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
+	virtual PlayerStat equip() const noexcept { return _addStat; }; // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
 	
 	ITEM_TYPE getType() const noexcept { return _type; }
 
