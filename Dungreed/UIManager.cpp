@@ -22,6 +22,11 @@ void UIManager::init()
 	_hpUI.hpAni->setDefPlayFrame(false, true);
 	_hpUI.hpAni->start();
 
+	_hpUI.dashOutsideImg = IMAGE_MANAGER->findImage("UI/DASH_OUTSIDE");
+	_hpUI.dashInsideImg = IMAGE_MANAGER->findImage("UI/DASH_INSIDE");
+	_hpUI.dashGaugeImg = IMAGE_MANAGER->findImage("UI/DASH_GAUGE");
+	_hpUI.dashFirstCenter = Vector2(50, 125);
+
 	// GOLD UI
 	_goldUI.img = IMAGE_MANAGER->findImage("UI/GOLD");
 	_goldUI.ani = new Animation;
@@ -76,16 +81,59 @@ void UIManager::render()
 			FloatRect hpWave = FloatRect(hpBar.right - 1, hpBar.top, hpBar.right + 14, hpBar.bottom);
 			_hpUI.hpWaveImg->aniRender(hpWave.getCenter(), hpWave.getSize(), _hpUI.hpAni);
 		}
-		
-		if (!FLOAT_EQUAL(width, _hpUI.hpBar.getSize().x))
-		{
-			
-		}
+				
 		_hpUI.hpFrameImg->render(_hpUI.hpBg.getCenter(), _hpUI.hpBg.getSize());
 		D2D_RENDERER->renderTextField(_hpUI.hpLevel.left, _hpUI.hpLevel.top, to_wstring(_player->getLevel()), RGB(255, 255, 255), 
 			45, _hpUI.hpLevel.getSize().x, _hpUI.hpLevel.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
 		D2D_RENDERER->renderTextField(_hpUI.hpBar.left, _hpUI.hpBar.top, (to_wstring(_player->getCurrHp()) + L"/" + to_wstring(_player->getMaxHp())), RGB(255, 255, 255),
 			40, _hpUI.hpBar.getSize().x, _hpUI.hpBar.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+
+		for (int i = 0; i < _player->getMaxDash(); i++)
+		{
+			Vector2 dashCenter = _hpUI.dashFirstCenter;
+			if (i > 0)
+			{
+				dashCenter.x += _hpUI.dashOutsideImg->getWidth() * 2.5 + _hpUI.dashInsideImg->getWidth() * 2.5;
+				if (i > 1)
+				{
+					dashCenter.x += _hpUI.dashInsideImg->getWidth() * 5 * (i - 1);
+				}
+				if (i == _player->getMaxDash() - 1)
+				{
+					dashCenter.x -= _hpUI.dashInsideImg->getWidth() * 2.5;
+					dashCenter.x += _hpUI.dashOutsideImg->getWidth() * 2.5;
+				}
+			}
+			if (i == 0)
+			{
+				_hpUI.dashOutsideImg->setScale(5);
+				_hpUI.dashOutsideImg->render(dashCenter);
+			}
+			else if (i == _player->getMaxDash() - 1)
+			{
+				_hpUI.dashOutsideImg->setScale(5);
+				_hpUI.dashOutsideImg->render(dashCenter, true);
+			}
+			else
+			{
+				_hpUI.dashInsideImg->setScale(5);
+				_hpUI.dashInsideImg->render(dashCenter);
+			}
+			
+			if ((i + 1) <= _player->getCurrDash())
+			{
+				if (i == 0)
+				{
+					dashCenter.x += 5;
+				}
+				else if (i == _player->getMaxDash() - 1)
+				{
+					dashCenter.x -= 5;
+				}
+				_hpUI.dashGaugeImg->setScale(5);
+				_hpUI.dashGaugeImg->render(dashCenter);
+			}
+		}
 
 		// PLAYER GOLD
 		_goldUI.img->aniRender(_goldUI.imgRc.getCenter(), _goldUI.imgRc.getSize(), _goldUI.ani);

@@ -88,5 +88,6 @@ public:
 	int getSatiety() const noexcept { return _currSatiety; }
 
 	int getMaxDash() const noexcept { return _adjustStat.maxDashCount; }
+	int getCurrDash() const noexcept { return _currDashCount; }
 };
 

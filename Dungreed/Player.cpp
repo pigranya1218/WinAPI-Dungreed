@@ -14,7 +14,7 @@ void Player::setBaseStat()
 {
 	_baseStat.maxHp = 80;
 	_baseStat.maxJumpCount = 1;
-	_baseStat.maxDashCount = 2;
+	_baseStat.maxDashCount = 5;
 	_baseStat.dashCoolTime = 1.5f;
 	_baseStat.maxSatiety = 100;
 	_baseStat.power = 5;
@@ -333,13 +333,13 @@ void Player::update(float const elapsedTime)
 
 	//하강중
 	_force.y += _adjustStat.yGravity * elapsedTime;
-	moveDir.y = 1.5 + _force.y * elapsedTime;
+	moveDir.y = 5.5 + _force.y * elapsedTime;
 
 	_gameScene->moveTo(this, moveDir);
 	//착지
 	if (_isStand)
 	{
-		_force.y = 200;
+		_force.y = 0;
 		_currJumpCount = _adjustStat.maxJumpCount;
 		if (moveDir.x == 0 && _aniState != PLAYER_ANIMATION::IDLE)
 		{

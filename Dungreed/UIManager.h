@@ -22,10 +22,10 @@ private:
 
 		FloatRect levelRc; // 레벨 공간
 
-		Image* dashBgImg;
-		Image* dashFgImg;
-		FloatRect dashBg; // 대쉬 배경
-		FloatRect dashFg; // 대쉬 게이지
+		Image* dashOutsideImg;
+		Image* dashInsideImg;
+		Image* dashGaugeImg;
+		Vector2 dashFirstCenter;
 	};
 
 	struct tagLabelUI // 이미지 + 글 (골드, 포만감, 빠른시작, 빠른이동)

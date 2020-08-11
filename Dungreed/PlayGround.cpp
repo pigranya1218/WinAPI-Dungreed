@@ -138,6 +138,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("UI/PLAYER_LIFE_WAVE", L"resources/images/gameScene/ui/LifeWave.png", 7, 1);
 	IMAGE_MANAGER->addFrameImage("UI/GOLD", L"resources/images/gameScene/ui/gold.png", 8, 1);
 	IMAGE_MANAGER->addImage("UI/FOOD", L"resources/images/gameScene/ui/Food.png");
+	IMAGE_MANAGER->addImage("UI/DASH_OUTSIDE", L"resources/images/gameScene/ui/DashCountBase_0.png");
+	IMAGE_MANAGER->addImage("UI/DASH_INSIDE", L"resources/images/gameScene/ui/DashBase.png");
+	IMAGE_MANAGER->addImage("UI/DASH_GAUGE", L"resources/images/gameScene/ui/DashCount.png");
 
 
 	// ** VILLIGE
