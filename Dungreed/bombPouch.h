@@ -1,13 +1,16 @@
 #pragma once
 #include "Item.h"
-class babyGreenBat : public Item
+class bombPouch : public Item
 {
 private:
+	FloatRect RC;
+	bool isBoom;
 	Vector2 renderPos;
 	int x, y;
-	Animation* _ani1;
-	DIRECTION _direction;
+
+
 public:
+
 	virtual void init();
 	virtual void release();
 	virtual void update(float const elapsedTime);

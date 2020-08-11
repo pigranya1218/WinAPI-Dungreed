@@ -5,6 +5,7 @@
 #include "Punch.h"
 #include "SpikeBall.h"
 #include "babyGreenBat.h"
+#include "bombPouch.h"
 
 void Player::setBaseStat()
 {
@@ -146,13 +147,17 @@ void Player::init()
 	_equippedWeapon.push_back(testWeapon);
 	_currWeaponIndex = 0;
 	
-	SpikeBall* testSpikeBall = new SpikeBall;
-	testSpikeBall->init();
-	_equippedAcc.push_back(testSpikeBall);
+	SpikeBall* testAcc = new SpikeBall;
+	testAcc->init();
+	_equippedAcc.push_back(testAcc);
 	
-	babyGreenBat* testbabyGreenBat = new babyGreenBat;
-	testbabyGreenBat->init();
-	_equippedAcc.push_back(testbabyGreenBat);
+	babyGreenBat* testAcc1 = new babyGreenBat;
+	testAcc1->init();
+	_equippedAcc.push_back(testAcc1);
+
+	bombPouch* testAcc2 = new bombPouch;
+	testAcc2->init();
+	_equippedAcc.push_back(testAcc2);
 
 	//ShortSpear* testWeapon = new ShortSpear;
 	ShortSpear* testWeapon1 = new ShortSpear;
@@ -334,6 +339,7 @@ void Player::update(float const elapsedTime)
 	_equippedWeapon[_currWeaponIndex]->update(elapsedTime);
 	_equippedAcc[1]->update(elapsedTime);
 	_equippedAcc[0]->update(elapsedTime);
+	_equippedAcc[2]->update(elapsedTime);
 	
 }
 
@@ -352,9 +358,10 @@ void Player::render()
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
 	}
 
-	_equippedAcc[1]->render(_position, angle);
-	_equippedAcc[0]->render(_position, angle);
-	_equippedWeapon[_currWeaponIndex]->render(_position, angle);
+	_equippedAcc[0]->backRender(_position, angle);
+	_equippedAcc[1]->backRender(_position, angle);
+	_equippedAcc[2]->backRender(_position, angle);
+	
 
 	
 	

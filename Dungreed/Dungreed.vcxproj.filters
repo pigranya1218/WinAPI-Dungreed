@@ -327,6 +327,9 @@
     <ClInclude Include="babyGreenBat.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="bombPouch.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -501,6 +504,9 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="babyGreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="bombPouch.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>

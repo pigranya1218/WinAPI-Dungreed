@@ -10,7 +10,8 @@ public:
 	virtual void init();
 	virtual void release();
 	virtual void update(float const elapsedTime);
-	virtual void render(Vector2 pos, float angle);
+	virtual void frontRender(Vector2 pos, float angle);
+	virtual void backRender(Vector2 pos, float angle);
 	virtual void displayInfo(); // 인벤토리에서 보여질 정보들
 
 	virtual void attack(Vector2 const position, float const angle); // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)

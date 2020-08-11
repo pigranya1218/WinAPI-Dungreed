@@ -41,10 +41,14 @@ void babyGreenBat::update(float const elapsedTime)
 
 }
 
-void babyGreenBat::render(Vector2 pos, float angle)
+void babyGreenBat::frontRender(Vector2 pos, float angle)
 {
-	renderPos = pos;	
-	if (x > renderPos.x + 60 )
+}
+
+void babyGreenBat::backRender(Vector2 pos, float angle)
+{
+	renderPos = pos;
+	if (x > renderPos.x + 60)
 	{
 		x -= 6;
 	}
@@ -52,17 +56,18 @@ void babyGreenBat::render(Vector2 pos, float angle)
 	{
 		x += 6;
 	}
-	if (y > renderPos.y + 5 && y>renderPos.y)
+	if (y > renderPos.y + 5 && y > renderPos.y)
 	{
 		y -= 7;
-	}             
-	else if (y < renderPos.y - 5 && y<=renderPos.y)
+	}
+	else if (y < renderPos.y - 5 && y <= renderPos.y)
 	{
 		y += 7;
 	}
 	_img->setScale(3);
-	_img->aniRender(Vector2(x,y), _ani1, _direction == DIRECTION::LEFT);	
+	_img->aniRender(Vector2(x, y), _ani1, _direction == DIRECTION::LEFT);
 }
+
 
 void babyGreenBat::displayInfo()
 {

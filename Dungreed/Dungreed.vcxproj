@@ -158,6 +158,7 @@
     <ClInclude Include="BatNormal.h" />
     <ClInclude Include="BatRed.h" />
     <ClInclude Include="babyGreenBat.h" />
+    <ClInclude Include="bombPouch.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraShakeEvent.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="BatNormal.cpp" />
     <ClCompile Include="BatRed.cpp" />
     <ClCompile Include="babyGreenBat.cpp" />
+    <ClCompile Include="bombPouch.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
