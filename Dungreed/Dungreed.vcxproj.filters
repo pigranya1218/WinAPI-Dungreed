@@ -297,6 +297,12 @@
     <ClInclude Include="MatchLockGun.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
+    <ClInclude Include="ItemBullet.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -441,6 +447,12 @@
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
     <ClCompile Include="MatchLockGun.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemBullet.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Boomerang.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,25 +1,24 @@
 #pragma once
 #include "Item.h"
-
-class MatchLockGun : public Item
+class Boomerang :
+	public Item
 {
 private:
+	Animation* _ani;
+	Image* _aniImg;
+	Image* _effect01;
 
-	Image* _shootEffect;
-	Image* _dustEffect;
-	Animation* _effectAni01;
-	Animation* _effectAni02;
-
+	Vector2 _position;
 	int _minDamage;
 	int _maxDamage;
 	int _gunType;				//원거리 무기 타입
 	float _angle;
 	bool _isLeft;
 	Vector2 _gunPos;
-
 	bool _isAttack;
+	FloatRect _attackRect;
+	int _timeCount;
 public:
-
 	virtual void init();
 	virtual void release();
 	virtual void update(float const elapsedTime);

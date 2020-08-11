@@ -6,11 +6,19 @@ void MatchLockGun::init()
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
 
+	_dustEffect = IMAGE_MANAGER->findImage("HecateSmokeFX02");
+	_shootEffect = IMAGE_MANAGER->findImage("ShootEffect02");
+
 	_price = 250;
 	_minDamage = 30;
 	_maxDamage = 40;
-	_bulletCount = 1;
-	_reloadCount = 3.0f;
+	_gunType = 0;
+	_isAttack = false;
+
+	_effectAni01 = new Animation;
+	_effectAni01->init(_dustEffect->getWidth(), _dustEffect->getHeight(), 10, 1);
+	_effectAni01->setDefPlayFrame(false, false);
+	_effectAni01->setFPS(20);
 }
 
 void MatchLockGun::release()
@@ -19,27 +27,59 @@ void MatchLockGun::release()
 
 void MatchLockGun::update(float const elapsedTime)
 {
+	if (_isAttack)
+	{
+		/*if (!_effectAni01->isPlay())
+		{
+			_effectAni01->start();
+		}*/
 
+		_effectAni01->frameUpdate(elapsedTime);
+	}
 }
 
 void MatchLockGun::render(Vector2 pos, float angle)
 {
 	Vector2 _centerPos = Vector2(_img->getSize().x / 3, _img->getSize().y / 2);
-	_img->setScale(3);
+	_img->setScale(4);
 	_img->setAnglePos(_centerPos);
 
-	_img->setAngle(angle);
-
-	if (angle < 90.0f && angle >= 0.0f && angle > 270.0f && angle <= 360.0f)
-	{
-		_isLeft = false;
-	}
-	if (angle > 90.0f && angle < 270.0f)
+	_isLeft = false;
+	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
 	{
 		_isLeft = true;
+		angle = fmod((180 - angle) + 360, 360);
 	}
 
-	_img->render(pos, _isLeft);
+	_gunPos = _isLeft ? Vector2(pos.x - 20, pos.y + 15) : Vector2(pos.x + 20, pos.y + 15);
+
+	/*if (_isLeft) { _gunPos = Vector2(pos.x - 20, pos.y + 15); }
+	else { _gunPos = Vector2(pos.x + 20, pos.y + 15); }*/
+
+	_img->setAngle(angle);
+	_img->render(_gunPos, _isLeft);
+
+	Vector2 _pos;
+	Vector2 _centerPos02 = Vector2(_img->getSize().x / 2 , _img->getSize().y / 2 + 24);
+	_dustEffect->setScale(4);
+	_dustEffect->setAnglePos(_centerPos02);
+	if (_isAttack)
+	{
+		_dustEffect->setScale(4);
+		//_dustEffect->setAnglePos(_centerPos);
+		if (!_isLeft)
+		{
+			_pos = Vector2(pos.x + 30, pos.y + 5);
+
+		}
+		else
+		{
+			_pos = Vector2(pos.x - 30, pos.y + 5);
+		}
+		_dustEffect->setAngle(angle);
+		_dustEffect->aniRender(_pos, _effectAni01, _isLeft);
+		
+	}
 
 	//D2DRenderer::renderText(50, 50, );
 }
@@ -50,6 +90,8 @@ void MatchLockGun::displayInfo()
 
 void MatchLockGun::attack(Vector2 const position, float const angle)
 {
+	_isAttack = true;
+	_effectAni01->start();
 }
 
 void MatchLockGun::attack(FloatRect * rect, tagAttackInfo * info)

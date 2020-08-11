@@ -3,7 +3,7 @@
 #include "Item.h"
 #include "ShortSpear.h"
 #include "MatchLockGun.h"
-#include "Matchlock.h"
+#include "Boomerang.h"
 
 void Player::setBaseStat()
 {
@@ -144,6 +144,11 @@ void Player::init()
 	testWeapon->init();
 	_equippedWeapon.push_back(testWeapon);
 	_currWeaponIndex = 0;
+
+	/*Boomerang* testWeapon = new Boomerang;
+	testWeapon->init();
+	_equippedWeapon.push_back(testWeapon);
+	_currWeaponIndex = 0;*/
 }
 
 void Player::release()
