@@ -3,6 +3,9 @@
 #include "Item.h"
 #include "ShortSpear.h"
 #include "Punch.h"
+#include "SpikeBall.h"
+#include "babyGreenBat.h"
+#include "bombPouch.h"
 
 void Player::setBaseStat()
 {
@@ -139,6 +142,23 @@ void Player::init()
 	setAni(PLAYER_ANIMATION::IDLE);
 
 	//test 
+	ShortSpear* testWeapon = new ShortSpear;
+	testWeapon->init();
+	_equippedWeapon.push_back(testWeapon);
+	_currWeaponIndex = 0;
+	
+	SpikeBall* testAcc = new SpikeBall;
+	testAcc->init();
+	_equippedAcc.push_back(testAcc);
+	
+	babyGreenBat* testAcc1 = new babyGreenBat;
+	testAcc1->init();
+	_equippedAcc.push_back(testAcc1);
+
+	bombPouch* testAcc2 = new bombPouch;
+	testAcc2->init();
+	_equippedAcc.push_back(testAcc2);
+
 	//ShortSpear* testWeapon = new ShortSpear;
 	ShortSpear* testWeapon1 = new ShortSpear;
 	testWeapon1->init();
@@ -317,14 +337,18 @@ void Player::update(float const elapsedTime)
 
 	// 무기 업데이트
 	_equippedWeapon[_currWeaponIndex]->update(elapsedTime);
+	_equippedAcc[1]->update(elapsedTime);
+	_equippedAcc[0]->update(elapsedTime);
+	_equippedAcc[2]->update(elapsedTime);
+	
 }
 
 void Player::render()
 {
+	_img->setScale(4);
+
 	float angle = fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
 
-	_equippedWeapon[_currWeaponIndex]->backRender(_position, angle);
-	_img->setScale(4);
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
 		_img->render(_position, _direction == DIRECTION::LEFT);
@@ -333,6 +357,13 @@ void Player::render()
 	{
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
 	}
+
+	_equippedAcc[0]->backRender(_position, angle);
+	_equippedAcc[1]->backRender(_position, angle);
+	_equippedAcc[2]->backRender(_position, angle);
+	
+
+	
 	
 	_equippedWeapon[_currWeaponIndex]->frontRender(_position, angle);
 	

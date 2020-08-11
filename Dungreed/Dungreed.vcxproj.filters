@@ -112,6 +112,9 @@
     <Filter Include="Dungreed\GameScene\Item\Melee">
       <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Accessories">
+      <UniqueIdentifier>{6cd4b808-2924-4835-ae3b-9c78ec86045a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -318,6 +321,15 @@
     <ClInclude Include="Punch.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
+    <ClInclude Include="SpikeBall.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="babyGreenBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="bombPouch.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -487,6 +499,15 @@
     </ClCompile>
     <ClCompile Include="Punch.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="SpikeBall.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="babyGreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="bombPouch.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
