@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameScene.h"
 #include "Item.h"
+#include "ShortSpear.h"
 
 void Player::setBaseStat()
 {
@@ -130,6 +131,12 @@ void Player::init()
 
 	_ani = new Animation;
 	setAni(PLAYER_ANIMATION::IDLE);
+
+	//test 
+	ShortSpear* testWeapon = new ShortSpear;
+	testWeapon->init();
+	_equippedWeapon.push_back(testWeapon);
+	_currWeaponIndex = 0;
 }
 
 void Player::release()
@@ -156,17 +163,17 @@ void Player::update(float const elapsedTime)
 	}
 
 	// 공격
-	/*if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
 		_equippedWeapon[_currWeaponIndex]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
-		for (int i = 0; i < 4; i++)
+		/*for (int i = 0; i < 4; i++)
 		{
 			if (_equippedAcc[i] != nullptr)
 			{
 				_equippedAcc[i]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
 			}
-		}
-	}*/
+		}*/
+	}
 
 	//이동
 	Vector2 moveDir(0, 0);
@@ -282,6 +289,9 @@ void Player::update(float const elapsedTime)
 	}
 
 	_ani->frameUpdate(elapsedTime);
+
+	// 무기 업데이트
+	_equippedWeapon[_currWeaponIndex]->update(elapsedTime);
 }
 
 void Player::render()
@@ -290,7 +300,7 @@ void Player::render()
 	_weapon = IMAGE_MANAGER->findImage("ShortSpear");
 	_weapon->setScale(4);
 	//float angle =  (TTYONE_UTIL::getAngle(_position.x, _position.y, _ptMouse.x, _ptMouse.y)) * (180 / PI);
-	float angle =  atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) - 90;
+	float angle =  fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
 	
 
 	_weapon->setAngle(angle);
@@ -318,15 +328,4 @@ void Player::render()
 	D2D_RENDERER->fillRectangle(_rightHand, 213, 205, 198, 1, angle, Vector2(_position.x - _rightHand.getCenter().x, _position.y - _rightHand.getCenter().y));
 	*/
 
-	wstring aniState;
-	if ((int)_aniState == 0) aniState = L" DEFAULT";
-	else if ((int)_aniState == 1) aniState = L" IDLE";
-	else if ((int)_aniState == 2) aniState = L" MOVE";
-	wstring str = L" 현재 애니 스테이트 : " + aniState;
-	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
-	wstring isStand;
-	if ((int)_isStand == 0) isStand = L"점프상태";
-	else isStand = L"착지상태";
-	str = L"isStand = " + isStand;
-	D2D_RENDERER->renderText(0, 20, str, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 }

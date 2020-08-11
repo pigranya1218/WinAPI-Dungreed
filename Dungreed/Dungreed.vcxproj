@@ -194,6 +194,7 @@
     <ClInclude Include="SampleStage.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SecondTestScene.h" />
+    <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Stage.h" />
@@ -244,6 +245,7 @@
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SecondTestScene.cpp" />
+    <ClCompile Include="ShortSpear.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />

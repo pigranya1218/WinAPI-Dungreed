@@ -80,12 +80,12 @@ void Image::render(const Vector2& position, bool bisymmetry)
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
 	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x + size.x / 2.f, position.y - size.y / 2.f);
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(position.x + size.x / 2.f), round(position.y - size.y / 2.f));
 		lrMatrix = D2D1::Matrix3x2F(-1, 0, 0, 1, 0, 0);
 	}
 	else
 	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x - size.x / 2.f, position.y - size.y / 2.f);
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(position.x - size.x / 2.f), round(position.y - size.y / 2.f));
 		lrMatrix = D2D1::Matrix3x2F(1, 0, 0, 1, 0, 0);
 	}
 	D2D1::Matrix3x2F skewMatrix = D2D1::Matrix3x2F::Skew(_skewAngle.x, _skewAngle.y, D2D1::Point2F(_skewPos.x, _skewPos.y));
@@ -107,12 +107,12 @@ void Image::render(const Vector2 & position, const Vector2 & size, bool bisymmet
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
 	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x + size.x / 2.f, position.y - size.y / 2.f);
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(position.x + size.x / 2.f), round(position.y - size.y / 2.f));
 		lrMatrix = D2D1::Matrix3x2F(-1, 0, 0, 1, 0, 0);
 	}
 	else
 	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x - size.x / 2.f, position.y - size.y / 2.f);
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(position.x - size.x / 2.f), round(position.y - size.y / 2.f));
 		lrMatrix = D2D1::Matrix3x2F(1, 0, 0, 1, 0, 0);
 	}
 	D2D1::Matrix3x2F skewMatrix = D2D1::Matrix3x2F::Skew(_skewAngle.x, _skewAngle.y, D2D1::Point2F(_skewPos.x, _skewPos.y));
@@ -135,12 +135,12 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
 	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x + size.x / 2.f, position.y - size.y / 2.f);
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(position.x + size.x / 2.f), round(position.y - size.y / 2.f));
 		lrMatrix = D2D1::Matrix3x2F(-1, 0, 0, 1, 0, 0);
 	}
 	else
 	{
-		translateMatrix = D2D1::Matrix3x2F::Translation(position.x - size.x / 2.f, position.y - size.y / 2.f);
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(position.x - size.x / 2.f), round(position.y - size.y / 2.f));
 		lrMatrix = D2D1::Matrix3x2F(1, 0, 0, 1, 0, 0);
 	}
 	
