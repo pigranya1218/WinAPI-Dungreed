@@ -2,6 +2,8 @@
 #include "GameScene.h"
 #include "Item.h"
 #include "ShortSpear.h"
+#include "SpikeBall.h"
+#include "babyGreenBat.h"
 
 void Player::setBaseStat()
 {
@@ -137,6 +139,15 @@ void Player::init()
 	testWeapon->init();
 	_equippedWeapon.push_back(testWeapon);
 	_currWeaponIndex = 0;
+	
+	SpikeBall* testSpikeBall = new SpikeBall;
+	testSpikeBall->init();
+	_equippedAcc.push_back(testSpikeBall);
+	
+	babyGreenBat* testbabyGreenBat = new babyGreenBat;
+	testbabyGreenBat->init();
+	_equippedAcc.push_back(testbabyGreenBat);
+
 }
 
 void Player::release()
@@ -292,12 +303,17 @@ void Player::update(float const elapsedTime)
 
 	// 무기 업데이트
 	_equippedWeapon[_currWeaponIndex]->update(elapsedTime);
+	_equippedAcc[1]->update(elapsedTime);
+	_equippedAcc[0]->update(elapsedTime);
+	
 }
 
 void Player::render()
 {
+
 	_img->setScale(4);
-	float angle =  fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
+
+	float angle = fmod(atan2f(-(_ptMouse.y - (_position.y + 15)), (_ptMouse.x - _position.x)) * (180 / PI) + 360, 360);
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
 	{
@@ -309,6 +325,10 @@ void Player::render()
 		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
 		//D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
 	}
-	
+
+	_equippedAcc[1]->render(_position, angle);
+	_equippedAcc[0]->render(_position, angle);
 	_equippedWeapon[_currWeaponIndex]->render(_position, angle);
+
+	
 }

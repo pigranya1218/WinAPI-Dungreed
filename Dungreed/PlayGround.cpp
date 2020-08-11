@@ -207,10 +207,11 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Bat/Giant_Red/Attack_Shot"	, L"resources/images/Enemy/Bat/Giant_Red/attack_shot.png"	, 10, 1);	// 박쥐 (거대 빨강) 공격 피격
 
 	// *Accessories
-	IMAGE_MANAGER->addImage("BloodStoneRing", L"resources/images/Accessories/BloodStoneRing.png");             // 혈석반지
+	IMAGE_MANAGER->addImage("SpikeBall", L"resources/images/Accessories/SpikeBall.png");                       // 뾰족공	
+	IMAGE_MANAGER->addImage("BloodStoneRing", L"resources/images/Accessories/BloodStoneRing.png");             // 혈석반지	
 	IMAGE_MANAGER->addImage("Voluspa", L"resources/images/Accessories/Voluspa.png");                           // 볼루스파
 	IMAGE_MANAGER->addImage("Voluspa0", L"resources/images/Accessories/Voluspa0.png");                         // 볼루스파창
-	IMAGE_MANAGER->addImage("BombPouch", L"resources/images/Accessories/Bolus0.png");                          // 대쉬폭탄
+	IMAGE_MANAGER->addImage("BombPouch", L"resources/images/Accessories/BombPouch.png");                       // 대쉬폭탄	
 	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch0.png", 12, 1);         // 대쉬폭탄 프레임이미지
 	IMAGE_MANAGER->addImage("CarpCoinPurse", L"resources/images/Accessories/CarpCoinPurse.png");               // 잉어모양 동전지갑
 	IMAGE_MANAGER->addImage("DaisyRing", L"resources/images/Accessories/DaisyRing.png");                       // 데이지링
@@ -238,11 +239,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MiniEarth", L"resources/images/Accessories/MiniEarth.png");                       // 미니행성
 	IMAGE_MANAGER->addFrameImage("MiniEarth0", L"resources/images/Accessories/MiniEarth0.png", 9, 1);          // 미니행성 프레임 이미지
 	IMAGE_MANAGER->addImage("SecretMap", L"resources/images/Accessories/SecretMap.png");                       // 비밀맵
-	IMAGE_MANAGER->addImage("SilverBullet", L"resources/images/Accessories/SilverBullet.png");                 // 은탄
-	IMAGE_MANAGER->addImage("SpikeBall", L"resources/images/Accessories/SpikeBall.png");                       // 가시공
+	IMAGE_MANAGER->addImage("SilverBullet", L"resources/images/Accessories/SilverBullet.png");                 // 은탄	
 	IMAGE_MANAGER->addImage("SpikeBoots", L"resources/images/Accessories/SpikeBoots.png");                     // 가시신발
 	IMAGE_MANAGER->addImage("SpringShoes", L"resources/images/Accessories/SpringShoes.png");                   // 점프신발
-	IMAGE_MANAGER->addImage("SteelBoots", L"resources/images/Accessories/Steel Boots.png");                    // 강철신발
+	IMAGE_MANAGER->addImage("MetalBoots", L"resources/images/Accessories/MetalBoots.png");                     // 강철신발
 	IMAGE_MANAGER->addImage("TAANA", L"resources/images/Accessories/TAANA.png");                               // 타나
 	IMAGE_MANAGER->addFrameImage("TAANA0", L"resources/images/Accessories/TAANA0.png", 7, 1);                  // 타나 프레임 이미지
 	IMAGE_MANAGER->addImage("Watcher", L"resources/images/Accessories/Watcher.png");                           // 주시자
@@ -251,6 +251,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Wing", L"resources/images/Accessories/Wing.png");                                 // 날개
 	IMAGE_MANAGER->addImage("Wing0", L"resources/images/Accessories/Wing0.png");                               // 날개 장착 이미지
 	IMAGE_MANAGER->addImage("Wingboots", L"resources/images/Accessories/Wingboots.png");                       // 윙부츠
+	
 
 	// * 유령
 	IMAGE_MANAGER->addFrameImage("Ghost/Move"		, L"resources/images/Enemy/Ghost/move.png"			, 6, 1);	// 유령 이동

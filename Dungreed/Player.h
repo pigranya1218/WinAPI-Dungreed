@@ -32,8 +32,8 @@ Synthesize(DIRECTION, _direction, Direction)
 
 private:
 	GameScene* _gameScene;
-	Animation* _ani;
-	Image* _img;
+	Animation* _ani;	
+	Image* _img;	
 	PLAYER_ANIMATION _aniState;
 
 	// 현재 상태

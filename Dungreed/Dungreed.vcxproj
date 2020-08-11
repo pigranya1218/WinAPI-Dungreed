@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="babyGreenBat.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraShakeEvent.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SpikeBall.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -212,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="babyGreenBat.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
@@ -247,6 +250,7 @@
     <ClCompile Include="SecondTestScene.cpp" />
     <ClCompile Include="ShortSpear.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SpikeBall.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
