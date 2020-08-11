@@ -17,7 +17,8 @@ class Enemy : public GameObject
 protected:
 	EnemyManager*	_enemyManager;	// 에너미 매니저
 
-	ENEMY_STATE		_state;			// 상태
+	ENEMY_STATE		_state;		// 현재 상태
+	
 	DIRECTION		_direction;		// 행동
 
 	Image*			_img;			// 이미지
@@ -41,9 +42,7 @@ protected:
 				return true;
 			}
 			return false;
-		}
-
-		
+		}		
 	};
 
 	struct tagMoveInfo
