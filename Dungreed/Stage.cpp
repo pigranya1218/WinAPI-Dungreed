@@ -40,21 +40,62 @@ void Stage::render()
 void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 {
 	object->setIsStand(false);
-	Vector2 newCenter = object->getPosition() + moveDir;
+	Vector2 lastCenter = object->getPosition();
+	Vector2 newCenter = lastCenter + moveDir;
 	float radiusX = object->getSize().x / 2;
 	float radiusY = object->getSize().y / 2;
 	int calculatePoint[4][2] = { {-1, -1}, {1, -1}, {1, 1}, {-1, 1}}; // 좌상, 우상, 우하, 좌하
-	Vector2 points[4];
+	Vector2 lastPoints[4];
+	Vector2 newPoints[4];
 	for (int i = 0; i < 4; i++)
 	{
-		points[i] = Vector2(newCenter.x + calculatePoint[i][0] * radiusX, newCenter.y + calculatePoint[i][1] * radiusY);
+		lastPoints[i] = Vector2(lastCenter.x + calculatePoint[i][0] * radiusX, lastCenter.y + calculatePoint[i][1] * radiusY);
+		newPoints[i] = Vector2(newCenter.x + calculatePoint[i][0] * radiusX, newCenter.y + calculatePoint[i][1] * radiusY);
 	}
 
+	// 발판 검사
 	for (int i = 0; i < _collisionPlatforms.size(); i++)
 	{
+		for (int j = 2; j <= 3; j++) // 아래 꼭짓점들만 검사
+		{
+			bool isCollision = false;
+			if (_collisionPlatforms[i].func.a == LinearFunc::INF_A) // 수직선
+			{
+				// 발판이 수직선인 경우는 없음
+			}
+			else // 수직선이 아닌 경우
+			{
+				if (_collisionPlatforms[i].func.start <= newPoints[j].x && newPoints[j].x <= _collisionPlatforms[i].func.end) // 범위 안에 있을 때
+				{
+					// 이전까지는 발판 위에 있다가, 이번 업데이트에서 발판 아래로 내려간다면 발판에 올라타게 한다
 
+					LINEAR_VALUE_TYPE leftFoot = _collisionPlatforms[i].func.getValueType(lastPoints[3].x, lastPoints[3].y);
+					LINEAR_VALUE_TYPE rightFoot = _collisionPlatforms[i].func.getValueType(lastPoints[2].x, lastPoints[2].y);
+					if ((leftFoot != _collisionPlatforms[i].collision) &&
+						(rightFoot != _collisionPlatforms[i].collision) &&
+						(_collisionPlatforms[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionPlatforms[i].collision))
+					{
+						newPoints[j].y = _collisionPlatforms[i].func.getY(newPoints[j].x);
+						isCollision = true;
+						if (_collisionPlatforms[i].collision == LINEAR_VALUE_TYPE::DOWN)
+						{
+							object->setIsStand(true); // 땅에 서있는 경우
+						}
+					}
+				}
+			}
+			if (isCollision)
+			{
+				newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
+				for (int k = 0; k < 4; k++)
+				{
+					newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
+				}
+			}
+		}
 	}
 
+	// 땅 검사
 	for (int i = 0; i < _collisionGrounds.size(); i++)
 	{
 		for (int j = 0; j < 4; j++) // 각 꼭짓점별 검사
@@ -62,33 +103,36 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 			bool isCollision = false;
 			if (_collisionGrounds[i].func.a == LinearFunc::INF_A) // 수직선
 			{
-				if (_collisionGrounds[i].func.start <= points[j].y && points[j].y <= _collisionGrounds[i].func.end) // 범위 안에 있을 때
+				if (_collisionGrounds[i].func.start <= newPoints[j].y && newPoints[j].y <= _collisionGrounds[i].func.end) // 범위 안에 있을 때
 				{
-					if (_collisionGrounds[i].func.getValueType(points[j].x, points[j].y) == _collisionGrounds[i].collision)
+					if (_collisionGrounds[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGrounds[i].collision)
 					{
-						points[j].x = _collisionGrounds[i].func.b;
+						newPoints[j].x = _collisionGrounds[i].func.b;
 						isCollision = true;
 					}
 				}
 			}
 			else // 수직선이 아닌 경우
 			{
-				if (_collisionGrounds[i].func.start <= points[j].x && points[j].x <= _collisionGrounds[i].func.end) // 범위 안에 있을 때
+				if (_collisionGrounds[i].func.start <= newPoints[j].x && newPoints[j].x <= _collisionGrounds[i].func.end) // 범위 안에 있을 때
 				{
-					if (_collisionGrounds[i].func.getValueType(points[j].x, points[j].y) == _collisionGrounds[i].collision)
+					if (_collisionGrounds[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGrounds[i].collision)
 					{
-						points[j].y = _collisionGrounds[i].func.getY(points[j].x);
+						newPoints[j].y = _collisionGrounds[i].func.getY(newPoints[j].x);
 						isCollision = true;
-						object->setIsStand(true); // 땅에 서있는 경우
+						if (_collisionGrounds[i].collision == LINEAR_VALUE_TYPE::DOWN)
+						{
+							object->setIsStand(true); // 땅에 서있는 경우
+						}
 					}
 				}
 			}
 			if (isCollision)
 			{
-				newCenter = Vector2(points[j].x - calculatePoint[j][0] * radiusX, points[j].y - calculatePoint[j][1] * radiusY);
+				newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
 				for (int k = 0; k < 4; k++)
 				{
-					points[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
+					newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
 				}
 			}
 		}

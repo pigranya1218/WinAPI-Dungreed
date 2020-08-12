@@ -30,11 +30,11 @@ void Player::setBaseStat()
 	_baseStat.attackSpeed = 0;
 	_baseStat.reloadSpeed = 0; // --
 	_baseStat.moveSpeed = 350;
-	_baseStat.dashXPower = 2400;
-	_baseStat.dashYPower = 1700;
-	_baseStat.jumpPower = 1700;
-	_baseStat.xGravity = 10000;
-	_baseStat.yGravity = 5000;
+	_baseStat.dashXPower = 1600;
+	_baseStat.dashYPower = 1400;
+	_baseStat.jumpPower = 1400;
+	_baseStat.xGravity = 4000;
+	_baseStat.yGravity = 4000;
 }
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -285,11 +285,19 @@ void Player::update(float const elapsedTime)
 		_aniState = PLAYER_ANIMATION::IDLE;
 	}*/
 
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)) && _currJumpCount > 0)
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)))
 	{
-		_force.y = -_adjustStat.jumpPower;
-		// _aniState = PLAYER_ANIMATION::DEFAULT;
-		_currJumpCount -= 1;
+		if (_isStand && KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_DOWN)))
+		{
+			_position.y += 1.5;
+			_force.y = 0.1;
+		}
+		else if (_currJumpCount > 0)
+		{
+			_force.y = -_adjustStat.jumpPower;
+			_currJumpCount -= 1;
+		}
+		
 	}
 	//대쉬
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
@@ -333,8 +341,15 @@ void Player::update(float const elapsedTime)
 	}
 
 	//하강중
+	if (_isStand && _force.y == 0)
+	{
+		_position.y -= 5;
+		moveDir.y += 10;
+	}
+	
 	_force.y += _adjustStat.yGravity * elapsedTime;
-	moveDir.y = 5.5 + _force.y * elapsedTime;
+	moveDir.y += _force.y * elapsedTime;
+
 
 	_gameScene->moveTo(this, moveDir);
 	//착지
@@ -376,6 +391,9 @@ void Player::render()
 	/*_equippedAcc[0]->backRender(_position, angle);
 	_equippedAcc[1]->backRender(_position, angle);
 	_equippedAcc[2]->backRender(_position, angle);*/
+
+	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1);
+
 	_equippedWeapon[_currWeaponIndex]->backRender(this);
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)
@@ -392,8 +410,8 @@ void Player::render()
 	_equippedAcc[2]->frontRender(_position, angle);*/
 	_equippedWeapon[_currWeaponIndex]->frontRender(this);
 	
-	wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);
+	/*wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);
 	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Blue, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	str = L" 무기 교체 딜레이 시간 : " + to_wstring(_currWeaponChangeCoolTime);
-	D2D_RENDERER->renderText(600, 0, str, 20, D2DRenderer::DefaultBrush::Green, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(600, 0, str, 20, D2DRenderer::DefaultBrush::Green, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);*/
 }
