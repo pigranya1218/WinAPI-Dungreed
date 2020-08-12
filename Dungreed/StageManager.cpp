@@ -2,7 +2,7 @@
 #include "StageManager.h"
 #include "Stage.h"
 #include "GameScene.h"
-#include "TestStage.h"
+#include "DebugStage.h"
 
 void StageManager::init()
 {
@@ -39,7 +39,7 @@ void StageManager::nextStage()
 
 void StageManager::makeStage()
 {
-	_currStage = new TestStage();
+	_currStage = new DebugStage();
 	_currStage->setStageManager(this);
 	_currStage->init();
 }

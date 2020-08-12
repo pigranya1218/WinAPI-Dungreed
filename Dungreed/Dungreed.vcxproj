@@ -169,6 +169,7 @@
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
+    <ClInclude Include="DebugStage.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
@@ -219,7 +220,6 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ShortSword.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="TestStage.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TownStage.h" />
@@ -248,6 +248,7 @@
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
+    <ClCompile Include="DebugStage.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
@@ -287,7 +288,6 @@
     <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="ShortSword.cpp" />
-    <ClCompile Include="TestStage.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UIManager.cpp" />

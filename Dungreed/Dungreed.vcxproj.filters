@@ -282,9 +282,6 @@
     <ClInclude Include="TownStage.h">
       <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClInclude>
-    <ClInclude Include="TestStage.h">
-      <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
@@ -356,6 +353,9 @@
     </ClInclude>
     <ClInclude Include="CameraManager.h">
       <Filter>2DGameFramework\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugStage.h">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -488,9 +488,6 @@
     <ClCompile Include="TownStage.cpp">
       <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClCompile>
-    <ClCompile Include="TestStage.cpp">
-      <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClCompile>
     <ClCompile Include="Banshee.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
@@ -556,6 +553,9 @@
     </ClCompile>
     <ClCompile Include="CameraManager.cpp">
       <Filter>2DGameFramework\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

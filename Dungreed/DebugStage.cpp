@@ -1,15 +1,16 @@
-#include "TestStage.h"
 
-void TestStage::init()
+#include "DebugStage.h"
+
+void DebugStage::init()
 {
 	Stage::init();
-	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN});
-	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN});
+	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN });
+	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN });
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
-	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT});
-	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT});
+	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT });
+	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT });
 
-	
+
 	// 에너미 테스트입니다.
 	_enemyMgr->setStage(this);
 	/*_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_RED, Vector2(WINSIZEX / 2, WINSIZEY / 2));
@@ -27,13 +28,13 @@ void TestStage::init()
 
 
 	int curr = 0;
-	
+
 	for (int i = 0; i < TILEX*TILEY; ++i)
 	{
 		switch (_tile[i].linePos)
 		{
 		case DRAW_LINE_POSITION::TOP:
-			
+
 			if (curr == 0)
 			{
 				_currentIndex = i;
@@ -50,7 +51,7 @@ void TestStage::init()
 
 			break;
 		case DRAW_LINE_POSITION::BOTTOM:
-			
+
 			if (curr == 0)
 			{
 				_currentIndex = i;
@@ -65,10 +66,10 @@ void TestStage::init()
 
 			}
 
-			
+
 			break;
 		case DRAW_LINE_POSITION::LEFT:
-			
+
 			if (curr == 0)
 			{
 				_currentIndex = i;
@@ -83,10 +84,10 @@ void TestStage::init()
 
 			}
 
-			
+
 			break;
 			case DRAW_LINE_POSITION::RIGHT:
-			
+
 			if (curr == 0)
 			{
 				_currentIndex = i;
@@ -101,7 +102,7 @@ void TestStage::init()
 
 			}
 
-			
+
 				break;
 			case DRAW_LINE_POSITION::LEFT_DIAGONAL:
 				if (curr == 0)
@@ -135,35 +136,35 @@ void TestStage::init()
 				}
 
 				break;
-			default: 
+			default:
 				_currentIndex = 0;
 				curr = 0;
 				break;
 		}
 
 
-		
-		
-		
-		
-		
+
+
+
+
+
 	}*/
 
-
-
 }
 
-void TestStage::release()
+void DebugStage::release()
 {
 	Stage::release();
+
 }
 
-void TestStage::update(float const elapsedTime)
+void DebugStage::update(float const elapsedTime)
 {
 	Stage::update(elapsedTime);
+
 }
 
-void TestStage::render()
+void DebugStage::render()
 {
 	/*for (int i = 0; i < tilex*tiley; ++i)
 	{
@@ -177,10 +178,9 @@ void TestStage::render()
 	}
 
 	Stage::render();
-
 }
 
-void TestStage::mapLoad()
+void DebugStage::mapLoad()
 {
 	HANDLE stageFile;
 	DWORD read;

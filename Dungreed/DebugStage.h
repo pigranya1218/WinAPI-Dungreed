@@ -2,7 +2,7 @@
 #include "Stage.h"
 #include "MapTool.h"
 
-class TestStage : public Stage
+class DebugStage : public Stage
 {
 private:
 	Image* _tileImage;
@@ -17,4 +17,3 @@ public:
 
 	void mapLoad();
 };
-
