@@ -405,26 +405,19 @@ void D2DRenderer::fillRectangle(const FloatRect& rc, const D2D1::ColorF::Enum& c
 /**********************************************************************************************
 ## FillRectagle ##
 @@ FloatRect rc : 그릴 렉트
-@@ float red : RGB red, (0 ~ 1)
-@@ float green : RGB green, (0 ~ 1)
-@@ float blue : RGB blue, (0 ~ 1)
+@@ int red : RGB red, (0 ~ 255)
+@@ int green : RGB green, (0 ~ 255)
+@@ int blue : RGB blue, (0 ~ 255)
 @@ float alpha  : 알파 값
 ************************************************************************************************/
-void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const float green, const float blue, const float alpha, const float angle, const Vector2& anglePos)
+void D2DRenderer::fillRectangle(const FloatRect & rc, const int red, const int green, const int blue, const float alpha, const float angle, const Vector2& anglePos)
 {
 	FloatRect rect = rc;
 
-	ID2D1SolidColorBrush* brush;
-	D2D1_COLOR_F clr;
-	clr.r = red;
-	clr.g = green;
-	clr.b = blue;
-	clr.a = alpha;
-
 	D2D1::Matrix3x2F rotate = D2D1::Matrix3x2F::Rotation(360 - angle, D2D1::Point2F(anglePos.x, anglePos.y));
 
-
-	_D2DRenderTarget->CreateSolidColorBrush(clr, &brush);
+	ID2D1SolidColorBrush* brush;
+	_D2DRenderTarget->CreateSolidColorBrush(D2D1::ColorF(RGB(red, green, blue), alpha), &brush);
 	if (angle != 0)
 	{
 		_D2DRenderTarget->SetTransform(rotate);
@@ -436,18 +429,6 @@ void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const flo
 	_D2DRenderTarget->FillRectangle(D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom), brush);
 
 	NEW_SAFE_RELEASE(brush);
-}
-/**********************************************************************************************
-## FillRectagle ##
-@@ FloatRect rc : 그릴 렉트
-@@ int red : RGB red, (0 ~ 255)
-@@ int green : RGB green, (0 ~ 255)
-@@ int blue : RGB blue, (0 ~ 255)
-@@ float alpha  : 알파 값
-************************************************************************************************/
-void D2DRenderer::fillRectangle(const FloatRect & rc, const int red, const int green, const int blue, const float alpha, const float angle, const Vector2& anglePos)
-{
-	fillRectangle(rc, static_cast<float>(red) / 255, static_cast<float>(green) / 255, static_cast<float>(blue) / 255, alpha, angle, anglePos);
 }
 /**********************************************************************************************
 ## FillRectangle  ##

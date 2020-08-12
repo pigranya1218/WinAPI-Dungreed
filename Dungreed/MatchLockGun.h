@@ -1,6 +1,6 @@
 #pragma once
 #include "Item.h"
-#include "GunBullet.h"
+#include "PlayerBullet.h"
 
 class MatchLockGun : public Item
 {
@@ -17,10 +17,26 @@ private:
 	float _angle;
 	bool _isLeft;
 	Vector2 _gunPos;
+	Vector2 renderPosWeapon;
 
 	bool _isAttack;
+	bool isLeft;
 
-	GunBullet* _bullet;
+	//GunBullet* _bullet;
+	PlayerBullet* _bullet;
+
+	Vector2 _attackMove;
+	
+	float renderDegree;
+	float degree;
+
+	float _baseAttackDelay; // 공격 쿨타임
+	float _currAttackDelay; // 남은 공격 쿨타임
+	float _attackAngle;
+	bool _reverseMove;
+	bool _drawEffect;
+	FloatRect _hand;
+	Vector2 _handSize;
 public:
 
 	virtual void init();

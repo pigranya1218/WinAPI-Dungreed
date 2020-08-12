@@ -339,9 +339,6 @@
     <ClInclude Include="Boomerang.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
-    <ClInclude Include="GunBullet.h">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="ShortSword.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
@@ -389,6 +386,9 @@
     </ClInclude>
     <ClInclude Include="PickaxCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBullet.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -572,9 +572,6 @@
     <ClCompile Include="Boomerang.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
-    <ClCompile Include="GunBullet.cpp">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="ShortSword.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
@@ -619,6 +616,9 @@
     </ClCompile>
     <ClCompile Include="PickaxCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBullet.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

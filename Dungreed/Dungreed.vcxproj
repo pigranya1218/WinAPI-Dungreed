@@ -188,7 +188,6 @@
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InventoryUI.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="GunBullet.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
@@ -206,6 +205,7 @@
     <ClInclude Include="Ovibos.h" />
     <ClInclude Include="PickaxCos.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
@@ -272,7 +272,6 @@
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
-    <ClCompile Include="GunBullet.cpp" />
     <ClCompile Include="InventoryUI.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
@@ -289,6 +288,7 @@
     <ClCompile Include="Ovibos.cpp" />
     <ClCompile Include="PickaxCos.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
