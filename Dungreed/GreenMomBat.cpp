@@ -36,7 +36,7 @@ void GreenMomBat::update(Player * player, float const elapsedTime)
 	_ani1->frameUpdate(elapsedTime);
 	_ani1->init(_img->getWidth(), _img->getHeight(),
 		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani1->setFPS(10);
+	_ani1->setFPS(11);
 	_ani1->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 }
 
