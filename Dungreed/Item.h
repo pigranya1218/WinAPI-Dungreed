@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include "ProjectileManager.h"
 
 enum class ITEM_TYPE
 {
@@ -24,6 +25,7 @@ protected:
 	Image* _img; // 아이템 이미지
 	int _price; // 가격
 	PlayerStat _addStat; // 아이템 스탯 옵션
+	ProjectileManager* _projecttileMng;		//투사체 매니저
 public:
 	virtual void init() = 0;
 	virtual void release() = 0;

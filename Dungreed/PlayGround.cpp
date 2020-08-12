@@ -168,8 +168,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("OakBowAni", L"resources/images/weapon/longDistanceWeapon/OakBowAni.png", 6, 1);
 	// **** WeaponBullet
 	IMAGE_MANAGER->addImage("Arrow00", L"resources/images/weapon/longDistanceWeapon/Arrow00.png");
-	IMAGE_MANAGER->addImage("GunBullet", L"resources/images/weapon/longDistanceWeapon/Bullet.png");
-	IMAGE_MANAGER->addImage("GunBullet_Big", L"resources/images/weapon/longDistanceWeapon/Bullet_Big.png");
+	IMAGE_MANAGER->addFrameImage("GunBullet", L"resources/images/weapon/longDistanceWeapon/Bullet.png", 4, 1);
+	//IMAGE_MANAGER->addFrameImage("GunBullet_Big", L"resources/images/weapon/longDistanceWeapon/Bullet_Big.png", 2, 1);
 	// **** WeaponEffect
 	IMAGE_MANAGER->addFrameImage("ArrowHitEffect", L"resources/images/weapon/longDistanceWeapon/effect/ArrowHitEffect.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("BoomerangEffect", L"resources/images/weapon/longDistanceWeapon/effect/BoomerangEffect.png", 12, 1);
@@ -179,8 +179,24 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("ShootEffect01", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect01.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("ShootEffect02", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect02.png", 6, 1);
 
+	EFFECT_MANAGER->addEffect("L_Effect_ArrowHit", "ArrowHitEffect", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_Boomerang", "BoomerangEffect", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_Charge", "ChargeEffect", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_HecateSmoke", "HecateSmokeFX02", 10, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_Shoot", "ShootEffect", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_Shoot01", "ShootEffect01", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_Shoot02", "ShootEffect02", 30, 10);
+
+
 	//***MeleeWeapon
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
+	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
+	//***MeleeWeaponEffect
+	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
+	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
+	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 30, 10);
+	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 30, 10);
+
 
 	// ** ENEMY
 	// * ¼ö³à
@@ -206,36 +222,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Move"		, L"resources/images/Enemy/Bat/Bomb/move.png"		 , 6, 1);	// ¹ÚÁã (ÀÚÆø) ÀÌµ¿
 	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Move_Shot"	, L"resources/images/Enemy/Bat/Bomb/move_shot.png"	 , 6, 1);	// ¹ÚÁã (ÀÚÆø) ÀÌµ¿ ÇÇ°Ý
 	IMAGE_MANAGER->addFrameImage("Bat/Bomb/attack_Begin", L"resources/images/Enemy/Bat/Bomb/attack_begin.png", 6, 3);	// ¹ÚÁã (ÀÚÆø) Æø¹ß ÁØºñ
-	// ** WEAPON
-	// *** LongDistanceWeapon
-	IMAGE_MANAGER->addImage("Lala'sMagicWand", L"resources/images/weapon/longDistanceWeapon/Lala'sMagicWand.png");
-	IMAGE_MANAGER->addImage("MatchlockGun", L"resources/images/weapon/longDistanceWeapon/MatchlockGun.png");
-	IMAGE_MANAGER->addImage("MetalBoomerang", L"resources/images/weapon/longDistanceWeapon/MetalBoomerang.png");
-	IMAGE_MANAGER->addImage("OakBow", L"resources/images/weapon/longDistanceWeapon/OakBow.png");
-
-	IMAGE_MANAGER->addFrameImage("Boomerang_Moving", L"resources/images/weapon/longDistanceWeapon/Boomerang_Moving.png", 2, 1);
-	IMAGE_MANAGER->addFrameImage("OakBowAni", L"resources/images/weapon/longDistanceWeapon/OakBowAni.png", 6, 1);
-	// **** WeaponBullet
-	IMAGE_MANAGER->addImage("Arrow00", L"resources/images/weapon/longDistanceWeapon/Arrow00.png");
-	IMAGE_MANAGER->addImage("GunBullet", L"resources/images/weapon/longDistanceWeapon/Bullet.png");
-	IMAGE_MANAGER->addImage("GunBullet_Big", L"resources/images/weapon/longDistanceWeapon/Bullet_Big.png");
-	// **** WeaponEffect
-	IMAGE_MANAGER->addFrameImage("ArrowHitEffect", L"resources/images/weapon/longDistanceWeapon/effect/ArrowHitEffect.png", 6, 1);
-	IMAGE_MANAGER->addFrameImage("BoomerangEffect", L"resources/images/weapon/longDistanceWeapon/effect/BoomerangEffect.png", 12, 1);
-	IMAGE_MANAGER->addFrameImage("ChargeEffect", L"resources/images/weapon/longDistanceWeapon/effect/ChargeEffect.png", 8, 1);
-	IMAGE_MANAGER->addFrameImage("HecateSmokeFX02", L"resources/images/weapon/longDistanceWeapon/effect/HecateSmokeFX02.png", 9, 1);
-	IMAGE_MANAGER->addFrameImage("ShootEffect", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect.png", 3, 1);
-	IMAGE_MANAGER->addFrameImage("ShootEffect01", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect01.png", 6, 1);
-	IMAGE_MANAGER->addFrameImage("ShootEffect02", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect02.png", 6, 1);
-
-	//***MeleeWeapon
-	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
-	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
-	//***MeleeWeaponEffect
-	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
-	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
-	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 30, 10);
-	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 30, 10);
+	
 
 
 	IMAGE_MANAGER->addFrameImage("Bat/Giant_Normal/Idle"		, L"resources/images/Enemy/Bat/Giant_Normal/idle.png"		,  7, 1);	// ¹ÚÁã (°Å´ë ±âº») ±âº»

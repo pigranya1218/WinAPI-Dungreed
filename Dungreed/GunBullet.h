@@ -9,7 +9,7 @@ class GunBullet : public Projectile
 private:
 	ProjectileManager* _projectileMng;
 public:
-	virtual void init(int itemType, Vector2 pos);
+	virtual void init(Vector2 pos);
 	virtual void release();
 	virtual void update(float timeElapsed);
 	virtual void render();

@@ -169,7 +169,12 @@ void Player::init()
 	_equippedAcc.push_back(testAcc2);*/
 
 	//ShortSpear* testWeapon = new ShortSpear;
-	ShortSpear* testWeapon1 = new ShortSpear;
+
+	/*ShortSpear* testWeapon1 = new ShortSpear;
+	testWeapon1->init();
+	_equippedWeapon.push_back(testWeapon1);*/
+
+	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
 	_equippedWeapon.push_back(testWeapon1);
 	

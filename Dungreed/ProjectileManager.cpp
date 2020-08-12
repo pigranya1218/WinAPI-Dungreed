@@ -28,3 +28,11 @@ void ProjectileManager::render()
 		_projectiles[i]->render();
 	}
 }
+
+void ProjectileManager::fire()
+{
+	for (int i = 0; i < _projectiles.size(); i++)
+	{
+		_projectiles[i]->fire();
+	}
+}
