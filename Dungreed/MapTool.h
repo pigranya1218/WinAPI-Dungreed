@@ -9,20 +9,39 @@
 #define SAMPLETILEX 10
 #define SAMPLETILEY 20
 
+enum class DRAW_LINE_POSITION
+{
+	NOLINE,
+	LEFT,
+	TOP,
+	RIGHT,
+	BOTTOM,
+	LEFT_DIAGONAL, // /이런 모양
+	RIGHT_DIAGONAL, // \이런 모양
+	LEFT_TOP,
+	RIGHT_TOP,
+	LEFT_BOTTOM,
+	RIGHT_BOTTOM
+	
+};
+
+
 struct tagTileMap
 {
+	
 	FloatRect rc;
 	int tileFrameX;
 	int tileFrameY;
-
+	DRAW_LINE_POSITION linePos;
 };
 
 struct  tagPalette
 {
+	
 	FloatRect rc;
 	int tileFrameX;
 	int tileFrameY;
-
+	
 };
 
 struct tagSelectTile
@@ -30,6 +49,7 @@ struct tagSelectTile
 	FloatRect rc;
 	int x;
 	int y;
+	
 };
 
 
@@ -49,15 +69,17 @@ private:
 	//HWND _loadBtn;
 	
 	LinearFunc _line;
-	Camera _camera;
 
 	FloatRect _save;
 	FloatRect _load;
 	FloatRect _erase;
+	FloatRect _paletteLoad;
 
 	Image* _paletteImage;
 	tagTileMap _tile[TILEX * TILEY];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
+
+	DRAW_LINE_POSITION _drawLinePos;
 
 	vector<tagSelectTile> _vSelectTile;
 	vector<tagSelectTile>::iterator _viSelectTile;
@@ -80,9 +102,12 @@ public:
 	void setMap();
 	void save();
 	void load();
+	void paletteChange();
 	void mapLoad();
 	void setSelectTile();
 	void releaseSelectTile();
+
+	void setLinePos(int frameX,int frameY) ;
 
 	Image* getImage() {	return _paletteImage;}
 	tagTileMap getTile() { return _tile[TILEX * TILEY]; }

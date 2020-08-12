@@ -1,6 +1,5 @@
 #pragma once
 #include "SingletonBase.h"
-#include "Camera.h"
 
 class ConfigManager : public SingletonBase<ConfigManager>
 {
@@ -42,7 +41,6 @@ private:
 	};
 
 private:
-	Camera _camera;
 	bool _isActive; // 옵션창을 열었는지 판단함
 
 	Image* _header;

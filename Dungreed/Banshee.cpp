@@ -1,30 +1,26 @@
+#include "stdafx.h"
+#include "EnemyManager.h"
 #include "Banshee.h"
 
 void Banshee::init(const Vector2& pos, DIRECTION direction)
-{
-	_img = IMAGE_MANAGER->findImage("Banshee/Idle");
-
+{	
 	_ani = new Animation;
-	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());	
-	_ani->setDefPlayFrame(false, true);	
-	_ani->setFPS(1);
-	_ani->start();
+
+	setState(ENEMY_STATE::IDLE);
 
 	_position = pos;
 	_direction = direction;
+	_scale = 4;
 
-	_rect = rectMakePivot(_position, _img->getFrameSize(), PIVOT::CENTER);
-
-	_state = ENEMY_STATE::IDLE;
+	_size = _img->getFrameSize() * _scale;
 
 	ZeroMemory(&_shooting, sizeof(_shooting));
 	_shooting.delay = 30;
+	
+	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
-	_bullet = new BulletManager;
-	_bullet->init();
-
-	_active = true;
-	_isDetect = false;
+	_isDetect = 0;
+	_detectRange = 300;
 }
 
 void Banshee::release()
@@ -33,63 +29,61 @@ void Banshee::release()
 	SAFE_DELETE(_ani);
 }
 
-void Banshee::update()
+void Banshee::update(float const timeElapsed)
 {
-	if (_active)
+	if (!_isDetect)
 	{
-		switch (_state)
+		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
+	}
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
 		{
-			case ENEMY_STATE::IDLE:
+			if (_isDetect)
 			{
-				if (_shooting.update(TIME_MANAGER->getElapsedTime() * 10))
+				if (_shooting.update(timeElapsed * 10))
 				{
 					setState(ENEMY_STATE::ATTACK);
 				}
-
-				break;
 			}
-			case ENEMY_STATE::ATTACK:
-			{				
-				if (!_ani->isPlay())
-				{
-					setState(ENEMY_STATE::IDLE);
-				}
-				break;
-			}
-			case ENEMY_STATE::DIE:
-			{
-				//setState(ENEMY_STATE::DIE);
-				break;
-			}
+			break;
 		}
+		case ENEMY_STATE::ATTACK:
+		{
+			if (!_ani->isPlay())
+			{
+				setState(ENEMY_STATE::IDLE);
+			}
+			break;
+		}
+		case ENEMY_STATE::DIE:
+		{
 
-		_ani->frameUpdate(TIME_MANAGER->getElapsedTime() * 10);
+			break;
+		}
+	}
 
-		_rect = rectMakePivot(_position, _img->getFrameSize(), PIVOT::CENTER);
-	}	
-
-	_bullet->update();
+	_ani->frameUpdate(timeElapsed * 10);
 }
 
 void Banshee::render()
 {
-	_img->setScale(5.0f);
-
-	if(_active) _img->aniRender(_rect.getCenter(), _ani, !(unsigned)_direction);
-
-	_bullet->render();
+	D2D_RENDERER->drawRectangle(_rect);
+	D2D_RENDERER->drawEllipse(_position, _detectRange);
+	_img->setScale(_scale);
+	_img->aniRender(_position, _ani, !(bool)_direction);
 }
 
 void Banshee::setState(ENEMY_STATE state)
 {
-	if (_state == state) return;
-
 	_state = state;
 
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_ani->stop();
 			_img = IMAGE_MANAGER->findImage("Banshee/Idle");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
@@ -100,19 +94,12 @@ void Banshee::setState(ENEMY_STATE state)
 		}		
 		case ENEMY_STATE::ATTACK:
 		{
+			_ani->stop();
 			_img = IMAGE_MANAGER->findImage("Banshee/Attack");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(1);
-			_ani->start();
-
-			for (int i = 0; i < 8; i++)
-			{
-				_bullet->createBullet("Banshee/Bullet", _position, 10, _shooting.angle, 500, 5.0f);
-				_shooting.angle += PI / 4;
-			}
-
-			_bullet->fireBullet();
+			_ani->start();			
 
 			break;
 		}		
@@ -121,6 +108,5 @@ void Banshee::setState(ENEMY_STATE state)
 
 			break;
 		}
-		break;
 	}
 }

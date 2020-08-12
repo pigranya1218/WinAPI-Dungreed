@@ -129,8 +129,7 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	Vector2 size = _size * _scale;
 
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
-	Vector2 anglePos = _anglePos * _scale;
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(anglePos.x, anglePos.y));
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(_anglePos.x, _anglePos.y));
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
@@ -158,6 +157,37 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	this->resetRenderOption();
 }
 
+void Image::render(const Vector2 & originPos, const Vector2 & originSize, const Vector2 & sourPos, const Vector2 & sourSize, bool bisymmetry)
+{
+	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(1, 1, D2D1::Point2F(0, 0));
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(originSize.x * 0.5, originSize.y * 0.5));
+	D2D1::Matrix3x2F translateMatrix;
+	D2D1::Matrix3x2F lrMatrix;
+	if (bisymmetry)
+	{
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(originPos.x + originSize.x / 2.f), round(originPos.y - originSize.y / 2.f));
+		lrMatrix = D2D1::Matrix3x2F(-1, 0, 0, 1, 0, 0);
+	}
+	else
+	{
+		translateMatrix = D2D1::Matrix3x2F::Translation(round(originPos.x - originSize.x / 2.f), round(originPos.y - originSize.y / 2.f));
+		lrMatrix = D2D1::Matrix3x2F(1, 0, 0, 1, 0, 0);
+	}
+
+	D2D1::Matrix3x2F skewMatrix = D2D1::Matrix3x2F::Skew(_skewAngle.x, _skewAngle.y, D2D1::Point2F(_skewPos.x, _skewPos.y));
+
+	//그릴 영역 세팅 
+	D2D1_RECT_F dxArea = D2D1::RectF(0.0f, 0.0f, originSize.x, originSize.y);
+	D2D1_RECT_F dxSrc = D2D1::RectF(sourPos.x, sourPos.y, sourPos.x + sourSize.x, sourPos.y + sourSize.y);
+	//최종행렬 세팅
+	D2D_RENDERER->getRenderTarget()->SetTransform(scaleMatrix * rotateMatrix * skewMatrix * lrMatrix * translateMatrix);
+	//렌더링 요청
+	D2D_RENDERER->getRenderTarget()->DrawBitmap(_bitmap, dxArea, _alpha,
+		D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, &dxSrc);
+
+	this->resetRenderOption();
+}
+
 /********************************************************************************
 ## PerfeactFrameRender ##
 *********************************************************************************/
@@ -168,12 +198,27 @@ void Image::frameRender(const Vector2& position, const int frameX, const int fra
 	this->render(position, Vector2(_frameInfo[frame].x, _frameInfo[frame].y), Vector2(_frameInfo[frame].width, _frameInfo[frame].height), bisymmetry);
 }
 
+void Image::frameRender(const Vector2& position, const Vector2& size, const int frameX, const int frameY, bool bisymmetry)
+{
+	//현재 프레임인덱스 
+	int frame = frameY * _maxFrameX + frameX;
+	this->render(position, size, Vector2(_frameInfo[frame].x, _frameInfo[frame].y), Vector2(_frameInfo[frame].width, _frameInfo[frame].height), bisymmetry);
+}
+
 void Image::aniRender(const Vector2 & position, Animation * ani, bool bisymmetry)
 {
 	POINT sourPos = ani->getFramePos();
 	POINT sourSize = { ani->getFrameWidth(), ani->getFrameHeight() };
 	this->render(position, Vector2(sourPos), Vector2(sourSize), bisymmetry);
 	
+}
+
+void Image::aniRender(const Vector2 & position, const Vector2 & size, Animation * ani, bool bisymmetry)
+{
+	POINT sourPos = ani->getFramePos();
+	POINT sourSize = { ani->getFrameWidth(), ani->getFrameHeight() };
+	this->render(position, size, Vector2(sourPos), Vector2(sourSize), bisymmetry);
+
 }
 
 /********************************************************************************
@@ -185,7 +230,7 @@ void Image::resetRenderOption()
 	this->_alpha = 1.0f;
 	this->_scale = 1.0f;
 	this->_angle = 0.f;
-	this->_anglePos = Vector2(_size.x / 2.f, _size.y / 2.f);
+	
 	this->_skewAngle = Vector2(0, 0);
 	this->_skewPos = Vector2(0, 0);
 
@@ -199,4 +244,5 @@ void Image::resetRenderOption()
 		this->_size.x = _frameInfo[0].width;
 		this->_size.y = _frameInfo[0].height;
 	}
+	this->_anglePos = Vector2(_size.x / 2.f, _size.y / 2.f);
 }

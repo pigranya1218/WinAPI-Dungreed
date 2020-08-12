@@ -13,7 +13,7 @@ enum class OBJECT_TEAM : int
 
 enum class ENEMY_TYPE : unsigned int
 {
-	BANSHEE,			// 수녀
+	BANSHEE = 0,		// 수녀
 	BAT_BOMB,			// 박쥐 자폭
 	BAT_RED,			// 박쥐 빨강
 	BAT_NORMAL,			// 박쥐 기본
@@ -25,7 +25,8 @@ enum class ENEMY_TYPE : unsigned int
 	SKEL_BIG_NORMAL,	// 해골기사 기본
 	SKEL_BIG_ICE,		// 해골기사 얼음
 	SKEL_DOG,			// 해골강아지
-	SKEL_MAGICIAN_ICE	// 해골마법사 얼음
+	SKEL_MAGICIAN_ICE,	// 해골마법사 얼음
+	SKEL_SMALL_BOW
 };
 
 enum class DIRECTION : unsigned int

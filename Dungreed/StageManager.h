@@ -43,5 +43,8 @@ public:
 
 	// 스테이지 해제
 	void releaseStage();
+
+	// 플레이어 관련 함수
+	Vector2 getPlayerPos();
 };
 

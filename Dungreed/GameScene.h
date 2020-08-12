@@ -11,9 +11,6 @@ class GameScene : public GameNode
 private:
 	float _timeSpeed; // 시간 배속, 1 = 기본 속도
 
-	Camera* _bgCamera; // 배경 카메라
-	Camera* _camera; // 일반 카메라
-
 	Player* _player;
 	StageManager* _stageMgr;
 	UIManager* _uiMgr;
@@ -28,15 +25,11 @@ public:
 	void loadInfo(tagLoadInfo const info);
 
 	// 플레이어 관련 함수
-	
+	Vector2 getPlayerPos() { return _player->getPosition(); }
 
 
 	// 스테이지 관련 함수
 	void moveTo(GameObject* object, Vector2 moveDir);
-
-	// 카메라 관련 함수
-	Camera* getBgCamera() const { return _bgCamera; }
-	Camera* getCamera() const { return _camera; }
 
 	// UI 관련 함수
 

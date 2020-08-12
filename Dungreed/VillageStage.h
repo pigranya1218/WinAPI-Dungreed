@@ -1,9 +1,14 @@
 #pragma once
 #include "Stage.h"
 
-class TestStage : public Stage
+class VillageStage :public Stage
 {
 private:
+	Image* _BGL;
+	Image* _BG1;
+	Image* _BG2;
+	Image* _floor;
+
 
 public:
 	virtual void init();

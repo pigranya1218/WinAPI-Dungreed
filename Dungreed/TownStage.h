@@ -5,7 +5,6 @@
 class TownStage : public GameNode
 {
 private:
-	Camera _camera;
 
 
 public:

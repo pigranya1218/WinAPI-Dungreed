@@ -22,5 +22,5 @@ void TownStage::update()
 
 void TownStage::render()
 {
-	_camera.render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
+	CAMERA->render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
 }

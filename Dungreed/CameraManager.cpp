@@ -1,25 +1,25 @@
 #include "stdafx.h"
-#include "Camera.h"
+#include "CameraManager.h"
 #include "CameraShakeEvent.h"
 
-Camera::Camera()
+CameraManager::CameraManager()
 {
 }
 
-Camera::~Camera()
+CameraManager::~CameraManager()
 {
 }
 
-HRESULT Camera::init()
+HRESULT CameraManager::init()
 {
 	return S_OK;
 }
 
-void Camera::release()
+void CameraManager::release()
 {
 }
 
-void Camera::processEvent()
+void CameraManager::processEvent()
 {
 	if (_eventQueue.empty()) return;
 
@@ -31,13 +31,13 @@ void Camera::processEvent()
 	}
 }
 
-void Camera::pushShakeEvent(float power, float shakePerTime, float remainTime)
+void CameraManager::pushShakeEvent(float power, float shakePerTime, float remainTime)
 {
 	CameraShakeEvent* event = new CameraShakeEvent(power, shakePerTime, remainTime);
 	_eventQueue.push(event);
 }
 
-void Camera::setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT)
+void CameraManager::setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT)
 {
 	_offsetL = offsetL;
 	_offsetT = offsetT;
@@ -58,7 +58,7 @@ void Camera::setConfig(float offsetL, float offsetT, float width, float height, 
 	_originMaxY = _maxY = _maxT + (_height / 2);
 }
 
-void Camera::setConfigCenter(float x, float y, float width, float height, float minX, float minY, float maxX, float maxY)
+void CameraManager::setConfigCenter(float x, float y, float width, float height, float minX, float minY, float maxX, float maxY)
 {
 	_x = x;
 	_y = y;
@@ -77,37 +77,37 @@ void Camera::setConfigCenter(float x, float y, float width, float height, float 
 	_originMaxT = _maxT = _minY - (height / 2);
 }
 
-float Camera::getL()
+float CameraManager::getL()
 {
 	return _L;
 }
 
-float Camera::getT()
+float CameraManager::getT()
 {
 	return _T;
 }
 
-Vector2 Camera::getLT()
+Vector2 CameraManager::getLT()
 {
 	return Vector2(_L, _T);
 }
 
-float Camera::getX()
+float CameraManager::getX()
 {
 	return _x;
 }
 
-float Camera::getY()
+float CameraManager::getY()
 {
 	return _y;
 }
 
-Vector2 Camera::getXY()
+Vector2 CameraManager::getXY()
 {
 	return Vector2(_x, _y);
 }
 
-void Camera::setL(float newL)
+void CameraManager::setL(float newL)
 {
 	newL = min(_maxL, newL);
 	newL = max(_minL, newL);
@@ -115,7 +115,7 @@ void Camera::setL(float newL)
 	_x = _L + (_width / 2);
 }
 
-void Camera::setT(float newT)
+void CameraManager::setT(float newT)
 {
 	newT = min(_maxT, newT);
 	newT = max(_minT, newT);
@@ -123,13 +123,13 @@ void Camera::setT(float newT)
 	_y = _T + (_height / 2);
 }
 
-void Camera::setLT(Vector2 newLT)
+void CameraManager::setLT(Vector2 newLT)
 {
 	setL(newLT.x);
 	setT(newLT.y);
 }
 
-void Camera::setX(float newX)
+void CameraManager::setX(float newX)
 {
 	newX = min(_maxX, newX);
 	newX = max(_minX, newX);
@@ -137,7 +137,7 @@ void Camera::setX(float newX)
 	_L = _x - (_width / 2);
 }
 
-void Camera::setY(float newY)
+void CameraManager::setY(float newY)
 {
 	newY = min(_maxY, newY);
 	newY = max(_minY, newY);
@@ -145,49 +145,49 @@ void Camera::setY(float newY)
 	_T = _y - (_height / 2);
 }
 
-void Camera::setXY(Vector2 newXY)
+void CameraManager::setXY(Vector2 newXY)
 {
 	setX(newXY.x);
 	setY(newXY.y);
 }
 
-void Camera::movePivot(float offsetX, float offsetY)
+void CameraManager::movePivot(float offsetX, float offsetY)
 {
 	setL(_L + offsetX);
 	setT(_T + offsetY);
 }
 
-void Camera::movePivot(Vector2 offsetXY)
+void CameraManager::movePivot(Vector2 offsetXY)
 {
 	setL(_L + offsetXY.x);
 	setT(_T + offsetXY.y);
 }
 
-float Camera::getRelativeX(float left)
+float CameraManager::getRelativeX(float left)
 {
 	float newL = _offsetL + left - _L;
 	return newL;
 }
 
-LONG Camera::getRelativeX(LONG left)
+LONG CameraManager::getRelativeX(LONG left)
 {
 	LONG newL = _offsetL + left - _L;
 	return newL;
 }
 
-float Camera::getRelativeY(float top)
+float CameraManager::getRelativeY(float top)
 {
 	float newT = _offsetT + top - _T;
 	return  newT;
 }
 
-LONG Camera::getRelativeY(LONG top)
+LONG CameraManager::getRelativeY(LONG top)
 {
 	LONG newT = _offsetT + top - _T;
 	return  newT;
 }
 
-POINT Camera::getRelativePt(POINT pt)
+POINT CameraManager::getRelativePt(POINT pt)
 {
 	POINT result;
 	result.x = getRelativeX(pt.x);
@@ -195,12 +195,12 @@ POINT Camera::getRelativePt(POINT pt)
 	return result;
 }
 
-Vector2 Camera::getRelativeV2(Vector2 vec2)
+Vector2 CameraManager::getRelativeV2(Vector2 vec2)
 {
 	return Vector2(getRelativeX(vec2.x), getRelativeY(vec2.y));
 }
 
-FloatRect Camera::getRelativeFR(FloatRect rc)
+FloatRect CameraManager::getRelativeFR(FloatRect rc)
 {
 	float left = getRelativeX(rc.left);
 	float top = getRelativeY(rc.top);
@@ -211,31 +211,31 @@ FloatRect Camera::getRelativeFR(FloatRect rc)
 		right, bottom);
 }
 
-float Camera::getAbsoluteX(float left)
+float CameraManager::getAbsoluteX(float left)
 {
 	float newL = -_offsetL + _L + left;
 	return newL;
 }
 
-LONG Camera::getAbsoluteX(LONG left)
+LONG CameraManager::getAbsoluteX(LONG left)
 {
 	LONG newL = -_offsetL + _L + left;
 	return newL;
 }
 
-float Camera::getAbsoluteY(float top)
+float CameraManager::getAbsoluteY(float top)
 {
 	float newT = -_offsetT + _T + top;
 	return newT;
 }
 
-LONG Camera::getAbsoluteY(LONG top)
+LONG CameraManager::getAbsoluteY(LONG top)
 {
 	LONG newT = -_offsetT + _T + top;
 	return newT;
 }
 
-POINT Camera::getAbsolutePt(POINT pt)
+POINT CameraManager::getAbsolutePt(POINT pt)
 {
 	POINT result;
 	result.x = getAbsoluteX(pt.x);
@@ -243,50 +243,68 @@ POINT Camera::getAbsolutePt(POINT pt)
 	return result;
 }
 
-Vector2 Camera::getAbsoluteV2(Vector2 vec2)
+Vector2 CameraManager::getAbsoluteV2(Vector2 vec2)
 {
 	return Vector2(getAbsoluteX(vec2.x), getAbsoluteY(vec2.y));
 }
 
-FloatRect Camera::getAbsoluteFR(FloatRect rc)
+FloatRect CameraManager::getAbsoluteFR(FloatRect rc)
 {
 	return FloatRect(getAbsoluteX(rc.left), getAbsoluteY(rc.top),
 		getAbsoluteX(rc.right), getAbsoluteY(rc.bottom));
 }
 
-void Camera::drawLine(Vector2 start, Vector2 end)
+void CameraManager::drawLine(Vector2 start, Vector2 end)
 {
 	D2D_RENDERER->drawLine(getRelativeV2(start), getRelativeV2(end));
 }
 
-void Camera::rectangle(FloatRect rect, D2D1::ColorF::Enum color, float alpha, float strokeWidth)
+void CameraManager::rectangle(FloatRect rect, D2D1::ColorF::Enum color, float alpha, float strokeWidth)
 {
 	FloatRect relativeRc = getRelativeFR(rect);
 	D2D_RENDERER->drawRectangle(relativeRc, color, alpha, strokeWidth);
 }
 
-void Camera::render(Image * img, Vector2 center, bool bisymmetry)
+void CameraManager::render(Image * img, Vector2 center, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
 	img->render(drawPos, bisymmetry);
 }
 
-void Camera::render(Image * img, Vector2 center, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
+void CameraManager::render(Image* img, Vector2 center, Vector2 size, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->render(drawPos, size, bisymmetry);
+}
+
+void CameraManager::render(Image * img, Vector2 center, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
 	img->render(drawPos, sourLT, sourSize, bisymmetry);
 }
 
+void CameraManager::render(Image* img, Vector2 center, Vector2 size, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->render(drawPos, size, sourLT, sourSize, bisymmetry);
+}
 
-void Camera::frameRender(Image * img, Vector2 center, int frameX, int frameY, bool bisymmetry)
+
+void CameraManager::frameRender(Image * img, Vector2 center, int frameX, int frameY, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
 	img->frameRender(drawPos, frameX, frameY, bisymmetry);
 }
 
-void Camera::aniRender(Image * img, Vector2 center, Animation * ani, bool bisymmetry)
+void CameraManager::aniRender(Image * img, Vector2 center, Animation * ani, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
 	img->aniRender(drawPos, ani, bisymmetry);
+}
+
+void CameraManager::aniRender(Image* img, Vector2 center, Vector2 size, Animation* ani, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->aniRender(drawPos, size, ani, bisymmetry);
 }
 

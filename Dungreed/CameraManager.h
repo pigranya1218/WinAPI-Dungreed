@@ -2,7 +2,7 @@
 #include "Image.h"
 #include "CameraEvent.h"
 
-class Camera
+class CameraManager : public SingletonBase<CameraManager>
 {
 private:
 	queue<CameraEvent*> _eventQueue;
@@ -26,8 +26,8 @@ private:
 	float _minY, _maxY; // y 좌표의 가능한 범위
 
 public:
-	Camera();
-	~Camera();
+	CameraManager();
+	~CameraManager();
 
 	HRESULT init();
 	void release();
@@ -73,10 +73,14 @@ public:
 	void rectangle(FloatRect rect, D2D1::ColorF::Enum color, float alpha, float strokeWidth);
 
 	void render(Image* img, Vector2 center, bool bisymmetry = false);
+	void render(Image* img, Vector2 center, Vector2 size, bool bisymmetry = false);
 	void render(Image* img, Vector2 center, Vector2 sourLT, Vector2 sourSize, bool bisymmetry = false);
+	void render(Image* img, Vector2 center, Vector2 size, Vector2 sourLT, Vector2 sourSize, bool bisymmetry = false);
 
 	void frameRender(Image* img, Vector2 center, int frameX, int frameY, bool bisymmetry = false);
 
 	void aniRender(Image* img, Vector2 center, Animation* ani, bool bisymmetry = false);
+	void aniRender(Image* img, Vector2 center, Vector2 size, Animation* ani, bool bisymmetry = false);
+
 	
 };

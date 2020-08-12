@@ -91,12 +91,6 @@
     <Filter Include="Dungreed\GameScene\Stage\Dungeon">
       <UniqueIdentifier>{7e8e49aa-110b-4327-a474-bd2b96273960}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\GameScene\Stage\Test">
-      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2DGameFramework\Camera">
-      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Npc">
       <UniqueIdentifier>{f27c1b85-e2e6-4efe-ac36-0a247dd856a6}</UniqueIdentifier>
     </Filter>
@@ -114,6 +108,18 @@
     </Filter>
     <Filter Include="Dungreed\GameScene\Item\Long">
       <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Costume">
+      <UniqueIdentifier>{d01a2838-1c1c-4035-b841-2308d2d14be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Accessories">
+      <UniqueIdentifier>{6cd4b808-2924-4835-ae3b-9c78ec86045a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Debug">
+      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,10 +142,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CameraEvent.h">
-      <Filter>2DGameFramework\Camera</Filter>
+      <Filter>2DGameFramework\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
-      <Filter>2DGameFramework\Camera</Filter>
+      <Filter>2DGameFramework\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -216,9 +222,6 @@
     <ClInclude Include="DataManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>2DGameFramework\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>Dungreed\MainScene</Filter>
     </ClInclude>
@@ -279,11 +282,17 @@
     <ClInclude Include="TownStage.h">
       <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClInclude>
-    <ClInclude Include="TestStage.h">
-      <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Banshee.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatRed.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelBigIce.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>2DGameFramework\ProgressBar</Filter>
@@ -294,6 +303,42 @@
     <ClInclude Include="ShortSpear.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
+    <ClInclude Include="SkelBigNormal.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelMagicianIce.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatNormal.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatIce.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallBow.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Punch.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="SpikeBall.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="babyGreenBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="bombPouch.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="Costume.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeManager.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="VillageStage.h">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
+    </ClInclude>
     <ClInclude Include="MatchLockGun.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
@@ -302,6 +347,15 @@
     </ClInclude>
     <ClInclude Include="GunBullet.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>2DGameFramework\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugStage.h">
+      <Filter>Dungreed\GameScene\Stage\Debug</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -312,10 +366,10 @@
       <Filter>2DGameFramework\GameNode</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Camera</Filter>
+      <Filter>2DGameFramework\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
-      <Filter>2DGameFramework\Camera</Filter>
+      <Filter>2DGameFramework\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -386,9 +440,6 @@
     <ClCompile Include="DataManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>2DGameFramework\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="MainScene.cpp">
       <Filter>Dungreed\MainScene</Filter>
     </ClCompile>
@@ -437,14 +488,56 @@
     <ClCompile Include="TownStage.cpp">
       <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClCompile>
-    <ClCompile Include="TestStage.cpp">
-      <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    <ClCompile Include="Banshee.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatRed.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStat.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
     <ClCompile Include="ShortSpear.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelMagicianIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallBow.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Punch.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Costume.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeManager.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="SpikeBall.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="babyGreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="bombPouch.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="VillageStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClCompile>
     <ClCompile Include="MatchLockGun.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
@@ -454,6 +547,15 @@
     </ClCompile>
     <ClCompile Include="GunBullet.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>2DGameFramework\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Debug</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <Filter>소스 파일</Filter>

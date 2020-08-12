@@ -34,15 +34,12 @@ using namespace std;
 #include "SoundManager.h"
 #include "SceneManager.h"
 #include "EffectManager.h"
+#include "CameraManager.h"
 #include "DebugManager.h"
 #include "ConfigManager.h"
 #include "DataManager.h"
 
 using namespace TTYONE_UTIL;
-
-//MS VS버전이 올라가면서 기존의 문자열 함수의 안정성을 올리기위해
-//_s를 붙인 함수를 사용하게끔 경고하는 메시지를 무시해준다
-
 
 // 여기서 프로그램에 필요한 추가 헤더를 참조합니다.
 #define WINNAME (LPCTSTR)(TEXT("Dungreed"))
@@ -64,6 +61,7 @@ using namespace TTYONE_UTIL;
 #define DEBUG_MANAGER DebugManager::getSingleton()
 #define CONFIG_MANAGER ConfigManager::getSingleton()
 #define DATA_MANAGER DataManager::getSingleton()
+#define CAMERA CameraManager::getSingleton()
 
 #define SAFE_DELETE(p)		{if(p) {delete(p); (p) = NULL;}}
 #define SAFE_RELEASE(p)		{if(p) {(p)->release(); (p) = NULL;}}

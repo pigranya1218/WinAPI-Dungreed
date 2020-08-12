@@ -25,11 +25,12 @@ public:
 
 	virtual void init();
 	virtual void release();
-	virtual void update(float const elapsedTime);
-	virtual void render(Vector2 pos, float angle);
+	virtual void update(Player* player, float const elapsedTime);
+	virtual void backRender(Player* player);
+	virtual void frontRender(Player* player);
 	virtual void displayInfo(); // 인벤토리에서 보여질 정보들
 
-	virtual void attack(Vector2 const position, float const angle); // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
+	virtual void attack(Player* player); // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
 	virtual void attack(FloatRect* rect, tagAttackInfo* info); // 공격 렉트를 변경시키는 함수 
 	virtual void attack(FloatCircle* circle, tagAttackInfo* info); // 공격 써클을 변경시키는 함수
 	virtual void attack(Projectile* projectile, tagAttackInfo* info); // 탄환을 변경시키는 함수
