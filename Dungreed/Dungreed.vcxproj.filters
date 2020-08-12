@@ -384,11 +384,11 @@
     <ClInclude Include="PickaxCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="BaseCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -614,11 +614,11 @@
     <ClCompile Include="PickaxCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="BaseCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

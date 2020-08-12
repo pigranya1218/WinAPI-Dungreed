@@ -229,15 +229,15 @@ void ShortSword::attack(Player* player)
 	_currAttackDelay = _baseAttackDelay;
 }
 
-void ShortSword::attack(FloatRect * rect, tagAttackInfo * info)
+void ShortSword::attack(FloatRect* rect, tagAttackInfo* info)
 {
 }
 
-void ShortSword::attack(FloatCircle * circle, tagAttackInfo * info)
+void ShortSword::attack(FloatCircle* circle, tagAttackInfo* info)
 {
 }
 
-void ShortSword::attack(Projectile * projectile, tagAttackInfo * info)
+void ShortSword::attack(Projectile* projectile, tagAttackInfo* info)
 {
 }
 

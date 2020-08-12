@@ -29,7 +29,6 @@ void DebugStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));*/
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::MINOTAURS, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
 
-
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	mapLoad();
 	

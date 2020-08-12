@@ -2,18 +2,20 @@
 #include "GameScene.h"
 #include "Costume.h"
 #include "Item.h"
+
 #include "ShortSpear.h"
 #include "Punch.h"
+#include "MatchLockGun.h"
+#include "Boomerang.h"
+#include "ShortSword.h"
+
 #include "SpikeBall.h"
 #include "IceBall.h"
 #include "miniEarth.h"
 #include "watCher.h"
 #include "babyGreenBat.h"
 #include "bombPouch.h"
-#include "MatchLockGun.h"
 #include "Matchlock.h"
-#include "ShortSword.h"
-#include "Boomerang.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -62,6 +64,8 @@ void Player::attack(Projectile* projectile, tagAttackInfo* info)
 	}
 
 	// 플레이어 스탯 적용
+
+	_gameScene->attack(projectile, info);
 }
 
 void Player::init()

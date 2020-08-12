@@ -5,7 +5,6 @@ class ShortSpear : public Item
 {
 private:
 	// 공격 관련
-	Image*	_effect;
 	int	_minDamage;
 	int _maxDamage;
 	Vector2 _attackMove;
@@ -14,9 +13,6 @@ private:
 	float _attackAngle;
 	bool _reverseMove;
 	bool _drawEffect;
-
-	FloatRect _hand;
-	Vector2 _handSize;
 
 public:
 	virtual void init();

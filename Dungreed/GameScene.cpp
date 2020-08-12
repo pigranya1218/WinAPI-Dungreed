@@ -80,3 +80,16 @@ void GameScene::moveTo(GameObject * object, Vector2 moveDir)
 {
 	_stageMgr->moveTo(object, moveDir);
 }
+
+void GameScene::attack(FloatRect* rect, tagAttackInfo* info)
+{
+}
+
+void GameScene::attack(FloatCircle* circle, tagAttackInfo* info)
+{
+}
+
+void GameScene::attack(Projectile* projectile, tagAttackInfo* info)
+{
+	_stageMgr->attack(projectile, info);
+}

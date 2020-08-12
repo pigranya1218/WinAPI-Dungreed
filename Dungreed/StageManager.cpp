@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "StageManager.h"
-#include "Stage.h"
 #include "GameScene.h"
+#include "Player.h"
+
 #include "DebugStage.h"
 #include "VillageStage.h"
 
@@ -26,6 +27,20 @@ void StageManager::render()
 {
 	_currStage->render();
 }
+
+void StageManager::attack(FloatRect* rect, tagAttackInfo* info)
+{
+}
+
+void StageManager::attack(FloatCircle* circle, tagAttackInfo* info)
+{
+}
+
+void StageManager::attack(Projectile* projectile, tagAttackInfo* info)
+{
+	_currStage->attack(projectile, info);
+}
+
 
 void StageManager::moveTo(GameObject* object, Vector2 moveDir)
 {

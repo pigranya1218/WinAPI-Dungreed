@@ -1,42 +1,20 @@
 #pragma once
 #include "Item.h"
-#include "PlayerBullet.h"
 
 class MatchLockGun : public Item
 {
 private:
-
-	Image* _shootEffect;
-	Image* _dustEffect;
-	Animation* _effectAni01;
-	Animation* _effectAni02;
-
 	int _minDamage;
 	int _maxDamage;
-	int _gunType;				//원거리 무기 타입
-	float _angle;
-	bool _isLeft;
-	Vector2 _gunPos;
-	Vector2 renderPosWeapon;
-
-	bool _isAttack;
-	bool isLeft;
-
-	//GunBullet* _bullet;
-	PlayerBullet* _bullet;
-
-	Vector2 _attackMove;
 	
-	float renderDegree;
-	float degree;
-
 	float _baseAttackDelay; // 공격 쿨타임
 	float _currAttackDelay; // 남은 공격 쿨타임
-	float _attackAngle;
-	bool _reverseMove;
-	bool _drawEffect;
-	FloatRect _hand;
-	Vector2 _handSize;
+	int _maxBullet; // 최대 총알 갯수
+	int _currBullet; // 현재 총알 갯수
+	float _baseReloadDelay; // 재장전 쿨타임
+	float _currReloadDelay; // 남은 재장전 쿨타임
+	bool _drawEffect; // 이번 render 함수에서 이펙트를 시작할 것인지 판단
+
 public:
 
 	virtual void init();
@@ -54,6 +32,5 @@ public:
 	virtual void getHit(Vector2 const position); // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
 	virtual PlayerStat equip(); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
-	int getGunType() { return _gunType; }
 };
 

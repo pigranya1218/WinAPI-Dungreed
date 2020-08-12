@@ -30,6 +30,9 @@ public:
 
 	// 스테이지 관련 함수
 	void moveTo(GameObject* object, Vector2 moveDir);
+	void attack(FloatRect* rect, tagAttackInfo* info);
+	void attack(FloatCircle* circle, tagAttackInfo* info);
+	void attack(Projectile* projectile, tagAttackInfo* info);
 
 	// UI 관련 함수
 

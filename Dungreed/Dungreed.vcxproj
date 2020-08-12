@@ -198,6 +198,7 @@
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
+    <ClInclude Include="NormalProjectile.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="Object.h" />
@@ -205,7 +206,6 @@
     <ClInclude Include="Ovibos.h" />
     <ClInclude Include="PickaxCos.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
@@ -282,13 +282,13 @@
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
+    <ClCompile Include="NormalProjectile.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ovibos.cpp" />
     <ClCompile Include="PickaxCos.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />

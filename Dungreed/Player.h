@@ -18,6 +18,7 @@ struct tagAttackInfo
 	float knockBack; // ³Ë¹é (¹Ð¾î³»´Â Èû)
 };
 
+
 class Player : public GameObject
 {
 Synthesize(DIRECTION, _direction, Direction)

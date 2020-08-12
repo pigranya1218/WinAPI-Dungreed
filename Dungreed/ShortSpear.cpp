@@ -11,9 +11,6 @@ void ShortSpear::init()
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 
-	_handSize = Vector2(5, 5);
-
-
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
 	_minDamage = 7;
@@ -58,22 +55,10 @@ void ShortSpear::backRender(Player* player)
 {
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
-	if (isLeft)
-	{
-		Vector2 renderPos = Vector2(pos.x - 22, pos.y + 20);
-
-		_hand = rectMakePivot(renderPos, _handSize, PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1, 6.f);
-		D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1);
-	}
-	else
-	{
-		Vector2 renderPos = Vector2(pos.x + 22, pos.y + 20);
-
-		_hand = rectMakePivot(renderPos, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1, 6.f);
-		D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1);
-	}
+	Vector2 renderPos = Vector2(pos.x + ((isLeft) ? (-22) : (22)), pos.y + 20);
+	FloatRect handRc = rectMakePivot(renderPos, Vector2(5, 5), PIVOT::CENTER);
+	D2D_RENDERER->drawRectangle(handRc, 40, 36, 58, 1, 6.f);
+	D2D_RENDERER->fillRectangle(handRc, 210, 188, 181, 1);
 }
 
 void ShortSpear::frontRender(Player* player)
@@ -110,10 +95,10 @@ void ShortSpear::frontRender(Player* player)
 	_img->setAnglePos(Vector2(0.35f * _img->getWidth(), 0.5f * _img->getHeight()));
 	_img->render(renderPosWeapon, isLeft);
 
-	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+	FloatRect handRc = rectMakePivot(renderPosHand, Vector2(5, 5), PIVOT::CENTER);
 
-	D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
-	D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, degree, renderPosHand);
+	D2D_RENDERER->drawRectangle(handRc, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
+	D2D_RENDERER->fillRectangle(handRc, 210, 188, 181, 1, degree, renderPosHand);
 	
 	if (_drawEffect) // 이펙트를 그린다
 	{
@@ -153,15 +138,15 @@ void ShortSpear::attack(Player* player)
 	_currAttackDelay = _baseAttackDelay;
 }
 
-void ShortSpear::attack(FloatRect * rect, tagAttackInfo * info)
+void ShortSpear::attack(FloatRect * rect, tagAttackInfo* info)
 {
 }
 
-void ShortSpear::attack(FloatCircle * circle, tagAttackInfo * info)
+void ShortSpear::attack(FloatCircle * circle, tagAttackInfo* info)
 {
 }
 
-void ShortSpear::attack(Projectile * projectile, tagAttackInfo * info)
+void ShortSpear::attack(Projectile * projectile, tagAttackInfo* info)
 {
 }
 
