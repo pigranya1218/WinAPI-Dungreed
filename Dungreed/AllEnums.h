@@ -26,7 +26,11 @@ enum class ENEMY_TYPE : unsigned int
 	SKEL_BIG_ICE,		// 해골기사 얼음
 	SKEL_DOG,			// 해골강아지
 	SKEL_MAGICIAN_ICE,	// 해골마법사 얼음
-	SKEL_SMALL_BOW
+	SKEL_SMALL_BOW,		// 해골 궁수
+	SKEL_SMALL_GSWORD,	// 해골 대검
+	SKEL_SMALL_DAGGER,	// 해골 단검
+	MINOTAURS,			// 미노타우르스
+	OVIBOS				// 얼음맵 염소
 };
 
 enum class DIRECTION : unsigned int

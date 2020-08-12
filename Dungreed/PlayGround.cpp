@@ -335,8 +335,23 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Skel/Magician_Ice/Idle_Shot"	, L"resources/images/Enemy/Skel/Magician_Ice/idle_shot.png"		,  6, 1);	// 해골 얼음마법사 기본 피격
 	IMAGE_MANAGER->addFrameImage("Skel/Magician_Ice/Attack"		, L"resources/images/Enemy/Skel/Magician_Ice/attack.png"		, 12, 1);	// 해골 얼음마법사 공격
 	IMAGE_MANAGER->addFrameImage("Skel/Magician_Ice/Attack_Shot", L"resources/images/Enemy/Skel/Magician_Ice/attack_shot.png"	, 12, 1);	// 해골 얼음마법사 공격 피격
+	IMAGE_MANAGER->addFrameImage("Skel/Magician_Ice/Effect"		, L"resources/images/Enemy/Skel/Magician_Ice/ice_crystal.png"	,  7, 3);	// 해골 얼음마법사 공격 이펙트
 
-	IMAGE_MANAGER->addFrameImage("test", L"resources/images/Enemy/Skel/Small/move.png", 6,1);
+	IMAGE_MANAGER->addImage("Skel/Small/Idle"			, L"resources/images/Enemy/Skel/Small/idle.png"				);	// 작은해골 기본
+	IMAGE_MANAGER->addImage("Skel/Small/Idle_Shot"		, L"resources/images/Enemy/Skel/Small/idle_shot.png"		);	// 작은해골 기본 피격
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Move"		, L"resources/images/Enemy/Skel/Small/move.png"		, 6, 1	);	// 작은해골 이동
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Move_Shot"	, L"resources/images/Enemy/Skel/Small/move_shot.png", 6, 1	);	// 작은해골 이동 피격
+
+	IMAGE_MANAGER->addImage("Skel/Small/Bow_Idle"		, L"resources/images/Enemy/Skel/Small/Bow/idle.png"			);	// 작은해골 활 기본
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Bow_Attack", L"resources/images/Enemy/Skel/Small/Bow/attack.png", 6, 1	);	// 작은해골 활 공격
+
+	// * 미노타우르스
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Idle"		, L"resources/images/Enemy/Minotaurs/idle.png"			, 6, 1);	// 미노타우르스 기본
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Idle_Shot"	, L"resources/images/Enemy/Minotaurs/idle_shot.png"		, 6, 1);	// 미노타우르스 기본 피격
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Attack"		, L"resources/images/Enemy/Minotaurs/attack.png"		, 7, 1);	// 미노타우르스 공격
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Attack_Shot", L"resources/images/Enemy/Minotaurs/attack_shot.png"	, 7, 1);	// 미노타우르스 공격 피격
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill"		, L"resources/images/Enemy/Minotaurs/skill.png"			, 8, 1);	// 미노타우르스 돌진
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill_Shot"	, L"resources/images/Enemy/Minotaurs/skill_shot.png"	, 8, 1);	// 미노타우르스 돌진 피격
 
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// 수녀 총알

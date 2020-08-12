@@ -91,6 +91,9 @@
     <Filter Include="Dungreed\GameScene\Stage\Dungeon">
       <UniqueIdentifier>{7e8e49aa-110b-4327-a474-bd2b96273960}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Test">
+      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dungreed\GameScene\Npc">
       <UniqueIdentifier>{f27c1b85-e2e6-4efe-ac36-0a247dd856a6}</UniqueIdentifier>
     </Filter>
@@ -117,9 +120,6 @@
     </Filter>
     <Filter Include="2DGameFramework\CameraManager">
       <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Dungreed\GameScene\Stage\Debug">
-      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -355,7 +355,16 @@
       <Filter>2DGameFramework\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="DebugStage.h">
-      <Filter>Dungreed\GameScene\Stage\Debug</Filter>
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="BatGiantRed.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Ovibos.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Minotaurs.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -555,7 +564,16 @@
       <Filter>2DGameFramework\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="DebugStage.cpp">
-      <Filter>Dungreed\GameScene\Stage\Debug</Filter>
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="BatGiantRed.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Ovibos.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Minotaurs.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

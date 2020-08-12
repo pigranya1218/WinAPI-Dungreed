@@ -1,14 +1,11 @@
 #pragma once
 #include "Enemy.h"
 
-class SkelMagicianIce : public Enemy
+class BatGiantRed : public Enemy
 {
 private:
-	tagAttackInfo	_attack;	// 공격
-
-	Image*			_attackImg;	// 공격 이펙트 이미지
-	Animation*		_attackAni;	// 공격 이펙트 프레임
-	Vector2			_attackPos;	// 공격 이펙트 좌표 저장용
+	tagAttackInfo	_shooting;	// 공격 관련
+	tagMoveInfo		_moving;	// 이동 관련
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);
