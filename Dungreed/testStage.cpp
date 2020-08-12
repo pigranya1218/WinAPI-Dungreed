@@ -22,7 +22,7 @@ void TestStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));*/
 
 
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
+	/*_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	mapLoad();
 
 
@@ -147,7 +147,7 @@ void TestStage::init()
 		
 		
 		
-	}
+	}*/
 
 
 
@@ -165,7 +165,7 @@ void TestStage::update(float const elapsedTime)
 
 void TestStage::render()
 {
-	for (int i = 0; i < TILEX*TILEY; ++i)
+	/*for (int i = 0; i < TILEX*TILEY; ++i)
 	{
 		_tileImage->setScale(2);
 		_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
@@ -174,7 +174,7 @@ void TestStage::render()
 	for (int i = 0; i < _collisions.size(); i++)
 	{
 		D2D_RENDERER->drawLine(_collisions[i].func.getStart(), _collisions[i].func.getEnd());
-	}
+	}*/
 
 	Stage::render();
 
