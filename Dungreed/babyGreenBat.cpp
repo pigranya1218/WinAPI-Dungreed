@@ -14,6 +14,7 @@ void babyGreenBat::init()
 	_img = IMAGE_MANAGER->findImage("babyGreenBatF");
 	_ani1 = new Animation;
 	_ani1->start();
+
 }
 
 void babyGreenBat::release()
@@ -23,6 +24,8 @@ void babyGreenBat::release()
 
 void babyGreenBat::update(Player* player, float const elapsedTime)
 {
+	
+	
 	if (_ptMouse.x < renderPos.x)
 	{
 		_direction = DIRECTION::LEFT;
@@ -47,6 +50,7 @@ void babyGreenBat::frontRender(Player* player)
 
 void babyGreenBat::backRender(Player* player)
 {
+	
 	renderPos = player->getPosition();
 	if (x > renderPos.x + 60)
 	{
@@ -63,7 +67,7 @@ void babyGreenBat::backRender(Player* player)
 	else if (y < renderPos.y - 5 && y <= renderPos.y)
 	{
 		y += 8;
-	}
+	}	
 	_img->setScale(3);
 	_img->aniRender(Vector2(x, y), _ani1, _direction == DIRECTION::LEFT);
 }
@@ -75,10 +79,12 @@ void babyGreenBat::displayInfo()
 
 void babyGreenBat::attack(Player* player)
 {
+	
 }
 
 void babyGreenBat::attack(FloatRect * rect, tagAttackInfo * info)
 {
+	
 }
 
 void babyGreenBat::attack(FloatCircle * circle, tagAttackInfo * info)

@@ -1,14 +1,14 @@
 #pragma once
 #include "Item.h"
-class babyGreenBat : public Item
+class watCher : public Item
 {
 private:
-	Vector2 renderPos;
 	int x, y;
+	int radius;
+	int fspeed;
+	float _angle = PI / 5;
 	Animation* _ani1;
-	DIRECTION _direction;
-	
-
+	bool setitem;
 public:
 	virtual void init();
 	virtual void release();

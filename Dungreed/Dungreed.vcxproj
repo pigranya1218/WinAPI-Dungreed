@@ -167,6 +167,7 @@
     <ClInclude Include="Costume.h" />
     <ClInclude Include="CostumeManager.h" />
     <ClInclude Include="D2DRenderer.h" />
+    <ClInclude Include="daisyRing.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="DebugStage.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InventoryUI.h" />
@@ -193,6 +195,7 @@
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MapToolScene.h" />
     <ClInclude Include="MatchLockGun.h" />
+    <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
@@ -231,6 +234,7 @@
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="VillageStage.h" />
+    <ClInclude Include="watCher.h" />
     <ClInclude Include="windowsAPI.h" />
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +253,7 @@
     <ClCompile Include="CostumeManager.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
+    <ClCompile Include="daisyRing.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DebugStage.cpp" />
@@ -260,6 +265,7 @@
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="GunBullet.cpp" />
@@ -270,6 +276,7 @@
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MapToolScene.cpp" />
     <ClCompile Include="MatchLockGun.cpp" />
+    <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
@@ -302,6 +309,7 @@
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="VillageStage.cpp" />
+    <ClCompile Include="watCher.cpp" />
     <ClCompile Include="windowsAPI.cpp" />
   </ItemGroup>
   <ItemGroup>

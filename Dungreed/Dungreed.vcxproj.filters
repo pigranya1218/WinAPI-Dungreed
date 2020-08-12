@@ -351,6 +351,18 @@
     <ClInclude Include="DebugStage.h">
       <Filter>Dungreed\GameScene\Stage\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="daisyRing.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="IceBall.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="miniEarth.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="watCher.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
     <ClInclude Include="InventoryUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
@@ -562,6 +574,18 @@
     </ClCompile>
     <ClCompile Include="DebugStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="daisyRing.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="IceBall.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="miniEarth.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="watCher.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="InventoryUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>

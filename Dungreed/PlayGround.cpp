@@ -24,6 +24,8 @@ HRESULT playGround::init()
 {
 	GameNode::init(true);
 
+	
+
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
 
