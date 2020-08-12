@@ -1,15 +1,12 @@
 #pragma once
 #include "Item.h"
-class babyGreenBat : public Item
+class miniEarth : public Item
 {
 private:
-	Vector2 renderPos;
 	int x, y;
-	Animation* _ani1;
-	DIRECTION _direction;
-	
-
+	float _angle = PI / 4;
 public:
+
 	virtual void init();
 	virtual void release();
 	virtual void update(Player* player, float const elapsedTime);

@@ -11,6 +11,7 @@ void SpikeBall::init()
 	//厩技辑府 可记
 	_addStat.criticalChance = 1;
 	_addStat.defense = 1;
+	
 	x = y = 0;
 
 	
@@ -34,8 +35,8 @@ void SpikeBall::frontRender(Player* player)
 
 void SpikeBall::backRender(Player* player)
 {
-	x = cosf(_angle) * 70;
-	y = -sinf(_angle) * 70;
+	x = cosf(_angle) * 85;
+	y = -sinf(_angle) * 85;
 
 	Vector2 renderPos = player->getPosition();
 	renderPos.x = renderPos.x + x;

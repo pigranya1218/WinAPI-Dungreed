@@ -4,6 +4,9 @@
 #include "ShortSpear.h"
 #include "Punch.h"
 #include "SpikeBall.h"
+#include "IceBall.h"
+#include "miniEarth.h"
+#include "watCher.h"
 #include "babyGreenBat.h"
 #include "bombPouch.h"
 #include "MatchLockGun.h"
@@ -47,6 +50,7 @@ void Player::updateAdjustStat()
 
 void Player::setAni(PLAYER_ANIMATION setAni)
 {
+	
 	_aniState = setAni;
 	switch (setAni)
 	{
@@ -156,7 +160,7 @@ void Player::init()
 	_equippedWeapon.push_back(testWeapon);
 	_currWeaponIndex = 0;*/
 	
-	/*SpikeBall* testAcc = new SpikeBall;
+	SpikeBall* testAcc = new SpikeBall;
 	testAcc->init();
 	_equippedAcc.push_back(testAcc);
 	
@@ -166,7 +170,20 @@ void Player::init()
 
 	bombPouch* testAcc2 = new bombPouch;
 	testAcc2->init();
-	_equippedAcc.push_back(testAcc2);*/
+	_equippedAcc.push_back(testAcc2);
+
+	IceBall* testAcc3 = new IceBall;
+	testAcc3->init();
+	_equippedAcc.push_back(testAcc3);
+
+	miniEarth* testAcc4 = new miniEarth;
+	testAcc4->init();
+	_equippedAcc.push_back(testAcc4);
+
+	watCher* testAcc5 = new watCher;
+	testAcc5->init();
+	_equippedAcc.push_back(testAcc5);
+
 
 	//ShortSpear* testWeapon = new ShortSpear;
 	ShortSpear* testWeapon1 = new ShortSpear;
@@ -363,19 +380,19 @@ void Player::update(float const elapsedTime)
 	_equippedWeapon[0]->update(this, elapsedTime);
 	_equippedWeapon[1]->update(this, elapsedTime);
 	// 악세사리 업데이트
-	/*_equippedAcc[1]->update(this, elapsedTime);
-	_equippedAcc[0]->update(this, elapsedTime);
-	_equippedAcc[2]->update(this, elapsedTime);*/
+	for (int i = 0; i < 6; i++) {
+		_equippedAcc[i]->update(this, elapsedTime);
+		
+	}
 	
 }
 
 void Player::render()
 {
 	_img->setScale(4);
-
-	/*_equippedAcc[0]->backRender(_position, angle);
-	_equippedAcc[1]->backRender(_position, angle);
-	_equippedAcc[2]->backRender(_position, angle);*/
+	for(int i=0;i<6;i++){
+	_equippedAcc[i]->backRender(this);	
+	}
 	_equippedWeapon[_currWeaponIndex]->backRender(this);
 
 	if (_aniState == PLAYER_ANIMATION::DEFAULT)

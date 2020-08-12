@@ -1,13 +1,10 @@
 #pragma once
 #include "Item.h"
-class babyGreenBat : public Item
+class IceBall : public Item
 {
 private:
-	Vector2 renderPos;
 	int x, y;
-	Animation* _ani1;
-	DIRECTION _direction;
-	
+	float _angle = PI / 2;
 
 public:
 	virtual void init();
