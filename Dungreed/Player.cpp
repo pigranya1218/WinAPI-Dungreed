@@ -198,8 +198,14 @@ void Player::init()
 	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
+	ShortSword* testWeapon3 = new ShortSword;
+	testWeapon3->init();
+	_equippedWeapon.push_back(testWeapon3);
 
-	_currWeaponIndex = 0;
+
+
+
+	_currWeaponIndex = 2;
 	_currWeaponChangeCoolTime = 0;
 }
 
@@ -399,6 +405,7 @@ void Player::update(float const elapsedTime)
 	// 무기 업데이트
 	_equippedWeapon[0]->update(this, elapsedTime);
 	_equippedWeapon[1]->update(this, elapsedTime);
+	_equippedWeapon[2]->update(this, elapsedTime);
 	// 악세사리 업데이트
 	for (int i = 0; i < 6; i++) {
 		_equippedAcc[i]->update(this, elapsedTime);
