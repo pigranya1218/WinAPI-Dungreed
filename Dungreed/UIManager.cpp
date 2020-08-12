@@ -3,6 +3,12 @@
 #include "Player.h"
 #include "StageManager.h"
 
+void UIManager::setPlayer(Player * player)
+{
+	_player = player;
+	_inventoryUI.setPlayer(player);
+}
+
 void UIManager::init()
 {
 	_isActive = false;
@@ -55,7 +61,7 @@ void UIManager::init()
 	_weaponUI.viewIndex = 0;
 
 	// INVENTORY UI
-	_inventoryUI.init(this);
+	_inventoryUI.init();
 }
 
 void UIManager::release()

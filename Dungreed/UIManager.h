@@ -80,7 +80,7 @@ private:
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
-	void setPlayer(Player* player) { _player = player; }
+	void setPlayer(Player* player);
 	void setStageManager(StageManager* stageMgr) { _stageMgr = stageMgr; }
 
 	void init();

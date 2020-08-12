@@ -1,11 +1,11 @@
 #pragma once
 
-class UIManager;
+class Player;
 
 class InventoryUI
 {
 private:
-	UIManager* _uiMgr;
+	Player* _player;
 	
 	bool _isActive;
 
@@ -14,9 +14,13 @@ private:
 
 	FloatRect _exitRc;
 
+	FloatRect _goldRc;
+
 
 public:
-	void init(UIManager* uiMgr);
+	void setPlayer(Player* player) { _player = player; }
+
+	void init();
 	void release();
 	void update(float elapsedTime);
 	void render();

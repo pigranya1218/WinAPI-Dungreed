@@ -2,9 +2,8 @@
 #include "InventoryUI.h"
 #include "UIManager.h"
 
-void InventoryUI::init(UIManager* uiMgr)
+void InventoryUI::init()
 {
-	_uiMgr = uiMgr;
 	_isActive = false;
 
 	_baseImg = IMAGE_MANAGER->findImage("UI/INVENTORY/BASE");
