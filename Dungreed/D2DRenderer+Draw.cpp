@@ -285,8 +285,13 @@ void D2DRenderer::drawRectangle(const FloatRect & rc, const int r, const int g, 
 {
 	FloatRect rect = rc;
 
-	ID2D1SolidColorBrush* brush(nullptr);
-	_D2DRenderTarget->CreateSolidColorBrush(D2D1::ColorF(RGB(r, g, b), alpha), &brush);
+	ID2D1SolidColorBrush* brush;
+	D2D1_COLOR_F clr;
+	clr.r = static_cast<float>(r) / 255;
+	clr.g = static_cast<float>(g) / 255;
+	clr.b = static_cast<float>(b) / 255;
+	clr.a = alpha;
+	_D2DRenderTarget->CreateSolidColorBrush(clr, &brush);
 
 	if (angle != 0)
 	{

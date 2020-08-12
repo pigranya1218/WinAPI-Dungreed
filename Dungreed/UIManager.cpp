@@ -45,6 +45,14 @@ void UIManager::init()
 	_satietyUI.fontSize = 25;
 	_satietyProgress.progressRc = FloatRect(80, 860, 200, 870);
 
+	// WEAPON UI
+	_weaponUI.bgImg = IMAGE_MANAGER->findImage("UI/WEAPON_BG");
+	_weaponUI.frontBaseCenter = Vector2(1480, 820);
+	_weaponUI.backBaseCenter = Vector2(1500, 800);
+	_weaponUI.frontIndexRc = FloatRect(50, 20, 60, 40);
+	_weaponUI.move = Vector2(0, 0);
+	_weaponUI.moveSpeed = 80;
+	_weaponUI.viewIndex = 0;
 }
 
 void UIManager::release()
@@ -53,8 +61,24 @@ void UIManager::release()
 
 void UIManager::update(float const elaspedTime)
 {
+	// HP bar animation
 	_hpUI.hpAni->frameUpdate(elaspedTime);
+
+	// Gold icon animation
 	_goldUI.ani->frameUpdate(elaspedTime);
+
+	// Weapon change animation
+	if (_player->getWeaponIndex() != _weaponUI.viewIndex)
+	{
+		_weaponUI.move.x = min(20, _weaponUI.move.x + _weaponUI.moveSpeed * elaspedTime);
+		_weaponUI.move.y = max(-20, _weaponUI.move.y - _weaponUI.moveSpeed * elaspedTime);
+		if (_weaponUI.move.x == 20)
+		{
+			_weaponUI.move.x = 0;
+			_weaponUI.move.y = 0;
+			_weaponUI.viewIndex = _player->getWeaponIndex();
+		}
+	}
 }
 
 void UIManager::render()
@@ -148,5 +172,53 @@ void UIManager::render()
 		FloatRect satietyGauge = _satietyProgress.progressRc;
 		satietyGauge.right = satietyGauge.left + (static_cast<float>(_player->getSatiety()) / _player->getMaxSatiety()) * satietyGauge.getSize().x;
 		D2D_RENDERER->fillRectangle(satietyGauge, 255, 206, 78, 1);
+	
+		// PLAYER WEAPON
+		if (_weaponUI.move.x <= 10)
+		{
+			_weaponUI.bgImg->setScale(5);
+			_weaponUI.bgImg->render(_weaponUI.backBaseCenter - _weaponUI.move);
+			_weaponUI.bgImg->setScale(5);
+			_weaponUI.bgImg->render(_weaponUI.frontBaseCenter + _weaponUI.move);
+			for (int i = 0; i <= _weaponUI.viewIndex; i++)
+			{
+				FloatRect drawRc = FloatRect(_weaponUI.frontBaseCenter + _weaponUI.move + _weaponUI.frontIndexRc.getCenter(), _weaponUI.frontIndexRc.getSize(), PIVOT::CENTER);
+				drawRc.left -= i * _weaponUI.frontIndexRc.getSize().x;
+				drawRc.right -= i * _weaponUI.frontIndexRc.getSize().x;
+
+				D2D_RENDERER->fillRectangle(drawRc, 255, 255, 255, 1);
+				D2D_RENDERER->drawRectangle(drawRc, 34, 32, 52, 1, 5);
+			}
+			Vector2 weaponPos = Vector2(_weaponUI.frontBaseCenter + _weaponUI.move);
+			weaponPos.x -= 10;
+			if (_player->getWeaponImg(_weaponUI.viewIndex) != nullptr)
+			{
+				_player->getWeaponImg(_weaponUI.viewIndex)->setScale(4);
+				_player->getWeaponImg(_weaponUI.viewIndex)->render(weaponPos);
+			}
+		}
+		else if (_weaponUI.move.x >= 10)
+		{
+			_weaponUI.bgImg->setScale(5);
+			_weaponUI.bgImg->render(_weaponUI.frontBaseCenter + _weaponUI.move);
+			_weaponUI.bgImg->setScale(5);
+			_weaponUI.bgImg->render(_weaponUI.backBaseCenter - _weaponUI.move);
+			for (int i = 0; i <= _player->getWeaponIndex(); i++)
+			{
+				FloatRect drawRc = FloatRect(_weaponUI.backBaseCenter - _weaponUI.move + _weaponUI.frontIndexRc.getCenter(), _weaponUI.frontIndexRc.getSize(), PIVOT::CENTER);
+				drawRc.left -= i * _weaponUI.frontIndexRc.getSize().x;
+				drawRc.right -= i * _weaponUI.frontIndexRc.getSize().x;
+
+				D2D_RENDERER->fillRectangle(drawRc, 255, 255, 255, 1);
+				D2D_RENDERER->drawRectangle(drawRc, 34, 32, 52, 1, 5);
+			}
+			Vector2 weaponPos = Vector2(_weaponUI.backBaseCenter - _weaponUI.move);
+			weaponPos.x -= 10;
+			if (_player->getWeaponImg(_player->getWeaponIndex()) != nullptr)
+			{
+				_player->getWeaponImg(_player->getWeaponIndex())->setScale(4);
+				_player->getWeaponImg(_player->getWeaponIndex())->render(weaponPos);
+			}
+		}
 	}
 }

@@ -44,8 +44,14 @@ private:
 
 	struct tagWeaponUI // 현재 장착한 무기들
 	{
-		FloatRect currRc;
-		FloatRect swapRc;
+		Image* bgImg;
+		Vector2 frontBaseCenter;
+		Vector2 backBaseCenter;
+		FloatRect frontIndexRc;
+		
+		float moveSpeed;
+		int viewIndex;
+		Vector2 move;
 	};
 
 	struct tagSkillUI // 현재 스킬
@@ -68,6 +74,7 @@ private:
 	tagLabelUI	_goldUI; // 플레이어 소지금 라벨
 	tagLabelUI	_satietyUI; // 플레이어 포만감 라벨
 	tagProgressUI	_satietyProgress; // 플레이어 포만감 프로그레스바
+	tagWeaponUI	_weaponUI; // 무기 UI
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }

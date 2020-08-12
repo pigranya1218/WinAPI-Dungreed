@@ -177,7 +177,7 @@ void Player::init()
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
 
-	_currWeaponIndex = 1;
+	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
 }
 
@@ -414,4 +414,9 @@ void Player::render()
 	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Blue, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	str = L" 무기 교체 딜레이 시간 : " + to_wstring(_currWeaponChangeCoolTime);
 	D2D_RENDERER->renderText(600, 0, str, 20, D2DRenderer::DefaultBrush::Green, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);*/
+}
+
+Image* Player::getWeaponImg(int index) const noexcept
+{
+	return _equippedWeapon[index]->getImg();
 }

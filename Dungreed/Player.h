@@ -89,5 +89,8 @@ public:
 
 	int getMaxDash() const noexcept { return _adjustStat.maxDashCount; }
 	int getCurrDash() const noexcept { return _currDashCount; }
+
+	int getWeaponIndex() const noexcept { return _currWeaponIndex; }
+	Image* getWeaponImg(int index) const noexcept;
 };
 

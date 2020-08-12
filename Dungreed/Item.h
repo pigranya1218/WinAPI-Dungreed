@@ -44,4 +44,5 @@ public:
 	ITEM_TYPE getType() const noexcept { return _type; }
 
 	int getPrice() const noexcept { return _price; }
+	Image* getImg() const noexcept { return _img; }
 };

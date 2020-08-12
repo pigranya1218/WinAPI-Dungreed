@@ -141,6 +141,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/DASH_OUTSIDE", L"resources/images/gameScene/ui/DashCountBase_0.png");
 	IMAGE_MANAGER->addImage("UI/DASH_INSIDE", L"resources/images/gameScene/ui/DashBase.png");
 	IMAGE_MANAGER->addImage("UI/DASH_GAUGE", L"resources/images/gameScene/ui/DashCount.png");
+	IMAGE_MANAGER->addImage("UI/WEAPON_BG", L"resources/images/gameScene/ui/EquippedWeaponBase.png");
 
 
 	// ** VILLIGE
