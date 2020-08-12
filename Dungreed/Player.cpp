@@ -343,8 +343,8 @@ void Player::update(float const elapsedTime)
 	//ÇÏ°­Áß
 	if (_isStand && _force.y == 0)
 	{
-		_position.y -= 5;
-		moveDir.y += 10;
+		_position.y -= 15;
+		moveDir.y += 25;
 	}
 	
 	_force.y += _adjustStat.yGravity * elapsedTime;
