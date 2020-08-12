@@ -28,7 +28,8 @@ private:
 	Vector2				_size;			
 	float				_scale;			
 	float				_angle;
-	
+	Vector2				_anglePos;
+
 	Vector2				_skewPos, _skewAngle;	// Âî±×·¯Æ®¸± ÁÂÇ¥, °¢µµ
 
 	tagLoadedImageInfo	_loadInfo;
@@ -47,8 +48,11 @@ public:
 	void render(const Vector2& position, bool bisymmetry = false);
 	void render(const Vector2& position, const Vector2& size, bool bisymmetry = false);
 	void render(const Vector2& position, const Vector2& sourPos, const Vector2& sourSize, bool bisymmetry = false);	
+	void render(const Vector2& position,const Vector2& size, const Vector2& sourPos, const Vector2& sourSize, bool bisymmetry = false);	
 	void frameRender(const Vector2& position, const int frameX, const int frameY, bool bisymmetry = false);
+	void frameRender(const Vector2& position, const Vector2& size, const int frameX, const int frameY, bool bisymmetry = false);
 	void aniRender(const Vector2& position, Animation* ani, bool bisymmetry = false);
+	void aniRender(const Vector2& position, const Vector2& size, Animation* ani, bool bisymmetry = false);
 
 	void resetRenderOption();
 
@@ -56,6 +60,7 @@ public:
 	void setAlpha(const float alpha) { this->_alpha = alpha; }
 	void setScale(const float scale) { this->_scale = scale; }
 	void setAngle(const float angle) { this->_angle = angle; }
+	void setAnglePos(const Vector2& vec) { this->_anglePos = vec; }
 
 	float getScale() { return _scale; }
 	float getAngle() { return _angle; }

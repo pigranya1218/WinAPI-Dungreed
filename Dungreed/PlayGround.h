@@ -1,10 +1,12 @@
 #pragma once
 #include "GameNode.h"
+//#include "Player.h"
 
 class playGround : public GameNode
 {	
 
 private:
+	//Player* _player;
 
 public:
 	playGround();

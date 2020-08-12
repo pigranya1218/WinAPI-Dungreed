@@ -10,104 +10,6 @@ CameraManager::~CameraManager()
 {
 }
 
-void CameraManager::merge(int s, int e) // merge sort
-{
-	if (s == e) return;
-	int mid = (s + e) / 2;
-	merge(s, mid);
-	merge(mid + 1, e);
-
-	sort(s, e);
-}
-
-void CameraManager::sort(int s, int e) // z 를 기준으로 오름차순,(먼저 그려야 되는게 앞으로)
-{
-	int mid = (s + e) / 2;
-	int sIndex = s;
-	int eIndex = mid + 1;
-	vector<tagZImage> tempVector;
-
-	//while (sIndex <= mid && eIndex <= e)
-	//{
-	//	if ((_renderList[sIndex].pos.z + (_renderList[sIndex].size.z / 2) + _renderList[sIndex].offsetZ) < (_renderList[eIndex].pos.z + (_renderList[eIndex].size.z / 2) + _renderList[eIndex].offsetZ))
-	//	{
-	//		tempVector.push_back(_renderList[sIndex]);
-	//		sIndex++;
-	//	}
-	//	else if ((_renderList[sIndex].pos.z + (_renderList[sIndex].size.z / 2) + _renderList[sIndex].offsetZ) == (_renderList[eIndex].pos.z + (_renderList[eIndex].size.z / 2) + _renderList[eIndex].offsetZ))
-	//	{
-	//		if (_renderList[sIndex].renderType == IMAGE_RENDER_TYPE::SHADOW)
-	//		{
-	//			tempVector.push_back(_renderList[sIndex]);
-	//			sIndex++;
-	//		}
-	//		else
-	//		{
-	//			tempVector.push_back(_renderList[eIndex]);
-	//			eIndex++;
-	//		}
-	//	}
-	//	else
-	//	{
-	//		tempVector.push_back(_renderList[eIndex]);
-	//		eIndex++;
-	//	}
-	//}
-	//while (sIndex <= mid)
-	//{
-	//	tempVector.push_back(_renderList[sIndex]);
-	//	sIndex++;
-	//}
-	//while (eIndex <= e)
-	//{
-	//	tempVector.push_back(_renderList[eIndex]);
-	//	eIndex++;
-	//}
-
-	//for (int i = 0; i <= (e - s); i++) // 정렬
-	//{
-	//	_renderList[s + i] = tempVector[i];
-	//}
-}
-
-void CameraManager::render(tagZImage imageInfo)
-{
-	//if (imageInfo.renderType == IMAGE_RENDER_TYPE::SHADOW)
-	//{
-	//	drawShadow(imageInfo.pos, imageInfo.size);
-	//}
-	//else
-	//{
-	//	imageInfo.img->setScale(imageInfo.scale);
-	//	imageInfo.img->setAngle(imageInfo.angle);
-	//	imageInfo.img->setAlpha(imageInfo.alpha);
-	//	// 타입에 맞게 이미지 그리기
-	//	switch (imageInfo.renderType)
-	//	{
-	//	case IMAGE_RENDER_TYPE::RENDER:
-	//	{
-	//		render(imageInfo.img, convertV3ToV2(imageInfo.pos));
-	//	}
-	//	break;
-	//	case IMAGE_RENDER_TYPE::RENDER_WITH_SOURCE_POS:
-	//	{
-	//		render(imageInfo.img, convertV3ToV2(imageInfo.pos), imageInfo.sourPos, imageInfo.sourSize);
-	//	}
-	//	break;
-	//	case IMAGE_RENDER_TYPE::FRAME_RENDER:
-	//	{
-	//		frameRender(imageInfo.img, convertV3ToV2(imageInfo.pos), imageInfo.frameX, imageInfo.frameY);
-	//	}
-	//	break;
-	//	case IMAGE_RENDER_TYPE::ANIMATION_RENDER:
-	//	{
-	//		aniRender(imageInfo.img, convertV3ToV2(imageInfo.pos), imageInfo.ani);
-	//	}
-	//	break;
-	//	}
-	//}
-}
-
 HRESULT CameraManager::init()
 {
 	return S_OK;
@@ -285,6 +187,14 @@ LONG CameraManager::getRelativeY(LONG top)
 	return  newT;
 }
 
+POINT CameraManager::getRelativePt(POINT pt)
+{
+	POINT result;
+	result.x = getRelativeX(pt.x);
+	result.y = getRelativeY(pt.y);
+	return result;
+}
+
 Vector2 CameraManager::getRelativeV2(Vector2 vec2)
 {
 	return Vector2(getRelativeX(vec2.x), getRelativeY(vec2.y));
@@ -325,6 +235,14 @@ LONG CameraManager::getAbsoluteY(LONG top)
 	return newT;
 }
 
+POINT CameraManager::getAbsolutePt(POINT pt)
+{
+	POINT result;
+	result.x = getAbsoluteX(pt.x);
+	result.y = getAbsoluteY(pt.y);
+	return result;
+}
+
 Vector2 CameraManager::getAbsoluteV2(Vector2 vec2)
 {
 	return Vector2(getAbsoluteX(vec2.x), getAbsoluteY(vec2.y));
@@ -347,28 +265,46 @@ void CameraManager::rectangle(FloatRect rect, D2D1::ColorF::Enum color, float al
 	D2D_RENDERER->drawRectangle(relativeRc, color, alpha, strokeWidth);
 }
 
-void CameraManager::render(Image * img, Vector2 center)
+void CameraManager::render(Image * img, Vector2 center, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->render(drawPos);
+	img->render(drawPos, bisymmetry);
 }
 
-void CameraManager::render(Image * img, Vector2 center, Vector2 sourLT, Vector2 sourSize)
+void CameraManager::render(Image* img, Vector2 center, Vector2 size, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->render(drawPos, sourLT, sourSize);
+	img->render(drawPos, size, bisymmetry);
+}
+
+void CameraManager::render(Image * img, Vector2 center, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->render(drawPos, sourLT, sourSize, bisymmetry);
+}
+
+void CameraManager::render(Image* img, Vector2 center, Vector2 size, Vector2 sourLT, Vector2 sourSize, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->render(drawPos, size, sourLT, sourSize, bisymmetry);
 }
 
 
-void CameraManager::frameRender(Image * img, Vector2 center, int frameX, int frameY)
+void CameraManager::frameRender(Image * img, Vector2 center, int frameX, int frameY, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->frameRender(drawPos, frameX, frameY);
+	img->frameRender(drawPos, frameX, frameY, bisymmetry);
 }
 
-void CameraManager::aniRender(Image * img, Vector2 center, Animation * ani)
+void CameraManager::aniRender(Image * img, Vector2 center, Animation * ani, bool bisymmetry)
 {
 	Vector2 drawPos = getRelativeV2(center);
-	img->aniRender(drawPos, ani);
+	img->aniRender(drawPos, ani, bisymmetry);
+}
+
+void CameraManager::aniRender(Image* img, Vector2 center, Vector2 size, Animation* ani, bool bisymmetry)
+{
+	Vector2 drawPos = getRelativeV2(center);
+	img->aniRender(drawPos, size, ani, bisymmetry);
 }
 

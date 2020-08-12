@@ -16,7 +16,7 @@
 기본 정의해둔 브러쉬로 텍스트 렌더링
 ************************************************************************************************/
 void D2DRenderer::renderText(const int x, const int y, const wstring& text, const int size,
-	const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align,const wstring& font, float angle)
+	const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align, const wstring& font, float angle)
 {
 	locale::global(locale("kor"));
 	Vector2 pos(x, y);
@@ -39,12 +39,12 @@ void D2DRenderer::renderText(const int x, const int y, const wstring& text, cons
 
 	layout->SetFontSize((float)size, range);
 	layout->SetTextAlignment(align);
+	layout->SetFontWeight(DWRITE_FONT_WEIGHT_BOLD, range);
 
-	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	// 회전 행렬 생성
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
-
-	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(pos.x, pos.y), layout,
+	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(0, 0)));
+	
+	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(x, y), layout,
 		_defaultBrushList[(UINT)defaultBrush]);
 
 	NEW_SAFE_RELEASE(layout);
@@ -113,38 +113,37 @@ void D2DRenderer::renderText(const int x, const int y, const wstring& text, cons
 
 영역내에서 기본 브러쉬로 글자 출력
 ************************************************************************************************/
-void D2DRenderer::renderTextField(const int x, const int y, const wstring& text, const int size,
-	const int width, const int height, const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align, const wstring& font, float angle)
-{
-	Vector2 pos(x, y);
-
-	IDWriteTextLayout* layout = nullptr;
-	_DWFactory->CreateTextLayout(
-		text.c_str(),
-		text.length(),
-		_fontList[font],
-		(float)width,
-		(float)height,
-		&layout
-	);
-
-	//레이아웃 셋업
-	DWRITE_TEXT_RANGE range;
-	range.startPosition = 0;
-	range.length = text.length();
-	layout->SetFontSize((float)size, range);
-
-	layout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
-	layout->SetTextAlignment(align);
-
-	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
-	// 회전 행렬 생성
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
-
-	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(pos.x, pos.y), layout, _defaultBrushList[(UINT)defaultBrush]);
-
-	NEW_SAFE_RELEASE(layout);
-}
+//void D2DRenderer::renderTextField(const int x, const int y, const wstring& text, const int size,
+//	const int width, const int height, const DefaultBrush& defaultBrush, const DWRITE_TEXT_ALIGNMENT& align, const wstring& font, float angle)
+//{
+//	Vector2 pos(x, y);
+//
+//	IDWriteTextLayout* layout = nullptr;
+//	_DWFactory->CreateTextLayout(
+//		text.c_str(),
+//		text.length(),
+//		_fontList[font],
+//		(float)width,
+//		(float)height,
+//		&layout
+//	);
+//
+//	//레이아웃 셋업
+//	DWRITE_TEXT_RANGE range;
+//	range.startPosition = 0;
+//	range.length = text.length();
+//	layout->SetFontSize((float)size, range);
+//	layout->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
+//	layout->SetTextAlignment(align);
+//
+//	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+//	// 회전 행렬 생성
+//	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
+//
+//	_D2DRenderTarget->DrawTextLayout(D2D1::Point2F(pos.x, pos.y), layout, _defaultBrushList[(UINT)defaultBrush]);
+//
+//	NEW_SAFE_RELEASE(layout);
+//}
 /**********************************************************************************************
 ## RenderText ##
 @@ int x : 그릴 좌표
@@ -188,7 +187,6 @@ void D2DRenderer::renderTextField(const int x, const int y, const wstring& text,
 	ID2D1SolidColorBrush* brush;
 	_D2DRenderTarget->CreateSolidColorBrush(D2D1::ColorF(color, alpha), &brush);
 
-	//_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	// 회전 행렬 생성
 	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));
 
@@ -265,11 +263,19 @@ void D2DRenderer::drawRectangle(const FloatRect& rc, const D2D1::ColorF::Enum& c
 @@ DefaultBrush brush : 그릴 브러쉬
 @@ float stroke : 선 굵기
 ************************************************************************************************/
-void D2DRenderer::drawRectangle(const FloatRect& rc, const DefaultBrush& defaultBrush, const float strokeWidth)
+void D2DRenderer::drawRectangle(const FloatRect& rc, const DefaultBrush& defaultBrush, const float strokeWidth, const float angle, const Vector2& anglePos)
 {
 	FloatRect rect = rc;
 
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	if (angle != 0)
+	{
+		D2D1::Matrix3x2F rotate = D2D1::Matrix3x2F::Rotation(360 - angle, D2D1::Point2F(anglePos.x, anglePos.y));
+		_D2DRenderTarget->SetTransform(rotate);
+	}
+	else
+	{
+		_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
 
 	_D2DRenderTarget->DrawRectangle(D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom),
 		_defaultBrushList[(UINT)defaultBrush], strokeWidth);
@@ -377,7 +383,7 @@ void D2DRenderer::fillRectangle(const FloatRect& rc, const D2D1::ColorF::Enum& c
 @@ float blue : RGB blue, (0 ~ 1)
 @@ float alpha  : 알파 값
 ************************************************************************************************/
-void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const float green, const float blue, const float alpha)
+void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const float green, const float blue, const float alpha, const float angle, const Vector2& anglePos)
 {
 	FloatRect rect = rc;
 
@@ -387,8 +393,19 @@ void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const flo
 	clr.g = green;
 	clr.b = blue;
 	clr.a = alpha;
+
+	D2D1::Matrix3x2F rotate = D2D1::Matrix3x2F::Rotation(360 - angle, D2D1::Point2F(anglePos.x, anglePos.y));
+
+
 	_D2DRenderTarget->CreateSolidColorBrush(clr, &brush);
-	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	if (angle != 0)
+	{
+		_D2DRenderTarget->SetTransform(rotate);
+	}
+	else
+	{
+		_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
 	_D2DRenderTarget->FillRectangle(D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom), brush);
 
 	NEW_SAFE_RELEASE(brush);
@@ -401,9 +418,9 @@ void D2DRenderer::fillRectangle(const FloatRect & rc, const float red, const flo
 @@ int blue : RGB blue, (0 ~ 255)
 @@ float alpha  : 알파 값
 ************************************************************************************************/
-void D2DRenderer::fillRectangle(const FloatRect & rc, const int red, const int green, const int blue, const float alpha)
+void D2DRenderer::fillRectangle(const FloatRect & rc, const int red, const int green, const int blue, const float alpha, const float angle, const Vector2& anglePos)
 {
-	fillRectangle(rc, static_cast<float>(red) / 255, static_cast<float>(green) / 255, static_cast<float>(blue) / 255, alpha);
+	fillRectangle(rc, static_cast<float>(red) / 255, static_cast<float>(green) / 255, static_cast<float>(blue) / 255, alpha, angle, anglePos);
 }
 /**********************************************************************************************
 ## FillRectangle  ##
