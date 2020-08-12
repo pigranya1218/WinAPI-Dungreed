@@ -5,6 +5,7 @@ HRESULT MapTool::init()
 {
 	_tileX = 30;
 	_tileY = 20;
+	
 	_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
 	setup();
 	CAMERA->setConfig(0, 0, 960, 640, 0, 0, 0, 0);
@@ -18,10 +19,12 @@ void MapTool::release()
 
 void MapTool::update()
 {
+	
 	setMap();
 
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
 	{
+		setTileSize();
 		if (_save.ptInRect(_ptMouse)) save();
 		if (_load.ptInRect(_ptMouse)) load();
 	}
@@ -33,45 +36,46 @@ void MapTool::update()
 	
 	if (KEY_MANAGER->isStayKeyDown(VK_RIGHT))
 	{
-		CAMERA->movePivot(Vector2(2, 0));
+		CAMERA->movePivot(Vector2(-2, 0));
 		//_mapPointer.x += 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(2,0));
+			_tile[i].rc.move(Vector2(-2,0));
 			
 		}
 	}
 	if (KEY_MANAGER->isStayKeyDown(VK_LEFT))
 	{
-		CAMERA->movePivot(Vector2(-2, 0));
+		CAMERA->movePivot(Vector2(2, 0));
 		//_mapPointer.x -= 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(-2, 0));
+			_tile[i].rc.move(Vector2(2, 0));
 			
 		}
 	}
 	if (KEY_MANAGER->isStayKeyDown(VK_UP))
 	{
-		CAMERA->movePivot(Vector2(0, -2));
-		//_mapPointer.y -= 1;
-		for (int i = 0; i < _tileX*_tileY; i++)
-		{
-			_tile[i].rc.move(Vector2(0, -2));
-			
-		}
-	}
-	if (KEY_MANAGER->isStayKeyDown(VK_DOWN))
-	{
 		CAMERA->movePivot(Vector2(0, 2));
-		//_mapPointer.y += 1;
+		//_mapPointer.y -= 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
 			_tile[i].rc.move(Vector2(0, 2));
 			
 		}
 	}
+	if (KEY_MANAGER->isStayKeyDown(VK_DOWN))
+	{
+		CAMERA->movePivot(Vector2(0, -2));
+		//_mapPointer.y += 1;
+		for (int i = 0; i < _tileX*_tileY; i++)
+		{
+			_tile[i].rc.move(Vector2(0, -2));
+			
+		}
+	}
 
+	
 
 	// CAMERA->setXY(_tile[_tileX*_tileY/2].rc.getCenter());
 	// CAMERA->setLT(_tile[0].rc.getCenter());
@@ -135,20 +139,31 @@ void MapTool::render()
 	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_erase, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text4(L"Palette");
-	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
-	D2D_RENDERER->drawRectangle(_paletteLoad, D2D1::ColorF::Blue, 1, 0.5f);
+	/*wstring text4(L"Palette");
+	D2D_RENDERER->renderText(810, WINSIZEY - 100, WINSIZEY - 100, text4, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->drawRectangle(_paletteLoad, D2D1::ColorF::Blue, 1, 0.5f);*/
 
 	wstring text5(L"XUP");
-	//D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->renderText(_increaseTileX.right+50, _increaseTileX.getCenter().y, text5, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_increaseTileX, D2D1::ColorF::Blue, 1, 0.5f);
 
+	wstring text9(L"X:"+to_wstring( _tileX));
+	D2D_RENDERER->renderText((_decreaseTileX.right+ _decreaseTileX.left)/2+12 , _decreaseTileX.getCenter().y, text9, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+
 	wstring text6(L"XDOWN");
-	//D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->renderText(_decreaseTileX.left - 50, _decreaseTileX.getCenter().y, text6, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_decreaseTileX, D2D1::ColorF::Blue, 1, 0.5f);
 
+	wstring text7(L"YDOWN");
+	D2D_RENDERER->renderText(_decreaseTileY.left - 50, _decreaseTileY.getCenter().y, text7, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_decreaseTileY, D2D1::ColorF::Blue, 1, 0.5f);
 
+	wstring text10(L"Y:" + to_wstring(_tileY));
+	D2D_RENDERER->renderText((_decreaseTileY.right + _decreaseTileY.left) / 2 + 12, _decreaseTileY.getCenter().y, text10, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+
+
+	wstring text8(L"YUP");
+	D2D_RENDERER->renderText(_increaseTileY.right + 50, _increaseTileY.getCenter().y, text8, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_increaseTileY, D2D1::ColorF::Blue, 1, 0.5f);
 }
 
@@ -160,10 +175,10 @@ void MapTool::setup()
 	_load = FloatRect(Vector2(400, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_erase = FloatRect(Vector2(600, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_paletteLoad=FloatRect(Vector2(1000, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
-	_decreaseTileX = FloatRect(Vector2(300, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_increaseTileX = FloatRect(Vector2(350, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_decreaseTileY = FloatRect(Vector2(450, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_increaseTileY = FloatRect(Vector2(500, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_decreaseTileX = FloatRect(Vector2(300, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_increaseTileX = FloatRect(Vector2(350, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_decreaseTileY = FloatRect(Vector2(300, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_increaseTileY = FloatRect(Vector2(350, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
 
 
 	for (int i = 0; i < SAMPLETILEY; ++i)
@@ -197,8 +212,9 @@ void MapTool::setup()
 		_tile[i].tileFrameX = 0;
 		_tile[i].tileFrameY = 0;
 		_tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
-		_mapPointer.x =  _tile[_tileX / 2].rc.left;
-		_mapPointer.y = _tile[_tileX*_tileY / 2].rc.top;
+		
+		_map[0].Tx = _tileX;
+		_map[0].Ty = _tileY;
 	}
 
 }
@@ -243,10 +259,7 @@ void MapTool::setMap()
 					if (_tile[i].tileFrameX == 0 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT;
 					if ((_tile[i].tileFrameX == 6|| _tile[i].tileFrameX == 8) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
 					if ((_tile[i].tileFrameX == 7|| _tile[i].tileFrameX == 9) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
-
-
 					else _tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
-					
 
 					releaseSelectTile();
 					break;
@@ -298,6 +311,7 @@ void MapTool::save()
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	WriteFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &write, NULL);
+	WriteFile(stageFile, _map, sizeof(tagMap), &write, NULL);
 
 	CloseHandle(stageFile);
 
@@ -403,6 +417,8 @@ void MapTool::setLinePos(int frameX, int frameY)
 	if(frameX==1 && frameY==6)_drawLinePos = DRAW_LINE_POSITION::BOTTOM;
 	if(frameX==0 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::RIGHT;
 	if(frameX==2 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT;
+	if ((frameX >=0&&frameX<4)&&frameY==5 )_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
+	if ((frameX >= 5 && frameX < 8) && frameY == 5)_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
 	else _drawLinePos = DRAW_LINE_POSITION::NOLINE;
 	/*if((frameX==6||frameX==8)&&frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
 	if ((frameX == 7 || frameX == 9) && frameY == 7)_drawLinePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
@@ -411,6 +427,32 @@ void MapTool::setLinePos(int frameX, int frameY)
 
 void MapTool::setTileSize()
 {
+	
+
+		if(_increaseTileX.ptInRect(_ptMouse))
+		{
+			if (_tileX* _tileY >= 1900) return;
+			_tileX += 1;
+			setup();
+		}
+		else if(_decreaseTileX.ptInRect(_ptMouse))
+		{
+			
+			_tileX -= 1;
+			setup();
+		}
+		else if (_increaseTileY.ptInRect(_ptMouse))
+		{
+			if (_tileX* _tileY >= 1900) return;
+			_tileY += 1;
+			setup();
+		}
+		else if (_decreaseTileY.ptInRect(_ptMouse))
+		{
+			_tileY -= 1;
+			setup();
+		}
+	
 
 
 }

@@ -17,11 +17,15 @@ enum class DRAW_LINE_POSITION
 	BOTTOM,
 	LEFT_DIAGONAL, // /이런 모양
 	RIGHT_DIAGONAL, // \이런 모양
+	
+	//두변 이상 그려질 경우
 	LEFT_TOP,
 	RIGHT_TOP,
 	LEFT_BOTTOM,
-	RIGHT_BOTTOM
+	RIGHT_BOTTOM,
 	
+	//프랫폼형태인가?
+	PLATFORM
 };
 
 
@@ -53,6 +57,12 @@ struct tagSelectTile
 	
 };
 
+struct tagMap
+{
+	int Tx;
+	int Ty;
+};
+
 
 class MapTool : public GameNode
 {
@@ -71,8 +81,10 @@ private:
 
 	
 	
-	Synthesize(int, _tileX,TileX)
-	Synthesize(int,_tileY,TileY)
+	Synthesize(int, _tileX, TileX)
+	Synthesize(int, _tileY, TileY)
+
+	
 
 	Vector2 _mapPointer;
 	FloatRect _mapPtnRc;
@@ -88,8 +100,9 @@ private:
 
 
 	Image* _paletteImage;
-	tagTileMap _tile[1000];
+	tagTileMap _tile[2000];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
+	tagMap _map[1];
 
 	DRAW_LINE_POSITION _drawLinePos;
 
