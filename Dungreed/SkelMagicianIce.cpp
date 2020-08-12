@@ -4,7 +4,14 @@
 
 void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 {
+	_attackImg = IMAGE_MANAGER->findImage("Skel/Magician_Ice/Effect");
+
 	_ani = new Animation;
+
+	_attackAni = new Animation;
+	_attackAni->init(_attackImg->getWidth(), _attackImg->getHeight(), _attackImg->getMaxFrameX(), _attackImg->getMaxFrameY());
+	_attackAni->setDefPlayFrame(false, false);
+	_attackAni->setFPS(10);
 
 	setState(ENEMY_STATE::IDLE);
 
@@ -45,16 +52,19 @@ void SkelMagicianIce::update(float const timeElapsed)
 		{
 			if (_isDetect && _attack.update(timeElapsed))
 			{
+				_attackPos = _enemyManager->getPlayerPos();
 				setState(ENEMY_STATE::ATTACK);
 			}
 			break;
 		}		
 		case ENEMY_STATE::ATTACK:
 		{
-			if (!_ani->isPlay())
+			if (!_attackAni->isPlay())
 			{
 				setState(ENEMY_STATE::IDLE);
 			}
+
+			_attackAni->frameUpdate(timeElapsed);
 			break;
 		}	
 		case ENEMY_STATE::DIE:
@@ -64,6 +74,7 @@ void SkelMagicianIce::update(float const timeElapsed)
 	}
 	
 	_ani->frameUpdate(timeElapsed);
+	
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
@@ -74,8 +85,14 @@ void SkelMagicianIce::render()
 	D2D_RENDERER->drawEllipse(_position, _detectRange);
 
 	_img->setScale(_scale);
-	
+	_attackImg->setScale(_scale);
+
 	_img->aniRender(_position, _ani, !(bool)_direction);
+
+	if (_attackAni->isPlay())
+	{
+		_attackImg->aniRender(_attackPos, _attackAni);
+	}
 }
 
 void SkelMagicianIce::setState(ENEMY_STATE state)
@@ -104,6 +121,9 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(10);
 			_ani->start();
+
+			_attackAni->stop();
+			_attackAni->start();
 
 			break;
 		}	

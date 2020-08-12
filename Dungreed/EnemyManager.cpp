@@ -43,85 +43,104 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 			enemy = new Banshee;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
-
-			break;
 		}
+		break;
 		case ENEMY_TYPE::BAT_BOMB:
 		{
-			break;
 		}		
+		break;
 		case ENEMY_TYPE::BAT_RED:
 		{
 			enemy = new BatRed;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
-
-			break;
 		}
+		break;
 		case ENEMY_TYPE::BAT_NORMAL:
 		{
 			enemy = new BatNormal;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
-			break;
 		}
+		break;
 		case ENEMY_TYPE::BAT_ICE:
 		{
 			enemy = new BatIce;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
-			break;
 		}
+		break;
 		case ENEMY_TYPE::BAT_GIANT_RED:
 		{
-			break;
+			enemy = new BatGiantRed;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
+		break;
 		case ENEMY_TYPE::BAT_GIANT_NORMAL:
 		{
-			break;
 		}
+		break;
 		case ENEMY_TYPE::GHOST:
 		{
-			break;
 		}
+		break;
 		case ENEMY_TYPE::LILITH:
 		{
-			break;
 		}
+		break;
 		case ENEMY_TYPE::SKEL_BIG_NORMAL:
 		{
 			enemy = new SkelBigNormal;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
-			break;
 		}
+		break;
 		case ENEMY_TYPE::SKEL_BIG_ICE:
 		{
 			enemy = new SkelBigIce;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
-
-			break;
 		}
+		break;
 		case ENEMY_TYPE::SKEL_DOG:
 		{
-			break;
 		}
+		break;
 		case ENEMY_TYPE::SKEL_MAGICIAN_ICE:
 		{
 			enemy = new SkelMagicianIce;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
-
-			break;
 		}
+		break;
 		case ENEMY_TYPE::SKEL_SMALL_BOW:
 		{
 			enemy = new SkelSmallBow;
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
+		}
+		break;
+		case ENEMY_TYPE::SKEL_SMALL_DAGGER:
+		{
 
-			break;
+		}
+		break;
+		case ENEMY_TYPE::SKEL_SMALL_GSWORD:
+		{
+
+		}
+		break;
+		case ENEMY_TYPE::MINOTAURS:
+		{
+			enemy = new Minotaurs;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
+		}
+		break;
+		case ENEMY_TYPE::OVIBOS:
+		{
+
 		}
 	}
 

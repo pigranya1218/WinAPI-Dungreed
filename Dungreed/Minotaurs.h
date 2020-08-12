@@ -1,14 +1,15 @@
 #pragma once
 #include "Enemy.h"
 
-class SkelMagicianIce : public Enemy
+class Minotaurs : public Enemy
 {
 private:
-	tagAttackInfo	_attack;	// 공격
+	tagAttackInfo	_skill;		// 돌진 모션
+	tagAttackInfo	_attack;	// 도끼 휘두르는 모션
+	tagMoveInfo		_moving;	// 이동 전용
 
-	Image*			_attackImg;	// 공격 이펙트 이미지
-	Animation*		_attackAni;	// 공격 이펙트 프레임
-	Vector2			_attackPos;	// 공격 이펙트 좌표 저장용
+	Vector2			_lastPos;	// 이전 좌표
+	Vector2			_currPos;	// 현재 좌표
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

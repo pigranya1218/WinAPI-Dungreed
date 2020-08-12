@@ -4,10 +4,13 @@
 #include "BatRed.h"
 #include "BatIce.h"
 #include "BatNormal.h"
+#include "BatGiantRed.h"
 #include "SkelBigIce.h"
 #include "SkelBigNormal.h"
 #include "SkelMagicianIce.h"
 #include "SkelSmallBow.h"
+#include "Minotaurs.h"
+#include "Ovibos.h"
 
 class Stage;
 
