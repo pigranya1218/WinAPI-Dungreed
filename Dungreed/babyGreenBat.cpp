@@ -62,7 +62,7 @@ void babyGreenBat::backRender(Vector2 pos, float angle)
 	}
 	else if (y < renderPos.y - 5 && y <= renderPos.y)
 	{
-		y += 7;
+		y += 8;
 	}
 	_img->setScale(3);
 	_img->aniRender(Vector2(x, y), _ani1, _direction == DIRECTION::LEFT);
