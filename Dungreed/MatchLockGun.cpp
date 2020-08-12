@@ -17,7 +17,7 @@ void MatchLockGun::init()
 
 	_effectAni01 = new Animation;
 	_effectAni01->init(_dustEffect->getWidth(), _dustEffect->getHeight(), 10, 1);
-	_effectAni01->setDefPlayFrame(false, true);
+	_effectAni01->setDefPlayFrame(false, false);
 	_effectAni01->setFPS(20);
 
 }
