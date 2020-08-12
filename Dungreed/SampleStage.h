@@ -6,8 +6,9 @@ class SampleStage : public GameNode
 {
 private:
 	Image* _mapImage;
-	tagTileMap _tile[TILEX*TILEY];
-
+	MapTool _map;
+	tagTileMap _tile[1000];
+	
 public:
 	HRESULT init();
 	void release();

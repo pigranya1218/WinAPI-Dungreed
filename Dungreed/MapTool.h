@@ -4,10 +4,9 @@
 #include "LinearFunc.h"
 
 #define TILESIZE 64
-#define TILEX 40
-#define TILEY 30
+
 #define SAMPLETILEX 10
-#define SAMPLETILEY 20
+#define SAMPLETILEY 10
 
 enum class DRAW_LINE_POSITION
 {
@@ -33,6 +32,8 @@ struct tagTileMap
 	int tileFrameX;
 	int tileFrameY;
 	DRAW_LINE_POSITION linePos;
+	int tileX;
+	int tileY;
 };
 
 struct  tagPalette
@@ -67,6 +68,12 @@ private:
 
 	//HWND _saveBtn;
 	//HWND _loadBtn;
+
+	
+	
+	Synthesize(int, _tileX,TileX)
+	Synthesize(int,_tileY,TileY)
+
 	Vector2 _mapPointer;
 	FloatRect _mapPtnRc;
 
@@ -76,9 +83,12 @@ private:
 	FloatRect _load;
 	FloatRect _erase;
 	FloatRect _paletteLoad;
+	FloatRect _increaseTileX, _decreaseTileX;
+	FloatRect _increaseTileY, _decreaseTileY;
+
 
 	Image* _paletteImage;
-	tagTileMap _tile[TILEX * TILEY];
+	tagTileMap _tile[1000];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
 
 	DRAW_LINE_POSITION _drawLinePos;
@@ -93,6 +103,9 @@ private:
 	vector<TCHAR*>::iterator _viLoad;
 
 public:
+
+
+
 	HRESULT init();
 	
 	void release();
@@ -111,7 +124,10 @@ public:
 
 	void setLinePos(int frameX,int frameY) ;
 
-	Image* getImage() {	return _paletteImage;}
-	tagTileMap getTile() { return _tile[TILEX * TILEY]; }
+	void setTileSize();
+
+	
+
+
 };
 
