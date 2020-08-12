@@ -328,19 +328,17 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å »èÁ¦
 
 
-
+	CONFIG_MANAGER->init();
+	DATA_MANAGER->init();
+	TIME_MANAGER->update();
 
 	// ¸ğµç ¾À SCENE_MANAGER¿¡ 
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("SECOND", new SecondTestScene);
-	SCENE_MANAGER->changeScene("GAME");	
+	SCENE_MANAGER->changeScene("MAIN");	
 
-	TIME_MANAGER->update();
-
-	CONFIG_MANAGER->init();
-	DATA_MANAGER->init();
 	return S_OK;
 }
 

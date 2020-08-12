@@ -8,6 +8,13 @@ class GameScene;
 class Projectile;
 class Ability;
 
+enum class PLAYER_ANIMATION
+{
+	DEFAULT,		//점프나 사망과 같이 애니렌더를 사용하지 않는 경우.
+	IDLE,
+	MOVE		//점프 중이 아닌 경우에만
+};
+
 // 공격 관련 정보
 struct tagAttackInfo
 {
@@ -20,15 +27,6 @@ struct tagAttackInfo
 class Player : public GameObject
 {
 Synthesize(DIRECTION, _direction, Direction)
-
-private:
-	//애니메이션 재생용 (상태패턴 아님)
-	enum class PLAYER_ANIMATION
-	{
-		DEFAULT,		//점프나 사망과 같이 애니렌더를 사용하지 않는 경우.
-		IDLE,
-		MOVE		//점프 중이 아닌 경우에만
-	};
 
 private:
 	GameScene* _gameScene;

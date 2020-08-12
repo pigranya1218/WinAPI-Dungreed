@@ -354,6 +354,21 @@
     <ClInclude Include="InventoryUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Costume.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeManager.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="MetalPlateCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="PickaxCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -550,6 +565,18 @@
     </ClCompile>
     <ClCompile Include="InventoryUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeManager.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="MetalPlateCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="PickaxCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
