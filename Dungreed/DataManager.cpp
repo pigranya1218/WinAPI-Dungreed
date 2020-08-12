@@ -22,6 +22,9 @@ void DataManager::init()
 	_slotImg = IMAGE_MANAGER->findImage("SLOT");
 	_selectedSlot = -1;
 	_selectedDelete = -1;
+
+	_costumeMgr = new CostumeManager;
+	_costumeMgr->init();
 }
 
 void DataManager::update()
@@ -111,4 +114,9 @@ void DataManager::render()
 
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->setScale(5);
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->render(Vector2(_ptMouse.x, _ptMouse.y));
+}
+
+Costume* DataManager::getCostume(COSTUME_TYPE type) const
+{
+	return _costumeMgr->getCostume(type);
 }

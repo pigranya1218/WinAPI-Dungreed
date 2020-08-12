@@ -7,13 +7,7 @@ class Item;
 class GameScene;
 class Projectile;
 class Ability;
-
-enum class PLAYER_ANIMATION
-{
-	DEFAULT,		//점프나 사망과 같이 애니렌더를 사용하지 않는 경우.
-	IDLE,
-	MOVE		//점프 중이 아닌 경우에만
-};
+class Costume;
 
 // 공격 관련 정보
 struct tagAttackInfo
@@ -30,11 +24,11 @@ Synthesize(DIRECTION, _direction, Direction)
 
 private:
 	GameScene* _gameScene;
-	Animation* _ani;	
-	Image* _img;	
-	PLAYER_ANIMATION _aniState;
+	
 
 	// 현재 상태
+	Costume* _costume;				// 현재 장착한 코스튬
+
 	int		_level;					// 현재 레벨
 	int		_currHp;				// 현재 체력
 	int		_currJumpCount;			// 현재 남은 점프 카운트
@@ -45,8 +39,7 @@ private:
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
-	PlayerStat _baseStat; // 기본 스탯, 아이템으로 변하지 않는 스탯
-	PlayerStat _adjustStat; // 아이템으로 변화된 스탯
+	PlayerStat _adjustStat; // 각종 요인으로 변화된 최종 스탯
 
 	vector<Item*> _inventory;				// 인벤토리
 	vector<Item*> _equippedWeapon;			// 장착된 무기
@@ -55,7 +48,6 @@ private:
 	vector<Item*> _equippedAcc;				// 장착된 악세사리
 
 private:
-	void setBaseStat();
 	void updateAdjustStat();
 
 public:
@@ -63,8 +55,6 @@ public:
 	~Player() {};
 
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; };
-
-	void setAni(PLAYER_ANIMATION setAni);
 
 	// 아이템들이 호출할 함수들
 	void attack(FloatRect* rect, tagAttackInfo* info);

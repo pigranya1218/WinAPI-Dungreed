@@ -378,9 +378,6 @@
     <ClInclude Include="CostumeManager.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultCos.h">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClInclude>
     <ClInclude Include="MetalPlateCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
@@ -389,6 +386,9 @@
     </ClInclude>
     <ClInclude Include="PlayerBullet.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -608,9 +608,6 @@
     <ClCompile Include="CostumeManager.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultCos.cpp">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClCompile>
     <ClCompile Include="MetalPlateCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
@@ -619,6 +616,9 @@
     </ClCompile>
     <ClCompile Include="PlayerBullet.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

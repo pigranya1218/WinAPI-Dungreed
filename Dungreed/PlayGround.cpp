@@ -158,11 +158,24 @@ HRESULT playGround::init()
 
 	// ** DUNGEON
 
-	// ** PLAYER
-	IMAGE_MANAGER->addFrameImage("PLAYER/IDLE", L"resources/images/Characters/Player/player_idle.png", 5, 1);
-	IMAGE_MANAGER->addFrameImage("PLAYER/RUN", L"resources/images/Characters/Player/player_run.png", 8, 1);
-	IMAGE_MANAGER->addImage("PLAYER/JUMP", L"resources/images/Characters/Player/player_jump.png");
-	IMAGE_MANAGER->addImage("PLAYER/DIE", L"resources/images/Characters/Player/player_die.png");
+	// ** COSTUME
+	// *** BASE
+	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/IDLE", L"resources/images/costumes/base/player_idle.png", 5, 1);
+	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/MOVE", L"resources/images/costumes/base/player_run.png", 8, 1);
+	IMAGE_MANAGER->addImage("COSTUME/BASE/JUMP", L"resources/images/costumes/base/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/BASE/DIE", L"resources/images/costumes/base/player_die.png");
+
+	// *** METAL_PLATE
+	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/IDLE", L"resources/images/costumes/metalPlate/player_idle.png", 5, 1);
+	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/MOVE", L"resources/images/costumes/metalPlate/player_run.png", 8, 1);
+	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/JUMP", L"resources/images/costumes/metalPlate/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/DIE", L"resources/images/costumes/metalPlate/player_die.png");
+
+	// *** PICKAX
+	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/IDLE", L"resources/images/costumes/pickax/player_idle.png", 5, 1);
+	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/MOVE", L"resources/images/costumes/pickax/player_run.png", 8, 1);
+	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP", L"resources/images/costumes/pickax/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/PICKAX/DIE", L"resources/images/costumes/pickax/player_die.png");
 
 	// ** WEAPON
 	// *** LongDistanceWeapon
