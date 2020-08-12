@@ -13,5 +13,6 @@ public:
 	void update(float const elapsedTime);
 	void render();
 	vector<Projectile*> getProjectile() { return _projectiles; }
+	//void setProjectile() {}
 };
 

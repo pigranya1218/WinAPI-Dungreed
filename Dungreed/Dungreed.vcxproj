@@ -247,6 +247,7 @@
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SampleStage.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />

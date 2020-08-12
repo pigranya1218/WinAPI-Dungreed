@@ -455,6 +455,9 @@
     <ClCompile Include="GunBullet.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dungreed.rc">

@@ -62,10 +62,12 @@ void GunBullet::render()
 	D2D_RENDERER->drawRectangle(_bulletRect);
 }
 
-void GunBullet::fire(Vector2 const pos, float const angle)
+void GunBullet::fire(Vector2 const pos, float const angle, int itemType)
 {
 	_angle = angle;
 	_bulletRect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	GunBullet* _bullet = new GunBullet;
+	_bullet->init(itemType, pos);
 }
 
 void GunBullet::move()
