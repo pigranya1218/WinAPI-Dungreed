@@ -187,38 +187,22 @@ void Player::update(float const elapsedTime)
 
 	//이동
 	Vector2 moveDir(0, 0);
-	//좌측 이동중
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
+	
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)) || KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT))) // 좌우 이동중
 	{
-		moveDir.x -= _adjustStat.moveSpeed * elapsedTime;
-		if (_isStand)
+		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
 		{
-			if (moveDir.x == 0)
-			{
-				_costume->setSprite(PLAYER_STATE::IDLE, false);
-			}
-			else if (moveDir.x != 0)
-			{
-				_costume->setSprite(PLAYER_STATE::MOVE, false);
-			}
+			moveDir.x -= _adjustStat.moveSpeed * elapsedTime;
 		}
+		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))
+		{
+			moveDir.x += _adjustStat.moveSpeed * elapsedTime;
+		}
+		_costume->setSprite(PLAYER_STATE::MOVE, false);
 	}
-	//우측 이동중
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))
+	else // 이동 안하는 중 
 	{
-		moveDir.x += _adjustStat.moveSpeed * elapsedTime;
-
-		if (_isStand)
-		{
-			if (moveDir.x == 0)
-			{
-				_costume->setSprite(PLAYER_STATE::IDLE, false);
-			}
-			else if (moveDir.x != 0)
-			{
-				_costume->setSprite(PLAYER_STATE::MOVE, false);
-			}
-		}
+		_costume->setSprite(PLAYER_STATE::IDLE, false);
 	}
 
 	// 점프
@@ -294,10 +278,6 @@ void Player::update(float const elapsedTime)
 	{
 		_force.y = 0;
 		_currJumpCount = _adjustStat.maxJumpCount;
-		if (moveDir.x == 0)
-		{
-			_costume->setSprite(PLAYER_STATE::IDLE, false);
-		}
 	}
 
 	//점프 처리
