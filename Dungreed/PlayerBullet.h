@@ -1,6 +1,8 @@
 #pragma once
 #include "Projectile.h"
 
+#define PI 3.124159f
+
 class PlayerBullet
 {
 private:
@@ -14,6 +16,8 @@ private:
 	Image* _effect02;
 	int _ObjectType;							//юс╫ц
 	Vector2 _position;
+	
+	char _buffer[128];
 public:
 	void init(Vector2 pos, float angle);
 	void update(float const elapsedTime);

@@ -110,23 +110,23 @@ void MatchLockGun::frontRender(Player* player)
 
 	////D2DRenderer::renderText(50, 50, );
 
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 
 	Vector2 renderPosHand = pos;
 	renderPosHand.x += ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4)); // 손의 위치는 무기의 회전 중심점
 	renderPosHand.y += 20; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 	// 손으로부터 마우스 에임까지의 각도
-	float degree = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) * (180 / PI) + 360;
+	degree = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) * (180 / PI) + 360;
 	if (degree > 360)
 	{
 		degree -= 360;
 	}
 
-	Vector2 renderPosWeapon = renderPosHand;
+	renderPosWeapon = renderPosHand;
 	renderPosWeapon.x -= ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4));
 
-	float renderDegree = degree;
+	renderDegree = degree;
 	if (isLeft) // 왼쪽을 보고 있음
 	{
 		renderDegree = 180 - degree;
@@ -167,6 +167,8 @@ void MatchLockGun::frontRender(Player* player)
 	{
 		_bullet->render();
 	}
+
+	//D2D_RENDERER->renderText(300, 500, to_wstring(degree), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 }
 
 void MatchLockGun::displayInfo()
@@ -180,22 +182,22 @@ void MatchLockGun::attack(Player* player)
 	//_bullet->fire(position, angle);
 	_drawEffect = true;
 
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	/*bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	float degree = atan2f(-(_ptMouse.y - player->getPosition().y), (_ptMouse.x - player->getPosition().x)) * (180 / PI) + 360;
 	if (degree > 360)
 	{
 		degree -= 360;
-	}
+	}*/
 
-	float renderDegree = degree;
-	if (isLeft) // 왼쪽을 보고 있음
-	{
-		renderDegree = 180 - degree;
-		if (renderDegree < 0) renderDegree += 360;
-	}
+	//float renderDegree = degree;
+	//if (isLeft) // 왼쪽을 보고 있음
+	//{
+	//	renderDegree = 180 - degree;
+	//	if (renderDegree < 0) renderDegree += 360;
+	//}
 
 	_bullet = new PlayerBullet;
-	_bullet->init(player->getPosition(), renderDegree);
+	_bullet->init(player->getPosition(), degree);
 	_isAttack = true;
 }
 
