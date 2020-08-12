@@ -4,7 +4,7 @@ void TestStage::init()
 {
 	Stage::init();
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN});
-	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN});
+	//_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN});
 	_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT});
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT});
@@ -22,7 +22,7 @@ void TestStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));*/
 
 
-	/*_tileImage = IMAGE_MANAGER->findImage("sampleTile");
+	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	mapLoad();
 
 
@@ -117,7 +117,7 @@ void TestStage::init()
 		
 	}
 
-*/
+
 
 }
 
@@ -133,11 +133,11 @@ void TestStage::update(float const elapsedTime)
 
 void TestStage::render()
 {
-	//for (int i = 0; i < TILEX*TILEY; ++i)
-	//{
-	//	_tileImage->setScale(2);
-	//	_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
-	//}
+	for (int i = 0; i < TILEX*TILEY; ++i)
+	{
+		_tileImage->setScale(2);
+		_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+	}
 
 	for (int i = 0; i < _collisions.size(); i++)
 	{
@@ -153,7 +153,7 @@ void TestStage::mapLoad()
 	HANDLE stageFile;
 	DWORD read;
 
-	stageFile = CreateFile("stage4.map", GENERIC_READ, NULL, NULL,
+	stageFile = CreateFile("stage5.map", GENERIC_READ, NULL, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);

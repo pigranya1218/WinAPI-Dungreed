@@ -160,7 +160,10 @@ void MapTool::setMap()
 					if (_tile[i].tileFrameX == 1 && _tile[i].tileFrameY == 6)_tile[i].linePos = DRAW_LINE_POSITION::BOTTOM;
 					if (_tile[i].tileFrameX == 2 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT;
 					if (_tile[i].tileFrameX == 0 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT;
-					
+					if ((_tile[i].tileFrameX == 6|| _tile[i].tileFrameX == 8) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+					if ((_tile[i].tileFrameX == 7|| _tile[i].tileFrameX == 9) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+
+
 					else _tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
 
 					releaseSelectTile();
