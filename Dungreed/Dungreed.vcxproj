@@ -183,6 +183,9 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GreenBat.h" />
+    <ClInclude Include="GreenDadBat.h" />
+    <ClInclude Include="GreenMomBat.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -237,6 +240,7 @@
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="VillageStage.h" />
+    <ClInclude Include="Voluspa.h" />
     <ClInclude Include="watCher.h" />
     <ClInclude Include="windowsAPI.h" />
   </ItemGroup>
@@ -269,6 +273,9 @@
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GreenBat.cpp" />
+    <ClCompile Include="GreenDadBat.cpp" />
+    <ClCompile Include="GreenMomBat.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
@@ -315,6 +322,7 @@
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="VillageStage.cpp" />
+    <ClCompile Include="Voluspa.cpp" />
     <ClCompile Include="watCher.cpp" />
     <ClCompile Include="windowsAPI.cpp" />
   </ItemGroup>

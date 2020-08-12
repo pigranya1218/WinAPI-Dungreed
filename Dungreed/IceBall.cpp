@@ -12,6 +12,8 @@ void IceBall::init()
 	_addStat.criticalChance = 1;
 	_addStat.defense = 1;
 
+	
+
 	x = y = 0;
 
 
@@ -30,10 +32,11 @@ void IceBall::update(Player * player, float const elapsedTime)
 
 void IceBall::backRender(Player * player)
 {
-	x = cosf(_angle) * 65;
-	y = -sinf(_angle) * 65;
+	
 
 	Vector2 renderPos = player->getPosition();
+	x = cosf(_angle) * 65;
+	y = -sinf(_angle) * 65;
 	renderPos.x = renderPos.x + x;
 	renderPos.y = renderPos.y + y;
 	_img->setScale(4);

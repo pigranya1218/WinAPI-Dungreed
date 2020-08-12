@@ -8,6 +8,9 @@
 #include "miniEarth.h"
 #include "watCher.h"
 #include "babyGreenBat.h"
+#include "GreenBat.h"
+#include "GreenDadBat.h"
+#include "GreenMomBat.h"
 #include "bombPouch.h"
 #include "MatchLockGun.h"
 #include "Matchlock.h"
@@ -168,21 +171,33 @@ void Player::init()
 	testAcc1->init();
 	_equippedAcc.push_back(testAcc1);
 
-	bombPouch* testAcc2 = new bombPouch;
+	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
 	_equippedAcc.push_back(testAcc2);
 
-	IceBall* testAcc3 = new IceBall;
+	GreenDadBat* testAcc3 = new GreenDadBat;
 	testAcc3->init();
 	_equippedAcc.push_back(testAcc3);
 
-	miniEarth* testAcc4 = new miniEarth;
+	GreenMomBat* testAcc4 = new GreenMomBat;
 	testAcc4->init();
 	_equippedAcc.push_back(testAcc4);
 
-	watCher* testAcc5 = new watCher;
+	bombPouch* testAcc5 = new bombPouch;
 	testAcc5->init();
 	_equippedAcc.push_back(testAcc5);
+
+	IceBall* testAcc6 = new IceBall;
+	testAcc6->init();
+	_equippedAcc.push_back(testAcc6);
+
+	miniEarth* testAcc7 = new miniEarth;
+	testAcc7->init();
+	_equippedAcc.push_back(testAcc7);
+
+	watCher* testAcc8 = new watCher;
+	testAcc8->init();
+	_equippedAcc.push_back(testAcc8);
 
 
 	//ShortSpear* testWeapon = new ShortSpear;
@@ -400,7 +415,7 @@ void Player::update(float const elapsedTime)
 	_equippedWeapon[0]->update(this, elapsedTime);
 	_equippedWeapon[1]->update(this, elapsedTime);
 	// 악세사리 업데이트
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < 9; i++) {
 		_equippedAcc[i]->update(this, elapsedTime);
 		
 	}
@@ -411,13 +426,10 @@ void Player::render()
 {
 	_img->setScale(4);
 
-	/*_equippedAcc[0]->backRender(_position, angle);
-	_equippedAcc[1]->backRender(_position, angle);
-	_equippedAcc[2]->backRender(_position, angle);*/
 
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1);
 
-	for(int i=0;i<6;i++){
+	for(int i=0;i<9;i++){
 	_equippedAcc[i]->backRender(this);	
 	}
 	_equippedWeapon[_currWeaponIndex]->backRender(this);

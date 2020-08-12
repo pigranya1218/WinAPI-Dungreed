@@ -67,16 +67,16 @@ void watCher::backRender(Player * player)
 {
 	x = cosf(_angle) * radius;
 	y = -sinf(_angle) * radius;
-
+	
 	Vector2 renderPos = player->getPosition();
 	renderPos.x = renderPos.x + x+2;
-	renderPos.y = renderPos.y + y-22;
+	renderPos.y = renderPos.y + y-22;	
 	_img->setScale(4);
-	
 	_img->aniRender(Vector2(renderPos), _ani1, false);
 }
 
 void watCher::frontRender(Player * player)
+
 {
 }
 
