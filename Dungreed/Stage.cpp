@@ -7,6 +7,7 @@ void Stage::init()
 	_npcMgr = new NpcManager;
 	_enemyMgr = new EnemyManager;
 	_projectileMgr = new ProjectileManager;
+	
 }
 
 void Stage::release()
@@ -27,6 +28,7 @@ void Stage::update(float const elaspedTime)
 	_npcMgr->update(elaspedTime);
 	_enemyMgr->update(elaspedTime);
 	_projectileMgr->update(elaspedTime);
+	
 }
 
 void Stage::render()
@@ -35,6 +37,7 @@ void Stage::render()
 	_npcMgr->render();
 	_enemyMgr->render();
 	_projectileMgr->render();
+	
 }
 
 void Stage::moveTo(GameObject* object, Vector2 const moveDir)

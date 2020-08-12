@@ -23,7 +23,7 @@ void SampleStage::render()
 {
 	
 
-	for (int i = 0; i < TILEX*TILEY; i++)
+	for (int i = 0; i < _map.getTileX()*_map.getTileY(); i++)
 	{
 		_mapImage->setScale(2);
 		_mapImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
@@ -44,7 +44,7 @@ void SampleStage::mapLoad()
 
 	file = CreateFile("stage.map", GENERIC_READ, NULL, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	ReadFile(file, _tile , sizeof(tagTileMap)*TILEX*TILEY, &read, NULL);
+	ReadFile(file, _tile , sizeof(tagTileMap)* _map.getTileX()*_map.getTileY(), &read, NULL);
 
 
 

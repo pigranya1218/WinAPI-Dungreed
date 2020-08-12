@@ -3,10 +3,12 @@
 #include "Stage.h"
 #include "GameScene.h"
 #include "DebugStage.h"
+#include "VillageStage.h"
 
 void StageManager::init()
 {
 	_currStageType = STAGE_TYPE::TEST;
+	//_currStageType = STAGE_TYPE::VILLAGE;
 	makeStage();
 }
 
@@ -40,6 +42,7 @@ void StageManager::nextStage()
 void StageManager::makeStage()
 {
 	_currStage = new DebugStage();
+	//_currStage = new VillageStage();
 	_currStage->setStageManager(this);
 	_currStage->init();
 }
