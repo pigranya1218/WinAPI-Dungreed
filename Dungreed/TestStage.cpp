@@ -22,7 +22,7 @@ void TestStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));*/
 
 
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
+	/*_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	mapLoad();
 
 
@@ -103,6 +103,38 @@ void TestStage::init()
 
 			
 				break;
+			case DRAW_LINE_POSITION::LEFT_DIAGONAL:
+				if (curr == 0)
+				{
+					_currentIndex = i;
+					curr++;
+				}
+
+				if (_tile[i + TILEX - 2].linePos == DRAW_LINE_POSITION::LEFT_DIAGONAL) continue;
+				else
+				{
+					_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.bottom),Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top)),LINEAR_VALUE_TYPE::DOWN });
+					curr = 0;
+
+				}
+
+				break;
+			case DRAW_LINE_POSITION::RIGHT_DIAGONAL:
+				if (curr == 0)
+				{
+					_currentIndex = i;
+					curr++;
+				}
+
+				if (_tile[i + TILEX + 3].linePos == DRAW_LINE_POSITION::RIGHT_DIAGONAL) continue;
+				else
+				{
+					_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
+					curr = 0;
+
+				}
+
+				break;
 			default: 
 				_currentIndex = 0;
 				curr = 0;
@@ -115,7 +147,7 @@ void TestStage::init()
 		
 		
 		
-	}
+	}*/
 
 
 
@@ -133,7 +165,7 @@ void TestStage::update(float const elapsedTime)
 
 void TestStage::render()
 {
-	for (int i = 0; i < TILEX*TILEY; ++i)
+	/*for (int i = 0; i < TILEX*TILEY; ++i)
 	{
 		_tileImage->setScale(2);
 		_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
@@ -142,7 +174,7 @@ void TestStage::render()
 	for (int i = 0; i < _collisions.size(); i++)
 	{
 		D2D_RENDERER->drawLine(_collisions[i].func.getStart(), _collisions[i].func.getEnd());
-	}
+	}*/
 
 	Stage::render();
 
