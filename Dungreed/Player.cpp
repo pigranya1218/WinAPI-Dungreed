@@ -195,7 +195,7 @@ void Player::init()
 	testWeapon1->init();
 	_equippedWeapon.push_back(testWeapon1);
 	
-	Punch* testWeapon2 = new Punch;
+	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
 
