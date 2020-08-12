@@ -3,11 +3,11 @@
 void TestStage::init()
 {
 	Stage::init();
-	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN});
-	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN});
-	_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
-	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT});
-	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT});
+	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN});
+	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN});
+	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
+	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT});
+	_collisionGrounds.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT});
 
 	
 	// 에너미 테스트입니다.
@@ -171,9 +171,9 @@ void TestStage::render()
 		_tileimage->framerender(_tile[i].rc.getcenter(), _tile[i].tileframex, _tile[i].tileframey);
 	}*/
 
-	for (int i = 0; i < _collisions.size(); i++)
+	for (int i = 0; i < _collisionGrounds.size(); i++)
 	{
-		D2D_RENDERER->drawLine(_collisions[i].func.getStart(), _collisions[i].func.getEnd());
+		D2D_RENDERER->drawLine(_collisionGrounds[i].func.getStart(), _collisionGrounds[i].func.getEnd(), D2D1::ColorF::Enum::Red, 1);
 	}
 
 	Stage::render();

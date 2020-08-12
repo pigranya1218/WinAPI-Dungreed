@@ -26,7 +26,8 @@ protected:
 	ProjectileManager* _projectileMgr;
 	NpcManager* _npcMgr;
 	
-	vector<tagCollision> _collisions;
+	vector<tagCollision> _collisionGrounds; // 땅
+	vector<tagCollision> _collisionPlatforms; // 발판
 	bool _isVisited; // 방문한 스테이지인가? (UI에서 그리기 위함)
 
 public:
