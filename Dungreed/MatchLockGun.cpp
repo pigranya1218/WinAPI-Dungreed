@@ -16,7 +16,7 @@ void MatchLockGun::init()
 	_maxDamage = 18;
 	_baseAttackDelay = 1;
 	_currAttackDelay = 0;
-	_maxBullet = 100;
+	_maxBullet = 2;
 	_currBullet = _maxBullet;
 	_baseReloadDelay = 3;
 	_currReloadDelay = 0;
