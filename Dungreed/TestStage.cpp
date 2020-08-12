@@ -4,7 +4,7 @@ void TestStage::init()
 {
 	Stage::init();
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN});
-	//_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN});
+	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(300, 800), Vector2(1550, -450)), LINEAR_VALUE_TYPE::DOWN});
 	_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT});
 	_collisions.push_back({LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT});
@@ -165,16 +165,16 @@ void TestStage::update(float const elapsedTime)
 
 void TestStage::render()
 {
-	/*for (int i = 0; i < TILEX*TILEY; ++i)
+	/*for (int i = 0; i < tilex*tiley; ++i)
 	{
-		_tileImage->setScale(2);
-		_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
-	}
+		_tileimage->setscale(2);
+		_tileimage->framerender(_tile[i].rc.getcenter(), _tile[i].tileframex, _tile[i].tileframey);
+	}*/
 
 	for (int i = 0; i < _collisions.size(); i++)
 	{
 		D2D_RENDERER->drawLine(_collisions[i].func.getStart(), _collisions[i].func.getEnd());
-	}*/
+	}
 
 	Stage::render();
 

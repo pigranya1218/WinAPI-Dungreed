@@ -46,48 +46,48 @@ void MatchLockGun::backRender(Player* player)
 
 void MatchLockGun::frontRender(Player* player)
 {
-	Vector2 _centerPos = Vector2(_img->getSize().x / 3, _img->getSize().y / 2);
-	_img->setScale(4);
-	_img->setAnglePos(_centerPos);
+	//Vector2 _centerPos = Vector2(_img->getSize().x / 3, _img->getSize().y / 2);
+	//_img->setScale(4);
+	//_img->setAnglePos(_centerPos);
 
-	_isLeft = false;
-	if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
-	{
-		_isLeft = true;
-		angle = fmod((180 - angle) + 360, 360);
-	}
+	//_isLeft = false;
+	//if (angle >= 90 && angle <= 270) // 왼쪽을 보고 있음
+	//{
+	//	_isLeft = true;
+	//	angle = fmod((180 - angle) + 360, 360);
+	//}
 
-	_gunPos = _isLeft ? Vector2(pos.x - 20, pos.y + 15) : Vector2(pos.x + 20, pos.y + 15);
+	//_gunPos = _isLeft ? Vector2(pos.x - 20, pos.y + 15) : Vector2(pos.x + 20, pos.y + 15);
 
-	/*if (_isLeft) { _gunPos = Vector2(pos.x - 20, pos.y + 15); }
-	else { _gunPos = Vector2(pos.x + 20, pos.y + 15); }*/
+	///*if (_isLeft) { _gunPos = Vector2(pos.x - 20, pos.y + 15); }
+	//else { _gunPos = Vector2(pos.x + 20, pos.y + 15); }*/
 
-	_img->setAngle(angle);
-	_img->render(_gunPos, _isLeft);
+	//_img->setAngle(angle);
+	//_img->render(_gunPos, _isLeft);
 
-	Vector2 _pos;
-	Vector2 _centerPos02 = Vector2(_img->getSize().x * 0.25f, _img->getSize().y / 2);
-	_dustEffect->setScale(4);
-	_dustEffect->setAnglePos(_centerPos02);
-	if (_isAttack)
-	{
-		_dustEffect->setScale(4);
-		//_dustEffect->setAnglePos(_centerPos);
-		/*if (!_isLeft)
-		{
-			_pos = Vector2(pos.x + 30, pos.y + 5);
+	//Vector2 _pos;
+	//Vector2 _centerPos02 = Vector2(_img->getSize().x * 0.25f, _img->getSize().y / 2);
+	//_dustEffect->setScale(4);
+	//_dustEffect->setAnglePos(_centerPos02);
+	//if (_isAttack)
+	//{
+	//	_dustEffect->setScale(4);
+	//	//_dustEffect->setAnglePos(_centerPos);
+	//	/*if (!_isLeft)
+	//	{
+	//		_pos = Vector2(pos.x + 30, pos.y + 5);
 
-		}
-		else
-		{
-			_pos = Vector2(pos.x - 30, pos.y + 5);
-		}*/
-		_dustEffect->setAngle(angle);
-		_dustEffect->aniRender(_gunPos, _effectAni01, _isLeft);
-		//_bullet->render();
-	}
+	//	}
+	//	else
+	//	{
+	//		_pos = Vector2(pos.x - 30, pos.y + 5);
+	//	}*/
+	//	_dustEffect->setAngle(angle);
+	//	_dustEffect->aniRender(_gunPos, _effectAni01, _isLeft);
+	//	//_bullet->render();
+	//}
 
-	//D2DRenderer::renderText(50, 50, );
+	////D2DRenderer::renderText(50, 50, );
 }
 
 void MatchLockGun::displayInfo()

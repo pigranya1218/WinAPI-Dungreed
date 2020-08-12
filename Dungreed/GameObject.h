@@ -15,7 +15,7 @@ public:
 	GameObject() {}
 	virtual ~GameObject() {}
 
-	virtual void init() = 0;
+	virtual void init() {};
 	virtual void release() = 0;
 	virtual void update(float timeElapsed) = 0;
 	virtual void render() = 0;
