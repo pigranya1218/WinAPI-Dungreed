@@ -92,7 +92,7 @@ void ShortSpear::frontRender(Player* player)
 	}
 
 	Vector2 renderPosWeapon = renderPosHand;
-	renderPosWeapon.x -= ((isLeft) ? (_img->getWidth() * 0.30f * 4) : -(_img->getWidth() * 0.15f * 4));
+	renderPosWeapon.x -= ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4));
 	
 	float renderDegree = degree;
 	if (isLeft) // 왼쪽을 보고 있음
@@ -107,7 +107,7 @@ void ShortSpear::frontRender(Player* player)
 
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
-	_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight()));
+	_img->setAnglePos(Vector2(0.35f * _img->getWidth(), 0.5f * _img->getHeight()));
 	_img->render(renderPosWeapon, isLeft);
 
 	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
