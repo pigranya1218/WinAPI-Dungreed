@@ -2,9 +2,6 @@
 #include "Item.h"
 class ShortSword : public Item
 {
-
-
-
 private:
 	// 공격 관련
 	Image*	_effect;
@@ -14,11 +11,14 @@ private:
 	float _baseAttackDelay; // 공격 쿨타임
 	float _currAttackDelay; // 남은 공격 쿨타임
 	float _attackAngle;
+	float _angleOffset;
 	bool _reverseMove;
+	bool _drawEffect;
+	bool _oneAttack;
+	FloatRect _hand;
+	Vector2 _handSize;
 
 public:
-
-
 	virtual void init();
 	virtual void release();
 	virtual void update(Player* player, float const elapsedTime);
@@ -34,5 +34,6 @@ public:
 	virtual void getHit(Vector2 const position); // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
 	virtual PlayerStat equip(); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
+
 };
 
