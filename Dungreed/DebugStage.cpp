@@ -24,10 +24,11 @@ void DebugStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));*/
 
+	
 
-	/*_tileImage = IMAGE_MANAGER->findImage("sampleTile");
+	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	mapLoad();
-
+	/*
 
 	int curr = 0;
 
@@ -46,7 +47,7 @@ void DebugStage::init()
 			if (_tile[i + 1].linePos == DRAW_LINE_POSITION::TOP) continue;
 			else
 			{
-				_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.top)),LINEAR_VALUE_TYPE::DOWN });
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.top)),LINEAR_VALUE_TYPE::DOWN });
 				curr = 0;
 
 			}
@@ -63,7 +64,7 @@ void DebugStage::init()
 			if (_tile[i + 1].linePos == DRAW_LINE_POSITION::BOTTOM) continue;
 			else
 			{
-				_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.bottom),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::UP });
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.bottom),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::UP });
 				curr = 0;
 
 			}
@@ -81,7 +82,7 @@ void DebugStage::init()
 			if (_tile[i + TILEX+1].linePos == DRAW_LINE_POSITION::LEFT) continue;
 			else
 			{
-				_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.left,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::RIGHT });
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.left,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::RIGHT });
 				curr = 0;
 
 			}
@@ -99,7 +100,7 @@ void DebugStage::init()
 			if (_tile[i + TILEX+1].linePos == DRAW_LINE_POSITION::RIGHT) continue;
 			else
 			{
-				_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::LEFT });
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::LEFT });
 				curr = 0;
 
 			}
@@ -116,7 +117,7 @@ void DebugStage::init()
 				if (_tile[i + TILEX - 2].linePos == DRAW_LINE_POSITION::LEFT_DIAGONAL) continue;
 				else
 				{
-					_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.bottom),Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top)),LINEAR_VALUE_TYPE::DOWN });
+					_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.bottom),Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top)),LINEAR_VALUE_TYPE::DOWN });
 					curr = 0;
 
 				}
@@ -132,7 +133,7 @@ void DebugStage::init()
 				if (_tile[i + TILEX + 3].linePos == DRAW_LINE_POSITION::RIGHT_DIAGONAL) continue;
 				else
 				{
-					_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
+					_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
 					curr = 0;
 
 				}
@@ -152,6 +153,8 @@ void DebugStage::init()
 
 	}*/
 
+
+
 }
 
 void DebugStage::release()
@@ -164,15 +167,17 @@ void DebugStage::update(float const elapsedTime)
 {
 	Stage::update(elapsedTime);
 
+	
 }
 
 void DebugStage::render()
 {
-	/*for (int i = 0; i < tilex*tiley; ++i)
+	for (int i = 0; i < TILEX*TILEY; ++i)
 	{
-		_tileimage->setscale(2);
-		_tileimage->framerender(_tile[i].rc.getcenter(), _tile[i].tileframex, _tile[i].tileframey);
-	}*/
+		_tileImage->setScale(2);
+		//_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+		CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+	}
 
 	for (int i = 0; i < _collisionGrounds.size(); i++)
 	{
@@ -185,6 +190,8 @@ void DebugStage::render()
 	}
 
 	Stage::render();
+
+	//CAMERA->frameRender(_tileImage, Vector2(800,400));
 }
 
 void DebugStage::mapLoad()
@@ -192,10 +199,133 @@ void DebugStage::mapLoad()
 	HANDLE stageFile;
 	DWORD read;
 
-	stageFile = CreateFile("stage5.map", GENERIC_READ, NULL, NULL,
+	stageFile = CreateFile("stage6.map", GENERIC_READ, NULL, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * TILEX * TILEY, &read, NULL);
 
 	CloseHandle(stageFile);
+
+	int curr = 0;
+
+	for (int i = 0; i < TILEX*TILEY; ++i)
+	{
+		switch (_tile[i].linePos)
+		{
+		case DRAW_LINE_POSITION::TOP:
+
+			if (curr == 0)
+			{
+				_currentIndex = i;
+				curr++;
+			}
+
+			if (_tile[i + 1].linePos == DRAW_LINE_POSITION::TOP) continue;
+			else
+			{
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.top)),LINEAR_VALUE_TYPE::DOWN });
+				curr = 0;
+
+			}
+
+			break;
+		case DRAW_LINE_POSITION::BOTTOM:
+
+			if (curr == 0)
+			{
+				_currentIndex = i;
+				curr++;
+			}
+
+			if (_tile[i + 1].linePos == DRAW_LINE_POSITION::BOTTOM) continue;
+			else
+			{
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.bottom),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::UP });
+				curr = 0;
+
+			}
+
+
+			break;
+		case DRAW_LINE_POSITION::LEFT:
+
+			if (curr == 0)
+			{
+				_currentIndex = i;
+				curr++;
+			}
+
+			if (_tile[i + TILEX + 1].linePos == DRAW_LINE_POSITION::LEFT) continue;
+			else
+			{
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.left,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::RIGHT });
+				curr = 0;
+
+			}
+
+
+			break;
+		case DRAW_LINE_POSITION::RIGHT:
+
+			if (curr == 0)
+			{
+				_currentIndex = i;
+				curr++;
+			}
+
+			if (_tile[i + TILEX + 1].linePos == DRAW_LINE_POSITION::RIGHT) continue;
+			else
+			{
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::LEFT });
+				curr = 0;
+
+			}
+
+
+			break;
+		case DRAW_LINE_POSITION::LEFT_DIAGONAL:
+			if (curr == 0)
+			{
+				_currentIndex = i;
+				curr++;
+			}
+
+			if (_tile[i + TILEX - 2].linePos == DRAW_LINE_POSITION::LEFT_DIAGONAL) continue;
+			else
+			{
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.bottom),Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top)),LINEAR_VALUE_TYPE::DOWN });
+				curr = 0;
+
+			}
+
+			break;
+		case DRAW_LINE_POSITION::RIGHT_DIAGONAL:
+			if (curr == 0)
+			{
+				_currentIndex = i;
+				curr++;
+			}
+
+			if (_tile[i + TILEX + 3].linePos == DRAW_LINE_POSITION::RIGHT_DIAGONAL) continue;
+			else
+			{
+				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
+				curr = 0;
+
+			}
+
+			break;
+		default:
+			_currentIndex = 0;
+			curr = 0;
+			break;
+		}
+
+
+
+
+
+
+
+	}
 }

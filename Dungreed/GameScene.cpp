@@ -44,7 +44,7 @@ void GameScene::update()
 	_stageMgr->update(elapsedTime);
 	_player->update(elapsedTime);
 	EFFECT_MANAGER->update(elapsedTime);
-
+	CAMERA->setXY(_player->getPosition());
 	_uiMgr->update(elapsedTime);
 }
 

@@ -7,6 +7,8 @@ HRESULT MapToolScene::init()
 {
 	_tileMapTool = new MapTool;
 	_tileMapTool->init();
+	//CAMERA->setConfig(100, 50, 960, 640, 0, 0, 1600, 900);
+	
 
 	return S_OK;
 }

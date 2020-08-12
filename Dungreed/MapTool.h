@@ -3,9 +3,9 @@
 #include <commdlg.h>
 #include "LinearFunc.h"
 
-#define TILESIZE 32
-#define TILEX 30
-#define TILEY 20
+#define TILESIZE 64
+#define TILEX 40
+#define TILEY 30
 #define SAMPLETILEX 10
 #define SAMPLETILEY 20
 
@@ -67,7 +67,9 @@ private:
 
 	//HWND _saveBtn;
 	//HWND _loadBtn;
-	
+	Vector2 _mapPointer;
+	FloatRect _mapPtnRc;
+
 	LinearFunc _line;
 
 	FloatRect _save;
