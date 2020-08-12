@@ -24,7 +24,6 @@ protected:
 	Image* _img; // 아이템 이미지
 	int _price; // 가격
 	PlayerStat _addStat; // 아이템 스탯 옵션
-
 public:
 	virtual void init() = 0;
 	virtual void release() = 0;

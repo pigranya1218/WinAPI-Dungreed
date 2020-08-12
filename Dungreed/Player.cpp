@@ -9,6 +9,7 @@
 #include "MatchLockGun.h"
 #include "Matchlock.h"
 #include "ShortSword.h"
+#include "Boomerang.h"
 
 void Player::setBaseStat()
 {

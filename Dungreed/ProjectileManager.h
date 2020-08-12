@@ -4,6 +4,7 @@
 class ProjectileManager
 {
 private:
+protected:
 	vector<Projectile*> _projectiles;
 
 public:
@@ -11,5 +12,6 @@ public:
 	void release();
 	void update(float const elapsedTime);
 	void render();
+	vector<Projectile*> getProjectile() { return _projectiles; }
 };
 
