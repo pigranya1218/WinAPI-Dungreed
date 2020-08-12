@@ -53,10 +53,14 @@ void UIManager::init()
 	_weaponUI.move = Vector2(0, 0);
 	_weaponUI.moveSpeed = 80;
 	_weaponUI.viewIndex = 0;
+
+	// INVENTORY UI
+	_inventoryUI.init(this);
 }
 
 void UIManager::release()
 {
+	_inventoryUI.release();
 }
 
 void UIManager::update(float const elaspedTime)
@@ -79,6 +83,23 @@ void UIManager::update(float const elaspedTime)
 			_weaponUI.viewIndex = _player->getWeaponIndex();
 		}
 	}
+
+	// Inventory Open
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::INVENTORY)))
+	{
+		// toggle
+		_inventoryUI.setActive(!_inventoryUI.isActive());
+	}
+
+	if (_inventoryUI.isActive())
+	{
+		_inventoryUI.update(elaspedTime);
+	}
+
+
+	_isActive = false;
+	_isActive |= _inventoryUI.isActive();
+
 }
 
 void UIManager::render()
@@ -87,7 +108,6 @@ void UIManager::render()
 	{
 
 	}
-	else // ±âº» UI
 	{
 		// PLAYER HPBAR
 		_hpUI.hpBgImg->render(_hpUI.hpBg.getCenter(), _hpUI.hpBg.getSize());
@@ -219,6 +239,13 @@ void UIManager::render()
 				_player->getWeaponImg(_player->getWeaponIndex())->setScale(4);
 				_player->getWeaponImg(_player->getWeaponIndex())->render(weaponPos);
 			}
+		}
+
+
+		// Inventory UI 
+		if (_inventoryUI.isActive())
+		{
+			_inventoryUI.render();
 		}
 	}
 }

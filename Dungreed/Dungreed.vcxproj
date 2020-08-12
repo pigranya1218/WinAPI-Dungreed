@@ -164,8 +164,6 @@
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
-    <ClInclude Include="Costume.h" />
-    <ClInclude Include="CostumeManager.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
@@ -182,6 +180,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
+    <ClInclude Include="InventoryUI.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="GunBullet.h" />
     <ClInclude Include="KeyManager.h" />
@@ -242,8 +241,6 @@
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
     <ClCompile Include="ConfigManager.cpp" />
-    <ClCompile Include="Costume.cpp" />
-    <ClCompile Include="CostumeManager.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="DataManager.cpp" />
@@ -259,6 +256,7 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="GunBullet.cpp" />
+    <ClCompile Include="InventoryUI.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MainScene.cpp" />

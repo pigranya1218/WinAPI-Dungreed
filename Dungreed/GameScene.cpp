@@ -56,8 +56,17 @@ void GameScene::render()
 
 	_uiMgr->render();
 
-	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
-	IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
+	if (_uiMgr->isActive())
+	{
+		IMAGE_MANAGER->findImage("CURSOR_BASIC")->setScale(5);
+		IMAGE_MANAGER->findImage("CURSOR_BASIC")->render(Vector2(_ptMouse.x, _ptMouse.y));
+	}
+	else
+	{
+		IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
+		IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
+	}
+	
 }
 
 

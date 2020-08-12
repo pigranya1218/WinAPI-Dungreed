@@ -330,12 +330,6 @@
     <ClInclude Include="bombPouch.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="Costume.h">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClInclude>
-    <ClInclude Include="CostumeManager.h">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClInclude>
     <ClInclude Include="VillageStage.h">
       <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClInclude>
@@ -356,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="DebugStage.h">
       <Filter>Dungreed\GameScene\Stage\Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -521,12 +518,6 @@
     <ClCompile Include="Punch.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
-    <ClCompile Include="Costume.cpp">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClCompile>
-    <ClCompile Include="CostumeManager.cpp">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClCompile>
     <ClCompile Include="SpikeBall.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
@@ -556,6 +547,9 @@
     </ClCompile>
     <ClCompile Include="DebugStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

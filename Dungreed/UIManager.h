@@ -1,4 +1,5 @@
 #pragma once
+#include "InventoryUI.h"
 
 class  GameScene;
 class Player;
@@ -75,6 +76,7 @@ private:
 	tagLabelUI	_satietyUI; // 플레이어 포만감 라벨
 	tagProgressUI	_satietyProgress; // 플레이어 포만감 프로그레스바
 	tagWeaponUI	_weaponUI; // 무기 UI
+	InventoryUI _inventoryUI;
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
