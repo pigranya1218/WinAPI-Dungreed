@@ -11,7 +11,7 @@ void ShortSpear::init()
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 
-	_handSize = Vector2(7, 7);
+	_handSize = Vector2(5, 5);
 
 
 	// private 변수 설정
@@ -63,16 +63,16 @@ void ShortSpear::backRender(Player* player)
 		Vector2 renderPos = Vector2(pos.x - 22, pos.y + 20);
 
 		_hand = rectMakePivot(renderPos, _handSize, PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_hand, D2DRenderer::DefaultBrush::Black, 4.f);
-		D2D_RENDERER->fillRectangle(_hand, 251, 206, 177, 1);
+		D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1, 6.f);
+		D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1);
 	}
 	else
 	{
 		Vector2 renderPos = Vector2(pos.x + 22, pos.y + 20);
 
 		_hand = rectMakePivot(renderPos, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_hand, D2DRenderer::DefaultBrush::Black, 4.f);
-		D2D_RENDERER->fillRectangle(_hand, 251, 206, 177, 1);
+		D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1, 6.f);
+		D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1);
 	}
 }
 
@@ -112,8 +112,8 @@ void ShortSpear::frontRender(Player* player)
 
 	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 
-	D2D_RENDERER->drawRectangle(_hand, D2DRenderer::DefaultBrush::Black, 4.f, degree, renderPosHand);
-	D2D_RENDERER->fillRectangle(_hand, 251, 206, 177, 1, degree, renderPosHand);
+	D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
+	D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, degree, renderPosHand);
 	
 	if (_drawEffect) // 이펙트를 그린다
 	{
