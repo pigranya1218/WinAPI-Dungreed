@@ -66,6 +66,8 @@ public:
 		const float strokeWidth = 1.f);
 	void drawRectangle(const FloatRect& rc, const DefaultBrush& defaultBrush = DefaultBrush::Black,
 		const float strokeWidth = 1.f, const float angle = 0, const Vector2& anglePos = Vector2());
+	void drawRectangle(const FloatRect& rc, const int r, const int g, const int b, const float alpha,
+		const float strokeWidth = 1.f, const float angle = 0, const Vector2& anglePos = Vector2());
 	void drawEllipse(const Vector2& origin, const float radius, const DefaultBrush& defaultBrush = DefaultBrush::Black,
 		 const float strokeWidth = 1.f);
 	void drawEllipse(const Vector2& origin, const float radius, const D2D1::ColorF::Enum& color, const float alpha,

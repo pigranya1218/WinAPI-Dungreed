@@ -9,6 +9,8 @@ void DebugStage::init()
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT });
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT });
+	
+	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(200, 600), Vector2(300, 600)), LINEAR_VALUE_TYPE::DOWN});
 
 
 	// 에너미 테스트입니다.
@@ -175,6 +177,11 @@ void DebugStage::render()
 	for (int i = 0; i < _collisionGrounds.size(); i++)
 	{
 		D2D_RENDERER->drawLine(_collisionGrounds[i].func.getStart(), _collisionGrounds[i].func.getEnd(), D2D1::ColorF::Enum::Red, 1);
+	}
+
+	for (int i = 0; i < _collisionPlatforms.size(); i++)
+	{
+		D2D_RENDERER->drawLine(_collisionPlatforms[i].func.getStart(), _collisionPlatforms[i].func.getEnd(), D2D1::ColorF::Enum::Blue, 1);
 	}
 
 	Stage::render();

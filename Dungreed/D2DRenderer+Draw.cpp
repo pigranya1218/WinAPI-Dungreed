@@ -281,6 +281,28 @@ void D2DRenderer::drawRectangle(const FloatRect& rc, const DefaultBrush& default
 		_defaultBrushList[(UINT)defaultBrush], strokeWidth);
 
 }
+void D2DRenderer::drawRectangle(const FloatRect & rc, const int r, const int g, const int b, const float alpha, const float strokeWidth, const float angle, const Vector2 & anglePos)
+{
+	FloatRect rect = rc;
+
+	ID2D1SolidColorBrush* brush(nullptr);
+	_D2DRenderTarget->CreateSolidColorBrush(D2D1::ColorF(RGB(r, g, b), alpha), &brush);
+
+	if (angle != 0)
+	{
+		D2D1::Matrix3x2F rotate = D2D1::Matrix3x2F::Rotation(360 - angle, D2D1::Point2F(anglePos.x, anglePos.y));
+		_D2DRenderTarget->SetTransform(rotate);
+	}
+	else
+	{
+		_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
+
+	_D2DRenderTarget->DrawRectangle(D2D1::RectF((float)rect.left, (float)rect.top, (float)rect.right, (float)rect.bottom),
+		brush, strokeWidth);
+
+	NEW_SAFE_RELEASE(brush);
+}
 /**********************************************************************************************
 ## DrawEllipse ##
 @@ Vector2 origin : ÁßÁ¡

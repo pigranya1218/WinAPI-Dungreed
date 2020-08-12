@@ -50,6 +50,11 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 		points[i] = Vector2(newCenter.x + calculatePoint[i][0] * radiusX, newCenter.y + calculatePoint[i][1] * radiusY);
 	}
 
+	for (int i = 0; i < _collisionPlatforms.size(); i++)
+	{
+
+	}
+
 	for (int i = 0; i < _collisionGrounds.size(); i++)
 	{
 		for (int j = 0; j < 4; j++) // 각 꼭짓점별 검사

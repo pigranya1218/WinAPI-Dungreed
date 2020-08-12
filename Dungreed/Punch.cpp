@@ -18,7 +18,8 @@ void Punch::init()
 	_reverseMove = false;
 
 	//손 표현할 렉트
-	_handSize = Vector2(7, 7);
+	_handSize = Vector2(5, 5);
+
 }
 
 void Punch::release()
@@ -66,8 +67,8 @@ void Punch::backRender(Player* player)
 		renderPosLeft.y += ((angle >= 180)?(_attackMove.y):(-_attackMove.y));
 
 		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_leftHand, D2DRenderer::DefaultBrush::Black, 4.f, angle, _leftHand.getCenter());
-		D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1, angle, _leftHand.getCenter());
+		D2D_RENDERER->drawRectangle(_leftHand, 40, 36, 58, 1, 6.f, angle, _leftHand.getCenter());
+		D2D_RENDERER->fillRectangle(_leftHand, 210, 188, 181, 1.f, angle, _leftHand.getCenter());
 	}
 	else
 	{
@@ -81,8 +82,8 @@ void Punch::backRender(Player* player)
 		renderPosRight.y += ((angle >= 180) ? (_attackMove.y) : (-_attackMove.y));
 
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f, angle, _rightHand.getCenter());
-		D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1, angle, _rightHand.getCenter());
+		D2D_RENDERER->drawRectangle(_rightHand, 40, 36, 58, 1, 6.f, angle, _rightHand.getCenter());
+		D2D_RENDERER->fillRectangle(_rightHand, 210, 188, 181, 1.f, angle, _rightHand.getCenter());
 	}
 }
 
@@ -95,15 +96,15 @@ void Punch::frontRender(Player* player)
 	{
 		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 20);
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_rightHand, D2DRenderer::DefaultBrush::Black, 4.f);
-		D2D_RENDERER->fillRectangle(_rightHand, 251, 206, 177, 1);
+		D2D_RENDERER->drawRectangle(_rightHand, 40, 36, 58, 1, 6.f);
+		D2D_RENDERER->fillRectangle(_rightHand, 210, 188, 181, 1);
 	}
 	else
 	{
 		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 20);
 		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_leftHand, D2DRenderer::DefaultBrush::Black, 4.f);
-		D2D_RENDERER->fillRectangle(_leftHand, 251, 206, 177, 1);
+		D2D_RENDERER->drawRectangle(_leftHand, 40, 36, 58, 1, 6.f);
+		D2D_RENDERER->fillRectangle(_leftHand, 210, 188, 181, 1);
 	}
 }
 
