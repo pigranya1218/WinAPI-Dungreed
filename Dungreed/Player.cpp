@@ -14,6 +14,9 @@
 #include "miniEarth.h"
 #include "watCher.h"
 #include "babyGreenBat.h"
+#include "GreenBat.h"
+#include "GreenDadBat.h"
+#include "GreenMomBat.h"
 #include "bombPouch.h"
 #include "Matchlock.h"
 
@@ -92,26 +95,41 @@ void Player::init()
 	SpikeBall* testAcc1 = new SpikeBall;
 	testAcc1->init();
 	_equippedAcc.push_back(testAcc1);
-	
-	babyGreenBat* testAcc2 = new babyGreenBat;
+
+	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
 	_equippedAcc.push_back(testAcc2);
 
-	bombPouch* testAcc3 = new bombPouch;
+	GreenDadBat* testAcc3 = new GreenDadBat;
 	testAcc3->init();
 	_equippedAcc.push_back(testAcc3);
 
-	IceBall* testAcc4 = new IceBall;
+	GreenMomBat* testAcc4 = new GreenMomBat;
 	testAcc4->init();
 	_equippedAcc.push_back(testAcc4);
 
-	miniEarth* testAcc5 = new miniEarth;
+	bombPouch* testAcc5 = new bombPouch;
 	testAcc5->init();
 	_equippedAcc.push_back(testAcc5);
 
-	watCher* testAcc6 = new watCher;
+	IceBall* testAcc6 = new IceBall;
 	testAcc6->init();
 	_equippedAcc.push_back(testAcc6);
+
+	miniEarth* testAcc7 = new miniEarth;
+	testAcc7->init();
+	_equippedAcc.push_back(testAcc7);
+
+	watCher* testAcc8 = new watCher;
+	testAcc8->init();
+	_equippedAcc.push_back(testAcc8);
+
+
+	//ShortSpear* testWeapon = new ShortSpear;
+
+	/*ShortSpear* testWeapon1 = new ShortSpear;
+	testWeapon1->init();
+	_equippedWeapon.push_back(testWeapon1);*/
 
 	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();

@@ -390,6 +390,18 @@
     <ClInclude Include="NormalProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="GreenBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenDadBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenMomBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="Voluspa.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -619,6 +631,18 @@
     </ClCompile>
     <ClCompile Include="NormalProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenDadBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenMomBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Voluspa.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
