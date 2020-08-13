@@ -485,3 +485,19 @@ void Player::unequipAcc(int index)
 		}
 	}
 }
+
+void Player::swapItem(int indexA, int indexB)
+{
+	if (indexA <= 1) // Weapon
+	{
+
+	}
+	else if (indexA <= 5) // Acc
+	{
+
+	}
+	else // Inventory
+	{
+
+	}
+}
