@@ -4,9 +4,10 @@ class Voluspa : public Item
 {
 private:
 	Image* _img;
-	Vector2 renderPos;
-	Vector2 location;
-	bool Opposition;
+	Vector2 renderPos;        // 이미지위치
+	Vector2 location;         // 이동위치
+	bool Opposition;          // 좌우반전 공격
+
 public:
 	virtual void init();
 	virtual void release();

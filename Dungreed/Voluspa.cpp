@@ -17,6 +17,7 @@ void Voluspa::init()
 
 	location.x = 0;
 	location.y = 0;
+	
 	renderPos.x = -300;
 	renderPos.y = WINSIZEY/2;
 	Opposition = false;
@@ -28,18 +29,28 @@ void Voluspa::release()
 
 void Voluspa::update(Player * player, float const elapsedTime)
 {
-	location.x = 10;
 	
 
-	if (renderPos.x > WINSIZEX)
+	location.x = 45;	
+	
+	if (renderPos.x > WINSIZEX+300 )
 	{
+		renderPos.y = _ptMouse.y;		
 		Opposition = true;
 	}
-	else if (renderPos.x < 0)
+	else if (renderPos.x < -300 )
 	{
+		renderPos.y = _ptMouse.y;		
 		Opposition = false;
 	}
-
+	if (Opposition)
+	{
+		renderPos.x -= location.x;
+	}
+	else
+	{
+		renderPos.x += location.x;
+	}
 	
 
 }
@@ -47,8 +58,17 @@ void Voluspa::update(Player * player, float const elapsedTime)
 void Voluspa::backRender(Player * player)
 {
 
-	_img->setScale(4);	
-	_img->render(renderPos, false);
+	_img->setScale(3);	
+	if (Opposition)
+	{
+		_img->render(renderPos, true);
+	}
+	else
+	{
+		_img->render(renderPos, false);
+	}
+
+	
 }
 
 void Voluspa::frontRender(Player * player)
