@@ -109,8 +109,8 @@ void SkelSmallBow::render()
 		drawPos.y += 10;
 
 
-		_img->render(_position, (_direction == DIRECTION::LEFT));
-		_weaponImg->aniRender(drawPos, _weaponAni, (_direction == DIRECTION::LEFT));
+		_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
+		_weaponImg->aniRender(CAMERA->getRelativeV2(drawPos), _weaponAni, (_direction == DIRECTION::LEFT));
 	}
 	else
 	{
@@ -119,8 +119,8 @@ void SkelSmallBow::render()
 
 
 		_weaponImg->setAnglePos(Vector2((0.4f * _weaponImg->getWidth()), _weaponImg->getHeight() * 0.5f));
-		_img->render(_position, (_direction == DIRECTION::LEFT));
-		_weaponImg->render(drawPos, (_direction == DIRECTION::LEFT));
+		_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
+		_weaponImg->render(CAMERA->getRelativeV2(drawPos), (_direction == DIRECTION::LEFT));
 	}
 
 }

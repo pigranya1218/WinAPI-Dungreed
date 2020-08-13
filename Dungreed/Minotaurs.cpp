@@ -200,8 +200,8 @@ void Minotaurs::update(float const timeElapsed)
 void Minotaurs::render()
 {
 	// 디버그
-	D2D_RENDERER->drawEllipse(_position, _detectRange);	// 인식거리
-	D2D_RENDERER->drawRectangle(_rect);					// 피격 및 충돌 렉트
+	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);	// 인식거리
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));					// 피격 및 충돌 렉트
 
 	// 스케일 설정
 	_img->setScale(_scale);
@@ -220,7 +220,7 @@ void Minotaurs::render()
 		drawPos.y -= elapsePos.y / 2;
 	}
 	// 최종 렌더
-	_img->aniRender(drawPos, _ani, (_direction == DIRECTION::LEFT));
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void Minotaurs::setState(ENEMY_STATE state)

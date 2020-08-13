@@ -161,8 +161,8 @@ void SkelBigIce::update(float const timeElapsed)
 
 void SkelBigIce::render()
 {
-	D2D_RENDERER->drawRectangle(_rect);
-	D2D_RENDERER->drawEllipse(_position, _detectRange);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
+	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
 
 	Vector2 drawPos = _position;	
@@ -180,7 +180,7 @@ void SkelBigIce::render()
 		}
 		drawPos.y -= elapsePos.y / 2;
 	}	
-	_img->aniRender(drawPos, _ani, (_direction == DIRECTION::LEFT));
+	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void SkelBigIce::setState(ENEMY_STATE state)
