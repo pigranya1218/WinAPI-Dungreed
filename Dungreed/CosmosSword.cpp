@@ -316,15 +316,15 @@ void CosmosSword::attack(Player* player)
 	_currAttackDelay = _baseAttackDelay;
 }
 
-void CosmosSword::attack(FloatRect* rect, tagAttackInfo* info)
+void CosmosSword::attack(FloatRect* rect, AttackInfo* info)
 {
 }
 
-void CosmosSword::attack(FloatCircle* circle, tagAttackInfo* info)
+void CosmosSword::attack(FloatCircle* circle, AttackInfo* info)
 {
 }
 
-void CosmosSword::attack(Projectile* projectile, tagAttackInfo* info)
+void CosmosSword::attack(Projectile* projectile, AttackInfo* info)
 {
 }
 
