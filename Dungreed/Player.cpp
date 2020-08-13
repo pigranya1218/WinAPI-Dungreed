@@ -28,6 +28,13 @@ void Player::updateAdjustStat()
 	_adjustStat = _costume->getBaseStat();
 }
 
+void Player::swap(Item *& a, Item *& b)
+{
+	Item* temp = a;
+	a = b;
+	b = temp;
+}
+
 void Player::attack(FloatRect* rect, AttackInfo* info)
 {
 	// 아이템 효과 적용
@@ -93,7 +100,8 @@ void Player::init()
 	_force = Vector2(0, 0);
 
 	// TEST ITEM
-	
+	_equippedWeapon.resize(2);
+	_inventory.resize(15);
 
 	babyGreenBat* testAcc1 = new babyGreenBat;
 	testAcc1->init();
@@ -144,20 +152,18 @@ void Player::init()
 
 	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
-	_equippedWeapon.push_back(testWeapon1);
+	_equippedWeapon[0] = testWeapon1;
 	
 	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
-	_equippedWeapon.push_back(testWeapon2);
+	_equippedWeapon[1] = testWeapon2;
 
 	ShortSword* testWeapon3 = new ShortSword;
 	testWeapon3->init();
-	_equippedWeapon.push_back(testWeapon3);
+	_inventory[0] = testWeapon3;
 
-	Punch* testWeapon4 = new Punch;
-	testWeapon4->init();
-	_equippedWeapon.push_back(testWeapon4);
-
+	_hand = new Punch;
+	_hand->init();
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
@@ -167,16 +173,19 @@ void Player::release()
 {
 	for (int i = 0; i < _inventory.size(); i++)
 	{
+		if (_inventory[i] == nullptr) continue;
 		_inventory[i]->release();
 		delete _inventory[i];
 	}
 	for (int i = 0; i < _equippedWeapon.size(); i++)
 	{
+		if (_equippedWeapon[i] == nullptr) continue;
 		_equippedWeapon[i]->release();
 		delete _equippedWeapon[i];
 	}
 	for (int i = 0; i < _equippedAcc.size(); i++)
 	{
+		if (_equippedAcc[i] == nullptr) continue;
 		_equippedAcc[i]->release();
 		delete _equippedAcc[i];
 	}
@@ -217,7 +226,14 @@ void Player::update(float const elapsedTime)
 	// 공격
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
-		_equippedWeapon[_currWeaponIndex]->attack(this);
+		if (_equippedWeapon[_currWeaponIndex] == nullptr)
+		{
+			_hand->attack(this);
+		}
+		else
+		{
+			_equippedWeapon[_currWeaponIndex]->attack(this);
+		}
 		for (int i = 0; i < _equippedAcc.size(); i++)
 		{
 			if (_equippedAcc[i] != nullptr)
@@ -332,15 +348,33 @@ void Player::update(float const elapsedTime)
 	_costume->update(elapsedTime);
 
 	// 무기 업데이트
-	for (int i = 0; i < _equippedWeapon.size(); i++) 
+	if (_equippedWeapon[0] == nullptr && _equippedWeapon[1] == nullptr)
 	{
-		_equippedWeapon[i]->update(this, elapsedTime);
+		_hand->update(this, elapsedTime);
 	}
+	else
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			if (_equippedWeapon[i] != nullptr)
+			{
+				_equippedWeapon[i]->update(this, elapsedTime);
+			}
+			else
+			{
+				_hand->update(this, elapsedTime);
+			}
+		}
+	}
+	
 	
 	// 악세사리 업데이트
 	for (int i = 0; i < _equippedAcc.size(); i++) 
 	{
-		_equippedAcc[i]->update(this, elapsedTime);
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->update(this, elapsedTime);
+		}
 	}
 }
 
@@ -351,9 +385,19 @@ void Player::render()
 	// 캐릭터 뒤에 그리기
 	for(int i = 0; i < _equippedAcc.size(); i++)
 	{
-		_equippedAcc[i]->backRender(this);	
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->backRender(this);
+		}
 	}
-	_equippedWeapon[_currWeaponIndex]->backRender(this);
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_equippedWeapon[_currWeaponIndex]->backRender(this);
+	}
+	else
+	{
+		_hand->backRender(this);
+	}
 
 	// 캐릭터 그리기
 	_costume->render(_position, _direction);
@@ -361,12 +405,77 @@ void Player::render()
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < _equippedAcc.size(); i++)
 	{
-		_equippedAcc[i]->frontRender(this);
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->frontRender(this);
+		}
 	}
-	_equippedWeapon[_currWeaponIndex]->frontRender(this);
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_equippedWeapon[_currWeaponIndex]->frontRender(this);
+	}
+	else
+	{
+		_hand->frontRender(this);
+	}
 }
 
 Image* Player::getWeaponImg(int index) const noexcept
 {
-	return _equippedWeapon[index]->getIconImg();
+	if (_equippedWeapon[index] != nullptr)
+	{
+		return _equippedWeapon[index]->getIconImg();
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+void Player::equipItem(int index)
+{
+	if (_inventory[index] == nullptr) return;
+	if (_inventory[index]->getType() == ITEM_TYPE::ACC) // 악세사리의 경우
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_equippedAcc[i] == nullptr)
+			{
+				_equippedAcc[i] = _inventory[index];
+				_inventory[index] = nullptr;
+				break;
+			}
+		}
+	}
+	else
+	{
+		swap(_inventory[index], _equippedWeapon[_currWeaponIndex]);
+	}
+}
+
+void Player::unequipWeapon(int index)
+{
+	if (_equippedWeapon[index] == nullptr) return;
+	for (int i = 0; i < 15; i++)
+	{
+		if (_inventory[i] == nullptr)
+		{
+			swap(_inventory[i], _equippedWeapon[index]);
+			break;
+		}
+	}
+
+}
+
+void Player::unequipAcc(int index)
+{
+	if (_equippedAcc[index] == nullptr) return;
+	for (int i = 0; i < 15; i++)
+	{
+		if (_inventory[i] == nullptr)
+		{
+			swap(_inventory[i], _equippedAcc[index]);
+			break;
+		}
+	}
 }
