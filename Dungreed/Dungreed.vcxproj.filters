@@ -103,9 +103,6 @@
     <Filter Include="Dungreed\MapToolScene\MapTool">
       <UniqueIdentifier>{0669a0e9-7d5e-4ffe-8a51-5fe5ca0e4bb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\MapToolScene\Test">
-      <UniqueIdentifier>{4d6d20c6-2019-497e-b474-4e544706d11a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Item\Melee">
       <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
     </Filter>
@@ -272,15 +269,6 @@
     </ClInclude>
     <ClInclude Include="MapTool.h">
       <Filter>Dungreed\MapToolScene\MapTool</Filter>
-    </ClInclude>
-    <ClInclude Include="SampleStage.h">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondTestScene.h">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TownStage.h">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
@@ -541,15 +529,6 @@
     </ClCompile>
     <ClCompile Include="MapTool.cpp">
       <Filter>Dungreed\MapToolScene\MapTool</Filter>
-    </ClCompile>
-    <ClCompile Include="SampleStage.cpp">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondTestScene.cpp">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TownStage.cpp">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
     </ClCompile>
     <ClCompile Include="Banshee.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>

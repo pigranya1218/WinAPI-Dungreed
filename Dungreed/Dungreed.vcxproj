@@ -222,9 +222,7 @@
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="RedLotusCos.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="SampleStage.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SecondTestScene.h" />
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SkelBigIce.h" />
@@ -241,7 +239,6 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
-    <ClInclude Include="TownStage.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
@@ -314,7 +311,6 @@
     <ClCompile Include="SampleStage.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SecondTestScene.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />
     <ClCompile Include="SkelBigNormal.cpp" />
@@ -330,7 +326,6 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="UIManager.cpp" />
-    <ClCompile Include="TownStage.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="VillageStage.cpp" />
