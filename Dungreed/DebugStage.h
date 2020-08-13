@@ -6,7 +6,7 @@ class DebugStage : public Stage
 {
 private:
 	Image* _tileImage;
-	tagTileMap _tile[2000];
+	tagTileMap _tile[2000],_tile2[2000];
 	MapTool* _map;
 	int _currentIndex;
 

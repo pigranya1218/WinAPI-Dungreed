@@ -4,7 +4,7 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "MapToolScene.h"
-#include "SecondTestScene.h"
+
 
 #include "Player.h"
 
@@ -376,9 +376,11 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
-	SCENE_MANAGER->addScene("SECOND", new SecondTestScene);
-	SCENE_MANAGER->changeScene("MapTool");	
+	
 
+	SCENE_MANAGER->changeScene("GAME");	
+
+	
 	return S_OK;
 }
 

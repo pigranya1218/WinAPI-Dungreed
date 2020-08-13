@@ -5,7 +5,7 @@ void DebugStage::init()
 {
 	Stage::init();
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 800), Vector2(WINSIZEX, 800)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
+	/*_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 100), Vector2(WINSIZEX, 100)), LINEAR_VALUE_TYPE::UP });
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(50, 100), Vector2(50, 800)), LINEAR_VALUE_TYPE::LEFT });
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(1550, 100), Vector2(1550, 800)), LINEAR_VALUE_TYPE::RIGHT });
 	_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(1250, 800), Vector2(1400, 650)), LINEAR_VALUE_TYPE::DOWN });
@@ -14,7 +14,7 @@ void DebugStage::init()
 	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(200, 700), Vector2(300, 700)), LINEAR_VALUE_TYPE::DOWN });
 	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(300, 700), Vector2(700, 300)), LINEAR_VALUE_TYPE::DOWN });
 	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(700, 300), Vector2(1550, 300)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(1100, 500), Vector2(1250, 500)), LINEAR_VALUE_TYPE::DOWN });
+	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(1100, 500), Vector2(1250, 500)), LINEAR_VALUE_TYPE::DOWN });*/
 
 
 	// 에너미 테스트입니다.
@@ -29,7 +29,7 @@ void DebugStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));*/
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::MINOTAURS, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
 
-	_map = new MapTool;
+
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	
@@ -55,14 +55,26 @@ void DebugStage::render()
 {
 	for (int i = 0; i < _tile[0].tileX* _tile[0].tileY; ++i)
 	{
-		_tileImage->setScale(4);
-		//_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
-		CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			_tileImage->setScale(4);
+			//_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
 	}
+
+	
 
 	for (int i = 0; i < _collisionGrounds.size(); i++)
 	{
-		D2D_RENDERER->drawLine(_collisionGrounds[i].func.getStart(), _collisionGrounds[i].func.getEnd(), D2D1::ColorF::Enum::Red, 1);
+		D2D_RENDERER->drawLine( _collisionGrounds[i].func.getStart(), _collisionGrounds[i].func.getEnd(), D2D1::ColorF::Enum::Red, 1);
+	    //CAMERA->drawLine(_collisionGrounds[i].func.getStart(), _collisionGrounds[i].func.getEnd());
 	}
 
 	for (int i = 0; i < _collisionPlatforms.size(); i++)
@@ -80,12 +92,12 @@ void DebugStage::mapLoad()
 	HANDLE stageFile;
 	DWORD read;
 
-	stageFile = CreateFile("stage9.map", GENERIC_READ, NULL, NULL,
+	stageFile = CreateFile("stage16.map", GENERIC_READ, NULL, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * 2000, &read, NULL);
-	
+
 
 	CloseHandle(stageFile);
 	

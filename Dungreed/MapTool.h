@@ -39,11 +39,12 @@ struct tagTileMap
 {
 	
 	FloatRect rc;
-	int tileFrameX;
-	int tileFrameY;
+	int tileFrameX[2];
+	int tileFrameY[2];
 	DRAW_LINE_POSITION linePos;
 	int tileX;
 	int tileY;
+	
 };
 
 struct  tagPalette
@@ -90,7 +91,7 @@ private:
 	Synthesize(int, _tileX, TileX)
 	Synthesize(int, _tileY, TileY)
 
-	
+	int _layer;
 
 	Vector2 _mapPointer;
 	FloatRect _mapPtnRc;
@@ -100,15 +101,15 @@ private:
 	FloatRect _save;
 	FloatRect _load;
 	FloatRect _erase;
-	FloatRect _paletteLoad;
+	FloatRect _layer1Btn, _layer2Btn;
 	FloatRect _increaseTileX, _decreaseTileX;
 	FloatRect _increaseTileY, _decreaseTileY;
 
 
 	Image* _paletteImage;
-	tagTileMap _tile[2000];
+	tagTileMap _tile[2000], _tile2[2000];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
-	
+	tagSelectTile _selectTile;
 
 	DRAW_LINE_POSITION _drawLinePos;
 
