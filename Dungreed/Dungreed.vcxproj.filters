@@ -405,6 +405,9 @@
     <ClInclude Include="AttackInfo.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -649,6 +652,9 @@
     </ClCompile>
     <ClCompile Include="AttackInfo.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
