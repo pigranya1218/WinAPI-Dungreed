@@ -58,10 +58,10 @@ void NormalProjectile::render()
 	_img->setAngle(_angleRadian * (180 / PI));
 	if (_useAni)
 	{
-		_img->aniRender(_position, _size, _ani);
+		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
 	}
 	else
 	{
-		_img->render(_position, _size);
+		_img->render(CAMERA->getRelativeV2(_position), _size);
 	}
 }
