@@ -402,6 +402,9 @@
     <ClInclude Include="Voluspa.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="MagnifyingGlass.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
     <ClInclude Include="AttackInfo.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
@@ -645,6 +648,9 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="Voluspa.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnifyingGlass.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="AttackInfo.cpp">

@@ -13,7 +13,7 @@ private:
 	bool _useAni;				// 애니메이션 사용하는가
 	Animation* _ani;			// 투사체 애니메이션
 
-	bool _checkCollision;			// 스테이지 벽과 충돌 검사를 하는가
+	bool _checkCollision;		// 스테이지 벽과 충돌 검사를 하는가
 	string _collisionEffect;	// 부딪혀서 폭발할 때 이펙트
 	Vector2 _effectSize;		// 부딪혀서 폭발할 때 이펙트 사이즈
 

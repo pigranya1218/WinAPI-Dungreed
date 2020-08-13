@@ -19,6 +19,7 @@
 #include "GreenMomBat.h"
 #include "bombPouch.h"
 #include "Matchlock.h"
+#include "MagnifyingGlass.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -92,7 +93,9 @@ void Player::init()
 	_force = Vector2(0, 0);
 
 	// TEST ITEM
-	SpikeBall* testAcc1 = new SpikeBall;
+	
+
+	babyGreenBat* testAcc1 = new babyGreenBat;
 	testAcc1->init();
 	_equippedAcc.push_back(testAcc1);
 
@@ -103,10 +106,14 @@ void Player::init()
 	GreenDadBat* testAcc3 = new GreenDadBat;
 	testAcc3->init();
 	_equippedAcc.push_back(testAcc3);
-
+	
 	GreenMomBat* testAcc4 = new GreenMomBat;
 	testAcc4->init();
 	_equippedAcc.push_back(testAcc4);
+
+	SpikeBall* testAcc9 = new SpikeBall;
+	testAcc9->init();
+	_equippedAcc.push_back(testAcc9);
 
 	bombPouch* testAcc5 = new bombPouch;
 	testAcc5->init();
@@ -123,6 +130,10 @@ void Player::init()
 	watCher* testAcc8 = new watCher;
 	testAcc8->init();
 	_equippedAcc.push_back(testAcc8);
+
+	//MagnifyingGlass* testAcc10 = new MagnifyingGlass;
+	//testAcc10->init();
+	//_equippedAcc.push_back(testAcc10);
 
 
 	//ShortSpear* testWeapon = new ShortSpear;

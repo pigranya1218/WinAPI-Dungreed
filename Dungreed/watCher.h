@@ -7,8 +7,7 @@ private:
 	int x, y;
 	int radius;
 	int fspeed;
-	float _angle = PI / 5;
-	Animation* _ani1;
+	float _angle = PI / 5;	
 	bool setitem;
 public:
 	virtual void init();
