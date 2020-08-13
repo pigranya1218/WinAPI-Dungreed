@@ -30,8 +30,10 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
-	_isDetect = _moving.jumpPower = 0;
+	_isDetect = _moving.jumpPower = _fireNum = 0;
 	_moving.gravity = 4000;
+
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 5, false, false, false);
 }
 
 void SkelBigIce::release()
@@ -44,6 +46,7 @@ void SkelBigIce::update(float const timeElapsed)
 	{
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
 	}
+	const Vector2 playerPos = _enemyManager->getPlayerPos();
 
 	Vector2 moveDir(0, 0);
 	// 상태에 따른 행동처리
@@ -59,8 +62,6 @@ void SkelBigIce::update(float const timeElapsed)
 		}		
 		case ENEMY_STATE::MOVE:
 		{
-			const Vector2 playerPos = _enemyManager->getPlayerPos();
-
 			if (_moving.update(timeElapsed))
 			{
 				_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
@@ -96,27 +97,41 @@ void SkelBigIce::update(float const timeElapsed)
 			{
 				if (_skill.update(timeElapsed))
 				{
+					_fireNum = RANDOM->getFromIntTo(3, 7);
 					setState(ENEMY_STATE::SKILL);
 				}
 			}
-			break;
 		}
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
 			if (!_ani->isPlay())
 			{
 				setState(ENEMY_STATE::MOVE);
 			}
-			break;
 		}		
+		break;
 		case ENEMY_STATE::SKILL:
 		{			
-			if (!_ani->isPlay())
+			if (_fireNum > 0 && _ani->getPlayIndex() >= 6)
+			{
+				if (_shooting.delayUpdate(timeElapsed))
+				{
+					float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
+
+					angle += RANDOM->getFromFloatTo(PI / 10 * -1, PI / 10);
+
+					_shooting.createBullet(_position, angle);
+					_shooting.fireBullet(_enemyManager);
+					_fireNum--;
+				}
+			}
+			else if (!_ani->isPlay() && _fireNum <= 0)
 			{
 				setState(ENEMY_STATE::MOVE);
-			}
-			break;
-		}		
+			}			
+		}	
+		break;
 		case ENEMY_STATE::DIE:
 		{
 			break;
@@ -174,7 +189,7 @@ void SkelBigIce::render()
 
 		drawPos.y -= elapseY / 2;
 
-		_img->aniRender(drawPos, _ani, !(unsigned)_direction);
+		_img->aniRender(drawPos, _ani, _direction == DIRECTION::LEFT);
 	}
 	else
 	{

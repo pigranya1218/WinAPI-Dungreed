@@ -222,6 +222,7 @@
     <ClInclude Include="SampleStage.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SecondTestScene.h" />
+    <ClInclude Include="Shooting.h" />
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SkelBigIce.h" />
@@ -271,6 +272,7 @@
     <ClCompile Include="BaseCos.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="FloatCircle.cpp" />
     <ClCompile Include="FloatRect.cpp" />
@@ -308,6 +310,7 @@
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SecondTestScene.cpp" />
+    <ClCompile Include="Shooting.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />
     <ClCompile Include="SkelBigNormal.cpp" />

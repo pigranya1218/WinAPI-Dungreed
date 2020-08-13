@@ -408,6 +408,9 @@
     <ClInclude Include="Ghost.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Shooting.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -655,6 +658,12 @@
     </ClCompile>
     <ClCompile Include="GreenMomBat.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Shooting.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

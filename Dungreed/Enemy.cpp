@@ -2,22 +2,14 @@
 #include "Enemy.h"
 #include "EnemyManager.h"
 
-void Enemy::init(const Vector2& pos, DIRECTION direction)
+void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager)
 {
-}
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		AttackInfo* attackInfo = new AttackInfo;
+		attackInfo->team = OBJECT_TEAM::ENEMY;
 
-void Enemy::release()
-{
-}
-
-void Enemy::update(const float timeElapsed)
-{
-}
-
-void Enemy::render()
-{
-}
-
-void Enemy::setState(ENEMY_STATE state)
-{
+		enemyManager->fireEnemy(bullets[i], attackInfo);
+	}
+	bulletNum = 0;
 }

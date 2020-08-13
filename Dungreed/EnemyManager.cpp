@@ -171,10 +171,10 @@ bool EnemyManager::detectPlayer(GameObject* object, const float distance)
 	
 }
 
-//void EnemyManager::fireEnemy()
-//{
-//	
-//}
+void EnemyManager::fireEnemy(Projectile * projectile, AttackInfo * attackInfo)
+{
+	return _stage->attack(projectile, attackInfo);
+}
 
 Vector2 EnemyManager::getPlayerPos()
 {

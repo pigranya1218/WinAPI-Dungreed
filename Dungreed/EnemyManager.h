@@ -29,10 +29,10 @@ public:
 	void render();
 
 	// 에너미 관련 함수
-	void spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTION direction = DIRECTION::LEFT);
-	void moveEnemy(GameObject* object, const Vector2 moveDir);
-	bool detectPlayer(GameObject* object, const float distance);
-	//void fireEnemy(Projectile* projectile);
+	void spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTION direction = DIRECTION::LEFT);	// 에너미 소환
+	void moveEnemy(GameObject* object, const Vector2 moveDir);											// 에너미 이동
+	bool detectPlayer(GameObject* object, const float distance);										// 에너미 플레이어 감지
+	void fireEnemy(Projectile* projectile, AttackInfo* attackInfo);										// 에너미 불릿
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();

@@ -8,6 +8,8 @@ private:
 
 	tagAttackInfo	_attack;
 	tagAttackInfo	_skill;
+	tagShootingInfo _shooting;
+	unsigned int	_fireNum;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);
