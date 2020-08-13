@@ -283,7 +283,7 @@
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
-      <Filter>2DGameFramework\ProgressBar</Filter>
+      <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStat.h">
       <Filter>Dungreed\GameScene\Player</Filter>
@@ -394,9 +394,6 @@
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
     <ClInclude Include="Ghost.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Shooting.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Voluspa.h">
@@ -656,11 +653,9 @@
     <ClCompile Include="GreenMomBat.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="Shooting.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
     <ClCompile Include="StatUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClCompile>
