@@ -4,7 +4,7 @@
 class Ghost : public Enemy
 {
 private:
-	AttackInfo _attacking;
+	tagAttackInfo _attacking;
 	tagMoveInfo _moving;
 
 public:
