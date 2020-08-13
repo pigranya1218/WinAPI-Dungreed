@@ -86,7 +86,7 @@ void Player::init()
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
-	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::BASE);
+	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE);
 	_costume->init();
 
 	updateAdjustStat();

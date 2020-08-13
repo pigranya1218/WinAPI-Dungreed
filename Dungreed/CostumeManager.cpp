@@ -4,6 +4,8 @@
 #include "MetalPlateCos.h"
 #include "PickaxCos.h"
 #include "BaseCos.h"
+#include "AliceCos.h"
+#include "RedLotusCos.h"
 
 void CostumeManager::init()
 {
@@ -18,6 +20,14 @@ void CostumeManager::init()
 	Costume* pickaxCos = new PickaxCos;
 	pickaxCos->init();
 	_costumeMap.insert(pair<COSTUME_TYPE, Costume*>(COSTUME_TYPE::PICKAX, pickaxCos));
+
+	Costume* aliceCos = new AliceCos;
+	aliceCos->init();
+	_costumeMap.insert(pair<COSTUME_TYPE, Costume*>(COSTUME_TYPE::ALICE, aliceCos));
+
+	Costume* redLotusCos = new RedLotusCos;
+	redLotusCos->init();
+	_costumeMap.insert(pair<COSTUME_TYPE, Costume*>(COSTUME_TYPE::RED_LOTUS, redLotusCos));
 }
 
 void CostumeManager::release()

@@ -414,6 +414,12 @@
     <ClInclude Include="OakBow.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
+    <ClInclude Include="AliceCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="RedLotusCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -667,6 +673,12 @@
     </ClCompile>
     <ClCompile Include="OakBow.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="RedLotusCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="AliceCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
