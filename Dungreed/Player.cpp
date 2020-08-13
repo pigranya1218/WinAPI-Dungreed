@@ -102,51 +102,61 @@ void Player::init()
 
 	// TEST ITEM
 	_equippedWeapon.resize(2);
+	_equippedAcc.resize(4);
 	_inventory.resize(15);
 
 	babyGreenBat* testAcc1 = new babyGreenBat;
 	testAcc1->init();
-	_equippedAcc.push_back(testAcc1);
+	_inventory[0] = testAcc1;
 
 	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
-	_equippedAcc.push_back(testAcc2);
+	_inventory[1] = testAcc2;
+
 
 	GreenDadBat* testAcc3 = new GreenDadBat;
 	testAcc3->init();
-	_equippedAcc.push_back(testAcc3);
+	_inventory[2] = testAcc3;
+
 	
 	GreenMomBat* testAcc4 = new GreenMomBat;
 	testAcc4->init();
-	_equippedAcc.push_back(testAcc4);
+	_inventory[3] = testAcc4;
+
 
 	SpikeBall* testAcc9 = new SpikeBall;
 	testAcc9->init();
-	_equippedAcc.push_back(testAcc9);
+	_inventory[4] = testAcc9;
+
 
 	bombPouch* testAcc5 = new bombPouch;
 	testAcc5->init();
-	_equippedAcc.push_back(testAcc5);
+	_inventory[5] = testAcc5;
+
 
 	IceBall* testAcc6 = new IceBall;
 	testAcc6->init();
-	_equippedAcc.push_back(testAcc6);
+	// _inventory[6] = testAcc6;
+
 
 	miniEarth* testAcc7 = new miniEarth;
 	testAcc7->init();
-	_equippedAcc.push_back(testAcc7);
+	//_inventory[7] = testAcc7;
+
 
 	watCher* testAcc8 = new watCher;
 	testAcc8->init();
-	_equippedAcc.push_back(testAcc8);
+	_inventory[8] = testAcc8;
 
-	//MagnifyingGlass* testAcc10 = new MagnifyingGlass;
-	//testAcc10->init();
-	//_equippedAcc.push_back(testAcc10);
+
+	MagnifyingGlass* testAcc10 = new MagnifyingGlass;
+	testAcc10->init();
+	_inventory[9] = testAcc10;
 
 	Voluspa* testAcc11 = new Voluspa;
 	testAcc11->init();
-	_equippedAcc.push_back(testAcc11);
+	_inventory[10] = testAcc11;
+
 
 
 	//ShortSpear* testWeapon = new ShortSpear;
@@ -157,15 +167,15 @@ void Player::init()
 
 	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
-	_equippedWeapon[0] = testWeapon1;
+	_inventory[11] = testWeapon1;
 	
 	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
-	_equippedWeapon[1] = testWeapon2;
+	_inventory[12] = testWeapon2;
 
 	ShortSword* testWeapon3 = new ShortSword;
 	testWeapon3->init();
-	_inventory[0] = testWeapon3;
+	_inventory[13] = testWeapon3;
 
 	_hand = new Punch;
 	_hand->init();
@@ -388,7 +398,7 @@ void Player::render()
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1);
 
 	// 캐릭터 뒤에 그리기
-	for(int i = 0; i < _equippedAcc.size(); i++)
+	for(int i = 0; i < 4; i++)
 	{
 		if (_equippedAcc[i] != nullptr)
 		{
@@ -408,7 +418,7 @@ void Player::render()
 	_costume->render(_position, _direction);
 
 	// 캐릭터 앞에 그리기
-	for (int i = 0; i < _equippedAcc.size(); i++)
+	for (int i = 0; i < 4; i++)
 	{
 		if (_equippedAcc[i] != nullptr)
 		{
@@ -446,8 +456,7 @@ void Player::equipItem(int index)
 		{
 			if (_equippedAcc[i] == nullptr)
 			{
-				_equippedAcc[i] = _inventory[index];
-				_inventory[index] = nullptr;
+				swap(_inventory[index], _equippedAcc[i]);
 				break;
 			}
 		}

@@ -16,6 +16,10 @@ void GreenDadBat::init()
 	_img = IMAGE_MANAGER->findImage("GreenDadBatF");
 	_ani = new Animation;
 	_ani->start();
+	_ani->init(_img->getWidth(), _img->getHeight(),
+		_img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setFPS(9);
+	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 
 	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
@@ -55,10 +59,7 @@ void GreenDadBat::update(Player * player, float const elapsedTime)
 
 	}
 	_ani->frameUpdate(elapsedTime);
-	_ani->init(_img->getWidth(), _img->getHeight(),
-		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(9);
-	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
+	
 }
 
 void GreenDadBat::backRender(Player * player)

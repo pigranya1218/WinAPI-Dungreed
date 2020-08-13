@@ -179,14 +179,14 @@ void InventoryUI::render()
 			}
 		}
 
-		/*for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			Item* acc = _player->getAcc(i);
 			if (acc == nullptr) continue;
 
 			acc->getIconImg()->setScale(5);
-			acc->getIconImg()->render(_equippedAccRc[i * 2].getCenter());
-		}*/
+			acc->getIconImg()->render(_equippedAccRc[i].getCenter());
+		}
 	}
 
 	// 인벤토리 그리기

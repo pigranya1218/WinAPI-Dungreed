@@ -14,6 +14,10 @@ void babyGreenBat::init()
 	_img = IMAGE_MANAGER->findImage("babyGreenBatF");
 	_ani = new Animation;
 	_ani->start();
+	_ani->init(_img->getWidth(), _img->getHeight(),
+		_img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setFPS(14);
+	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 
 	_baseAttackDelay = 0.2;
 	_currAttackDelay = 0;
@@ -55,10 +59,7 @@ void babyGreenBat::update(Player* player, float const elapsedTime)
 
 	}
 	_ani->frameUpdate(elapsedTime);
-	_ani->init(_img->getWidth(), _img->getHeight(),
-		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(14);
-	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
+	
 
 }
 
