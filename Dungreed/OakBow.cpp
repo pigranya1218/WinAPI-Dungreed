@@ -5,8 +5,8 @@ void OakBow::init()
 {
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_iconImg = IMAGE_MANAGER->findImage("OakBow");
-	_img = IMAGE_MANAGER->findImage("OakBowAni");
+	_iconImg = _img = IMAGE_MANAGER->findImage("OakBow");
+	_frameImg = IMAGE_MANAGER->findImage("OakBowAni");
 
 
 	_price = 360;

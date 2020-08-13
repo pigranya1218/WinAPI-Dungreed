@@ -4,23 +4,25 @@
 
 void Banshee::init(const Vector2& pos, DIRECTION direction)
 {	
+	// 애니메이션 할당
 	_ani = new Animation;
 
+	// 초기 상태는 기본 상태
 	setState(ENEMY_STATE::IDLE);
 
+	// 변수 초기화
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-
-	_size = _img->getFrameSize() * _scale;
-
-	ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.delay = 30;
-	
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
-
 	_isDetect = 0;
 	_detectRange = 300;
+
+	// 피격 렉트 및 사이즈 초기화
+	_size = _img->getFrameSize() * _scale;
+	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
+	// 탄막 초기화
+	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 500, 5, false, true, true);
 }
 
 void Banshee::release()
@@ -42,9 +44,16 @@ void Banshee::update(float const timeElapsed)
 		{
 			if (_isDetect)
 			{
-				if (_shooting.update(timeElapsed))
+				if (_shooting.delayUpdate(timeElapsed))
 				{
 					setState(ENEMY_STATE::ATTACK);
+
+					for (int i = 0; i < 12; i++)
+					{
+						_shooting.angle += PI / 6;
+						_shooting.createBullet(_position, _shooting.angle);
+					}
+					_shooting.fireBullet(_enemyManager);
 				}
 			}
 			break;

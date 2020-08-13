@@ -83,6 +83,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		break;
 		case ENEMY_TYPE::GHOST:
 		{
+			enemy = new Ghost;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::LILITH:
@@ -140,7 +143,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		break;
 		case ENEMY_TYPE::OVIBOS:
 		{
-
+			enemy = new Ovibos;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
 	}
 
@@ -166,10 +171,10 @@ bool EnemyManager::detectPlayer(GameObject* object, const float distance)
 	
 }
 
-//void EnemyManager::fireEnemy()
-//{
-//	
-//}
+void EnemyManager::fireEnemy(Projectile * projectile, AttackInfo * attackInfo)
+{
+	return _stage->attack(projectile, attackInfo);
+}
 
 Vector2 EnemyManager::getPlayerPos()
 {

@@ -34,6 +34,10 @@ void InventoryUI::init()
 			_invenRc[i * 5 + j] = rectMakePivot(Vector2(1080 + 110 * j, 490 + 105 * i), Vector2(96, 90), PIVOT::CENTER);
 		}
 	}
+
+	_dragWeaponIndex = -1;
+	_dragAccIndex = -1;
+	_dragInvenIndex = -1;
 }
 
 void InventoryUI::release()
@@ -48,7 +52,120 @@ void InventoryUI::update(float elapsedTime)
 		{
 			_isActive = false;
 		}
+
+		// 드래그
+		// 무기칸 위에 있던 경우
+		for (int i = 0; i < 2; i++)
+		{
+			if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
+			{
+				_dragWeaponIndex = i;
+				break;
+			}
+		}
+
+		// 악세사리칸 위에 있던 경우
+		for (int i = 0; i < 4; i++)
+		{
+			if (_equippedAccRc[i].ptInRect(_ptMouse))
+			{
+				_dragAccIndex = i;
+				break;
+			}
+		}
+
+
+		// 인벤토리 위에 있던 경우
+		for (int i = 0; i < 15; i++)
+		{
+			if (_invenRc[i].ptInRect(_ptMouse))
+			{
+				_dragInvenIndex = i;
+				break;
+			}
+		}
 	}
+
+	// 드래그 해제
+	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
+	{
+		if (_dragWeaponIndex != -1) // 무기를 잡고 있던 경우
+		{
+			// 무기칸 위에 있던 경우
+			for (int i = 0; i < 2; i++)
+			{
+				if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
+				{
+					break;
+				}
+			}
+
+			// 인벤토리 위에 있던 경우
+			for (int i = 0; i < 15; i++)
+			{
+				if (_invenRc[i].ptInRect(_ptMouse))
+				{
+					break;
+				}
+			}
+		}
+		else if (_dragAccIndex != -1)
+		{
+			// 악세칸 위에 있던 경우
+			for (int i = 0; i < 4; i++)
+			{
+				if (_equippedAccRc[i].ptInRect(_ptMouse))
+				{
+					break;
+				}
+			}
+
+			// 인벤토리 위에 있던 경우
+			for (int i = 0; i < 15; i++)
+			{
+				if (_invenRc[i].ptInRect(_ptMouse))
+				{
+					break;
+				}
+			}
+		}
+		else if (_dragInvenIndex != -1)
+		{
+			// 무기칸 위에 있던 경우
+			for (int i = 0; i < 2; i++)
+			{
+				if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
+				{
+					break;
+				}
+			}
+
+			// 악세사리 위에 있던 경우
+			for (int i = 0; i < 4; i++)
+			{
+				if (_equippedAccRc[i].ptInRect(_ptMouse))
+				{
+					break;
+				}
+			}
+
+			// 인벤토리 위에 있던 경우
+			for (int i = 0; i < 15; i++)
+			{
+				if (_invenRc[i].ptInRect(_ptMouse))
+				{
+					break;
+				}
+			}
+
+		}
+
+		_dragWeaponIndex = -1;
+		_dragAccIndex = -1;
+		_dragInvenIndex = -1;
+	}
+
+
 
 	if (KEY_MANAGER->isOnceKeyDown(VK_RBUTTON))
 	{
@@ -201,7 +318,24 @@ void InventoryUI::render()
 		}
 	}
 
-	
-
+	// 골드 적기	
 	D2D_RENDERER->renderTextField(_goldRc.left, _goldRc.top, to_wstring(_player->getGold()), RGB(255, 255, 255), _goldRc.getSize().y, _goldRc.getSize().x, _goldRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_TRAILING);
+
+
+	// 드래그 중이라면 마우스 위치에 아이템 그리기
+	if (_dragWeaponIndex != -1)
+	{
+		_player->getWeapon(_dragWeaponIndex)->getIconImg()->setScale(5);
+		_player->getWeapon(_dragWeaponIndex)->getIconImg()->render(Vector2(_ptMouse));
+	}
+	else if (_dragAccIndex != -1)
+	{
+		_player->getAcc(_dragAccIndex)->getIconImg()->setScale(5);
+		_player->getAcc(_dragAccIndex)->getIconImg()->render(Vector2(_ptMouse));
+	}
+	else if (_dragInvenIndex != -1)
+	{
+		_player->getInvenItem(_dragInvenIndex)->getIconImg()->setScale(5);
+		_player->getInvenItem(_dragInvenIndex)->getIconImg()->render(Vector2(_ptMouse));
+	}
 }

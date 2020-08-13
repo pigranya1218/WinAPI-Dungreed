@@ -17,23 +17,34 @@ enum class DRAW_LINE_POSITION
 	BOTTOM,
 	LEFT_DIAGONAL, // /이런 모양
 	RIGHT_DIAGONAL, // \이런 모양
+	
+	//두변 이상 그려질 경우
 	LEFT_TOP,
 	RIGHT_TOP,
 	LEFT_BOTTOM,
-	RIGHT_BOTTOM
+	RIGHT_BOTTOM,
 	
+	//프랫폼형태인가?
+	PLATFORM
 };
 
+//struct tagTileMap
+//{
+//	int maxTileX;
+//	int maxTileY;
+//	tagTile 
+//};
 
 struct tagTileMap
 {
 	
 	FloatRect rc;
-	int tileFrameX;
-	int tileFrameY;
+	int tileFrameX[2];
+	int tileFrameY[2];
 	DRAW_LINE_POSITION linePos;
 	int tileX;
 	int tileY;
+	
 };
 
 struct  tagPalette
@@ -51,6 +62,12 @@ struct tagSelectTile
 	int x;
 	int y;
 	
+};
+
+struct tagMap
+{
+	int Tx;
+	int Ty;
 };
 
 
@@ -71,8 +88,10 @@ private:
 
 	
 	
-	Synthesize(int, _tileX,TileX)
-	Synthesize(int,_tileY,TileY)
+	Synthesize(int, _tileX, TileX)
+	Synthesize(int, _tileY, TileY)
+
+	int _layer;
 
 	Vector2 _mapPointer;
 	FloatRect _mapPtnRc;
@@ -82,14 +101,15 @@ private:
 	FloatRect _save;
 	FloatRect _load;
 	FloatRect _erase;
-	FloatRect _paletteLoad;
+	FloatRect _layer1Btn, _layer2Btn;
 	FloatRect _increaseTileX, _decreaseTileX;
 	FloatRect _increaseTileY, _decreaseTileY;
 
 
 	Image* _paletteImage;
-	tagTileMap _tile[1000];
+	tagTileMap _tile[2000], _tile2[2000];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
+	tagSelectTile _selectTile;
 
 	DRAW_LINE_POSITION _drawLinePos;
 

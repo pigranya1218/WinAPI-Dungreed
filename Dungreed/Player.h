@@ -81,6 +81,7 @@ public:
 	void equipItem(int index);		// 인벤토리에 있던 아이템을 장착함
 	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함
 	void unequipAcc(int index);		// 악세사리 장착중이던 아이템을 해제함
+	void swapItem(int indexA, int indexB);
 
 };
 

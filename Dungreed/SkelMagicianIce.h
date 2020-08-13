@@ -4,7 +4,7 @@
 class SkelMagicianIce : public Enemy
 {
 private:
-	AttackInfo	_attack;	// 공격
+	tagAttackInfo	_attack;	// 공격
 
 	Image*			_attackImg;	// 공격 이펙트 이미지
 	Animation*		_attackAni;	// 공격 이펙트 프레임

@@ -7,6 +7,7 @@ private:
 	Vector2 renderPos;
 	Vector2 location;
 	bool Opposition;
+	float _currAttackDelay;
 public:
 	virtual void init();
 	virtual void release();

@@ -4,7 +4,7 @@
 class Banshee : public Enemy
 {
 private:	
-	AttackInfo	_shooting;	// 공격 관련
+	tagShootingInfo _shooting;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

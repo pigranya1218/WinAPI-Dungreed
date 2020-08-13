@@ -4,7 +4,7 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "MapToolScene.h"
-#include "SecondTestScene.h"
+
 
 #include "Player.h"
 
@@ -214,6 +214,18 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP", L"resources/images/costumes/pickax/player_jump.png");
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/DIE", L"resources/images/costumes/pickax/player_die.png");
 
+	// *** ALICE
+	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/IDLE", L"resources/images/costumes/alice/player_idle.png", 5, 1);
+	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/MOVE", L"resources/images/costumes/alice/player_run.png", 6, 1);
+	IMAGE_MANAGER->addImage("COSTUME/ALICE/JUMP", L"resources/images/costumes/alice/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/ALICE/DIE", L"resources/images/costumes/alice/player_die.png");
+
+	// *** RED_LOTUS
+	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/IDLE", L"resources/images/costumes/redLotus/player_idle.png", 5, 1);
+	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/MOVE", L"resources/images/costumes/redLotus/player_run.png", 6, 1);
+	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/JUMP", L"resources/images/costumes/redLotus/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/DIE", L"resources/images/costumes/redLotus/player_die.png");
+
 	// ** WEAPON
 	// *** LongDistanceWeapon
 	IMAGE_MANAGER->addImage("Lala'sMagicWand", L"resources/images/weapon/longDistanceWeapon/Lala'sMagicWand.png");
@@ -254,9 +266,12 @@ HRESULT playGround::init()
 	//***MeleeWeapon
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
 	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
+	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);
+
 	//***MeleeWeaponEffect
 	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
 	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
+	IMAGE_MANAGER->addFrameImage("CosmosSwordFx ", L"resources/images/MeleeWeapon/CosmosSwordFx .png",8, 1);
 	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 30, 10);
 	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 30, 10);
 
@@ -409,9 +424,11 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// ¼ö³à ÃÑ¾Ë
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Banshee/bullet_FX.png"	, 6, 1);	// ¼ö³à ÃÑ¾Ë »èÁ¦
 
-	IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å
-	IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å »èÁ¦
+	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å
+	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å »èÁ¦
 
+	IMAGE_MANAGER->addImage("IceBullet"			, L"resources/images/Enemy/Bullet/IceBullet.png"		 );	// ¾óÀ½ ÃÑ¾Ë
+	IMAGE_MANAGER->addFrameImage("IceBullet_FX"	, L"resources/images/Enemy/Bullet/IceBullet_FX.png", 3, 1);	// ¾óÀ½ ÃÑ¾Ë »èÁ¦
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
@@ -421,9 +438,11 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
-	SCENE_MANAGER->addScene("SECOND", new SecondTestScene);
+	
+
 	SCENE_MANAGER->changeScene("GAME");	
 
+	
 	return S_OK;
 }
 

@@ -23,6 +23,10 @@ private:
 	FloatRect _equippedAccRc[4];
 	FloatRect _invenRc[15];
 
+	int _dragWeaponIndex;
+	int _dragAccIndex;
+	int _dragInvenIndex;
+
 public:
 	void setPlayer(Player* player) { _player = player; }
 

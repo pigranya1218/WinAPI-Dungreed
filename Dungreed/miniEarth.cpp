@@ -7,7 +7,6 @@ void miniEarth::init()
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::NORMAL;
 	_iconImg = IMAGE_MANAGER->findImage("MiniEarth");
-	_iconImg = nullptr;
 	_img = IMAGE_MANAGER->findImage("MiniEarth0");
 
 	//厩技辑府 可记	
