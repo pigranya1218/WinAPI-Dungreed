@@ -20,6 +20,7 @@
 #include "bombPouch.h"
 #include "Matchlock.h"
 #include "MagnifyingGlass.h"
+#include "Voluspa.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -134,6 +135,10 @@ void Player::init()
 	//MagnifyingGlass* testAcc10 = new MagnifyingGlass;
 	//testAcc10->init();
 	//_equippedAcc.push_back(testAcc10);
+
+	Voluspa* testAcc11 = new Voluspa;
+	testAcc11->init();
+	_equippedAcc.push_back(testAcc11);
 
 
 	//ShortSpear* testWeapon = new ShortSpear;
