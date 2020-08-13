@@ -19,7 +19,7 @@ private:
 	float _chargeDelay;
 	Image* _img;
 	Animation* _ani;
-
+	Vector2 renderPosHand;
 	int effectCount;
 public:
 

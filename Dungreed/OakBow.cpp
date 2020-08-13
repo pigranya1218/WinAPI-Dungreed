@@ -5,12 +5,10 @@ void OakBow::init()
 {
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_iconImg = _img = IMAGE_MANAGER->findImage("OakBow");
-	_frameImg = IMAGE_MANAGER->findImage("OakBowAni");
-
+	_iconImg = IMAGE_MANAGER->findImage("OakBow");
+	_img = IMAGE_MANAGER->findImage("OakBowAni");
 
 	_price = 360;
-
 	_minDamage = 20;
 	_maxDamage = 35;
 
@@ -31,7 +29,6 @@ void OakBow::init()
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setDefPlayFrame(false, false);
 	_ani->stop();
-
 }
 
 void OakBow::release()
@@ -56,7 +53,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 
-	Vector2 renderPosHand = pos;
+	renderPosHand = pos;
 	renderPosHand.x += ((isLeft) ? (_img->getFrameSize().x * 0.1f * 4) : -(_img->getFrameSize().y * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
 	renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
@@ -88,14 +85,6 @@ void OakBow::update(Player * player, float const elapsedTime)
 	//떼면 공격
 	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
-		/*if (_ani->getPlayIndex() >= 5)
-		{
-			_ani->stop();
-		}
-		else
-		{
-			_ani->stop();
-		}*/
 		effectCount = 0;
 
 		_ani->setFPS(6);
@@ -140,9 +129,9 @@ void OakBow::frontRender(Player * player)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 
-	Vector2 renderPosHand = pos;
-	renderPosHand.x += ((isLeft) ? (_img->getFrameSize().x * 0.1f * 4) : -(_img->getFrameSize().y * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
-	renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
+	//Vector2 renderPosHand = pos;
+	//renderPosHand.x += ((isLeft) ? (_img->getFrameSize().x * 0.2f * 4) : -(_img->getFrameSize().y * 0.2f * 4)); // 손의 위치는 무기의 회전 중심점
+	//renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
 	// 손으로부터 마우스 에임까지의 각도
 	float degree = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) * (180 / PI) + 360;
@@ -150,10 +139,7 @@ void OakBow::frontRender(Player * player)
 	{
 		degree -= 360;
 	}
-
-	Vector2 renderPosWeapon = renderPosHand;
-	renderPosWeapon.x += ((isLeft) ? -(_img->getFrameSize().x * 0.2f * 4) : (_img->getFrameSize().y * 0.2f * 4));
-	renderPosWeapon.y -= _img->getFrameSize().y * 0.1f * 4;
+	
 	float renderDegree = degree;
 	if (isLeft) // 왼쪽을 보고 있음
 	{
@@ -161,24 +147,33 @@ void OakBow::frontRender(Player * player)
 		if (renderDegree < 0) renderDegree += 360;
 	}
 
+	Vector2 renderPosWeapon = renderPosHand;
+	renderPosWeapon.x += _img->getFrameSize().x * 0.3 * 4;
+	renderPosWeapon.y += (isLeft) ? (_img->getFrameSize().y * 0.2 * 4) : (_img->getFrameSize().y * -0.2 * 4);
+	//renderPosWeapon.x += ((isLeft) ? -(_img->getFrameSize().x * 0.1f * 4) : (_img->getFrameSize().y * 0.1f * 4));
+	//renderPosWeapon.y -= _img->getFrameSize().y * 0.1f * 4;
+	//renderPosWeapon.x = renderPosHand.x;
+	//renderPosWeapon.y = renderPosHand.y;
+
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
-	_img->setAnglePos(Vector2(0.3f * _img->getFrameSize().x, 0.6f * _img->getFrameSize().y));
+
+	_img->setAnglePos(Vector2(0.2f * _img->getFrameSize().x, 0.5f * _img->getFrameSize().y));
 	_img->aniRender(renderPosWeapon, _ani, isLeft);
 
-	Vector2 subHandPos = renderPosHand; // 보조 손 (양손무기)
-	subHandPos.x += _img->getFrameSize().x * 0.4 * 4;
+	Vector2 subHandPos = renderPosHand; // 보조 손 (양손무기) 움직임
+	subHandPos.x += _img->getFrameSize().x * 0.3 * 4;
 	subHandPos.y += (isLeft) ? (_img->getFrameSize().y * 0.2 * 4) : (_img->getFrameSize().y * -0.2 * 4);
-	FloatRect subhandRc = rectMakePivot(subHandPos, Vector2(5, 5), PIVOT::CENTER);
 
+	FloatRect subhandRc = rectMakePivot(subHandPos, Vector2(5, 5), PIVOT::CENTER);
 	D2D_RENDERER->drawRectangle(subhandRc, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
 	D2D_RENDERER->fillRectangle(subhandRc, 210, 188, 181, 1.f, degree, renderPosHand);
 
 	FloatRect handRc = rectMakePivot(renderPosHand, Vector2(5, 5), PIVOT::CENTER);
-
 	D2D_RENDERER->drawRectangle(handRc, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
 	D2D_RENDERER->fillRectangle(handRc, 210, 188, 181, 1.f, degree, renderPosHand);
 
+	//이펙트
 	if (_drawEffect)
 	{
 		_drawEffect = false;
