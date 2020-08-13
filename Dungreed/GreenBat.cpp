@@ -5,7 +5,7 @@ void GreenBat::init()
 {
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::RARE;	
-
+	_iconImg = IMAGE_MANAGER->findImage("GreenBat");
 	_price = 600;
 
 	batPos.x = WINSIZEX / 2;

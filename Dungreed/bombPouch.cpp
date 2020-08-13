@@ -4,12 +4,15 @@ void bombPouch::init()
 {
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::RARE;
-
-	isBoom = false;
-
+	_iconImg = IMAGE_MANAGER->findImage("BombPouch");
+	
 	_addStat.defense = 2;
 	
 	_price = 1200;
+
+
+	isBoom = false;
+
 }
 
 void bombPouch::release()

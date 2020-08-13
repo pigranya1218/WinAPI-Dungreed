@@ -6,7 +6,7 @@ void GreenDadBat::init()
 {
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::HIGH;
-
+	_iconImg = IMAGE_MANAGER->findImage("GreenDadBat");
 
 	_price = 3500;
 

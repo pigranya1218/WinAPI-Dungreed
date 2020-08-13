@@ -5,11 +5,9 @@ void SpikeBall::init()
 {
 	//厩技辑府 鸥涝
 	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::NORMAL;
-	
-	_iconImg = nullptr;
+	_rank = ITEM_RANK::NORMAL;	
 	_img = IMAGE_MANAGER->findImage("SpikeBall");
-	
+	_iconImg = IMAGE_MANAGER->findImage("SpikeBall");
 	//厩技辑府 可记
 	_addStat.criticalChance = 1;
 	_addStat.defense = 1;

@@ -7,11 +7,14 @@ void IceBall::init()
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::NORMAL;
 	
-	
+	_iconImg = IMAGE_MANAGER->findImage("IceBall");
 
 	//厩技辑府 可记
 	_addStat.criticalChance = 1;
 	_addStat.defense = 1;
+	
+	//厩技辑府 啊拜
+	_price = 600;
 
 	radius = 0;
 	fspeed = 0;
@@ -20,8 +23,6 @@ void IceBall::init()
 	_ani = new Animation;
 	_ani->start();
 	setitem = false;
-	//厩技辑府 啊拜
-	_price = 600;
 }
 
 void IceBall::release()

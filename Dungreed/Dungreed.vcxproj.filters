@@ -399,14 +399,14 @@
     <ClInclude Include="GreenMomBat.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="Voluspa.h">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
-    </ClInclude>
     <ClInclude Include="MagnifyingGlass.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
     <ClInclude Include="AttackInfo.h">
       <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Voluspa.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
