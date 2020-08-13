@@ -611,9 +611,6 @@
     <ClCompile Include="daisyRing.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="IceBall.cpp">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
-    </ClCompile>
     <ClCompile Include="miniEarth.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
@@ -637,15 +634,6 @@
     </ClCompile>
     <ClCompile Include="NormalProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClCompile>
-    <ClCompile Include="GreenBat.cpp">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
-    </ClCompile>
-    <ClCompile Include="GreenDadBat.cpp">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
-    </ClCompile>
-    <ClCompile Include="GreenMomBat.cpp">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="Voluspa.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>

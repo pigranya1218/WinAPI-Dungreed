@@ -184,6 +184,7 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="GreenBat.h" />
     <ClInclude Include="GreenDadBat.h" />
     <ClInclude Include="GreenMomBat.h" />
@@ -275,6 +276,7 @@
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="InventoryUI.cpp" />
