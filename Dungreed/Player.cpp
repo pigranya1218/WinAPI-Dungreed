@@ -493,18 +493,69 @@ void Player::unequipAcc(int index)
 	}
 }
 
-void Player::swapItem(int indexA, int indexB)
+void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 ~ 20 : inventory
 {
-	if (indexA <= 1) // Weapon
+	if (indexA <= 1) // A : Weapon
 	{
 
+		if (indexB <= 1) // B : Weapon
+		{
+			if (indexA == indexB) return;
+			swap(_equippedWeapon[indexA], _equippedWeapon[indexB]);
+		}
+		else if (indexB <= 5) // B : Acc
+		{
+			return;
+		}
+		else // B : Inventory
+		{
+			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() != ITEM_TYPE::ACC)
+			{
+				swap(_equippedWeapon[indexA], _inventory[indexB - 6]);
+			}
+		}
 	}
-	else if (indexA <= 5) // Acc
+	else if (indexA <= 5) // A : Acc
 	{
-
+		if (indexB <= 1) // B : Weapon
+		{
+			return;
+			
+		}
+		else if (indexB <= 5) // B : Acc
+		{
+			if (indexA == indexB) return;
+			swap(_equippedAcc[indexA - 2], _equippedAcc[indexB - 2]);
+		}
+		else // B : Inventory
+		{
+			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() == ITEM_TYPE::ACC)
+			{
+				swap(_equippedAcc[indexA - 2], _inventory[indexB - 6]);
+			}
+		}
 	}
-	else // Inventory
+	else // A : Inventory
 	{
+		if (indexB <= 1) // B : Weapon
+		{
+			if (_inventory[indexA - 6]->getType() != ITEM_TYPE::ACC)
+			{
+				swap(_inventory[indexA - 6], _equippedWeapon[indexB]);
+			}
 
+		}
+		else if (indexB <= 5) // B : Acc
+		{
+			if (_inventory[indexA - 6]->getType() == ITEM_TYPE::ACC)
+			{
+				swap(_inventory[indexA - 6], _equippedAcc[indexB - 2]);
+			}
+		}
+		else // B : Inventory
+		{
+			if (indexA == indexB) return;
+			swap(_inventory[indexA - 6], _inventory[indexB - 6]);
+		}
 	}
 }
