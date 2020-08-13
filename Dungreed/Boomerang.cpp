@@ -2,7 +2,7 @@
 
 void Boomerang::init()
 {
-	_img = IMAGE_MANAGER->findImage("MetalBoomerang");
+	_iconImg = _img = IMAGE_MANAGER->findImage("MetalBoomerang");
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::RARE;
 
@@ -94,15 +94,15 @@ void Boomerang::attack(Vector2 const position, float const angle)
 
 }
 
-void Boomerang::attack(FloatRect * rect, tagAttackInfo * info)
+void Boomerang::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void Boomerang::attack(FloatCircle * circle, tagAttackInfo * info)
+void Boomerang::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void Boomerang::attack(Projectile * projectile, tagAttackInfo * info)
+void Boomerang::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

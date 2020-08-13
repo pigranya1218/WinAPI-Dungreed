@@ -1,6 +1,7 @@
 #pragma once
 #include "Player.h"
 #include "ProjectileManager.h"
+#include "AttackInfo.h"
 
 enum class ITEM_TYPE
 {
@@ -20,15 +21,12 @@ enum class ITEM_RANK
 class Item
 {
 protected:
-	ITEM_TYPE _type;						 // 아이템 타입
-	ITEM_RANK _rank;						 // 아이템 등급
-	Image* _img;							 // 아이템 이미지
-	Image* _frameImg;						 // 아이템 프레임 이미지
-	Animation* _ani;						 // 아이템 애니메이션
-	int _price;								 // 가격
-	int _minDamage;							 // 최소 데미지
-	int _maxDamage;							 // 최대 데미지
-	PlayerStat _addStat;					 // 아이템 스탯 옵션
+	ITEM_TYPE _type; // 아이템 타입
+	ITEM_RANK _rank; // 아이템 등급
+	Image* _iconImg; // 아이템 이미지
+	int _price; // 가격
+	PlayerStat _addStat; // 아이템 스탯 옵션
+	ProjectileManager* _projecttileMng;		//투사체 매니저
 public:
 	virtual void init() = 0;
 	virtual void release() = 0;
@@ -38,9 +36,9 @@ public:
 	virtual void displayInfo() = 0; // 인벤토리에서 보여질 정보들
 
 	virtual void attack(Player* player) = 0; // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
-	virtual void attack(FloatRect* rect, tagAttackInfo* info) = 0; // 공격 렉트를 변경시키는 함수 
-	virtual void attack(FloatCircle* circle, tagAttackInfo* info) = 0; // 공격 써클을 변경시키는 함수
-	virtual void attack(Projectile* projectile, tagAttackInfo* info) = 0; // 탄환을 변경시키는 함수
+	virtual void attack(FloatRect* rect, AttackInfo* info) = 0; // 공격 렉트를 변경시키는 함수 
+	virtual void attack(FloatCircle* circle, AttackInfo* info) = 0; // 공격 써클을 변경시키는 함수
+	virtual void attack(Projectile* projectile, AttackInfo* info) = 0; // 탄환을 변경시키는 함수
 
 	virtual void getHit(Vector2 const position) = 0; // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
@@ -49,5 +47,5 @@ public:
 	ITEM_TYPE getType() const noexcept { return _type; }
 
 	int getPrice() const noexcept { return _price; }
-	Image* getImg() const noexcept { return _img; }
+	Image* getIconImg() const noexcept { return _iconImg; }
 };

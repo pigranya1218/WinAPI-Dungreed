@@ -65,12 +65,13 @@ private:
 
 private:
 	wstring getActionName(ACTION_TYPE type);
-	Image* getKeyImage(int key);
 
 public:
 	void init();
 	void update();
 	void render();
+	Image* getKeyImage(int key);
+
 
 	inline void setActive(bool active) { _isActive = active; }
 	inline bool isActive() const noexcept { return _isActive; }

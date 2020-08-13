@@ -2,22 +2,13 @@
 #include "stdafx.h"
 #include "GameObject.h"
 #include "PlayerStat.h"
+#include "AttackInfo.h"
 
 class Item;
 class GameScene;
 class Projectile;
 class Ability;
 class Costume;
-
-// 공격 관련 정보
-struct tagAttackInfo
-{
-	OBJECT_TEAM team;
-	int attackID; // 어택 아이디, 공격에 대한 중복검사 판별을 위해서 사용
-	float damage; // 대미지
-	float knockBack; // 넉백 (밀어내는 힘)
-};
-
 
 class Player : public GameObject
 {
@@ -42,6 +33,7 @@ private:
 
 	PlayerStat _adjustStat; // 각종 요인으로 변화된 최종 스탯
 
+	Item*		_hand; // 주먹질
 	vector<Item*> _inventory;				// 인벤토리
 	vector<Item*> _equippedWeapon;			// 장착된 무기
 	int			  _currWeaponIndex;			// 현재 사용하는 무기 인덱스, 0 or 1
@@ -50,6 +42,7 @@ private:
 
 private:
 	void updateAdjustStat();
+	void swap(Item* &a, Item* &b);
 
 public:
 	Player() {};
@@ -58,9 +51,9 @@ public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; };
 
 	// 아이템들이 호출할 함수들
-	void attack(FloatRect* rect, tagAttackInfo* info);
-	void attack(FloatCircle* circle, tagAttackInfo* info);
-	void attack(Projectile* projectile, tagAttackInfo* info);
+	void attack(FloatRect* rect, AttackInfo* info);
+	void attack(FloatCircle* circle, AttackInfo* info);
+	void attack(Projectile* projectile, AttackInfo* info);
 
 	virtual void init() override;
 	virtual void release() override;
@@ -80,6 +73,14 @@ public:
 	int getCurrDash() const noexcept { return _currDashCount; }
 
 	int getWeaponIndex() const noexcept { return _currWeaponIndex; }
+	Item* getWeapon(int index) const noexcept { return _equippedWeapon[index]; };
+	Item* getAcc(int index) const noexcept { return _equippedAcc[index]; }
+	Item* getInvenItem(int index) const noexcept { return _inventory[index]; }
 	Image* getWeaponImg(int index) const noexcept;
+
+	void equipItem(int index);		// 인벤토리에 있던 아이템을 장착함
+	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함
+	void unequipAcc(int index);		// 악세사리 장착중이던 아이템을 해제함
+
 };
 

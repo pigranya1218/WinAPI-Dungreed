@@ -4,12 +4,15 @@ void bombPouch::init()
 {
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::RARE;
+	_iconImg = IMAGE_MANAGER->findImage("BombPouch");
+	
+	_addStat.defense = 2;
+	
+	_price = 1200;
+
 
 	isBoom = false;
 
-	
-	
-	_price = 1200;
 }
 
 void bombPouch::release()
@@ -61,15 +64,15 @@ void bombPouch::attack(Player* player)
 {
 }
 
-void bombPouch::attack(FloatRect * rect, tagAttackInfo * info)
+void bombPouch::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void bombPouch::attack(FloatCircle * circle, tagAttackInfo * info)
+void bombPouch::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void bombPouch::attack(Projectile * projectile, tagAttackInfo * info)
+void bombPouch::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

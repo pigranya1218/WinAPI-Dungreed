@@ -5,8 +5,8 @@
 class Minotaurs : public Enemy
 {
 private:
-	tagAttackInfo	_skill;		// 돌진 모션
-	tagAttackInfo	_attack;	// 도끼 휘두르는 모션
+	AttackInfo	_skill;		// 돌진 모션
+	AttackInfo	_attack;	// 도끼 휘두르는 모션
 	tagMoveInfo		_moving;	// 이동 전용
 
 	Vector2			_lastPos;	// 이전 좌표

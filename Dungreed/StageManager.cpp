@@ -28,15 +28,15 @@ void StageManager::render()
 	_currStage->render();
 }
 
-void StageManager::attack(FloatRect* rect, tagAttackInfo* info)
+void StageManager::attack(FloatRect* rect, AttackInfo* info)
 {
 }
 
-void StageManager::attack(FloatCircle* circle, tagAttackInfo* info)
+void StageManager::attack(FloatCircle* circle, AttackInfo* info)
 {
 }
 
-void StageManager::attack(Projectile* projectile, tagAttackInfo* info)
+void StageManager::attack(Projectile* projectile, AttackInfo* info)
 {
 	_currStage->attack(projectile, info);
 }

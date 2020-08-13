@@ -7,6 +7,7 @@ void UIManager::setPlayer(Player * player)
 {
 	_player = player;
 	_inventoryUI.setPlayer(player);
+	_statUI.setPlayer(player);
 }
 
 void UIManager::init()
@@ -62,11 +63,15 @@ void UIManager::init()
 
 	// INVENTORY UI
 	_inventoryUI.init();
+
+	// STATUS UI
+	_statUI.init();
 }
 
 void UIManager::release()
 {
 	_inventoryUI.release();
+	_statUI.release();
 }
 
 void UIManager::update(float const elaspedTime)
@@ -96,16 +101,29 @@ void UIManager::update(float const elaspedTime)
 		// toggle
 		_inventoryUI.setActive(!_inventoryUI.isActive());
 	}
+	// Status Open
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::STAT)))
+	{
+		_statUI.setActive(!_statUI.isActive());
+	}
+
+
 
 	if (_inventoryUI.isActive())
 	{
 		_inventoryUI.update(elaspedTime);
 	}
-
+	if (_statUI.isActive())
+	{
+		_statUI.update(elaspedTime);
+	}
 
 	_isActive = false;
 	_isActive |= _inventoryUI.isActive();
+	_isActive |= _statUI.isActive();
 
+	
+	
 }
 
 void UIManager::render()
@@ -252,6 +270,12 @@ void UIManager::render()
 		if (_inventoryUI.isActive())
 		{
 			_inventoryUI.render();
+		}
+
+		// StatUI
+		if (_statUI.isActive())
+		{
+			_statUI.render();
 		}
 	}
 }

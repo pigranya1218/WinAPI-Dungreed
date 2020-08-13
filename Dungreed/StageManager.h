@@ -31,9 +31,9 @@ public:
 	void render();
 
 	// 스테이지 내 공격 판정
-	void attack(FloatRect* rect, struct tagAttackInfo* info);
-	void attack(FloatCircle* circle, struct tagAttackInfo* info);
-	void attack(Projectile* projectile, struct tagAttackInfo* info);
+	void attack(FloatRect* rect, AttackInfo* info);
+	void attack(FloatCircle* circle, AttackInfo* info);
+	void attack(Projectile* projectile, AttackInfo* info);
 
 	// 스테이지 내 충돌 처리 및 이동
 	void moveTo(GameObject* object, Vector2 moveDir);

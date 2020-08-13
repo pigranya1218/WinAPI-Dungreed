@@ -148,6 +148,43 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/BASE", L"resources/images/gameScene/ui/inventory/InventoryBase 2.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT", L"resources/images/gameScene/ui/inventory/InventoryExit.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT_SELECTED", L"resources/images/gameScene/ui/inventory/InventoryExit_Selected.png");
+	// *** STATUS
+	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
+	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");
+	IMAGE_MANAGER->addImage("UI/STAT/POW_SELECTED", L"resources/images/gameScene/ui/status/Stat_00_Pow_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DEF", L"resources/images/gameScene/ui/status/Stat_01_Def.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DEF_SELECTED", L"resources/images/gameScene/ui/status/Stat_01_Def_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TOUGH", L"resources/images/gameScene/ui/status/Stat_02_Tough.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TOUGH_SELECTED", L"resources/images/gameScene/ui/status/Stat_02_Tough_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/BLOCK", L"resources/images/gameScene/ui/status/Stat_03_Block.png");
+	IMAGE_MANAGER->addImage("UI/STAT/BLOCK_SELECTED", L"resources/images/gameScene/ui/status/Stat_03_Block_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL", L"resources/images/gameScene/ui/status/Stat_04_Critical.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL_SELECTED", L"resources/images/gameScene/ui/status/Stat_04_Critical_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL_DAMAGE", L"resources/images/gameScene/ui/status/Stat_05_CriticalDamage.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_05_CriticalDamage_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/EVADE", L"resources/images/gameScene/ui/status/Stat_06_Evade.png");
+	IMAGE_MANAGER->addImage("UI/STAT/EVADE_SELECTED", L"resources/images/gameScene/ui/status/Stat_06_Evade_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/MOVE_SPEED", L"resources/images/gameScene/ui/status/Stat_07_MoveSpeed.png");
+	IMAGE_MANAGER->addImage("UI/STAT/MOVE_SPEED_SELECTED", L"resources/images/gameScene/ui/status/Stat_07_MoveSpeed_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/ATTACK_SPEED", L"resources/images/gameScene/ui/status/Stat_08_AttackSpeed.png");
+	IMAGE_MANAGER->addImage("UI/STAT/ATTACK_SPEED_SELECTED", L"resources/images/gameScene/ui/status/Stat_08_AttackSpeed_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/RELOAD", L"resources/images/gameScene/ui/status/Stat_09_Reload.png");
+	IMAGE_MANAGER->addImage("UI/STAT/RELOAD_SELECTED", L"resources/images/gameScene/ui/status/Stat_09_Reload_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DASH_DAMAGE", L"resources/images/gameScene/ui/status/Stat_10_DashDamage.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DASH_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_10_DashDamage_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage_Selected.png");
+
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_0_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect0.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_1_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect1.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_X", L"resources/images/gameScene/ui/inventory/X.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_SELECTED", L"resources/images/gameScene/ui/inventory/weapon_selected.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_ZONE", L"resources/images/gameScene/ui/inventory/accessoryZone.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_BASE", L"resources/images/gameScene/ui/inventory/accessory.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE", L"resources/images/gameScene/ui/inventory/inventory.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE_SELECTED", L"resources/images/gameScene/ui/inventory/inventory_select.png");
+
+
 
 
 	// ** VILLIGE
@@ -237,7 +274,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MultiBullet", L"resources/images/Accessories/MultiBullet.png");                   // 3갈래총탄
 	IMAGE_MANAGER->addImage("GoldenCandy", L"resources/images/Accessories/GoldenCandy.png");                   // 골드캔디
 	IMAGE_MANAGER->addImage("babyGreenBat", L"resources/images/Accessories/babyGreenBat.png");                 // 아기 그린박쥐
-	IMAGE_MANAGER->addImage("babyuGreenBat", L"resources/images/Accessories/GreenBat.png");                    // 그린박쥐
+	IMAGE_MANAGER->addImage("GreenBat", L"resources/images/Accessories/GreenBat.png");                    // 그린박쥐
 	IMAGE_MANAGER->addImage("GreenMomBat", L"resources/images/Accessories/GreenMomBat.png");                   // 엄마그린박쥐
 	IMAGE_MANAGER->addImage("GreenDadBat", L"resources/images/Accessories/GreenDadBat.png");                   // 아빠그린박쥐
 	IMAGE_MANAGER->addFrameImage("BabyBatBulletAt", L"resources/images/Accessories/BabyBatBullet0.png", 5, 1); // 아기 그린박쥐 공격 프레임이미지
@@ -362,6 +399,12 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill"		, L"resources/images/Enemy/Minotaurs/skill.png"			, 8, 1);	// 미노타우르스 돌진
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill_Shot"	, L"resources/images/Enemy/Minotaurs/skill_shot.png"	, 8, 1);	// 미노타우르스 돌진 피격
 
+	// * 물소
+	IMAGE_MANAGER->addFrameImage("Ovibos/Idle"			, L"resources/images/Enemy/Ovibos/idle.png"			, 9, 1);	// 물소 기본
+	IMAGE_MANAGER->addFrameImage("Ovibos/Idle_Shot"		, L"resources/images/Enemy/Ovibos/idle_shot.png"	, 9, 1);	// 물소 기본 피격
+	IMAGE_MANAGER->addFrameImage("Ovibos/Attack"		, L"resources/images/Enemy/Ovibos/attack.png"		, 6, 1);	// 물소 공격 
+	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격
+
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// 수녀 총알
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Banshee/bullet_FX.png"	, 6, 1);	// 수녀 총알 삭제
@@ -397,6 +440,7 @@ void playGround::update()
 
 	SCENE_MANAGER->update();
 	DEBUG_MANAGER->update();
+	KEY_MANAGER->update();
 }
 
 //그리기 전용

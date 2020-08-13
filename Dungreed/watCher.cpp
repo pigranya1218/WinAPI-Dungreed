@@ -4,22 +4,28 @@ void watCher::init()
 {
 	//厩技辑府 鸥涝
 	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::NORMAL;
+	_rank = ITEM_RANK::RARE;	
+	_iconImg = IMAGE_MANAGER->findImage("Watcher");
 	
-
 	//厩技辑府 可记
-	_addStat.criticalChance = 1;
-	_addStat.defense = 1;
+	_addStat.evasion = 5;
+
 	radius = 0;
 	fspeed = 0;
-	x = y = 0;
+	x = y = 0;	
 	_img = IMAGE_MANAGER->findImage("Watcher0");
-	_ani1 = new Animation;
-	_ani1->start();
+	_ani = new Animation;
+	_ani->start();
+	_ani->init(_img->getWidth(), _img->getHeight(),
+		_img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setFPS(fspeed);
+	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 	setitem = false;
 
+
+
 	//厩技辑府 啊拜
-	_price = 600;
+	_price = 1200;
 }
 
 void watCher::release()
@@ -29,12 +35,12 @@ void watCher::release()
 
 void watCher::update(Player * player, float const elapsedTime)
 {
-	if (KEY_MANAGER->isOnceKeyDown('5'))
+	if (KEY_MANAGER->isOnceKeyDown('8'))
 	{
 		setitem = false;
 		
 	}
-	if (KEY_MANAGER->isOnceKeyDown('6'))
+	if (KEY_MANAGER->isOnceKeyDown('9'))
 	{
 		setitem = true;
 		
@@ -42,7 +48,7 @@ void watCher::update(Player * player, float const elapsedTime)
 	
 	if (!setitem)
 	{
-		radius = 100;
+		radius = 85;
 		_img = IMAGE_MANAGER->findImage("Watcher0");
 		_angle -= 0.043f;
 		fspeed = 5;
@@ -55,11 +61,8 @@ void watCher::update(Player * player, float const elapsedTime)
 		fspeed = 10;
 	}
 
-	_ani1->frameUpdate(elapsedTime);
-	_ani1->init(_img->getWidth(), _img->getHeight(),
-		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani1->setFPS(fspeed);
-	_ani1->setPlayFrame(0, _img->getMaxFrameX(), false, true);
+	_ani->frameUpdate(elapsedTime);
+	
 	
 }
 
@@ -72,7 +75,10 @@ void watCher::backRender(Player * player)
 	renderPos.x = renderPos.x + x+2;
 	renderPos.y = renderPos.y + y-22;	
 	_img->setScale(4);
-	_img->aniRender(Vector2(renderPos), _ani1, false);
+	_img->aniRender(Vector2(renderPos), _ani, false);
+	Vector2 size = Vector2(_img->getFrameSize().x * 2, _img->getFrameSize().y *2);
+	_crash = rectMakePivot(Vector2(renderPos.x, renderPos.y + 25), size, PIVOT::CENTER);
+	D2D_RENDERER->drawRectangle(_crash);
 }
 
 void watCher::frontRender(Player * player)
@@ -88,15 +94,15 @@ void watCher::attack(Player * player)
 {
 }
 
-void watCher::attack(FloatRect * rect, tagAttackInfo * info)
+void watCher::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void watCher::attack(FloatCircle * circle, tagAttackInfo * info)
+void watCher::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void watCher::attack(Projectile * projectile, tagAttackInfo * info)
+void watCher::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

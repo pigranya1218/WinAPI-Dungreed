@@ -6,7 +6,7 @@ void ShortSword::init()
 
 	_type = ITEM_TYPE::WEAPON_ONE_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_img = IMAGE_MANAGER->findImage("ShortSword");
+	_iconImg = _img = IMAGE_MANAGER->findImage("ShortSword");
 	_price = 600;
 
 	// 기본 보조옵션
@@ -284,15 +284,15 @@ void ShortSword::attack(Player* player)
 	_currAttackDelay = _baseAttackDelay;
 }
 
-void ShortSword::attack(FloatRect* rect, tagAttackInfo* info)
+void ShortSword::attack(FloatRect* rect, AttackInfo* info)
 {
 }
 
-void ShortSword::attack(FloatCircle* circle, tagAttackInfo* info)
+void ShortSword::attack(FloatCircle* circle, AttackInfo* info)
 {
 }
 
-void ShortSword::attack(Projectile* projectile, tagAttackInfo* info)
+void ShortSword::attack(Projectile* projectile, AttackInfo* info)
 {
 }
 

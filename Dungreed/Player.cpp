@@ -8,7 +8,6 @@
 #include "MatchLockGun.h"
 #include "Boomerang.h"
 #include "ShortSword.h"
-#include "OakBow.h"
 
 #include "SpikeBall.h"
 #include "IceBall.h"
@@ -20,6 +19,8 @@
 #include "GreenMomBat.h"
 #include "bombPouch.h"
 #include "Matchlock.h"
+#include "MagnifyingGlass.h"
+#include "Voluspa.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -28,7 +29,14 @@ void Player::updateAdjustStat()
 	_adjustStat = _costume->getBaseStat();
 }
 
-void Player::attack(FloatRect* rect, tagAttackInfo* info)
+void Player::swap(Item *& a, Item *& b)
+{
+	Item* temp = a;
+	a = b;
+	b = temp;
+}
+
+void Player::attack(FloatRect* rect, AttackInfo* info)
 {
 	// 아이템 효과 적용
 	for (int i = 0; i < _equippedAcc.size(); i++)
@@ -42,7 +50,7 @@ void Player::attack(FloatRect* rect, tagAttackInfo* info)
 	// 플레이어 스탯 적용
 }
 
-void Player::attack(FloatCircle* circle, tagAttackInfo* info)
+void Player::attack(FloatCircle* circle, AttackInfo* info)
 {
 	// 아이템 효과 적용
 	for (int i = 0; i < _equippedAcc.size(); i++)
@@ -56,7 +64,7 @@ void Player::attack(FloatCircle* circle, tagAttackInfo* info)
 	// 플레이어 스탯 적용
 }
 
-void Player::attack(Projectile* projectile, tagAttackInfo* info)
+void Player::attack(Projectile* projectile, AttackInfo* info)
 {
 	// 아이템 효과 적용
 	for (int i = 0; i < _equippedAcc.size(); i++)
@@ -74,11 +82,11 @@ void Player::attack(Projectile* projectile, tagAttackInfo* info)
 
 void Player::init()
 {
-	setSize(Vector2(40, 90));
+	setSize(Vector2(40, 80));
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
-	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::METAL_PLATE);
+	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::PICKAX);
 	_costume->init();
 
 	updateAdjustStat();
@@ -93,37 +101,62 @@ void Player::init()
 	_force = Vector2(0, 0);
 
 	// TEST ITEM
-	SpikeBall* testAcc1 = new SpikeBall;
+	_equippedWeapon.resize(2);
+	_equippedAcc.resize(4);
+	_inventory.resize(15);
+
+	babyGreenBat* testAcc1 = new babyGreenBat;
 	testAcc1->init();
-	_equippedAcc.push_back(testAcc1);
+	_inventory[0] = testAcc1;
 
 	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
-	_equippedAcc.push_back(testAcc2);
+	_inventory[1] = testAcc2;
+
 
 	GreenDadBat* testAcc3 = new GreenDadBat;
 	testAcc3->init();
-	_equippedAcc.push_back(testAcc3);
+	_inventory[2] = testAcc3;
 
+	
 	GreenMomBat* testAcc4 = new GreenMomBat;
 	testAcc4->init();
-	_equippedAcc.push_back(testAcc4);
+	_inventory[3] = testAcc4;
+
+
+	SpikeBall* testAcc9 = new SpikeBall;
+	testAcc9->init();
+	_inventory[4] = testAcc9;
+
 
 	bombPouch* testAcc5 = new bombPouch;
 	testAcc5->init();
-	_equippedAcc.push_back(testAcc5);
+	_inventory[5] = testAcc5;
+
 
 	IceBall* testAcc6 = new IceBall;
 	testAcc6->init();
-	_equippedAcc.push_back(testAcc6);
+	// _inventory[6] = testAcc6;
+
 
 	miniEarth* testAcc7 = new miniEarth;
 	testAcc7->init();
-	_equippedAcc.push_back(testAcc7);
+	//_inventory[7] = testAcc7;
+
 
 	watCher* testAcc8 = new watCher;
 	testAcc8->init();
-	_equippedAcc.push_back(testAcc8);
+	_inventory[8] = testAcc8;
+
+
+	MagnifyingGlass* testAcc10 = new MagnifyingGlass;
+	testAcc10->init();
+	_inventory[9] = testAcc10;
+
+	Voluspa* testAcc11 = new Voluspa;
+	testAcc11->init();
+	_inventory[10] = testAcc11;
+
 
 
 	//ShortSpear* testWeapon = new ShortSpear;
@@ -132,30 +165,22 @@ void Player::init()
 	testWeapon1->init();
 	_equippedWeapon.push_back(testWeapon1);*/
 
-	
-
-	/*MatchLockGun* testWeapon1 = new MatchLockGun;
+	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
-	_equippedWeapon.push_back(testWeapon1);*/
-	OakBow* testWeapon5 = new OakBow;
-	testWeapon5->init();
-	_equippedWeapon.push_back(testWeapon5);
+	_inventory[11] = testWeapon1;
 	
 	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
-	_equippedWeapon.push_back(testWeapon2);
+	_inventory[12] = testWeapon2;
 
 	ShortSword* testWeapon3 = new ShortSword;
 	testWeapon3->init();
-	_equippedWeapon.push_back(testWeapon3);
+	_inventory[13] = testWeapon3;
 
-	Punch* testWeapon4 = new Punch;
-	testWeapon4->init();
-	_equippedWeapon.push_back(testWeapon4);
+	_hand = new Punch;
+	_hand->init();
 
-	
-
-	_currWeaponIndex = 2;
+	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
 }
 
@@ -163,16 +188,19 @@ void Player::release()
 {
 	for (int i = 0; i < _inventory.size(); i++)
 	{
+		if (_inventory[i] == nullptr) continue;
 		_inventory[i]->release();
 		delete _inventory[i];
 	}
 	for (int i = 0; i < _equippedWeapon.size(); i++)
 	{
+		if (_equippedWeapon[i] == nullptr) continue;
 		_equippedWeapon[i]->release();
 		delete _equippedWeapon[i];
 	}
 	for (int i = 0; i < _equippedAcc.size(); i++)
 	{
+		if (_equippedAcc[i] == nullptr) continue;
 		_equippedAcc[i]->release();
 		delete _equippedAcc[i];
 	}
@@ -213,7 +241,14 @@ void Player::update(float const elapsedTime)
 	// 공격
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
-		_equippedWeapon[_currWeaponIndex]->attack(this);
+		if (_equippedWeapon[_currWeaponIndex] == nullptr)
+		{
+			_hand->attack(this);
+		}
+		else
+		{
+			_equippedWeapon[_currWeaponIndex]->attack(this);
+		}
 		for (int i = 0; i < _equippedAcc.size(); i++)
 		{
 			if (_equippedAcc[i] != nullptr)
@@ -328,15 +363,33 @@ void Player::update(float const elapsedTime)
 	_costume->update(elapsedTime);
 
 	// 무기 업데이트
-	for (int i = 0; i < _equippedWeapon.size(); i++) 
+	if (_equippedWeapon[0] == nullptr && _equippedWeapon[1] == nullptr)
 	{
-		_equippedWeapon[i]->update(this, elapsedTime);
+		_hand->update(this, elapsedTime);
 	}
+	else
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			if (_equippedWeapon[i] != nullptr)
+			{
+				_equippedWeapon[i]->update(this, elapsedTime);
+			}
+			else
+			{
+				_hand->update(this, elapsedTime);
+			}
+		}
+	}
+	
 	
 	// 악세사리 업데이트
 	for (int i = 0; i < _equippedAcc.size(); i++) 
 	{
-		_equippedAcc[i]->update(this, elapsedTime);
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->update(this, elapsedTime);
+		}
 	}
 }
 
@@ -345,24 +398,98 @@ void Player::render()
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1);
 
 	// 캐릭터 뒤에 그리기
-	for(int i = 0; i < _equippedAcc.size(); i++)
+	for(int i = 0; i < 4; i++)
 	{
-		_equippedAcc[i]->backRender(this);	
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->backRender(this);
+		}
 	}
-	_equippedWeapon[_currWeaponIndex]->backRender(this);
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_equippedWeapon[_currWeaponIndex]->backRender(this);
+	}
+	else
+	{
+		_hand->backRender(this);
+	}
 
 	// 캐릭터 그리기
 	_costume->render(_position, _direction);
 
 	// 캐릭터 앞에 그리기
-	for (int i = 0; i < _equippedAcc.size(); i++)
+	for (int i = 0; i < 4; i++)
 	{
-		_equippedAcc[i]->frontRender(this);
+		if (_equippedAcc[i] != nullptr)
+		{
+			_equippedAcc[i]->frontRender(this);
+		}
 	}
-	_equippedWeapon[_currWeaponIndex]->frontRender(this);
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_equippedWeapon[_currWeaponIndex]->frontRender(this);
+	}
+	else
+	{
+		_hand->frontRender(this);
+	}
 }
 
 Image* Player::getWeaponImg(int index) const noexcept
 {
-	return _equippedWeapon[index]->getImg();
+	if (_equippedWeapon[index] != nullptr)
+	{
+		return _equippedWeapon[index]->getIconImg();
+	}
+	else
+	{
+		return nullptr;
+	}
+}
+
+void Player::equipItem(int index)
+{
+	if (_inventory[index] == nullptr) return;
+	if (_inventory[index]->getType() == ITEM_TYPE::ACC) // 악세사리의 경우
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_equippedAcc[i] == nullptr)
+			{
+				swap(_inventory[index], _equippedAcc[i]);
+				break;
+			}
+		}
+	}
+	else
+	{
+		swap(_inventory[index], _equippedWeapon[_currWeaponIndex]);
+	}
+}
+
+void Player::unequipWeapon(int index)
+{
+	if (_equippedWeapon[index] == nullptr) return;
+	for (int i = 0; i < 15; i++)
+	{
+		if (_inventory[i] == nullptr)
+		{
+			swap(_inventory[i], _equippedWeapon[index]);
+			break;
+		}
+	}
+
+}
+
+void Player::unequipAcc(int index)
+{
+	if (_equippedAcc[index] == nullptr) return;
+	for (int i = 0; i < 15; i++)
+	{
+		if (_inventory[i] == nullptr)
+		{
+			swap(_inventory[i], _equippedAcc[index]);
+			break;
+		}
+	}
 }

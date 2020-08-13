@@ -399,8 +399,17 @@
     <ClInclude Include="GreenMomBat.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="MagnifyingGlass.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackInfo.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
     <ClInclude Include="Voluspa.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="StatUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
     <ClInclude Include="OakBow.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
@@ -646,6 +655,15 @@
     </ClCompile>
     <ClCompile Include="Voluspa.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="StatUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnifyingGlass.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackInfo.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
     <ClCompile Include="OakBow.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
