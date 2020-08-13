@@ -362,6 +362,12 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill"		, L"resources/images/Enemy/Minotaurs/skill.png"			, 8, 1);	// 미노타우르스 돌진
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill_Shot"	, L"resources/images/Enemy/Minotaurs/skill_shot.png"	, 8, 1);	// 미노타우르스 돌진 피격
 
+	// * 물소
+	IMAGE_MANAGER->addFrameImage("Ovibos/Idle"			, L"resources/images/Enemy/Ovibos/idle.png"			, 9, 1);	// 물소 기본
+	IMAGE_MANAGER->addFrameImage("Ovibos/Idle_Shot"		, L"resources/images/Enemy/Ovibos/idle_shot.png"	, 9, 1);	// 물소 기본 피격
+	IMAGE_MANAGER->addFrameImage("Ovibos/Attack"		, L"resources/images/Enemy/Ovibos/attack.png"		, 6, 1);	// 물소 공격 
+	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격
+
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// 수녀 총알
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Banshee/bullet_FX.png"	, 6, 1);	// 수녀 총알 삭제

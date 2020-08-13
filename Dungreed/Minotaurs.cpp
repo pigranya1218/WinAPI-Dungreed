@@ -37,7 +37,7 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect = _moving.jumpPower = 0;	// 플레이어 감지 플래그, 점프파워 초기화
 	_rushPos = Vector2(0, 0);
 	_force = Vector2(10, 0);			// 저항 변수 초기화
-	_moving.gravity = 1600;				// 중력 변수 초기화
+	_moving.gravity = 4000;				// 중력 변수 초기화
 }
 
 void Minotaurs::release()
@@ -175,8 +175,14 @@ void Minotaurs::update(float const timeElapsed)
 
 
 	// 마지막에 중력 적용	
+	if (_isStand && _moving.jumpPower == 0)
+	{
+		_position.y -= 15;
+		moveDir.y += 25;
+	}
+
 	_moving.jumpPower += _moving.gravity * timeElapsed;
-	moveDir.y = 1.5 + _moving.jumpPower * timeElapsed;
+	moveDir.y += _moving.jumpPower * timeElapsed;
 
 	_lastPos = _position;
 	_enemyManager->moveEnemy(this, moveDir);

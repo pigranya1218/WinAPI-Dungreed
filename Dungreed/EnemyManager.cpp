@@ -152,20 +152,26 @@ void EnemyManager::moveEnemy(GameObject* object, const Vector2 moveDir)
 	_stage->moveTo(object, moveDir);
 }
 
-Vector2 EnemyManager::getPlayerPos()
-{
-	return _stage->getPlayerPos();
-}
-
 bool EnemyManager::detectPlayer(GameObject* object, const float distance)
 {
 	const Vector2 playerPos = _stage->getPlayerPos();
 	const Vector2 enemyPos = object->getPosition();
-	
+
 	if (getDistance(playerPos.x, playerPos.y, enemyPos.x, enemyPos.y) < distance)
 	{
 		return true;
 	}
-	
 	return false;
+
+	
+}
+
+//void EnemyManager::fireEnemy()
+//{
+//	
+//}
+
+Vector2 EnemyManager::getPlayerPos()
+{
+	return _stage->getPlayerPos();
 }
