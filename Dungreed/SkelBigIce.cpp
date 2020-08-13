@@ -15,6 +15,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
+	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.speed = 200;
@@ -28,12 +29,11 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_skill.delay = 2;
 	_skill.distance = 300;
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	//ZeroMemory(&_shooting, sizeof(_shooting));
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 15, false, false, false);
 
-	_isDetect = _moving.jumpPower = _fireNum = 0;
-	_moving.gravity = 4000;
-
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 5, false, false, false);
+	_isDetect = _moving.jumpPower = 0;
+	_moving.gravity = 4000;	
 }
 
 void SkelBigIce::release()
@@ -97,7 +97,7 @@ void SkelBigIce::update(float const timeElapsed)
 			{
 				if (_skill.update(timeElapsed))
 				{
-					_fireNum = RANDOM->getFromIntTo(3, 7);
+					_shooting.bulletNum = RANDOM->getFromIntTo(3, 7);
 					setState(ENEMY_STATE::SKILL);
 				}
 			}
@@ -113,7 +113,7 @@ void SkelBigIce::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::SKILL:
 		{			
-			if (_fireNum > 0 && _ani->getPlayIndex() >= 6)
+			if (_shooting.bulletNum > 0 && _ani->getPlayIndex() >= 6)
 			{
 				if (_shooting.delayUpdate(timeElapsed))
 				{
@@ -123,10 +123,9 @@ void SkelBigIce::update(float const timeElapsed)
 
 					_shooting.createBullet(_position, angle);
 					_shooting.fireBullet(_enemyManager);
-					_fireNum--;
 				}
 			}
-			else if (!_ani->isPlay() && _fireNum <= 0)
+			else if (!_ani->isPlay() && _shooting.bulletNum <= 0)
 			{
 				setState(ENEMY_STATE::MOVE);
 			}			
@@ -166,35 +165,22 @@ void SkelBigIce::render()
 	D2D_RENDERER->drawEllipse(_position, _detectRange);
 	_img->setScale(_scale);
 
-	Vector2 drawPos = _position;
-	if (_state == ENEMY_STATE::ATTACK)
+	Vector2 drawPos = _position;	
+	if (_state == ENEMY_STATE::ATTACK || _state == ENEMY_STATE::SKILL)
 	{
 		// 이동 이미지 기준으로
 		Image* img = IMAGE_MANAGER->findImage("Skel/Big_Ice/Move");
 
 		// 이미지 간의 사이즈 차이 구하고
 		Vector2 elapsePos((_img->getFrameSize().x - img->getFrameSize().x) * _scale, (_img->getFrameSize().y - img->getFrameSize().y) * _scale);
-
 		// 최종 출력 포지션 설정
-		drawPos.x += (_direction == DIRECTION::RIGHT) ? +(elapsePos.x / 2) : -(elapsePos.x / 2);		
+		if (_state == ENEMY_STATE::ATTACK)
+		{
+			drawPos.x += (_direction == DIRECTION::RIGHT) ? +(elapsePos.x / 2) : -(elapsePos.x / 2);
+		}
 		drawPos.y -= elapsePos.y / 2;
-
-		_img->aniRender(drawPos, _ani, !(unsigned)_direction);
-	}
-	else if (_state == ENEMY_STATE::SKILL)
-	{
-		Image* img = IMAGE_MANAGER->findImage("Skel/Big_Ice/Move");
-
-		float elapseY = (_img->getFrameSize().y - img->getFrameSize().y) * _scale;
-
-		drawPos.y -= elapseY / 2;
-
-		_img->aniRender(drawPos, _ani, _direction == DIRECTION::LEFT);
-	}
-	else
-	{
-		_img->aniRender(drawPos, _ani, _direction == DIRECTION::LEFT);
 	}	
+	_img->aniRender(drawPos, _ani, (_direction == DIRECTION::LEFT));
 }
 
 void SkelBigIce::setState(ENEMY_STATE state)
