@@ -204,6 +204,7 @@
     <ClInclude Include="NormalProjectile.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
+    <ClInclude Include="OakBow.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Ovibos.h" />
@@ -292,6 +293,7 @@
     <ClCompile Include="NormalProjectile.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
+    <ClCompile Include="OakBow.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ovibos.cpp" />
     <ClCompile Include="PickaxCos.cpp" />

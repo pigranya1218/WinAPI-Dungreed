@@ -8,6 +8,7 @@
 #include "MatchLockGun.h"
 #include "Boomerang.h"
 #include "ShortSword.h"
+#include "OakBow.h"
 
 #include "SpikeBall.h"
 #include "IceBall.h"
@@ -131,9 +132,14 @@ void Player::init()
 	testWeapon1->init();
 	_equippedWeapon.push_back(testWeapon1);*/
 
-	MatchLockGun* testWeapon1 = new MatchLockGun;
+	
+
+	/*MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
-	_equippedWeapon.push_back(testWeapon1);
+	_equippedWeapon.push_back(testWeapon1);*/
+	OakBow* testWeapon5 = new OakBow;
+	testWeapon5->init();
+	_equippedWeapon.push_back(testWeapon5);
 	
 	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
@@ -147,6 +153,7 @@ void Player::init()
 	testWeapon4->init();
 	_equippedWeapon.push_back(testWeapon4);
 
+	
 
 	_currWeaponIndex = 2;
 	_currWeaponChangeCoolTime = 0;

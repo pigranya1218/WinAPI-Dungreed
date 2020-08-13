@@ -20,12 +20,15 @@ enum class ITEM_RANK
 class Item
 {
 protected:
-	ITEM_TYPE _type; // 아이템 타입
-	ITEM_RANK _rank; // 아이템 등급
-	Image* _img; // 아이템 이미지
-	int _price; // 가격
-	PlayerStat _addStat; // 아이템 스탯 옵션
-	ProjectileManager* _projecttileMng;		//투사체 매니저
+	ITEM_TYPE _type;						 // 아이템 타입
+	ITEM_RANK _rank;						 // 아이템 등급
+	Image* _img;							 // 아이템 이미지
+	Image* _frameImg;						 // 아이템 프레임 이미지
+	Animation* _ani;						 // 아이템 애니메이션
+	int _price;								 // 가격
+	int _minDamage;							 // 최소 데미지
+	int _maxDamage;							 // 최대 데미지
+	PlayerStat _addStat;					 // 아이템 스탯 옵션
 public:
 	virtual void init() = 0;
 	virtual void release() = 0;

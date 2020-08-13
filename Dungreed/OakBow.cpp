@@ -1,34 +1,38 @@
+#include "OakBow.h"
 #include "NormalProjectile.h"
-#include "MatchLockGun.h"
 
-void MatchLockGun::init()
+void OakBow::init()
 {
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_img = IMAGE_MANAGER->findImage("MatchlockGun");
-	_price = 850;
+	_img = IMAGE_MANAGER->findImage("OakBow");
+	_frameImg = IMAGE_MANAGER->findImage("OakBowAni");
 
-	_minDamage = 10;
-	_maxDamage = 20;
+
+	_price = 360;
+
+	_minDamage = 20;
+	_maxDamage = 35;
 
 	// private 변수 설정
 	_minDamage = 12;
 	_maxDamage = 18;
-	_baseAttackDelay = 1;
+	_baseAttackDelay = 0.5;
 	_currAttackDelay = 0;
 	_maxBullet = 1;
 	_currBullet = _maxBullet;
-	_baseReloadDelay = 2;
+	_baseReloadDelay = 3;
 	_currReloadDelay = 0;
 	_drawEffect = false;
+	_isAttack = false;
+
 }
 
-void MatchLockGun::release()
+void OakBow::release()
 {
-
 }
 
-void MatchLockGun::update(Player* player, float const elapsedTime)
+void OakBow::update(Player * player, float const elapsedTime)
 {
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
@@ -42,13 +46,18 @@ void MatchLockGun::update(Player* player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}
+
+	if (_isAttack)
+	{
+		_ani->frameUpdate(elapsedTime);
+	}
 }
 
-void MatchLockGun::backRender(Player* player)
+void OakBow::backRender(Player * player)
 {
 }
 
-void MatchLockGun::frontRender(Player* player)
+void OakBow::frontRender(Player * player)
 {
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
@@ -56,7 +65,7 @@ void MatchLockGun::frontRender(Player* player)
 	Vector2 renderPosHand = pos;
 	renderPosHand.x += ((isLeft) ? (_img->getWidth() * 0.1f * 4) : -(_img->getWidth() * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
 	renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
-	
+
 	// 손으로부터 마우스 에임까지의 각도
 	float degree = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) * (180 / PI) + 360;
 	if (degree > 360)
@@ -77,11 +86,34 @@ void MatchLockGun::frontRender(Player* player)
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
 	_img->setAnglePos(Vector2(0.3f * _img->getWidth(), 0.6f * _img->getHeight()));
-	_img->render(renderPosWeapon, isLeft);
+
+	if (!_isAttack)
+	{
+		_img->render(renderPosWeapon, isLeft);
+	}
+
+	if (_isAttack)
+	{
+		_frameImg->setScale(4);
+		_frameImg->setAngle(renderDegree);
+		_frameImg->setAnglePos(Vector2(0.3f * _frameImg->getFrameSize().x, 0.6f * _frameImg->getFrameSize().y));
+		_frameImg->aniRender(renderPosWeapon, _ani, isLeft);
+
+		if (!_ani->getPlayIndex() >= 4)
+		{
+			Vector2 effectPos01 = renderPosHand; // 손의 위치로부터
+
+			Vector2 effectSize01 = Vector2(220, 220);
+			float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
+			effectPos01.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+			effectPos01.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+			EFFECT_MANAGER->play("L_Effect_Charge", effectPos01, effectSize01, degree);
+		}
+	}
 
 	Vector2 subHandPos = renderPosHand; // 보조 손 (양손무기)
-	subHandPos.x +=  _img->getWidth() * 0.4 * 4;
-	subHandPos.y += (isLeft)?(_img->getHeight() * 0.2 * 4):(_img->getHeight() * -0.2 * 4);
+	subHandPos.x += _img->getWidth() * 0.4 * 4;
+	subHandPos.y += (isLeft) ? (_img->getHeight() * 0.2 * 4) : (_img->getHeight() * -0.2 * 4);
 	FloatRect subhandRc = rectMakePivot(subHandPos, Vector2(5, 5), PIVOT::CENTER);
 
 	D2D_RENDERER->drawRectangle(subhandRc, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
@@ -97,28 +129,20 @@ void MatchLockGun::frontRender(Player* player)
 		_drawEffect = false;
 		Vector2 effectPos = renderPosHand; // 손의 위치로부터
 
-		/*Vector2 effectPos;
-		effectPos.x = (isLeft) ? (renderPosHand.x + 18) : (renderPosHand.x - 18);
-		effectPos.y = renderPosHand.y;*/
-
 		Vector2 effectSize = Vector2(220, 220);
 		float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
-		effectPos.x += cosf(degree * (PI / 180) + ((isLeft)?(-0.2):(0.2))) * length;
+		effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
 		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
 
-		/*float changeX = cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		effectPos.x += (isLeft) ? (changeX + 18) : (changeX - 18);
-		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;*/
-
-		EFFECT_MANAGER->play("L_Effect_HecateSmoke", effectPos, effectSize, degree);
+		//EFFECT_MANAGER->play("L_Effect_HecateSmoke", effectPos, effectSize, degree);
 	}
 }
 
-void MatchLockGun::displayInfo()
+void OakBow::displayInfo()
 {
 }
 
-void MatchLockGun::attack(Player* player)
+void OakBow::attack(Player * player)
 {
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currBullet == 0) // 총알이 없다면
@@ -144,41 +168,64 @@ void MatchLockGun::attack(Player* player)
 		angleRadian -= PI2;
 	}
 
-	NormalProjectile* projectile = new NormalProjectile;
-	Vector2 shootPos = renderPosHand;
-	float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
-	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
-	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
-	projectile->setPosition(shootPos);
-	projectile->setSize(Vector2(100, 30));
-	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("GunBullet", angleRadian, 30, true, false, 10, false, "", Vector2());
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	{
+		if (!_isAttack)
+		{
+			_isAttack = true;
+		}
 
-	tagAttackInfo* attackInfo = new tagAttackInfo;
-	attackInfo->team = OBJECT_TEAM::PLAYER;
-	player->attack(projectile, attackInfo);
-	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
-	_currBullet -= 1; // 탄환 1 줄임
-	_drawEffect = true; // 이펙트 그리기
+		_ani = new Animation;
+		_ani->init(_frameImg->getWidth(), _frameImg->getHeight(), _frameImg->getMaxFrameX(), _frameImg->getMaxFrameY());
+		_ani->setFPS(5);
+		_ani->setPlayFrame(0, 4, false);
+		_ani->start();
+	}
+
+	//떼면 공격
+	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	{
+		NormalProjectile* projectile = new NormalProjectile;
+		Vector2 shootPos = renderPosHand;
+		float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
+		shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
+		shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
+		projectile->setPosition(shootPos);
+		projectile->setSize(Vector2(60, 10));
+		projectile->setTeam(OBJECT_TEAM::PLAYER);
+		projectile->init("Arrow00", angleRadian, 30, false, false, 20, true, "", Vector2());
+
+		tagAttackInfo* attackInfo = new tagAttackInfo;
+		attackInfo->team = OBJECT_TEAM::PLAYER;
+		player->attack(projectile, attackInfo);
+		_currAttackDelay = _baseAttackDelay;	// 공격 쿨타임 설정
+		_currBullet -= 1;						// 탄환 1 줄임
+		_drawEffect = true;						// 이펙트 그리기
+
+		if (_isAttack)
+		{
+			_isAttack = false;
+		}
+	}
 }
 
-void MatchLockGun::attack(FloatRect * rect, tagAttackInfo* info)
+void OakBow::attack(FloatRect * rect, tagAttackInfo * info)
 {
 }
 
-void MatchLockGun::attack(FloatCircle * circle, tagAttackInfo* info)
+void OakBow::attack(FloatCircle * circle, tagAttackInfo * info)
 {
 }
 
-void MatchLockGun::attack(Projectile * projectile, tagAttackInfo* info)
+void OakBow::attack(Projectile * projectile, tagAttackInfo * info)
 {
 }
 
-void MatchLockGun::getHit(Vector2 const position)
+void OakBow::getHit(Vector2 const position)
 {
 }
 
-PlayerStat MatchLockGun::equip()
+PlayerStat OakBow::equip()
 {
 	return PlayerStat();
 }
