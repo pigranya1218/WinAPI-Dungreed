@@ -145,7 +145,7 @@ void MatchLockGun::attack(Player* player)
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 	projectile->init("GunBullet", angleRadian, 30, true, false, 20, false, "", Vector2());
 
-	tagAttackInfo* attackInfo = new tagAttackInfo;
+	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
@@ -153,15 +153,15 @@ void MatchLockGun::attack(Player* player)
 	_drawEffect = true; // 이펙트 그리기
 }
 
-void MatchLockGun::attack(FloatRect * rect, tagAttackInfo* info)
+void MatchLockGun::attack(FloatRect * rect, AttackInfo* info)
 {
 }
 
-void MatchLockGun::attack(FloatCircle * circle, tagAttackInfo* info)
+void MatchLockGun::attack(FloatCircle * circle, AttackInfo* info)
 {
 }
 
-void MatchLockGun::attack(Projectile * projectile, tagAttackInfo* info)
+void MatchLockGun::attack(Projectile * projectile, AttackInfo* info)
 {
 }
 

@@ -82,16 +82,16 @@ void babyGreenBat::attack(Player* player)
 	
 }
 
-void babyGreenBat::attack(FloatRect * rect, tagAttackInfo * info)
+void babyGreenBat::attack(FloatRect * rect, AttackInfo * info)
 {
 	
 }
 
-void babyGreenBat::attack(FloatCircle * circle, tagAttackInfo * info)
+void babyGreenBat::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void babyGreenBat::attack(Projectile * projectile, tagAttackInfo * info)
+void babyGreenBat::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

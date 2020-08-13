@@ -88,15 +88,15 @@ void watCher::attack(Player * player)
 {
 }
 
-void watCher::attack(FloatRect * rect, tagAttackInfo * info)
+void watCher::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void watCher::attack(FloatCircle * circle, tagAttackInfo * info)
+void watCher::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void watCher::attack(Projectile * projectile, tagAttackInfo * info)
+void watCher::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

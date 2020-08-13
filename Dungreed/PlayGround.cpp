@@ -148,6 +148,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/BASE", L"resources/images/gameScene/ui/inventory/InventoryBase 2.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT", L"resources/images/gameScene/ui/inventory/InventoryExit.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT_SELECTED", L"resources/images/gameScene/ui/inventory/InventoryExit_Selected.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_0_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect0.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_1_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect1.png");
 
 
 	// ** VILLIGE

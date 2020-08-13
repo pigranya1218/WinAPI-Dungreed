@@ -61,15 +61,15 @@ void bombPouch::attack(Player* player)
 {
 }
 
-void bombPouch::attack(FloatRect * rect, tagAttackInfo * info)
+void bombPouch::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void bombPouch::attack(FloatCircle * circle, tagAttackInfo * info)
+void bombPouch::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void bombPouch::attack(Projectile * projectile, tagAttackInfo * info)
+void bombPouch::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

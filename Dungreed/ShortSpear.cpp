@@ -138,15 +138,15 @@ void ShortSpear::attack(Player* player)
 	_currAttackDelay = _baseAttackDelay;
 }
 
-void ShortSpear::attack(FloatRect * rect, tagAttackInfo* info)
+void ShortSpear::attack(FloatRect * rect, AttackInfo* info)
 {
 }
 
-void ShortSpear::attack(FloatCircle * circle, tagAttackInfo* info)
+void ShortSpear::attack(FloatCircle * circle, AttackInfo* info)
 {
 }
 
-void ShortSpear::attack(Projectile * projectile, tagAttackInfo* info)
+void ShortSpear::attack(Projectile * projectile, AttackInfo* info)
 {
 }
 

@@ -29,15 +29,15 @@ void Voluspa::attack(Player * player)
 {
 }
 
-void Voluspa::attack(FloatRect * rect, tagAttackInfo * info)
+void Voluspa::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void Voluspa::attack(FloatCircle * circle, tagAttackInfo * info)
+void Voluspa::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void Voluspa::attack(Projectile * projectile, tagAttackInfo * info)
+void Voluspa::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

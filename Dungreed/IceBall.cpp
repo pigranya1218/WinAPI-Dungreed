@@ -55,15 +55,15 @@ void IceBall::attack(Player * player)
 {
 }
 
-void IceBall::attack(FloatRect * rect, tagAttackInfo * info)
+void IceBall::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void IceBall::attack(FloatCircle * circle, tagAttackInfo * info)
+void IceBall::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void IceBall::attack(Projectile * projectile, tagAttackInfo * info)
+void IceBall::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

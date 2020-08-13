@@ -4,7 +4,7 @@
 class BatGiantRed : public Enemy
 {
 private:
-	tagAttackInfo	_shooting;	// 공격 관련
+	AttackInfo	_shooting;	// 공격 관련
 	tagMoveInfo		_moving;	// 이동 관련
 
 public:

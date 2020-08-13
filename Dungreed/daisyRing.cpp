@@ -70,15 +70,15 @@ void daisyRing::attack(Player * player)
 {
 }
 
-void daisyRing::attack(FloatRect * rect, tagAttackInfo * info)
+void daisyRing::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void daisyRing::attack(FloatCircle * circle, tagAttackInfo * info)
+void daisyRing::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void daisyRing::attack(Projectile * projectile, tagAttackInfo * info)
+void daisyRing::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

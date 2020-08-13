@@ -55,15 +55,15 @@ void SpikeBall::attack(Player* player)
 {
 }
 
-void SpikeBall::attack(FloatRect * rect, tagAttackInfo * info)
+void SpikeBall::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void SpikeBall::attack(FloatCircle * circle, tagAttackInfo * info)
+void SpikeBall::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void SpikeBall::attack(Projectile * projectile, tagAttackInfo * info)
+void SpikeBall::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

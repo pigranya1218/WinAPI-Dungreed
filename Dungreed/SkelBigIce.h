@@ -6,8 +6,8 @@ class SkelBigIce : public Enemy
 private:
 	tagMoveInfo		_moving;
 
-	tagAttackInfo	_attack;
-	tagAttackInfo	_skill;
+	AttackInfo	_attack;
+	AttackInfo	_skill;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

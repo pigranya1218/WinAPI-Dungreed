@@ -135,15 +135,15 @@ void Punch::attack(Player* player)
 	_currAttackDelay = _baseAttackDelay;
 }
 
-void Punch::attack(FloatRect * rect, tagAttackInfo * info)
+void Punch::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void Punch::attack(FloatCircle * circle, tagAttackInfo * info)
+void Punch::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void Punch::attack(Projectile * projectile, tagAttackInfo * info)
+void Punch::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

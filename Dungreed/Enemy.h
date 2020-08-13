@@ -25,7 +25,7 @@ protected:
 	Animation*        _ani;            // 애니메이션
 	string            _imageName;        // 이미지 이름
 
-	struct tagAttackInfo
+	struct AttackInfo
 	{
 		float delay;    // 딜레이
 		float count;    // 카운트용

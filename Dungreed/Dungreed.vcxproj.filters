@@ -402,6 +402,9 @@
     <ClInclude Include="Voluspa.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="AttackInfo.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -643,6 +646,9 @@
     </ClCompile>
     <ClCompile Include="Voluspa.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackInfo.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

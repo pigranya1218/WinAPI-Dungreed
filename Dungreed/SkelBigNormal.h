@@ -5,7 +5,7 @@ class SkelBigNormal : public Enemy
 {
 private:
 	tagMoveInfo		_moving;
-	tagAttackInfo	_attack;
+	AttackInfo	_attack;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

@@ -148,15 +148,15 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 	object->setPosition(newCenter);
 }
 
-void Stage::attack(FloatRect* rect, tagAttackInfo* info)
+void Stage::attack(FloatRect* rect, AttackInfo* info)
 {
 }
 
-void Stage::attack(FloatCircle* circle, tagAttackInfo* info)
+void Stage::attack(FloatCircle* circle, AttackInfo* info)
 {
 }
 
-void Stage::attack(Projectile* projectile, tagAttackInfo* info)
+void Stage::attack(Projectile* projectile, AttackInfo* info)
 {
 	_projectileMgr->addProjectile(projectile);
 }

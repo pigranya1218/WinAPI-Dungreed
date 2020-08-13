@@ -73,15 +73,15 @@ void GreenBat::attack(Player * player)
 {
 }
 
-void GreenBat::attack(FloatRect * rect, tagAttackInfo * info)
+void GreenBat::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void GreenBat::attack(FloatCircle * circle, tagAttackInfo * info)
+void GreenBat::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void GreenBat::attack(Projectile * projectile, tagAttackInfo * info)
+void GreenBat::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

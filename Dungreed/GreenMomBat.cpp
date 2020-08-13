@@ -75,15 +75,15 @@ void GreenMomBat::attack(Player * player)
 {
 }
 
-void GreenMomBat::attack(FloatRect * rect, tagAttackInfo * info)
+void GreenMomBat::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void GreenMomBat::attack(FloatCircle * circle, tagAttackInfo * info)
+void GreenMomBat::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void GreenMomBat::attack(Projectile * projectile, tagAttackInfo * info)
+void GreenMomBat::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

@@ -38,9 +38,9 @@ public:
 	virtual void render();
 
 	void moveTo(GameObject* object, Vector2 const moveDir); // GameObject를 moveDir 방향으로 충돌판정을 계산해서 이동시키는 함수
-	void attack(FloatRect* rect, struct tagAttackInfo* info);
-	void attack(FloatCircle* circle, struct tagAttackInfo* info);
-	void attack(Projectile* projectile, struct tagAttackInfo* info);
+	void attack(FloatRect* rect, struct AttackInfo* info);
+	void attack(FloatCircle* circle, struct AttackInfo* info);
+	void attack(Projectile* projectile, struct AttackInfo* info);
 
 	inline Stage* getConnectedStage( DIRECTION const direction ) const { return _connectedStage[static_cast<int> (direction)];}
 	bool isVisited() const { return _isVisited; }

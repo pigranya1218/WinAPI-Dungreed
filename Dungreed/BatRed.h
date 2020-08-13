@@ -4,7 +4,7 @@
 class BatRed : public Enemy
 {
 private:
-	tagAttackInfo	_shooting;
+	AttackInfo	_shooting;
 	tagMoveInfo		_moving;
 
 public:

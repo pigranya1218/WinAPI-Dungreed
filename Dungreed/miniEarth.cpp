@@ -52,15 +52,15 @@ void miniEarth::attack(Player * player)
 {
 }
 
-void miniEarth::attack(FloatRect * rect, tagAttackInfo * info)
+void miniEarth::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void miniEarth::attack(FloatCircle * circle, tagAttackInfo * info)
+void miniEarth::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void miniEarth::attack(Projectile * projectile, tagAttackInfo * info)
+void miniEarth::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

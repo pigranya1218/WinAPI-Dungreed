@@ -94,15 +94,15 @@ void Boomerang::attack(Vector2 const position, float const angle)
 
 }
 
-void Boomerang::attack(FloatRect * rect, tagAttackInfo * info)
+void Boomerang::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void Boomerang::attack(FloatCircle * circle, tagAttackInfo * info)
+void Boomerang::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void Boomerang::attack(Projectile * projectile, tagAttackInfo * info)
+void Boomerang::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 
