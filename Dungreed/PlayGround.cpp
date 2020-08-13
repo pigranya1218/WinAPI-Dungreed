@@ -148,6 +148,33 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/BASE", L"resources/images/gameScene/ui/inventory/InventoryBase 2.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT", L"resources/images/gameScene/ui/inventory/InventoryExit.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT_SELECTED", L"resources/images/gameScene/ui/inventory/InventoryExit_Selected.png");
+	// *** STATUS
+	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
+	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");
+	IMAGE_MANAGER->addImage("UI/STAT/POW_SELECTED", L"resources/images/gameScene/ui/status/Stat_00_Pow_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DEF", L"resources/images/gameScene/ui/status/Stat_01_Def.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DEF_SELECTED", L"resources/images/gameScene/ui/status/Stat_01_Def_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TOUGH", L"resources/images/gameScene/ui/status/Stat_02_Tough.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TOUGH_SELECTED", L"resources/images/gameScene/ui/status/Stat_02_Tough_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/BLOCK", L"resources/images/gameScene/ui/status/Stat_03_Block.png");
+	IMAGE_MANAGER->addImage("UI/STAT/BLOCK_SELECTED", L"resources/images/gameScene/ui/status/Stat_03_Block_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL", L"resources/images/gameScene/ui/status/Stat_04_Critical.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL_SELECTED", L"resources/images/gameScene/ui/status/Stat_04_Critical_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL_DAMAGE", L"resources/images/gameScene/ui/status/Stat_05_CriticalDamage.png");
+	IMAGE_MANAGER->addImage("UI/STAT/CRITICAL_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_05_CriticalDamage_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/EVADE", L"resources/images/gameScene/ui/status/Stat_06_Evade.png");
+	IMAGE_MANAGER->addImage("UI/STAT/EVADE_SELECTED", L"resources/images/gameScene/ui/status/Stat_06_Evade_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/MOVE_SPEED", L"resources/images/gameScene/ui/status/Stat_07_MoveSpeed.png");
+	IMAGE_MANAGER->addImage("UI/STAT/MOVE_SPEED_SELECTED", L"resources/images/gameScene/ui/status/Stat_07_MoveSpeed_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/ATTACK_SPEED", L"resources/images/gameScene/ui/status/Stat_08_AttackSpeed.png");
+	IMAGE_MANAGER->addImage("UI/STAT/ATTACK_SPEED_SELECTED", L"resources/images/gameScene/ui/status/Stat_08_AttackSpeed_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/RELOAD", L"resources/images/gameScene/ui/status/Stat_09_Reload.png");
+	IMAGE_MANAGER->addImage("UI/STAT/RELOAD_SELECTED", L"resources/images/gameScene/ui/status/Stat_09_Reload_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DASH_DAMAGE", L"resources/images/gameScene/ui/status/Stat_10_DashDamage.png");
+	IMAGE_MANAGER->addImage("UI/STAT/DASH_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_10_DashDamage_Selected.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage.png");
+	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage_Selected.png");
+
 
 
 	// ** VILLIGE

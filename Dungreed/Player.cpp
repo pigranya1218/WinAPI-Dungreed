@@ -73,11 +73,11 @@ void Player::attack(Projectile* projectile, tagAttackInfo* info)
 
 void Player::init()
 {
-	setSize(Vector2(40, 90));
+	setSize(Vector2(40, 80));
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
-	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::METAL_PLATE);
+	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::PICKAX);
 	_costume->init();
 
 	updateAdjustStat();

@@ -1,4 +1,22 @@
 #pragma once
+#include "stdafx.h"
+
+enum class STAT_TYPE : int
+{
+	POW = 0,
+	DEF,
+	TOUGH,
+	BLOCK,
+	CRITICAL,
+	CRITICAL_DAMAGE,
+	EVADE,
+	MOVE_SPEED,
+	ATTACK_SPEED,
+	RELOAD,
+	DASH_DAMAGE,
+	TRUE_DAMAGE
+};
+
 class PlayerStat
 {
 public:
@@ -29,5 +47,9 @@ public:
 
 public:
 	PlayerStat operator+(const PlayerStat& a);
-};
+
+public:
+	static string getStatString(STAT_TYPE type, bool isEnglish);
+
+}; 
 
