@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AliceCos.h" />
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="Punch.h" />
     <ClInclude Include="randomFunction.h" />
+    <ClInclude Include="RedLotusCos.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SampleStage.h" />
     <ClInclude Include="SceneManager.h" />
@@ -249,6 +251,7 @@
     <ClInclude Include="windowsAPI.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
     <ClCompile Include="BatGiantRed.cpp" />
@@ -307,6 +310,7 @@
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Punch.cpp" />
+    <ClCompile Include="RedLotusCos.cpp" />
     <ClCompile Include="SampleStage.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
