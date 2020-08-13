@@ -4,7 +4,7 @@
 class SkelSmallBow : public Enemy
 {
 private:
-	AttackInfo	_attack;	// 공격
+	tagAttackInfo	_attack;	// 공격
 	tagMoveInfo		_moving;	// 이동
 	Animation*		_weaponAni;	// 무기 애니메이션
 	Image*			_weaponImg;	// 무기 이미지

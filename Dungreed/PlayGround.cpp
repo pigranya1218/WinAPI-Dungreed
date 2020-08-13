@@ -421,9 +421,11 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// ¼ö³à ÃÑ¾Ë
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Banshee/bullet_FX.png"	, 6, 1);	// ¼ö³à ÃÑ¾Ë »èÁ¦
 
-	IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å
-	IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å »èÁ¦
+	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å
+	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å »èÁ¦
 
+	IMAGE_MANAGER->addImage("IceBullet"			, L"resources/images/Enemy/Bullet/IceBullet.png"		 );	// ¾óÀ½ ÃÑ¾Ë
+	IMAGE_MANAGER->addFrameImage("IceBullet_FX"	, L"resources/images/Enemy/Bullet/IceBullet_FX.png", 3, 1);	// ¾óÀ½ ÃÑ¾Ë »èÁ¦
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
