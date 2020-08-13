@@ -12,14 +12,13 @@ void watCher::init()
 
 	radius = 0;
 	fspeed = 0;
-	x = y = 0;	
-	_img = IMAGE_MANAGER->findImage("Watcher0");
+	anglePos.x = anglePos.y =0;
+	_img = IMAGE_MANAGER->findImage("Watcher0");	
 	_ani = new Animation;
+	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setDefPlayFrame(false, true);
+	_ani->setFPS(7);
 	_ani->start();
-	_ani->init(_img->getWidth(), _img->getHeight(),
-		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(fspeed);
-	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 	setitem = false;
 
 
@@ -51,34 +50,37 @@ void watCher::update(Player * player, float const elapsedTime)
 		radius = 85;
 		_img = IMAGE_MANAGER->findImage("Watcher0");
 		_angle -= 0.043f;
-		fspeed = 5;
+		
 	}
 	else
 	{
 		radius = 130;
 		_img = IMAGE_MANAGER->findImage("Watcher1");
 		_angle -= 0.062f;
-		fspeed = 10;
+		
 	}
 
 	_ani->frameUpdate(elapsedTime);
-	
+	anglePos.x = cosf(_angle) * radius;
+	anglePos.y = -sinf(_angle) * radius;
 	
 }
 
 void watCher::backRender(Player * player)
 {
-	x = cosf(_angle) * radius;
-	y = -sinf(_angle) * radius;
 	
-	Vector2 renderPos = player->getPosition();
-	renderPos.x = renderPos.x + x+2;
-	renderPos.y = renderPos.y + y-22;	
-	_img->setScale(4);
-	_img->aniRender(Vector2(renderPos), _ani, false);
-	Vector2 size = Vector2(_img->getFrameSize().x * 2, _img->getFrameSize().y *2);
+	
+	renderPos = player->getPosition();
+	renderPos.x = renderPos.x + anglePos.x + 2;
+	renderPos.y = renderPos.y + anglePos.y - 22;	
+	Vector2 size = Vector2(_img->getFrameSize().x * 2, _img->getFrameSize().y * 2);
 	_crash = rectMakePivot(Vector2(renderPos.x, renderPos.y + 25), size, PIVOT::CENTER);
 	D2D_RENDERER->drawRectangle(_crash);
+
+
+	_img->setScale(4);	
+	_img->aniRender(Vector2(_crash.left,_crash.top), _ani, false);
+	
 }
 
 void watCher::frontRender(Player * player)

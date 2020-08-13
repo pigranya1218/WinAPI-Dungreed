@@ -150,7 +150,7 @@ void Player::init()
 	testAcc8->init();
 	_inventory[8] = testAcc8;
 
-
+	
 	MagnifyingGlass* testAcc10 = new MagnifyingGlass;
 	testAcc10->init();
 	_inventory[9] = testAcc10;
