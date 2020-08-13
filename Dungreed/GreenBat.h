@@ -4,10 +4,17 @@ class GreenBat :public Item
 {
 private:
 	Vector2 renderPos;
-	int x, y;
-	Animation* _ani1;
+	Vector2 batPos;
+
 	DIRECTION _direction;
 
+	float _baseAttackDelay;   // 공격 쿨타임
+	float _currAttackDelay;   // 남은 공격 쿨타임
+	int _maxBullet;           // 최대 총알 갯수
+	int _currBullet;          // 현재 총알 갯수
+	float _baseReloadDelay;   // 재장전 쿨타임
+	float _currReloadDelay;   // 남은 재장전 쿨타임
+	bool _drawEffect;         // 이번 render 함수에서 이펙트를 시작할 것인지 판단
 public:
 	virtual void init();
 	virtual void release();
@@ -19,7 +26,7 @@ public:
 	virtual void attack(Player* player); // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
 	virtual void attack(FloatRect* rect, tagAttackInfo* info); // 공격 렉트를 변경시키는 함수 
 	virtual void attack(FloatCircle* circle, tagAttackInfo* info); // 공격 써클을 변경시키는 함수
-	virtual void attack(Projectile* projectile, tagAttackInfo* info); // 탄환을 변경시키는 함수
+	virtual void attack(Projectile*  projectile, tagAttackInfo* info); // 탄환을 변경시키는 함수
 
 	virtual void getHit(Vector2 const position); // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 

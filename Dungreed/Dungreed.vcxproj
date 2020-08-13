@@ -194,6 +194,7 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
+    <ClInclude Include="MagnifyingGlass.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MapToolScene.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="InventoryUI.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
+    <ClCompile Include="MagnifyingGlass.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MapToolScene.cpp" />

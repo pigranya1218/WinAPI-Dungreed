@@ -5,6 +5,9 @@ class IceBall : public Item
 private:
 	int x, y;
 	float _angle = PI / 2;
+	bool setitem;
+	int radius;
+	int fspeed;
 
 public:
 	virtual void init();

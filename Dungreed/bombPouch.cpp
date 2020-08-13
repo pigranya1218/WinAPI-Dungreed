@@ -7,7 +7,7 @@ void bombPouch::init()
 
 	isBoom = false;
 
-	
+	_addStat.defense = 2;
 	
 	_price = 1200;
 }

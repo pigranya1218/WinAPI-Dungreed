@@ -35,14 +35,17 @@ void SpikeBall::frontRender(Player* player)
 
 void SpikeBall::backRender(Player* player)
 {
-	x = cosf(_angle) * 85;
-	y = -sinf(_angle) * 85;
+	x = cosf(_angle) * 110;
+	y = -sinf(_angle) * 110;
 
 	Vector2 renderPos = player->getPosition();
 	renderPos.x = renderPos.x + x;
 	renderPos.y = renderPos.y + y;
 	_img->setScale(4);
 	_img->render(renderPos, false);
+	Vector2 size = Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4);
+	_crash = rectMakePivot(Vector2(renderPos), size, PIVOT::CENTER);
+	D2D_RENDERER->drawRectangle(_crash);
 }
 
 
