@@ -35,7 +35,7 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	
 	// 변수 초기화
 	_isDetect = _moving.jumpPower = 0;	// 플레이어 감지 플래그, 점프파워 초기화
-	_rushPos = Vector2(0, 0);
+	_rushPos = Vector2(0, 0);			// 돌진 시작 위치
 	_force = Vector2(10, 0);			// 저항 변수 초기화
 	_moving.gravity = 4000;				// 중력 변수 초기화
 }
