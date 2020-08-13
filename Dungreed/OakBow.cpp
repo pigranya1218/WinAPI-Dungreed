@@ -165,18 +165,7 @@ void OakBow::frontRender(Player * player)
 	//	
 	//}
 
-	if (_drawEffect)
-	{
-		_drawEffect = false;
-
-		Vector2 effectPos01 = renderPosHand; // 손의 위치로부터
-
-		Vector2 effectSize01 = Vector2(220, 220);
-		float length = _img->getFrameSize().x * 0.6f * 4; // 무기 길이만큼
-		effectPos01.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		effectPos01.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		EFFECT_MANAGER->play("L_Effect_Charge", effectPos01, effectSize01, degree);
-	}
+	
 
 	Vector2 subHandPos = renderPosHand; // 보조 손 (양손무기)
 	subHandPos.x += _img->getFrameSize().x * 0.4 * 4;
@@ -191,16 +180,17 @@ void OakBow::frontRender(Player * player)
 	D2D_RENDERER->drawRectangle(handRc, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
 	D2D_RENDERER->fillRectangle(handRc, 210, 188, 181, 1.f, degree, renderPosHand);
 
-	if (_drawEffect) // 이펙트를 그린다
+	if (_drawEffect)
 	{
-		Vector2 effectPos = renderPosHand; // 손의 위치로부터
+		_drawEffect = false;
 
-		Vector2 effectSize = Vector2(220, 220);
+		Vector2 effectPos01 = renderPosHand; // 손의 위치로부터
+
+		Vector2 effectSize01 = Vector2(220, 220);
 		float length = _img->getFrameSize().x * 0.6f * 4; // 무기 길이만큼
-		effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-
-		//EFFECT_MANAGER->play("L_Effect_HecateSmoke", effectPos, effectSize, degree);
+		effectPos01.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+		effectPos01.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+		EFFECT_MANAGER->play("L_Effect_Charge", effectPos01, effectSize01, degree);
 	}
 }
 
