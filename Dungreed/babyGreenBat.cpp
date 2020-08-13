@@ -127,7 +127,7 @@ void babyGreenBat::attack(Player* player)
 	projectile->setSize(Vector2(100, 100));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 	projectile->init("BabyBatBulletAt", angleRadian, 10, true, true, 20, false, "BabyBatBulletFx", Vector2(100,100));
-	tagAttackInfo* attackInfo = new tagAttackInfo;
+	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;	
 	player->attack(projectile, attackInfo);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
@@ -143,7 +143,7 @@ void babyGreenBat::attack(Player* player)
 	projectile0->setSize(Vector2(100, 100));
 	projectile0->setTeam(OBJECT_TEAM::PLAYER);
 	projectile0->init("BabyBatBulletAt", angleRadian, 10, true, true, 20, false, "BabyBatBulletFx", Vector2(100, 100));
-	tagAttackInfo* attackInfo0 = new tagAttackInfo;
+	AttackInfo* attackInfo0 = new AttackInfo;
 	attackInfo0->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile0, attackInfo0);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정

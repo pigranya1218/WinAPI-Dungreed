@@ -30,15 +30,15 @@ void MagnifyingGlass::attack(Player * player)
 {
 }
 
-void MagnifyingGlass::attack(FloatRect * rect, tagAttackInfo * info)
+void MagnifyingGlass::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void MagnifyingGlass::attack(FloatCircle * circle, tagAttackInfo * info)
+void MagnifyingGlass::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void MagnifyingGlass::attack(Projectile * projectile, tagAttackInfo * info)
+void MagnifyingGlass::attack(Projectile * projectile, AttackInfo * info)
 {
 	projectile->setSize(projectile->getSize() * 3);
 }

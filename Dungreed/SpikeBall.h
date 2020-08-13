@@ -4,6 +4,8 @@ class SpikeBall : public Item
 {
 private:
 	Image* _img;
+
+	FloatRect _crash;
 	int x, y;
 	float _angle = PI / 2;
 

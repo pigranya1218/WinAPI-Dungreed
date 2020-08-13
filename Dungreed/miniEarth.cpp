@@ -14,6 +14,9 @@ void miniEarth::init()
 	
 	x = y = 0;
 	_ani = new Animation;
+	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setDefPlayFrame(false, true);
+	_ani->setFPS(20);
 	_ani->start();
 
 	//악세서리 가격

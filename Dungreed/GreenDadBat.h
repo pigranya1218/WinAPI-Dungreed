@@ -4,6 +4,7 @@ class GreenDadBat : public Item
 {
 private:
 	Image* _img;
+	Animation* _ani;
 
 	Vector2 renderPos;
 	Vector2 batPos;

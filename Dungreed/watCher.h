@@ -4,6 +4,9 @@ class watCher : public Item
 {
 private:
 	Image* _img;
+	Animation* _ani;
+
+	FloatRect _crash;
 	int x, y;
 	int radius;
 	int fspeed;

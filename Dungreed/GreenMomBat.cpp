@@ -122,7 +122,7 @@ void GreenMomBat::attack(Player * player)
 	projectile->setSize(Vector2(170, 120));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 	projectile->init("BabyBatBulletAt", angleRadian, 18, true, true, 18, false, "BabyBatBulletFx", Vector2(170, 170));
-	tagAttackInfo* attackInfo = new tagAttackInfo;
+	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정

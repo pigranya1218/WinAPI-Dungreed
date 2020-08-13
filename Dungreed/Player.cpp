@@ -159,7 +159,7 @@ void Player::init()
 	_equippedWeapon.push_back(testWeapon4);
 
 
-	_currWeaponIndex = 2;
+	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
 }
 
