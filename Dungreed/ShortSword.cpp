@@ -3,7 +3,6 @@
 
 void ShortSword::init()
 {
-
 	_type = ITEM_TYPE::WEAPON_ONE_HAND;
 	_rank = ITEM_RANK::NORMAL;
 	_iconImg = _img = IMAGE_MANAGER->findImage("ShortSword");
@@ -95,8 +94,8 @@ void ShortSword::backRender(Player* player)
 	// 손으로부터 마우스 에임까지의 각도
 		
 		//float degree = atan2f(-(_ptMouse.y - Pos.y), (_ptMouse.x - Pos.x)) * (180 / PI) +90;
-		float degree = atan2f(-(_ptMouse.y - pos.y), (_ptMouse.x - pos.x)) * (180 / PI);
-		float degreeOffsetangle = atan2f(-(_ptMouse.y - pos.y), (_ptMouse.x - pos.x)) * (180 / PI) + 90;
+		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x - pos.x))) * (180 / PI);
+		float degreeOffsetangle = degree + 90;
 		
 		
 		
@@ -151,20 +150,20 @@ void ShortSword::backRender(Player* player)
 			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); // 이미지 회전시킬 중점
 
 		}
-		_img->render(renderPosWeapon, isLeft); // 그린다
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft); // 그린다
 	
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		Vector2 last = renderPosHand;
 	
 		if (isLeft) // 왼쪽을 보고 있음
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, -(renderDegree + _angleOffset), last) ; // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, -(renderDegree + _angleOffset), last);
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(last)) ; // 손의 렉트를 그린다
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(last));
 		}
 		else
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, (renderDegree + _angleOffset), last); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, (renderDegree + _angleOffset), last);
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree + _angleOffset), CAMERA->getRelativeV2(last));
 		}
 		if (_drawEffect) // 이펙트를 그린다
 		{
@@ -192,16 +191,16 @@ void ShortSword::frontRender(Player* player)
 		Vector2 renderPos = Vector2(originPos.x + 25, originPos.y + 20);
 
 		_hand = rectMakePivot(renderPos, _handSize, PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1, 6.f);
-		D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1, 6.f);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1);
 	}
 	else
 	{
 		Vector2 renderPos = Vector2(originPos.x - 25, originPos.y + 20);
 
 		_hand = rectMakePivot(renderPos, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1, 6.f);
-		D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1, 6.f);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1);
 	}
 	if (!_oneAttack)
 	{
@@ -213,8 +212,8 @@ void ShortSword::frontRender(Player* player)
 		// 손으로부터 마우스 에임까지의 각도
 
 		//float degree = atan2f(-(_ptMouse.y - Pos.y), (_ptMouse.x - Pos.x)) * (180 / PI) + 90;
-		float degree = atan2f(-(_ptMouse.y - pos.y), (_ptMouse.x - pos.x)) * (180 / PI) ;
-		float degreeOffsetangle = atan2f(-(_ptMouse.y - pos.y), (_ptMouse.x - pos.x)) * (180 / PI) +90 ;
+		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - pos.x)) * (180 / PI) ;
+		float degreeOffsetangle = degree + 90 ;
 
 
 		if (degree > 360)
@@ -267,19 +266,19 @@ void ShortSword::frontRender(Player* player)
 			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); // 이미지 회전시킬 중점
 
 		}
-		_img->render(renderPosWeapon, isLeft); // 그린다
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft); // 그린다
 
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		
 		if (isLeft) // 왼쪽을 보고 있음
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, -(renderDegree + _angleOffset), renderPosHand); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, -(renderDegree + _angleOffset), renderPosHand);
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
 		}
 		else
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, (renderDegree + _angleOffset), renderPosHand); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, (renderDegree + _angleOffset), renderPosHand);
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
 		}
 		if (_drawEffect) // 이펙트를 그린다
 		{
@@ -307,7 +306,7 @@ void ShortSword::attack(Player* player)
 	Vector2 renderPosHand = pos;
 	
 	// 손으로부터 마우스 에임까지의 각도
-	float angle = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) ;	
+	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) ;	
 	_reverseMove = false;	
 	_currAttackDelay = _baseAttackDelay;
 }

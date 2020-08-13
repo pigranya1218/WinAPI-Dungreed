@@ -439,7 +439,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	
-	SCENE_MANAGER->changeScene("MapTool");	
+	SCENE_MANAGER->changeScene("GAME");	
 
 	
 	return S_OK;

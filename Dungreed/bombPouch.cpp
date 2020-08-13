@@ -53,7 +53,7 @@ void bombPouch::frontRender(Player* player)
 void bombPouch::backRender(Player* player)
 {
 	renderPos = player->getPosition();
-	D2D_RENDERER->drawRectangle(RC);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(RC));
 }
 
 void bombPouch::displayInfo()

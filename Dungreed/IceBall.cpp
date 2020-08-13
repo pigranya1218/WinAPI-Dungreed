@@ -80,18 +80,18 @@ void IceBall::backRender(Player * player)
 	_img->setScale(4);
 	if (!setitem)
 	{
-		_img->render(renderPos, false);
+		_img->render(CAMERA->getRelativeV2(renderPos), false);
 		Vector2 size = Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4);
 		_crash = rectMakePivot(Vector2(renderPos.x, renderPos.y ), size, PIVOT::CENTER);
 	}
 	else
 	{
-		_img->aniRender(Vector2(renderPos), _ani, false);
+		_img->aniRender(CAMERA->getRelativeV2(renderPos), _ani, false);
 		Vector2 size = Vector2(_img->getFrameSize().x * 2, _img->getFrameSize().y * 2);
 		_crash = rectMakePivot(Vector2(renderPos.x-1, renderPos.y + 19), size, PIVOT::CENTER);
 	}
 	
-	D2D_RENDERER->drawRectangle(_crash);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_crash));
 	
 
 	

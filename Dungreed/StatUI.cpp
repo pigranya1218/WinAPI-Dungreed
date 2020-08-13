@@ -15,7 +15,7 @@ void StatUI::init()
 	//창닫기 이미지
 	_exitImg = IMAGE_MANAGER->findImage("BUTTON_EXIT");
 	_exitSelectImg = IMAGE_MANAGER->findImage("BUTTON_EXIT_SELECTED");
-	_exitRc = FloatRect(440, 40, 560, 140);
+	_exitRc = FloatRect(440, 60, 560, 140);
 
 	//스탯 요소 이미지
 	for (int i = 0; i < 12; i++)

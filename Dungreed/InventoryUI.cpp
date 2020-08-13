@@ -13,7 +13,7 @@ void InventoryUI::init()
 	_accImg = IMAGE_MANAGER->findImage("UI/INVENTORY/ACC_ZONE");
 	_accRc = FloatRect(Vector2(1305, 352), Vector2(460, 110), PIVOT::CENTER);
 
-	_exitRc = FloatRect(900, 10, 980, 100);
+	_exitRc = FloatRect(890, 10, 980, 90);
 
 	_goldRc = FloatRect(1100, 798, 1500, 848);
 

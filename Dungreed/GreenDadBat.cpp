@@ -82,7 +82,7 @@ void GreenDadBat::backRender(Player * player)
 		batPos.y += 8;
 	}
 	_img->setScale(4);
-	_img->aniRender(Vector2(batPos), _ani, _direction == DIRECTION::LEFT);
+	_img->aniRender(CAMERA->getRelativeV2(batPos), _ani, _direction == DIRECTION::LEFT);
 
 
 }
