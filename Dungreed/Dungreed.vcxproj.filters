@@ -644,6 +644,18 @@
     <ClCompile Include="Ghost.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="IceBall.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenDadBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenMomBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dungreed.rc">

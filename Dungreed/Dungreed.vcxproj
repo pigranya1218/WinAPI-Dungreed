@@ -277,6 +277,10 @@
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="GreenBat.cpp" />
+    <ClCompile Include="GreenDadBat.cpp" />
+    <ClCompile Include="GreenMomBat.cpp" />
+    <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="InventoryUI.cpp" />
