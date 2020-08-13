@@ -402,6 +402,9 @@
     <ClInclude Include="Voluspa.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="CosmosSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
     <ClInclude Include="StatUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
@@ -663,6 +666,9 @@
     </ClCompile>
     <ClCompile Include="MagnifyingGlass.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="CosmosSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
     <ClCompile Include="AttackInfo.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
