@@ -3,6 +3,7 @@
 class watCher : public Item
 {
 private:
+	Image* _img;
 	int x, y;
 	int radius;
 	int fspeed;

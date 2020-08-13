@@ -3,6 +3,8 @@
 class IceBall : public Item
 {
 private:
+	Image* _img;
+
 	int x, y;
 	float _angle = PI / 2;
 

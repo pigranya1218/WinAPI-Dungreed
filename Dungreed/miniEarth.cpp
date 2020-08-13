@@ -6,6 +6,8 @@ void miniEarth::init()
 	//厩技辑府 鸥涝
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::NORMAL;
+
+	_iconImg = nullptr;
 	_img = IMAGE_MANAGER->findImage("MiniEarth");
 
 	//厩技辑府 可记

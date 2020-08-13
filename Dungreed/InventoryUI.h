@@ -12,10 +12,16 @@ private:
 	Image* _baseImg;
 	FloatRect _baseRc;
 
+	Image* _accImg;
+	FloatRect _accRc;
+
 	FloatRect _exitRc;
 
 	FloatRect _goldRc;
 
+	FloatRect _equippedWeaponRc[4];
+	FloatRect _equippedAccRc[4];
+	FloatRect _invenRc[15];
 
 public:
 	void setPlayer(Player* player) { _player = player; }

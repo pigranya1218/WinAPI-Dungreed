@@ -13,6 +13,7 @@ void watCher::init()
 	radius = 0;
 	fspeed = 0;
 	x = y = 0;
+	_iconImg = nullptr;
 	_img = IMAGE_MANAGER->findImage("Watcher0");
 	_ani1 = new Animation;
 	_ani1->start();

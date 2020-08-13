@@ -3,6 +3,8 @@
 class babyGreenBat : public Item
 {
 private:
+	Image* _img;
+
 	Vector2 renderPos;
 	int x, y;
 	Animation* _ani1;

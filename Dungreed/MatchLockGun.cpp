@@ -5,7 +5,7 @@ void MatchLockGun::init()
 {
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_img = IMAGE_MANAGER->findImage("MatchlockGun");
+	_iconImg = _img = IMAGE_MANAGER->findImage("MatchlockGun");
 	_price = 850;
 
 	_minDamage = 10;

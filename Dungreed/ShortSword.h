@@ -4,6 +4,7 @@ class ShortSword : public Item
 {
 private:
 	// 공격 관련
+	Image* _img;
 	Image*	_effect;
 	int	_minDamage;
 	int _maxDamage;

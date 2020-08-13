@@ -102,10 +102,8 @@ void UIManager::update(float const elaspedTime)
 		_inventoryUI.update(elaspedTime);
 	}
 
-
 	_isActive = false;
 	_isActive |= _inventoryUI.isActive();
-
 }
 
 void UIManager::render()

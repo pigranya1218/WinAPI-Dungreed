@@ -357,5 +357,5 @@ void Player::render()
 
 Image* Player::getWeaponImg(int index) const noexcept
 {
-	return _equippedWeapon[index]->getImg();
+	return _equippedWeapon[index]->getIconImg();
 }

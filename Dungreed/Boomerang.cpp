@@ -2,7 +2,7 @@
 
 void Boomerang::init()
 {
-	_img = IMAGE_MANAGER->findImage("MetalBoomerang");
+	_iconImg = _img = IMAGE_MANAGER->findImage("MetalBoomerang");
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::RARE;
 

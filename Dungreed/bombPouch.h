@@ -3,6 +3,7 @@
 class bombPouch : public Item
 {
 private:
+
 	FloatRect RC;
 	bool isBoom;
 	Vector2 renderPos;

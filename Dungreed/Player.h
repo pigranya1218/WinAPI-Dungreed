@@ -71,6 +71,7 @@ public:
 	int getCurrDash() const noexcept { return _currDashCount; }
 
 	int getWeaponIndex() const noexcept { return _currWeaponIndex; }
+	Item* getWeapon(int index) const noexcept { return _equippedWeapon[index]; };
 	Image* getWeaponImg(int index) const noexcept;
 };
 

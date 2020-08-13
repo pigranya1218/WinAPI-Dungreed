@@ -23,7 +23,7 @@ class Item
 protected:
 	ITEM_TYPE _type; // 아이템 타입
 	ITEM_RANK _rank; // 아이템 등급
-	Image* _img; // 아이템 이미지
+	Image* _iconImg; // 아이템 이미지
 	int _price; // 가격
 	PlayerStat _addStat; // 아이템 스탯 옵션
 	ProjectileManager* _projecttileMng;		//투사체 매니저
@@ -47,5 +47,5 @@ public:
 	ITEM_TYPE getType() const noexcept { return _type; }
 
 	int getPrice() const noexcept { return _price; }
-	Image* getImg() const noexcept { return _img; }
+	Image* getIconImg() const noexcept { return _iconImg; }
 };
