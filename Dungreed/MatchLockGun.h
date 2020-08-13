@@ -4,6 +4,8 @@
 class MatchLockGun : public Item
 {
 private:
+	Image* _img;
+
 	int _minDamage;
 	int _maxDamage;
 	

@@ -3,11 +3,15 @@
 class watCher : public Item
 {
 private:
+	Image* _img;
+	Animation* _ani;
+	Vector2 renderPos;
+	Vector2 anglePos;
+	FloatRect _crash;
 	int x, y;
 	int radius;
 	int fspeed;
-	float _angle = PI / 5;
-	Animation* _ani1;
+	float _angle = PI / 5;	
 	bool setitem;
 public:
 	virtual void init();

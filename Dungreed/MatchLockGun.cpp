@@ -5,7 +5,7 @@ void MatchLockGun::init()
 {
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_img = IMAGE_MANAGER->findImage("MatchlockGun");
+	_iconImg = _img = IMAGE_MANAGER->findImage("MatchlockGun");
 	_price = 850;
 
 	_minDamage = 10;
@@ -16,9 +16,9 @@ void MatchLockGun::init()
 	_maxDamage = 18;
 	_baseAttackDelay = 1;
 	_currAttackDelay = 0;
-	_maxBullet = 2;
+	_maxBullet = 1;
 	_currBullet = _maxBullet;
-	_baseReloadDelay = 3;
+	_baseReloadDelay = 2;
 	_currReloadDelay = 0;
 	_drawEffect = false;
 }
@@ -42,7 +42,6 @@ void MatchLockGun::update(Player* player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}
-
 }
 
 void MatchLockGun::backRender(Player* player)
@@ -97,10 +96,20 @@ void MatchLockGun::frontRender(Player* player)
 	{
 		_drawEffect = false;
 		Vector2 effectPos = renderPosHand; // 손의 위치로부터
-		Vector2 effectSize = Vector2(130, 130);
+
+		/*Vector2 effectPos;
+		effectPos.x = (isLeft) ? (renderPosHand.x + 18) : (renderPosHand.x - 18);
+		effectPos.y = renderPosHand.y;*/
+
+		Vector2 effectSize = Vector2(220, 220);
 		float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
 		effectPos.x += cosf(degree * (PI / 180) + ((isLeft)?(-0.2):(0.2))) * length;
 		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+
+		/*float changeX = cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+		effectPos.x += (isLeft) ? (changeX + 18) : (changeX - 18);
+		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;*/
+
 		EFFECT_MANAGER->play("L_Effect_HecateSmoke", effectPos, effectSize, degree);
 	}
 }
@@ -143,7 +152,7 @@ void MatchLockGun::attack(Player* player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(100, 30));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("GunBullet", angleRadian, 30, true, false, 20, false, "", Vector2());
+	projectile->init("GunBullet", angleRadian, 30, true, false, 10, false, "", Vector2());
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;

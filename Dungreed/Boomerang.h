@@ -5,6 +5,7 @@ class Boomerang :
 {
 private:
 	Animation* _ani;
+	Image* _img;
 	Image* _aniImg;
 	Image* _effect01;
 

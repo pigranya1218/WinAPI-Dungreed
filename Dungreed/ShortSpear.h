@@ -4,6 +4,7 @@
 class ShortSpear : public Item
 {
 private:
+	Image* _img;
 	// 공격 관련
 	int	_minDamage;
 	int _maxDamage;

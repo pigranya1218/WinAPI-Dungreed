@@ -3,8 +3,15 @@
 class IceBall : public Item
 {
 private:
+	Image* _img;
+	Animation* _ani;
+
+	FloatRect _crash;
 	int x, y;
 	float _angle = PI / 2;
+	bool setitem;
+	int radius;
+	int fspeed;
 
 public:
 	virtual void init();

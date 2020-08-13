@@ -5,6 +5,7 @@ HRESULT MapTool::init()
 {
 	_tileX = 30;
 	_tileY = 20;
+	
 	_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
 	setup();
 	CAMERA->setConfig(0, 0, 960, 640, 0, 0, 0, 0);
@@ -18,12 +19,16 @@ void MapTool::release()
 
 void MapTool::update()
 {
+	
 	setMap();
 
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
 	{
+		setTileSize();
 		if (_save.ptInRect(_ptMouse)) save();
 		if (_load.ptInRect(_ptMouse)) load();
+		if (_layer1Btn.ptInRect(_ptMouse))_layer=0; // ¹è°æ
+		if (_layer2Btn.ptInRect(_ptMouse))_layer=1; // ÀÌ¹ÌÁö
 	}
 	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
 	{
@@ -31,47 +36,48 @@ void MapTool::update()
 		
 	}
 	
-	if (KEY_MANAGER->isStayKeyDown(VK_RIGHT))
+	if (KEY_MANAGER->isStayKeyDown('D'))
 	{
-		CAMERA->movePivot(Vector2(2, 0));
+		CAMERA->movePivot(Vector2(-6, 0));
 		//_mapPointer.x += 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(2,0));
+			_tile[i].rc.move(Vector2(-6,0));
 			
 		}
 	}
-	if (KEY_MANAGER->isStayKeyDown(VK_LEFT))
+	if (KEY_MANAGER->isStayKeyDown('A'))
 	{
-		CAMERA->movePivot(Vector2(-2, 0));
+		CAMERA->movePivot(Vector2(6, 0));
 		//_mapPointer.x -= 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(-2, 0));
+			_tile[i].rc.move(Vector2(6, 0));
 			
 		}
 	}
-	if (KEY_MANAGER->isStayKeyDown(VK_UP))
+	if (KEY_MANAGER->isStayKeyDown('W'))
 	{
-		CAMERA->movePivot(Vector2(0, -2));
+		CAMERA->movePivot(Vector2(0, 6));
 		//_mapPointer.y -= 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(0, -2));
+			_tile[i].rc.move(Vector2(0, 6));
 			
 		}
 	}
-	if (KEY_MANAGER->isStayKeyDown(VK_DOWN))
+	if (KEY_MANAGER->isStayKeyDown('S'))
 	{
-		CAMERA->movePivot(Vector2(0, 2));
+		CAMERA->movePivot(Vector2(0, -6));
 		//_mapPointer.y += 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(0, 2));
+			_tile[i].rc.move(Vector2(0, -6));
 			
 		}
 	}
 
+	
 
 	// CAMERA->setXY(_tile[_tileX*_tileY/2].rc.getCenter());
 	// CAMERA->setLT(_tile[0].rc.getCenter());
@@ -85,17 +91,37 @@ void MapTool::render()
 
 	for (int i = 0; i < _tileX*_tileY; ++i)
 	{
-		_paletteImage->setScale(4);
 		//D2D_RENDERER->drawRectangle(_vTileMap[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
 		//_paletteImage->frameRender(_vTileMap[i].rc.getCenter(), _vTileMap[i].tileFrameX, _vTileMap[i].tileFrameY);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_tile[i].rc), D2D1::ColorF::Blue, 1, 0.5f);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_tile2[i].rc), D2D1::ColorF::Blue, 1, 0.5f);
 		//_paletteImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
-		CAMERA->frameRender(_paletteImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+		
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			if (_layer != 0)
+			{
+				_paletteImage->setAlpha(0.5);
+			}
+			_paletteImage->setScale(4);
+			CAMERA->frameRender(_paletteImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
 
-
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			if (_layer != 1)
+			{
+				_paletteImage->setAlpha(0.5);
+			}
+			_paletteImage->setScale(4);
+			CAMERA->frameRender(_paletteImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
+		
 
 		//D2D_RENDERER->drawEllipse(_mapPointer, 5, D2DRenderer::DefaultBrush::Red, 1);
 	}
+
+	
 
 	//CAMERA->render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
 
@@ -135,20 +161,35 @@ void MapTool::render()
 	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_erase, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text4(L"Palette");
-	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
-	D2D_RENDERER->drawRectangle(_paletteLoad, D2D1::ColorF::Blue, 1, 0.5f);
+	wstring text4(L"LAYER1");
+	D2D_RENDERER->renderText(810, WINSIZEY - 100, text4, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->drawRectangle(_layer1Btn, D2D1::ColorF::Blue, 1, 0.5f);
+
+	wstring text11(L"LAYER2");
+	D2D_RENDERER->renderText(1010, WINSIZEY - 100, text11, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->drawRectangle(_layer2Btn, D2D1::ColorF::Blue, 1, 0.5f);
 
 	wstring text5(L"XUP");
-	//D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->renderText(_increaseTileX.right+50, _increaseTileX.getCenter().y, text5, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_increaseTileX, D2D1::ColorF::Blue, 1, 0.5f);
 
+	wstring text9(L"X:"+to_wstring( _tileX));
+	D2D_RENDERER->renderText((_decreaseTileX.right+ _decreaseTileX.left)/2+12 , _decreaseTileX.getCenter().y, text9, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+
 	wstring text6(L"XDOWN");
-	//D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+	D2D_RENDERER->renderText(_decreaseTileX.left - 50, _decreaseTileX.getCenter().y, text6, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_decreaseTileX, D2D1::ColorF::Blue, 1, 0.5f);
 
+	wstring text7(L"YDOWN");
+	D2D_RENDERER->renderText(_decreaseTileY.left - 50, _decreaseTileY.getCenter().y, text7, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_decreaseTileY, D2D1::ColorF::Blue, 1, 0.5f);
 
+	wstring text10(L"Y:" + to_wstring(_tileY));
+	D2D_RENDERER->renderText((_decreaseTileY.right + _decreaseTileY.left) / 2 + 12, _decreaseTileY.getCenter().y, text10, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
+
+
+	wstring text8(L"YUP");
+	D2D_RENDERER->renderText(_increaseTileY.right + 50, _increaseTileY.getCenter().y, text8, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.0f);
 	D2D_RENDERER->drawRectangle(_increaseTileY, D2D1::ColorF::Blue, 1, 0.5f);
 }
 
@@ -159,11 +200,13 @@ void MapTool::setup()
 	_save = FloatRect(Vector2(200, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_load = FloatRect(Vector2(400, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
 	_erase = FloatRect(Vector2(600, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
-	_paletteLoad=FloatRect(Vector2(1000, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
-	_decreaseTileX = FloatRect(Vector2(300, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_increaseTileX = FloatRect(Vector2(350, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_decreaseTileY = FloatRect(Vector2(450, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_increaseTileY = FloatRect(Vector2(500, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_layer1Btn=FloatRect(Vector2(800, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+	_layer2Btn = FloatRect(Vector2(1000, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+
+	_decreaseTileX = FloatRect(Vector2(300, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_increaseTileX = FloatRect(Vector2(350, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_decreaseTileY = FloatRect(Vector2(300, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_increaseTileY = FloatRect(Vector2(350, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
 
 
 	for (int i = 0; i < SAMPLETILEY; ++i)
@@ -183,23 +226,44 @@ void MapTool::setup()
 	{
 		for (int j = 0; j < _tileX; ++j)
 		{
-			_tile[_tileX*i + j].tileFrameX = j;
-			_tile[_tileX*i + j].tileFrameY = i;
-			_tile[_tileX*i + j].rc = FloatRect(Vector2(16+ j * TILESIZE, +16+ TILESIZE * i), Vector2(TILESIZE, TILESIZE), PIVOT::CENTER);
-			_vTileMap.push_back(_tile[_tileX * i + j]);
+			/*_tile[_tileX * i + j].tileFrameX = j;
+			_tile[_tileX * i + j].tileFrameY = i;*/
+			
+			_tile[_tileX * i + j].rc = FloatRect(Vector2(TILESIZE + j * TILESIZE, +TILESIZE + TILESIZE * i), Vector2(TILESIZE, TILESIZE), PIVOT::CENTER);
+			// _vTileMap.push_back(_tile[_tileX * i + j]);
 		}
 	}
+	/*for (int i = 0; i < _tileY; ++i)
+	{
+		for (int j = 0; j < _tileX; ++j)
+		{
+			_tile2[_tileX*i + j].tileFrameX = j;
+			_tile2[_tileX*i + j].tileFrameY = i;
 
-	for (int i = 0; i < _tileX*_tileY; ++i)
+			_tile2[_tileX*i + j].rc = FloatRect(Vector2(TILESIZE + j * TILESIZE, +TILESIZE + TILESIZE * i), Vector2(TILESIZE, TILESIZE), PIVOT::CENTER);
+			_vTileMap.push_back(_tile2[_tileX * i + j]);
+		}
+	}*/
+
+	for (int i = 0; i < _tileX * _tileY; ++i)
 	{
 		//_vTileMap[i].tileFrameX = 0;
 		//_vTileMap[i].tileFrameY = 0;
-		_tile[i].tileFrameX = 0;
-		_tile[i].tileFrameY = 0;
+		_tile[i].tileFrameX[0] = -1;
+		_tile[i].tileFrameX[1] = -1;
+		_tile[i].tileFrameY[0] = -1;
+		_tile[i].tileFrameY[1] = -1;
 		_tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
-		_mapPointer.x =  _tile[_tileX / 2].rc.left;
-		_mapPointer.y = _tile[_tileX*_tileY / 2].rc.top;
+		_tile[i].tileX = _tileX;
+		_tile[i].tileY = _tileY;
+
+		/*_tile2[i].tileFrameX = 0;
+		_tile2[i].tileFrameY = 4;
+		_tile2[i].linePos == DRAW_LINE_POSITION::NOLINE;
+		_tile2[i].tileX = _tileX;
+		_tile2[i].tileY = _tileY;*/
 	}
+	_layer = 0;
 
 }
 
@@ -211,59 +275,77 @@ void MapTool::setMap()
 	{
 		for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
 		{
-
 			if (_sampleTile[i].rc.ptInRect(_ptMouse))
 			{
-				tagSelectTile _selectTile;
 				_selectTile.x = _sampleTile[i].tileFrameX;
 				_selectTile.y = _sampleTile[i].tileFrameY;
 				_selectTile.rc = _sampleTile[i].rc;
 
-				_vSelectTile.push_back(_selectTile);
+				//_vSelectTile.push_back(_selectTile);
 			}
-
 		}
 	}
+
 	if (KEY_MANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-	    for (int i = 0; i < _tileX*_tileY; ++i)
-	    {
-			if (_tile[i].rc.ptInRect(_ptMouse)&& _ptMouse.x<=960&&_ptMouse.y<=640)
+			for (int i = 0; i < _tileX * _tileY; ++i)
 			{
-				for (int j = 0; j < _vSelectTile.size(); ++j)
+				if (_tile[i].rc.ptInRect(CAMERA->getRelativePt(_ptMouse)) && _ptMouse.x <= 960 && _ptMouse.y <= 640)
 				{
-					_tile[i].tileFrameX = _vSelectTile[_vSelectTile.size() - 1].x;
-					_tile[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;
-					//setLinePos(_tile[i].tileFrameX, _tile[i].tileFrameY);
-					//_tile[i].linePos = _drawLinePos;
-
-					if (_tile[i].tileFrameX == 1 && _tile[i].tileFrameY == 8)_tile[i].linePos = DRAW_LINE_POSITION::TOP;
-					if (_tile[i].tileFrameX == 1 && _tile[i].tileFrameY == 6)_tile[i].linePos = DRAW_LINE_POSITION::BOTTOM;
-					if (_tile[i].tileFrameX == 2 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT;
-					if (_tile[i].tileFrameX == 0 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT;
-					if ((_tile[i].tileFrameX == 6|| _tile[i].tileFrameX == 8) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
-					if ((_tile[i].tileFrameX == 7|| _tile[i].tileFrameX == 9) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
-
-
-					else _tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
 					
 
-					releaseSelectTile();
-					break;
+						_tile[i].tileFrameX[_layer] = _selectTile.x;
+						_tile[i].tileFrameY[_layer] = _selectTile.y;
+
+						if (_layer == 1)
+						{
+							if (_tile[i].tileFrameX[_layer] == 1 && _tile[i].tileFrameY[_layer] == 8)_tile[i].linePos = DRAW_LINE_POSITION::TOP;
+							else if (_tile[i].tileFrameX[_layer] == 3 && _tile[i].tileFrameY[_layer] == 8)_tile[i].linePos = DRAW_LINE_POSITION::BOTTOM;
+							else if (_tile[i].tileFrameX[_layer] == 2 && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT;
+							else if (_tile[i].tileFrameX[_layer] == 0 && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT;
+							else if ((_tile[i].tileFrameX[_layer] == 6 || _tile[i].tileFrameX[_layer] == 8) && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+							else if ((_tile[i].tileFrameX[_layer] == 7 || _tile[i].tileFrameX[_layer] == 9) && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+							else if ((_tile[i].tileFrameX[_layer] >= 0 && _tile[i].tileFrameX[_layer] < 4) && _tile[i].tileFrameY[_layer] == 5)_tile[i].linePos = DRAW_LINE_POSITION::PLATFORM;
+							else if ((_tile[i].tileFrameX[_layer] >= 5 && _tile[i].tileFrameX[_layer] < 8) && _tile[i].tileFrameY[_layer] == 5)_tile[i].linePos = DRAW_LINE_POSITION::PLATFORM;
+							else _tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
+						}
+						releaseSelectTile();
+						break;
+					
 				}
 			}
-			/*if (_tile[i].rc.ptInRect(_ptMouse))
-			{
-				for (int j=0;j<_vSelectTile.size();++j)
-				{
-					_vTileMap[i].tileFrameX = _vSelectTile[_vSelectTile.size()-1].x;
-					_vTileMap[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;
-					releaseSelectTile();
-					break;
-				}
-			}*/
-		}
-		
+		//else if (_layer == 2)
+		//{
+		//	for (int i = 0; i < _tileX*_tileY; ++i)
+		//	{
+		//		if (_tile2[i].rc.ptInRect(_ptMouse) && _ptMouse.x <= 960 && _ptMouse.y <= 640)
+		//		{
+		//			for (int j = 0; j < _vSelectTile.size(); ++j)
+		//			{
+		//				/*_tile[i].tileFrameX = _vSelectTile[_vSelectTile.size() - 1].x;
+		//				_tile[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;*/
+		//				//setLinePos(_tile[i].tileFrameX, _tile[i].tileFrameY);
+		//				//_tile[i].linePos = _drawLinePos;
+
+		//				_tile2[i].tileFrameX = _selectTile.x;
+		//				_tile2[i].tileFrameY = _selectTile.y;
+
+		//				if (_tile2[i].tileFrameX == 1 && _tile2[i].tileFrameY == 8)_tile2[i].linePos = DRAW_LINE_POSITION::TOP;
+		//				if (_tile2[i].tileFrameX == 1 && _tile2[i].tileFrameY == 6)_tile2[i].linePos = DRAW_LINE_POSITION::BOTTOM;
+		//				if (_tile2[i].tileFrameX == 2 && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::LEFT;
+		//				if (_tile2[i].tileFrameX == 0 && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::RIGHT;
+		//				if ((_tile2[i].tileFrameX == 6 || _tile2[i].tileFrameX == 8) && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+		//				if ((_tile2[i].tileFrameX == 7 || _tile2[i].tileFrameX == 9) && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+		//				if ((_tile2[i].tileFrameX >= 0 && _tile2[i].tileFrameX < 4) && _tile2[i].tileFrameY == 5)_tile2[i].linePos = DRAW_LINE_POSITION::PLATFORM;
+		//				if ((_tile2[i].tileFrameX >= 5 && _tile2[i].tileFrameX < 8) && _tile2[i].tileFrameY == 5)_tile2[i].linePos = DRAW_LINE_POSITION::PLATFORM;
+		//				else _tile2[i].linePos == DRAW_LINE_POSITION::NOLINE;
+
+		//				releaseSelectTile();
+		//				break;
+		//			}
+		//		}
+		//	}
+		//}
 	}
 }
 
@@ -298,6 +380,7 @@ void MapTool::save()
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	WriteFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &write, NULL);
+	
 
 	CloseHandle(stageFile);
 
@@ -328,6 +411,7 @@ void MapTool::load()
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &read, NULL);
+	
 
 	CloseHandle(stageFile);
 }
@@ -403,6 +487,8 @@ void MapTool::setLinePos(int frameX, int frameY)
 	if(frameX==1 && frameY==6)_drawLinePos = DRAW_LINE_POSITION::BOTTOM;
 	if(frameX==0 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::RIGHT;
 	if(frameX==2 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT;
+	if ((frameX >=0&&frameX<4)&&frameY==5 )_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
+	if ((frameX >= 5 && frameX < 8) && frameY == 5)_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
 	else _drawLinePos = DRAW_LINE_POSITION::NOLINE;
 	/*if((frameX==6||frameX==8)&&frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
 	if ((frameX == 7 || frameX == 9) && frameY == 7)_drawLinePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
@@ -411,6 +497,34 @@ void MapTool::setLinePos(int frameX, int frameY)
 
 void MapTool::setTileSize()
 {
+	
+
+		if(_increaseTileX.ptInRect(_ptMouse))
+		{
+			if (_tileX* _tileY >= 1900) return;
+			_tileX += 1;
+			setup();			
+			
+
+		}
+		else if(_decreaseTileX.ptInRect(_ptMouse))
+		{
+			
+			_tileX -= 1;
+			setup();
+		}
+		else if (_increaseTileY.ptInRect(_ptMouse))
+		{
+			if (_tileX* _tileY >= 1900) return;
+			_tileY += 1;
+			setup();
+		}
+		else if (_decreaseTileY.ptInRect(_ptMouse))
+		{
+			_tileY -= 1;
+			setup();
+		}
+	
 
 
 }

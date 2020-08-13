@@ -4,22 +4,27 @@ void watCher::init()
 {
 	//厩技辑府 鸥涝
 	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::NORMAL;
+	_rank = ITEM_RANK::RARE;	
+	_iconImg = IMAGE_MANAGER->findImage("Watcher");
 	
-
 	//厩技辑府 可记
-	_addStat.criticalChance = 1;
-	_addStat.defense = 1;
+	_addStat.evasion = 5;
+
 	radius = 0;
 	fspeed = 0;
-	x = y = 0;
-	_img = IMAGE_MANAGER->findImage("Watcher0");
-	_ani1 = new Animation;
-	_ani1->start();
+	anglePos.x = anglePos.y =0;
+	_img = IMAGE_MANAGER->findImage("Watcher0");	
+	_ani = new Animation;
+	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setDefPlayFrame(false, true);
+	_ani->setFPS(7);
+	_ani->start();
 	setitem = false;
 
+
+
 	//厩技辑府 啊拜
-	_price = 600;
+	_price = 1200;
 }
 
 void watCher::release()
@@ -29,12 +34,12 @@ void watCher::release()
 
 void watCher::update(Player * player, float const elapsedTime)
 {
-	if (KEY_MANAGER->isOnceKeyDown('5'))
+	if (KEY_MANAGER->isOnceKeyDown('8'))
 	{
 		setitem = false;
 		
 	}
-	if (KEY_MANAGER->isOnceKeyDown('6'))
+	if (KEY_MANAGER->isOnceKeyDown('9'))
 	{
 		setitem = true;
 		
@@ -42,37 +47,40 @@ void watCher::update(Player * player, float const elapsedTime)
 	
 	if (!setitem)
 	{
-		radius = 100;
+		radius = 85;
 		_img = IMAGE_MANAGER->findImage("Watcher0");
 		_angle -= 0.043f;
-		fspeed = 5;
+		
 	}
 	else
 	{
 		radius = 130;
 		_img = IMAGE_MANAGER->findImage("Watcher1");
 		_angle -= 0.062f;
-		fspeed = 10;
+		
 	}
 
-	_ani1->frameUpdate(elapsedTime);
-	_ani1->init(_img->getWidth(), _img->getHeight(),
-		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani1->setFPS(fspeed);
-	_ani1->setPlayFrame(0, _img->getMaxFrameX(), false, true);
+	_ani->frameUpdate(elapsedTime);
+	anglePos.x = cosf(_angle) * radius;
+	anglePos.y = -sinf(_angle) * radius;
 	
 }
 
 void watCher::backRender(Player * player)
 {
-	x = cosf(_angle) * radius;
-	y = -sinf(_angle) * radius;
 	
-	Vector2 renderPos = player->getPosition();
-	renderPos.x = renderPos.x + x+2;
-	renderPos.y = renderPos.y + y-22;	
-	_img->setScale(4);
-	_img->aniRender(Vector2(renderPos), _ani1, false);
+	
+	renderPos = player->getPosition();
+	renderPos.x = renderPos.x + anglePos.x + 2;
+	renderPos.y = renderPos.y + anglePos.y - 22;	
+	Vector2 size = Vector2(_img->getFrameSize().x * 2, _img->getFrameSize().y * 2);
+	_crash = rectMakePivot(Vector2(renderPos.x, renderPos.y + 25), size, PIVOT::CENTER);
+	D2D_RENDERER->drawRectangle(_crash);
+
+
+	_img->setScale(4);	
+	_img->aniRender(Vector2(_crash.left,_crash.top), _ani, false);
+	
 }
 
 void watCher::frontRender(Player * player)

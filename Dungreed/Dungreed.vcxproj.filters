@@ -103,9 +103,6 @@
     <Filter Include="Dungreed\MapToolScene\MapTool">
       <UniqueIdentifier>{0669a0e9-7d5e-4ffe-8a51-5fe5ca0e4bb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\MapToolScene\Test">
-      <UniqueIdentifier>{4d6d20c6-2019-497e-b474-4e544706d11a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Item\Melee">
       <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
     </Filter>
@@ -273,15 +270,6 @@
     <ClInclude Include="MapTool.h">
       <Filter>Dungreed\MapToolScene\MapTool</Filter>
     </ClInclude>
-    <ClInclude Include="SampleStage.h">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="SecondTestScene.h">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="TownStage.h">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
@@ -295,7 +283,7 @@
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="TimeManager.h">
-      <Filter>2DGameFramework\ProgressBar</Filter>
+      <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
     <ClInclude Include="PlayerStat.h">
       <Filter>Dungreed\GameScene\Player</Filter>
@@ -399,7 +387,7 @@
     <ClInclude Include="GreenMomBat.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="Voluspa.h">
+    <ClInclude Include="MagnifyingGlass.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
     <ClInclude Include="AttackInfo.h">
@@ -408,8 +396,23 @@
     <ClInclude Include="Ghost.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Shooting.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
+    <ClInclude Include="Voluspa.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="CosmosSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="StatUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="OakBow.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="AliceCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="RedLotusCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,15 +536,6 @@
     <ClCompile Include="MapTool.cpp">
       <Filter>Dungreed\MapToolScene\MapTool</Filter>
     </ClCompile>
-    <ClCompile Include="SampleStage.cpp">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="SecondTestScene.cpp">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="TownStage.cpp">
-      <Filter>Dungreed\MapToolScene\Test</Filter>
-    </ClCompile>
     <ClCompile Include="Banshee.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
@@ -659,11 +653,29 @@
     <ClCompile Include="GreenMomBat.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="Shooting.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="StatUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnifyingGlass.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="CosmosSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackInfo.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="OakBow.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="RedLotusCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="AliceCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
