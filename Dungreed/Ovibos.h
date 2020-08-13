@@ -5,6 +5,12 @@ class Ovibos : public Enemy
 {
 private:
 	tagMoveInfo _moving;
+	tagAttackInfo _attacking;
+
+	Vector2 _force;
+	Vector2 _rushpos;
+
+	bool _break;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

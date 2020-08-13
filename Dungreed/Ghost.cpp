@@ -112,9 +112,10 @@ void Ghost::update(float const timeElapsed)
 			//_enemyManager->moveEnemy(this, moveDir);
 			if (_moving.update(timeElapsed))
 			{
+				_moving.speed = 120;
+				_moving.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
+				//_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 				setState(ENEMY_STATE::MOVE);
-				_moving.speed = 50;
-				_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 			}
 
 			if (!_ani->isPlay())
