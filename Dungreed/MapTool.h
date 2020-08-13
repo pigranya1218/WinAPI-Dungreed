@@ -28,6 +28,12 @@ enum class DRAW_LINE_POSITION
 	PLATFORM
 };
 
+//struct tagTileMap
+//{
+//	int maxTileX;
+//	int maxTileY;
+//	tagTile 
+//};
 
 struct tagTileMap
 {
@@ -102,7 +108,7 @@ private:
 	Image* _paletteImage;
 	tagTileMap _tile[2000];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
-	tagMap _map[1];
+	
 
 	DRAW_LINE_POSITION _drawLinePos;
 

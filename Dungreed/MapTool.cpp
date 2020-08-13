@@ -36,41 +36,41 @@ void MapTool::update()
 	
 	if (KEY_MANAGER->isStayKeyDown(VK_RIGHT))
 	{
-		CAMERA->movePivot(Vector2(-2, 0));
+		CAMERA->movePivot(Vector2(-4, 0));
 		//_mapPointer.x += 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(-2,0));
+			_tile[i].rc.move(Vector2(-4,0));
 			
 		}
 	}
 	if (KEY_MANAGER->isStayKeyDown(VK_LEFT))
 	{
-		CAMERA->movePivot(Vector2(2, 0));
+		CAMERA->movePivot(Vector2(4, 0));
 		//_mapPointer.x -= 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(2, 0));
+			_tile[i].rc.move(Vector2(4, 0));
 			
 		}
 	}
 	if (KEY_MANAGER->isStayKeyDown(VK_UP))
 	{
-		CAMERA->movePivot(Vector2(0, 2));
+		CAMERA->movePivot(Vector2(0, 4));
 		//_mapPointer.y -= 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(0, 2));
+			_tile[i].rc.move(Vector2(0, 4));
 			
 		}
 	}
 	if (KEY_MANAGER->isStayKeyDown(VK_DOWN))
 	{
-		CAMERA->movePivot(Vector2(0, -2));
+		CAMERA->movePivot(Vector2(0, -4));
 		//_mapPointer.y += 1;
 		for (int i = 0; i < _tileX*_tileY; i++)
 		{
-			_tile[i].rc.move(Vector2(0, -2));
+			_tile[i].rc.move(Vector2(0, -4));
 			
 		}
 	}
@@ -200,6 +200,7 @@ void MapTool::setup()
 		{
 			_tile[_tileX*i + j].tileFrameX = j;
 			_tile[_tileX*i + j].tileFrameY = i;
+			
 			_tile[_tileX*i + j].rc = FloatRect(Vector2(16+ j * TILESIZE, +16+ TILESIZE * i), Vector2(TILESIZE, TILESIZE), PIVOT::CENTER);
 			_vTileMap.push_back(_tile[_tileX * i + j]);
 		}
@@ -212,9 +213,9 @@ void MapTool::setup()
 		_tile[i].tileFrameX = 0;
 		_tile[i].tileFrameY = 0;
 		_tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
+		_tile[i].tileX = _tileX;
+		_tile[i].tileY = _tileY;
 		
-		_map[0].Tx = _tileX;
-		_map[0].Ty = _tileY;
 	}
 
 }
@@ -259,7 +260,12 @@ void MapTool::setMap()
 					if (_tile[i].tileFrameX == 0 && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT;
 					if ((_tile[i].tileFrameX == 6|| _tile[i].tileFrameX == 8) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
 					if ((_tile[i].tileFrameX == 7|| _tile[i].tileFrameX == 9) && _tile[i].tileFrameY == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+					if ((_tile[i].tileFrameX >= 0 && _tile[i].tileFrameX < 4) && _tile[i].tileFrameY == 5)_tile[i].linePos = DRAW_LINE_POSITION::PLATFORM;
+					if ((_tile[i].tileFrameX >= 5 && _tile[i].tileFrameX < 8) && _tile[i].tileFrameY == 5)_tile[i].linePos = DRAW_LINE_POSITION::PLATFORM;
 					else _tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
+
+					/*_tile[i].tileX = _tileX;
+					_tile[i].tileY = _tileY;*/
 
 					releaseSelectTile();
 					break;
@@ -311,8 +317,7 @@ void MapTool::save()
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	WriteFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &write, NULL);
-	WriteFile(stageFile, _map, sizeof(tagMap), &write, NULL);
-
+	
 	CloseHandle(stageFile);
 
 }
@@ -433,24 +438,24 @@ void MapTool::setTileSize()
 		{
 			if (_tileX* _tileY >= 1900) return;
 			_tileX += 1;
-			setup();
+			
 		}
 		else if(_decreaseTileX.ptInRect(_ptMouse))
 		{
 			
 			_tileX -= 1;
-			setup();
+			
 		}
 		else if (_increaseTileY.ptInRect(_ptMouse))
 		{
 			if (_tileX* _tileY >= 1900) return;
 			_tileY += 1;
-			setup();
+			
 		}
 		else if (_decreaseTileY.ptInRect(_ptMouse))
 		{
 			_tileY -= 1;
-			setup();
+			//setup();
 		}
 	
 

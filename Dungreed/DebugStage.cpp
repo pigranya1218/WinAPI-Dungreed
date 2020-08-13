@@ -29,10 +29,12 @@ void DebugStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));*/
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::MINOTAURS, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
 
+	_map = new MapTool;
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
 	
 	mapLoad();
+	
 	
 }
 
@@ -51,11 +53,11 @@ void DebugStage::update(float const elapsedTime)
 
 void DebugStage::render()
 {
-	for (int i = 0; i < _map[0].Tx *_map[0].Ty; ++i)
+	for (int i = 0; i < _tile[0].tileX* _tile[0].tileY; ++i)
 	{
 		_tileImage->setScale(4);
-		_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
-		//CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+		//_tileImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
+		CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
 	}
 
 	for (int i = 0; i < _collisionGrounds.size(); i++)
@@ -78,18 +80,18 @@ void DebugStage::mapLoad()
 	HANDLE stageFile;
 	DWORD read;
 
-	stageFile = CreateFile("stage8.map", GENERIC_READ, NULL, NULL,
+	stageFile = CreateFile("stage9.map", GENERIC_READ, NULL, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
-	ReadFile(stageFile, _map, sizeof(tagMap), &read, NULL);
-	ReadFile(stageFile, _tile, sizeof(tagTileMap) * _map[0].Tx *_map[0].Ty, &read, NULL);
+
+	ReadFile(stageFile, _tile, sizeof(tagTileMap) * 2000, &read, NULL);
 	
 
 	CloseHandle(stageFile);
+	
+	int curr = 0;    	
 
-	int curr = 0;
-
-	for (int i = 0; i < _map[0].Tx *_map[0].Ty; ++i)
+	for (int i = 0; i <_tile[0].tileX* _tile[0].tileY; ++i)
 	{
 		switch (_tile[i].linePos)
 		{
@@ -136,7 +138,7 @@ void DebugStage::mapLoad()
 				curr++;
 			}
 
-			if (_tile[i + _map[0].Tx + 1].linePos == DRAW_LINE_POSITION::LEFT) continue;
+			if (_tile[i + _tile[0].tileX + 1].linePos == DRAW_LINE_POSITION::LEFT) continue;
 			else
 			{
 				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.left,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::RIGHT });
@@ -154,7 +156,7 @@ void DebugStage::mapLoad()
 				curr++;
 			}
 
-			if (_tile[i + _map[0].Tx + 1].linePos == DRAW_LINE_POSITION::RIGHT) continue;
+			if (_tile[i + _tile[0].tileX + 1].linePos == DRAW_LINE_POSITION::RIGHT) continue;
 			else
 			{
 				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::LEFT });
@@ -171,7 +173,7 @@ void DebugStage::mapLoad()
 				curr++;
 			}
 
-			if (_tile[i + _map[0].Tx - 2].linePos == DRAW_LINE_POSITION::LEFT_DIAGONAL) continue;
+			if (_tile[i + _tile[0].tileX - 2].linePos == DRAW_LINE_POSITION::LEFT_DIAGONAL) continue;
 			else
 			{
 				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.bottom),Vector2(_tile[_currentIndex].rc.right,_tile[_currentIndex].rc.top)),LINEAR_VALUE_TYPE::DOWN });
@@ -187,7 +189,7 @@ void DebugStage::mapLoad()
 				curr++;
 			}
 
-			if (_tile[i + _map[0].Tx + 3].linePos == DRAW_LINE_POSITION::RIGHT_DIAGONAL) continue;
+			if (_tile[i + _tile[0].tileX + 3].linePos == DRAW_LINE_POSITION::RIGHT_DIAGONAL) continue;
 			else
 			{
 				_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
@@ -206,7 +208,7 @@ void DebugStage::mapLoad()
 			if (_tile[i + 1].linePos == DRAW_LINE_POSITION::PLATFORM) continue;
 			else
 			{
-				_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
+				_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[_currentIndex].rc.left,_tile[_currentIndex].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.top)),LINEAR_VALUE_TYPE::DOWN });
 				curr = 0;
 
 			}
