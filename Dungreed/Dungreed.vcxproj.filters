@@ -357,6 +357,9 @@
     <ClInclude Include="DebugStage.h">
       <Filter>Dungreed\GameScene\Stage\Debug</Filter>
     </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -556,6 +559,9 @@
     </ClCompile>
     <ClCompile Include="DebugStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

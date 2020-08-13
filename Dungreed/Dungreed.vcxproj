@@ -180,6 +180,7 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Ghost.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Item.h" />
@@ -256,6 +257,7 @@
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="GunBullet.cpp" />

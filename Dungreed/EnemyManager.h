@@ -8,6 +8,7 @@
 #include "SkelBigNormal.h"
 #include "SkelMagicianIce.h"
 #include "SkelSmallBow.h"
+#include "Ghost.h"
 
 class Stage;
 

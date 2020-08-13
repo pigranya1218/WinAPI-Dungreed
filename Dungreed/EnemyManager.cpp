@@ -82,8 +82,11 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		}
 		case ENEMY_TYPE::GHOST:
 		{
-			break;
+			enemy = new Ghost;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
+		break;
 		case ENEMY_TYPE::LILITH:
 		{
 			break;
