@@ -82,4 +82,6 @@ public:
 	virtual void setState(ENEMY_STATE state) = 0;
 
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
+
+	void setDetectRange(float const range) { _detectRange = range; }
 };

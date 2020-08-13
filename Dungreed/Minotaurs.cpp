@@ -2,6 +2,8 @@
 #include "EnemyManager.h"
 #include "Minotaurs.h"
 
+#define RUSHSPEED 1000.0f
+
 void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 {
 	_ani = new Animation;
@@ -11,26 +13,31 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 300;		// 플레이어 감지 거리
 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
+	// 이동 관련 변수 >> 여기서는 돌진에 사용
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.speed = 1000;
-	_moving.delay = 0.2;
+	_moving.speed = RUSHSPEED;
 
+	// 공격 관련 변수
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 2;
-	_attack.distance = 100;
+	_attack.delay =	2;		// 공격 딜레이 초기화
+	_attack.distance = 100;	// 공격 시전 가능 거리
 
+	// 돌진 관련 변수
 	ZeroMemory(&_skill, sizeof(_skill));
-	_skill.delay = 1;
-	_skill.distance = 500;
-
-	_isDetect = _moving.jumpPower = 0;
-	_moving.gravity = 1600;
+	_skill.delay = 1;		// 돌진 딜레이 초기화
+	_skill.distance = 800;	// 돌진 시전 시 최대 거리
+	
+	// 변수 초기화
+	_isDetect = _moving.jumpPower = 0;	// 플레이어 감지 플래그, 점프파워 초기화
+	_rushPos = Vector2(0, 0);
+	_force = Vector2(10, 0);			// 저항 변수 초기화
+	_moving.gravity = 1600;				// 중력 변수 초기화
 }
 
 void Minotaurs::release()
@@ -41,10 +48,13 @@ void Minotaurs::release()
 
 void Minotaurs::update(float const timeElapsed)
 {
-	Vector2 playerPos = _enemyManager->getPlayerPos();
+	// 플레이어 좌표는 항상 받아옴
+	const Vector2 playerPos = _enemyManager->getPlayerPos();
 
+	// 아직 플레이어 감지를 못했다면
 	if (!_isDetect)
 	{
+		// 플레이어 감지 계속 실행
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
 	}
 
@@ -64,7 +74,7 @@ void Minotaurs::update(float const timeElapsed)
 				// 플레이어와의 거리 계산
 				float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
 
-				// 거리가 일반공격 사정거리보다 짧으면
+				// 거리가 일반공격 사정거리안에 들어와 있으면
 				if (distance < _attack.distance)
 				{
 					// 공격 딜레이 계산 후
@@ -81,6 +91,7 @@ void Minotaurs::update(float const timeElapsed)
 					{
 						// 돌진 상태로 전환
 						setState(ENEMY_STATE::SKILL);
+						_rushPos = _position;
 					}
 				}
 			}
@@ -98,16 +109,33 @@ void Minotaurs::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::SKILL:
 		{
-			// 돌진 프레임
+			// 돌진 공격 모션 프레임 고정
 			if (_ani->getPlayIndex() == 4)
 			{
 				// 일시 정지
 				if(_ani->isPlay()) _ani->pause();
 
-				moveDir.x += _moving.speed * timeElapsed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
+				// 돌진한다
+				_moving.speed -= _force.x;
+				moveDir.x += (_moving.speed) * timeElapsed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
 				// 이전 X축과 현재 X축이 같으면 벽에 부딪힌 것
 				if (_lastPos.x == _currPos.x)
+				{
+					_ani->resume();
+				}
+				// 돌진 힘이 끝났을 때
+				else if (_moving.speed < 0)
+				{
+					_ani->resume();
+				}
+				// 돌진 사정거리 가 지나면
+				else if (getDistance(_rushPos.x, _rushPos.y, _position.x, _position.y) > _skill.distance)
+				{
+					_ani->resume();
+				}
+				// 플레이어와 충돌
+				else if (playerCollision(playerPos))
 				{
 					_ani->resume();
 				}
@@ -115,6 +143,10 @@ void Minotaurs::update(float const timeElapsed)
 			// 돌진이 끝났을 때
 			if (!_ani->isPlay() && _ani->getPlayIndex() != 4)
 			{
+				_moving.speed = RUSHSPEED;
+
+				_force.x = 0;
+
 				// 플레이어와 거리 계산 후
 				float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
 
@@ -161,20 +193,27 @@ void Minotaurs::update(float const timeElapsed)
 
 void Minotaurs::render()
 {
-	D2D_RENDERER->drawEllipse(_position, _detectRange);
-	D2D_RENDERER->drawRectangle(_rect);
+	// 디버그
+	D2D_RENDERER->drawEllipse(_position, _detectRange);	// 인식거리
+	D2D_RENDERER->drawRectangle(_rect);					// 피격 및 충돌 렉트
 
+	// 스케일 설정
 	_img->setScale(_scale);
 
+	// 렌더 포지션 설정
 	Vector2 drawPos = _position;
+	// 기본 상태가 아닌 경우에
 	if (_state != ENEMY_STATE::IDLE)
 	{
+		// 기본 이미지를 가져오고
 		Image* img = IMAGE_MANAGER->findImage("Minotaurs/Idle");
+		// 사이즈 차이를 구한다
 		Vector2 elapsePos((_img->getFrameSize().x - img->getFrameSize().x) * _scale, (_img->getFrameSize().y - img->getFrameSize().y) * _scale);
-
-		drawPos.x += ((_direction == DIRECTION::RIGHT) ? (elapsePos.x / 2 * 1) : (elapsePos.x / 2 * -1));
+		// 구한 차이만큼 렌더 포지션 수정
+		drawPos.x += elapsePos.x / 2 * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 		drawPos.y -= elapsePos.y / 2;
 	}
+	// 최종 렌더
 	_img->aniRender(drawPos, _ani, (_direction == DIRECTION::LEFT));
 }
 
@@ -219,4 +258,15 @@ void Minotaurs::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+bool Minotaurs::playerCollision(const Vector2& playerPos)
+{
+	if (_rect.left <= playerPos.x && playerPos.x <= _rect.right &&
+		_rect.top <= playerPos.y && playerPos.y <= _rect.bottom)
+	{
+		return true;
+	}
+
+	return false;
 }
