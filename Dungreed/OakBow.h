@@ -21,6 +21,8 @@ private:
 
 	bool _isAttack;
 	float _chargeDelay;
+	Image* _img;
+	Animation* _ani;
 public:
 
 	virtual void init();

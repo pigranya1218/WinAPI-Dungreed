@@ -5,9 +5,11 @@
 
 #include "ShortSpear.h"
 #include "Punch.h"
+#include "ShortSword.h"
+
+#include "OakBow.h"
 #include "MatchLockGun.h"
 #include "Boomerang.h"
-#include "ShortSword.h"
 
 #include "SpikeBall.h"
 #include "IceBall.h"
@@ -168,6 +170,11 @@ void Player::init()
 	ShortSword* testWeapon3 = new ShortSword;
 	testWeapon3->init();
 	_inventory[13] = testWeapon3;
+
+	OakBow* testWeapon4 = new OakBow;
+	testWeapon4->init();
+	_inventory[14] = testWeapon4;
+
 
 	_hand = new Punch;
 	_hand->init();
