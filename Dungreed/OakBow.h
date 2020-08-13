@@ -19,6 +19,8 @@ private:
 	float _chargeDelay;
 	Image* _img;
 	Animation* _ani;
+
+	int effectCount;
 public:
 
 	virtual void init();

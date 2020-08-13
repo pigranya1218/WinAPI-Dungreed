@@ -25,12 +25,13 @@ void OakBow::init()
 	_currReloadDelay = 0;
 	_drawEffect = false;
 	_isAttack = false;
-
+	effectCount = 0;
 
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setDefPlayFrame(false, false);
 	_ani->stop();
+
 }
 
 void OakBow::release()
@@ -71,6 +72,19 @@ void OakBow::update(Player * player, float const elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
+	if (_ani->getPlayIndex() == 3)
+	{
+		effectCount++;
+		if (effectCount == 1)
+		{
+			_drawEffect = true;						// 이펙트 그리기
+		}
+		else
+		{
+			_drawEffect = false;
+		}
+	}
+
 	//떼면 공격
 	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
@@ -82,6 +96,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 		{
 			_ani->stop();
 		}*/
+		effectCount = 0;
 
 		_ani->setFPS(6);
 		_ani->setPlayFrame(4, 6, false);
@@ -112,6 +127,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 		{
 			_isAttack = false;
 		}
+
 	}
 }
 
@@ -150,23 +166,6 @@ void OakBow::frontRender(Player * player)
 	_img->setAnglePos(Vector2(0.3f * _img->getFrameSize().x, 0.6f * _img->getFrameSize().y));
 	_img->aniRender(renderPosWeapon, _ani, isLeft);
 
-	//if (!_isAttack)
-	//{
-	//	
-	//}
-
-	//if (_isAttack)
-	//{
-	//	_frameImg->setScale(4);
-	//	_frameImg->setAngle(renderDegree);
-	//	_frameImg->setAnglePos(Vector2(0.3f * _frameImg->getFrameSize().x, 0.6f * _frameImg->getFrameSize().y));
-	//	_frameImg->aniRender(renderPosWeapon, _ani, isLeft);
-
-	//	
-	//}
-
-	
-
 	Vector2 subHandPos = renderPosHand; // 보조 손 (양손무기)
 	subHandPos.x += _img->getFrameSize().x * 0.4 * 4;
 	subHandPos.y += (isLeft) ? (_img->getFrameSize().y * 0.2 * 4) : (_img->getFrameSize().y * -0.2 * 4);
@@ -183,13 +182,13 @@ void OakBow::frontRender(Player * player)
 	if (_drawEffect)
 	{
 		_drawEffect = false;
-
 		Vector2 effectPos01 = renderPosHand; // 손의 위치로부터
 
-		Vector2 effectSize01 = Vector2(220, 220);
+		Vector2 effectSize01 = Vector2(50, 50);
 		float length = _img->getFrameSize().x * 0.6f * 4; // 무기 길이만큼
 		effectPos01.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
 		effectPos01.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+
 		EFFECT_MANAGER->play("L_Effect_Charge", effectPos01, effectSize01, degree);
 	}
 }
@@ -204,11 +203,6 @@ void OakBow::attack(Player * player)
 	_ani->setPlayFrame(0, 4, false);
 	_ani->start();
 
-	if (_ani->getPlayIndex() >= 3)
-	{
-		_drawEffect = true;						// 이펙트 그리기
-	}
-
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currBullet == 0) // 총알이 없다면
 	{
@@ -218,22 +212,11 @@ void OakBow::attack(Player * player)
 		}
 		return;
 	}
-
-	
 	
 	if (!_isAttack)
 	{
 		_isAttack = true;
 	}
-
-	/*if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
-	{
-		if (_ani->getPlayIndex() >= 3)
-		{
-			_ani->pause();
-		}
-	}*/
-
 	
 }
 
