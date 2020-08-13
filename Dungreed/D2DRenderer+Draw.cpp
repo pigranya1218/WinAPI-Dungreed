@@ -417,7 +417,13 @@ void D2DRenderer::fillRectangle(const FloatRect & rc, const int red, const int g
 	D2D1::Matrix3x2F rotate = D2D1::Matrix3x2F::Rotation(360 - angle, D2D1::Point2F(anglePos.x, anglePos.y));
 
 	ID2D1SolidColorBrush* brush;
-	_D2DRenderTarget->CreateSolidColorBrush(D2D1::ColorF(RGB(red, green, blue), alpha), &brush);
+	D2D1_COLOR_F clr;
+	clr.r = static_cast<float>(red) / 255;
+	clr.g = static_cast<float>(green) / 255;
+	clr.b = static_cast<float>(blue) / 255;
+	clr.a = alpha;
+	_D2DRenderTarget->CreateSolidColorBrush(clr, &brush);
+
 	if (angle != 0)
 	{
 		_D2DRenderTarget->SetTransform(rotate);

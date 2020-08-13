@@ -1,88 +1,30 @@
 #include "Player.h"
 #include "GameScene.h"
+#include "Costume.h"
 #include "Item.h"
+
 #include "ShortSpear.h"
 #include "Punch.h"
+#include "MatchLockGun.h"
+#include "Boomerang.h"
+#include "ShortSword.h"
+
 #include "SpikeBall.h"
 #include "IceBall.h"
 #include "miniEarth.h"
 #include "watCher.h"
 #include "babyGreenBat.h"
+#include "GreenBat.h"
+#include "GreenDadBat.h"
+#include "GreenMomBat.h"
 #include "bombPouch.h"
-#include "MatchLockGun.h"
 #include "Matchlock.h"
-#include "ShortSword.h"
-#include "Boomerang.h"
 
-void Player::setBaseStat()
-{
-	_baseStat.maxHp = 80;
-	_baseStat.maxJumpCount = 1;
-	_baseStat.maxDashCount = 5;
-	_baseStat.dashCoolTime = 1.5f;
-	_baseStat.maxSatiety = 100;
-	_baseStat.power = 5;
-	_baseStat.damage = 0; //0 ~ 4
-	_baseStat.trueDamage = 0;
-	_baseStat.criticalChance = 2;
-	_baseStat.criticalDamage = 1; // + 100%
-	_baseStat.toughness = 0;
-	_baseStat.defense = 0;
-	_baseStat.block = 0;
-	_baseStat.evasion = 0;
-	_baseStat.attackSpeed = 0;
-	_baseStat.reloadSpeed = 0; // --
-	_baseStat.moveSpeed = 350;
-	_baseStat.dashXPower = 1600;
-	_baseStat.dashYPower = 1400;
-	_baseStat.jumpPower = 1400;
-	_baseStat.xGravity = 4000;
-	_baseStat.yGravity = 4000;
-}
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
 void Player::updateAdjustStat()
 {
-	_adjustStat = _baseStat;
-	
-
-}
-
-void Player::setAni(PLAYER_ANIMATION setAni)
-{
-	
-	_aniState = setAni;
-	switch (setAni)
-	{
-	case PLAYER_ANIMATION::IDLE:
-	{
-		_ani->stop();
-		_img = IMAGE_MANAGER->findImage("PLAYER/IDLE");
-		_ani->init(_img->getWidth(), _img->getHeight(),
-			_img->getMaxFrameX(), _img->getMaxFrameY());
-		_ani->setFPS(10);
-		_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
-		_ani->start();
-	}
-	break;
-	case PLAYER_ANIMATION::MOVE:
-	{
-		_ani->stop();
-		_img = IMAGE_MANAGER->findImage("PLAYER/RUN");
-		_ani->init(_img->getWidth(), _img->getHeight(),
-			_img->getMaxFrameX(), _img->getMaxFrameY());
-		_ani->setFPS(10);
-		_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
-		_ani->start();
-	}
-	break;
-	default:
-	{
-		_ani->stop();
-		_ani = nullptr;
-	}
-	break;
-	}
+	_adjustStat = _costume->getBaseStat();
 }
 
 void Player::attack(FloatRect* rect, tagAttackInfo* info)
@@ -125,6 +67,8 @@ void Player::attack(Projectile* projectile, tagAttackInfo* info)
 	}
 
 	// 플레이어 스탯 적용
+
+	_gameScene->attack(projectile, info);
 }
 
 void Player::init()
@@ -133,8 +77,9 @@ void Player::init()
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
+	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::METAL_PLATE);
+	_costume->init();
 
-	setBaseStat();
 	updateAdjustStat();
 	_level = 1;
 	_currJumpCount = _adjustStat.maxJumpCount;
@@ -146,43 +91,38 @@ void Player::init()
 	_currGold = 1000;
 	_force = Vector2(0, 0);
 
-	_ani = new Animation;
-	setAni(PLAYER_ANIMATION::IDLE);
-
-	//test 
-	/*ShortSpear* testWeapon = new ShortSpear;
-	testWeapon->init();
-	_equippedWeapon.push_back(testWeapon);
-	_currWeaponIndex = 0;*/
-
-	/*MatchLockGun* testWeapon = new MatchLockGun;
-	testWeapon->init();
-	_equippedWeapon.push_back(testWeapon);
-	_currWeaponIndex = 0;*/
-	
-	SpikeBall* testAcc = new SpikeBall;
-	testAcc->init();
-	_equippedAcc.push_back(testAcc);
-	
-	babyGreenBat* testAcc1 = new babyGreenBat;
+	// TEST ITEM
+	SpikeBall* testAcc1 = new SpikeBall;
 	testAcc1->init();
 	_equippedAcc.push_back(testAcc1);
 
-	bombPouch* testAcc2 = new bombPouch;
+	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
 	_equippedAcc.push_back(testAcc2);
 
-	IceBall* testAcc3 = new IceBall;
+	GreenDadBat* testAcc3 = new GreenDadBat;
 	testAcc3->init();
 	_equippedAcc.push_back(testAcc3);
 
-	miniEarth* testAcc4 = new miniEarth;
+	GreenMomBat* testAcc4 = new GreenMomBat;
 	testAcc4->init();
 	_equippedAcc.push_back(testAcc4);
 
-	watCher* testAcc5 = new watCher;
+	bombPouch* testAcc5 = new bombPouch;
 	testAcc5->init();
 	_equippedAcc.push_back(testAcc5);
+
+	IceBall* testAcc6 = new IceBall;
+	testAcc6->init();
+	_equippedAcc.push_back(testAcc6);
+
+	miniEarth* testAcc7 = new miniEarth;
+	testAcc7->init();
+	_equippedAcc.push_back(testAcc7);
+
+	watCher* testAcc8 = new watCher;
+	testAcc8->init();
+	_equippedAcc.push_back(testAcc8);
 
 
 	//ShortSpear* testWeapon = new ShortSpear;
@@ -199,14 +139,39 @@ void Player::init()
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
 
-	_currWeaponIndex = 0;
+	ShortSword* testWeapon3 = new ShortSword;
+	testWeapon3->init();
+	_equippedWeapon.push_back(testWeapon3);
+
+	Punch* testWeapon4 = new Punch;
+	testWeapon4->init();
+	_equippedWeapon.push_back(testWeapon4);
+
+
+	_currWeaponIndex = 2;
 	_currWeaponChangeCoolTime = 0;
 }
 
 void Player::release()
 {
-	_ani->release();
-	SAFE_DELETE(_ani);
+	for (int i = 0; i < _inventory.size(); i++)
+	{
+		_inventory[i]->release();
+		delete _inventory[i];
+	}
+	for (int i = 0; i < _equippedWeapon.size(); i++)
+	{
+		_equippedWeapon[i]->release();
+		delete _equippedWeapon[i];
+	}
+	for (int i = 0; i < _equippedAcc.size(); i++)
+	{
+		_equippedAcc[i]->release();
+		delete _equippedAcc[i];
+	}
+	_inventory.clear();
+	_equippedWeapon.clear();
+	_equippedAcc.clear();
 }
 
 void Player::update(float const elapsedTime)
@@ -218,18 +183,16 @@ void Player::update(float const elapsedTime)
 	if (_ptMouse.x < _position.x)
 	{
 		_direction = DIRECTION::LEFT;
-
 	}
 	else
 	{
 		_direction = DIRECTION::RIGHT;
-
 	}
 
 	// 장비 교체
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::CHANGE_WEAPON)) && _currWeaponChangeCoolTime == 0)
 	{
-		_currWeaponIndex == 0 ? _currWeaponIndex = 1 : _currWeaponIndex = 0;
+		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
 	}
 
@@ -244,69 +207,36 @@ void Player::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
 		_equippedWeapon[_currWeaponIndex]->attack(this);
-		/*for (int i = 0; i < 4; i++)
+		for (int i = 0; i < _equippedAcc.size(); i++)
 		{
 			if (_equippedAcc[i] != nullptr)
 			{
-				_equippedAcc[i]->attack(_position, atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x)));
+				_equippedAcc[i]->attack(this);
 			}
-		}*/
+		}
 	}
 
 	//이동
 	Vector2 moveDir(0, 0);
-	//좌측 이동중
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
+	
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)) || KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT))) // 좌우 이동중
 	{
-		moveDir.x -= _baseStat.moveSpeed * elapsedTime;
-		if (_isStand)
+		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
 		{
-			if (moveDir.x == 0)
-			{
-				if(_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-				_aniState = PLAYER_ANIMATION::IDLE;
-			}
-			else if (moveDir.x != 0)
-			{
-				if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-				_aniState = PLAYER_ANIMATION::MOVE;
-			}
+			moveDir.x -= _adjustStat.moveSpeed * elapsedTime;
 		}
+		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))
+		{
+			moveDir.x += _adjustStat.moveSpeed * elapsedTime;
+		}
+		_costume->setSprite(PLAYER_STATE::MOVE, false);
 	}
-	//우측 이동중
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))
+	else // 이동 안하는 중 
 	{
-		moveDir.x += _baseStat.moveSpeed * elapsedTime;
+		_costume->setSprite(PLAYER_STATE::IDLE, false);
+	}
 
-		if (_isStand)
-		{
-			// if(moveDir.x == 0) 이때 IDLE
-			if (moveDir.x == 0)
-			{
-				if(_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-				_aniState = PLAYER_ANIMATION::IDLE;
-			}
-			else if(moveDir.x != 0)
-			{
-				if(_aniState != PLAYER_ANIMATION::MOVE) setAni(PLAYER_ANIMATION::MOVE);
-				_aniState = PLAYER_ANIMATION::MOVE;
-			}
-		}
-	}
-	/*if (KEY_MANAGER->isOnceKeyUp('A'))
-	{
-		if (_aniState != PLAYER_ANIMATION::IDLE)
-		{
-			setAni(PLAYER_ANIMATION::IDLE);
-			_aniState = PLAYER_ANIMATION::IDLE;
-		}
-	}
-	if (KEY_MANAGER->isOnceKeyUp('D'))
-	{
-		if (_aniState != PLAYER_ANIMATION::IDLE) setAni(PLAYER_ANIMATION::IDLE);
-		_aniState = PLAYER_ANIMATION::IDLE;
-	}*/
-
+	// 점프
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)))
 	{
 		if (_isStand && KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_DOWN)))
@@ -319,9 +249,9 @@ void Player::update(float const elapsedTime)
 			_force.y = -_adjustStat.jumpPower;
 			_currJumpCount -= 1;
 		}
-		
 	}
-	//대쉬
+
+	// 대쉬
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		_currDashCount -= 1;
@@ -379,67 +309,50 @@ void Player::update(float const elapsedTime)
 	{
 		_force.y = 0;
 		_currJumpCount = _adjustStat.maxJumpCount;
-		if (moveDir.x == 0 && _aniState != PLAYER_ANIMATION::IDLE)
-		{
-			setAni(PLAYER_ANIMATION::IDLE);
-			_aniState = PLAYER_ANIMATION::IDLE;
-		}
 	}
 
 	//점프 처리
 	if (!_isStand)
 	{
-		_ani->stop();
-		_img = IMAGE_MANAGER->findImage("PLAYER/JUMP");
-		_aniState = PLAYER_ANIMATION::DEFAULT;
+		_costume->setSprite(PLAYER_STATE::JUMP, false);
 	}
 
-	_ani->frameUpdate(elapsedTime);
+	// 코스튬 애니메이션 업데이트
+	_costume->update(elapsedTime);
 
 	// 무기 업데이트
-	_equippedWeapon[0]->update(this, elapsedTime);
-	_equippedWeapon[1]->update(this, elapsedTime);
-	// 악세사리 업데이트
-	for (int i = 0; i < 6; i++) {
-		_equippedAcc[i]->update(this, elapsedTime);
-		
+	for (int i = 0; i < _equippedWeapon.size(); i++) 
+	{
+		_equippedWeapon[i]->update(this, elapsedTime);
 	}
 	
+	// 악세사리 업데이트
+	for (int i = 0; i < _equippedAcc.size(); i++) 
+	{
+		_equippedAcc[i]->update(this, elapsedTime);
+	}
 }
 
 void Player::render()
 {
-	_img->setScale(4);
-
-	/*_equippedAcc[0]->backRender(_position, angle);
-	_equippedAcc[1]->backRender(_position, angle);
-	_equippedAcc[2]->backRender(_position, angle);*/
-
 	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1);
 
-	for(int i=0;i<6;i++){
-	_equippedAcc[i]->backRender(this);	
+	// 캐릭터 뒤에 그리기
+	for(int i = 0; i < _equippedAcc.size(); i++)
+	{
+		_equippedAcc[i]->backRender(this);	
 	}
 	_equippedWeapon[_currWeaponIndex]->backRender(this);
 
-	if (_aniState == PLAYER_ANIMATION::DEFAULT)
-	{
-		_img->render(_position, _direction == DIRECTION::LEFT);
-	}
-	else
-	{
-		_img->aniRender(_position, _ani, _direction == DIRECTION::LEFT);
-	}
+	// 캐릭터 그리기
+	_costume->render(_position, _direction);
 
-	/*_equippedAcc[0]->frontRender(_position, angle);
-	_equippedAcc[1]->frontRender(_position, angle);
-	_equippedAcc[2]->frontRender(_position, angle);*/
+	// 캐릭터 앞에 그리기
+	for (int i = 0; i < _equippedAcc.size(); i++)
+	{
+		_equippedAcc[i]->frontRender(this);
+	}
 	_equippedWeapon[_currWeaponIndex]->frontRender(this);
-	
-	/*wstring str = L" 대쉬 카운트 : " + to_wstring(_currDashCount) + L" | 대쉬 쿨타임 : " + to_wstring(_currDashCoolTime) + L" / " + to_wstring(_adjustStat.dashCoolTime);
-	D2D_RENDERER->renderText(0, 0, str, 20, D2DRenderer::DefaultBrush::Blue, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
-	str = L" 무기 교체 딜레이 시간 : " + to_wstring(_currWeaponChangeCoolTime);
-	D2D_RENDERER->renderText(600, 0, str, 20, D2DRenderer::DefaultBrush::Green, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);*/
 }
 
 Image* Player::getWeaponImg(int index) const noexcept

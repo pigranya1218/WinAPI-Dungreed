@@ -1,13 +1,17 @@
 #include "StageManager.h"
 #include "Stage.h"
+#include "Player.h"
 
 void Stage::init()
 {
 	_objectMgr = new ObjectManager;
-	_npcMgr = new NpcManager;
-	_enemyMgr = new EnemyManager;
-	_projectileMgr = new ProjectileManager;
 	
+	_npcMgr = new NpcManager;
+	
+	_enemyMgr = new EnemyManager;
+	
+	_projectileMgr = new ProjectileManager;
+	_projectileMgr->setStage(this);
 }
 
 void Stage::release()
@@ -142,6 +146,19 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 	}
 
 	object->setPosition(newCenter);
+}
+
+void Stage::attack(FloatRect* rect, tagAttackInfo* info)
+{
+}
+
+void Stage::attack(FloatCircle* circle, tagAttackInfo* info)
+{
+}
+
+void Stage::attack(Projectile* projectile, tagAttackInfo* info)
+{
+	_projectileMgr->addProjectile(projectile);
 }
 
 Vector2 Stage::getPlayerPos()

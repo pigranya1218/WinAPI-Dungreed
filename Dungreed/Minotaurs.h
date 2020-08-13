@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include <dxgitype.h>
 
 class Minotaurs : public Enemy
 {
@@ -10,6 +11,8 @@ private:
 
 	Vector2			_lastPos;	// 이전 좌표
 	Vector2			_currPos;	// 현재 좌표
+	Vector2			_force;		// 돌진 시 공기저항
+	Vector2			_rushPos;	// 돌진 시작 포지션
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);
@@ -18,5 +21,7 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
+
+	bool playerCollision(const Vector2& playerPos);
 };
 

@@ -1,18 +1,8 @@
 #pragma once
 #include "Item.h"
-
-class ShortSpear : public Item
+class Voluspa : public Item
 {
 private:
-	// 공격 관련
-	int	_minDamage;
-	int _maxDamage;
-	Vector2 _attackMove;
-	float _baseAttackDelay; // 공격 쿨타임
-	float _currAttackDelay; // 남은 공격 쿨타임
-	float _attackAngle;
-	bool _reverseMove;
-	bool _drawEffect;
 
 public:
 	virtual void init();

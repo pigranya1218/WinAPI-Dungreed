@@ -378,17 +378,29 @@
     <ClInclude Include="CostumeManager.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultCos.h">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClInclude>
     <ClInclude Include="MetalPlateCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
     <ClInclude Include="PickaxCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBullet.h">
+    <ClInclude Include="BaseCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenDadBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenMomBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="Voluspa.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -608,17 +620,29 @@
     <ClCompile Include="CostumeManager.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultCos.cpp">
-      <Filter>Dungreed\GameScene\Player\Costume</Filter>
-    </ClCompile>
     <ClCompile Include="MetalPlateCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
     <ClCompile Include="PickaxCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBullet.cpp">
+    <ClCompile Include="BaseCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenDadBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenMomBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Voluspa.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

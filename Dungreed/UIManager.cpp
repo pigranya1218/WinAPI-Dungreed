@@ -187,7 +187,7 @@ void UIManager::render()
 
 		// PLAYER GOLD
 		_goldUI.img->aniRender(_goldUI.imgRc.getCenter(), _goldUI.imgRc.getSize(), _goldUI.ani);
-		D2D_RENDERER->renderTextField(_goldUI.textRc.left, _goldUI.textRc.top, to_wstring(_player->getGold()) + L" ¿ø", RGB(255, 255, 255),
+		D2D_RENDERER->renderTextField(_goldUI.textRc.left, _goldUI.textRc.top, to_wstring(_player->getGold()) + L"G", RGB(255, 255, 255),
 			_goldUI.fontSize, _goldUI.textRc.getSize().x, _goldUI.textRc.getSize().y, 1);
 
 		// PLAYER SATIETY

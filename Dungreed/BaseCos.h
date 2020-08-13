@@ -1,7 +1,7 @@
 #pragma once
 #include "Costume.h"
 
-class PickaxCos : public Costume
+class BaseCos : public Costume
 {
 private:
 

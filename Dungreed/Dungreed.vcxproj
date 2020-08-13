@@ -172,7 +172,7 @@
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="DebugStage.h" />
-    <ClInclude Include="DefaultCos.h" />
+    <ClInclude Include="BaseCos.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
@@ -183,6 +183,9 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GreenBat.h" />
+    <ClInclude Include="GreenDadBat.h" />
+    <ClInclude Include="GreenMomBat.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -198,6 +201,7 @@
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
+    <ClInclude Include="NormalProjectile.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
     <ClInclude Include="Object.h" />
@@ -205,7 +209,6 @@
     <ClInclude Include="Ovibos.h" />
     <ClInclude Include="PickaxCos.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerBullet.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="PlayGround.h" />
     <ClInclude Include="ProgressBar.h" />
@@ -237,6 +240,7 @@
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="VillageStage.h" />
+    <ClInclude Include="Voluspa.h" />
     <ClInclude Include="watCher.h" />
     <ClInclude Include="windowsAPI.h" />
   </ItemGroup>
@@ -261,7 +265,7 @@
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DebugStage.cpp" />
-    <ClCompile Include="DefaultCos.cpp" />
+    <ClCompile Include="BaseCos.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
@@ -269,6 +273,9 @@
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GreenBat.cpp" />
+    <ClCompile Include="GreenDadBat.cpp" />
+    <ClCompile Include="GreenMomBat.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
@@ -282,13 +289,13 @@
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
+    <ClCompile Include="NormalProjectile.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ovibos.cpp" />
     <ClCompile Include="PickaxCos.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerBullet.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PlayGround.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
@@ -315,6 +322,7 @@
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="VillageStage.cpp" />
+    <ClCompile Include="Voluspa.cpp" />
     <ClCompile Include="watCher.cpp" />
     <ClCompile Include="windowsAPI.cpp" />
   </ItemGroup>

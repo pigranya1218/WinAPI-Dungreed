@@ -1,5 +1,5 @@
 #pragma once
-
+#include "CostumeManager.h"
 
 struct tagLoadInfo
 {
@@ -11,7 +11,6 @@ struct tagLoadInfo
 	int statLevel[5];// 훈련장 스탯 정보
 	// 장착한 무기 (신비 20레벨 스킬 대비) 
 };
-
 
 class DataManager : public SingletonBase<DataManager>
 {
@@ -28,6 +27,8 @@ private:
 	int _selectedSlot;
 	int _selectedDelete;
 
+	CostumeManager* _costumeMgr;
+
 public:
 	void init(); // 로드 데이터 존재한다면 읽음
 	void update(); // 로드 UI를 띄운 상태일 때 
@@ -36,5 +37,7 @@ public:
 	inline void setActive(bool active) { _isActive = active; }
 	inline bool isActive() const noexcept { return _isActive; }
 	void save(int slot, tagLoadInfo info) {} // 저장하는 함수
+
+	Costume* getCostume (COSTUME_TYPE type) const;
 };
 

@@ -1,20 +1,25 @@
 #pragma once
 #include "Projectile.h"
 
+class Stage;
+
 class ProjectileManager
 {
 private:
 
 protected:
+	Stage* _stage;
+
 	vector<Projectile*> _projectiles;
-	vector<Projectile*> _vBullet;
 
 public:
 	void init();
 	void release();
 	void update(float const elapsedTime);
 	void render();
-	vector<Projectile*> getProjectile() { return _projectiles; }
-	void fire();
+
+	void setStage(Stage* stage) { _stage = stage; }
+	void moveTo(GameObject* gameObject, Vector2 moveDir);
+	void addProjectile(Projectile* projectile) { _projectiles.push_back(projectile); }
 };
 

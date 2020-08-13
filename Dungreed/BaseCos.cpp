@@ -1,15 +1,15 @@
-#include "PickaxCos.h"
+#include "BaseCos.h"
 
-void PickaxCos::init()
+void BaseCos::init()
 {
 	//코스튬 이름 설정
-	_costumeName = "PICKAX";
+	_costumeName = "BASE";
 
 	_ani = new Animation;
 
 	//현재 재생할 이미지
 	setSprite(PLAYER_STATE::IDLE, true);
-
+	
 	//베이스 스탯
 	_baseStat.maxHp = 80;
 	_baseStat.maxJumpCount = 1;
@@ -35,13 +35,13 @@ void PickaxCos::init()
 	_baseStat.yGravity = 4000;
 }
 
-void PickaxCos::release()
+void BaseCos::release()
 {
 	_ani->release();
 	delete _ani;
 }
 
-void PickaxCos::update(float elaspedTime)
+void BaseCos::update(float elaspedTime)
 {
 	if (_ani->isPlay())
 	{
@@ -49,7 +49,7 @@ void PickaxCos::update(float elaspedTime)
 	}
 }
 
-void PickaxCos::render(Vector2 pos, DIRECTION dir)
+void BaseCos::render(Vector2 pos, DIRECTION dir)
 {
 	// 확대
 	_img->setScale(4);
@@ -72,7 +72,7 @@ void PickaxCos::render(Vector2 pos, DIRECTION dir)
 	}
 }
 
-void PickaxCos::setSprite(PLAYER_STATE state, bool isForced)
+void BaseCos::setSprite(PLAYER_STATE state, bool isForced)
 {
 	if (_imgState == state && !isForced) return;
 
@@ -81,7 +81,7 @@ void PickaxCos::setSprite(PLAYER_STATE state, bool isForced)
 	case PLAYER_STATE::IDLE:
 	{
 		_imgState = PLAYER_STATE::IDLE;
-
+		
 		_img = IMAGE_MANAGER->findImage("COSTUME/" + _costumeName + "/IDLE");
 		_ani->stop();
 		_ani->init(_img->getWidth(), _img->getHeight(),

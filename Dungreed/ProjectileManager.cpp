@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ProjectileManager.h"
+#include "Stage.h"
 
 void ProjectileManager::init()
 {
@@ -29,10 +30,7 @@ void ProjectileManager::render()
 	}
 }
 
-void ProjectileManager::fire()
+void ProjectileManager::moveTo(GameObject* gameObject, Vector2 moveDir)
 {
-	for (int i = 0; i < _projectiles.size(); i++)
-	{
-		_projectiles[i]->fire();
-	}
+	_stage->moveTo(gameObject, moveDir);
 }

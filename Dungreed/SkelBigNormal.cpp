@@ -11,7 +11,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 100;
+	_detectRange = 300;
 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
@@ -27,7 +27,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	_isDetect = _moving.jumpPower = 0;
-	_moving.gravity = 1600;
+	_moving.gravity = 4000;
 }
 
 void SkelBigNormal::release()
@@ -38,8 +38,10 @@ void SkelBigNormal::release()
 
 void SkelBigNormal::update(float const timeElapsed)
 {
+	// 플레이어를 아직 감지 못했다면
 	if (!_isDetect)
 	{
+		// 계속 감지
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
 	}
 
@@ -51,6 +53,7 @@ void SkelBigNormal::update(float const timeElapsed)
 		{
 			if (_isDetect)
 			{
+				
 				setState(ENEMY_STATE::MOVE);
 			}
 			break;
@@ -59,14 +62,35 @@ void SkelBigNormal::update(float const timeElapsed)
 		{
 			const Vector2 playerPos = _enemyManager->getPlayerPos();
 
+			// 일정 주기로 방향 변경
 			if (_moving.update(timeElapsed))
 			{
-				_direction = playerPos.x > _position.x ? DIRECTION::RIGHT : DIRECTION::LEFT;
+				_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 			}
 
-			moveDir.x += timeElapsed * _moving.speed * ((bool)(_direction) ? 1 : -1);
-
+			// X축 설정
+			moveDir.x += timeElapsed * _moving.speed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
+			// 거리 계산
 			float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
+			// 플레이어와의 X축 거리 계산
+			if (fabsf(_position.x - playerPos.x) < _size.x)
+			{
+				// 땅에 서있는 상태
+				if (_isStand)
+				{
+					// 위에 있다면
+					if (playerPos.y < (_position.y - _size.y * 1.3f))
+					{
+						_moving.jumpPower = -1400;
+					}
+					// 아래에 있다면
+					else if (playerPos.y > (_position.y + _size.y * 0.5f))
+					{
+						_position.y += 1.5f;
+						_moving.jumpPower = 0.1f;
+					}
+				}
+			}
 			if (distance < _attack.distance)
 			{
 				if (_attack.update(timeElapsed))
@@ -90,9 +114,13 @@ void SkelBigNormal::update(float const timeElapsed)
 		}
 	}
 
+	if (_isStand && _moving.jumpPower == 0)
+	{
+		_position.y -= 15;
+		moveDir.y += 25;
+	}
 	_moving.jumpPower += _moving.gravity * timeElapsed;
-	moveDir.y = 1.5 + _moving.jumpPower * timeElapsed;
-
+	moveDir.y += _moving.jumpPower * timeElapsed;
 
 	// 이동할 포지션 최종
 	_enemyManager->moveEnemy(this, moveDir);
