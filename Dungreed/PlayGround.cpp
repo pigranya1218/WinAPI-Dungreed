@@ -395,6 +395,7 @@ void playGround::update()
 
 	SCENE_MANAGER->update();
 	DEBUG_MANAGER->update();
+	KEY_MANAGER->update();
 }
 
 //그리기 전용

@@ -20,7 +20,13 @@ void InventoryUI::release()
 
 void InventoryUI::update(float elapsedTime)
 {
-
+	if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
+	{
+		if (_exitRc.ptInRect(_ptMouse))
+		{
+			_isActive = false;
+		}
+	}
 }
 
 void InventoryUI::render()

@@ -10,6 +10,8 @@ class KeyManager : public SingletonBase<KeyManager>
 private:
 	bitset<KEYMAX> _keyUp;
 	bitset<KEYMAX> _keyDown;
+	vector<int> _bufferUp;
+	vector<int> _bufferDown;
 
 public:
 	KeyManager();
@@ -26,6 +28,8 @@ public:
 	bool isStayKeyDown(int key);
 	//키가 토글되면(?) 캡스롹 생각해라
 	bool isToggleKey(int key);
+
+	void update(); // 프레임 별 onceKeyDown, onceKeyUp 공유할 수 있도록!
 
 	int getWhichKeyDown();
 	bitset<KEYMAX> getKeyUp() { return _keyUp; }
