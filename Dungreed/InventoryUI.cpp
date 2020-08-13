@@ -49,6 +49,40 @@ void InventoryUI::update(float elapsedTime)
 			_isActive = false;
 		}
 	}
+
+	if (KEY_MANAGER->isOnceKeyDown(VK_RBUTTON))
+	{
+		// 무기칸 위에 있던 경우
+		for (int i = 0; i < 2; i++)
+		{
+			if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
+			{
+				_player->unequipWeapon(i);
+				break;
+			}
+		}
+
+		// 악세사리칸 위에 있던 경우
+		for (int i = 0; i < 4; i++)
+		{
+			if (_equippedAccRc[i].ptInRect(_ptMouse))
+			{
+				_player->unequipAcc(i);
+				break;
+			}
+		}
+
+
+		// 인벤토리 위에 있던 경우
+		for (int i = 0 ; i < 15 ; i++)
+		{
+			if (_invenRc[i].ptInRect(_ptMouse))
+			{
+				_player->equipItem(i);
+				break;
+			}
+		}
+	}
 }
 
 void InventoryUI::render()
@@ -135,7 +169,7 @@ void InventoryUI::render()
 			Item* weapon = _player->getWeapon(i);
 			if (weapon == nullptr) continue;
 
-			weapon->getIconImg()->setScale(4);
+			weapon->getIconImg()->setScale(5);
 			weapon->getIconImg()->render(_equippedWeaponRc[i * 2].getCenter());
 
 			if (weapon->getType() == ITEM_TYPE::WEAPON_TWO_HAND)
@@ -144,8 +178,28 @@ void InventoryUI::render()
 				IMAGE_MANAGER->findImage("UI/INVENTORY/WEAPON_X")->render(_equippedWeaponRc[i * 2 + 1].getCenter());
 			}
 		}
+
+		for (int i = 0; i < 4; i++)
+		{
+			Item* acc = _player->getAcc(i);
+			if (acc == nullptr) continue;
+
+			acc->getIconImg()->setScale(5);
+			acc->getIconImg()->render(_equippedAccRc[i].getCenter());
+		}
 	}
 
+	// 인벤토리 그리기
+	{
+		for (int i = 0; i < 15; i++)
+		{
+			Item* item = _player->getInvenItem(i);
+			if (item == nullptr) continue;
+
+			item->getIconImg()->setScale(5);
+			item->getIconImg()->render(_invenRc[i].getCenter());
+		}
+	}
 
 	
 

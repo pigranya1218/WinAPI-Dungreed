@@ -21,6 +21,10 @@ void GreenBat::init()
 	_img = IMAGE_MANAGER->findImage("GreenBatF");
 	_ani = new Animation;
 	_ani->start();
+	_ani->init(_img->getWidth(), _img->getHeight(),
+		_img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setFPS(10);
+	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 }
 
 void GreenBat::release()
@@ -52,10 +56,7 @@ void GreenBat::update(Player * player, float const elapsedTime)
 
 	}
 	_ani->frameUpdate(elapsedTime);
-	_ani->init(_img->getWidth(), _img->getHeight(),
-		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(10);
-	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
+	
 }
 
 void GreenBat::backRender(Player * player)
