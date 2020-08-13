@@ -32,16 +32,29 @@ void Voluspa::update(Player * player, float const elapsedTime)
 	
 
 	location.x = 45;	
-	
-	if (renderPos.x > WINSIZEX+300 )
+
+	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
-		renderPos.y = _ptMouse.y;		
-		Opposition = true;
+		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 	}
-	else if (renderPos.x < -300 )
+	
+	if (renderPos.x > WINSIZEX+200 )
 	{
-		renderPos.y = _ptMouse.y;		
-		Opposition = false;
+		
+		renderPos.y = _ptMouse.y;	
+		if (_currAttackDelay == 0 ) {
+			_currAttackDelay = 3.1f;
+			Opposition = true;
+		}
+	}
+	if (renderPos.x < -200 )
+	{
+		
+		renderPos.y = _ptMouse.y;	
+		if (_currAttackDelay == 0 ) {
+			_currAttackDelay = 2.9f;
+			Opposition = false;
+		}
 	}
 	if (Opposition)
 	{
