@@ -139,7 +139,16 @@ void Player::init()
 	testWeapon2->init();
 	_equippedWeapon.push_back(testWeapon2);
 
-	_currWeaponIndex = 0;
+	ShortSword* testWeapon3 = new ShortSword;
+	testWeapon3->init();
+	_equippedWeapon.push_back(testWeapon3);
+
+	Punch* testWeapon4 = new Punch;
+	testWeapon4->init();
+	_equippedWeapon.push_back(testWeapon4);
+
+
+	_currWeaponIndex = 2;
 	_currWeaponChangeCoolTime = 0;
 }
 
