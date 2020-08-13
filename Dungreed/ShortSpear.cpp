@@ -57,8 +57,8 @@ void ShortSpear::backRender(Player* player)
 	Vector2 pos = player->getPosition();
 	Vector2 renderPos = Vector2(pos.x + ((isLeft) ? (-22) : (22)), pos.y + 20);
 	FloatRect handRc = rectMakePivot(renderPos, Vector2(5, 5), PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1, 6.f);
 	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(handRc), 210, 188, 181, 1);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1, 2.f);
 }
 
 void ShortSpear::frontRender(Player* player)
@@ -97,8 +97,8 @@ void ShortSpear::frontRender(Player* player)
 
 	FloatRect handRc = rectMakePivot(renderPosHand, Vector2(5, 5), PIVOT::CENTER);
 
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1.f, 6.f, degree, CAMERA->getRelativeV2(renderPosHand));
 	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(handRc), 210, 188, 181, 1, degree, CAMERA->getRelativeV2(renderPosHand));
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
 	
 	if (_drawEffect) // 이펙트를 그린다
 	{

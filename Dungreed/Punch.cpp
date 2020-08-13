@@ -67,8 +67,8 @@ void Punch::backRender(Player* player)
 		renderPosLeft.y += ((angle >= 180)?(_attackMove.y):(-_attackMove.y));
 
 		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_leftHand), 40, 36, 58, 1, 6.f, angle, CAMERA->getRelativeV2(_leftHand.getCenter()));
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_leftHand), 210, 188, 181, 1.f, angle, CAMERA->getRelativeV2(_leftHand.getCenter()));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_leftHand), 40, 36, 58, 1, 2.f, angle, CAMERA->getRelativeV2(_leftHand.getCenter()));
 	}
 	else
 	{
@@ -82,8 +82,8 @@ void Punch::backRender(Player* player)
 		renderPosRight.y += ((angle >= 180) ? (_attackMove.y) : (-_attackMove.y));
 
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rightHand), 40, 36, 58, 1, 6.f, angle, CAMERA->getRelativeV2(_rightHand.getCenter()));
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_rightHand), 210, 188, 181, 1.f, angle, CAMERA->getRelativeV2(_rightHand.getCenter()));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rightHand), 40, 36, 58, 1, 2.f, angle, CAMERA->getRelativeV2(_rightHand.getCenter()));
 	}
 }
 
@@ -96,15 +96,15 @@ void Punch::frontRender(Player* player)
 	{
 		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 18);
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rightHand), 40, 36, 58, 1, 6.f);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_rightHand), 210, 188, 181, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rightHand), 40, 36, 58, 1, 2.f);
 	}
 	else
 	{
 		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 18);
 		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_leftHand), 40, 36, 58, 1, 6.f);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_leftHand), 210, 188, 181, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_leftHand), 40, 36, 58, 1, 2.f);
 	}
 }
 

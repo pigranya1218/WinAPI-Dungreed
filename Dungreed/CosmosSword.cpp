@@ -172,13 +172,13 @@ void CosmosSword::backRender(Player* player)
 
 		if (isLeft) // 왼쪽을 보고 있음
 		{
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, -(renderDegree ), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree ), CAMERA->getRelativeV2(last));
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree), CAMERA->getRelativeV2(last));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree ), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
 		}
 		else
 		{
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, (renderDegree ), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree ), CAMERA->getRelativeV2(last));
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree), CAMERA->getRelativeV2(last));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree ), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
 		}
 		if (_drawEffect) // 이펙트를 그린다
 		{
@@ -277,13 +277,13 @@ void CosmosSword::frontRender(Player* player)
 
 		if (isLeft) // 왼쪽을 보고 있음
 		{
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
 		}
 		else
 		{
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 6.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
 		}
 		if (_drawEffect) // 이펙트를 그린다
 		{

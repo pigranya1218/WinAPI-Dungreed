@@ -28,6 +28,37 @@ PlayerStat PlayerStat::operator+(const PlayerStat& a)
 	return result;
 }
 
+float PlayerStat::getStat(STAT_TYPE type)
+{
+	switch (type)
+	{
+	case STAT_TYPE::POW:
+		return power;
+	case STAT_TYPE::DEF:
+		return defense;
+	case STAT_TYPE::TOUGH:
+		return toughness;
+	case STAT_TYPE::BLOCK:
+		return block;
+	case STAT_TYPE::CRITICAL:
+		return criticalChance;
+	case STAT_TYPE::CRITICAL_DAMAGE:
+		return criticalDamage;
+	case STAT_TYPE::EVADE:
+		return evasion;
+	case STAT_TYPE::MOVE_SPEED:
+		return moveSpeed;
+	case STAT_TYPE::ATTACK_SPEED:
+		return attackSpeed;
+	case STAT_TYPE::RELOAD:
+		return reloadSpeed;
+	case STAT_TYPE::DASH_DAMAGE:
+		return dashDamage;
+	case STAT_TYPE::TRUE_DAMAGE:
+		return trueDamage;
+	}
+}
+
 string PlayerStat::getStatString(STAT_TYPE type, bool isEnglish)
 {
 	switch (type)

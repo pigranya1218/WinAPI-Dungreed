@@ -47,6 +47,7 @@ public:
 
 public:
 	PlayerStat operator+(const PlayerStat& a);
+	float getStat(STAT_TYPE type);
 
 public:
 	static string getStatString(STAT_TYPE type, bool isEnglish);
