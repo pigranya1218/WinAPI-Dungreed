@@ -5,7 +5,7 @@ void OakBow::init()
 {
 	_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_img = IMAGE_MANAGER->findImage("OakBow");
+	_iconImg = _img = IMAGE_MANAGER->findImage("OakBow");
 	_frameImg = IMAGE_MANAGER->findImage("OakBowAni");
 
 
@@ -195,7 +195,7 @@ void OakBow::attack(Player * player)
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
 		projectile->init("Arrow00", angleRadian, 30, false, false, 20, true, "", Vector2());
 
-		tagAttackInfo* attackInfo = new tagAttackInfo;
+		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
 		player->attack(projectile, attackInfo);
 		_currAttackDelay = _baseAttackDelay;	// 공격 쿨타임 설정
@@ -209,15 +209,15 @@ void OakBow::attack(Player * player)
 	}
 }
 
-void OakBow::attack(FloatRect * rect, tagAttackInfo * info)
+void OakBow::attack(FloatRect * rect, AttackInfo * info)
 {
 }
 
-void OakBow::attack(FloatCircle * circle, tagAttackInfo * info)
+void OakBow::attack(FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void OakBow::attack(Projectile * projectile, tagAttackInfo * info)
+void OakBow::attack(Projectile * projectile, AttackInfo * info)
 {
 }
 

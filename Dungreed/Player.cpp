@@ -86,7 +86,7 @@ void Player::init()
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
-	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::PICKAX);
+	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::BASE);
 	_costume->init();
 
 	updateAdjustStat();
@@ -136,12 +136,12 @@ void Player::init()
 
 	IceBall* testAcc6 = new IceBall;
 	testAcc6->init();
-	// _inventory[6] = testAcc6;
+	_inventory[6] = testAcc6;
 
 
 	miniEarth* testAcc7 = new miniEarth;
 	testAcc7->init();
-	//_inventory[7] = testAcc7;
+	_inventory[7] = testAcc7;
 
 
 	watCher* testAcc8 = new watCher;
@@ -156,14 +156,6 @@ void Player::init()
 	Voluspa* testAcc11 = new Voluspa;
 	testAcc11->init();
 	_inventory[10] = testAcc11;
-
-
-
-	//ShortSpear* testWeapon = new ShortSpear;
-
-	/*ShortSpear* testWeapon1 = new ShortSpear;
-	testWeapon1->init();
-	_equippedWeapon.push_back(testWeapon1);*/
 
 	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
