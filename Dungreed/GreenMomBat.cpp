@@ -5,7 +5,7 @@ void GreenMomBat::init()
 {
 	_type = ITEM_TYPE::ACC;
 	_rank = ITEM_RANK::HIGH;
-	//_img = IMAGE_MANAGER->findImage("babyGreenBat");
+	_iconImg = IMAGE_MANAGER->findImage("GreenMomBat");
 
 	_price = 3500;
 

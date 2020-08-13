@@ -4,16 +4,15 @@ void watCher::init()
 {
 	//厩技辑府 鸥涝
 	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;
+	_rank = ITEM_RANK::RARE;	
+	_iconImg = IMAGE_MANAGER->findImage("Watcher");
 	
-
 	//厩技辑府 可记
 	_addStat.evasion = 5;
 
 	radius = 0;
 	fspeed = 0;
-	x = y = 0;
-	_iconImg = nullptr;
+	x = y = 0;	
 	_img = IMAGE_MANAGER->findImage("Watcher0");
 	_ani = new Animation;
 	_ani->start();
