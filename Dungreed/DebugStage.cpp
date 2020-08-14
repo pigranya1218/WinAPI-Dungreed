@@ -40,7 +40,7 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
 
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile2");
+	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	
 	mapLoad();
 	
@@ -100,7 +100,7 @@ void DebugStage::mapLoad()
 	HANDLE stageFile;
 	DWORD read;
 
-	stageFile = CreateFile("iceStage1.map", GENERIC_READ, NULL, NULL,
+	stageFile = CreateFile("StartRoom1.map", GENERIC_READ, NULL, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 
