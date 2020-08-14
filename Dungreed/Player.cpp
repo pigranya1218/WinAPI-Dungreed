@@ -352,10 +352,16 @@ void Player::update(float const elapsedTime)
 		_currJumpCount = _adjustStat.maxJumpCount;
 	}
 
-	//점프 처리
+	// 점프 처리
 	if (!_isStand)
 	{
 		_costume->setSprite(PLAYER_STATE::JUMP, false);
+	}
+
+	// 재장전 키를 눌렀을 때
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::RELOAD)))
+	{
+		_equippedWeapon[_currWeaponIndex]->reload(this);
 	}
 
 	// 코스튬 애니메이션 업데이트

@@ -4,8 +4,6 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "MapToolScene.h"
-
-
 #include "Player.h"
 
 #include <string>
@@ -23,8 +21,6 @@ playGround::~playGround()
 HRESULT playGround::init()
 {
 	GameNode::init(true);
-
-	
 
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
@@ -258,10 +254,9 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot02", "ShootEffect02", 30, 10);
 
 	// **** L_WeaponReload
-	IMAGE_MANAGER->addImage("ReloadBase", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
-	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
-	IMAGE_MANAGER->addFrameImage("Reload", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
-	EFFECT_MANAGER->addEffect("L_Effect_Reload", "Reload", 30, 10);
+	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
+	IMAGE_MANAGER->addImage("ReloadHandle", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
+	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
 
 	//***MeleeWeapon
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
