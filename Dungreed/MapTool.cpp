@@ -8,7 +8,8 @@ HRESULT MapTool::init()
 	_tileY = 20;
 	
 	// 팔레트 그리기
-	_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
+	_paletteNum = 1;
+	_paletteImage = IMAGE_MANAGER->findImage("sampleTile"+to_string(_paletteNum));
 	for (int i = 0; i < SAMPLETILEY; ++i)
 	{
 		for (int j = 0; j < SAMPLETILEX; ++j)
@@ -46,7 +47,10 @@ void MapTool::release()
 
 void MapTool::update()
 {
-	
+	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
+	{
+		paletteChange();
+	}
 
 	setMap();
 
@@ -71,10 +75,7 @@ void MapTool::update()
 		}
 	}
 
-	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
-	{
-		paletteChange();
-	}
+	
 	
 	if (KEY_MANAGER->isStayKeyDown('D'))
 	{
@@ -157,7 +158,7 @@ void MapTool::render()
 			D2D_RENDERER->drawRectangle(_sampleTile[i].rc, D2D1::ColorF::Black, 1, 1);
 		}
 	}
-
+	
 
 	//인터페이스들 렌더
 	D2D_RENDERER->renderText(210, WINSIZEY - 100, L"SAVE",30,D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING,L"둥근모꼴",0.0f);
@@ -236,7 +237,7 @@ void MapTool::setMap()
 			}
 		}
 	}
-
+	
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
 	{
 		if (_selectDrag)
@@ -281,15 +282,52 @@ void MapTool::setMap()
 
 							if (_layer == 1)
 							{
-								if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
-								else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::BOTTOM;
-								else if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT;
-								else if (_tile[index].tileFrameX[_layer] == 0 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT;
-								else if ((_tile[index].tileFrameX[_layer] == 6 || _tile[index].tileFrameX[_layer] == 8) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
-								else if ((_tile[index].tileFrameX[_layer] == 7 || _tile[index].tileFrameX[_layer] == 9) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
-								else if ((_tile[index].tileFrameX[_layer] >= 0 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
-								else if ((_tile[index].tileFrameX[_layer] >= 5 && _tile[index].tileFrameX[_layer] < 8) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
-								else _tile[index].linePos == DRAW_LINE_POSITION::NOLINE;
+								switch (_paletteNum)
+								{
+								case 1:
+									if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
+									else if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::BOTTOM;
+									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT;
+									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT;
+									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_TOP;
+									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_TOP;
+									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_BOTTOM;
+									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_BOTTOM;
+									else if ((_tile[index].tileFrameX[_layer] == 6 || _tile[index].tileFrameX[_layer] == 8) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+									else if ((_tile[index].tileFrameX[_layer] == 7 || _tile[index].tileFrameX[_layer] == 9) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+									else if ((_tile[index].tileFrameX[_layer] >= 0 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
+									else if ((_tile[index].tileFrameX[_layer] >= 5 && _tile[index].tileFrameX[_layer] < 8) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
+									else _tile[index].linePos == DRAW_LINE_POSITION::NOLINE;
+									break;
+								case 2:
+									if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
+									else if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::BOTTOM;
+									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT;
+									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT;
+									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_TOP;
+									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_TOP;
+									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_BOTTOM;
+									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_BOTTOM;
+									else if ((_tile[index].tileFrameX[_layer] == 6 || _tile[index].tileFrameX[_layer] == 8) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+									else if ((_tile[index].tileFrameX[_layer] == 7 || _tile[index].tileFrameX[_layer] == 9) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+									else if ((_tile[index].tileFrameX[_layer] >= 1 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
+									
+									else _tile[index].linePos == DRAW_LINE_POSITION::NOLINE;
+									break;
+									
+								case 3:
+									if ((_tile[index].tileFrameX[_layer] >= 1&&_tile[index].tileFrameX[_layer]<9) && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
+									else if((_tile[index].tileFrameX[_layer] >= 2 && _tile[index].tileFrameX[_layer] < 7) && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
+									else if ((_tile[index].tileFrameX[_layer] >= 0 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
+									else if ((_tile[index].tileFrameX[_layer] >= 5 && _tile[index].tileFrameX[_layer] < 8) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
+									else _tile[index].linePos == DRAW_LINE_POSITION::NOLINE;
+									break;
+
+								
+								}
+
+
+								
 							}
 						}
 					}
@@ -365,25 +403,14 @@ void MapTool::load()
 
 void MapTool::paletteChange()
 {
-	/*TCHAR szFilePath[MAX_PATH] = {0,};
-	OPENFILENAME ofn;
-	ZeroMemory(&ofn, sizeof(OPENFILENAME));
-	ofn.lStructSize = sizeof(OPENFILENAME);
-	ofn.hwndOwner = NULL;
-	ofn.lpstrFile = szFilePath;
-	ofn.nMaxFile=	sizeof(szFilePath);
-	ofn.lpstrFilter = _T("png Files(*.png)\0*.png\0All Files (*.*)\0*.*\0");
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-	if (::GetOpenFileName(&ofn) == false) return;
-	TCHAR* return_path = ofn.lpstrFile;*/
+	_paletteNum++;
+	if (_paletteNum > 3)_paletteNum = 1;
+	_paletteImage=IMAGE_MANAGER->findImage("sampleTile" + to_string(_paletteNum));
 	
-	if (_paletteImage == IMAGE_MANAGER->findImage("sampleTile"))_paletteImage = IMAGE_MANAGER->findImage("sampleTile2");
 
-	else if (_paletteImage == IMAGE_MANAGER->findImage("sampleTile2"))_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
+	/*if (_paletteImage == IMAGE_MANAGER->findImage("sampleTile"))_paletteImage = IMAGE_MANAGER->findImage("sampleTile2");
+
+	else if (_paletteImage == IMAGE_MANAGER->findImage("sampleTile2"))_paletteImage = IMAGE_MANAGER->findImage("sampleTile");*/
 		
 }
 
@@ -421,12 +448,12 @@ void MapTool::setSelectTile()
 
 void MapTool::setLinePos(int frameX, int frameY)
 {
-	if (frameX == 1 && frameY == 8)_drawLinePos=DRAW_LINE_POSITION::TOP;
-	if(frameX==1 && frameY==6)_drawLinePos = DRAW_LINE_POSITION::BOTTOM;
-	if(frameX==0 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::RIGHT;
-	if(frameX==2 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT;
-	if ((frameX >=0&&frameX<4)&&frameY==5 )_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
-	if ((frameX >= 5 && frameX < 8) && frameY == 5)_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
+	if (frameX == 2 && frameY == 8)_drawLinePos=DRAW_LINE_POSITION::TOP;
+	if(frameX==2 && frameY==6)_drawLinePos = DRAW_LINE_POSITION::BOTTOM;
+	if(frameX==1 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::RIGHT;
+	if(frameX==3 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT;
+	if ((frameX >=1&&frameX<5)&&frameY==5 )_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
+	if ((frameX >= 6 && frameX < 9) && frameY == 5)_drawLinePos = DRAW_LINE_POSITION::PLATFORM;
 	else _drawLinePos = DRAW_LINE_POSITION::NOLINE;
 	/*if((frameX==6||frameX==8)&&frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
 	if ((frameX == 7 || frameX == 9) && frameY == 7)_drawLinePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
@@ -437,7 +464,7 @@ void MapTool::setTileSize()
 {
 		if(_increaseTileX.ptInRect(_ptMouse))
 		{
-			if ((_tileX + 1)* _tileY >= 2000) return;
+			if ((_tileX + 1)* _tileY >= MAXTILEX*MAXTILEY) return;
 			_tileX += 1;
 			setup();			
 		}
@@ -449,7 +476,7 @@ void MapTool::setTileSize()
 		}
 		else if (_increaseTileY.ptInRect(_ptMouse))
 		{
-			if (_tileX* (_tileY + 1) >= 2000) return;
+			if (_tileX* (_tileY + 1) >= MAXTILEX * MAXTILEY) return;
 			_tileY += 1;
 			setup();
 		}

@@ -40,7 +40,7 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
 
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
+	_tileImage = IMAGE_MANAGER->findImage("sampleTile2");
 	
 	mapLoad();
 	
@@ -100,11 +100,11 @@ void DebugStage::mapLoad()
 	HANDLE stageFile;
 	DWORD read;
 
-	stageFile = CreateFile("stage16.map", GENERIC_READ, NULL, NULL,
+	stageFile = CreateFile("iceStage1.map", GENERIC_READ, NULL, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 
-	ReadFile(stageFile, _tile, sizeof(tagTileMap) * 2000, &read, NULL);
+	ReadFile(stageFile, _tile, sizeof(tagTileMap) *2000, &read, NULL);
 
 	CloseHandle(stageFile);
 	
@@ -178,6 +178,23 @@ void DebugStage::mapLoad()
 
 			}
 
+			break;
+
+		case DRAW_LINE_POSITION::LEFT_TOP:
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.top),Vector2(_tile[i].rc.left,_tile[i].rc.bottom)), LINEAR_VALUE_TYPE::RIGHT });
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.top)), LINEAR_VALUE_TYPE::DOWN });
+			break;
+		case DRAW_LINE_POSITION::LEFT_BOTTOM:
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.top),Vector2(_tile[i].rc.left,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::RIGHT });
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.bottom),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::UP });
+			break;
+		case DRAW_LINE_POSITION::RIGHT_TOP:
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.top)),LINEAR_VALUE_TYPE::DOWN });
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.right,_tile[i].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::LEFT });
+			break;
+		case DRAW_LINE_POSITION::RIGHT_BOTTOM:
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.right,_tile[i].rc.top),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::LEFT });
+			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[i].rc.left,_tile[i].rc.bottom),Vector2(_tile[i].rc.right,_tile[i].rc.bottom)),LINEAR_VALUE_TYPE::UP });
 			break;
 		case DRAW_LINE_POSITION::LEFT_DIAGONAL:
 			if (curr == 0)

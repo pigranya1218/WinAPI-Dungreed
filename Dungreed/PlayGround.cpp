@@ -25,8 +25,9 @@ HRESULT playGround::init()
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
 
-	IMAGE_MANAGER->addFrameImage("sampleTile", L"resources/images/Map/tileAtlas3.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas1.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas.png", 10, 10);
 
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");
@@ -196,6 +197,7 @@ HRESULT playGround::init()
 
 	// ** VILLIGE
 	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
+	//IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/Town_BGL.png");
 	IMAGE_MANAGER->addImage("Town_BG", L"resources/images/Map/TownBG_Day.png");
 	IMAGE_MANAGER->addImage("Town_BG2", L"resources/images/Map/TownLayer_Day.png");
 	IMAGE_MANAGER->addImage("Town_Floor", L"resources/images/Map/TownFloor.png");
