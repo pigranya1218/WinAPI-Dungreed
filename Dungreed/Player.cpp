@@ -513,8 +513,10 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 {
 	if (indexA <= 1) // A : Weapon
 	{
-
-		if (indexB <= 1) // B : Weapon
+		if (_equippedWeapon[indexA] == nullptr)
+		{
+		}
+		else if (indexB <= 1) // B : Weapon
 		{
 			if (indexA == indexB) return;
 			swap(_equippedWeapon[indexA], _equippedWeapon[indexB]);
@@ -537,7 +539,10 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 	}
 	else if (indexA <= 5) // A : Acc
 	{
-		if (indexB <= 1) // B : Weapon
+		if (_equippedAcc[indexA - 2] == nullptr)
+		{
+		}
+		else if (indexB <= 1) // B : Weapon
 		{
 			return;
 			
