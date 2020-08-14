@@ -86,7 +86,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 	}
 	renderPosWeapon = (isLeft) ? Vector2(renderPosHand.x - 9.0f, renderPosHand.y) : Vector2(renderPosHand.x + 9.0f, renderPosHand.y);
 
-	anglePos = Vector2(1.5f * _img->getFrameSize().x, 1.85f * _img->getFrameSize().y);
+	anglePos = Vector2(0.35f * _img->getFrameSize().x, 0.5f * _img->getFrameSize().y);
 
 	if (_isAttack)
 	{
@@ -124,7 +124,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 			projectile->setPosition(arrowPos);
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 30, false, false, 20, false, "", Vector2());
+			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, false, "", Vector2());
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
