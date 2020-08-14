@@ -58,7 +58,7 @@ void UIManager::init()
 	_weaponUI.frontBaseCenter = Vector2(1480, 820);
 	_weaponUI.backBaseCenter = Vector2(1500, 800);
 	_weaponUI.frontIndexRc = FloatRect(50, 20, 60, 40);
-	_weaponUI.frontBulletRc = FloatRect(-50, -45, 60, -22);
+	_weaponUI.frontBulletRc = FloatRect(-80, 10, 80, 40);
 	_weaponUI.move = Vector2(0, 0);
 	_weaponUI.moveSpeed = 80;
 	_weaponUI.viewIndex = 0;
@@ -241,7 +241,7 @@ void UIManager::render()
 				{
 					FloatRect bulletRc = FloatRect(_weaponUI.frontBaseCenter + _weaponUI.move + _weaponUI.frontBulletRc.getCenter(), _weaponUI.frontBulletRc.getSize(), PIVOT::CENTER);
 					D2D_RENDERER->renderTextField(bulletRc.left, bulletRc.top, _player->getWeapon(_weaponUI.viewIndex)->getBulletUI(), RGB(255, 255, 255),
-						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING);
+						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER);
 				}
 			}
 

@@ -16,7 +16,6 @@ Synthesize(DIRECTION, _direction, Direction)
 
 private:
 	GameScene* _gameScene;
-	
 
 	// 현재 상태
 	Costume* _costume;				// 현재 장착한 코스튬

@@ -3,9 +3,8 @@
 
 void CosmosSword::init()
 {
-	_img = IMAGE_MANAGER->findImage("CosmosSword00");
+	_img = IMAGE_MANAGER->findImage("CosmosSword");
 	_iconImg = IMAGE_MANAGER->findImage("CosmosSword00");
-	//_attackEffect = IMAGE_MANAGER->findImage("CosmosSwordFx");
 
 	width = _img->getFrameSize().x;
 	height = _img->getFrameSize().y;
@@ -15,14 +14,6 @@ void CosmosSword::init()
 	_ani->setDefPlayFrame(false, true);
 	_ani->setFPS(20);
 	_ani->start();
-
-
-
-	//_attackEffectAni = new Animation;
-	//_attackEffectAni->init();
-
-
-
 
 	_type = ITEM_TYPE::WEAPON_ONE_HAND;
 	_rank = ITEM_RANK::NORMAL;
@@ -101,8 +92,7 @@ void CosmosSword::backRender(Player* player)
 		_img->setScale(4); // 이미지 크기 
 		_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
 		_img->setAnglePos(Vector2(0.15f * width, 0.5f * height)); // 이미지 회전시킬 중점
-		//_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
-		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
+		_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
 
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
@@ -161,8 +151,7 @@ void CosmosSword::frontRender(Player* player)
 		_img->setScale(4); // 이미지 크기 
 		_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
 		_img->setAnglePos(Vector2(0.15f * width, 0.5f * height)); // 이미지 회전시킬 중점
-		//_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
-		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
+		_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
 
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
