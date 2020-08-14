@@ -7,7 +7,7 @@ private:
 	Animation* _ani;
 
 	FloatRect _crash;
-	int x, y;
+	int _x, _y;
 	float _angle = PI / 4;
 public:
 

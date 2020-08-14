@@ -4,10 +4,10 @@ class bombPouch : public Item
 {
 private:
 
-	FloatRect RC;
-	bool isBoom;
-	Vector2 renderPos;
-	int x, y;
+	FloatRect _RC;
+	bool _isBoom;
+	Vector2 _renderPos;
+	int _x, _y;
 
 
 public:

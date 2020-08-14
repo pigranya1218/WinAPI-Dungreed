@@ -11,7 +11,7 @@ void bombPouch::init()
 	_price = 1200;
 
 
-	isBoom = false;
+	_isBoom = false;
 
 }
 
@@ -21,27 +21,27 @@ void bombPouch::release()
 
 void bombPouch::update(Player* player, float const elapsedTime)
 {
-	renderPos;
+	_renderPos;
 	
 	if (KEY_MANAGER->isOnceKeyDown('R') )
 	{
-		x = renderPos.x;
-		y = renderPos.y;
-		isBoom = true;	
+		_x = _renderPos.x;
+		_y = _renderPos.y;
+		_isBoom = true;
 	}
-	if (RC.bottom > WINSIZEY)
+	if (_RC.bottom > WINSIZEY)
 	{
-		isBoom = false;
+		_isBoom = false;
 	}
-	if (isBoom)
+	if (_isBoom)
 	{
-		RC = rectMakePivot(Vector2(x,y), Vector2(50, 50), PIVOT::CENTER);
-		y += 10;
+		_RC = rectMakePivot(Vector2(_x, _y), Vector2(50, 50), PIVOT::CENTER);
+		_y += 10;
 	}
-	else if (!isBoom )
+	else if (!_isBoom )
 	{
 		
-		RC = rectMakePivot(Vector2(renderPos), Vector2(0, 0), PIVOT::CENTER);
+		_RC = rectMakePivot(Vector2(_renderPos), Vector2(0, 0), PIVOT::CENTER);
 	}
 }
 
@@ -52,8 +52,8 @@ void bombPouch::frontRender(Player* player)
 
 void bombPouch::backRender(Player* player)
 {
-	renderPos = player->getPosition();
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(RC));
+	_renderPos = player->getPosition();
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_RC));
 }
 
 void bombPouch::displayInfo()

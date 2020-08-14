@@ -4,9 +4,9 @@ class Voluspa : public Item
 {
 private:
 	Image* _img;
-	Vector2 renderPos;
-	Vector2 location;
-	bool Opposition;
+	Vector2 _renderPos;
+	Vector2 _location;
+	bool _Opposition;
 	float _currAttackDelay;
 public:
 	virtual void init();

@@ -15,7 +15,7 @@ void miniEarth::init()
 	_price = 600;
 
 
-	x = y = 0;
+	_x = _y = 0;
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setDefPlayFrame(false, true);
@@ -29,7 +29,7 @@ void miniEarth::release()
 
 void miniEarth::update(Player * player, float const elapsedTime)
 {
-	_angle += 0.023f;
+	_angle += 1.523f*elapsedTime;
 	_ani->frameUpdate(elapsedTime);
 	_ani->init(_img->getWidth(), _img->getHeight(),
 		_img->getMaxFrameX(), _img->getMaxFrameY());
@@ -39,17 +39,14 @@ void miniEarth::update(Player * player, float const elapsedTime)
 
 void miniEarth::backRender(Player * player)
 {
-	x = cosf(_angle) * 50;
-	y = -sinf(_angle) * 50;
+	_x = cosf(_angle) * 55;
+	_y = -sinf(_angle) * 55;
 
 	Vector2 renderPos = player->getPosition();
-	renderPos.x = renderPos.x + x;
-	renderPos.y = renderPos.y + y;
+	renderPos.x = renderPos.x + _x;
+	renderPos.y = renderPos.y + _y - 20;
 	_img->setScale(4);
 	_img->aniRender(CAMERA->getRelativeV2(renderPos), _ani, false);
-	Vector2 size = Vector2(_img->getFrameSize().x*2 , _img->getFrameSize().y *2);
-	_crash = rectMakePivot(Vector2(renderPos.x, renderPos.y+20), size, PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_crash));
 }
 
 void miniEarth::frontRender(Player * player)

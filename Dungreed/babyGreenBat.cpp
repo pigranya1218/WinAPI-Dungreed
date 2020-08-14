@@ -8,8 +8,8 @@ void babyGreenBat::init()
 
 	_price = 600;
 	
-	batPos.x = WINSIZEX / 2;
-	batPos.y = WINSIZEY / 2;
+	_batPos.x = WINSIZEX / 2;
+	_batPos.y = WINSIZEY / 2;
 
 	_img = IMAGE_MANAGER->findImage("babyGreenBatF");
 	_ani = new Animation;
@@ -35,6 +35,7 @@ void babyGreenBat::release()
 
 void babyGreenBat::update(Player* player, float const elapsedTime)
 {
+
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
@@ -48,7 +49,7 @@ void babyGreenBat::update(Player* player, float const elapsedTime)
 		}
 	}	
 	
-	if (_ptMouse.x < renderPos.x)
+	if (_ptMouse.x < _renderPos.x)
 	{
 		_direction = DIRECTION::LEFT;
 
@@ -58,6 +59,25 @@ void babyGreenBat::update(Player* player, float const elapsedTime)
 		_direction = DIRECTION::RIGHT;
 
 	}
+	
+	_renderPos = player->getPosition();
+	if (_batPos.x > _renderPos.x + 60)
+	{
+		_batPos.x -= 500*elapsedTime;
+	}
+	else if (_batPos.x <= _renderPos.x + 10)
+	{
+		_batPos.x += 500 * elapsedTime;
+	}
+	if (_batPos.y > _renderPos.y + 5 && _batPos.y > _renderPos.y)
+	{
+		_batPos.y -= 500 * elapsedTime;
+	}
+	else if (_batPos.y < _renderPos.y - 5 && _batPos.y <= _renderPos.y)
+	{
+		_batPos.y += 500 * elapsedTime;
+	}
+	
 	_ani->frameUpdate(elapsedTime);
 	
 
@@ -70,25 +90,9 @@ void babyGreenBat::frontRender(Player* player)
 void babyGreenBat::backRender(Player* player)
 {
 	
-	renderPos = player->getPosition();
-	if (batPos.x > renderPos.x + 60)
-	{
-		batPos.x -= 6;
-	}
-	else if (batPos.x <= renderPos.x + 10)
-	{
-		batPos.x += 6;
-	}
-	if (batPos.y > renderPos.y + 5 && batPos.y > renderPos.y)
-	{
-		batPos.y -= 7;
-	}
-	else if (batPos.y < renderPos.y - 5 && batPos.y <= renderPos.y)
-	{
-		batPos.y += 8;
-	}	
+	
 	_img->setScale(3);
-	_img->aniRender(CAMERA->getRelativeV2(batPos), _ani, _direction == DIRECTION::LEFT);
+	_img->aniRender(CAMERA->getRelativeV2(_batPos), _ani, _direction == DIRECTION::LEFT);
 }
 
 
@@ -110,10 +114,10 @@ void babyGreenBat::attack(Player* player)
 	}
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = batPos;	
+	Vector2 pos = _batPos;
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(_ptMouse.y - batPos.y), (_ptMouse.x - batPos.x)) + PI2;
+	float angleRadian = atan2f(-(_ptMouse.y - _batPos.y), (_ptMouse.x - _batPos.x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;

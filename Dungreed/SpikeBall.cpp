@@ -12,7 +12,7 @@ void SpikeBall::init()
 	_addStat.criticalChance = 1;
 	_addStat.defense = 1;
 	
-	x = y = 0;
+	_x = _y = 0;
 
 	
 	//악세서리 가격
@@ -26,7 +26,7 @@ void SpikeBall::release()
 
 void SpikeBall::update(Player* player, float const elapsedTime)
 {
-	_angle += 0.033f;
+	_angle += 2.233f*elapsedTime;
 }
 
 void SpikeBall::frontRender(Player* player)
@@ -35,12 +35,12 @@ void SpikeBall::frontRender(Player* player)
 
 void SpikeBall::backRender(Player* player)
 {
-	x = cosf(_angle) * 110;
-	y = -sinf(_angle) * 110;
+	_x = cosf(_angle) * 110;
+	_y = -sinf(_angle) * 110;
 
 	Vector2 renderPos = player->getPosition();
-	renderPos.x = renderPos.x + x;
-	renderPos.y = renderPos.y + y;
+	renderPos.x = renderPos.x + _x;
+	renderPos.y = renderPos.y + _y;
 	_img->setScale(4);
 	_img->render(CAMERA->getRelativeV2(renderPos), false);
 	Vector2 size = Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4);
