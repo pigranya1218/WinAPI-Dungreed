@@ -216,7 +216,6 @@ void MatchLockGun::getHit(Vector2 const position)
 {
 }
 
-PlayerStat MatchLockGun::equip()
+void MatchLockGun::equip(Player* player)
 {
-	return PlayerStat();
 }

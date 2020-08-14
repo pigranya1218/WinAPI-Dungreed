@@ -302,7 +302,10 @@ void Player::update(float const elapsedTime)
 
 		for (int i = 0; i < 4; i++) 
 		{
-			_equippedAcc[i]->dash(this);
+			if (_equippedAcc[i] != nullptr)
+			{
+				_equippedAcc[i]->dash(this);
+			}
 		}
 	}
 	
@@ -467,13 +470,15 @@ void Player::equipItem(int index)
 			if (_equippedAcc[i] == nullptr)
 			{
 				swap(_inventory[index], _equippedAcc[i]);
+				_equippedAcc[i]->equip(this);
 				break;
 			}
 		}
 	}
-	else
+	else // 무기인 경우
 	{
 		swap(_inventory[index], _equippedWeapon[_currWeaponIndex]);
+		_equippedWeapon[_currWeaponIndex]->equip(this);
 	}
 }
 
@@ -523,6 +528,10 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() != ITEM_TYPE::ACC)
 			{
 				swap(_equippedWeapon[indexA], _inventory[indexB - 6]);
+				if (_equippedWeapon[indexA] != nullptr)
+				{
+					_equippedWeapon[indexA]->equip(this);
+				}
 			}
 		}
 	}
@@ -543,16 +552,24 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() == ITEM_TYPE::ACC)
 			{
 				swap(_equippedAcc[indexA - 2], _inventory[indexB - 6]);
+				if (_equippedAcc[indexA - 2])
+				{
+					_equippedAcc[indexA - 2]->equip(this);
+				}
 			}
 		}
 	}
 	else // A : Inventory
 	{
-		if (indexB <= 1) // B : Weapon
+		if (_inventory[indexA - 6] == nullptr)
+		{
+		}
+		else if (indexB <= 1) // B : Weapon
 		{
 			if (_inventory[indexA - 6]->getType() != ITEM_TYPE::ACC)
 			{
 				swap(_inventory[indexA - 6], _equippedWeapon[indexB]);
+				_equippedWeapon[indexB]->equip(this);
 			}
 
 		}
@@ -561,6 +578,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (_inventory[indexA - 6]->getType() == ITEM_TYPE::ACC)
 			{
 				swap(_inventory[indexA - 6], _equippedAcc[indexB - 2]);
+				_equippedAcc[indexB - 2]->equip(this);
 			}
 		}
 		else // B : Inventory

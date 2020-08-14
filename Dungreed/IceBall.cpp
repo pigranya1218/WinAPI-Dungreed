@@ -126,7 +126,6 @@ void IceBall::getHit(Vector2 const position)
 {
 }
 
-PlayerStat IceBall::equip()
+void IceBall::equip(Player* player)
 {
-	return PlayerStat();
 }

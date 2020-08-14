@@ -58,7 +58,6 @@ void MagnifyingGlass::getHit(Vector2 const position)
 {
 }
 
-PlayerStat MagnifyingGlass::equip()
+void MagnifyingGlass::equip(Player* player)
 {
-	return PlayerStat();
 }

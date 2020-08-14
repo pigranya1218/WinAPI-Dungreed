@@ -52,7 +52,6 @@ void daisyRing::getHit(Vector2 const position)
 {
 }
 
-PlayerStat daisyRing::equip()
+void daisyRing::equip(Player* player)
 {
-	return PlayerStat();
 }

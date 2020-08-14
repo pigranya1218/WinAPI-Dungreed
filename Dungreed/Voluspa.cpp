@@ -112,7 +112,6 @@ void Voluspa::getHit(Vector2 const position)
 {
 }
 
-PlayerStat Voluspa::equip()
+void Voluspa::equip(Player* player)
 {
-	return PlayerStat();
 }

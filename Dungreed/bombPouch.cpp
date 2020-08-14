@@ -80,7 +80,6 @@ void bombPouch::getHit(Vector2 const position)
 {
 }
 
-PlayerStat bombPouch::equip()
+void bombPouch::equip(Player* player)
 {
-	return PlayerStat();
 }

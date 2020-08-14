@@ -327,7 +327,6 @@ void ShortSword::getHit(Vector2 const position)
 {
 }
 
-PlayerStat ShortSword::equip()
+void ShortSword::equip(Player* player)
 {
-	return PlayerStat();
 }

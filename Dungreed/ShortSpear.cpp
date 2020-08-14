@@ -154,7 +154,6 @@ void ShortSpear::getHit(Vector2 const position)
 {
 }
 
-PlayerStat ShortSpear::equip()
+void ShortSpear::equip(Player* player)
 {
-	return PlayerStat();
 }

@@ -112,7 +112,6 @@ void watCher::getHit(Vector2 const position)
 {
 }
 
-PlayerStat watCher::equip()
+void watCher::equip(Player* player)
 {
-	return PlayerStat();
 }

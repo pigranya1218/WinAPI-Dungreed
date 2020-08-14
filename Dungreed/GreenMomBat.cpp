@@ -147,7 +147,6 @@ void GreenMomBat::getHit(Vector2 const position)
 {
 }
 
-PlayerStat GreenMomBat::equip()
+void GreenMomBat::equip(Player* player)
 {
-	return PlayerStat();
 }
