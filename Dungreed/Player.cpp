@@ -161,13 +161,13 @@ void Player::init()
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
-	/*MatchLockGun* testWeapon1 = new MatchLockGun;
+	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
-	_inventory[11] = testWeapon1;*/
+	_inventory[11] = testWeapon1;
 	
-	ShortSpear* testWeapon2 = new ShortSpear;
+	/*ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
-	_inventory[11] = testWeapon2;
+	_inventory[11] = testWeapon2;*/
 
 	ShortSword* testWeapon3 = new ShortSword;
 	testWeapon3->init();

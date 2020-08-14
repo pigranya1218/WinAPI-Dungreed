@@ -51,6 +51,7 @@ public:
 	virtual void equip(Player* player) const {}; // 아이템을 장착했을 때 호출될 함수
 	
 	virtual wstring getBulletUI() { return L""; }
+	virtual float getBulletRatio() { return 0.f; }
 
 	ITEM_TYPE getType() const noexcept { return _type; }
 

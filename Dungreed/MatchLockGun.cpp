@@ -220,3 +220,8 @@ wstring MatchLockGun::getBulletUI()
 {
 	return to_wstring(_currBullet) + L"/" + to_wstring(_maxBullet);
 }
+
+float MatchLockGun::getBulletRatio()
+{
+	return _currReloadDelay / _baseReloadDelay;
+}

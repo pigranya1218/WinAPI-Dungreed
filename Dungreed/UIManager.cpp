@@ -266,6 +266,21 @@ void UIManager::render()
 				_player->getWeaponImg(_weaponUI.viewIndex)->setScale(4);
 				_player->getWeaponImg(_weaponUI.viewIndex)->render(weaponPos);
 			}
+
+			{
+				if (_player->getWeapon(_weaponUI.viewIndex) != nullptr)
+				{
+					float ratio = _player->getWeapon(_weaponUI.viewIndex)->getBulletRatio();
+					if(!FLOAT_EQUAL(0, ratio))
+					{
+						FloatRect blank = FloatRect(_weaponUI.frontBaseCenter - _weaponUI.move, Vector2(_weaponUI.bgImg->getWidth() * 5.f, _weaponUI.bgImg->getHeight() * 5.f), PIVOT::CENTER);
+						FloatRect bulletReloadRc = blank;
+						bulletReloadRc.right = blank.right - ratio * blank.getWidth();
+						D2D_RENDERER->fillRectangle(bulletReloadRc, D2D1::ColorF::Enum::Black, 0.5);
+					}
+				}
+			}
+			
 		}
 		else if (_weaponUI.move.x >= 10)
 		{
@@ -282,6 +297,16 @@ void UIManager::render()
 				D2D_RENDERER->fillRectangle(drawRc, 255, 255, 255, 1);
 				D2D_RENDERER->drawRectangle(drawRc, 34, 32, 52, 1, 5);
 			}
+
+			{
+				if (_player->getWeapon(_player->getWeaponIndex()) != nullptr)
+				{
+					FloatRect bulletRc = FloatRect(_weaponUI.frontBaseCenter + _weaponUI.move + _weaponUI.frontBulletRc.getCenter(), _weaponUI.frontBulletRc.getSize(), PIVOT::CENTER);
+					D2D_RENDERER->renderTextField(bulletRc.left, bulletRc.top, _player->getWeapon(_player->getWeaponIndex())->getBulletUI(), RGB(255, 255, 255),
+						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+				}
+			}
+
 			Vector2 weaponPos = Vector2(_weaponUI.backBaseCenter - _weaponUI.move);
 			weaponPos.x -= 10;
 			if (_player->getWeaponImg(_player->getWeaponIndex()) != nullptr)
