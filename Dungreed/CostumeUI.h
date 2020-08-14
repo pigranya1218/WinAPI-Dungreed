@@ -38,6 +38,9 @@ private:
 
 		// 코스튬 샘플 이미지
 		Image* costumeSample;
+
+		// 설명 텍스트
+		wstring text;
 	};
 
 	tagCostumeCell _costumeCell[7];

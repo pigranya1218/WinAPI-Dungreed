@@ -30,6 +30,8 @@ void CostumeUI::init()
 			_costumeCell[i].costumeSample = IMAGE_MANAGER->findImage("UI/COSTUME/" + to_string(i));
 		}
 	}
+
+	//_costumeCell[0].text = L""
 }
 
 void CostumeUI::release()
@@ -97,6 +99,9 @@ void CostumeUI::render()
 		{
 			_costumeCell[i].costumeSelectedImg->setSize(Vector2(300, 500));
 			_costumeCell[i].costumeSelectedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
+			//¼³¸í
+			D2D_RENDERER->renderTextField(20, WINSIZEY - 200, _costumeCell[i].text, D2D1::ColorF::White, 20,
+				WINSIZEX, WINSIZEY, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 		}
 
 		//ÄÚ½ºÆ¬ »ùÇÃ ÀÌ¹ÌÁö
@@ -109,6 +114,5 @@ void CostumeUI::render()
 		D2D_RENDERER->drawRectangle(FloatRect(_costumeCell[i].cellRect.getCenter(), _costumeCell[i].costumeSample->getSize(), PIVOT::CENTER), D2D1::ColorF::Enum::Red, 1.0f, 3.0f);*/
 	}
 	
-
 	_costumeBaseDownImg->render(Vector2(WINSIZEX / 2, WINSIZEY - 100), Vector2(WINSIZEX, 200));
 }
