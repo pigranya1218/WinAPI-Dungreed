@@ -414,6 +414,15 @@
     <ClInclude Include="RedLotusCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
+    <ClInclude Include="KeresScythe.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="MartialArtOfTiger.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="PickaxeRed.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -676,6 +685,15 @@
     </ClCompile>
     <ClCompile Include="AliceCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="KeresScythe.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="MartialArtOfTiger.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="PickaxeRed.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

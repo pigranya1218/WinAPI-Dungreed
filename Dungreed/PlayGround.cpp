@@ -266,14 +266,32 @@ HRESULT playGround::init()
 	//***MeleeWeapon
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
 	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
-	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);
+	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);	   //¿ìÁÖ°Ë 
+	IMAGE_MANAGER->addImage("CosmosSword00", L"resources/images/MeleeWeapon/CosmosSword00.png"); // ¿ìÁÖ°Ë ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // »çÀÌµå
+	IMAGE_MANAGER->addImage("MartialArtOfTiger", L"resources/images/MeleeWeapon/MartialArtOfTiger.png"); // Å¸ÀÌ°ÅÆÝÄ¡ ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // ºÓÀº °î±ªÀÌ
+	
+
 
 	//***MeleeWeaponEffect
 	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
 	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
-	IMAGE_MANAGER->addFrameImage("CosmosSwordFx ", L"resources/images/MeleeWeapon/CosmosSwordFx .png",8, 1);
-	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 30, 10);
-	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 30, 10);
+	IMAGE_MANAGER->addFrameImage("CosmosSwordFx", L"resources/images/MeleeWeapon/CosmosSwordFx.png",8, 1); 
+	IMAGE_MANAGER->addFrameImage("KeresScytheSwingFX", L"resources/images/MeleeWeapon/KeresScytheSwingFX.png",8, 1);
+	IMAGE_MANAGER->addFrameImage("TigerPunch", L"resources/images/MeleeWeapon/TigerPunch.png",10,1);
+	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
+
+	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // ¿ìÁÖ°Ë ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // ³´ ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // ÀÏ¹Ý ÈÖµÎ¸£±â ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // ÀÏ¹Ý Âî¸£±â ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆÑÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // ºÓÀº°î±ªÀÌ ÀÌÆÑÆ®
+
+
+
+
 
 	// *Accessories
 	IMAGE_MANAGER->addImage("SpikeBall", L"resources/images/Accessories/SpikeBall.png");                       // »ÏÁ·°ø	
