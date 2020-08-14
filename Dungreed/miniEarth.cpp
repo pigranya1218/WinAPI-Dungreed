@@ -77,7 +77,6 @@ void miniEarth::getHit(Vector2 const position)
 {
 }
 
-PlayerStat miniEarth::equip()
+void miniEarth::equip(Player* player)
 {
-	return PlayerStat();
 }

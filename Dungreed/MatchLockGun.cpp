@@ -8,6 +8,12 @@ void MatchLockGun::init()
 	_iconImg = _img = IMAGE_MANAGER->findImage("MatchlockGun");
 	_price = 850;
 
+	_reloadEffect = IMAGE_MANAGER->findImage("ReloadFinish");
+	_reloadAni = new Animation;
+	_reloadAni->init(_reloadEffect->getWidth(), _reloadEffect->getHeight(), _reloadEffect->getMaxFrameX(), _reloadEffect->getMaxFrameY());
+	_reloadAni->setDefPlayFrame(false, false);
+	_reloadAni->setFPS(15);
+
 	_minDamage = 10;
 	_maxDamage = 20;
 
@@ -33,6 +39,10 @@ void MatchLockGun::update(Player* player, float const elapsedTime)
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
+		if (_reloadAni->isPlay())
+		{
+			_reloadAni->frameUpdate(elapsedTime);
+		}
 	}
 	else if (_currReloadDelay > 0) // 재장전 중
 	{
@@ -40,6 +50,7 @@ void MatchLockGun::update(Player* player, float const elapsedTime)
 		if (_currReloadDelay == 0) // 장전이 끝난 경우
 		{
 			_currBullet = _maxBullet;
+			_reloadAni->start();
 		}
 	}
 }
@@ -112,6 +123,20 @@ void MatchLockGun::frontRender(Player* player)
 
 		EFFECT_MANAGER->play("L_Effect_HecateSmoke", effectPos, effectSize, degree);
 	}
+
+	// 재장전 중이라면 재장전 UI를 그린다.
+	if (_currReloadDelay > 0)
+	{
+		float ratio = _currReloadDelay / _baseReloadDelay;
+		FloatRect reloadBar = FloatRect(Vector2(pos.x, pos.y - 80), Vector2(100, 20), PIVOT::CENTER);
+		FloatRect reloadHandle = FloatRect(Vector2(reloadBar.left + ratio * reloadBar.getSize().x, reloadBar.getCenter().y), Vector2(20, 20), PIVOT::CENTER);
+		IMAGE_MANAGER->findImage("ReloadBar")->render(CAMERA->getRelativeV2(reloadBar.getCenter()), reloadBar.getSize());
+		IMAGE_MANAGER->findImage("ReloadHandle")->render(CAMERA->getRelativeV2(reloadHandle.getCenter()), reloadHandle.getSize());
+	}
+	if (_reloadAni->isPlay())
+	{
+		_reloadEffect->aniRender(Vector2(pos.x, pos.y - 80), _reloadAni);
+	}
 }
 
 void MatchLockGun::displayInfo()
@@ -174,11 +199,23 @@ void MatchLockGun::attack(Projectile * projectile, AttackInfo* info)
 {
 }
 
+void MatchLockGun::reload(Player * player)
+{
+	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
+	if (_currBullet == 0) // 총알이 없다면
+	{
+		if (_currReloadDelay == 0) // 재장전 중이 아니라면
+		{
+			_currReloadDelay = _baseReloadDelay; // 재장전 함
+		}
+		return;
+	}
+}
+
 void MatchLockGun::getHit(Vector2 const position)
 {
 }
 
-PlayerStat MatchLockGun::equip()
+void MatchLockGun::equip(Player* player)
 {
-	return PlayerStat();
 }

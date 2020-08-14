@@ -74,7 +74,6 @@ void SpikeBall::getHit(Vector2 const position)
 {
 }
 
-PlayerStat SpikeBall::equip()
+void SpikeBall::equip(Player* player)
 {
-	return PlayerStat();
 }

@@ -332,7 +332,7 @@ void CosmosSword::getHit(Vector2 const position)
 {
 }
 
-PlayerStat CosmosSword::equip()
+void CosmosSword::equip(Player * player)
 {
-	return PlayerStat();
+	
 }

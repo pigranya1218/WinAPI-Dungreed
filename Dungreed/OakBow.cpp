@@ -253,7 +253,6 @@ void OakBow::getHit(Vector2 const position)
 {
 }
 
-PlayerStat OakBow::equip()
+void OakBow::equip(Player* player)
 {
-	return PlayerStat();
 }
