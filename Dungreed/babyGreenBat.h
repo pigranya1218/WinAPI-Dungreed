@@ -6,8 +6,8 @@ private:
 	Image* _img;
 	Animation* _ani;
 
-	Vector2 renderPos;
-	Vector2 batPos;
+	Vector2 _renderPos;
+	Vector2 _batPos;
 	
 	DIRECTION _direction;
 	

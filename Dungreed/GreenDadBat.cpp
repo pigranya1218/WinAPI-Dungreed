@@ -10,8 +10,8 @@ void GreenDadBat::init()
 
 	_price = 3500;
 
-	batPos.x = WINSIZEX / 2;
-	batPos.y = WINSIZEY / 2;
+	_batPos.x = WINSIZEX / 2;
+	_batPos.y = WINSIZEY / 2;
 	
 	_img = IMAGE_MANAGER->findImage("GreenDadBatF");
 	_ani = new Animation;
@@ -36,6 +36,8 @@ void GreenDadBat::release()
 
 void GreenDadBat::update(Player * player, float const elapsedTime)
 {
+	_direction = player->getDirection();
+
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
@@ -48,15 +50,23 @@ void GreenDadBat::update(Player * player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}
-	if (_ptMouse.x < renderPos.x)
+	
+	_renderPos = player->getPosition();
+	if (_batPos.x > _renderPos.x - 70)
 	{
-		_direction = DIRECTION::LEFT;
-
+		_batPos.x -= 500 * elapsedTime;
 	}
-	else
+	else if (_batPos.x <= _renderPos.x - 90)
 	{
-		_direction = DIRECTION::RIGHT;
-
+		_batPos.x += 500 * elapsedTime;
+	}
+	if (_batPos.y > _renderPos.y + 5 && _batPos.y > _renderPos.y)
+	{
+		_batPos.y -= 500 * elapsedTime;
+	}
+	else if (_batPos.y < _renderPos.y - 5)
+	{
+		_batPos.y += 500 * elapsedTime;
 	}
 	_ani->frameUpdate(elapsedTime);
 	
@@ -64,25 +74,9 @@ void GreenDadBat::update(Player * player, float const elapsedTime)
 
 void GreenDadBat::backRender(Player * player)
 {
-	renderPos = player->getPosition();
-	if (batPos.x > renderPos.x - 70)
-	{
-		batPos.x -= 6;
-	}
-	else if (batPos.x <= renderPos.x -90)
-	{
-		batPos.x += 6;
-	}
-	if (batPos.y > renderPos.y + 5 && batPos.y > renderPos.y)
-	{
-		batPos.y -= 7;
-	}
-	else if (batPos.y < renderPos.y - 5 )
-	{
-		batPos.y += 8;
-	}
+	
 	_img->setScale(4);
-	_img->aniRender(CAMERA->getRelativeV2(batPos), _ani, _direction == DIRECTION::LEFT);
+	_img->aniRender(CAMERA->getRelativeV2(_batPos), _ani, _direction == DIRECTION::LEFT);
 
 
 }
@@ -108,10 +102,10 @@ void GreenDadBat::attack(Player * player)
 	}
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = batPos;
+	Vector2 pos = _batPos;
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(_ptMouse.y - batPos.y), (_ptMouse.x - batPos.x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _batPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _batPos .x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;
@@ -119,7 +113,7 @@ void GreenDadBat::attack(Player * player)
 
 	NormalProjectile* projectile = new NormalProjectile;
 	Vector2 shootPos = pos;
-	float length = _img->getWidth() * 0.1f; // 길이만큼
+	float length = _img->getWidth() * 0.6f * 0.1; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	projectile->setPosition(shootPos);

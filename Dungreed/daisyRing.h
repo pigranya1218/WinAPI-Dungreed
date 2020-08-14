@@ -7,9 +7,7 @@
 class daisyRing : public Item
 {
 private:
-	int calculation[OPTIONMAX];
-	int numbers;
-	int potion[13];
+	
 
 	
 	

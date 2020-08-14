@@ -7,11 +7,11 @@ private:
 	Animation* _ani;
 
 	FloatRect _crash;
-	int x, y;
+	int _x, _y;
 	float _angle = PI / 2;
-	bool setitem;
-	int radius;
-	int fspeed;
+	bool _setitem;
+	int _radius;
+	int _fspeed;
 
 public:
 	virtual void init();

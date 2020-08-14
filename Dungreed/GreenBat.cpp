@@ -8,8 +8,8 @@ void GreenBat::init()
 	_iconImg = IMAGE_MANAGER->findImage("GreenBat");
 	_price = 600;
 
-	batPos.x = WINSIZEX / 2;
-	batPos.y = WINSIZEY / 2;
+	_batPos.x = WINSIZEX / 2;
+	_batPos.y = WINSIZEY / 2;
 
 	_baseAttackDelay = 0.1;
 	_currAttackDelay = 0;
@@ -23,7 +23,7 @@ void GreenBat::init()
 	_ani->start();
 	_ani->init(_img->getWidth(), _img->getHeight(),
 		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(10);
+	_ani->setFPS(15);
 	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 }
 
@@ -33,6 +33,7 @@ void GreenBat::release()
 
 void GreenBat::update(Player * player, float const elapsedTime)
 {
+	_direction = player->getDirection();
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
@@ -45,15 +46,24 @@ void GreenBat::update(Player * player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}
-	if (_ptMouse.x < renderPos.x)
+	
+	_batPos*elapsedTime;
+	_renderPos = player->getPosition();
+	if (_batPos.x > _renderPos.x + 10)
 	{
-		_direction = DIRECTION::LEFT;
-
+		_batPos.x -= 500 * elapsedTime;
 	}
-	else
+	else if (_batPos.x <= _renderPos.x)
 	{
-		_direction = DIRECTION::RIGHT;
-
+		_batPos.x += 500 * elapsedTime;
+	}
+	if (_batPos.y > _renderPos.y - 70)
+	{
+		_batPos.y -= 500 * elapsedTime;
+	}
+	else if (_batPos.y < _renderPos.y - 80 && _batPos.y <= _renderPos.y)
+	{
+		_batPos.y += 500 * elapsedTime;
 	}
 	_ani->frameUpdate(elapsedTime);
 	
@@ -61,25 +71,9 @@ void GreenBat::update(Player * player, float const elapsedTime)
 
 void GreenBat::backRender(Player * player)
 {
-	renderPos = player->getPosition();
-	if (batPos.x > renderPos.x + 10)
-	{
-		batPos.x -= 6;
-	}
-	else if (batPos.x <= renderPos.x )
-	{
-		batPos.x += 6;
-	}
-	if (batPos.y > renderPos.y -70)
-	{
-		batPos.y -= 7;
-	}
-	else if (batPos.y < renderPos.y - 80 && batPos.y <= renderPos.y)
-	{
-		batPos.y += 8;
-	}
+	
 	_img->setScale(4);
-	_img->aniRender(CAMERA->getRelativeV2(batPos), _ani, _direction == DIRECTION::LEFT);
+	_img->aniRender(CAMERA->getRelativeV2(_batPos), _ani, _direction == DIRECTION::LEFT);
 }
 
 void GreenBat::frontRender(Player * player)
@@ -103,10 +97,10 @@ void GreenBat::attack(Player * player)
 	}
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = batPos;
+	Vector2 pos = _batPos;
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(_ptMouse.y - batPos.y), (_ptMouse.x - batPos.x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _batPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _batPos.x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;

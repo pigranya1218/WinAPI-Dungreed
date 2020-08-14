@@ -278,7 +278,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Voluspa", L"resources/images/Accessories/Voluspa.png");                           // 볼루스파
 	IMAGE_MANAGER->addImage("Voluspa0", L"resources/images/Accessories/Voluspa0.png");                         // 볼루스파창
 	IMAGE_MANAGER->addImage("BombPouch", L"resources/images/Accessories/BombPouch.png");                       // 대쉬폭탄	
-	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch0.png", 12, 1);         // 대쉬폭탄 프레임이미지
+	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch1.png", 5, 1);          // 대쉬폭탄 프레임이미지
+	IMAGE_MANAGER->addFrameImage("BombPouch1", L"resources/images/Accessories/BombPouch2.png", 7, 1);          // 대쉬폭탄 터지는 프레임이미지
 	IMAGE_MANAGER->addImage("CarpCoinPurse", L"resources/images/Accessories/CarpCoinPurse.png");               // 잉어모양 동전지갑
 	IMAGE_MANAGER->addImage("DaisyRing", L"resources/images/Accessories/DaisyRing.png");                       // 데이지링
 	IMAGE_MANAGER->addImage("DemonBoots", L"resources/images/Accessories/DemonBoots.png");                     // 악마부츠
