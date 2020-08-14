@@ -22,7 +22,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	// Åº¸· ÃÊ±âÈ­
-	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 500, 5, false, true, true);
+	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 500, 500, false, false, true, true);
 }
 
 void Banshee::release()
@@ -96,7 +96,7 @@ void Banshee::setState(ENEMY_STATE state)
 			_img = IMAGE_MANAGER->findImage("Banshee/Idle");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 
 			break;
@@ -107,7 +107,7 @@ void Banshee::setState(ENEMY_STATE state)
 			_img = IMAGE_MANAGER->findImage("Banshee/Attack");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();			
 
 			break;

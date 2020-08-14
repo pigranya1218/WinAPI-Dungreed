@@ -4,6 +4,7 @@
 class SkelMagicianIce : public Enemy
 {
 private:
+	tagShootingInfo _shooting;	// 탄막
 	tagAttackInfo	_attack;	// 공격
 
 	Image*			_attackImg;	// 공격 이펙트 이미지
@@ -17,5 +18,7 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
+
+	void attackEffect();	
 };
 

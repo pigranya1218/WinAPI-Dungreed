@@ -421,14 +421,16 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// ¹°¼Ò °ø°İ ÇÇ°İ
 
 	// * ¿¡³Ê¹Ì ºÒ¸´
-	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// ¼ö³à ÃÑ¾Ë
-	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Banshee/bullet_FX.png"	, 6, 1);	// ¼ö³à ÃÑ¾Ë »èÁ¦
-
-	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å
-	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å »èÁ¦
+	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// ¼ö³à ÃÑ¾Ë
+	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// ¼ö³à ÃÑ¾Ë »èÁ¦
 
 	IMAGE_MANAGER->addImage("IceBullet"			, L"resources/images/Enemy/Bullet/IceBullet.png"		 );	// ¾óÀ½ ÃÑ¾Ë
 	IMAGE_MANAGER->addFrameImage("IceBullet_FX"	, L"resources/images/Enemy/Bullet/IceBullet_FX.png", 3, 1);	// ¾óÀ½ ÃÑ¾Ë »èÁ¦
+	
+	IMAGE_MANAGER->addFrameImage("GiantBullet"		, L"resources/images/Enemy/Bullet/giantBullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë Å« °Í
+	IMAGE_MANAGER->addFrameImage("GiantBullet_FX"	, L"resources/images/Enemy/Bullet/giantBullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë Å« °Í »èÁ¦ ÀÌÆåÆ®
+	IMAGE_MANAGER->addFrameImage("SmallBullet"		, L"resources/images/Enemy/Bullet/smallBullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Í
+	IMAGE_MANAGER->addFrameImage("SmallBullet_FX"	, L"resources/images/Enemy/Bullet/smallBullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Í »èÁ¦ ÀÌÆåÆ®
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

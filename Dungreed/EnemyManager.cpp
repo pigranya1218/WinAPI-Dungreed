@@ -79,6 +79,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		break;
 		case ENEMY_TYPE::BAT_GIANT_NORMAL:
 		{
+			enemy = new BatGiantNormal;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::GHOST:

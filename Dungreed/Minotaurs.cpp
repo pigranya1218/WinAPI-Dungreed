@@ -13,8 +13,9 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;		// 플레이어 감지 거리
+	_detectRange = 200;		// 플레이어 감지 거리
 
+	// 피격 렉트 및 사이즈 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
@@ -220,7 +221,7 @@ void Minotaurs::render()
 		drawPos.y -= elapsePos.y / 2;
 	}
 	// 최종 렌더
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void Minotaurs::setState(ENEMY_STATE state)

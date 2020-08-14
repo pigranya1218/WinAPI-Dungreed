@@ -15,6 +15,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
+	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.speed = 150;
@@ -23,8 +24,6 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 1.5f;
 	_attack.distance = 100;	
-
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	_isDetect = _moving.jumpPower = 0;
 	_moving.gravity = 4000;
@@ -137,28 +136,23 @@ void SkelBigNormal::update(float const timeElapsed)
 void SkelBigNormal::render()
 {
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
-	_img->setScale(_scale);
+	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);	
 
+	Vector2 drawPos = _position;
 	if (_state == ENEMY_STATE::ATTACK)
 	{
 		// 이동 이미지 기준으로
 		Image* img = IMAGE_MANAGER->findImage("Skel/Big_Normal/Move");
-		Vector2 drawPos = _position;
 
 		// 이미지 간의 사이즈 차이 구하고
 		Vector2 elapsePos((_img->getFrameSize().x - img->getFrameSize().x) * _scale, (_img->getFrameSize().y - img->getFrameSize().y) * _scale);
 
 		// 최종 출력 포지션 설정
-		drawPos.x += ((bool)_direction) ? +(elapsePos.x / 2) : -(elapsePos.x / 2);
+		drawPos.x += (_direction == DIRECTION::RIGHT) ? +(elapsePos.x / 2) : -(elapsePos.x / 2);
 		drawPos.y -= elapsePos.y / 2;
-
-		_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, !(unsigned)_direction);
 	}
-	else
-	{
-		_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(bool)_direction);
-	}
+	_img->setScale(_scale);
+	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void SkelBigNormal::setState(ENEMY_STATE state)
