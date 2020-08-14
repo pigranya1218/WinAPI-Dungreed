@@ -2,6 +2,7 @@
 #include "UIManager.h"
 #include "Player.h"
 #include "StageManager.h"
+#include "Item.h"
 
 void UIManager::setPlayer(Player * player)
 {
@@ -57,6 +58,7 @@ void UIManager::init()
 	_weaponUI.frontBaseCenter = Vector2(1480, 820);
 	_weaponUI.backBaseCenter = Vector2(1500, 800);
 	_weaponUI.frontIndexRc = FloatRect(50, 20, 60, 40);
+	_weaponUI.frontBulletRc = FloatRect(-50, -45, 60, -22);
 	_weaponUI.move = Vector2(0, 0);
 	_weaponUI.moveSpeed = 80;
 	_weaponUI.viewIndex = 0;
@@ -233,6 +235,16 @@ void UIManager::render()
 				D2D_RENDERER->fillRectangle(drawRc, 255, 255, 255, 1);
 				D2D_RENDERER->drawRectangle(drawRc, 34, 32, 52, 1, 5);
 			}
+
+			{
+				if (_player->getWeapon(_weaponUI.viewIndex) != nullptr)
+				{
+					FloatRect bulletRc = FloatRect(_weaponUI.frontBaseCenter + _weaponUI.move + _weaponUI.frontBulletRc.getCenter(), _weaponUI.frontBulletRc.getSize(), PIVOT::CENTER);
+					D2D_RENDERER->renderTextField(bulletRc.left, bulletRc.top, _player->getWeapon(_weaponUI.viewIndex)->getBulletUI(), RGB(255, 255, 255),
+						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING);
+				}
+			}
+
 			Vector2 weaponPos = Vector2(_weaponUI.frontBaseCenter + _weaponUI.move);
 			weaponPos.x -= 10;
 			if (_player->getWeaponImg(_weaponUI.viewIndex) != nullptr)

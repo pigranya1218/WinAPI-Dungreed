@@ -369,7 +369,10 @@ void Player::update(float const elapsedTime)
 	// 재장전 키를 눌렀을 때
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::RELOAD)))
 	{
-		_equippedWeapon[_currWeaponIndex]->reload(this);
+		if (_equippedWeapon[_currWeaponIndex] != nullptr)
+		{
+			_equippedWeapon[_currWeaponIndex]->reload(this);
+		}
 	}
 
 	// 코스튬 애니메이션 업데이트
