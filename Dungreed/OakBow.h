@@ -4,10 +4,6 @@
 class OakBow : public Item
 {
 private:
-	Image* _img;
-	Image* _frameImg;
-	Animation* _ani;
-
 	int _minDamage;
 	int _maxDamage;
 
@@ -21,6 +17,13 @@ private:
 
 	bool _isAttack;
 	float _chargeDelay;
+	Image* _img;
+	Animation* _ani;
+	Vector2 renderPosHand;
+	Vector2 renderPosWeapon;
+	Vector2 anglePos;
+	Vector2 subHandPos;
+	int effectCount;
 public:
 
 	virtual void init();
