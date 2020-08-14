@@ -49,12 +49,14 @@ protected:
 		bool				isAni;		// 애니메이션 사용여부
 		bool				aniLoop;	// 애니메이션 루프여부
 		bool				isCollision;// 충돌 여부
+		bool				isRotate;	// 이미지 회전 여부
 		int					bulletNum;	// 생성할 총알 지정
 
-		void init(string bulletName, string effectName, float scale, float delay, float range, float speed, bool isCollision = 1, bool isAni = 0, bool aniLoop = 0)
+		void init(string bulletName, string effectName, float scale, float delay, float range, float speed, bool isRotate, bool isCollision, bool isAni, bool aniLoop)
 		{
 			this->bulletName = bulletName;
-			this->effectName = effectName;			
+			this->effectName = effectName;	
+
 			if (isAni)
 			{
 				this->effectSize = IMAGE_MANAGER->findImage(bulletName)->getFrameSize() * scale;
@@ -72,6 +74,7 @@ protected:
 			this->isAni = isAni;
 			this->aniLoop = aniLoop;
 			this->isCollision = isCollision;
+			this->isRotate = isRotate;
 		}
 		// 딜레이 업데이트
 		bool delayUpdate(float const timeElapsed)
@@ -96,10 +99,17 @@ protected:
 			bullet->setSize(effectSize);
 			bullet->setTeam(OBJECT_TEAM::ENEMY);
 
-			bullet->init(bulletName, angle, speed, isAni, aniLoop, 10, isCollision, effectName, effectSize);
+			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, isRotate);
 
-			if (bulletNum > 0) bulletNum--;
+			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);
+		}
+		void aniUpdate(const float timeElapsed)
+		{
+			for (int i = 0; i < bullets.size(); i++)
+			{
+				bullets[i]->aniUpdate(timeElapsed);
+			}
 		}
 		// 총알 출력
 		void render()
@@ -110,7 +120,7 @@ protected:
 			}
 		}
 
-		void fireBullet(EnemyManager* enemyManager);
+		void fireBullet(EnemyManager* enemyManager, int fireCount = 0);
 	};
 
 	// 공격에 관련된 것들

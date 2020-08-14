@@ -11,17 +11,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 100;
-
-	// 공격 관련 변수 초기화
-	ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.delay = 2;
-
-	// 이동 관련 변수 초기화
-	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.delay = 3;
-	_moving.speed = 400;
-	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
+	_detectRange = 300;
 
 	// 사이즈 설정
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
@@ -29,6 +19,16 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 
 	// 충돌 렉트 설정
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
+	// 공격 관련 변수 초기화
+	//ZeroMemory(&_shooting, sizeof(_shooting));
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 300, 1000, true, false, false, false);
+
+	// 이동 관련 변수 초기화
+	ZeroMemory(&_moving, sizeof(_moving));
+	_moving.delay = 3;
+	_moving.speed = 250;
+	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	_isDetect = 0;
 }
@@ -41,14 +41,18 @@ void BatIce::release()
 
 void BatIce::update(float const timeElapsed)
 {
-	// 플레이어 좌표따라 방햘 설정
-	_direction = _enemyManager->getPlayerPos().x > _position.x ? DIRECTION::RIGHT : DIRECTION::LEFT;
+	const Vector2 playerPos = _enemyManager->getPlayerPos();
 
 	// 감지를 안했다면
 	if (!_isDetect)
 	{
 		// 플레이어 계속 확인
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
+	}
+	else
+	{
+		// 플레이어 좌표따라 방햘 설정
+		_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 	}
 
 	switch (_state)
@@ -82,8 +86,13 @@ void BatIce::update(float const timeElapsed)
 			// 일정 주기로 공격
 			if (_isDetect)
 			{
-				if (_shooting.update(timeElapsed))
+				if (_shooting.delayUpdate(timeElapsed))
 				{
+					float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
+					for (int i = -1; i < 2; i++)
+					{
+						_shooting.createBullet(_position, angle + ((PI / 4) * i));
+					}
 					setState(ENEMY_STATE::ATTACK);
 				}
 			}
@@ -95,11 +104,14 @@ void BatIce::update(float const timeElapsed)
 					setState(ENEMY_STATE::IDLE);
 				}
 			}
-
 			break;
 		}
 		case ENEMY_STATE::ATTACK:
 		{
+			if (_ani->getPlayIndex() == 5)
+			{
+				_shooting.fireBullet(_enemyManager);
+			}
 			if (!_ani->isPlay())
 			{
 				// 공격 완료 후 IDLE 상태로 변경
@@ -140,7 +152,7 @@ void BatIce::setState(ENEMY_STATE state)
 			_img = IMAGE_MANAGER->findImage("Bat/Ice/Move");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 
 			break;
@@ -151,7 +163,7 @@ void BatIce::setState(ENEMY_STATE state)
 			_img = IMAGE_MANAGER->findImage("Bat/Ice/Attack");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 
 			break;

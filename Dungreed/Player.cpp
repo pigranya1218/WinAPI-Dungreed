@@ -451,6 +451,8 @@ void Player::render()
 	{
 		_hand->frontRender(this);
 	}
+
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }
 
 Image* Player::getWeaponImg(int index) const noexcept

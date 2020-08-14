@@ -115,6 +115,9 @@
     <Filter Include="Dungreed\GameScene\Item\Accessories">
       <UniqueIdentifier>{6cd4b808-2924-4835-ae3b-9c78ec86045a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2DGameFramework\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dungreed\GameScene\Item\Range">
       <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
     </Filter>
@@ -420,6 +423,9 @@
     <ClInclude Include="RedLotusCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
+    <ClInclude Include="BatGiantNormal.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="CostumeUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
@@ -685,6 +691,9 @@
     </ClCompile>
     <ClCompile Include="AliceCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="BatGiantNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="CostumeUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>

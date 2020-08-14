@@ -1,11 +1,11 @@
 #pragma once
 #include "Enemy.h"
 
-class BatRed : public Enemy
+class BatGiantNormal : public Enemy
 {
 private:
-	tagShootingInfo _shooting;	
-	tagMoveInfo		_moving;
+	tagShootingInfo _shooting;	// 탄막 관련
+	tagAttackInfo	_attack;	// 공격 관련
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

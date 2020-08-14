@@ -30,7 +30,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_skill.distance = 300;
 
 	//ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 15, false, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 1000, true, false, false, false);
 
 	_isDetect = _moving.jumpPower = 0;
 	_moving.gravity = 4000;	
@@ -97,7 +97,7 @@ void SkelBigIce::update(float const timeElapsed)
 			{
 				if (_skill.update(timeElapsed))
 				{
-					_shooting.bulletNum = RANDOM->getFromIntTo(3, 7);
+					_shooting.bulletNum = RANDOM->getFromIntTo(4, 7);
 					setState(ENEMY_STATE::SKILL);
 				}
 			}
@@ -133,8 +133,8 @@ void SkelBigIce::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
 		}		
+		break;
 	}
 
 	if (_isStand && _moving.jumpPower == 0)

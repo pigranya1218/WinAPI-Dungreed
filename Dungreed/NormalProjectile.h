@@ -17,10 +17,15 @@ private:
 	string _collisionEffect;	// 부딪혀서 폭발할 때 이펙트
 	Vector2 _effectSize;		// 부딪혀서 폭발할 때 이펙트 사이즈
 
+	bool _useRotate;			// 투사체를 돌릴 것인가
+
 public:
-	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize);
+	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize, bool useRotate = 1);
 	virtual void release();
 	virtual void update(float elapsedTime);
 	virtual void render();
+
+	// 애니메이션 업데이트 하려고 만듬 삭제하세욥
+	virtual void aniUpdate(float const elapsedTime);
 };
 

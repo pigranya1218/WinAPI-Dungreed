@@ -6,6 +6,7 @@
 #include "BatIce.h"
 #include "BatNormal.h"
 #include "BatGiantRed.h"
+#include "BatGiantNormal.h"
 #include "SkelBigIce.h"
 #include "SkelBigNormal.h"
 #include "SkelMagicianIce.h"
