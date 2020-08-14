@@ -8,6 +8,7 @@ void UIManager::setPlayer(Player * player)
 	_player = player;
 	_inventoryUI.setPlayer(player);
 	_statUI.setPlayer(player);
+	_costumeUI.setPlayer(player);
 }
 
 void UIManager::init()
@@ -66,12 +67,16 @@ void UIManager::init()
 
 	// STATUS UI
 	_statUI.init();
+
+	// COSTUME UI
+	_costumeUI.init();
 }
 
 void UIManager::release()
 {
 	_inventoryUI.release();
 	_statUI.release();
+	_costumeUI.release();
 }
 
 void UIManager::update(float const elaspedTime)
@@ -106,7 +111,11 @@ void UIManager::update(float const elaspedTime)
 	{
 		_statUI.setActive(!_statUI.isActive());
 	}
-
+	// Boutique(CostumeUI) Open
+	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
+	{
+		_costumeUI.setActive(!_costumeUI.isActive());
+	}
 
 
 	if (_inventoryUI.isActive())
@@ -117,10 +126,15 @@ void UIManager::update(float const elaspedTime)
 	{
 		_statUI.update(elaspedTime);
 	}
+	if (_costumeUI.isActive())
+	{
+		_costumeUI.update(elaspedTime);
+	}
 
 	_isActive = false;
 	_isActive |= _inventoryUI.isActive();
 	_isActive |= _statUI.isActive();
+	_isActive != _costumeUI.isActive();
 
 	
 	
@@ -277,5 +291,11 @@ void UIManager::render()
 		{
 			_statUI.render();
 		}
+
+		// CostumeUI
+		if (_costumeUI.isActive())
+		{
+			_costumeUI.render();
+		}	
 	}
 }
