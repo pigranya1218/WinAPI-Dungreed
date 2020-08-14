@@ -112,11 +112,11 @@
     <Filter Include="Dungreed\GameScene\Item\Accessories">
       <UniqueIdentifier>{6cd4b808-2924-4835-ae3b-9c78ec86045a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2DGameFramework\CameraManager">
-      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Item\Range">
       <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Manager\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -139,10 +139,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CameraEvent.h">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -331,7 +331,7 @@
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="DebugStage.h">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
@@ -423,10 +423,10 @@
       <Filter>2DGameFramework\GameNode</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -591,7 +591,7 @@
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="DebugStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>

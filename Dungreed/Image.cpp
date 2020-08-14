@@ -129,7 +129,8 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	Vector2 size = _size * _scale;
 
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
-	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(_anglePos.x, _anglePos.y));
+	Vector2 anglePos = _anglePos * _scale;
+	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(anglePos.x, anglePos.y));
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;
 	if (bisymmetry)
@@ -144,15 +145,16 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	}
 	
 	D2D1::Matrix3x2F skewMatrix = D2D1::Matrix3x2F::Skew(_skewAngle.x, _skewAngle.y, D2D1::Point2F(_skewPos.x, _skewPos.y));
-
+	
 	//그릴 영역 세팅 
 	D2D1_RECT_F dxArea = D2D1::RectF(0.0f, 0.0f, sourSize.x, sourSize.y);
-	D2D1_RECT_F dxSrc = D2D1::RectF(sourPos.x, sourPos.y, sourPos.x + sourSize.x, sourPos.y + sourSize.y);
+	D2D1_RECT_F dxSour = D2D1::RectF(sourPos.x, sourPos.y, sourPos.x + sourSize.x, sourPos.y + sourSize.y);
+	
 	//최종행렬 세팅
 	D2D_RENDERER->getRenderTarget()->SetTransform(scaleMatrix * rotateMatrix * skewMatrix * lrMatrix * translateMatrix);
 	//렌더링 요청
 	D2D_RENDERER->getRenderTarget()->DrawBitmap(_bitmap, dxArea, _alpha,
-		D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, &dxSrc);
+		D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR, dxSour);
 
 	this->resetRenderOption();
 }

@@ -6,6 +6,7 @@
 #include "ShortSpear.h"
 #include "Punch.h"
 #include "ShortSword.h"
+#include "CosmosSword.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -155,7 +156,7 @@ void Player::init()
 	testAcc10->init();
 	_inventory[9] = testAcc10;
 
-	Voluspa* testAcc11 = new Voluspa;
+	CosmosSword* testAcc11 = new CosmosSword;
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
@@ -431,7 +432,7 @@ void Player::render()
 	}
 
 	// 캐릭터 그리기
-	_costume->render(CAMERA->getRelativeV2(_position), _direction);
+	 _costume->render(CAMERA->getRelativeV2(_position), _direction);
 
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < 4; i++)
