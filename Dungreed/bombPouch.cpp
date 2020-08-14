@@ -1,4 +1,5 @@
 #include "bombPouch.h"
+#include "NormalProjectile.h"
 
 void bombPouch::init()
 {
@@ -10,7 +11,7 @@ void bombPouch::init()
 	
 	_price = 1200;
 
-
+	
 	_isBoom = false;
 
 }
@@ -21,28 +22,44 @@ void bombPouch::release()
 
 void bombPouch::update(Player* player, float const elapsedTime)
 {
-	_renderPos;
+	_maxDash = player->getMaxDash();
+	_currDash = player->getCurrDash();
+	int _Difference = _maxDash - _currDash ;	
+	_renderPos = player->getPosition();
 	
-	if (KEY_MANAGER->isOnceKeyDown('R') )
+
+
+	if (_maxDash - _Difference == _currDash && _maxDash != _currDash )
 	{
-		_x = _renderPos.x;
-		_y = _renderPos.y;
-		_isBoom = true;
+		
+			_isBoom = true;
+				
 	}
-	if (_RC.bottom > WINSIZEY)
+	else
 	{
 		_isBoom = false;
 	}
+	
+	
 	if (_isBoom)
 	{
-		_RC = rectMakePivot(Vector2(_x, _y), Vector2(50, 50), PIVOT::CENTER);
-		_y += 10;
+
+		NormalProjectile* projectile = new NormalProjectile;
+		Vector2 shootPos = _renderPos;
+		float length = 60 * 0.3f; // 길이만큼
+		int y = 0;
+
+		shootPos.y += -sinf(PI / 2) * length;
+		projectile->setPosition(shootPos);
+		projectile->setSize(Vector2(100, 100));
+		projectile->setTeam(OBJECT_TEAM::PLAYER);
+		projectile->init("BombPouch0", y, 10, true, false, 20, false, "BabyBatBulletFx", Vector2(100, 100));
+		AttackInfo* attackInfo = new AttackInfo;
+		attackInfo->team = OBJECT_TEAM::PLAYER;
+		player->attack(projectile, attackInfo);
+
 	}
-	else if (!_isBoom )
-	{
-		
-		_RC = rectMakePivot(Vector2(_renderPos), Vector2(0, 0), PIVOT::CENTER);
-	}
+	
 }
 
 void bombPouch::frontRender(Player* player)
@@ -52,7 +69,7 @@ void bombPouch::frontRender(Player* player)
 
 void bombPouch::backRender(Player* player)
 {
-	_renderPos = player->getPosition();
+	
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_RC));
 }
 
@@ -82,4 +99,7 @@ void bombPouch::getHit(Vector2 const position)
 
 void bombPouch::equip(Player* player)
 {
+	
+	
+
 }

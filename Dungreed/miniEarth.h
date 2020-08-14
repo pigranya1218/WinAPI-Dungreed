@@ -5,7 +5,7 @@ class miniEarth : public Item
 private:
 	Image* _img;
 	Animation* _ani;
-
+	Vector2 _renderPos;
 	FloatRect _crash;
 	int _x, _y;
 	float _angle = PI / 4;

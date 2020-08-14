@@ -35,22 +35,24 @@ void miniEarth::update(Player * player, float const elapsedTime)
 		_img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setFPS(10);
 	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
+	_x = cosf(_angle) * 40;
+	_y = -sinf(_angle) * 40;
+
+	_renderPos = player->getPosition();
+	_renderPos.x = _renderPos.x + _x;
+	_renderPos.y = _renderPos.y + _y - 20;
 }
 
 void miniEarth::backRender(Player * player)
 {
-	_x = cosf(_angle) * 55;
-	_y = -sinf(_angle) * 55;
+	
 
-	Vector2 renderPos = player->getPosition();
-	renderPos.x = renderPos.x + _x;
-	renderPos.y = renderPos.y + _y - 20;
-	_img->setScale(4);
-	_img->aniRender(CAMERA->getRelativeV2(renderPos), _ani, false);
 }
 
 void miniEarth::frontRender(Player * player)
 {
+	_img->setScale(4);
+	_img->aniRender(CAMERA->getRelativeV2(_renderPos), _ani, false);
 }
 
 void miniEarth::displayInfo()

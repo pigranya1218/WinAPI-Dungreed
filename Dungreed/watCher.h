@@ -10,7 +10,7 @@ private:
 	FloatRect _crash;
 	int _x, _y;
 	int _radius;
-	int _fspeed;
+	int _fspeed;	
 	float _angle = PI / 5;	
 	bool _setitem;
 public:

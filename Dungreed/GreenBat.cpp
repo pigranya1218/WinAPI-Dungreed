@@ -23,7 +23,7 @@ void GreenBat::init()
 	_ani->start();
 	_ani->init(_img->getWidth(), _img->getHeight(),
 		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(10);
+	_ani->setFPS(15);
 	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 }
 
@@ -33,6 +33,7 @@ void GreenBat::release()
 
 void GreenBat::update(Player * player, float const elapsedTime)
 {
+	_direction = player->getDirection();
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
@@ -45,16 +46,7 @@ void GreenBat::update(Player * player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}
-	if (_ptMouse.x < _renderPos.x)
-	{
-		_direction = DIRECTION::LEFT;
-
-	}
-	else
-	{
-		_direction = DIRECTION::RIGHT;
-
-	}
+	
 	_batPos*elapsedTime;
 	_renderPos = player->getPosition();
 	if (_batPos.x > _renderPos.x + 10)
@@ -108,7 +100,7 @@ void GreenBat::attack(Player * player)
 	Vector2 pos = _batPos;
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(_ptMouse.y - _batPos.y), (_ptMouse.x - _batPos.x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _batPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _batPos.x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;

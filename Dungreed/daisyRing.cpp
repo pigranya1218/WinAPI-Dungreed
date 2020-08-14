@@ -54,4 +54,5 @@ void daisyRing::getHit(Vector2 const position)
 
 void daisyRing::equip(Player* player)
 {
+	
 }

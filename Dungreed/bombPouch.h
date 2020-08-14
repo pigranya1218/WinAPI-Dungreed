@@ -5,9 +5,14 @@ class bombPouch : public Item
 private:
 
 	FloatRect _RC;
+	Image* _img;
 	bool _isBoom;
 	Vector2 _renderPos;
 	int _x, _y;
+	int _currDash;  //대쉬횟수
+	int _maxDash;   //대쉬최대값
+	float _lastTime;//마지막시간
+	float _currTime;//시간차이값
 
 
 public:

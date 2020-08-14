@@ -46,16 +46,7 @@ void GreenMomBat::update(Player * player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}
-	if (_ptMouse.x < _renderPos.x)
-	{
-		_direction = DIRECTION::LEFT;
-
-	}
-	else
-	{
-		_direction = DIRECTION::RIGHT;
-
-	}
+	_direction = player->getDirection();
 	_renderPos = player->getPosition();
 	if (_batPos.x > _renderPos.x + 80)
 	{
@@ -109,7 +100,7 @@ void GreenMomBat::attack(Player * player)
 	Vector2 pos = _batPos;
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(_ptMouse.y - _batPos.y), (_ptMouse.x - _batPos.x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _batPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _batPos.x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;

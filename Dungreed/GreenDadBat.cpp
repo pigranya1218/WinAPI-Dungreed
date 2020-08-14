@@ -36,6 +36,8 @@ void GreenDadBat::release()
 
 void GreenDadBat::update(Player * player, float const elapsedTime)
 {
+	_direction = player->getDirection();
+
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
@@ -48,16 +50,7 @@ void GreenDadBat::update(Player * player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}
-	if (_ptMouse.x < _renderPos.x)
-	{
-		_direction = DIRECTION::LEFT;
-
-	}
-	else
-	{
-		_direction = DIRECTION::RIGHT;
-
-	}
+	
 	_renderPos = player->getPosition();
 	if (_batPos.x > _renderPos.x - 70)
 	{
@@ -112,7 +105,7 @@ void GreenDadBat::attack(Player * player)
 	Vector2 pos = _batPos;
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(_ptMouse.y - _batPos.y), (_ptMouse.x - _batPos.x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _batPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _batPos .x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;
@@ -120,7 +113,7 @@ void GreenDadBat::attack(Player * player)
 
 	NormalProjectile* projectile = new NormalProjectile;
 	Vector2 shootPos = pos;
-	float length = _img->getWidth() * 0.1f; // 길이만큼
+	float length = _img->getWidth() * 0.6f * 0.1; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	projectile->setPosition(shootPos);
