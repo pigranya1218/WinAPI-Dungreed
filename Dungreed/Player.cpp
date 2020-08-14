@@ -299,6 +299,11 @@ void Player::update(float const elapsedTime)
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
+
+		for (int i = 0; i < 4; i++) 
+		{
+			_equippedAcc[i]->dash(this);
+		}
 	}
 	
 	if (_force.x != 0) // 대쉬 상태라면
