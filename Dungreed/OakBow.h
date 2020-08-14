@@ -20,6 +20,9 @@ private:
 	Image* _img;
 	Animation* _ani;
 	Vector2 renderPosHand;
+	Vector2 renderPosWeapon;
+	Vector2 anglePos;
+	Vector2 subHandPos;
 	int effectCount;
 public:
 
