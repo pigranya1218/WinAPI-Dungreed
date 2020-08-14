@@ -42,10 +42,10 @@ void SpikeBall::backRender(Player* player)
 	renderPos.x = renderPos.x + x;
 	renderPos.y = renderPos.y + y;
 	_img->setScale(4);
-	_img->render(renderPos, false);
+	_img->render(CAMERA->getRelativeV2(renderPos), false);
 	Vector2 size = Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4);
 	_crash = rectMakePivot(Vector2(renderPos), size, PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(_crash);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_crash));
 }
 
 

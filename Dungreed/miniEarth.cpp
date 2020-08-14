@@ -46,10 +46,10 @@ void miniEarth::backRender(Player * player)
 	renderPos.x = renderPos.x + x;
 	renderPos.y = renderPos.y + y;
 	_img->setScale(4);
-	_img->aniRender(Vector2(renderPos), _ani, false);
+	_img->aniRender(CAMERA->getRelativeV2(renderPos), _ani, false);
 	Vector2 size = Vector2(_img->getFrameSize().x*2 , _img->getFrameSize().y *2);
 	_crash = rectMakePivot(Vector2(renderPos.x, renderPos.y+20), size, PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(_crash);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_crash));
 }
 
 void miniEarth::frontRender(Player * player)

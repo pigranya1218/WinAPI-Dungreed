@@ -78,10 +78,10 @@ void Banshee::update(float const timeElapsed)
 
 void Banshee::render()
 {
-	D2D_RENDERER->drawRectangle(_rect);
-	D2D_RENDERER->drawEllipse(_position, _detectRange);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
+	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
-	_img->aniRender(_position, _ani, !(bool)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(bool)_direction);
 }
 
 void Banshee::setState(ENEMY_STATE state)

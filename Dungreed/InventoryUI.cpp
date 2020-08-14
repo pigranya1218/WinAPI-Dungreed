@@ -13,7 +13,7 @@ void InventoryUI::init()
 	_accImg = IMAGE_MANAGER->findImage("UI/INVENTORY/ACC_ZONE");
 	_accRc = FloatRect(Vector2(1305, 352), Vector2(460, 110), PIVOT::CENTER);
 
-	_exitRc = FloatRect(900, 10, 980, 100);
+	_exitRc = FloatRect(890, 10, 980, 90);
 
 	_goldRc = FloatRect(1100, 798, 1500, 848);
 
@@ -96,6 +96,7 @@ void InventoryUI::update(float elapsedTime)
 			{
 				if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
 				{
+					_player->swapItem(_dragWeaponIndex, i);
 					break;
 				}
 			}
@@ -105,9 +106,12 @@ void InventoryUI::update(float elapsedTime)
 			{
 				if (_invenRc[i].ptInRect(_ptMouse))
 				{
+					_player->swapItem(_dragWeaponIndex, 6 + i);
 					break;
 				}
 			}
+
+			// TODO : ÆÄ±«ÇÏ±â
 		}
 		else if (_dragAccIndex != -1)
 		{
@@ -116,6 +120,7 @@ void InventoryUI::update(float elapsedTime)
 			{
 				if (_equippedAccRc[i].ptInRect(_ptMouse))
 				{
+					_player->swapItem(2 + _dragAccIndex, 2 + i);
 					break;
 				}
 			}
@@ -125,9 +130,12 @@ void InventoryUI::update(float elapsedTime)
 			{
 				if (_invenRc[i].ptInRect(_ptMouse))
 				{
+					_player->swapItem(2 + _dragAccIndex, 6 + i);
 					break;
 				}
 			}
+
+			// TODO : ÆÄ±«ÇÏ±â
 		}
 		else if (_dragInvenIndex != -1)
 		{
@@ -136,6 +144,7 @@ void InventoryUI::update(float elapsedTime)
 			{
 				if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
 				{
+					_player->swapItem(6 + _dragInvenIndex, i);
 					break;
 				}
 			}
@@ -145,6 +154,7 @@ void InventoryUI::update(float elapsedTime)
 			{
 				if (_equippedAccRc[i].ptInRect(_ptMouse))
 				{
+					_player->swapItem(6 + _dragInvenIndex, 2 + i);
 					break;
 				}
 			}
@@ -154,9 +164,12 @@ void InventoryUI::update(float elapsedTime)
 			{
 				if (_invenRc[i].ptInRect(_ptMouse))
 				{
+					_player->swapItem(6 + _dragInvenIndex, 6 + i);
 					break;
 				}
 			}
+
+			// TODO : ÆÄ±«ÇÏ±â
 
 		}
 

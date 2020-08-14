@@ -83,5 +83,6 @@ public:
 	void unequipAcc(int index);		// 악세사리 장착중이던 아이템을 해제함
 	void swapItem(int indexA, int indexB);
 
+	PlayerStat getCurrStat() { return _adjustStat; };
 };
 

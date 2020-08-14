@@ -214,7 +214,7 @@ void Player::update(float const elapsedTime)
 	// updateAdjustStat();
 
 	//방향 조정
-	if (_ptMouse.x < _position.x)
+	if (CAMERA->getAbsoluteX(_ptMouse.x) < _position.x)
 	{
 		_direction = DIRECTION::LEFT;
 	}
@@ -296,7 +296,7 @@ void Player::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		_currDashCount -= 1;
-		float angle = atan2f(-(_ptMouse.y - _position.y), (_ptMouse.x - _position.x));
+		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
 	}
@@ -394,7 +394,7 @@ void Player::update(float const elapsedTime)
 
 void Player::render()
 {
-	D2D_RENDERER->drawRectangle(FloatRect(_position, _size, PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1);
 
 	// 캐릭터 뒤에 그리기
 	for(int i = 0; i < 4; i++)
@@ -414,7 +414,7 @@ void Player::render()
 	}
 
 	// 캐릭터 그리기
-	_costume->render(_position, _direction);
+	_costume->render(CAMERA->getRelativeV2(_position), _direction);
 
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < 4; i++)
@@ -493,18 +493,69 @@ void Player::unequipAcc(int index)
 	}
 }
 
-void Player::swapItem(int indexA, int indexB)
+void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 ~ 20 : inventory
 {
-	if (indexA <= 1) // Weapon
+	if (indexA <= 1) // A : Weapon
 	{
 
+		if (indexB <= 1) // B : Weapon
+		{
+			if (indexA == indexB) return;
+			swap(_equippedWeapon[indexA], _equippedWeapon[indexB]);
+		}
+		else if (indexB <= 5) // B : Acc
+		{
+			return;
+		}
+		else // B : Inventory
+		{
+			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() != ITEM_TYPE::ACC)
+			{
+				swap(_equippedWeapon[indexA], _inventory[indexB - 6]);
+			}
+		}
 	}
-	else if (indexA <= 5) // Acc
+	else if (indexA <= 5) // A : Acc
 	{
-
+		if (indexB <= 1) // B : Weapon
+		{
+			return;
+			
+		}
+		else if (indexB <= 5) // B : Acc
+		{
+			if (indexA == indexB) return;
+			swap(_equippedAcc[indexA - 2], _equippedAcc[indexB - 2]);
+		}
+		else // B : Inventory
+		{
+			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() == ITEM_TYPE::ACC)
+			{
+				swap(_equippedAcc[indexA - 2], _inventory[indexB - 6]);
+			}
+		}
 	}
-	else // Inventory
+	else // A : Inventory
 	{
+		if (indexB <= 1) // B : Weapon
+		{
+			if (_inventory[indexA - 6]->getType() != ITEM_TYPE::ACC)
+			{
+				swap(_inventory[indexA - 6], _equippedWeapon[indexB]);
+			}
 
+		}
+		else if (indexB <= 5) // B : Acc
+		{
+			if (_inventory[indexA - 6]->getType() == ITEM_TYPE::ACC)
+			{
+				swap(_inventory[indexA - 6], _equippedAcc[indexB - 2]);
+			}
+		}
+		else // B : Inventory
+		{
+			if (indexA == indexB) return;
+			swap(_inventory[indexA - 6], _inventory[indexB - 6]);
+		}
 	}
 }

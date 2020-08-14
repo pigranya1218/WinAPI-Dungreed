@@ -3,13 +3,40 @@
 
 HRESULT MapTool::init()
 {
+	// Default Tilemap Size Setting
 	_tileX = 30;
 	_tileY = 20;
 	
+	// 팔레트 그리기
 	_paletteImage = IMAGE_MANAGER->findImage("sampleTile");
-	setup();
-	CAMERA->setConfig(0, 0, 960, 640, 0, 0, 0, 0);
+	for (int i = 0; i < SAMPLETILEY; ++i)
+	{
+		for (int j = 0; j < SAMPLETILEX; ++j)
+		{
+			_sampleTile[SAMPLETILEX * i + j].tileFrameX = j;
+			_sampleTile[SAMPLETILEX * i + j].tileFrameY = i;
+			_sampleTile[SAMPLETILEX * i + j].rc = FloatRect(Vector2(1196 + j * 32, 96 + 32 * i), Vector2(32, 32), PIVOT::CENTER);
+		}
+	}
 
+	// 인터페이스 위치 설정
+	_save = FloatRect(Vector2(200, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+	_load = FloatRect(Vector2(400, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+	_erase = FloatRect(Vector2(600, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+	_layer1Btn = FloatRect(Vector2(800, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+	_layer2Btn = FloatRect(Vector2(1000, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+
+	_decreaseTileX = FloatRect(Vector2(300, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_increaseTileX = FloatRect(Vector2(350, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_decreaseTileY = FloatRect(Vector2(300, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
+	_increaseTileY = FloatRect(Vector2(350, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
+
+	_layer = 0;
+	_selectDrag = false;
+	_selectStart = Vector2(-1, -1);
+	_selectEnd = Vector2(-1, -1);
+
+	setup();
 	return S_OK;
 }
 
@@ -20,82 +47,65 @@ void MapTool::release()
 void MapTool::update()
 {
 	
+
 	setMap();
 
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
 	{
 		setTileSize();
-		if (_save.ptInRect(_ptMouse)) save();
-		if (_load.ptInRect(_ptMouse)) load();
-		if (_layer1Btn.ptInRect(_ptMouse))_layer=0; // 배경
-		if (_layer2Btn.ptInRect(_ptMouse))_layer=1; // 이미지
+		if (_save.ptInRect(_ptMouse))
+		{
+			save();
+		}
+		else if (_load.ptInRect(_ptMouse))
+		{
+			load();
+		}
+		else if (_layer1Btn.ptInRect(_ptMouse))
+		{
+			_layer = 0; // 배경
+		}
+		else if (_layer2Btn.ptInRect(_ptMouse))
+		{
+			_layer = 1; // 이미지
+		}
 	}
+
 	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
 	{
 		paletteChange();
-		
 	}
 	
 	if (KEY_MANAGER->isStayKeyDown('D'))
 	{
-		CAMERA->movePivot(Vector2(-6, 0));
-		//_mapPointer.x += 1;
-		for (int i = 0; i < _tileX*_tileY; i++)
-		{
-			_tile[i].rc.move(Vector2(-6,0));
-			
-		}
+		CAMERA->movePivot(Vector2(6, 0));
 	}
 	if (KEY_MANAGER->isStayKeyDown('A'))
 	{
-		CAMERA->movePivot(Vector2(6, 0));
-		//_mapPointer.x -= 1;
-		for (int i = 0; i < _tileX*_tileY; i++)
-		{
-			_tile[i].rc.move(Vector2(6, 0));
-			
-		}
+		CAMERA->movePivot(Vector2(-6, 0));
 	}
 	if (KEY_MANAGER->isStayKeyDown('W'))
 	{
-		CAMERA->movePivot(Vector2(0, 6));
-		//_mapPointer.y -= 1;
-		for (int i = 0; i < _tileX*_tileY; i++)
-		{
-			_tile[i].rc.move(Vector2(0, 6));
-			
-		}
+		CAMERA->movePivot(Vector2(0, -6));
 	}
 	if (KEY_MANAGER->isStayKeyDown('S'))
 	{
-		CAMERA->movePivot(Vector2(0, -6));
-		//_mapPointer.y += 1;
-		for (int i = 0; i < _tileX*_tileY; i++)
-		{
-			_tile[i].rc.move(Vector2(0, -6));
-			
-		}
+		CAMERA->movePivot(Vector2(0, 6));
+	}
+	
+	// Exit
+	if (KEY_MANAGER->isStayKeyDown(VK_ESCAPE))
+	{
+		PostQuitMessage(0);
 	}
 
-	
-
-	// CAMERA->setXY(_tile[_tileX*_tileY/2].rc.getCenter());
-	// CAMERA->setLT(_tile[0].rc.getCenter());
 }
 
 void MapTool::render()
 {
-	Vector2 size = _paletteImage->getSize();
-	size.x *= _paletteImage->getMaxFrameX();
-	size.y *= _paletteImage->getMaxFrameY();
-
-	for (int i = 0; i < _tileX*_tileY; ++i)
+	for (int i = 0; i < _tileX * _tileY; ++i)
 	{
-		//D2D_RENDERER->drawRectangle(_vTileMap[i].rc, D2D1::ColorF::Blue, 1, 0.5f);
-		//_paletteImage->frameRender(_vTileMap[i].rc.getCenter(), _vTileMap[i].tileFrameX, _vTileMap[i].tileFrameY);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_tile[i].rc), D2D1::ColorF::Blue, 1, 0.5f);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_tile2[i].rc), D2D1::ColorF::Blue, 1, 0.5f);
-		//_paletteImage->frameRender(_tile[i].rc.getCenter(), _tile[i].tileFrameX, _tile[i].tileFrameY);
 		
 		if (_tile[i].tileFrameX[0] != -1)
 		{
@@ -116,24 +126,13 @@ void MapTool::render()
 			_paletteImage->setScale(4);
 			CAMERA->frameRender(_paletteImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
 		}
-		
-
-		//D2D_RENDERER->drawEllipse(_mapPointer, 5, D2DRenderer::DefaultBrush::Red, 1);
 	}
-
-	
-
-	//CAMERA->render(IMAGE_MANAGER->findImage("Town_BGL"), Vector2(500, 500));
 
 	FloatRect frame = FloatRect(Vector2(0, 640), Vector2(WINSIZEX, 960), PIVOT::LEFT_TOP);
 	D2D_RENDERER->fillRectangle(frame, 255, 255, 255, 1, 0, Vector2(0, 0));
 	FloatRect frame2 = FloatRect(Vector2(960, 0), Vector2(640, WINSIZEY), PIVOT::LEFT_TOP);
 	D2D_RENDERER->fillRectangle(frame2, 255, 255, 255, 1, 0, Vector2(0, 0));
 
-	for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
-	{
-		D2D_RENDERER->drawRectangle(_sampleTile[i].rc, D2D1::ColorF::Red, 1, 0.5f);
-	}
 	
 	for (int i = 0; i < SAMPLETILEY; ++i)
 	{
@@ -145,214 +144,165 @@ void MapTool::render()
 		}
 	}
 
-	
+	for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
+	{
+		int xIndex = i % SAMPLETILEX;
+		int yIndex = i / SAMPLETILEX;
+		if (_selectStart.x <= xIndex && xIndex <= _selectEnd.x && _selectStart.y <= yIndex && yIndex <= _selectEnd.y)
+		{
+			D2D_RENDERER->drawRectangle(_sampleTile[i].rc, D2D1::ColorF::Red, 1, 3);
+		}
+		else
+		{
+			D2D_RENDERER->drawRectangle(_sampleTile[i].rc, D2D1::ColorF::Black, 1, 1);
+		}
+	}
 
 
 	//인터페이스들 렌더
-	wstring text(L"save");
-	D2D_RENDERER->renderText(210, WINSIZEY - 100, text,30,D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING,L"둥근모꼴",0.0f);
+	D2D_RENDERER->renderText(210, WINSIZEY - 100, L"SAVE",30,D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING,L"둥근모꼴",0.0f);
 	D2D_RENDERER->drawRectangle(_save, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text2(L"laod");
-	D2D_RENDERER->renderText(410, WINSIZEY - 100, text2, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(410, WINSIZEY - 100, L"LOAD", 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_load, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text3(L"erase");
-	D2D_RENDERER->renderText(610, WINSIZEY - 100, text3, 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(610, WINSIZEY - 100, L"ERASE", 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_erase, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text4(L"LAYER1");
-	D2D_RENDERER->renderText(810, WINSIZEY - 100, text4, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(810, WINSIZEY - 100, L"LAYER1", 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_layer1Btn, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text11(L"LAYER2");
-	D2D_RENDERER->renderText(1010, WINSIZEY - 100, text11, 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(1010, WINSIZEY - 100, L"LAYER2", 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_layer2Btn, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text5(L"XUP");
-	D2D_RENDERER->renderText(_increaseTileX.right+50, _increaseTileX.getCenter().y, text5, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(_increaseTileX.right+50, _increaseTileX.getCenter().y, L"XUP", 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_increaseTileX, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text9(L"X:"+to_wstring( _tileX));
-	D2D_RENDERER->renderText((_decreaseTileX.right+ _decreaseTileX.left)/2+12 , _decreaseTileX.getCenter().y, text9, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText((_decreaseTileX.right+ _decreaseTileX.left)/2+12 , _decreaseTileX.getCenter().y, L"X:" + to_wstring(_tileX), 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 
-	wstring text6(L"XDOWN");
-	D2D_RENDERER->renderText(_decreaseTileX.left - 50, _decreaseTileX.getCenter().y, text6, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(_decreaseTileX.left - 50, _decreaseTileX.getCenter().y, L"XDOWN", 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_decreaseTileX, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text7(L"YDOWN");
-	D2D_RENDERER->renderText(_decreaseTileY.left - 50, _decreaseTileY.getCenter().y, text7, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(_decreaseTileY.left - 50, _decreaseTileY.getCenter().y, L"YDOWN", 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_decreaseTileY, D2D1::ColorF::Blue, 1, 0.5f);
 
-	wstring text10(L"Y:" + to_wstring(_tileY));
-	D2D_RENDERER->renderText((_decreaseTileY.right + _decreaseTileY.left) / 2 + 12, _decreaseTileY.getCenter().y, text10, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText((_decreaseTileY.right + _decreaseTileY.left) / 2 + 12, _decreaseTileY.getCenter().y, L"Y:" + to_wstring(_tileY), 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 
-
-	wstring text8(L"YUP");
-	D2D_RENDERER->renderText(_increaseTileY.right + 50, _increaseTileY.getCenter().y, text8, 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
+	D2D_RENDERER->renderText(_increaseTileY.right + 50, _increaseTileY.getCenter().y, L"YUP", 10, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 	D2D_RENDERER->drawRectangle(_increaseTileY, D2D1::ColorF::Blue, 1, 0.5f);
 }
 
 void MapTool::setup()
 {
-	// _camera.setConfig(100, 100, )
-	// _saveBtn = CreateWindow("button", "save", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, WINSIZEX - 200,WINSIZEY- 200, 100,50, _hWnd, HMENU(0), _hInstance, NULL);
-	_save = FloatRect(Vector2(200, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
-	_load = FloatRect(Vector2(400, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
-	_erase = FloatRect(Vector2(600, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
-	_layer1Btn=FloatRect(Vector2(800, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
-	_layer2Btn = FloatRect(Vector2(1000, WINSIZEY - 100), Vector2(100, 50), PIVOT::LEFT_TOP);
+	CAMERA->setConfig(0, 0, 960, 640, 0, 0, max(0, TILESIZE * _tileX - 960), max(0, TILESIZE * _tileY - 640));
 
-	_decreaseTileX = FloatRect(Vector2(300, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_increaseTileX = FloatRect(Vector2(350, WINSIZEY - 150), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_decreaseTileY = FloatRect(Vector2(300, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-	_increaseTileY = FloatRect(Vector2(350, WINSIZEY - 200), Vector2(20, 20), PIVOT::LEFT_TOP);
-
-
-	for (int i = 0; i < SAMPLETILEY; ++i)
-	{
-		for (int j = 0; j < SAMPLETILEX; ++j)
-		{
-			_sampleTile[SAMPLETILEX * i + j].tileFrameX = j;
-			_sampleTile[SAMPLETILEX * i + j].tileFrameY = i;
-			_sampleTile[SAMPLETILEX * i + j].rc = FloatRect(Vector2(1196 + j * 32, 96 + 32 * i), Vector2(32, 32), PIVOT::CENTER);
-			
-		}
-	}
-
-	
-
+	// 타일맵 Rect 생성
 	for (int i = 0; i < _tileY; ++i)
 	{
 		for (int j = 0; j < _tileX; ++j)
 		{
-			/*_tile[_tileX * i + j].tileFrameX = j;
-			_tile[_tileX * i + j].tileFrameY = i;*/
-			
-			_tile[_tileX * i + j].rc = FloatRect(Vector2(TILESIZE + j * TILESIZE, +TILESIZE + TILESIZE * i), Vector2(TILESIZE, TILESIZE), PIVOT::CENTER);
-			// _vTileMap.push_back(_tile[_tileX * i + j]);
+			int index = _tileX * i + j;
+			_tile[index].rc = FloatRect(Vector2(j * TILESIZE, i * TILESIZE), Vector2(TILESIZE, TILESIZE), PIVOT::LEFT_TOP);
+
+			// 타일맵 초기화
+			for (int layer = 0; layer <= 1; layer++)
+			{
+				_tile[index].tileFrameX[layer] = -1;
+				_tile[index].tileFrameY[layer] = -1;
+			}
+
+			_tile[index].linePos == DRAW_LINE_POSITION::NOLINE;
+
+			_tile[index].tileX = _tileX;
+			_tile[index].tileY = _tileY;
 		}
 	}
-	/*for (int i = 0; i < _tileY; ++i)
-	{
-		for (int j = 0; j < _tileX; ++j)
-		{
-			_tile2[_tileX*i + j].tileFrameX = j;
-			_tile2[_tileX*i + j].tileFrameY = i;
 
-			_tile2[_tileX*i + j].rc = FloatRect(Vector2(TILESIZE + j * TILESIZE, +TILESIZE + TILESIZE * i), Vector2(TILESIZE, TILESIZE), PIVOT::CENTER);
-			_vTileMap.push_back(_tile2[_tileX * i + j]);
-		}
-	}*/
-
-	for (int i = 0; i < _tileX * _tileY; ++i)
-	{
-		//_vTileMap[i].tileFrameX = 0;
-		//_vTileMap[i].tileFrameY = 0;
-		_tile[i].tileFrameX[0] = -1;
-		_tile[i].tileFrameX[1] = -1;
-		_tile[i].tileFrameY[0] = -1;
-		_tile[i].tileFrameY[1] = -1;
-		_tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
-		_tile[i].tileX = _tileX;
-		_tile[i].tileY = _tileY;
-
-		/*_tile2[i].tileFrameX = 0;
-		_tile2[i].tileFrameY = 4;
-		_tile2[i].linePos == DRAW_LINE_POSITION::NOLINE;
-		_tile2[i].tileX = _tileX;
-		_tile2[i].tileY = _tileY;*/
-	}
-	_layer = 0;
 
 }
 
 void MapTool::setMap()
 {
-	
-	//setSelectTile();
 	if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
+		// 팔레트에서 타일 선택
 		for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
 		{
 			if (_sampleTile[i].rc.ptInRect(_ptMouse))
 			{
-				_selectTile.x = _sampleTile[i].tileFrameX;
-				_selectTile.y = _sampleTile[i].tileFrameY;
-				_selectTile.rc = _sampleTile[i].rc;
+				_selectStart.x = _sampleTile[i].tileFrameX;
+				_selectStart.y = _sampleTile[i].tileFrameY;
+				_selectDrag = true;
+			}
+		}
+	}
 
-				//_vSelectTile.push_back(_selectTile);
+	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
+	{
+		if (_selectDrag)
+		{
+			_selectDrag = false;
+		}
+		
+	}
+
+	if (_selectDrag)
+	{
+		// 팔레트에서 타일 선택
+		for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
+		{
+			if (_sampleTile[i].rc.ptInRect(_ptMouse))
+			{
+				_selectEnd.x = _sampleTile[i].tileFrameX;
+				_selectEnd.y = _sampleTile[i].tileFrameY;
 			}
 		}
 	}
 
 	if (KEY_MANAGER->isStayKeyDown(VK_LBUTTON))
 	{
-			for (int i = 0; i < _tileX * _tileY; ++i)
+		// 타일맵에 타일 그리기
+		if (_ptMouse.x <= 960 && _ptMouse.y <= 640)
+		{
+			for (int i = 0; i < _tileX * _tileY; i++)
 			{
-				if (_tile[i].rc.ptInRect(CAMERA->getRelativePt(_ptMouse)) && _ptMouse.x <= 960 && _ptMouse.y <= 640)
+				if (_tile[i].rc.ptInRect(CAMERA->getAbsolutePt(_ptMouse)))
 				{
-					
-
-						_tile[i].tileFrameX[_layer] = _selectTile.x;
-						_tile[i].tileFrameY[_layer] = _selectTile.y;
-
-						if (_layer == 1)
+					for (int offsetX = 0; offsetX <= _selectEnd.x - _selectStart.x; offsetX++)
+					{
+						for (int offsetY = 0; offsetY <= _selectEnd.y - _selectStart.y; offsetY++)
 						{
-							if (_tile[i].tileFrameX[_layer] == 1 && _tile[i].tileFrameY[_layer] == 8)_tile[i].linePos = DRAW_LINE_POSITION::TOP;
-							else if (_tile[i].tileFrameX[_layer] == 3 && _tile[i].tileFrameY[_layer] == 8)_tile[i].linePos = DRAW_LINE_POSITION::BOTTOM;
-							else if (_tile[i].tileFrameX[_layer] == 2 && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT;
-							else if (_tile[i].tileFrameX[_layer] == 0 && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT;
-							else if ((_tile[i].tileFrameX[_layer] == 6 || _tile[i].tileFrameX[_layer] == 8) && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
-							else if ((_tile[i].tileFrameX[_layer] == 7 || _tile[i].tileFrameX[_layer] == 9) && _tile[i].tileFrameY[_layer] == 7)_tile[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
-							else if ((_tile[i].tileFrameX[_layer] >= 0 && _tile[i].tileFrameX[_layer] < 4) && _tile[i].tileFrameY[_layer] == 5)_tile[i].linePos = DRAW_LINE_POSITION::PLATFORM;
-							else if ((_tile[i].tileFrameX[_layer] >= 5 && _tile[i].tileFrameX[_layer] < 8) && _tile[i].tileFrameY[_layer] == 5)_tile[i].linePos = DRAW_LINE_POSITION::PLATFORM;
-							else _tile[i].linePos == DRAW_LINE_POSITION::NOLINE;
+							int indexX = (i % _tileX) + offsetX;
+							int indexY = (i / _tileX) + offsetY;
+							if (indexY >= _tileY || indexX >= _tileX) continue;
+							int index = indexY * _tileX + indexX;
+							_tile[index].tileFrameX[_layer] = _selectStart.x + offsetX;
+							_tile[index].tileFrameY[_layer] = _selectStart.y + offsetY;
+
+							if (_layer == 1)
+							{
+								if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
+								else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::BOTTOM;
+								else if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT;
+								else if (_tile[index].tileFrameX[_layer] == 0 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT;
+								else if ((_tile[index].tileFrameX[_layer] == 6 || _tile[index].tileFrameX[_layer] == 8) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+								else if ((_tile[index].tileFrameX[_layer] == 7 || _tile[index].tileFrameX[_layer] == 9) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
+								else if ((_tile[index].tileFrameX[_layer] >= 0 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
+								else if ((_tile[index].tileFrameX[_layer] >= 5 && _tile[index].tileFrameX[_layer] < 8) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM;
+								else _tile[index].linePos == DRAW_LINE_POSITION::NOLINE;
+							}
 						}
-						releaseSelectTile();
-						break;
-					
+					}
+					break;
 				}
 			}
-		//else if (_layer == 2)
-		//{
-		//	for (int i = 0; i < _tileX*_tileY; ++i)
-		//	{
-		//		if (_tile2[i].rc.ptInRect(_ptMouse) && _ptMouse.x <= 960 && _ptMouse.y <= 640)
-		//		{
-		//			for (int j = 0; j < _vSelectTile.size(); ++j)
-		//			{
-		//				/*_tile[i].tileFrameX = _vSelectTile[_vSelectTile.size() - 1].x;
-		//				_tile[i].tileFrameY = _vSelectTile[_vSelectTile.size() - 1].y;*/
-		//				//setLinePos(_tile[i].tileFrameX, _tile[i].tileFrameY);
-		//				//_tile[i].linePos = _drawLinePos;
-
-		//				_tile2[i].tileFrameX = _selectTile.x;
-		//				_tile2[i].tileFrameY = _selectTile.y;
-
-		//				if (_tile2[i].tileFrameX == 1 && _tile2[i].tileFrameY == 8)_tile2[i].linePos = DRAW_LINE_POSITION::TOP;
-		//				if (_tile2[i].tileFrameX == 1 && _tile2[i].tileFrameY == 6)_tile2[i].linePos = DRAW_LINE_POSITION::BOTTOM;
-		//				if (_tile2[i].tileFrameX == 2 && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::LEFT;
-		//				if (_tile2[i].tileFrameX == 0 && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::RIGHT;
-		//				if ((_tile2[i].tileFrameX == 6 || _tile2[i].tileFrameX == 8) && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
-		//				if ((_tile2[i].tileFrameX == 7 || _tile2[i].tileFrameX == 9) && _tile2[i].tileFrameY == 7)_tile2[i].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
-		//				if ((_tile2[i].tileFrameX >= 0 && _tile2[i].tileFrameX < 4) && _tile2[i].tileFrameY == 5)_tile2[i].linePos = DRAW_LINE_POSITION::PLATFORM;
-		//				if ((_tile2[i].tileFrameX >= 5 && _tile2[i].tileFrameX < 8) && _tile2[i].tileFrameY == 5)_tile2[i].linePos = DRAW_LINE_POSITION::PLATFORM;
-		//				else _tile2[i].linePos == DRAW_LINE_POSITION::NOLINE;
-
-		//				releaseSelectTile();
-		//				break;
-		//			}
-		//		}
-		//	}
-		//}
+		}
 	}
 }
 
 void MapTool::save()
 {
-	
-	SetCursor;
+	ShowCursor(true);
 
 	TCHAR szFile[260] = _T("");
 	OPENFILENAME ofn;
@@ -371,8 +321,6 @@ void MapTool::save()
 
 	TCHAR* return_path = ofn.lpstrFile;
 
-	
-
 	HANDLE stageFile;
 	DWORD write;
 
@@ -380,14 +328,14 @@ void MapTool::save()
 		CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	WriteFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &write, NULL);
-	
-
 	CloseHandle(stageFile);
-
+	ShowCursor(false);
 }
 
 void MapTool::load()
 {
+	ShowCursor(true);
+
 	TCHAR szFilePath[MAX_PATH] = { 0, };
 	OPENFILENAME ofn;
 	ZeroMemory(&ofn, sizeof(OPENFILENAME));
@@ -411,9 +359,8 @@ void MapTool::load()
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &read, NULL);
-	
-
 	CloseHandle(stageFile);
+	ShowCursor(false);
 }
 
 void MapTool::paletteChange()
@@ -442,7 +389,7 @@ void MapTool::paletteChange()
 
 void MapTool::mapLoad()
 {
-	if (_vLoad.size() == 0)return;
+	if (_vLoad.size() == 0) return;
 	HANDLE stageFile;
 	DWORD read;
 	
@@ -459,26 +406,17 @@ void MapTool::mapLoad()
 
 void MapTool::setSelectTile()
 {
-	for (int i = 0; i < SAMPLETILEX*SAMPLETILEY; ++i)
+	for (int i = 0; i < SAMPLETILEX * SAMPLETILEY; ++i)
 	{
 		if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
 		{
 			if (_sampleTile[i].rc.ptInRect(_ptMouse))
 			{
-				tagSelectTile _selectTile;
-				_selectTile.x = _sampleTile[i].tileFrameX;
-				_selectTile.y = _sampleTile[i].tileFrameY;
-				_selectTile.rc = _sampleTile[i].rc;
-
-				_vSelectTile.push_back(_selectTile);
+				_selectStart.x = _sampleTile[i].tileFrameX;
+				_selectStart.y = _sampleTile[i].tileFrameY;
 			}
 		}
 	}
-}
-
-void MapTool::releaseSelectTile()
-{
-	
 }
 
 void MapTool::setLinePos(int frameX, int frameY)
@@ -497,34 +435,28 @@ void MapTool::setLinePos(int frameX, int frameY)
 
 void MapTool::setTileSize()
 {
-	
-
 		if(_increaseTileX.ptInRect(_ptMouse))
 		{
-			if (_tileX* _tileY >= 1900) return;
+			if ((_tileX + 1)* _tileY >= 2000) return;
 			_tileX += 1;
 			setup();			
-			
-
 		}
 		else if(_decreaseTileX.ptInRect(_ptMouse))
 		{
-			
+			if (_tileX <= 1) return;
 			_tileX -= 1;
 			setup();
 		}
 		else if (_increaseTileY.ptInRect(_ptMouse))
 		{
-			if (_tileX* _tileY >= 1900) return;
+			if (_tileX* (_tileY + 1) >= 2000) return;
 			_tileY += 1;
 			setup();
 		}
 		else if (_decreaseTileY.ptInRect(_ptMouse))
 		{
+			if (_tileY <= 1) return;
 			_tileY -= 1;
 			setup();
 		}
-	
-
-
 }

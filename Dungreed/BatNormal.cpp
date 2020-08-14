@@ -90,9 +90,9 @@ void BatNormal::update(float const timeElapsed)
 
 void BatNormal::render()
 {
-	D2D_RENDERER->drawRectangle(_rect);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
 	_img->setScale(_scale);
-	_img->aniRender(_position, _ani, !(bool)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(bool)_direction);
 }
 
 void BatNormal::setState(ENEMY_STATE state)

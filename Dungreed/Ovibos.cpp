@@ -100,9 +100,9 @@ void Ovibos::update(float const timeElapsed)
 void Ovibos::render()
 {
 	_img->setScale(_scale);
-	_img->aniRender(_position,_ani, !(unsigned)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position),_ani, !(unsigned)_direction);
 	
-	D2D_RENDERER->drawRectangle(_rect);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
 }
 
 void Ovibos::setState(ENEMY_STATE state)

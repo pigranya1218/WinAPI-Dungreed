@@ -57,8 +57,8 @@ void Punch::backRender(Player* player)
 	Vector2 pos = player->getPosition();
 	if (isLeft)
 	{
-		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 20);
-		float angle = atan2f(-(_ptMouse.y - renderPosLeft.y), (_ptMouse.x - renderPosLeft.x)) * (180 / PI) + 360;
+		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 18);
+		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosLeft.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosLeft.x)) * (180 / PI) + 360;
 		if (angle > 360)
 		{
 			angle -= 360;
@@ -67,13 +67,13 @@ void Punch::backRender(Player* player)
 		renderPosLeft.y += ((angle >= 180)?(_attackMove.y):(-_attackMove.y));
 
 		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_leftHand, 40, 36, 58, 1, 6.f, angle, _leftHand.getCenter());
-		D2D_RENDERER->fillRectangle(_leftHand, 210, 188, 181, 1.f, angle, _leftHand.getCenter());
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_leftHand), 210, 188, 181, 1.f, angle, CAMERA->getRelativeV2(_leftHand.getCenter()));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_leftHand), 40, 36, 58, 1, 2.f, angle, CAMERA->getRelativeV2(_leftHand.getCenter()));
 	}
 	else
 	{
-		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 20);
-		float angle = atan2f(-(_ptMouse.y - renderPosRight.y), (_ptMouse.x - renderPosRight.x)) * (180 / PI) + 360;
+		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 18);
+		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosRight.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosRight.x)) * (180 / PI) + 360;
 		if (angle > 360)
 		{
 			angle -= 360;
@@ -82,8 +82,8 @@ void Punch::backRender(Player* player)
 		renderPosRight.y += ((angle >= 180) ? (_attackMove.y) : (-_attackMove.y));
 
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_rightHand, 40, 36, 58, 1, 6.f, angle, _rightHand.getCenter());
-		D2D_RENDERER->fillRectangle(_rightHand, 210, 188, 181, 1.f, angle, _rightHand.getCenter());
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_rightHand), 210, 188, 181, 1.f, angle, CAMERA->getRelativeV2(_rightHand.getCenter()));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rightHand), 40, 36, 58, 1, 2.f, angle, CAMERA->getRelativeV2(_rightHand.getCenter()));
 	}
 }
 
@@ -94,17 +94,17 @@ void Punch::frontRender(Player* player)
 
 	if (isLeft)
 	{
-		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 20);
+		Vector2 renderPosRight = Vector2(pos.x + 20, pos.y + 18);
 		_rightHand = rectMakePivot(renderPosRight, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_rightHand, 40, 36, 58, 1, 6.f);
-		D2D_RENDERER->fillRectangle(_rightHand, 210, 188, 181, 1);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_rightHand), 210, 188, 181, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rightHand), 40, 36, 58, 1, 2.f);
 	}
 	else
 	{
-		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 20);
+		Vector2 renderPosLeft = Vector2(pos.x - 20, pos.y + 18);
 		_leftHand = rectMakePivot(renderPosLeft, Vector2(_handSize), PIVOT::CENTER);
-		D2D_RENDERER->drawRectangle(_leftHand, 40, 36, 58, 1, 6.f);
-		D2D_RENDERER->fillRectangle(_leftHand, 210, 188, 181, 1);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_leftHand), 210, 188, 181, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_leftHand), 40, 36, 58, 1, 2.f);
 	}
 }
 
@@ -124,7 +124,7 @@ void Punch::attack(Player* player)
 	renderPosHand.x += ((isLeft) ? (-20) : (20)); 
 	renderPosHand.y += 20; 
 	// 손으로부터 마우스 에임까지의 각도
-	float angle = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) + PI2;
+	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2;
 	if (angle > PI2)
 	{
 		angle -= PI2;

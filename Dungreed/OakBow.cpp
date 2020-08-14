@@ -58,7 +58,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 	renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;
@@ -134,7 +134,7 @@ void OakBow::frontRender(Player * player)
 	//renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
 	// 손으로부터 마우스 에임까지의 각도
-	float degree = atan2f(-(_ptMouse.y - renderPosHand.y), (_ptMouse.x - renderPosHand.x)) * (180 / PI) + 360;
+	float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) * (180 / PI) + 360;
 	if (degree > 360)
 	{
 		degree -= 360;
@@ -157,21 +157,22 @@ void OakBow::frontRender(Player * player)
 
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
-
-	_img->setAnglePos(Vector2(0.2f * _img->getFrameSize().x, 0.5f * _img->getFrameSize().y));
-	_img->aniRender(renderPosWeapon, _ani, isLeft);
+	_img->setAnglePos(Vector2(0.3f * _img->getFrameSize().x, 0.6f * _img->getFrameSize().y));
+	_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
 
 	Vector2 subHandPos = renderPosHand; // 보조 손 (양손무기) 움직임
 	subHandPos.x += _img->getFrameSize().x * 0.3 * 4;
 	subHandPos.y += (isLeft) ? (_img->getFrameSize().y * 0.2 * 4) : (_img->getFrameSize().y * -0.2 * 4);
 
 	FloatRect subhandRc = rectMakePivot(subHandPos, Vector2(5, 5), PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(subhandRc, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
-	D2D_RENDERER->fillRectangle(subhandRc, 210, 188, 181, 1.f, degree, renderPosHand);
+
+	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(subhandRc), 210, 188, 181, 1.f, degree, CAMERA->getRelativeV2(renderPosHand));
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(subhandRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
 
 	FloatRect handRc = rectMakePivot(renderPosHand, Vector2(5, 5), PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(handRc, 40, 36, 58, 1.f, 6.f, degree, renderPosHand);
-	D2D_RENDERER->fillRectangle(handRc, 210, 188, 181, 1.f, degree, renderPosHand);
+
+	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(handRc), 210, 188, 181, 1.f, degree, CAMERA->getRelativeV2(renderPosHand));
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
 
 	//이펙트
 	if (_drawEffect)
@@ -198,6 +199,11 @@ void OakBow::attack(Player * player)
 	_ani->setPlayFrame(0, 4, false);
 	_ani->start();
 
+	if (_ani->getPlayIndex() >= 3)
+	{
+		_drawEffect = true;						// 이펙트 그리기
+	}
+
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currBullet == 0) // 총알이 없다면
 	{
@@ -207,11 +213,22 @@ void OakBow::attack(Player * player)
 		}
 		return;
 	}
+
+	
 	
 	if (!_isAttack)
 	{
 		_isAttack = true;
 	}
+
+	/*if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	{
+		if (_ani->getPlayIndex() >= 3)
+		{
+			_ani->pause();
+		}
+	}*/
+
 	
 }
 
