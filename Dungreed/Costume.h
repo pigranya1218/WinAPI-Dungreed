@@ -6,9 +6,9 @@ enum class COSTUME_TYPE : int
 {
 	BASE = 0,
 	METAL_PLATE,
-	PICKAX,
 	ALICE,
-	RED_LOTUS
+	RED_LOTUS,
+	PICKAX
 };
 
 enum class PLAYER_STATE : int

@@ -170,6 +170,7 @@
     <ClInclude Include="CosmosSword.h" />
     <ClInclude Include="Costume.h" />
     <ClInclude Include="CostumeManager.h" />
+    <ClInclude Include="CostumeUI.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="daisyRing.h" />
     <ClInclude Include="DataManager.h" />
@@ -267,6 +268,7 @@
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="CosmosSword.cpp" />
     <ClCompile Include="CostumeManager.cpp" />
+    <ClCompile Include="CostumeUI.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="daisyRing.cpp" />

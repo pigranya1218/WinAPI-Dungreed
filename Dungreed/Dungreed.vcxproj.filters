@@ -106,6 +106,9 @@
     <Filter Include="Dungreed\GameScene\Item\Melee">
       <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Long">
+      <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dungreed\GameScene\Player\Costume">
       <UniqueIdentifier>{d01a2838-1c1c-4035-b841-2308d2d14be2}</UniqueIdentifier>
     </Filter>
@@ -116,6 +119,9 @@
       <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
     </Filter>
     <Filter Include="2DGameFramework\Manager\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\CameraManager">
       <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -322,10 +328,10 @@
       <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClInclude>
     <ClInclude Include="MatchLockGun.h">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
     <ClInclude Include="Boomerang.h">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
     <ClInclude Include="ShortSword.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
@@ -406,13 +412,16 @@
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
     <ClInclude Include="OakBow.h">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
     <ClInclude Include="AliceCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
     <ClInclude Include="RedLotusCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -582,10 +591,10 @@
       <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClCompile>
     <ClCompile Include="MatchLockGun.cpp">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
     <ClCompile Include="Boomerang.cpp">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
     <ClCompile Include="ShortSword.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
@@ -669,13 +678,16 @@
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
     <ClCompile Include="OakBow.cpp">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
     <ClCompile Include="RedLotusCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
     <ClCompile Include="AliceCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

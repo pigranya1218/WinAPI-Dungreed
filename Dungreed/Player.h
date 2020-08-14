@@ -83,5 +83,8 @@ public:
 	void swapItem(int indexA, int indexB);
 
 	PlayerStat getCurrStat() { return _adjustStat; };
+	
+	Costume* getCurrCostume() { return _costume; }
+	void setCurrCostume(Costume* costume) { _costume = costume; }
 };
 

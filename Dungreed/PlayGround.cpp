@@ -144,6 +144,14 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/BASE", L"resources/images/gameScene/ui/inventory/InventoryBase 2.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT", L"resources/images/gameScene/ui/inventory/InventoryExit.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT_SELECTED", L"resources/images/gameScene/ui/inventory/InventoryExit_Selected.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_0_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect0.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_1_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect1.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_X", L"resources/images/gameScene/ui/inventory/X.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_SELECTED", L"resources/images/gameScene/ui/inventory/weapon_selected.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_ZONE", L"resources/images/gameScene/ui/inventory/accessoryZone.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_BASE", L"resources/images/gameScene/ui/inventory/accessory.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE", L"resources/images/gameScene/ui/inventory/inventory.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE_SELECTED", L"resources/images/gameScene/ui/inventory/inventory_select.png");
 	// *** STATUS
 	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");
@@ -170,18 +178,21 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/STAT/DASH_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_10_DashDamage_Selected.png");
 	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage.png");
 	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage_Selected.png");
-
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_0_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect0.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_1_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect1.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_X", L"resources/images/gameScene/ui/inventory/X.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_SELECTED", L"resources/images/gameScene/ui/inventory/weapon_selected.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_ZONE", L"resources/images/gameScene/ui/inventory/accessoryZone.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_BASE", L"resources/images/gameScene/ui/inventory/accessory.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE", L"resources/images/gameScene/ui/inventory/inventory.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE_SELECTED", L"resources/images/gameScene/ui/inventory/inventory_select.png");
-
-
-
+	// *** BOUTIQUE(COSTUME)
+	IMAGE_MANAGER->addImage("UI/COSTUME/BASE_UP", L"resources/images/gameScene/ui/boutique(costume)/CostumeBase_0.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/BASE_DOWN", L"resources/images/gameScene/ui/boutique(costume)/CostumeBase_1.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/BACK", L"resources/images/gameScene/ui/boutique(costume)/CostumeBack.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/EQUIPPED", L"resources/images/gameScene/ui/boutique(costume)/CostumeEquipped.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/LOCKED", L"resources/images/gameScene/ui/boutique(costume)/CostumeLocked.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/NONE", L"resources/images/gameScene/ui/boutique(costume)/CostumeNone.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/SELECTED", L"resources/images/gameScene/ui/boutique(costume)/CostumeOver.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/SHADOW", L"resources/images/gameScene/ui/boutique(costume)/CostumeShadow.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/UNLOCKED", L"resources/images/gameScene/ui/boutique(costume)/Costumeunlocked.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/0", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/base_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/1", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/metal_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/2", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/3", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/4", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
 
 	// ** VILLIGE
 	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
