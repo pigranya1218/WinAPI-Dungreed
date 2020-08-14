@@ -155,6 +155,7 @@
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
+    <ClInclude Include="BatGiantNormal.h" />
     <ClInclude Include="BatGiantRed.h" />
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="Banshee.h" />
@@ -170,6 +171,7 @@
     <ClInclude Include="CosmosSword.h" />
     <ClInclude Include="Costume.h" />
     <ClInclude Include="CostumeManager.h" />
+    <ClInclude Include="CostumeUI.h" />
     <ClInclude Include="D2DRenderer.h" />
     <ClInclude Include="daisyRing.h" />
     <ClInclude Include="DataManager.h" />
@@ -195,6 +197,7 @@
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="InventoryUI.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="KeresScythe.h" />
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
@@ -202,6 +205,7 @@
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MapTool.h" />
     <ClInclude Include="MapToolScene.h" />
+    <ClInclude Include="MartialArtOfTiger.h" />
     <ClInclude Include="MatchLockGun.h" />
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
@@ -214,6 +218,7 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Ovibos.h" />
     <ClInclude Include="PickaxCos.h" />
+    <ClInclude Include="PickaxeRed.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="PlayGround.h" />
@@ -253,6 +258,7 @@
     <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
+    <ClCompile Include="BatGiantNormal.cpp" />
     <ClCompile Include="BatGiantRed.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Banshee.cpp" />
@@ -267,6 +273,7 @@
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="CosmosSword.cpp" />
     <ClCompile Include="CostumeManager.cpp" />
+    <ClCompile Include="CostumeUI.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
     <ClCompile Include="daisyRing.cpp" />
@@ -290,12 +297,14 @@
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="InventoryUI.cpp" />
+    <ClCompile Include="KeresScythe.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
     <ClCompile Include="MagnifyingGlass.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MapTool.cpp" />
     <ClCompile Include="MapToolScene.cpp" />
+    <ClCompile Include="MartialArtOfTiger.cpp" />
     <ClCompile Include="MatchLockGun.cpp" />
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
@@ -307,6 +316,7 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ovibos.cpp" />
     <ClCompile Include="PickaxCos.cpp" />
+    <ClCompile Include="PickaxeRed.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PlayGround.cpp" />

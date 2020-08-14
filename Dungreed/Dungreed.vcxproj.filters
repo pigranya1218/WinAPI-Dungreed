@@ -106,6 +106,9 @@
     <Filter Include="Dungreed\GameScene\Item\Melee">
       <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Long">
+      <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Dungreed\GameScene\Player\Costume">
       <UniqueIdentifier>{d01a2838-1c1c-4035-b841-2308d2d14be2}</UniqueIdentifier>
     </Filter>
@@ -117,6 +120,12 @@
     </Filter>
     <Filter Include="Dungreed\GameScene\Item\Range">
       <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Manager\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -139,10 +148,10 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CameraEvent.h">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="CameraShakeEvent.h">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -322,16 +331,16 @@
       <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClInclude>
     <ClInclude Include="MatchLockGun.h">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
     <ClInclude Include="Boomerang.h">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
     <ClInclude Include="ShortSword.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
     <ClInclude Include="CameraManager.h">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="DebugStage.h">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
@@ -406,13 +415,28 @@
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
     <ClInclude Include="OakBow.h">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
     <ClInclude Include="AliceCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
     <ClInclude Include="RedLotusCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="KeresScythe.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="MartialArtOfTiger.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="PickaxeRed.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="BatGiantNormal.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -423,10 +447,10 @@
       <Filter>2DGameFramework\GameNode</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -582,16 +606,16 @@
       <Filter>Dungreed\GameScene\Stage\Village</Filter>
     </ClCompile>
     <ClCompile Include="MatchLockGun.cpp">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
     <ClCompile Include="Boomerang.cpp">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
     <ClCompile Include="ShortSword.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
     <ClCompile Include="CameraManager.cpp">
-      <Filter>2DGameFramework\CameraManager</Filter>
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="DebugStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
@@ -669,13 +693,28 @@
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
     <ClCompile Include="OakBow.cpp">
-      <Filter>Dungreed\GameScene\Item\Range</Filter>
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
     <ClCompile Include="RedLotusCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
     <ClCompile Include="AliceCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="KeresScythe.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="MartialArtOfTiger.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="PickaxeRed.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="BatGiantNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

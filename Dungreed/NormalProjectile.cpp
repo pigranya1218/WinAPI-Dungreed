@@ -2,7 +2,7 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize)
+void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_speed = speed;
@@ -21,6 +21,8 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 	_checkCollision = checkCollision;
 	_collisionEffect = collisionEffect;
 	_effectSize = effectSize;
+
+	_useRotate = useRotate;
 }
 
 void NormalProjectile::release()
@@ -35,8 +37,8 @@ void NormalProjectile::release()
 void NormalProjectile::update(float elapsedTime)
 {
 	Vector2 moveDir = Vector2(0, 0);
-	moveDir.x += cosf(_angleRadian) * _speed;
-	moveDir.y += -sinf(_angleRadian) * _speed;
+	moveDir.x += cosf(_angleRadian) * _speed * elapsedTime;
+	moveDir.y += -sinf(_angleRadian) * _speed * elapsedTime;
 
 	if (_checkCollision) // 스테이지와 충돌 검사함
 	{
@@ -55,7 +57,10 @@ void NormalProjectile::update(float elapsedTime)
 
 void NormalProjectile::render()
 {
-	_img->setAngle(_angleRadian * (180 / PI));
+	if (_useRotate)
+	{
+		_img->setAngle(_angleRadian * (180 / PI));
+	}
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
@@ -63,5 +68,14 @@ void NormalProjectile::render()
 	else
 	{
 		_img->render(CAMERA->getRelativeV2(_position), _size);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+	}
+}
+
+void NormalProjectile::aniUpdate(float const elapsedTime)
+{
+	if (_useAni && _ani != nullptr)
+	{
+		_ani->frameUpdate(elapsedTime);
 	}
 }

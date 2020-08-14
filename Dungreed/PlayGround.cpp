@@ -4,8 +4,6 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "MapToolScene.h"
-
-
 #include "Player.h"
 
 #include <string>
@@ -24,13 +22,12 @@ HRESULT playGround::init()
 {
 	GameNode::init(true);
 
-	
-
 	// ¸ðµç ÀÌ¹ÌÁö IMAGE_MANAGER¿¡ µî·Ï
 	// * COMMON IMAGE
 
-	IMAGE_MANAGER->addFrameImage("sampleTile", L"resources/images/Map/tileAtlas3.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas1.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas.png", 10, 10);
 
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");
@@ -148,6 +145,14 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/BASE", L"resources/images/gameScene/ui/inventory/InventoryBase 2.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT", L"resources/images/gameScene/ui/inventory/InventoryExit.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/EXIT_SELECTED", L"resources/images/gameScene/ui/inventory/InventoryExit_Selected.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_0_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect0.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_1_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect1.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_X", L"resources/images/gameScene/ui/inventory/X.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_SELECTED", L"resources/images/gameScene/ui/inventory/weapon_selected.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_ZONE", L"resources/images/gameScene/ui/inventory/accessoryZone.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_BASE", L"resources/images/gameScene/ui/inventory/accessory.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE", L"resources/images/gameScene/ui/inventory/inventory.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE_SELECTED", L"resources/images/gameScene/ui/inventory/inventory_select.png");
 	// *** STATUS
 	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");
@@ -174,21 +179,25 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/STAT/DASH_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_10_DashDamage_Selected.png");
 	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage.png");
 	IMAGE_MANAGER->addImage("UI/STAT/TRUE_DAMAGE_SELECTED", L"resources/images/gameScene/ui/status/Stat_11_TrueDamage_Selected.png");
-
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_0_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect0.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_1_SELECTED", L"resources/images/gameScene/ui/inventory/WeaponSelect1.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_X", L"resources/images/gameScene/ui/inventory/X.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/WEAPON_SELECTED", L"resources/images/gameScene/ui/inventory/weapon_selected.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_ZONE", L"resources/images/gameScene/ui/inventory/accessoryZone.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_BASE", L"resources/images/gameScene/ui/inventory/accessory.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE", L"resources/images/gameScene/ui/inventory/inventory.png");
-	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE_SELECTED", L"resources/images/gameScene/ui/inventory/inventory_select.png");
-
-
-
+	// *** BOUTIQUE(COSTUME)
+	IMAGE_MANAGER->addImage("UI/COSTUME/BASE_UP", L"resources/images/gameScene/ui/boutique(costume)/CostumeBase_0.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/BASE_DOWN", L"resources/images/gameScene/ui/boutique(costume)/CostumeBase_1.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/BACK", L"resources/images/gameScene/ui/boutique(costume)/CostumeBack.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/EQUIPPED", L"resources/images/gameScene/ui/boutique(costume)/CostumeEquipped.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/LOCKED", L"resources/images/gameScene/ui/boutique(costume)/CostumeLocked.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/NONE", L"resources/images/gameScene/ui/boutique(costume)/CostumeNone.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/SELECTED", L"resources/images/gameScene/ui/boutique(costume)/CostumeOver.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/SHADOW", L"resources/images/gameScene/ui/boutique(costume)/CostumeShadow.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/UNLOCKED", L"resources/images/gameScene/ui/boutique(costume)/Costumeunlocked.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/0", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/base_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/1", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/metal_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/2", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/3", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/4", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
 
 	// ** VILLIGE
 	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
+	//IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/Town_BGL.png");
 	IMAGE_MANAGER->addImage("Town_BG", L"resources/images/Map/TownBG_Day.png");
 	IMAGE_MANAGER->addImage("Town_BG2", L"resources/images/Map/TownLayer_Day.png");
 	IMAGE_MANAGER->addImage("Town_Floor", L"resources/images/Map/TownFloor.png");
@@ -262,22 +271,39 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot02", "ShootEffect02", 30, 10);
 
 	// **** L_WeaponReload
-	IMAGE_MANAGER->addImage("ReloadBase", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
-	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
-	IMAGE_MANAGER->addFrameImage("Reload", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
-	EFFECT_MANAGER->addEffect("L_Effect_Reload", "Reload", 30, 10);
+	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
+	IMAGE_MANAGER->addImage("ReloadHandle", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
+	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
 
 	//***MeleeWeapon
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
 	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
-	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);
+	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);	   //¿ìÁÖ°Ë 
+	IMAGE_MANAGER->addImage("CosmosSword00", L"resources/images/MeleeWeapon/CosmosSword00.png"); // ¿ìÁÖ°Ë ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // »çÀÌµå
+	IMAGE_MANAGER->addImage("MartialArtOfTiger", L"resources/images/MeleeWeapon/MartialArtOfTiger.png"); // Å¸ÀÌ°ÅÆÝÄ¡ ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // ºÓÀº °î±ªÀÌ
+	
+
 
 	//***MeleeWeaponEffect
 	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
 	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
-	IMAGE_MANAGER->addFrameImage("CosmosSwordFx ", L"resources/images/MeleeWeapon/CosmosSwordFx .png",8, 1);
-	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 30, 10);
-	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 30, 10);
+	IMAGE_MANAGER->addFrameImage("CosmosSwordFx", L"resources/images/MeleeWeapon/CosmosSwordFx.png",8, 1); 
+	IMAGE_MANAGER->addFrameImage("KeresScytheSwingFX", L"resources/images/MeleeWeapon/KeresScytheSwingFX.png",8, 1);
+	IMAGE_MANAGER->addFrameImage("TigerPunch", L"resources/images/MeleeWeapon/TigerPunch.png",10,1);
+	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
+
+	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // ¿ìÁÖ°Ë ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // ³´ ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // ÀÏ¹Ý ÈÖµÎ¸£±â ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // ÀÏ¹Ý Âî¸£±â ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆÑÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // ºÓÀº°î±ªÀÌ ÀÌÆÑÆ®
+
+
+
+
 
 	// *Accessories
 	IMAGE_MANAGER->addImage("SpikeBall", L"resources/images/Accessories/SpikeBall.png");                       // »ÏÁ·°ø	
@@ -285,7 +311,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Voluspa", L"resources/images/Accessories/Voluspa.png");                           // º¼·ç½ºÆÄ
 	IMAGE_MANAGER->addImage("Voluspa0", L"resources/images/Accessories/Voluspa0.png");                         // º¼·ç½ºÆÄÃ¢
 	IMAGE_MANAGER->addImage("BombPouch", L"resources/images/Accessories/BombPouch.png");                       // ´ë½¬ÆøÅº	
-	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch0.png", 12, 1);         // ´ë½¬ÆøÅº ÇÁ·¹ÀÓÀÌ¹ÌÁö
+	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch1.png", 5, 1);          // ´ë½¬ÆøÅº ÇÁ·¹ÀÓÀÌ¹ÌÁö
+	IMAGE_MANAGER->addFrameImage("BombPouch1", L"resources/images/Accessories/BombPouch2.png", 7, 1);          // ´ë½¬ÆøÅº ÅÍÁö´Â ÇÁ·¹ÀÓÀÌ¹ÌÁö
 	IMAGE_MANAGER->addImage("CarpCoinPurse", L"resources/images/Accessories/CarpCoinPurse.png");               // À×¾î¸ð¾ç µ¿ÀüÁö°©
 	IMAGE_MANAGER->addImage("DaisyRing", L"resources/images/Accessories/DaisyRing.png");                       // µ¥ÀÌÁö¸µ
 	IMAGE_MANAGER->addImage("DemonBoots", L"resources/images/Accessories/DemonBoots.png");                     // ¾Ç¸¶ºÎÃ÷
@@ -425,14 +452,16 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// ¹°¼Ò °ø°Ý ÇÇ°Ý
 
 	// * ¿¡³Ê¹Ì ºÒ¸´
-	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// ¼ö³à ÃÑ¾Ë
-	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Banshee/bullet_FX.png"	, 6, 1);	// ¼ö³à ÃÑ¾Ë »èÁ¦
-
-	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å
-	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Å »èÁ¦
+	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// ¼ö³à ÃÑ¾Ë
+	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// ¼ö³à ÃÑ¾Ë »èÁ¦
 
 	IMAGE_MANAGER->addImage("IceBullet"			, L"resources/images/Enemy/Bullet/IceBullet.png"		 );	// ¾óÀ½ ÃÑ¾Ë
 	IMAGE_MANAGER->addFrameImage("IceBullet_FX"	, L"resources/images/Enemy/Bullet/IceBullet_FX.png", 3, 1);	// ¾óÀ½ ÃÑ¾Ë »èÁ¦
+	
+	IMAGE_MANAGER->addFrameImage("GiantBullet"		, L"resources/images/Enemy/Bullet/giantBullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë Å« °Í
+	IMAGE_MANAGER->addFrameImage("GiantBullet_FX"	, L"resources/images/Enemy/Bullet/giantBullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë Å« °Í »èÁ¦ ÀÌÆåÆ®
+	IMAGE_MANAGER->addFrameImage("SmallBullet"		, L"resources/images/Enemy/Bullet/smallBullet.png"		, 5, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Í
+	IMAGE_MANAGER->addFrameImage("SmallBullet_FX"	, L"resources/images/Enemy/Bullet/smallBullet_FX.png"	, 7, 1);	// ¹ÚÁã ÃÑ¾Ë ÀÛÀº °Í »èÁ¦ ÀÌÆåÆ®
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

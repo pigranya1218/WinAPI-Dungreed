@@ -1,8 +1,9 @@
 #pragma once
 #include "InventoryUI.h"
 #include "StatUI.h"
+#include "CostumeUI.h"
 
-class  GameScene;
+class GameScene;
 class Player;
 class StageManager;
 
@@ -50,6 +51,7 @@ private:
 		Vector2 frontBaseCenter;
 		Vector2 backBaseCenter;
 		FloatRect frontIndexRc;
+		FloatRect frontBulletRc;
 		
 		float moveSpeed;
 		int viewIndex;
@@ -79,6 +81,7 @@ private:
 	tagWeaponUI	_weaponUI; // ¹«±â UI
 	InventoryUI _inventoryUI;
 	StatUI _statUI;
+	CostumeUI _costumeUI;
 
 
 public:

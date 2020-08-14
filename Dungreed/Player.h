@@ -16,7 +16,6 @@ Synthesize(DIRECTION, _direction, Direction)
 
 private:
 	GameScene* _gameScene;
-	
 
 	// 현재 상태
 	Costume* _costume;				// 현재 장착한 코스튬
@@ -84,5 +83,8 @@ public:
 	void swapItem(int indexA, int indexB);
 
 	PlayerStat getCurrStat() { return _adjustStat; };
+	
+	Costume* getCurrCostume() { return _costume; }
+	void setCurrCostume(Costume* costume) { _costume = costume; }
 };
 

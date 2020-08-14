@@ -4,8 +4,8 @@
 class BatGiantRed : public Enemy
 {
 private:
-	tagAttackInfo	_shooting;	// 공격 관련
-	tagMoveInfo		_moving;	// 이동 관련
+	tagShootingInfo _shooting;	// 탄막 관련
+	tagAttackInfo	_attack;	// 공격 관련
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

@@ -150,3 +150,7 @@ void Punch::attack(Projectile * projectile, AttackInfo * info)
 void Punch::getHit(Vector2 const position)
 {
 }
+
+void Punch::equip(Player * player)
+{
+}

@@ -6,6 +6,7 @@
 #include "ShortSpear.h"
 #include "Punch.h"
 #include "ShortSword.h"
+#include "CosmosSword.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -88,6 +89,7 @@ void Player::init()
 	setPosition(Vector2(200, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
+	//최초에 장착하는 코스튬
 	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE);
 	_costume->init();
 
@@ -155,7 +157,7 @@ void Player::init()
 	testAcc10->init();
 	_inventory[9] = testAcc10;
 
-	Voluspa* testAcc11 = new Voluspa;
+	CosmosSword* testAcc11 = new CosmosSword;
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
@@ -302,6 +304,14 @@ void Player::update(float const elapsedTime)
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
+
+		for (int i = 0; i < 4; i++) 
+		{
+			if (_equippedAcc[i] != nullptr)
+			{
+				_equippedAcc[i]->dash(this);
+			}
+		}
 	}
 	
 	if (_force.x != 0) // 대쉬 상태라면
@@ -355,10 +365,19 @@ void Player::update(float const elapsedTime)
 		_currJumpCount = _adjustStat.maxJumpCount;
 	}
 
-	//점프 처리
+	// 점프 처리
 	if (!_isStand)
 	{
 		_costume->setSprite(PLAYER_STATE::JUMP, false);
+	}
+
+	// 재장전 키를 눌렀을 때
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::RELOAD)))
+	{
+		if (_equippedWeapon[_currWeaponIndex] != nullptr)
+		{
+			_equippedWeapon[_currWeaponIndex]->reload(this);
+		}
 	}
 
 	// 코스튬 애니메이션 업데이트
@@ -417,7 +436,7 @@ void Player::render()
 	}
 
 	// 캐릭터 그리기
-	_costume->render(CAMERA->getRelativeV2(_position), _direction);
+	 _costume->render(CAMERA->getRelativeV2(_position), _direction);
 
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < 4; i++)
@@ -435,6 +454,8 @@ void Player::render()
 	{
 		_hand->frontRender(this);
 	}
+
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }
 
 Image* Player::getWeaponImg(int index) const noexcept
@@ -459,13 +480,15 @@ void Player::equipItem(int index)
 			if (_equippedAcc[i] == nullptr)
 			{
 				swap(_inventory[index], _equippedAcc[i]);
+				_equippedAcc[i]->equip(this);
 				break;
 			}
 		}
 	}
-	else
+	else // 무기인 경우
 	{
 		swap(_inventory[index], _equippedWeapon[_currWeaponIndex]);
+		_equippedWeapon[_currWeaponIndex]->equip(this);
 	}
 }
 
@@ -500,8 +523,10 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 {
 	if (indexA <= 1) // A : Weapon
 	{
-
-		if (indexB <= 1) // B : Weapon
+		if (_equippedWeapon[indexA] == nullptr)
+		{
+		}
+		else if (indexB <= 1) // B : Weapon
 		{
 			if (indexA == indexB) return;
 			swap(_equippedWeapon[indexA], _equippedWeapon[indexB]);
@@ -515,12 +540,19 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() != ITEM_TYPE::ACC)
 			{
 				swap(_equippedWeapon[indexA], _inventory[indexB - 6]);
+				if (_equippedWeapon[indexA] != nullptr)
+				{
+					_equippedWeapon[indexA]->equip(this);
+				}
 			}
 		}
 	}
 	else if (indexA <= 5) // A : Acc
 	{
-		if (indexB <= 1) // B : Weapon
+		if (_equippedAcc[indexA - 2] == nullptr)
+		{
+		}
+		else if (indexB <= 1) // B : Weapon
 		{
 			return;
 			
@@ -535,16 +567,24 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() == ITEM_TYPE::ACC)
 			{
 				swap(_equippedAcc[indexA - 2], _inventory[indexB - 6]);
+				if (_equippedAcc[indexA - 2])
+				{
+					_equippedAcc[indexA - 2]->equip(this);
+				}
 			}
 		}
 	}
 	else // A : Inventory
 	{
-		if (indexB <= 1) // B : Weapon
+		if (_inventory[indexA - 6] == nullptr)
+		{
+		}
+		else if (indexB <= 1) // B : Weapon
 		{
 			if (_inventory[indexA - 6]->getType() != ITEM_TYPE::ACC)
 			{
 				swap(_inventory[indexA - 6], _equippedWeapon[indexB]);
+				_equippedWeapon[indexB]->equip(this);
 			}
 
 		}
@@ -553,6 +593,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (_inventory[indexA - 6]->getType() == ITEM_TYPE::ACC)
 			{
 				swap(_inventory[indexA - 6], _equippedAcc[indexB - 2]);
+				_equippedAcc[indexB - 2]->equip(this);
 			}
 		}
 		else // B : Inventory

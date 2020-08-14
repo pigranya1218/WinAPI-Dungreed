@@ -76,8 +76,8 @@ LinearFunc LinearFunc::getLinearFuncFromPoints(Vector2 start, Vector2 end)
 	{
 		newFunc.a = INF_A;
 		newFunc.b = start.x;
-		newFunc.start = start.y;
-		newFunc.end = end.y;
+		newFunc.start = (start.y <= end.y)?(start.y):(end.y);
+		newFunc.end = (start.y <= end.y) ? (end.y) : (start.y);
 	}
 	else
 	{

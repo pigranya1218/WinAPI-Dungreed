@@ -338,17 +338,26 @@ void InventoryUI::render()
 	// 드래그 중이라면 마우스 위치에 아이템 그리기
 	if (_dragWeaponIndex != -1)
 	{
-		_player->getWeapon(_dragWeaponIndex)->getIconImg()->setScale(5);
-		_player->getWeapon(_dragWeaponIndex)->getIconImg()->render(Vector2(_ptMouse));
+		if (_player->getWeapon(_dragWeaponIndex) != nullptr)
+		{
+			_player->getWeapon(_dragWeaponIndex)->getIconImg()->setScale(5);
+			_player->getWeapon(_dragWeaponIndex)->getIconImg()->render(Vector2(_ptMouse));
+		}
 	}
 	else if (_dragAccIndex != -1)
 	{
-		_player->getAcc(_dragAccIndex)->getIconImg()->setScale(5);
-		_player->getAcc(_dragAccIndex)->getIconImg()->render(Vector2(_ptMouse));
+		if (_player->getAcc(_dragAccIndex) != nullptr)
+		{
+			_player->getAcc(_dragAccIndex)->getIconImg()->setScale(5);
+			_player->getAcc(_dragAccIndex)->getIconImg()->render(Vector2(_ptMouse));
+		}
 	}
 	else if (_dragInvenIndex != -1)
 	{
-		_player->getInvenItem(_dragInvenIndex)->getIconImg()->setScale(5);
-		_player->getInvenItem(_dragInvenIndex)->getIconImg()->render(Vector2(_ptMouse));
+		if (_player->getInvenItem(_dragInvenIndex) != nullptr)
+		{
+			_player->getInvenItem(_dragInvenIndex)->getIconImg()->setScale(5);
+			_player->getInvenItem(_dragInvenIndex)->getIconImg()->render(Vector2(_ptMouse));
+		}
 	}
 }

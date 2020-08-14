@@ -28,10 +28,10 @@ void Stage::release()
 
 void Stage::update(float const elaspedTime)
 {
+	_projectileMgr->update(elaspedTime);
 	_objectMgr->update(elaspedTime);
 	_npcMgr->update(elaspedTime);
 	_enemyMgr->update(elaspedTime);
-	_projectileMgr->update(elaspedTime);
 	
 }
 

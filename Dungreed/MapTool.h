@@ -3,7 +3,8 @@
 #include "LinearFunc.h"
 
 #define TILESIZE 64
-
+#define MAXTILEX 150
+#define MAXTILEY 150
 #define SAMPLETILEX 10
 #define SAMPLETILEY 10
 
@@ -89,9 +90,11 @@ private:
 	FloatRect _layer1Btn, _layer2Btn;
 	FloatRect _increaseTileX, _decreaseTileX;
 	FloatRect _increaseTileY, _decreaseTileY;
-
+	
+	int _paletteNum;
 	Image* _paletteImage;
-	tagTileMap _tile[2000];
+	
+	tagTileMap _tile[MAXTILEX*MAXTILEY];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
 	
 	bool _selectDrag;

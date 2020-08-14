@@ -137,7 +137,6 @@ void Boomerang::getHit(Vector2 const position)
 {
 }
 
-PlayerStat Boomerang::equip()
+void Boomerang::equip(Player* player)
 {
-	return PlayerStat();
 }

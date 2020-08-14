@@ -54,7 +54,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 
-	
+
 
 	if (_ani->isPlay())
 	{
@@ -155,19 +155,19 @@ void OakBow::frontRender(Player * player)
 	{
 		degree -= 360;
 	}
-	
+
 	float renderDegree = degree;
 	if (isLeft) // 왼쪽을 보고 있음
 	{
 		renderDegree = 180 - degree;
 		if (renderDegree < 0) renderDegree += 360;
 	}
-	
+
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
 	_img->setAnglePos(anglePos);
 	_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
-	
+
 	subHandPos = renderPosHand; // 보조 손 (양손무기) 움직임
 	subHandPos.x += _img->getFrameSize().x * 0.35 * 3;
 	subHandPos.y += (isLeft) ? (_img->getFrameSize().y * -0.1 * 4) : (_img->getFrameSize().y * 0.1 * 4);
@@ -224,7 +224,7 @@ void OakBow::attack(Player * player)
 	{
 		_drawEffect = true;						// 이펙트 그리기
 	}
-	
+
 	if (!_isAttack)
 	{
 		_isAttack = true;
@@ -247,7 +247,6 @@ void OakBow::getHit(Vector2 const position)
 {
 }
 
-PlayerStat OakBow::equip()
+void OakBow::equip(Player* player)
 {
-	return PlayerStat();
 }
