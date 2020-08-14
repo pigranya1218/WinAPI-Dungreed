@@ -15,7 +15,7 @@ void StatUI::init()
 	//창닫기 이미지
 	_exitImg = IMAGE_MANAGER->findImage("BUTTON_EXIT");
 	_exitSelectImg = IMAGE_MANAGER->findImage("BUTTON_EXIT_SELECTED");
-	_exitRc = FloatRect(440, 40, 560, 140);
+	_exitRc = FloatRect(440, 60, 560, 140);
 
 	//스탯 요소 이미지
 	for (int i = 0; i < 12; i++)
@@ -61,7 +61,8 @@ void StatUI::render()
 	_statBaseImg->render(_statBaseRc.getCenter(), _statBaseRc.getSize());
 	_foodBaseImg->render(_foodBaseRc.getCenter(), _foodBaseRc.getSize());
 	string statname = PlayerStat::getStatString(STAT_TYPE::ATTACK_SPEED, false);
-	//창닫기
+	
+	// 창닫기
 	if (_exitRc.ptInRect(_ptMouse))
 	{
 		_exitSelectImg->render(_exitRc.getCenter(), _exitRc.getSize());
@@ -70,13 +71,15 @@ void StatUI::render()
 	{
 		_exitImg->render(_exitRc.getCenter(), _exitRc.getSize());
 	}
-	//STATUS, FOOD 제목
+	
+	// STATUS, FOOD 제목
 	D2D_RENDERER->renderTextField(_statBaseRc.left, _statBaseRc.top, L"STATUS", RGB(255, 255, 255), 
 		50, _statBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"둥근모꼴", 0);
 	D2D_RENDERER->renderTextField(_foodBaseRc.left, _foodBaseRc.top, L"FOODS", RGB(255, 255, 255),
 		50, _foodBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"둥근모꼴", 0);
-	//스탯 아이콘
-	//_statEntity[0].icon->render(_statEntity[0].iconRc.getCenter(), _statEntity[0].iconRc.getSize());
+	
+	// 스탯
+	PlayerStat stat = _player->getCurrStat();
 	for (int i = 0; i < 12; i++)
 	{
 		if (_statEntity[i].iconRc.ptInRect(_ptMouse))
@@ -87,11 +90,7 @@ void StatUI::render()
 		{
 			_statEntity[i].icon->render(_statEntity[i].iconRc.getCenter(), _statEntity[i].iconRc.getSize());
 		}
-	}
-	//스탯 수치
-	for (int i = 0; i < 12; i++)
-	{
-		D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(0), RGB(255, 255, 255), 40, 100, 50, 1.f);
+		D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(stat.getStat(static_cast<STAT_TYPE>(i)))), RGB(255, 255, 255), 35, 100, 50, 1.f);
 	}
 }
 

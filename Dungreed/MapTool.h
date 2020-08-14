@@ -1,5 +1,4 @@
 #pragma once
-#include "GameNode.h"
 #include <commdlg.h>
 #include "LinearFunc.h"
 
@@ -56,14 +55,6 @@ struct  tagPalette
 	
 };
 
-struct tagSelectTile
-{
-	FloatRect rc;
-	int x;
-	int y;
-	
-};
-
 struct tagMap
 {
 	int Tx;
@@ -71,29 +62,23 @@ struct tagMap
 };
 
 
-class MapTool : public GameNode
+class MapTool
 {
 private:
 
 	enum class TOOLMENU
 	{
-			SAVE,
-			LOAD,
-			SELECTTILE,
-			ERASE,
+		SAVE,
+		LOAD,
+		SELECTTILE,
+		ERASE,
 	};
-
-	//HWND _saveBtn;
-	//HWND _loadBtn;
-
-	
 	
 	Synthesize(int, _tileX, TileX)
 	Synthesize(int, _tileY, TileY)
 
 	int _layer;
 
-	Vector2 _mapPointer;
 	FloatRect _mapPtnRc;
 
 	LinearFunc _line;
@@ -105,26 +90,19 @@ private:
 	FloatRect _increaseTileX, _decreaseTileX;
 	FloatRect _increaseTileY, _decreaseTileY;
 
-
 	Image* _paletteImage;
-	tagTileMap _tile[2000], _tile2[2000];
+	tagTileMap _tile[2000];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
-	tagSelectTile _selectTile;
+	
+	bool _selectDrag;
+	Vector2 _selectStart;
+	Vector2 _selectEnd;
 
 	DRAW_LINE_POSITION _drawLinePos;
 
-	vector<tagSelectTile> _vSelectTile;
-	vector<tagSelectTile>::iterator _viSelectTile;
-
-	vector<tagTileMap> _vTileMap;
-	vector<tagTileMap>::iterator _viTileMap;
-
 	vector<TCHAR*> _vLoad;
-	vector<TCHAR*>::iterator _viLoad;
 
 public:
-
-
 
 	HRESULT init();
 	
@@ -140,14 +118,10 @@ public:
 	void paletteChange();
 	void mapLoad();
 	void setSelectTile();
-	void releaseSelectTile();
 
 	void setLinePos(int frameX,int frameY) ;
 
 	void setTileSize();
-
-	
-
 
 };
 

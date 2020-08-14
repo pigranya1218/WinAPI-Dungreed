@@ -136,8 +136,8 @@ void SkelBigNormal::update(float const timeElapsed)
 
 void SkelBigNormal::render()
 {
-	D2D_RENDERER->drawRectangle(_rect);
-	D2D_RENDERER->drawEllipse(_position, _detectRange);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
+	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
 
 	if (_state == ENEMY_STATE::ATTACK)
@@ -153,11 +153,11 @@ void SkelBigNormal::render()
 		drawPos.x += ((bool)_direction) ? +(elapsePos.x / 2) : -(elapsePos.x / 2);
 		drawPos.y -= elapsePos.y / 2;
 
-		_img->aniRender(drawPos, _ani, !(unsigned)_direction);
+		_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, !(unsigned)_direction);
 	}
 	else
 	{
-		_img->aniRender(_position, _ani, !(bool)_direction);
+		_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(bool)_direction);
 	}
 }
 

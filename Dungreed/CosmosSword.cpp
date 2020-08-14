@@ -107,7 +107,7 @@ void CosmosSword::backRender(Player* player)
 
 		// 손으로부터 마우스 에임까지의 각도
 
-		float degree = atan2f(-(_ptMouse.y - pos.y), (_ptMouse.x - pos.x)) * (180 / PI);
+		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - pos.x)) * (180 / PI);
 		
 
 
@@ -166,19 +166,19 @@ void CosmosSword::backRender(Player* player)
 
 		}
 		 
-		_img->aniRender(renderPosWeapon, _ani, isLeft);// 그린다
+		_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		Vector2 last = renderPosHand;
 
 		if (isLeft) // 왼쪽을 보고 있음
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, -(renderDegree ), last); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, -(renderDegree ), last);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree), CAMERA->getRelativeV2(last));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree ), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
 		}
 		else
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, (renderDegree ), last); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, (renderDegree ), last);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree), CAMERA->getRelativeV2(last));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree ), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
 		}
 		if (_drawEffect) // 이펙트를 그린다
 		{
@@ -217,7 +217,7 @@ void CosmosSword::frontRender(Player* player)
 		// 손으로부터 마우스 에임까지의 각도
 
 		
-		float degree = atan2f(-(_ptMouse.y - pos.y), (_ptMouse.x - pos.x)) * (180 / PI);
+		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - pos.x)) * (180 / PI);
 		float degreeOffsetangle = atan2f(-(_ptMouse.y - pos.y), (_ptMouse.x - pos.x)) * (180 / PI) + 90;
 
 
@@ -277,13 +277,13 @@ void CosmosSword::frontRender(Player* player)
 
 		if (isLeft) // 왼쪽을 보고 있음
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, -(renderDegree + _angleOffset), renderPosHand); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, -(renderDegree + _angleOffset), renderPosHand);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
 		}
 		else
 		{
-			D2D_RENDERER->drawRectangle(_hand, 40, 36, 58, 1.f, 6.f, (renderDegree + _angleOffset), renderPosHand); // 손의 렉트를 그린다
-			D2D_RENDERER->fillRectangle(_hand, 210, 188, 181, 1, (renderDegree + _angleOffset), renderPosHand);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
 		}
 		if (_drawEffect) // 이펙트를 그린다
 		{

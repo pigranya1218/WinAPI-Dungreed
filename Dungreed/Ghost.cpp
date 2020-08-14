@@ -153,9 +153,9 @@ void Ghost::update(float const timeElapsed)
 void Ghost::render()
 {
 	_img->setScale(_scale);
-	_img->aniRender(_position,_ani,!(unsigned)_direction);
-	D2D_RENDERER->drawRectangle(_rect);
-	D2D_RENDERER->drawEllipse(_position,_detectRange);
+	_img->aniRender(CAMERA->getRelativeV2(_position),_ani,!(unsigned)_direction);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
+	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 }
 
 // 이미지 및 프레임 설정

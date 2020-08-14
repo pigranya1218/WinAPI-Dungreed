@@ -75,11 +75,11 @@ void watCher::backRender(Player * player)
 	renderPos.y = renderPos.y + anglePos.y - 22;	
 	Vector2 size = Vector2(_img->getFrameSize().x * 2, _img->getFrameSize().y * 2);
 	_crash = rectMakePivot(Vector2(renderPos.x, renderPos.y + 25), size, PIVOT::CENTER);
-	D2D_RENDERER->drawRectangle(_crash);
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_crash));
 
 
 	_img->setScale(4);	
-	_img->aniRender(Vector2(_crash.left,_crash.top), _ani, false);
+	_img->aniRender(CAMERA->getRelativeV2(Vector2(_crash.left,_crash.top)), _ani, false);
 	
 }
 

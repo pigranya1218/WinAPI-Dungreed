@@ -22,6 +22,7 @@ protected:
 protected:
 	StageManager* _stageManager;
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
+	
 	EnemyManager* _enemyMgr;
 	ObjectManager* _objectMgr;
 	ProjectileManager* _projectileMgr;

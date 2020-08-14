@@ -41,7 +41,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 	if (renderPos.x > WINSIZEX+200 )
 	{
 		
-		renderPos.y = _ptMouse.y;	
+		renderPos.y = CAMERA->getAbsoluteY(_ptMouse.y);	
 		if (_currAttackDelay == 0 ) {
 			_currAttackDelay = 3.1f;
 			Opposition = true;
@@ -50,7 +50,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 	if (renderPos.x < -200 )
 	{
 		
-		renderPos.y = _ptMouse.y;	
+		renderPos.y = CAMERA->getAbsoluteY(_ptMouse.y);	
 		if (_currAttackDelay == 0 ) {
 			_currAttackDelay = 2.9f;
 			Opposition = false;
@@ -74,11 +74,11 @@ void Voluspa::backRender(Player * player)
 	_img->setScale(3);	
 	if (Opposition)
 	{
-		_img->render(renderPos, true);
+		_img->render(CAMERA->getRelativeV2(renderPos), true);
 	}
 	else
 	{
-		_img->render(renderPos, false);
+		_img->render(CAMERA->getRelativeV2(renderPos), false);
 	}
 
 	
