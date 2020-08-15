@@ -59,15 +59,9 @@ void ShortSword::update(Player* player, float const elapsedTime)
 	float ratio = elapsedTime / (_baseAttackDelay * 0.15);
 	if (_reverseMove)
 	{
-		//_attackMove.x = max(0, _attackMove.x - abs(cosf(_attackAngle) * 40 * ratio));
-		//_attackMove.y = max(0, _attackMove.y - abs(-sinf(_attackAngle) * 40 * ratio));
-		
 	}
 	else
-	{
-		//_attackMove.x = min(abs(cosf(_attackAngle) * 40), _attackMove.x + abs(cosf(_attackAngle) * 40 * ratio));
-		//_attackMove.y = min(abs(-sinf(_attackAngle) * 40), _attackMove.y + abs((-sinf(_attackAngle)) * 40 * ratio));
-
+	{	
 		if (_currAttackDelay <= _baseAttackDelay * 0.8)
 		{
 			_reverseMove = true;

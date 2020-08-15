@@ -4,7 +4,7 @@
 void CosmosSword::init()
 {
 	_img = IMAGE_MANAGER->findImage("CosmosSword");
-	_iconImg = IMAGE_MANAGER->findImage("CosmosSword00");
+	_iconImg = IMAGE_MANAGER->findImage("CosmosSwordIcon");
 
 	width = _img->getFrameSize().x;
 	height = _img->getFrameSize().y;

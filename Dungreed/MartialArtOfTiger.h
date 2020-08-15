@@ -17,8 +17,13 @@ private:
 	bool _reverseMove;
 	bool _drawEffect;
 	bool _oneAttack;
-	FloatRect _hand;
-	Vector2 _handSize;
+	float _width;
+	float _height;
+	
+	FloatRect _leftHand;	// 왼손
+	FloatRect _rightHand;	// 오른손
+	Vector2 _handSize;		// 손의 크기
+	
 
 
 public:

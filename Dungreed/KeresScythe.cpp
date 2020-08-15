@@ -5,7 +5,8 @@ void KeresScythe::init()
 {
 	_type = ITEM_TYPE::WEAPON_ONE_HAND;
 	_rank = ITEM_RANK::NORMAL;
-	_iconImg = _img = IMAGE_MANAGER->findImage("KeresScythe");
+	_iconImg = IMAGE_MANAGER->findImage("KeresScytheIcon");
+		_img = IMAGE_MANAGER->findImage("KeresScythe");
 	_effect = IMAGE_MANAGER->findImage("KeresScytheSwingFX");
 	_price = 600;
 
