@@ -7,6 +7,7 @@
 #include "AllEnums.h"
 #include "LinearFunc.h"
 #include "Attackinfo.h"
+#include "MapTool.h"
 
 class StageManager;
 
@@ -32,6 +33,10 @@ protected:
 	vector<tagCollision> _collisionPlatforms; // 발판
 	bool _isVisited; // 방문한 스테이지인가? (UI에서 그리기 위함)
 
+	Image* _stageImage;
+	tagTileMap _tile[MAXTILEX*MAXTILEY];
+	int _currentIndex; //충돌선을 그리기 위함
+
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
 	virtual void init();
@@ -47,4 +52,6 @@ public:
 	inline Stage* getConnectedStage( DIRECTION const direction ) const { return _connectedStage[static_cast<int> (direction)];}
 	bool isVisited() const { return _isVisited; }
 	Vector2 getPlayerPos();
+
+	void mapLoad();
 };

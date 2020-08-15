@@ -10,9 +10,9 @@ private:
 	Image* _BG1;
 	Image* _BG2;
 	Image* _floor;
-	Image* _tileImage;
+	//Image* _tileImage;
 
-	tagTileMap _tile[MAXTILEX*MAXTILEY];
+	
 	int _currentIndex;
 
 public:
@@ -20,6 +20,6 @@ public:
 	virtual void release();
 	virtual void update(float const elapsedTime);
 	virtual void render();
-	void mapLoad();
+	//void mapLoad();
 };
 
