@@ -27,9 +27,9 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 0.5;	
 
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 300, 1000, true, false, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 300, 850, true, false, false, false);
 
-	_isDetect = 0;
+	_isDetect = _attacking = 0;
 }
 
 void SkelMagicianIce::release()
@@ -53,40 +53,27 @@ void SkelMagicianIce::update(float const timeElapsed)
 	{
 		case ENEMY_STATE::IDLE:
 		{
-			
-			if (_isDetect && _attack.update(timeElapsed) && _shooting.bullets.empty())
+			if (_isDetect && !_attacking)
 			{
-				_attackPos = playerPos;
-				_shooting.bulletNum = 6;
-				setState(ENEMY_STATE::ATTACK);
+				if (_attack.update(timeElapsed))
+				{
+					_attackPos = playerPos;
+					_shooting.bulletNum = 6;
+					float angle = 0;
+					for (int i = 0; i < 6; i++)
+					{
+						_shooting.createBullet(playerPos, angle += PI / 4);
+						if (i == 2)angle += PI / 4;
+					}
+					setState(ENEMY_STATE::ATTACK);
+					_attacking = true;
+				}
 			}
 		}		
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			// 해당 프레임에서 투사체 생성
-			if (_attackAni->getPlayIndex() == 15 && _shooting.bulletNum > 0)
-			{
-				// 공격 프레임 잠시 멈추고
-				if (_attackAni->isPlay()) _attackAni->pause();
-
-				if (!_attackAni->isPlay() && _shooting.bulletNum > 0)
-				{
-					if (_shooting.delayUpdate(timeElapsed))
-					{
-						float angle = 0;
-						for (int i = 0; i < 6; i++)
-						{
-							_shooting.createBullet(_attackPos, angle += PI / 4);
-							if (i == 2) angle += PI / 4;
-						}
-						_shooting.fireBullet(_enemyManager);
-						_attackAni->resume();
-					}
-				}
-				
-			}
-			else if (!_attackAni->isPlay())
+			if (!_ani->isPlay())
 			{
 				setState(ENEMY_STATE::IDLE);
 			}			
@@ -96,6 +83,24 @@ void SkelMagicianIce::update(float const timeElapsed)
 		{
 		}
 		break;
+	}
+
+	if (_attacking)
+	{
+		if (_attackAni->getPlayIndex() == 15)
+		{
+			if (_attackAni->isPlay()) _attackAni->pause();
+
+			if (_shooting.delayUpdate(timeElapsed))
+			{
+				_shooting.fireBullet(_enemyManager);
+				_attackAni->resume();
+			}
+			if (!_attackAni->isPlay() && _shooting.bullets.empty())
+			{
+				_attacking = false;
+			}
+		}
 	}
 	
 	_ani->frameUpdate(timeElapsed);
@@ -114,7 +119,7 @@ void SkelMagicianIce::render()
 
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
-	if (_state == ENEMY_STATE::ATTACK)
+	if (_attacking)
 	{
 		_attackImg->aniRender(CAMERA->getRelativeV2(_attackPos), _attackAni);
 	}
