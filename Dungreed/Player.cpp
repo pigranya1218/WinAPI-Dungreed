@@ -24,6 +24,7 @@
 #include "Matchlock.h"
 #include "MagnifyingGlass.h"
 #include "Voluspa.h"
+#include "HeartOfCosmos.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -111,7 +112,7 @@ void Player::init()
 
 	babyGreenBat* testAcc1 = new babyGreenBat;
 	testAcc1->init();
-	_inventory[0] = testAcc1;
+	_inventory[11] = testAcc1;
 
 	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
@@ -160,6 +161,10 @@ void Player::init()
 	CosmosSword* testAcc11 = new CosmosSword;
 	testAcc11->init();
 	_inventory[10] = testAcc11;
+
+	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
+	testAcc12->init();
+	_inventory[0] = testAcc12;
 
 	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
