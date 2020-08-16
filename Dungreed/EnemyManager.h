@@ -38,5 +38,10 @@ public:
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
 
+	// 피격 체크 관련 함수
+	bool isHit(FloatRect* rc, AttackInfo* info);
+	bool isHit(FloatCircle* circle, AttackInfo* info);
+	bool isHit(Projectile* projectile, AttackInfo* info);
+
 	void setStage(Stage* stage) { _stage = stage; }
 };

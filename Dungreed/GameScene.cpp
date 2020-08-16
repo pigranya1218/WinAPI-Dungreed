@@ -14,6 +14,7 @@ HRESULT GameScene::init()
 	_stageMgr = new StageManager;
 	_stageMgr->init();
 	_stageMgr->setGameScene(this);
+	_stageMgr->setPlayer(_player);
 
 	_uiMgr = new UIManager;
 	_uiMgr->init();
@@ -83,10 +84,12 @@ void GameScene::moveTo(GameObject * object, Vector2 moveDir)
 
 void GameScene::attack(FloatRect* rect, AttackInfo* info)
 {
+	_stageMgr->attack(rect, info);
 }
 
 void GameScene::attack(FloatCircle* circle, AttackInfo* info)
 {
+	_stageMgr->attack(circle, info);
 }
 
 void GameScene::attack(Projectile* projectile, AttackInfo* info)

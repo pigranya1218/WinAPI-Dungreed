@@ -183,3 +183,42 @@ Vector2 EnemyManager::getPlayerPos()
 {
 	return _stage->getPlayerPos();
 }
+
+bool EnemyManager::isHit(FloatRect* rc, AttackInfo* info)
+{
+	bool result = false;
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		if (_enemies[i]->isHit(rc, info))
+		{
+			result = _enemies[i]->hitEffect(rc, info);
+		}
+	}
+	return result;
+}
+
+bool EnemyManager::isHit(FloatCircle* circle, AttackInfo* info)
+{
+	bool result = false;
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		if (_enemies[i]->isHit(circle, info))
+		{
+			result = _enemies[i]->hitEffect(circle, info);
+		}
+	}
+	return result;
+}
+
+bool EnemyManager::isHit(Projectile* projectile, AttackInfo* info)
+{
+	bool result = false;
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		if (_enemies[i]->isHit(projectile, info))
+		{
+			result = _enemies[i]->hitEffect(projectile, info);
+		}
+	}
+	return result;
+}

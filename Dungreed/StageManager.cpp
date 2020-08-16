@@ -30,10 +30,26 @@ void StageManager::render()
 
 void StageManager::attack(FloatRect* rect, AttackInfo* info)
 {
+	if (info->team == OBJECT_TEAM::PLAYER)
+	{
+		_currStage->isHitEnemy(rect, info);
+	}
+	else
+	{
+		_player->isHit(rect, info);
+	}
 }
 
 void StageManager::attack(FloatCircle* circle, AttackInfo* info)
 {
+	if (info->team == OBJECT_TEAM::PLAYER)
+	{
+		_currStage->isHitEnemy(circle, info);
+	}
+	else
+	{
+		_player->isHit(circle, info);
+	}
 }
 
 void StageManager::attack(Projectile* projectile, AttackInfo* info)
@@ -73,5 +89,5 @@ void StageManager::releaseStage()
 
 Vector2 StageManager::getPlayerPos()
 {
-	return _gameScene->getPlayerPos();
+	return _player->getPosition();
 }

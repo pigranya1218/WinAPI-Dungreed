@@ -305,7 +305,6 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else // 선분 종료 
 		{
-			int startIndex = startX + startY * maxSizeX;
 			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, static_cast<float>(maxSizeY * TILESIZE))));
 		}
@@ -438,17 +437,19 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 	object->setPosition(newRc.getCenter());
 }
 
-void Stage::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void Stage::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
 void Stage::attack(Projectile* projectile, AttackInfo* info)
 {
 	_projectileMgr->addProjectile(projectile);
+}
+
+bool Stage::isHitEnemy(FloatRect* rc, AttackInfo* info)
+{
+	return _enemyMgr->isHit(rc, info);
+}
+
+bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
+{
+	return _enemyMgr->isHit(circle, info);
 }
 
 Vector2 Stage::getPlayerPos()

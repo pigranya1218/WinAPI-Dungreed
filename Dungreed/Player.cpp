@@ -50,7 +50,9 @@ void Player::attack(FloatRect* rect, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용
+	// 플레이어 스탯 적용 (위력, 크리티컬)
+
+	_gameScene->attack(rect, info);
 }
 
 void Player::attack(FloatCircle* circle, AttackInfo* info)
@@ -64,7 +66,9 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용
+	// 플레이어 스탯 적용 (위력, 크리티컬)
+
+	_gameScene->attack(circle, info);
 }
 
 void Player::attack(Projectile* projectile, AttackInfo* info)
@@ -78,7 +82,7 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용
+	// 플레이어 스탯 적용 (위력, 크리티컬)
 
 	_gameScene->attack(projectile, info);
 }
@@ -460,6 +464,36 @@ void Player::render()
 	}
 
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
+}
+
+bool Player::isHit(FloatRect* rc, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::isHit(FloatCircle* circle, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::isHit(Projectile* projectile, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::hitEffect(Projectile* projectile, AttackInfo* info)
+{
+	return false;
 }
 
 Image* Player::getWeaponImg(int index) const noexcept

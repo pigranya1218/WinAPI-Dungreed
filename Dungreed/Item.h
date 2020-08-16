@@ -21,9 +21,12 @@ enum class ITEM_RANK
 class Item
 {
 protected:
+	string _itemCode; // 아이템 코드
+
 	ITEM_TYPE _type; // 아이템 타입
 	ITEM_RANK _rank; // 아이템 등급
 	Image* _iconImg; // 아이템 이미지
+
 	
 	int _price; // 가격
 	PlayerStat _addStat; // 아이템 스탯 옵션

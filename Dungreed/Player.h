@@ -59,6 +59,16 @@ public:
 	virtual void update(float const elapsedTime) override;
 	virtual void render() override;
 
+	// 피격 체크를 위해 호출
+	bool isHit(FloatRect* rc, AttackInfo* info);
+	bool isHit(FloatCircle* circle, AttackInfo* info);
+	bool isHit(Projectile* projectile, AttackInfo* info);
+
+	// 만약 피격되었다면 호출될 가상함수
+	bool hitEffect(FloatRect* rc, AttackInfo* info);
+	bool hitEffect(FloatCircle* circle, AttackInfo* info);
+	bool hitEffect(Projectile* projectile, AttackInfo* info);
+
 	// GETTER & SETTER
 	int getLevel() const noexcept { return _level; }
 	int getMaxHp() const noexcept { return _adjustStat.maxHp; }
