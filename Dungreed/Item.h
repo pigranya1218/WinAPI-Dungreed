@@ -21,9 +21,12 @@ enum class ITEM_RANK
 class Item
 {
 protected:
+	string _itemCode; // 아이템 코드
+
 	ITEM_TYPE _type; // 아이템 타입
 	ITEM_RANK _rank; // 아이템 등급
 	Image* _iconImg; // 아이템 이미지
+
 	
 	int _price; // 가격
 	PlayerStat _addStat; // 아이템 스탯 옵션
@@ -51,6 +54,7 @@ public:
 	virtual void equip(Player* player) const {}; // 아이템을 장착했을 때 호출될 함수
 	
 	virtual wstring getBulletUI() { return L""; }
+	virtual float getBulletRatio() { return 0.f; }
 
 	ITEM_TYPE getType() const noexcept { return _type; }
 

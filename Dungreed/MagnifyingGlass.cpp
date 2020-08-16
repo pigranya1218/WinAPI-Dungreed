@@ -10,7 +10,7 @@ void MagnifyingGlass::init()
 	_iconImg = IMAGE_MANAGER->findImage("MagnifyingGlass");
 
 	//厩技辑府 可记
-	_addStat.damage = 30;
+	_addStat.power += 30;
 
 	//厩技辑府 啊拜
 	_price = 2400;

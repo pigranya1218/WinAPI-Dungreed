@@ -40,5 +40,6 @@ public:
 	virtual void equip(Player* player); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
 
 	virtual wstring getBulletUI() override;
+	virtual float getBulletRatio() override;
 };
 

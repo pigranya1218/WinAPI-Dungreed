@@ -87,6 +87,49 @@ bool FloatRect::ptInRect(POINT pt) const
 	return false;
 }
 
+bool FloatRect::intersectEffect(FloatRect& move)
+{
+	RECT temp;
+	RECT thisRc = { left, top, right, bottom };
+	RECT moveRc = { move.left, move.top, move.right, move.bottom};
+	if (IntersectRect(&temp, &thisRc, &moveRc))
+	{
+		int width = temp.right - temp.left;
+		int height = temp.bottom - temp.top;
+		float moveWidth = move.right - move.left;
+		float moveHeight = move.bottom - move.top;
+		if (width >= height) // 좌우로 겹치는 축이 더 크다
+		{
+			if (move.top < bottom && move.bottom > bottom)
+			{
+				move.top = bottom;
+				move.bottom = move.top + moveHeight;
+			}
+			else
+			{
+				move.bottom = top;
+				move.top = move.bottom - moveHeight;
+			}
+		}
+		else // 상하로 겹치는 축이 더 크다
+		{
+			if (move.left < right && move.right > right)
+			{
+				move.left = right;
+				move.right = move.left + moveWidth;
+			}
+			else
+			{
+				move.right = left;
+				move.left = move.right - moveWidth;
+			}
+			
+		}
+		return true;
+	}
+	return false;
+}
+
 /**************************************************************************************************
 ## FloatRect::operator = ##
 @@ RECT rc : RECT

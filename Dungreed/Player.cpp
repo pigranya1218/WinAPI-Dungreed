@@ -50,7 +50,9 @@ void Player::attack(FloatRect* rect, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용
+	// 플레이어 스탯 적용 (위력, 크리티컬)
+
+	_gameScene->attack(rect, info);
 }
 
 void Player::attack(FloatCircle* circle, AttackInfo* info)
@@ -64,7 +66,9 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용
+	// 플레이어 스탯 적용 (위력, 크리티컬)
+
+	_gameScene->attack(circle, info);
 }
 
 void Player::attack(Projectile* projectile, AttackInfo* info)
@@ -78,7 +82,7 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용
+	// 플레이어 스탯 적용 (위력, 크리티컬)
 
 	_gameScene->attack(projectile, info);
 }
@@ -86,7 +90,7 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 void Player::init()
 {
 	setSize(Vector2(40, 80));
-	setPosition(Vector2(200, WINSIZEY - 250));
+	setPosition(Vector2(500, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
 	//최초에 장착하는 코스튬
@@ -161,13 +165,13 @@ void Player::init()
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
-	/*MatchLockGun* testWeapon1 = new MatchLockGun;
+	MatchLockGun* testWeapon1 = new MatchLockGun;
 	testWeapon1->init();
-	_inventory[11] = testWeapon1;*/
+	_inventory[11] = testWeapon1;
 	
-	ShortSpear* testWeapon2 = new ShortSpear;
+	/*ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
-	_inventory[11] = testWeapon2;
+	_inventory[11] = testWeapon2;*/
 
 	ShortSword* testWeapon3 = new ShortSword;
 	testWeapon3->init();
@@ -304,6 +308,10 @@ void Player::update(float const elapsedTime)
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
+		if (angle < 0)
+		{
+			_position.y += 1.5;
+		}
 
 		for (int i = 0; i < 4; i++) 
 		{
@@ -346,11 +354,11 @@ void Player::update(float const elapsedTime)
 		}
 	}
 
-	//하강중
+	//서 있는 상태라면
 	if (_isStand && _force.y == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 25;
+		moveDir.y += 20;
 	}
 	
 	_force.y += _adjustStat.yGravity * elapsedTime;
@@ -456,6 +464,36 @@ void Player::render()
 	}
 
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
+}
+
+bool Player::isHit(FloatRect* rc, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::isHit(FloatCircle* circle, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::isHit(Projectile* projectile, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
+{
+	return false;
+}
+
+bool Player::hitEffect(Projectile* projectile, AttackInfo* info)
+{
+	return false;
 }
 
 Image* Player::getWeaponImg(int index) const noexcept

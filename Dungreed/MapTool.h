@@ -25,7 +25,9 @@ enum class DRAW_LINE_POSITION
 	RIGHT_BOTTOM,
 	
 	//프랫폼형태인가?
-	PLATFORM
+	PLATFORM_TOP,
+	PLATFORM_LEFT_DIAGONAL, // /이런 모양
+	PLATFORM_RIGHT_DIAGONAL // \이런 모양
 };
 
 //struct tagTileMap
