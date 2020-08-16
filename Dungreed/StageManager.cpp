@@ -58,9 +58,9 @@ void StageManager::nextStage()
 
 void StageManager::makeStage()
 {
-	//_currStage = new DebugStage();
+	_currStage = new DebugStage();
 	//_currStage = new VillageStage();
-	_currStage = new RestaurantRoom();
+	//_currStage = new RestaurantRoom();
 	_currStage->setStageManager(this);
 	_currStage->mapLoad();
 	_currStage->init();
