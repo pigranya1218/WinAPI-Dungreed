@@ -6,8 +6,8 @@ void DebugStage::init()
 	Stage::init();
 
 	// 맵 불러오기
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("StartRoom1.map");
+	_tileImage = IMAGE_MANAGER->findImage("sampleTile2");
+	loadMap("iceStage1.map");
 
 	// 에너미 테스트입니다.
 	_enemyMgr->setStage(this);
@@ -64,9 +64,14 @@ void DebugStage::render()
 		}
 	}
 
-	for (int i = 0; i < _collisionGrounds.size(); i++)
+	for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
-		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGrounds[i].func.getStart()), CAMERA->getRelativeV2(_collisionGrounds[i].func.getEnd()), D2D1::ColorF::Enum::Red, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_collisionGroundRects[i]), D2D1::ColorF::Enum::Red, 1, 1);
+	}
+
+	for (int i = 0; i < _collisionGroundLines.size(); i++)
+	{
+		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGroundLines[i].func.getStart()), CAMERA->getRelativeV2(_collisionGroundLines[i].func.getEnd()), D2D1::ColorF::Enum::Red, 1);
 	}
 
 	for (int i = 0; i < _collisionPlatforms.size(); i++)

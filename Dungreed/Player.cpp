@@ -86,7 +86,7 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 void Player::init()
 {
 	setSize(Vector2(40, 80));
-	setPosition(Vector2(200, WINSIZEY - 250));
+	setPosition(Vector2(500, WINSIZEY - 250));
 	_direction = DIRECTION::RIGHT;
 	
 	//최초에 장착하는 코스튬

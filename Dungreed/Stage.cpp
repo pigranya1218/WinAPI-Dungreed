@@ -91,11 +91,9 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		{
 			makeMapToLine(startX, startY, currX + 1, currY, isVisited);
 		}
-		else // 선분 종료 
+		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[startIndex].rc.top + TILESIZE)), LINEAR_VALUE_TYPE::DOWN });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
 	}
 	break;
@@ -107,8 +105,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.bottom),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.bottom - TILESIZE, _tile[startIndex].rc.bottom)), LINEAR_VALUE_TYPE::UP });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
 	}
 	break;
@@ -120,9 +117,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.left + TILESIZE), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)), LINEAR_VALUE_TYPE::RIGHT });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
 		}
 	}
 	break;
@@ -134,31 +129,12 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.right - TILESIZE, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)), LINEAR_VALUE_TYPE::LEFT });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
 		}
 	}
 	break;
 	case DRAW_LINE_POSITION::LEFT_TOP:
 	{
-		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::LEFT)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::LEFT)
-			{
-				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
-			}
-		}
-		else
-		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.left + TILESIZE), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)), LINEAR_VALUE_TYPE::RIGHT });
-		}
 		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::TOP)
 		{
 			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::TOP)
@@ -172,10 +148,24 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex]. rc.top, _tile[startIndex].rc.top + TILESIZE)), LINEAR_VALUE_TYPE::DOWN });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
+		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::LEFT)
+		{
+			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::LEFT)
+			{
+				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
+			}
+			else
+			{
+				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
+			}
+		}
+		else
+		{
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
+		}
+		
 	}
 	break;
 	case DRAW_LINE_POSITION::LEFT_BOTTOM:
@@ -193,9 +183,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.left + TILESIZE), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)), LINEAR_VALUE_TYPE::RIGHT });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
 		}
 		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BOTTOM)
 		{
@@ -210,31 +198,12 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.bottom),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.bottom - TILESIZE, _tile[startIndex].rc.bottom)), LINEAR_VALUE_TYPE::UP });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
 	}
 	break;
 	case DRAW_LINE_POSITION::RIGHT_TOP:
 	{
-		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::RIGHT)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::RIGHT)
-			{
-				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
-			}
-		}
-		else
-		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.right - TILESIZE, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)), LINEAR_VALUE_TYPE::LEFT });
-		}
 		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::TOP)
 		{
 			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::TOP)
@@ -248,10 +217,24 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[startIndex].rc.top - TILESIZE)), LINEAR_VALUE_TYPE::DOWN });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
+		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::RIGHT)
+		{
+			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::RIGHT)
+			{
+				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
+			}
+			else
+			{
+				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
+			}
+		}
+		else
+		{
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
+		}
+		
 	}
 	break;
 	case DRAW_LINE_POSITION::RIGHT_BOTTOM:
@@ -269,9 +252,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.right - TILESIZE, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)), LINEAR_VALUE_TYPE::LEFT });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE* (currY - startY + 1)), PIVOT::LEFT_TOP));
 		}
 		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BOTTOM)
 		{
@@ -286,9 +267,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			int startIndex = startX + startY * maxSizeX;
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.bottom),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.bottom - TILESIZE, _tile[startIndex].rc.bottom)), LINEAR_VALUE_TYPE::UP });
+			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
 	}
 	break;
@@ -300,8 +279,8 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom),
-				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom),
+				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
 	break;
@@ -313,8 +292,8 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGrounds.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)),LINEAR_VALUE_TYPE::DOWN });
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
+				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
 	break;
@@ -327,8 +306,8 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		else // 선분 종료 
 		{
 			int startIndex = startX + startY * maxSizeX;
-			_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, static_cast<float>(maxSizeY * TILESIZE))), LINEAR_VALUE_TYPE::DOWN });
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
+				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, static_cast<float>(maxSizeY * TILESIZE))));
 		}
 	}
 	break;
@@ -338,107 +317,122 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 {
 	object->setIsStand(false);
-	Vector2 lastCenter = object->getPosition();
-	Vector2 newCenter = lastCenter + moveDir;
-	float radiusX = object->getSize().x / 2;
-	float radiusY = object->getSize().y / 2;
-	int calculatePoint[4][2] = { {-1, -1}, {1, -1}, {1, 1}, {-1, 1}}; // 좌상, 우상, 우하, 좌하
-	Vector2 lastPoints[4];
-	Vector2 newPoints[4];
-	for (int i = 0; i < 4; i++)
-	{
-		lastPoints[i] = Vector2(lastCenter.x + calculatePoint[i][0] * radiusX, lastCenter.y + calculatePoint[i][1] * radiusY);
-		newPoints[i] = Vector2(newCenter.x + calculatePoint[i][0] * radiusX, newCenter.y + calculatePoint[i][1] * radiusY);
-	}
+	FloatRect newRc = FloatRect(object->getPosition() + moveDir, object->getSize(), PIVOT::CENTER);
+	//Vector2 lastCenter = object->getPosition();
+	//Vector2 newCenter = lastCenter + moveDir;
+	//float radiusX = object->getSize().x / 2;
+	//float radiusY = object->getSize().y / 2;
+	//int calculatePoint[4][2] = { {-1, -1}, {1, -1}, {1, 1}, {-1, 1}}; // 좌상, 우상, 우하, 좌하
+	//Vector2 lastPoints[4];
+	//Vector2 newPoints[4];
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	lastPoints[i] = Vector2(lastCenter.x + calculatePoint[i][0] * radiusX, lastCenter.y + calculatePoint[i][1] * radiusY);
+	//	newPoints[i] = Vector2(newCenter.x + calculatePoint[i][0] * radiusX, newCenter.y + calculatePoint[i][1] * radiusY);
+	//}
 
-	// 발판 검사
-	for (int i = 0; i < _collisionPlatforms.size(); i++)
+	// 플랫폼 검사
+	//for (int i = 0; i < _collisionPlatforms.size(); i++)
+	//{
+	//	for (int j = 2; j <= 3; j++) // 아래 꼭짓점들만 검사
+	//	{
+	//		bool isCollision = false;
+	//		if (_collisionPlatforms[i].func.a == LinearFunc::INF_A) // 수직선
+	//		{
+	//			// 발판이 수직선인 경우는 없음
+	//		}
+	//		else // 수직선이 아닌 경우
+	//		{
+	//			if (_collisionPlatforms[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionPlatforms[i].func.rangeX.y) // 범위 안에 있을 때
+	//			{
+	//				// 이전까지는 발판 위에 있다가, 이번 업데이트에서 발판 아래로 내려간다면 발판에 올라타게 한다
+
+	//				LINEAR_VALUE_TYPE leftFoot = _collisionPlatforms[i].func.getValueType(lastPoints[3].x, lastPoints[3].y);
+	//				LINEAR_VALUE_TYPE rightFoot = _collisionPlatforms[i].func.getValueType(lastPoints[2].x, lastPoints[2].y);
+	//				if ((leftFoot != _collisionPlatforms[i].collision) &&
+	//					(rightFoot != _collisionPlatforms[i].collision) &&
+	//					(_collisionPlatforms[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionPlatforms[i].collision))
+	//				{
+	//					newPoints[j].y = _collisionPlatforms[i].func.getY(newPoints[j].x);
+	//					isCollision = true;
+	//					if (_collisionPlatforms[i].collision == LINEAR_VALUE_TYPE::DOWN)
+	//					{
+	//						object->setIsStand(true); // 땅에 서있는 경우
+	//					}
+	//				}
+	//			}
+	//		}
+	//		if (isCollision)
+	//		{
+	//			newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
+	//			for (int k = 0; k < 4; k++)
+	//			{
+	//				newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
+	//			}
+	//		}
+	//	}
+	//}
+
+	// 땅 사각형 검사
+	for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
-		for (int j = 2; j <= 3; j++) // 아래 꼭짓점들만 검사
+		if (_collisionGroundRects[i].intersectEffect(newRc))
 		{
-			bool isCollision = false;
-			if (_collisionPlatforms[i].func.a == LinearFunc::INF_A) // 수직선
+			if (newRc.bottom == _collisionGroundRects[i].top)
 			{
-				// 발판이 수직선인 경우는 없음
-			}
-			else // 수직선이 아닌 경우
-			{
-				if (_collisionPlatforms[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionPlatforms[i].func.rangeX.y) // 범위 안에 있을 때
-				{
-					// 이전까지는 발판 위에 있다가, 이번 업데이트에서 발판 아래로 내려간다면 발판에 올라타게 한다
-
-					LINEAR_VALUE_TYPE leftFoot = _collisionPlatforms[i].func.getValueType(lastPoints[3].x, lastPoints[3].y);
-					LINEAR_VALUE_TYPE rightFoot = _collisionPlatforms[i].func.getValueType(lastPoints[2].x, lastPoints[2].y);
-					if ((leftFoot != _collisionPlatforms[i].collision) &&
-						(rightFoot != _collisionPlatforms[i].collision) &&
-						(_collisionPlatforms[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionPlatforms[i].collision))
-					{
-						newPoints[j].y = _collisionPlatforms[i].func.getY(newPoints[j].x);
-						isCollision = true;
-						if (_collisionPlatforms[i].collision == LINEAR_VALUE_TYPE::DOWN)
-						{
-							object->setIsStand(true); // 땅에 서있는 경우
-						}
-					}
-				}
-			}
-			if (isCollision)
-			{
-				newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
-				for (int k = 0; k < 4; k++)
-				{
-					newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
-				}
+				object->setIsStand(true);
 			}
 		}
 	}
 
-	// 땅 검사
-	for (int i = 0; i < _collisionGrounds.size(); i++)
-	{
-		for (int j = 0; j < 4; j++) // 각 꼭짓점별 검사
-		{
-			bool isCollision = false;
-			if (_collisionGrounds[i].func.a == LinearFunc::INF_A) // 수직선
-			{
-				if (_collisionGrounds[i].func.rangeY.x <= newPoints[j].y && newPoints[j].y <= _collisionGrounds[i].func.rangeY.y &&
-					_collisionGrounds[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionGrounds[i].func.rangeX.y) // 범위 안에 있을 때
-				{
-					if (_collisionGrounds[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGrounds[i].collision)
-					{
-						newPoints[j].x = _collisionGrounds[i].func.b;
-						isCollision = true;
-					}
-				}
-			}
-			else // 수직선이 아닌 경우
-			{
-				if (_collisionGrounds[i].func.rangeY.x <= newPoints[j].y && newPoints[j].y <= _collisionGrounds[i].func.rangeY.y &&
-					_collisionGrounds[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionGrounds[i].func.rangeX.y) // 범위 안에 있을 때
-				{
-					if (_collisionGrounds[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGrounds[i].collision)
-					{
-						newPoints[j].y = _collisionGrounds[i].func.getY(newPoints[j].x);
-						isCollision = true;
-						if (_collisionGrounds[i].collision == LINEAR_VALUE_TYPE::DOWN)
-						{
-							object->setIsStand(true); // 땅에 서있는 경우
-						}
-					}
-				}
-			}
-			if (isCollision)
-			{
-				newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
-				for (int k = 0; k < 4; k++)
-				{
-					newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
-				}
-			}
-		}
-	}
+	// 땅 선분 검사
+	//for (int i = 0; i < _collisionGroundLines.size(); i++)
+	//{
+	//	for (int j = 0; j < 4; j++) // 각 꼭짓점별 검사
+	//	{
+	//		bool isCollision = false;
+	//		if (_collisionGroundLines[i].func.a == LinearFunc::INF_A) // 수직선
+	//		{
+	//			if (_collisionGroundLines[i].func.rangeY.x <= newPoints[j].y && newPoints[j].y <= _collisionGroundLines[i].func.rangeY.y &&
+	//				_collisionGroundLines[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionGroundLines[i].func.rangeX.y) // 범위 안에 있을 때
+	//			{
+	//				if (_collisionGroundLines[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGroundLines[i].collision)
+	//				{
+	//					newPoints[j].x = _collisionGroundLines[i].func.b;
+	//					isCollision = true;
+	//				}
+	//			}
+	//		}
+	//		else // 수직선이 아닌 경우
+	//		{
+	//			if (_collisionGroundLines[i].func.rangeY.x <= newPoints[j].y && newPoints[j].y <= _collisionGroundLines[i].func.rangeY.y &&
+	//				_collisionGroundLines[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionGroundLines[i].func.rangeX.y) // 범위 안에 있을 때
+	//			{
+	//				if (_collisionGroundLines[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGroundLines[i].collision)
+	//				{
+	//					newPoints[j].y = _collisionGroundLines[i].func.getY(newPoints[j].x);
+	//					isCollision = true;
+	//					if (_collisionGroundLines[i].collision == LINEAR_VALUE_TYPE::DOWN)
+	//					{
+	//						object->setIsStand(true); // 땅에 서있는 경우
+	//					}
+	//				}
+	//			}
+	//		}
+	//		if (isCollision)
+	//		{
+	//			newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
+	//			for (int k = 0; k < 4; k++)
+	//			{
+	//				newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
+	//			}
+	//		}
+	//	}
+	//}
 
-	object->setPosition(newCenter);
+	// object->setPosition(newCenter);
+
+	object->setPosition(newRc.getCenter());
 }
 
 void Stage::attack(FloatRect* rect, AttackInfo* info)

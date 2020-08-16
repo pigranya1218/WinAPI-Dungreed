@@ -63,7 +63,7 @@ void VillageStage::render()
 		}
 	}
 
-	for (int i = 0; i < _collisionGrounds.size(); i++)
+	/*for (int i = 0; i < _collisionGrounds.size(); i++)
 	{
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGrounds[i].func.getStart()), CAMERA->getRelativeV2(_collisionGrounds[i].func.getEnd()), D2D1::ColorF::Enum::Red, 1);
 	}
@@ -71,7 +71,7 @@ void VillageStage::render()
 	for (int i = 0; i < _collisionPlatforms.size(); i++)
 	{
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].func.getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].func.getEnd()), D2D1::ColorF::Enum::Blue, 1);
-	}
-
+	}*/
+	
 	Stage::render();
 }
