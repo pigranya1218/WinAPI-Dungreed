@@ -116,7 +116,7 @@ void SkelBigNormal::update(float const timeElapsed)
 	if (_isStand && _moving.jumpPower == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 25;
+		moveDir.y += 17;
 	}
 	_moving.jumpPower += _moving.gravity * timeElapsed;
 	moveDir.y += _moving.jumpPower * timeElapsed;

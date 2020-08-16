@@ -304,6 +304,10 @@ void Player::update(float const elapsedTime)
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
+		if (angle < 0)
+		{
+			_position.y += 1.5;
+		}
 
 		for (int i = 0; i < 4; i++) 
 		{
@@ -346,11 +350,11 @@ void Player::update(float const elapsedTime)
 		}
 	}
 
-	//하강중
+	//서 있는 상태라면
 	if (_isStand && _force.y == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 25;
+		moveDir.y += 20;
 	}
 	
 	_force.y += _adjustStat.yGravity * elapsedTime;

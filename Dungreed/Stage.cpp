@@ -279,7 +279,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
 				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -292,7 +292,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -306,8 +306,8 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		else // 선분 종료 
 		{
 			int startIndex = startX + startY * maxSizeX;
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
-				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, static_cast<float>(maxSizeY * TILESIZE))));
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left + 10, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right - 10, _tile[currIndex].rc.top),
+				Vector2(_tile[startIndex].rc.left + 10, _tile[currIndex].rc.right - 10), Vector2(_tile[startIndex].rc.top, static_cast<float>(maxSizeY * TILESIZE))));
 		}
 	}
 	break;
@@ -337,10 +337,16 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 			}
 			else
 			{
+				float lastCrossX = _collisionPlatforms[i].getX(lastRc.bottom);
+				float newCrossX = _collisionPlatforms[i].getX(newRc.bottom);
+				if (newRc.left <= newCrossX && newCrossX <= newRc.right)
+				{
 
+				}
 			}
 		}
 	}
+	
 
 	// 땅 사각형 검사
 	for (int i = 0; i < _collisionGroundRects.size(); i++)
@@ -354,52 +360,46 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 		}
 	}
 
-	// 땅 선분 검사
-	//for (int i = 0; i < _collisionGroundLines.size(); i++)
-	//{
-	//	for (int j = 0; j < 4; j++) // 각 꼭짓점별 검사
-	//	{
-	//		bool isCollision = false;
-	//		if (_collisionGroundLines[i].func.a == LinearFunc::INF_A) // 수직선
-	//		{
-	//			if (_collisionGroundLines[i].func.rangeY.x <= newPoints[j].y && newPoints[j].y <= _collisionGroundLines[i].func.rangeY.y &&
-	//				_collisionGroundLines[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionGroundLines[i].func.rangeX.y) // 범위 안에 있을 때
-	//			{
-	//				if (_collisionGroundLines[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGroundLines[i].collision)
-	//				{
-	//					newPoints[j].x = _collisionGroundLines[i].func.b;
-	//					isCollision = true;
-	//				}
-	//			}
-	//		}
-	//		else // 수직선이 아닌 경우
-	//		{
-	//			if (_collisionGroundLines[i].func.rangeY.x <= newPoints[j].y && newPoints[j].y <= _collisionGroundLines[i].func.rangeY.y &&
-	//				_collisionGroundLines[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionGroundLines[i].func.rangeX.y) // 범위 안에 있을 때
-	//			{
-	//				if (_collisionGroundLines[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionGroundLines[i].collision)
-	//				{
-	//					newPoints[j].y = _collisionGroundLines[i].func.getY(newPoints[j].x);
-	//					isCollision = true;
-	//					if (_collisionGroundLines[i].collision == LINEAR_VALUE_TYPE::DOWN)
-	//					{
-	//						object->setIsStand(true); // 땅에 서있는 경우
-	//					}
-	//				}
-	//			}
-	//		}
-	//		if (isCollision)
-	//		{
-	//			newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
-	//			for (int k = 0; k < 4; k++)
-	//			{
-	//				newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
-	//			}
-	//		}
-	//	}
-	//}
+	// 땅 대각 선분 검사
+	for (int i = 0; i < _collisionGroundLines.size(); i++)
+	{
+		if (_collisionGroundLines[i].a > 0) // 왼쪽 꼭지점을 기준으로 함
+		{
+			if (_collisionGroundLines[i].rangeX.x <= newRc.left && newRc.left <= _collisionGroundLines[i].rangeX.y) // 범위 안에 있을 때
+			{
+				if (_collisionGroundLines[i].getValueType(newRc.left, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
+				{
+					newRc.bottom = _collisionGroundLines[i].getY(newRc.left);
+					newRc.top = newRc.bottom - object->getSize().y;
+					object->setIsStand(true);
+				}
+				/*float newCrossX = _collisionGroundLines[i].getX(newRc.bottom);
+				if (newRc.left <= newCrossX && newCrossX <= newRc.right)
+				{
+					newRc.bottom = _collisionGroundLines[i].getY(newRc.left);
+					newRc.top = newRc.bottom - object->getSize().y;
+					object->setIsStand(true);
+				}*/
+			}
+		}
+		else // 오른쪽 꼭지점을 기준으로 함
+		{
+			if (_collisionGroundLines[i].rangeX.x <= newRc.right && newRc.right <= _collisionGroundLines[i].rangeX.y) // 범위 안에 있을 때
+			{
+				if(_collisionGroundLines[i].getValueType(newRc.right, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
+				{
+					newRc.bottom = _collisionGroundLines[i].getY(newRc.right);
+					newRc.top = newRc.bottom - object->getSize().y;
+					object->setIsStand(true);
+				}
+				/*if (newRc.left <= newCrossX && newCrossX <= newRc.right)
+				{
+					
+				}*/
+			}
+		}
+	}
 
-	// object->setPosition(newCenter);
 
 	object->setPosition(newRc.getCenter());
 }
