@@ -14,7 +14,9 @@ enum class STAT_TYPE : int
 	ATTACK_SPEED,
 	RELOAD,
 	DASH_DAMAGE,
-	TRUE_DAMAGE
+	TRUE_DAMAGE,
+	MIN_DAMAGE,
+	MAX_DAMAGE
 };
 
 class PlayerStat
@@ -27,7 +29,8 @@ public:
 	int		maxSatiety;			// 최대 포만감
 	float	dashCoolTime;		// 대쉬 쿨타임
 	float	power;				// 위력 (위력 수치 1당 피해량 1% 상승)
-	float	damage;				// 무기 공격력 // 몬스터에게 들어가는 데미지 = (무기공격력 * (1+위력/100))
+	float	minDamage;			// 최소 무기 공격력 // 몬스터에게 들어가는 데미지 = (무기공격력 * (1+위력/100))
+	float	maxDamage;			// 최대 무기 공격력 // 몬스터에게 들어가는 데미지 = (무기공격력 * (1+위력/100))
 	float	trueDamage;			// 고정 데미지
 	float	criticalChance;		// 크리티컬 확률
 	float	criticalDamage;		// 크리티컬 데미지

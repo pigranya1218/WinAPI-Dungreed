@@ -439,6 +439,7 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 
 void Stage::attack(Projectile* projectile, AttackInfo* info)
 {
+	projectile->setAttackInfo(info);
 	_projectileMgr->addProjectile(projectile);
 }
 

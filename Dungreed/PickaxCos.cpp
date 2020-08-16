@@ -17,7 +17,8 @@ void PickaxCos::init()
 	_baseStat.dashCoolTime = 1.5f;
 	_baseStat.maxSatiety = 100;
 	_baseStat.power = 5;
-	_baseStat.damage = 0; //0 ~ 4
+	_baseStat.minDamage = 0; //0 ~ 4
+	_baseStat.maxDamage = 0; //0 ~ 4
 	_baseStat.trueDamage = 0;
 	_baseStat.criticalChance = 2;
 	_baseStat.criticalDamage = 1; // + 100%

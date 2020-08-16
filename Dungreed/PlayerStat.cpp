@@ -8,7 +8,8 @@ PlayerStat PlayerStat::operator+(const PlayerStat& a)
 	result.maxDashCount += a.maxDashCount;
 	result.maxSatiety += a.maxSatiety;
 	result.power += a.power;
-	result.damage += a.damage;
+	result.minDamage += a.minDamage;
+	result.maxDamage += a.maxDamage;
 	result.trueDamage += a.trueDamage;
 	result.criticalChance += a.criticalChance;
 	result.criticalDamage += a.criticalDamage;
@@ -56,6 +57,10 @@ float PlayerStat::getStat(STAT_TYPE type)
 		return dashDamage;
 	case STAT_TYPE::TRUE_DAMAGE:
 		return trueDamage;
+	case STAT_TYPE::MIN_DAMAGE:
+		return minDamage;
+	case STAT_TYPE::MAX_DAMAGE:
+		return maxDamage;
 	}
 }
 
