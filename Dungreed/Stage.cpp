@@ -205,7 +205,7 @@ void Stage::mapLoad()
 	{
 	case STAGE_TYPE::VILLAGE:
 		_stageImage = IMAGE_MANAGER->findImage("sampleTile3");
-		stageFile = CreateFile("Town.map", GENERIC_READ, NULL, NULL,
+		stageFile = CreateFile("Town2.map", GENERIC_READ, NULL, NULL,
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		ReadFile(stageFile, _tile, sizeof(tagTileMap) * MAXTILEX * MAXTILEY, &read, NULL);
 
