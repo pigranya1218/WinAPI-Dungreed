@@ -11,6 +11,7 @@ D2DRenderer::D2DRenderer()
 	this->createRenderTarget();
 	this->createDefaultBrush();
 	this->addTextFormat(L"µÕ±Ù¸ð²Ã");
+	this->addTextFormat(L"Alagard");
 	_D2DRenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
 }
 

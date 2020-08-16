@@ -7,30 +7,30 @@
 #include "AllEnums.h"
 #include "LinearFunc.h"
 #include "Attackinfo.h"
+#include "MapTool.h"
+
 
 class StageManager;
 
 class Stage
 {
 protected:
-	struct tagCollision
-	{
-		LinearFunc func;
-		LINEAR_VALUE_TYPE collision;
-	};
-
-protected:
 	StageManager* _stageManager;
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	
+	tagTileMap _tile[2000];
+	Image* _tileImage;
+
 	EnemyManager* _enemyMgr;
 	ObjectManager* _objectMgr;
 	ProjectileManager* _projectileMgr;
 	NpcManager* _npcMgr;
 	
-	vector<tagCollision> _collisionGrounds; // 땅
-	vector<tagCollision> _collisionPlatforms; // 발판
-	bool _isVisited; // 방문한 스테이지인가? (UI에서 그리기 위함)
+	vector<FloatRect> _collisionGroundRects; // 사각형 땅
+	vector<LinearFunc> _collisionGroundLines; // 대각선 땅
+	vector<LinearFunc> _collisionPlatforms; // 플랫폼 땅
+	
+	bool _isVisited; // 방문한 스테이지인가? (UI 지도에서 그리기 위함)
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
@@ -39,6 +39,8 @@ public:
 	virtual void update(float const elaspedTime);
 	virtual void render();
 
+	void loadMap(string mapName);
+	void makeMapToLine(int startX, int startY, int currX, int currY, vector<vector<bool>>& isVisited);
 	void moveTo(GameObject* object, Vector2 const moveDir); // GameObject를 moveDir 방향으로 충돌판정을 계산해서 이동시키는 함수
 	void attack(FloatRect* rect, AttackInfo* info);
 	void attack(FloatCircle* circle, AttackInfo* info);
