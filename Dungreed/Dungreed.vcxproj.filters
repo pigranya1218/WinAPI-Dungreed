@@ -414,6 +414,9 @@
     <ClInclude Include="RedLotusCos.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClInclude>
+    <ClInclude Include="RestaurantRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -676,6 +679,9 @@
     </ClCompile>
     <ClCompile Include="AliceCos.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantRoom.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

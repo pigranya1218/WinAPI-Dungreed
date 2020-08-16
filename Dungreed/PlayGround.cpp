@@ -32,6 +32,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas3.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas1.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("AniPalette1", L"resources/images/Map/AniPalette1.png", 10, 10);
 
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");
@@ -203,12 +204,15 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Temple", L"resources/images/Villiage/Temple.png");
 	IMAGE_MANAGER->addImage("TempleFront", L"resources/images/Villiage/TempleFront.png");
 	IMAGE_MANAGER->addImage("Gunsmith", L"resources/images/Villiage/Gunsmith.png");
+	IMAGE_MANAGER->addImage("Target", L"resources/images/Villiage/Target.png");
 	IMAGE_MANAGER->addImage("Tree0", L"resources/images/Map/Tree0.png");
 	IMAGE_MANAGER->addImage("Tree1", L"resources/images/Map/Tree1.png");
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 
 	// ** DUNGEON
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
+	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
+	
 
 	// ** COSTUME
 	// *** BASE
@@ -454,7 +458,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	
-	SCENE_MANAGER->changeScene("MapTool");	
+	SCENE_MANAGER->changeScene("GAME");	
 
 	
 	return S_OK;
@@ -466,7 +470,7 @@ void playGround::release()
 	GameNode::release();
 }
 
-//연산
+//연산ds
 void playGround::update()
 {
 	GameNode::update();

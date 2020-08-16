@@ -5,11 +5,12 @@
 
 #include "DebugStage.h"
 #include "VillageStage.h"
+#include "RestaurantRoom.h"
 
 void StageManager::init()
 {
-	//_currStageType = STAGE_TYPE::TEST;
-	_currStageType = STAGE_TYPE::VILLAGE;
+	_currStageType = STAGE_TYPE::TEST;
+	//_currStageType = STAGE_TYPE::VILLAGE;
 	
 	makeStage();
 }
@@ -58,7 +59,8 @@ void StageManager::nextStage()
 void StageManager::makeStage()
 {
 	//_currStage = new DebugStage();
-	_currStage = new VillageStage();
+	//_currStage = new VillageStage();
+	_currStage = new RestaurantRoom();
 	_currStage->setStageManager(this);
 	_currStage->mapLoad();
 	_currStage->init();

@@ -219,7 +219,7 @@ void Stage::mapLoad()
 		break;
 	case STAGE_TYPE::TEST:
 		_stageImage = IMAGE_MANAGER->findImage("sampleTile1");
-		stageFile = CreateFile("StartRoom1.map", GENERIC_READ, NULL, NULL,
+		stageFile = CreateFile("BossRoom1.map", GENERIC_READ, NULL, NULL,
 			OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 		ReadFile(stageFile, _tile, sizeof(tagTileMap) * MAXTILEX * MAXTILEY, &read, NULL);
 

@@ -2,11 +2,9 @@
 #include "Stage.h"
 #include "MapTool.h"
 
-class DebugStage : public Stage
+class RestaurantRoom : public Stage
 {
 private:
-	
-	
 	
 	int _currentIndex;
 
@@ -15,6 +13,5 @@ public:
 	virtual void release();
 	virtual void update(float const elapsedTime);
 	virtual void render();
-
-	
 };
+
