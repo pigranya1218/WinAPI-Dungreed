@@ -297,17 +297,43 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 	}
 	break;
-	case DRAW_LINE_POSITION::PLATFORM:
+	case DRAW_LINE_POSITION::PLATFORM_TOP:
 	{
-		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::PLATFORM)
+		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::PLATFORM_TOP)
 		{
 			makeMapToLine(startX, startY, currX + 1, currY, isVisited);
 		}
 		else // 선분 종료 
 		{
 			int startIndex = startX + startY * maxSizeX;
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left + 10, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right - 10, _tile[currIndex].rc.top),
-				Vector2(_tile[startIndex].rc.left + 10, _tile[currIndex].rc.right - 10), Vector2(_tile[startIndex].rc.top, static_cast<float>(maxSizeY * TILESIZE))));
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top),Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.top),
+				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, static_cast<float>(maxSizeY * TILESIZE))));
+		}
+	}
+	break;
+	case DRAW_LINE_POSITION::PLATFORM_LEFT_DIAGONAL:
+	{
+		if (currY < maxSizeY - 1 && currX > 0 && _tile[currIndex + maxSizeX - 1].linePos == DRAW_LINE_POSITION::PLATFORM_LEFT_DIAGONAL)
+		{
+			makeMapToLine(startX, startY, currX - 1, currY + 1, isVisited);
+		}
+		else
+		{
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
+				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
+		}
+	}
+	break;
+	case DRAW_LINE_POSITION::PLATFORM_RIGHT_DIAGONAL:
+	{
+		if (currY < maxSizeY - 1 && currX < maxSizeX - 1 && _tile[currIndex + maxSizeX + 1].linePos == DRAW_LINE_POSITION::PLATFORM_RIGHT_DIAGONAL)
+		{
+			makeMapToLine(startX, startY, currX + 1, currY + 1, isVisited);
+		}
+		else
+		{
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
+				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
 	break;
@@ -337,11 +363,31 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 			}
 			else
 			{
-				float lastCrossX = _collisionPlatforms[i].getX(lastRc.bottom);
-				float newCrossX = _collisionPlatforms[i].getX(newRc.bottom);
-				if (newRc.left <= newCrossX && newCrossX <= newRc.right)
+				if (_collisionPlatforms[i].a > 0) // 왼쪽 꼭지점을 기준으로 함
 				{
-
+					if (_collisionPlatforms[i].rangeX.x <= newRc.left && newRc.left <= _collisionPlatforms[i].rangeX.y) // 범위 안에 있을 때
+					{
+						if (_collisionPlatforms[i].getValueType(lastRc.left, lastRc.bottom) != LINEAR_VALUE_TYPE::DOWN
+							&& _collisionPlatforms[i].getValueType(newRc.left, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
+						{
+							newRc.bottom = _collisionPlatforms[i].getY(newRc.left);
+							newRc.top = newRc.bottom - object->getSize().y;
+							object->setIsStand(true);
+						}
+					}
+				}
+				else // 오른쪽 꼭지점을 기준으로 함
+				{
+					if (_collisionPlatforms[i].rangeX.x <= newRc.right && newRc.right <= _collisionPlatforms[i].rangeX.y) // 범위 안에 있을 때
+					{
+						if (_collisionPlatforms[i].getValueType(lastRc.right, lastRc.bottom) != LINEAR_VALUE_TYPE::DOWN
+							&& _collisionPlatforms[i].getValueType(newRc.right, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
+						{
+							newRc.bottom = _collisionPlatforms[i].getY(newRc.right);
+							newRc.top = newRc.bottom - object->getSize().y;
+							object->setIsStand(true);
+						}
+					}
 				}
 			}
 		}
@@ -373,13 +419,6 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 					newRc.top = newRc.bottom - object->getSize().y;
 					object->setIsStand(true);
 				}
-				/*float newCrossX = _collisionGroundLines[i].getX(newRc.bottom);
-				if (newRc.left <= newCrossX && newCrossX <= newRc.right)
-				{
-					newRc.bottom = _collisionGroundLines[i].getY(newRc.left);
-					newRc.top = newRc.bottom - object->getSize().y;
-					object->setIsStand(true);
-				}*/
 			}
 		}
 		else // 오른쪽 꼭지점을 기준으로 함
@@ -392,14 +431,9 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 					newRc.top = newRc.bottom - object->getSize().y;
 					object->setIsStand(true);
 				}
-				/*if (newRc.left <= newCrossX && newCrossX <= newRc.right)
-				{
-					
-				}*/
 			}
 		}
 	}
-
 
 	object->setPosition(newRc.getCenter());
 }
