@@ -59,7 +59,7 @@ void UIManager::init()
 	_weaponUI.frontBaseCenter = Vector2(1480, 820);
 	_weaponUI.backBaseCenter = Vector2(1500, 800);
 	_weaponUI.frontIndexRc = FloatRect(50, 20, 60, 40);
-	_weaponUI.frontBulletRc = FloatRect(-80, 10, 80, 40);
+	_weaponUI.frontBulletRc = FloatRect(-80, 18, 80, 42);
 	_weaponUI.move = Vector2(0, 0);
 	_weaponUI.moveSpeed = 80;
 	_weaponUI.viewIndex = 0;

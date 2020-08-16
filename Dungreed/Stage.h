@@ -7,6 +7,8 @@
 #include "AllEnums.h"
 #include "LinearFunc.h"
 #include "Attackinfo.h"
+#include "MapTool.h"
+
 
 class StageManager;
 
@@ -23,6 +25,9 @@ protected:
 	StageManager* _stageManager;
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	
+	tagTileMap _tile[2000];
+	Image* _tileImage;
+
 	EnemyManager* _enemyMgr;
 	ObjectManager* _objectMgr;
 	ProjectileManager* _projectileMgr;
@@ -39,6 +44,8 @@ public:
 	virtual void update(float const elaspedTime);
 	virtual void render();
 
+	void loadMap(string mapName);
+	void makeMapToLine(int startX, int startY, int currX, int currY, vector<vector<bool>>& isVisited);
 	void moveTo(GameObject* object, Vector2 const moveDir); // GameObject를 moveDir 방향으로 충돌판정을 계산해서 이동시키는 함수
 	void attack(FloatRect* rect, AttackInfo* info);
 	void attack(FloatCircle* circle, AttackInfo* info);
