@@ -78,6 +78,10 @@ void OakBow::update(Player * player, float const elapsedTime)
 	renderPosHand.x += ((isLeft) ? (_img->getFrameSize().x * 0.1f * 4) : -(_img->getFrameSize().y * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
 	renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
+	subHandPos = renderPosHand; // 보조 손 (양손무기) 움직임
+	subHandPos.x += _img->getFrameSize().x * 0.35 * 3;
+	subHandPos.y += (isLeft) ? (_img->getFrameSize().y * -0.1 * 4) : (_img->getFrameSize().y * 0.1 * 4);
+
 	// 손으로부터 마우스 에임까지의 각도
 	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2;
 	if (angleRadian > PI2)
@@ -124,7 +128,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 			projectile->setPosition(arrowPos);
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, false, "", Vector2());
+			projectile->init("Arrow00", angleRadian, 1, false, false, 20, false, "", Vector2());
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
@@ -166,11 +170,9 @@ void OakBow::frontRender(Player * player)
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
 	_img->setAnglePos(anglePos);
-	_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
+	//_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
 
-	subHandPos = renderPosHand; // 보조 손 (양손무기) 움직임
-	subHandPos.x += _img->getFrameSize().x * 0.35 * 3;
-	subHandPos.y += (isLeft) ? (_img->getFrameSize().y * -0.1 * 4) : (_img->getFrameSize().y * 0.1 * 4);
+
 
 	//손 그리기 어케해야하누...음...
 	Vector2 renderSunHandPos = subHandPos;
