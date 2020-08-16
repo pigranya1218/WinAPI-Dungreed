@@ -3,25 +3,27 @@
 #include "ProjectileManager.h"
 #include "AttackInfo.h"
 
-enum class ITEM_TYPE
+enum class ITEM_TYPE : int
 {
-	WEAPON_ONE_HAND, // 한손 무기
-	WEAPON_TWO_HAND, // 양손 무기
-	ACC // 악세사리
+	WEAPON_ONE_HAND = 0x01000, // 한손 무기
+	WEAPON_TWO_HAND = 0x02000, // 양손 무기
+	ACC = 0x03000, // 악세사리
+	FOOD = 0x04000
 };
 
-enum class ITEM_RANK
+enum class ITEM_RANK : int
 {
-	NORMAL, // 일반
-	HIGH, // 고급
-	RARE, // 희귀
-	LEGEND // 전설
+	NORMAL = 0x00100, // 일반
+	HIGH = 0x00200, // 고급
+	RARE = 0x00300, // 희귀
+	LEGEND = 0x00400 // 전설
 };
 
 class Item
 {
 protected:
-	string _itemCode; // 아이템 코드
+	int _itemCode; // 아이템 코드
+	vector<string> _displayInfos; // 아이템 능력에 대한 설명
 
 	ITEM_TYPE _type; // 아이템 타입
 	ITEM_RANK _rank; // 아이템 등급
@@ -59,6 +61,7 @@ public:
 	ITEM_TYPE getType() const noexcept { return _type; }
 
 	int getPrice() const noexcept { return _price; }
+	vector<string> getDisplayInfos() { return _displayInfos; }
 	Image* getIconImg() const noexcept { return _iconImg; }
 	PlayerStat getAddStat() const noexcept { return _addStat; }
 	
