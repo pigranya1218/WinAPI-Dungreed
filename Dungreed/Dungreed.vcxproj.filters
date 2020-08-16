@@ -441,6 +441,9 @@
     <ClInclude Include="HeartOfCosmos.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="DemonBoots.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -720,6 +723,9 @@
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClCompile>
     <ClCompile Include="HeartOfCosmos.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="DemonBoots.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>

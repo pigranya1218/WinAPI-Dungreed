@@ -178,6 +178,7 @@
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="DebugStage.h" />
     <ClInclude Include="BaseCos.h" />
+    <ClInclude Include="DemonBoots.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DebugStage.cpp" />
     <ClCompile Include="BaseCos.cpp" />
+    <ClCompile Include="DemonBoots.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />

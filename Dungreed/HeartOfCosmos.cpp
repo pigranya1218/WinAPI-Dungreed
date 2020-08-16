@@ -61,7 +61,7 @@ void HeartOfCosmos::dash(Player * player)
 		projectile->setPosition(_renderPos);
 		projectile->setSize(Vector2(200, 200));
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
-		projectile->init("HeartOfCosmos0", 0, 0, true, false, 15, false, "", Vector2(0, 0),false);
+		projectile->init("HeartOfCosmos0", 0, 0, true, false, 15, false, "", Vector2(0, 0),true);
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
 		player->attack(projectile, attackInfo);
