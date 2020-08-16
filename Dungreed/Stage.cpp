@@ -288,7 +288,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 	{
 		if (currY < maxSizeY - 1 && currX < maxSizeX - 1 && _tile[currIndex + maxSizeX + 1].linePos == DRAW_LINE_POSITION::RIGHT_DIAGONAL)
 		{
-			makeMapToLine(startX, startY, currX - 1, currY + 1, isVisited);
+			makeMapToLine(startX, startY, currX + 1, currY + 1, isVisited);
 		}
 		else
 		{
@@ -317,61 +317,30 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 {
 	object->setIsStand(false);
+	FloatRect lastRc = FloatRect(object->getPosition(), object->getSize(), PIVOT::CENTER);
 	FloatRect newRc = FloatRect(object->getPosition() + moveDir, object->getSize(), PIVOT::CENTER);
-	//Vector2 lastCenter = object->getPosition();
-	//Vector2 newCenter = lastCenter + moveDir;
-	//float radiusX = object->getSize().x / 2;
-	//float radiusY = object->getSize().y / 2;
-	//int calculatePoint[4][2] = { {-1, -1}, {1, -1}, {1, 1}, {-1, 1}}; // 좌상, 우상, 우하, 좌하
-	//Vector2 lastPoints[4];
-	//Vector2 newPoints[4];
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	lastPoints[i] = Vector2(lastCenter.x + calculatePoint[i][0] * radiusX, lastCenter.y + calculatePoint[i][1] * radiusY);
-	//	newPoints[i] = Vector2(newCenter.x + calculatePoint[i][0] * radiusX, newCenter.y + calculatePoint[i][1] * radiusY);
-	//}
 
 	// 플랫폼 검사
-	//for (int i = 0; i < _collisionPlatforms.size(); i++)
-	//{
-	//	for (int j = 2; j <= 3; j++) // 아래 꼭짓점들만 검사
-	//	{
-	//		bool isCollision = false;
-	//		if (_collisionPlatforms[i].func.a == LinearFunc::INF_A) // 수직선
-	//		{
-	//			// 발판이 수직선인 경우는 없음
-	//		}
-	//		else // 수직선이 아닌 경우
-	//		{
-	//			if (_collisionPlatforms[i].func.rangeX.x <= newPoints[j].x && newPoints[j].x <= _collisionPlatforms[i].func.rangeX.y) // 범위 안에 있을 때
-	//			{
-	//				// 이전까지는 발판 위에 있다가, 이번 업데이트에서 발판 아래로 내려간다면 발판에 올라타게 한다
+	for (int i = 0; i < _collisionPlatforms.size(); i++)
+	{
+		if (_collisionPlatforms[i].rangeX.x <= newRc.right && newRc.left <= _collisionPlatforms[i].rangeX.y) // 범위 안에 있을 때
+		{
+			// 이전까지는 발판 위에 있다가, 이번 업데이트에서 발판 아래로 내려간다면 발판에 올라타게 한다
+			if (_collisionPlatforms[i].a == 0)
+			{
+				if (lastRc.bottom <= _collisionPlatforms[i].b && newRc.bottom > _collisionPlatforms[i].b)
+				{
+					newRc.bottom = _collisionPlatforms[i].b;
+					newRc.top = newRc.bottom - object->getSize().y;
+					object->setIsStand(true); // 땅에 서있는 경우
+				}
+			}
+			else
+			{
 
-	//				LINEAR_VALUE_TYPE leftFoot = _collisionPlatforms[i].func.getValueType(lastPoints[3].x, lastPoints[3].y);
-	//				LINEAR_VALUE_TYPE rightFoot = _collisionPlatforms[i].func.getValueType(lastPoints[2].x, lastPoints[2].y);
-	//				if ((leftFoot != _collisionPlatforms[i].collision) &&
-	//					(rightFoot != _collisionPlatforms[i].collision) &&
-	//					(_collisionPlatforms[i].func.getValueType(newPoints[j].x, newPoints[j].y) == _collisionPlatforms[i].collision))
-	//				{
-	//					newPoints[j].y = _collisionPlatforms[i].func.getY(newPoints[j].x);
-	//					isCollision = true;
-	//					if (_collisionPlatforms[i].collision == LINEAR_VALUE_TYPE::DOWN)
-	//					{
-	//						object->setIsStand(true); // 땅에 서있는 경우
-	//					}
-	//				}
-	//			}
-	//		}
-	//		if (isCollision)
-	//		{
-	//			newCenter = Vector2(newPoints[j].x - calculatePoint[j][0] * radiusX, newPoints[j].y - calculatePoint[j][1] * radiusY);
-	//			for (int k = 0; k < 4; k++)
-	//			{
-	//				newPoints[k] = Vector2(newCenter.x + calculatePoint[k][0] * radiusX, newCenter.y + calculatePoint[k][1] * radiusY);
-	//			}
-	//		}
-	//	}
-	//}
+			}
+		}
+	}
 
 	// 땅 사각형 검사
 	for (int i = 0; i < _collisionGroundRects.size(); i++)

@@ -71,12 +71,12 @@ void DebugStage::render()
 
 	for (int i = 0; i < _collisionGroundLines.size(); i++)
 	{
-		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGroundLines[i].func.getStart()), CAMERA->getRelativeV2(_collisionGroundLines[i].func.getEnd()), D2D1::ColorF::Enum::Red, 1);
+		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGroundLines[i].getStart()), CAMERA->getRelativeV2(_collisionGroundLines[i].getEnd()), D2D1::ColorF::Enum::Red, 1);
 	}
 
 	for (int i = 0; i < _collisionPlatforms.size(); i++)
 	{
-		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].func.getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].func.getEnd()), D2D1::ColorF::Enum::Blue, 1);
+		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
 	}
 
 	Stage::render();
