@@ -178,6 +178,7 @@
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="DebugStage.h" />
     <ClInclude Include="BaseCos.h" />
+    <ClInclude Include="DemonBoots.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Enemy.h" />
@@ -192,6 +193,7 @@
     <ClInclude Include="GreenBat.h" />
     <ClInclude Include="GreenDadBat.h" />
     <ClInclude Include="GreenMomBat.h" />
+    <ClInclude Include="HeartOfCosmos.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -281,6 +283,7 @@
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DebugStage.cpp" />
     <ClCompile Include="BaseCos.cpp" />
+    <ClCompile Include="DemonBoots.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -293,6 +296,7 @@
     <ClCompile Include="GreenBat.cpp" />
     <ClCompile Include="GreenDadBat.cpp" />
     <ClCompile Include="GreenMomBat.cpp" />
+    <ClCompile Include="HeartOfCosmos.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />

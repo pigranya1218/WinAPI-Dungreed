@@ -1,18 +1,14 @@
 #pragma once
 #include "Item.h"
-class bombPouch : public Item
+class DemonBoots : public Item
 {
 private:
-
-	
 	Image* _img;
 	bool _isExplosion;
 	Vector2 _renderPos;
-	int _x, _y;	
-	
+	int _x, _y;
 
 public:
-
 	virtual void init();
 	virtual void release();
 	virtual void update(Player* player, float const elapsedTime);

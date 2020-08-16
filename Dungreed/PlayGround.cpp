@@ -320,7 +320,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MultiBullet", L"resources/images/Accessories/MultiBullet.png");                   // 3갈래총탄
 	IMAGE_MANAGER->addImage("GoldenCandy", L"resources/images/Accessories/GoldenCandy.png");                   // 골드캔디
 	IMAGE_MANAGER->addImage("babyGreenBat", L"resources/images/Accessories/babyGreenBat.png");                 // 아기 그린박쥐
-	IMAGE_MANAGER->addImage("GreenBat", L"resources/images/Accessories/GreenBat.png");                    // 그린박쥐
+	IMAGE_MANAGER->addImage("GreenBat", L"resources/images/Accessories/GreenBat.png");                         // 그린박쥐
 	IMAGE_MANAGER->addImage("GreenMomBat", L"resources/images/Accessories/GreenMomBat.png");                   // 엄마그린박쥐
 	IMAGE_MANAGER->addImage("GreenDadBat", L"resources/images/Accessories/GreenDadBat.png");                   // 아빠그린박쥐
 	IMAGE_MANAGER->addFrameImage("BabyBatBulletAt", L"resources/images/Accessories/BabyBatBullet0.png", 5, 1); // 아기 그린박쥐 공격 프레임이미지
