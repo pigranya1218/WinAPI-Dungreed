@@ -15,6 +15,7 @@
 #include "Minotaurs.h"
 #include "Ovibos.h"
 #include "Ghost.h"
+#include "Niflheim.h"
 
 class Stage;
 

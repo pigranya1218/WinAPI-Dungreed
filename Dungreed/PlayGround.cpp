@@ -423,6 +423,17 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack"		, L"resources/images/Enemy/Ovibos/attack.png"		, 6, 1);	// 물소 공격 
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격
 
+	// ** BOSS
+	// * 니플헤임
+	IMAGE_MANAGER->addFrameImage("Niflheim/Idle"	, L"resources/images/boss/Niflheim/idle.png"	,  6, 1);	// 니플헤임 기본
+	IMAGE_MANAGER->addFrameImage("Niflheim/Attack_1", L"resources/images/boss/Niflheim/attack.png"	, 11, 1);	// 니플헤임 공격 1
+	IMAGE_MANAGER->addFrameImage("Niflheim/Attack_2", L"resources/images/boss/Niflheim/attack_1.png", 11, 1);	// 니플헤임 공격 2
+	IMAGE_MANAGER->addFrameImage("Niflheim/Spawn"	, L"resources/images/boss/Niflheim/enter.png"	, 16, 1);	// 니플헤임 등장
+	IMAGE_MANAGER->addFrameImage("Niflheim/Die"		, L"resources/images/boss/Niflheim/die.png"		, 30, 1);	// 니플헤임 죽음
+	IMAGE_MANAGER->addFrameImage("Niflheim/Pillar"	, L"resources/images/boss/Niflheim/pillar.png"	, 20, 1);	// 니플헤임 얼음기둥
+	IMAGE_MANAGER->addFrameImage("Niflheim/Icicle"	, L"resources/images/boss/Niflheim/icicle.png"	, 10, 1);	// 니플헤임 고드름
+	IMAGE_MANAGER->addFrameImage("Niflheim/Spear"	, L"resources/images/boss/Niflheim/spear.png"	, 13, 1);	// 니플헤임 얼음창
+
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// 수녀 총알
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// 수녀 총알 삭제

@@ -153,6 +153,12 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
 		}
+		case ENEMY_TYPE::NIFLHEIM:
+		{
+			enemy = new Niflheim;
+			enemy->init();
+			enemy->setEnemyManager(this);
+		}
 	}
 
 	_enemies.push_back(enemy);

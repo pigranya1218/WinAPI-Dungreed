@@ -207,6 +207,7 @@
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
+    <ClInclude Include="Niflheim.h" />
     <ClInclude Include="NormalProjectile.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
@@ -303,6 +304,7 @@
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
+    <ClCompile Include="Niflheim.cpp" />
     <ClCompile Include="NormalProjectile.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />

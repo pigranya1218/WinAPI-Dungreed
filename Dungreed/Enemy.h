@@ -173,12 +173,13 @@ protected:
 	};	
 
 public:
-	virtual void init(const Vector2& pos, DIRECTION direction) = 0;
-	virtual void release() = 0;
-	virtual void update(float const timeElapsed) = 0;
-	virtual void render() = 0;
+	virtual void init() {}
+	virtual void init(const Vector2& pos, DIRECTION direction) {}
+	virtual void release() {};
+	virtual void update(float const timeElapsed) {};
+	virtual void render() {};
 
-	virtual void setState(ENEMY_STATE state) = 0;
+	virtual void setState(ENEMY_STATE state) {};
 
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
 

@@ -420,6 +420,9 @@
     <ClInclude Include="SkelDog.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Niflheim.h">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -688,6 +691,9 @@
     </ClCompile>
     <ClCompile Include="SkelDog.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Niflheim.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
