@@ -417,6 +417,9 @@
     <ClInclude Include="BatGiantNormal.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="SkelDog.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -681,6 +684,9 @@
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
     </ClCompile>
     <ClCompile Include="BatGiantNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelDog.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>

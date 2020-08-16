@@ -27,7 +27,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 0.5;	
 
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 300, 850, true, false, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 300, 850, true, true, false, false);
 
 	_isDetect = _attacking = 0;
 }

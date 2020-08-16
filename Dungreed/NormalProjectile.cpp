@@ -2,10 +2,13 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, bool useRotate)
+void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_speed = speed;
+	_range = range;
+
+	_startPos = _position;
 
 	_img = IMAGE_MANAGER->findImage(imgKey);
 	_useAni = useAni;
@@ -23,6 +26,8 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 	_effectSize = effectSize;
 
 	_useRotate = useRotate;
+
+	_active = true;
 }
 
 void NormalProjectile::release()
@@ -32,6 +37,8 @@ void NormalProjectile::release()
 		_ani->release();
 		delete _ani;
 	}
+
+	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
 }
 
 void NormalProjectile::update(float elapsedTime)
@@ -42,7 +49,14 @@ void NormalProjectile::update(float elapsedTime)
 
 	if (_checkCollision) // 스테이지와 충돌 검사함
 	{
+		Vector2 lastDir = _position;
 		_projectileMgr->moveTo(this, moveDir);
+		Vector2 currDir = _position;
+
+		if (lastDir.x == currDir.x || lastDir.y == currDir.y)
+		{
+			_active = false;
+		}
 	}
 	else // 스테이지와 충돌 검사 안함
 	{
@@ -52,6 +66,12 @@ void NormalProjectile::update(float elapsedTime)
 	if (_useAni)
 	{
 		_ani->frameUpdate(elapsedTime);
+	}
+
+	// 사정거리를 넘어가면
+	if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
+	{
+		_active = false;		
 	}
 }
 
@@ -74,8 +94,9 @@ void NormalProjectile::render()
 
 void NormalProjectile::aniUpdate(float const elapsedTime)
 {
-	if (_useAni && _ani != nullptr)
+	if (_useAni)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
 }
+

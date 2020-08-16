@@ -120,7 +120,7 @@ void GreenBat::attack(Player * player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(110, 110));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", angleRadian, 13, true, true, 20, false, "BabyBatBulletFx", Vector2(110, 110));
+	projectile->init("BabyBatBulletAt", angleRadian, 13, true, true, 20, false, "BabyBatBulletFx", Vector2(110, 110), 300);
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);

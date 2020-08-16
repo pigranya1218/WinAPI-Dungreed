@@ -1,13 +1,11 @@
 #pragma once
 #include "Enemy.h"
 
-class BatGiantRed : public Enemy
+class SkelDog : public Enemy
 {
 private:
-	tagShootingInfo _shooting;	// Åº¸· °ü·Ã
-	tagAttackInfo	_attack;	// °ø°Ý °ü·Ã
-
-	int				_renderNum;	// ÃÑ¾Ë ·»´õ¿ë
+	tagAttackInfo	_attack;
+	tagMoveInfo		_moving;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);

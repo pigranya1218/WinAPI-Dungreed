@@ -18,15 +18,15 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.speed = 150;
+	_moving.force = Vector2(150, 0);
+	_moving.gravity = Vector2(0, 4000);
 	_moving.delay = 0.2;
 
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 1.5f;
 	_attack.distance = 100;	
 
-	_isDetect = _moving.jumpPower = 0;
-	_moving.gravity = 4000;
+	_isDetect =  0;
 }
 
 void SkelBigNormal::release()
@@ -52,7 +52,6 @@ void SkelBigNormal::update(float const timeElapsed)
 		{
 			if (_isDetect)
 			{
-				
 				setState(ENEMY_STATE::MOVE);
 			}
 			break;
@@ -68,7 +67,7 @@ void SkelBigNormal::update(float const timeElapsed)
 			}
 
 			// X축 설정
-			moveDir.x += timeElapsed * _moving.speed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
+			moveDir.x += timeElapsed * _moving.force.x * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 			// 거리 계산
 			float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
 			// 플레이어와의 X축 거리 계산
@@ -80,13 +79,13 @@ void SkelBigNormal::update(float const timeElapsed)
 					// 위에 있다면
 					if (playerPos.y < (_position.y - _size.y * 1.3f))
 					{
-						_moving.jumpPower = -1400;
+						_moving.force.y = -1400;
 					}
 					// 아래에 있다면
 					else if (playerPos.y > (_position.y + _size.y * 0.5f))
 					{
 						_position.y += 1.5f;
-						_moving.jumpPower = 0.1f;
+						_moving.force.y = 0.1f;
 					}
 				}
 			}
@@ -113,19 +112,19 @@ void SkelBigNormal::update(float const timeElapsed)
 		}
 	}
 
-	if (_isStand && _moving.jumpPower == 0)
+	if (_isStand && _moving.force.y == 0)
 	{
 		_position.y -= 15;
 		moveDir.y += 25;
 	}
-	_moving.jumpPower += _moving.gravity * timeElapsed;
-	moveDir.y += _moving.jumpPower * timeElapsed;
+	_moving.force.y += _moving.gravity.y * timeElapsed;
+	moveDir.y += _moving.force.y * timeElapsed;
 
 	// 이동할 포지션 최종
 	_enemyManager->moveEnemy(this, moveDir);
 	if (_isStand)
 	{
-		_moving.jumpPower = 0;
+		_moving.force.y = 0;
 	}
 
 	_ani->frameUpdate(timeElapsed);

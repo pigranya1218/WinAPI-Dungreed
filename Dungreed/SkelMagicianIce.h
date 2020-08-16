@@ -20,7 +20,5 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
-
-	void attackEffect();	
 };
 

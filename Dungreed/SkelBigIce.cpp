@@ -18,7 +18,8 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.speed = 200;
+	_moving.force = Vector2(200, 0);
+	_moving.gravity = Vector2(0, 4000);
 	_moving.delay = 0.2;
 
 	ZeroMemory(&_attack, sizeof(_attack));
@@ -30,10 +31,9 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_skill.distance = 300;
 
 	//ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 1000, true, false, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 1000, true, true, false, false);
 
-	_isDetect = _moving.jumpPower = 0;
-	_moving.gravity = 4000;	
+	_isDetect = 0;
 }
 
 void SkelBigIce::release()
@@ -67,7 +67,7 @@ void SkelBigIce::update(float const timeElapsed)
 				_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 			}
 
-			moveDir.x += timeElapsed * _moving.speed * ((bool)(_direction) ? 1 : -1);
+			moveDir.x += timeElapsed * _moving.force.x * ((bool)(_direction) ? 1 : -1);
 
 			float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
 
@@ -77,12 +77,12 @@ void SkelBigIce::update(float const timeElapsed)
 				{
 					if (playerPos.y < (_position.y - _size.y * 1.3f))
 					{
-						_moving.jumpPower = -1400;
+						_moving.force.y = -1400;
 					}
 					else if (playerPos.y > (_position.y + _size.y * 0.5f))
 					{
 						_position.y += 1.5f;
-						_moving.jumpPower = 0.1f;
+						_moving.force.y = 0.1f;
 					}
 				}				
 			}
@@ -137,21 +137,21 @@ void SkelBigIce::update(float const timeElapsed)
 		break;
 	}
 
-	if (_isStand && _moving.jumpPower == 0)
+	if (_isStand && _moving.force.y == 0)
 	{
 		_position.y -= 15;
 		moveDir.y += 25;
 	}
 
-	_moving.jumpPower += _moving.gravity * timeElapsed;
-	moveDir.y += _moving.jumpPower * timeElapsed;
+	_moving.force.y += _moving.gravity.y * timeElapsed;
+	moveDir.y += _moving.force.y * timeElapsed;
 	
 
 	// 이동할 포지션 최종
 	_enemyManager->moveEnemy(this, moveDir);
 	if (_isStand)
 	{
-		_moving.jumpPower = 0;
+		_moving.force.y = 0;
 	}
 
 	_ani->frameUpdate(timeElapsed);

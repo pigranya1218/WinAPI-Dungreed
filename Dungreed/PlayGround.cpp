@@ -413,6 +413,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Attack_Shot", L"resources/images/Enemy/Minotaurs/attack_shot.png"	, 7, 1);	// 미노타우르스 공격 피격
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill"		, L"resources/images/Enemy/Minotaurs/skill.png"			, 8, 1);	// 미노타우르스 돌진
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill_Shot"	, L"resources/images/Enemy/Minotaurs/skill_shot.png"	, 8, 1);	// 미노타우르스 돌진 피격
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Effect"		, L"resources/images/Enemy/Minotaurs/effect.png"		, 1, 8);	// 미노타우르스 돌진 이펙트
+
+	EFFECT_MANAGER->addEffect("Minotaurs/Effect", "Minotaurs/Effect", 15, 30);
 
 	// * 물소
 	IMAGE_MANAGER->addFrameImage("Ovibos/Idle"			, L"resources/images/Enemy/Ovibos/idle.png"			, 9, 1);	// 물소 기본
@@ -424,13 +427,20 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// 수녀 총알
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// 수녀 총알 삭제
 
+	EFFECT_MANAGER->addEffect("Banshee/Bullet_FX", "Banshee/Bullet_FX", 15, 50);	// 이펙트 등록
+
 	IMAGE_MANAGER->addImage("IceBullet"			, L"resources/images/Enemy/Bullet/IceBullet.png"		 );	// 얼음 총알
 	IMAGE_MANAGER->addFrameImage("IceBullet_FX"	, L"resources/images/Enemy/Bullet/IceBullet_FX.png", 3, 1);	// 얼음 총알 삭제
+
+	EFFECT_MANAGER->addEffect("IceBullet_FX", "IceBullet_FX", 15, 50);
 	
 	IMAGE_MANAGER->addFrameImage("GiantBullet"		, L"resources/images/Enemy/Bullet/giantBullet.png"		, 5, 1);	// 박쥐 총알 큰 것
 	IMAGE_MANAGER->addFrameImage("GiantBullet_FX"	, L"resources/images/Enemy/Bullet/giantBullet_FX.png"	, 7, 1);	// 박쥐 총알 큰 것 삭제 이펙트
 	IMAGE_MANAGER->addFrameImage("SmallBullet"		, L"resources/images/Enemy/Bullet/smallBullet.png"		, 5, 1);	// 박쥐 총알 작은 것
 	IMAGE_MANAGER->addFrameImage("SmallBullet_FX"	, L"resources/images/Enemy/Bullet/smallBullet_FX.png"	, 7, 1);	// 박쥐 총알 작은 것 삭제 이펙트
+
+	EFFECT_MANAGER->addEffect("GiantBullet_FX", "GiantBullet_FX", 15, 50);
+	EFFECT_MANAGER->addEffect("SmallBullet_FX", "SmallBullet_FX", 15, 50);
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

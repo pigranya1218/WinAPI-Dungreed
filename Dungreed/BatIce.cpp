@@ -22,12 +22,12 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 
 	// 공격 관련 변수 초기화
 	//ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 300, 1000, true, false, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 300, 1000, true, true, false, false);
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
-	_moving.speed = 250;
+	_moving.force = Vector2(250, 0);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	_isDetect = 0;
@@ -74,8 +74,8 @@ void BatIce::update(float const timeElapsed)
 			// 이동
 			Vector2 moveDir(0, 0);
 
-			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.speed);
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.speed);
+			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);
 
 			//moveDir.x += cosf(_moving.angle);
 			//moveDir.y -= sinf(_moving.angle);
@@ -136,7 +136,7 @@ void BatIce::render()
 
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
 	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(unsigned)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void BatIce::setState(ENEMY_STATE state)

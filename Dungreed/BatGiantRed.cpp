@@ -20,10 +20,11 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.02, 500, 1000, false, false, true, true);
+	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.02, 500, 500, false, true, true, true);
 
 	_isDetect = 0;
 	_detectRange = 300;
+	_renderNum = -1;
 }
 
 void BatGiantRed::release()
@@ -48,33 +49,29 @@ void BatGiantRed::update(float const timeElapsed)
 			{
 				_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 
-				
-				if (_shooting.bulletNum > 0)
+				if (_attack.update(timeElapsed) && _shooting.bullets.empty())
 				{
-					if (_shooting.delayUpdate(timeElapsed))
+					_shooting.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
+
+					_shooting.bulletNum = 20;
+
+					for (int i = 0; i < 20; i++)
 					{
 						Vector2 bulletPos = _position;
-						bulletPos.x += cosf(PI2 / 20 * _shooting.bulletNum) * (_size.x + 10);
-						bulletPos.y -= sinf(PI2 / 20 * _shooting.bulletNum) * (_size.x + 10);
+						bulletPos.x += cosf(PI2 / 20 * i) * (_size.x + 10);
+						bulletPos.y -= sinf(PI2 / 20 * i) * (_size.x + 10);
 
-						_shooting.createBullet(bulletPos, _shooting.angle);						
-					}
-					if (_shooting.bulletNum <= 0)
-					{
-						setState(ENEMY_STATE::ATTACK);
+						_shooting.createBullet(bulletPos, _shooting.angle);
 					}
 				}
-				else
+				if (!_shooting.bullets.empty())
 				{
-					if (_attack.update(timeElapsed))
+					if (_shooting.delayUpdate(timeElapsed) && _renderNum < 20)
 					{
-						if (_shooting.bullets.empty())
-						{
-							_shooting.bulletNum = 20;
-						}
-						_shooting.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
+						_renderNum++;
+						if (_renderNum >= 20) setState(ENEMY_STATE::ATTACK);
 					}
-				}
+				}				
 			}
 		}
 		break;
@@ -83,6 +80,7 @@ void BatGiantRed::update(float const timeElapsed)
 			if (_ani->getPlayIndex() == 4)
 			{
 				_shooting.fireBullet(_enemyManager);
+				_renderNum = -1;
 			}
 			if (!_ani->isPlay())
 			{
@@ -100,6 +98,7 @@ void BatGiantRed::update(float const timeElapsed)
 	_shooting.aniUpdate(timeElapsed);
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
 }
 
 void BatGiantRed::render()
@@ -108,7 +107,11 @@ void BatGiantRed::render()
 	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
-	_shooting.render();
+
+	if (_renderNum >= 0)
+	{
+		_shooting.render(_renderNum);
+	}	
 }
 
 void BatGiantRed::setState(ENEMY_STATE state)

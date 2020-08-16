@@ -230,6 +230,7 @@
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SkelBigIce.h" />
     <ClInclude Include="SkelBigNormal.h" />
+    <ClInclude Include="SkelDog.h" />
     <ClInclude Include="SkelMagicianIce.h" />
     <ClInclude Include="SkelSmallBow.h" />
     <ClInclude Include="SoundManager.h" />
@@ -320,6 +321,7 @@
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />
     <ClCompile Include="SkelBigNormal.cpp" />
+    <ClCompile Include="SkelDog.cpp" />
     <ClCompile Include="SkelMagicianIce.cpp" />
     <ClCompile Include="SkelSmallBow.cpp" />
     <ClCompile Include="SoundManager.cpp" />
