@@ -2,16 +2,9 @@
 #include "Stage.h"
 #include "MapTool.h"
 
-
-class VillageStage :public Stage
+class RestaurantRoom : public Stage
 {
 private:
-	Image* _BGL;
-	Image* _BG1;
-	Image* _BG2;
-	Image* _floor;
-	//Image* _tileImage;
-
 	
 	int _currentIndex;
 

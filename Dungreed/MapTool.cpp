@@ -65,6 +65,10 @@ void MapTool::update()
 		{
 			load();
 		}
+		else if (_erase.ptInRect(_ptMouse))
+		{
+			load();
+		}
 		else if (_layer1Btn.ptInRect(_ptMouse))
 		{
 			_layer = 0; // ¹è°æ
@@ -79,19 +83,19 @@ void MapTool::update()
 	
 	if (KEY_MANAGER->isStayKeyDown('D'))
 	{
-		CAMERA->movePivot(Vector2(6, 0));
+		CAMERA->movePivot(Vector2(10, 0));
 	}
 	if (KEY_MANAGER->isStayKeyDown('A'))
 	{
-		CAMERA->movePivot(Vector2(-6, 0));
+		CAMERA->movePivot(Vector2(-10, 0));
 	}
 	if (KEY_MANAGER->isStayKeyDown('W'))
 	{
-		CAMERA->movePivot(Vector2(0, -6));
+		CAMERA->movePivot(Vector2(0, -10));
 	}
 	if (KEY_MANAGER->isStayKeyDown('S'))
 	{
-		CAMERA->movePivot(Vector2(0, 6));
+		CAMERA->movePivot(Vector2(0, 10));
 	}
 	
 	// Exit
@@ -399,8 +403,11 @@ void MapTool::load()
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &read, NULL);
+	
 	CloseHandle(stageFile);
 	ShowCursor(false);
+	/*_tileX = _tile[0].tileX;
+	_tileY = _tile[0].tileY;*/
 }
 
 void MapTool::paletteChange()

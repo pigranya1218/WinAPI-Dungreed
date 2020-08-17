@@ -231,6 +231,7 @@
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="RedLotusCos.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="RestaurantRoom.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SingletonBase.h" />
@@ -328,6 +329,7 @@
     <ClCompile Include="Punch.cpp" />
     <ClCompile Include="RedLotusCos.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
+    <ClCompile Include="RestaurantRoom.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />

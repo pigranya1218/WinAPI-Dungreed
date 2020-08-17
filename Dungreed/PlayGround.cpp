@@ -25,9 +25,10 @@ HRESULT playGround::init()
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
 
-	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas1.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas3.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
-	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas1.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("AniPalette1", L"resources/images/Map/AniPalette1.png", 10, 10);
 
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");
@@ -201,8 +202,24 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Town_BG", L"resources/images/Map/TownBG_Day.png");
 	IMAGE_MANAGER->addImage("Town_BG2", L"resources/images/Map/TownLayer_Day.png");
 	IMAGE_MANAGER->addImage("Town_Floor", L"resources/images/Map/TownFloor.png");
+	IMAGE_MANAGER->addImage("BlackSmith", L"resources/images/Villiage/BlackSmith.png");
+	IMAGE_MANAGER->addImage("BlackSmithDisplay", L"resources/images/Villiage/BlackSmithDisplay.png");
+	IMAGE_MANAGER->addImage("Boutique", L"resources/images/Villiage/Boutique.png");
+	IMAGE_MANAGER->addImage("Shop", L"resources/images/Villiage/Shop.png");
+	IMAGE_MANAGER->addImage("TrainingSchool", L"resources/images/Villiage/TrainingSchool.png");
+	IMAGE_MANAGER->addImage("TrainingHouse", L"resources/images/Villiage/TrainingHouse.png");
+	IMAGE_MANAGER->addImage("Temple", L"resources/images/Villiage/Temple.png");
+	IMAGE_MANAGER->addImage("TempleFront", L"resources/images/Villiage/TempleFront.png");
+	IMAGE_MANAGER->addImage("Gunsmith", L"resources/images/Villiage/Gunsmith.png");
+	IMAGE_MANAGER->addImage("Target", L"resources/images/Villiage/Target.png");
+	IMAGE_MANAGER->addImage("Tree0", L"resources/images/Map/Tree0.png");
+	IMAGE_MANAGER->addImage("Tree1", L"resources/images/Map/Tree1.png");
+	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 
 	// ** DUNGEON
+	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
+	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
+	
 
 	// ** COSTUME
 	// *** BASE
@@ -484,7 +501,7 @@ void playGround::release()
 	GameNode::release();
 }
 
-//연산
+//연산ds
 void playGround::update()
 {
 	GameNode::update();

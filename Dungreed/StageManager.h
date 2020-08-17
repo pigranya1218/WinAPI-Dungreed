@@ -22,7 +22,7 @@ private:
 	STAGE_TYPE _currStageType; // 현재 스테이지 타입
 	vector<Stage*> _stages; // 현재 스테이지들
 	Stage* _currStage; // 현재 스테이지
-
+	
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }

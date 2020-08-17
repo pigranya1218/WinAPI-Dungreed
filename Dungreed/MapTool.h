@@ -98,7 +98,8 @@ private:
 	
 	tagTileMap _tile[MAXTILEX*MAXTILEY];
 	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
-	
+	tagPalette _aniPalette[4];
+
 	bool _selectDrag;
 	Vector2 _selectStart;
 	Vector2 _selectEnd;
