@@ -14,8 +14,7 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 	_detectRange = 800;
 
 	// 사이즈 설정
-	//_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
-	_size = _img->getFrameSize();
+	_size = Vector2(_img->getFrameSize().x - 10, _img->getFrameSize().y);
 	_size = _size * _scale;
 
 	// 충돌 렉트 설정
@@ -28,6 +27,7 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 	_moving.angle = 0;
 
 	_isDetect = 0;
+	_active = true;
 }
 
 void BatBomb::release()
@@ -83,11 +83,16 @@ void BatBomb::update(float const timeElapsed)
 		}
 		break;
 		case ENEMY_STATE::ATTACK:
-		{					
+		{				
+			if (!_ani->isPlay())
+			{
+				setState(ENEMY_STATE::DIE);				
+			}
 		}
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			EFFECT_MANAGER->play("Bat_Explosion", _position, Vector2(250, 250));
 		}
 		break;
 	}
@@ -135,6 +140,7 @@ void BatBomb::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

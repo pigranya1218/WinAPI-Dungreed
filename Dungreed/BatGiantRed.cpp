@@ -20,11 +20,12 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.02, 500, 500, false, true, true, true);
+	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.02, 1, 500, false, true, true, true);
 
 	_isDetect = 0;
 	_detectRange = 300;
 	_renderNum = -1;
+	_active = true;
 }
 
 void BatGiantRed::release()
@@ -35,12 +36,14 @@ void BatGiantRed::release()
 
 void BatGiantRed::update(float const timeElapsed)
 {
+	const Vector2 playerPos = _enemyManager->getPlayerPos();
+
 	if (!_isDetect)
 	{
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
 	}
-	const Vector2 playerPos = _enemyManager->getPlayerPos();
 	
+	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -94,11 +97,12 @@ void BatGiantRed::update(float const timeElapsed)
 		break;
 	}
 
+	_enemyManager->moveEnemy(this, moveDir);
+
 	_ani->frameUpdate(timeElapsed);
 	_shooting.aniUpdate(timeElapsed);
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
-
 }
 
 void BatGiantRed::render()
@@ -142,6 +146,7 @@ void BatGiantRed::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

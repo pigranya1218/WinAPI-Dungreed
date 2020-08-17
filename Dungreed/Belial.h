@@ -1,7 +1,7 @@
 #pragma once
 #include "Enemy.h"
 
-
+#define HANDSPEED 600
 
 class Belial : public Enemy
 {
@@ -55,9 +55,10 @@ private:
 	tagHand _lHand;
 	tagSoul _back;
 
-	int _maxHp;
-	int _HP;
+	Vector2 _moveDir;
 
+	Vector2 _force;
+	int _count;
 
 
 public:

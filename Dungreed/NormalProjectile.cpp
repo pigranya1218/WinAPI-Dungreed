@@ -2,10 +2,12 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
+void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate, bool useGravity)
 {
+	float elapseXY = 0;
+
 	_angleRadian = angleRadian;
-	_speed = speed;
+	_speed = Vector2(speed, speed);
 	_maxTime = maxTime;
 	_count = 0;
 
@@ -13,6 +15,8 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 	_useAni = useAni;
 	if (_useAni)
 	{
+		elapseXY = fabsf(_img->getFrameSize().x - _img->getFrameSize().y);
+
 		_ani = new Animation;
 		_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 		_ani->setFPS(aniFps);
@@ -25,6 +29,8 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 	_effectSize = effectSize;
 
 	_useRotate = useRotate;
+	_useGravity = useGravity;
+	_gravity = Vector2(0, 4000);
 
 	_active = true;
 }
@@ -44,8 +50,17 @@ void NormalProjectile::release()
 void NormalProjectile::update(float elapsedTime)
 {
 	Vector2 moveDir = Vector2(0, 0);
-	moveDir.x += cosf(_angleRadian) * _speed * elapsedTime;
-	moveDir.y += -sinf(_angleRadian) * _speed * elapsedTime;
+	moveDir.x += cosf(_angleRadian) * _speed.x * elapsedTime;	
+	if (_useGravity)
+	{
+		_speed.y += _gravity.y * elapsedTime;
+		moveDir.y += -sinf(_angleRadian) * _speed.y * elapsedTime;
+	}
+	else
+	{
+		moveDir.y += -sinf(_angleRadian) * _speed.y * elapsedTime;
+	}
+	
 
 	if (_checkCollision) // 스테이지와 충돌 검사함
 	{

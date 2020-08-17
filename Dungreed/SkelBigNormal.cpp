@@ -27,6 +27,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_attack.distance = 100;	
 
 	_isDetect =  0;
+	_active = true;
 }
 
 void SkelBigNormal::release()
@@ -169,9 +170,8 @@ void SkelBigNormal::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(10);
 			_ani->start();
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::MOVE:
 		{
 			_ani->stop();
@@ -180,9 +180,8 @@ void SkelBigNormal::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(10);
 			_ani->start();
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
 			_ani->stop();
@@ -191,12 +190,12 @@ void SkelBigNormal::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(10);
 			_ani->start();
-
-			break;
 		}		
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
+			_active = false;
 		}
+		break;
 	}
 }

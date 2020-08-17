@@ -21,6 +21,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 	_moving.force = Vector2(RUSHSPEED, 0.0f);
 	_moving.gravity = Vector2(50, 4000);
 
+	_active = true;
 }
 
 void Ovibos::release()
@@ -145,7 +146,7 @@ void Ovibos::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-
+			_active = false;
 		}
 		break;
 	}

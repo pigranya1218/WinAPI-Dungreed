@@ -44,6 +44,8 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 
 	// 플레이어 감지 변수 초기화
 	_isDetect = 0;
+
+	_active = true;
 }
 
 void SkelSmallBow::release()
@@ -179,9 +181,8 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 			_weaponAni->stop();
 
 			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
 			_weaponAni->stop();
@@ -189,12 +190,12 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 
 			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
 			_weaponAni->start();
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
+			_active = false;
 		}
+		break;
 	}
 }

@@ -22,6 +22,19 @@ void EnemyManager::update(float const timeElapsed)
 	{
 		_enemies[i]->update(timeElapsed);
 	}
+	/*for (int i = 0; i < _enemies.size();)
+	{
+		if (!_enemies[i]->getActive())
+		{
+			_enemies[i]->release();
+			delete[] _enemies[i];
+			_enemies.erase(_enemies.begin() + i);
+		}
+		else
+		{
+			++i;
+		}
+	}*/
 }
 
 void EnemyManager::render()
@@ -163,7 +176,7 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		case ENEMY_TYPE::NIFLHEIM:
 		{
 			enemy = new Niflheim;
-			enemy->init();
+			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
 		}
 		break;

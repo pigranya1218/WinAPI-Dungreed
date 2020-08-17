@@ -31,9 +31,10 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_skill.distance = 300;
 
 	//ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 200, 1000, true, true, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 1, 700, true, true, false, false);
 
 	_isDetect = 0;
+	_active = true;
 }
 
 void SkelBigIce::release()
@@ -198,9 +199,8 @@ void SkelBigIce::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(10);
 			_ani->start();
-
-			break;
 		}		
+		break;
 		case ENEMY_STATE::MOVE:
 		{
 			_ani->stop();
@@ -209,9 +209,8 @@ void SkelBigIce::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(10);
 			_ani->start();
-
-			break;
 		}		
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
 			_ani->stop();
@@ -220,9 +219,8 @@ void SkelBigIce::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(10);
 			_ani->start();
-
-			break;
 		}		
+		break;
 		case ENEMY_STATE::SKILL:
 		{
 			_img = IMAGE_MANAGER->findImage("Skel/Big_Ice/Skill");
@@ -230,12 +228,12 @@ void SkelBigIce::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(10);
 			_ani->start();
-
-			break;
 		}		
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
+			_active = false;
 		}
+		break;
 	}
 }
