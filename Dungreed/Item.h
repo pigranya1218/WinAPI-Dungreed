@@ -8,7 +8,8 @@ enum class ITEM_TYPE : int
 	WEAPON_ONE_HAND = 0x01000, // 한손 무기
 	WEAPON_TWO_HAND = 0x02000, // 양손 무기
 	ACC = 0x03000, // 악세사리
-	FOOD = 0x04000
+	WEAPON_SUB = 0x04000, // 보조 무기
+	FOOD = 0x05000
 };
 
 enum class ITEM_RANK : int
