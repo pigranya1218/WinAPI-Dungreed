@@ -105,7 +105,7 @@ void StatUI::render()
 void StatUI::renderStatInfo(Vector2 pos, STAT_TYPE type)
 {
 	FloatRect textRc = FloatRect(pos, Vector2(430, 150), PIVOT::LEFT_TOP);
-	D2D_RENDERER->fillRectangle(textRc, 0, 0, 0, 0.65);
+	D2D_RENDERER->fillRectangle(textRc, 0, 0, 0, 0.75);
 	D2D_RENDERER->renderTextField(textRc.left + 5, textRc.top + 5, TTYONE_UTIL::stringTOwsting(PlayerStat::getStatString(type, false)), 
 		RGB(255, 238, 184), 40, textRc.getWidth(), 40, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 	D2D_RENDERER->renderTextField(textRc.left + 5, textRc.top + 55, TTYONE_UTIL::stringTOwsting(PlayerStat::getStatInfo(type)),

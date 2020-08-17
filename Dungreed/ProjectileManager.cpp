@@ -44,7 +44,7 @@ void ProjectileManager::render()
 	}
 }
 
-void ProjectileManager::moveTo(GameObject* gameObject, Vector2 moveDir)
+void ProjectileManager::moveTo(GameObject* gameObject, Vector2 moveDir, bool checkCollisionGround, bool checkCollisionPlatform)
 {
-	_stage->moveTo(gameObject, moveDir);
+	_stage->moveTo(gameObject, moveDir, checkCollisionGround, checkCollisionPlatform);
 }

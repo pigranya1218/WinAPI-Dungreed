@@ -65,10 +65,10 @@ void NormalProjectile::update(float elapsedTime)
 	if (_checkCollision) // 스테이지와 충돌 검사함
 	{
 		Vector2 lastDir = _position;
-		_projectileMgr->moveTo(this, moveDir);
+		_projectileMgr->moveTo(this, moveDir, true, false);
 		Vector2 currDir = _position;
 
-		if (_isCollision)
+		if (lastDir.x == currDir.x || lastDir.y == currDir.y)
 		{
 			_active = false;
 		}

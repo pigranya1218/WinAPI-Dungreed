@@ -43,7 +43,7 @@ public:
 
 	void loadMap(string mapName);
 	void makeMapToLine(int startX, int startY, int currX, int currY, vector<vector<bool>>& isVisited);
-	void moveTo(GameObject* object, Vector2 const moveDir); // GameObject를 moveDir 방향으로 충돌판정을 계산해서 이동시키는 함수
+	void moveTo(GameObject* object, Vector2 const moveDir, bool checkCollisionGround = true, bool checkCollisionPlatform = true); // GameObject를 moveDir 방향으로 충돌판정을 계산해서 이동시키는 함수
 	
 	void attack(Projectile* projectile, AttackInfo* info);
 

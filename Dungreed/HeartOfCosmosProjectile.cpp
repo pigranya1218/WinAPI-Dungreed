@@ -53,7 +53,7 @@ void HeartOfCosmosProjectile::update(float elapsedTime)
 		_projectileMgr->moveTo(this, moveDir);
 		Vector2 currDir = _position;
 
-		if (_isCollision)
+		if (lastDir.x == currDir.x || lastDir.y == currDir.y)
 		{
 			_active = false;
 		}

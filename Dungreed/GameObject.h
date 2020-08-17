@@ -10,7 +10,6 @@ protected:
 	Synthesize(FloatRect, _rect, Rect)
 	Synthesize(bool, _active, Active)
 	Synthesize(bool, _isStand, IsStand)
-	Synthesize(bool, _isCollision, IsCollision) // 땅과 충돌했는지 여부
 
 public:
 	GameObject() {}
