@@ -121,14 +121,14 @@ void OakBow::update(Player * player, float const elapsedTime)
 			float length = _img->getFrameSize().x * 0.5f * 3; // 무기 길이만큼
 
 			Vector2 arrowPos = renderPosWeapon;
-			arrowPos.x = (isLeft) ? (renderPosWeapon.x + anglePos.x + 15) : (renderPosWeapon.x + anglePos.x);
-			arrowPos.y = (isLeft) ? (renderPosWeapon.y + 10) : (renderPosWeapon.y);
+			arrowPos.x = (isLeft) ? (renderPosWeapon.x + anglePos.x + 5) : (renderPosWeapon.x + anglePos.x - 15);
+			//arrowPos.y = (isLeft) ? (renderPosWeapon.y + 10) : (renderPosWeapon.y);
 
 			NormalProjectile* projectile = new NormalProjectile;
 			projectile->setPosition(arrowPos);
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 1, false, false, 20, false, "", Vector2());
+			projectile->init("Arrow00", angleRadian, 0, false, false, 20, false, "", Vector2());
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
@@ -170,7 +170,7 @@ void OakBow::frontRender(Player * player)
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
 	_img->setAnglePos(anglePos);
-	//_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
+	_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
 
 
 
