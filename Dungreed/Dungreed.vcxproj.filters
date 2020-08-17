@@ -453,6 +453,9 @@
     <ClInclude Include="RestaurantRoom.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="BoomerangProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
     <ClInclude Include="HeartOfCosmosProjectile.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
@@ -751,6 +754,9 @@
     </ClCompile>
     <ClCompile Include="RestaurantRoom.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomerangProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="HeartOfCosmosProjectile.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>

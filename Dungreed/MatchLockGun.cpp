@@ -15,8 +15,10 @@ void MatchLockGun::init()
 	_reloadAni->setDefPlayFrame(false, false);
 	_reloadAni->setFPS(15);
 
-	_minDamage = 10;
-	_maxDamage = 20;
+	_addStat.minDamage = 10;
+	_addStat.maxDamage = 20;
+
+	projectile = new NormalProjectile;
 
 	// private 변수 설정
 	_minDamage = 12;
@@ -170,7 +172,6 @@ void MatchLockGun::attack(Player* player)
 		angleRadian -= PI2;
 	}
 
-	NormalProjectile* projectile = new NormalProjectile;
 	Vector2 shootPos = renderPosHand;
 	float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
@@ -225,4 +226,9 @@ wstring MatchLockGun::getBulletUI()
 float MatchLockGun::getBulletRatio()
 {
 	return _currReloadDelay / _baseReloadDelay;
+}
+
+NormalProjectile* MatchLockGun::getBulletInfo()
+{
+	return projectile;
 }

@@ -47,7 +47,9 @@ enum class PIVOT : int
 {
 	LEFT_TOP, 
 	CENTER, 
-	BOTTOM
+	BOTTOM,
+	RIGHT_TOP,
+	RIGHT_BOTTOM
 };
 
 enum class ACTION_TYPE

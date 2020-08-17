@@ -164,6 +164,7 @@
     <ClInclude Include="BatRed.h" />
     <ClInclude Include="babyGreenBat.h" />
     <ClInclude Include="bombPouch.h" />
+    <ClInclude Include="BoomerangProjectile.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CameraShakeEvent.h" />
@@ -274,6 +275,7 @@
     <ClCompile Include="BatRed.cpp" />
     <ClCompile Include="babyGreenBat.cpp" />
     <ClCompile Include="bombPouch.cpp" />
+    <ClCompile Include="BoomerangProjectile.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />

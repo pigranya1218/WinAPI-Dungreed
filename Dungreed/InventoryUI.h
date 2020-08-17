@@ -1,6 +1,7 @@
 #pragma once
 
 class Player;
+class Item;
 
 class InventoryUI
 {
@@ -26,6 +27,13 @@ private:
 	int _dragWeaponIndex;
 	int _dragAccIndex;
 	int _dragInvenIndex;
+
+	FloatRect _itemInfo;
+
+private:
+	void drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT);
+	void drawAccInfo(Item* acc, Vector2 pos, bool isRT);
+	void drawInvenInfo(int index, Vector2 pos);
 
 public:
 	void setPlayer(Player* player) { _player = player; }
