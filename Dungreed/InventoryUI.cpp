@@ -81,7 +81,6 @@ void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
 		Vector2 textPos = Vector2(mainRc.left + 20, typePos.y + 30);
 		D2D_RENDERER->renderTextField(textPos.x, textPos.y, weapon->getDisplayText(), RGB(202, 255, 255), 23, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 	}
-	
 }
 
 void InventoryUI::drawAccInfo(Item* acc, Vector2 pos, bool isRT)

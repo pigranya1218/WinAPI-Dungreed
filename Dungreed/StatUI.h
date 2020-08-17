@@ -37,6 +37,6 @@ public:
 
 	bool isActive() const noexcept { return _isActive; }
 	void setActive(bool active) { _isActive = active; }
-
+	void renderStatInfo(Vector2 pos, STAT_TYPE type);
 };
 

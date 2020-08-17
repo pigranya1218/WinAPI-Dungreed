@@ -55,6 +55,7 @@ public:
 
 public:
 	static string getStatString(STAT_TYPE type, bool isEnglish);
+	static string getStatInfo(STAT_TYPE type);
 
 }; 
 
