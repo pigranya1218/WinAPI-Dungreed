@@ -78,7 +78,6 @@ void StageManager::makeStage()
 	//_currStage = new VillageStage();
 	//_currStage = new RestaurantRoom();
 	_currStage->setStageManager(this);
-	_currStage->mapLoad();
 	_currStage->init();
 
 }

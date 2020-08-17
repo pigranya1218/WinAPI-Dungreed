@@ -5,7 +5,7 @@ void VillageStage::init()
 {
 	Stage::init();
 
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950)), LINEAR_VALUE_TYPE::DOWN });
+	/*_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950)), LINEAR_VALUE_TYPE::DOWN });
 	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(2005, 950), Vector2(2640, 1590)), LINEAR_VALUE_TYPE::DOWN });
 	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(2640, 1590), Vector2(2718, 1590)), LINEAR_VALUE_TYPE::DOWN });
 	
@@ -20,7 +20,7 @@ void VillageStage::init()
 
 	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(7033, 1590), Vector2(7115, 1590)), LINEAR_VALUE_TYPE::DOWN });
 	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(7115, 1590), Vector2(7750, 950)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(7750, 950), Vector2(9800, 950)), LINEAR_VALUE_TYPE::DOWN });
+	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(7750, 950), Vector2(9800, 950)), LINEAR_VALUE_TYPE::DOWN });*/
 
 
 	_BGL = IMAGE_MANAGER->findImage("Town_BGL");
@@ -104,14 +104,19 @@ void VillageStage::render()
 	IMAGE_MANAGER->findImage("Tree0")->setScale(5);
 	CAMERA->render(IMAGE_MANAGER->findImage("Tree0"), Vector2(2150, 1520));
 
-	for (int i = 0; i < _collisionGrounds.size(); i++)
+	for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
-		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGrounds[i].func.getStart()), CAMERA->getRelativeV2(_collisionGrounds[i].func.getEnd()), D2D1::ColorF::Enum::Red, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_collisionGroundRects[i]), D2D1::ColorF::Enum::Red, 1, 1);
+	}
+
+	for (int i = 0; i < _collisionGroundLines.size(); i++)
+	{
+		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGroundLines[i].getStart()), CAMERA->getRelativeV2(_collisionGroundLines[i].getEnd()), D2D1::ColorF::Enum::Red, 1);
 	}
 
 	for (int i = 0; i < _collisionPlatforms.size(); i++)
 	{
-		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].func.getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].func.getEnd()), D2D1::ColorF::Enum::Blue, 1);
+		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
 	}
 
 	Stage::render();

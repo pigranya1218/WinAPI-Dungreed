@@ -29,12 +29,6 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
 
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::NIFLHEIM, Vector2(WINSIZEX / 2 + 500, WINSIZEY / 2));
-
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile");
-	
-	mapLoad();
-	
-	
 }
 
 void DebugStage::release()
@@ -56,19 +50,7 @@ void DebugStage::update(float const elapsedTime)
 
 void DebugStage::render()
 {
-	for (int i = 0; i < _tile[0].tileX* _tile[0].tileY; ++i)
-	{
-		if (_tile[i].tileFrameX[0] != -1)
-		{
-			_tileImage->setScale(4);
-			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
-		}
-		if (_tile[i].tileFrameX[1] != -1)
-		{
-			_tileImage->setScale(4);
-			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
-		}
-	}
+	Stage::render();
 
 	for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
@@ -85,7 +67,6 @@ void DebugStage::render()
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
 	}
 
-	Stage::render();
 
 	//CAMERA->frameRender(_tileImage, Vector2(800,400));
 }

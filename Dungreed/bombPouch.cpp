@@ -72,7 +72,7 @@ void bombPouch::dash(Player * player)
 		projectile->setPosition(_renderPos);
 		projectile->setSize(Vector2(200, 200));
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
-		projectile->init("BombPouch0", _angleY, 700, true, false, 20, false, "BabyBatBulletFx", Vector2(100, 100));
+		projectile->init("BombPouch0", _angleY, 700, true, false, 20, false, "BabyBatBulletFx", Vector2(100, 100), 100);
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
 		player->attack(projectile, attackInfo);
