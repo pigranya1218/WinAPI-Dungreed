@@ -19,6 +19,9 @@ enum class ITEM_RANK : int
 	RARE = 0x00300, // 희귀
 	LEGEND = 0x00400 // 전설
 };
+//한손 전설 - 0x014xx;
+//근거리 0x0xx00~
+//원거리 0x0xx60~
 
 
 
