@@ -81,7 +81,7 @@ void Stage::loadMap(string mapName)
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 
-	ReadFile(stageFile, _tile, sizeof(tagTileMap) * 2000, &read, NULL);
+	ReadFile(stageFile, _tile, sizeof(tagTileMap) * 4500, &read, NULL);
 
 	CloseHandle(stageFile);
 
