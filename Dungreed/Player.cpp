@@ -7,6 +7,9 @@
 #include "Punch.h"
 #include "ShortSword.h"
 #include "CosmosSword.h"
+#include "KeresScythe.h"
+#include "MartialArtOfTiger.h"
+#include "PickaxeRed.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -175,19 +178,20 @@ void Player::init()
 	testAcc13->init();
 	_inventory[1] = testAcc13;
 
-	MatchLockGun* testWeapon1 = new MatchLockGun;
+	KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
 	_inventory[11] = testWeapon1;
 	
+
 	/*ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;*/
 
-	ShortSword* testWeapon3 = new ShortSword;
+	MartialArtOfTiger* testWeapon3 = new MartialArtOfTiger;
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
-	OakBow* testWeapon4 = new OakBow;
+	PickaxeRed* testWeapon4 = new PickaxeRed;
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
 

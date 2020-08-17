@@ -293,14 +293,20 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
 
 	//***MeleeWeapon
-	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
-	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
-	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);	   //우주검 
-	IMAGE_MANAGER->addImage("CosmosSword00", L"resources/images/MeleeWeapon/CosmosSword00.png"); // 우주검 아이콘
-	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // 사이드
-	IMAGE_MANAGER->addImage("MartialArtOfTiger", L"resources/images/MeleeWeapon/MartialArtOfTiger.png"); // 타이거펀치 아이콘
+	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");  //숏 스피어
+	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");  //숏 소드
+	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);//우주검 
+	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // 케레스(칼,창)
 	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // 붉은 곡괭이
 	
+	//***MeleeWeaponIcon
+	IMAGE_MANAGER->addImage("CosmosSwordIcon", L"resources/images/MeleeWeapon/CosmosSwordIcon.png"); // 우주검 아이콘
+	IMAGE_MANAGER->addImage("KeresScytheIcon", L"resources/images/MeleeWeapon/KeresScytheIcon.png"); // 케레스 아이콘
+	IMAGE_MANAGER->addImage("TigerPunchIcon", L"resources/images/MeleeWeapon/TigerPunchIcon.png"); // 타이거 펀치 아이콘
+	IMAGE_MANAGER->addImage("PickaxeRedIcon", L"resources/images/MeleeWeapon/PickaxeRedIcon.png"); // 붉은 곡괭이 아이콘
+
+
+
 
 
 	//***MeleeWeaponEffect
