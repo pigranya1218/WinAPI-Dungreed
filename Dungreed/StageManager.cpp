@@ -11,8 +11,8 @@
 
 void StageManager::init()
 {
-	//_currStageType = STAGE_TYPE::TEST;
-	_currStageType = STAGE_TYPE::VILLAGE;
+	_currStageType = STAGE_TYPE::TEST;
+	//_currStageType = STAGE_TYPE::VILLAGE;
 	
 	makeStage();
 
