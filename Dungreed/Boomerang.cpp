@@ -2,13 +2,19 @@
 
 void Boomerang::init()
 {
-	_itemCode = 0x02262;
 	_iconImg = _img = IMAGE_MANAGER->findImage("MetalBoomerang");
 	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	//_rank = ITEM_RANK::RARE;
 
+	_itemCode = 0x02262;
+	
+	_itemName = L"부메랑";
+	//_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
+	_displayText = L"\"부메랑은 돌아오지만 사랑은 돌아오지 않는다.\"";
+
 	_addStat.minDamage = 16;
 	_addStat.maxDamage = 19;
+	_addStat.attackSpeed = 0.5;
 
 	_price = 550;
 
@@ -23,6 +29,7 @@ void Boomerang::init()
 	_currBullet = _maxBullet;
 	_baseReloadDelay = 2;
 	_currReloadDelay = 0;
+	_returnCount = 0;
 
 	//_aniImg = IMAGE_MANAGER->findImage("Boomerang_Moving");
 	//_ani = new Animation;
@@ -80,10 +87,18 @@ void Boomerang::update(Player * player, float const elapsedTime)
 	{
 		if (_projectile->getReturn())
 		{
+			_returnCount += elapsedTime;
 			FloatRect projectileRc = FloatRect(_projectile->getPosition(), _projectile->getSize(), PIVOT::CENTER);
 			FloatRect playerRc = FloatRect(player->getPosition(), player->getSize(), PIVOT::CENTER);
 			if (FloatRect::intersect(projectileRc, playerRc))
 			{
+				_projectile->setActive(false);
+				_projectile = nullptr;
+			}
+
+			else if (_returnCount > 2.5)
+			{
+				_returnCount = 0;
 				_projectile->setActive(false);
 				_projectile = nullptr;
 			}
@@ -140,7 +155,7 @@ void Boomerang::attack(Player * player)
 	_projectile->setPosition(_gunPos);
 	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
 	_projectile->setTeam(OBJECT_TEAM::PLAYER);
-	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 20, true, true, 20, "", Vector2(), 500);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 25, true, true, 20, "", Vector2(), 1);
 
 	/*NormalProjectile* _projectile = new NormalProjectile;
 	_projectile->setPosition(_gunPos);

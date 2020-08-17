@@ -5,12 +5,21 @@ void OakBow::init()
 {
 	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	//_rank = ITEM_RANK::NORMAL;
-	_itemCode = 0x02161;
 	_iconImg = IMAGE_MANAGER->findImage("OakBow");
 	_img = IMAGE_MANAGER->findImage("OakBowAni");
 
+	_itemName = L"떡갈나무 활";
+	_itemCode = 0x02161;
+
+	//_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
+	_displayText = L"\"단단해서 때리는 데 쓸 수도 있을 것 같습니다.\"";
+
+	// 기본 보조옵션
+	//_addStat.dashDamage = 20;
+	_addStat.attackSpeed = 3.03;
 	_addStat.minDamage = 20;
 	_addStat.maxDamage = 35;
+
 	_price = 360;
 
 	// private 변수 설정
@@ -124,12 +133,14 @@ void OakBow::update(Player * player, float const elapsedTime)
 			Vector2 arrowPos = renderPosWeapon;
 			arrowPos.x = (isLeft) ? (renderPosWeapon.x + anglePos.x + 5) : (renderPosWeapon.x + anglePos.x - 15);
 			//arrowPos.y = (isLeft) ? (renderPosWeapon.y + 10) : (renderPosWeapon.y);
+			
+			Image* effectImg = IMAGE_MANAGER->findImage("ArrowHitEffect");
 
 			NormalProjectile* projectile = new NormalProjectile;
 			projectile->setPosition(arrowPos);
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(), 800);
+			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
