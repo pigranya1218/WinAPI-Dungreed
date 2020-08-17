@@ -75,9 +75,11 @@ void BoomerangProjectile::update(float elapsedTime)
 		moveDir.y += -sinf(_angleRadian) * _speed * elapsedTime;
 	}
 
+	Vector2 returnPos;
 	if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
 	{
 		_ProjectileReturn = true;
+		returnPos = _position;
 	}
 
 	if (_ProjectileReturn)
@@ -93,6 +95,10 @@ void BoomerangProjectile::update(float elapsedTime)
 		}
 		moveDir.x += cosf(angleValue) * _speed * elapsedTime;
 		moveDir.y += -sinf(angleValue) * _speed * elapsedTime;
+		if (getDistance(returnPos.x, returnPos.y, _position.x, _position.y) > 1000)
+		{
+			setActive(false);
+		}
 	}
 
 	_position += moveDir;
