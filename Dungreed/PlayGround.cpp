@@ -358,6 +358,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("GreenMomBatF", L"resources/images/Accessories/GreenMomBat2.png", 7, 1);      // 엄마 그린박쥐 프레임이미지
 	IMAGE_MANAGER->addImage("HeartOfCosmos", L"resources/images/Accessories/HeartOfCosmos.png");               // 우주심장
 	IMAGE_MANAGER->addFrameImage("HeartOfCosmos0", L"resources/images/Accessories/HeartOfCosmos0.png", 20, 1); // 우주심장 공격 프레임
+	IMAGE_MANAGER->addFrameImage("HeartOfCosmosF", L"resources/images/Accessories/HeartOfCosmosF.png", 11, 1); // 우주심장 공격 프레임
 	IMAGE_MANAGER->addImage("IceBall", L"resources/images/Accessories/IceBall.png");                           // 얼음공
 	IMAGE_MANAGER->addFrameImage("IceBall0", L"resources/images/Accessories/IceBall0.png", 7, 1);              // 얼음공 세트 완성 프레임이미지
 	IMAGE_MANAGER->addImage("Jarngreipr", L"resources/images/Accessories/Jarngreipr.png");                     // 야른그레이프르
@@ -402,7 +403,7 @@ HRESULT playGround::init()
 
 	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Move"		, L"resources/images/Enemy/Bat/Bomb/move.png"		 , 6, 1);	// 박쥐 (자폭) 이동
 	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Move_Shot"	, L"resources/images/Enemy/Bat/Bomb/move_shot.png"	 , 6, 1);	// 박쥐 (자폭) 이동 피격
-	IMAGE_MANAGER->addFrameImage("Bat/Bomb/attack_Begin", L"resources/images/Enemy/Bat/Bomb/attack_begin.png", 6, 3);	// 박쥐 (자폭) 폭발 준비
+	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Attack_Begin", L"resources/images/Enemy/Bat/Bomb/attack_begin.png", 6, 3);	// 박쥐 (자폭) 폭발 준비
 
 	IMAGE_MANAGER->addFrameImage("Bat/Giant_Normal/Idle"		, L"resources/images/Enemy/Bat/Giant_Normal/idle.png"		,  7, 1);	// 박쥐 (거대 기본) 기본
 	IMAGE_MANAGER->addFrameImage("Bat/Giant_Normal/Idle_Shot"	, L"resources/images/Enemy/Bat/Giant_Normal/idle_shot.png"	,  7, 1);	// 박쥐 (거대 기본) 기본 피격
@@ -458,11 +459,13 @@ HRESULT playGround::init()
 
 	IMAGE_MANAGER->addImage("Skel/Small/Idle"			, L"resources/images/Enemy/Skel/Small/idle.png"				);	// 작은해골 기본
 	IMAGE_MANAGER->addImage("Skel/Small/Idle_Shot"		, L"resources/images/Enemy/Skel/Small/idle_shot.png"		);	// 작은해골 기본 피격
+	IMAGE_MANAGER->addImage("Skel/Small/Hand"			, L"resources/images/Enemy/Skel/Small/hand.png"				);	// 작은해골 손
 	IMAGE_MANAGER->addFrameImage("Skel/Small/Move"		, L"resources/images/Enemy/Skel/Small/move.png"		, 6, 1	);	// 작은해골 이동
 	IMAGE_MANAGER->addFrameImage("Skel/Small/Move_Shot"	, L"resources/images/Enemy/Skel/Small/move_shot.png", 6, 1	);	// 작은해골 이동 피격
 
-	IMAGE_MANAGER->addImage("Skel/Small/Bow_Idle"		, L"resources/images/Enemy/Skel/Small/Bow/idle.png"			);	// 작은해골 활 기본
-	IMAGE_MANAGER->addFrameImage("Skel/Small/Bow_Attack", L"resources/images/Enemy/Skel/Small/Bow/attack.png", 6, 1	);	// 작은해골 활 공격
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Bow"	, L"resources/images/Enemy/Skel/Small/bow.png"		,  6, 1);	// 작은해골 활
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Dagger", L"resources/images/Enemy/Skel/Small/dagger.png"	, 12, 1);	// 작은해골 단검
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Gsword", L"resources/images/Enemy/Skel/Small/gSword.png"	, 15, 1);	// 작은해골 대검
 
 	// * 미노타우르스
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Idle"		, L"resources/images/Enemy/Minotaurs/idle.png"			, 6, 1);	// 미노타우르스 기본
@@ -512,10 +515,31 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("SmallBullet_FX", "SmallBullet_FX", 15, 50);
 	EFFECT_MANAGER->addEffect("BabyBatBulletFx","BabyBatBulletFx",15,50);
 	EFFECT_MANAGER->addEffect("BombPouch2", "BombPouch2", 15, 50);
+	EFFECT_MANAGER->addEffect("HeartOfCosmosF", "HeartOfCosmosF", 15, 50);
+
+	//** Boss
+	// * Belial
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle", L"resources/images/boss/Belial/idle.png", 10, 1);								//벨리알 머리 대기 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack", L"resources/images/boss/Belial/attack.png", 10, 1);							//벨리알 머리 공격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot", L"resources/images/boss/Belial/getHeadDamage_Idle.png", 10, 1);			//벨리알 머리 대기 피격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Head/IdAttackle_Shot", L"resources/images/boss/Belial/getHeadDamage_attack.png", 10, 1);	//벨리알 머리 공격 피격 상태
+
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle", L"resources/images/boss/Belial/HandIdle.png", 10, 1);							//벨리알 손 대기 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack", L"resources/images/boss/Belial/Handattack.png", 18, 1);						//벨리알 손 공격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle_Shot", L"resources/images/boss/Belial/getHandDamage_Idle.png", 10, 1);			//벨리알 손 대기 피격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/IdAttackle_Shot", L"resources/images/boss/Belial/getHandDamage_attack.png", 18, 1);	//벨리알 손 공격 피격 상태
+
+	IMAGE_MANAGER->addFrameImage("Belial/Back", L"resources/images/boss/Belial/back.png", 10, 1);									//벨리알 후광 구
+
+
+	// * Nipleheim
+
+
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
 	TIME_MANAGER->update();
+
 
 	// 모든 씬 SCENE_MANAGER에 
 	SCENE_MANAGER->addScene("MAIN", new MainScene);

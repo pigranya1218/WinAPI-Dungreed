@@ -131,7 +131,7 @@ void Image::render(const Vector2 & position, const Vector2 & sourPos, const Vect
 	Vector2 size = _size * _scale;
 
 	D2D1::Matrix3x2F scaleMatrix = D2D1::Matrix3x2F::Scale(_scale, _scale, D2D1::Point2F(0, 0));
-	Vector2 anglePos = _anglePos * _scale;
+	Vector2 anglePos = _anglePos * _scale;	
 	D2D1::Matrix3x2F rotateMatrix = D2D1::Matrix3x2F::Rotation(360 - _angle, D2D1::Point2F(anglePos.x, anglePos.y));
 	D2D1::Matrix3x2F translateMatrix;
 	D2D1::Matrix3x2F lrMatrix;

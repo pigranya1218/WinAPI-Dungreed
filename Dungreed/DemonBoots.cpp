@@ -5,7 +5,9 @@ void DemonBoots::init()
 {
 	_itemCode = 0x03303;
 	_iconImg = IMAGE_MANAGER->findImage("DemonBoots");
-	
+	_itemName = L"악마의 부츠";
+	_displayInfos.push_back(L"\"밟은 곳에 불이 붙습니다\"");
+	_displayText = L"\"신는 사람이 뒤에 열기를 쫒기게 되는 신발\"";
 	_price = 4300;
 	
 }
@@ -32,7 +34,7 @@ void DemonBoots::backRender(Player * player)
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 	_pos.y = _renderPos.y*_angleY;
 	_pos.x = _renderPos.x;
-	projectile->init("DemonBoots0", _pos.y, 0, true, false, 8, false, "DemonBoots0", Vector2(150, 150), false);
+	projectile->init("DemonBoots0", _pos.y, 0, true, false, 8, false, "DemonBoots0", Vector2(150, 150),50, false);
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);

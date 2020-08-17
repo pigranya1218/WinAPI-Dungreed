@@ -8,6 +8,16 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	_ani = new Animation;
 	_weaponAni = new Animation;
 
+	// 손 이미지 
+	_handImg = IMAGE_MANAGER->findImage("Skel/Small/Hand");
+
+	// 활 공격 이미지 초기화
+	_weaponImg = IMAGE_MANAGER->findImage("Skel/Small/Bow");
+	_weaponAni->init(_weaponImg->getWidth(), _weaponImg->getHeight(), _weaponImg->getMaxFrameX(), _weaponImg->getMaxFrameY());
+	_weaponAni->setDefPlayFrame(false, false);
+	_weaponAni->setFPS(10);
+	_weaponAni->stop();
+
 	// 상태 초기화
 	setState(ENEMY_STATE::IDLE);
 
@@ -25,6 +35,12 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	// 공격 관련 초기화
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
+	_attack.angle = (_direction == DIRECTION::LEFT) ? (PI) : (0);
+
+	ZeroMemory(&_moving, sizeof(_moving));
+	_moving.gravity = Vector2(0, 4000);
+
+	_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
 
 	// 플레이어 감지 변수 초기화
 	_isDetect = 0;
@@ -38,91 +54,116 @@ void SkelSmallBow::release()
 
 void SkelSmallBow::update(float const timeElapsed)
 {
-	_weaponPos = _position;
-	_weaponPos.x += ((bool)_direction) ? _weaponImg->getFrameSize().x : -_weaponImg->getFrameSize().x;
-	_weaponPos.y += 10;
+	const Vector2 playerPos = _enemyManager->getPlayerPos();
 
 	if (!_isDetect)
 	{
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
 	}
 
+	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
 			if (_isDetect)
 			{
-				const Vector2 playerPos = _enemyManager->getPlayerPos();
-				_direction = playerPos.x > _position.x ? DIRECTION::RIGHT : DIRECTION::LEFT;
+				_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 
-				_attack.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y) * (180 / PI) + 360;
+				_attack.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
 				if (_attack.angle > 360) _attack.angle -= 360;
 
 				if (_attack.update(timeElapsed))
 				{
+					_shooting.createBullet(_position, _attack.angle);
 					setState(ENEMY_STATE::ATTACK);
 				}
 			}
-			break;
 		}
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			if (!_weaponAni->isPlay())
+			if (_weaponAni->getPlayIndex() == 3 && !_shooting.bullets.empty())
+			{
+				if (_weaponAni->isPlay())
+				{
+					_weaponAni->pause();
+				}
+				if (_shooting.delayUpdate(timeElapsed))
+				{
+					_weaponAni->resume();
+					_shooting.fireBullet(_enemyManager);
+				}
+			}
+			if (!_weaponAni->isPlay() && _shooting.bullets.empty())
 			{
 				setState(ENEMY_STATE::IDLE);
 			}
-
-			_weaponAni->frameUpdate(timeElapsed);
-			break;
 		}
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
+		
 		}
+		break;
 	}
+
+	if (_isStand && _moving.force.y == 0)
+	{
+		_position.y -= 15;
+		moveDir.y += 17;
+	}
+	_moving.force.y += _moving.gravity.y * timeElapsed;
+	moveDir.y += _moving.force.y * timeElapsed;
+
+	// 이동할 포지션 최종
+	_enemyManager->moveEnemy(this, moveDir);
+	if (_isStand)
+	{
+		_moving.force.y = 0;
+	}
+
+	_weaponAni->frameUpdate(timeElapsed);
+
+	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
 void SkelSmallBow::render()
 {
-	// 무기 각도
-	float drawAngle = _attack.angle;
-	if (_direction == DIRECTION::LEFT)
-	{
-		drawAngle = 180 - _attack.angle;
-		if (drawAngle < 0) drawAngle += 360;
-	}
-	// 무기 좌표
-	Vector2 drawPos = _position;
-	//drawPos.x += (_direction == DIRECTION::LEFT) ? -(_weaponImg->getFrameSize().x) : (_weaponImg->getFrameSize().x);
-	
-	//drawPos.y += 10;
-
 	_img->setScale(_scale);
+	_handImg->setScale(_scale);
+	_handImg->setAngle(_attack.angle * (180 / PI));
 	_weaponImg->setScale(_scale);
-	_weaponImg->setAngle(drawAngle);	
-	
-	if (_state == ENEMY_STATE::ATTACK)
+
+	_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
+
+	// 활 시위 당기는 손 좌표 설정
+	Vector2 handPos = _position;
+	handPos.x += cosf(_attack.angle) * 15;
+	handPos.y -= sinf(_attack.angle) * 20;
+
+	// 무기 좌표 설정
+	Vector2 weaponPos = handPos;
+	weaponPos.x += cosf(_attack.angle) * 9;
+	weaponPos.y -= sinf(_attack.angle) * 9;
+	_weaponImg->setAngle(_attack.angle * (180 / PI));
+	_weaponImg->aniRender(CAMERA->getRelativeV2(weaponPos), _weaponAni);
+
+	// 활 시위 당기는 프레임에 따라 손 좌표도 수정
+	if (_weaponAni->getPlayIndex() <= 3)
 	{
-
-		drawPos.x -= (_direction == DIRECTION::LEFT) ? _weaponImg->getFrameSize().x * 0.30f*_scale : -(_weaponImg->getFrameSize().x*0.3f*_scale);
-		drawPos.y += 10;
-
-
-		_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
-		_weaponImg->aniRender(CAMERA->getRelativeV2(drawPos), _weaponAni, (_direction == DIRECTION::LEFT));
+		handPos.x += cosf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (5) : (-5)));
+		handPos.y -= sinf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (5) : (-5)));
 	}
-	else
-	{
-		drawPos.x -= (_direction == DIRECTION::LEFT) ? _weaponImg->getWidth()*0.30f*_scale : -(_weaponImg->getWidth()*0.3f*_scale);
-		drawPos.y += 10;
+	_handImg->render(CAMERA->getRelativeV2(handPos));	// 손 출력
 
-
-		_weaponImg->setAnglePos(Vector2((0.4f * _weaponImg->getWidth()), _weaponImg->getHeight() * 0.5f));
-		_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
-		_weaponImg->render(CAMERA->getRelativeV2(drawPos), (_direction == DIRECTION::LEFT));
-	}
-
+	// 고정되는 손 좌표 설정
+	handPos = _position;
+	_handImg->setScale(_scale);
+	_handImg->setAngle(_attack.angle * (180 / PI));
+	handPos.x += cosf(_attack.angle) * 35;
+	handPos.y -= sinf(_attack.angle) * 40;
+	_handImg->render(CAMERA->getRelativeV2(handPos));	// 다른 손 출력
 }
 
 void SkelSmallBow::setState(ENEMY_STATE state)
@@ -138,7 +179,6 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 			_weaponAni->stop();
 
 			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
-			_weaponImg = IMAGE_MANAGER->findImage("Skel/Small/Bow_Idle");
 
 			break;
 		}
@@ -148,10 +188,6 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 			_ani->stop();
 
 			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
-			_weaponImg = IMAGE_MANAGER->findImage("Skel/Small/Bow_Attack");
-			_weaponAni->init(_weaponImg->getWidth(), _weaponImg->getHeight(), _weaponImg->getMaxFrameX(), _weaponImg->getMaxFrameY());
-			_weaponAni->setDefPlayFrame(false, false);
-			_weaponAni->setFPS(5);
 			_weaponAni->start();
 
 			break;

@@ -10,7 +10,9 @@ void Voluspa::init()
 	_iconImg = IMAGE_MANAGER->findImage("Voluspa");
 	//악세서리 옵션
 
-
+	_itemName = L"볼루스파";
+	_displayInfos.push_back(L"적을 자동으로 노리는  얼음창 소환");
+	_displayText = L"\"그대 아직도 깨달음을 원하는가? 그리고 무엇을 알려는가?\"";
 	//악세서리 가격
 	_price = 4300;
 

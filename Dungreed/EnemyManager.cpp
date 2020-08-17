@@ -47,6 +47,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		break;
 		case ENEMY_TYPE::BAT_BOMB:
 		{
+			enemy = new BatBomb;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}		
 		break;
 		case ENEMY_TYPE::BAT_RED:
@@ -132,12 +135,16 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		break;
 		case ENEMY_TYPE::SKEL_SMALL_DAGGER:
 		{
-
+			enemy = new SkelSmallDagger;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_SMALL_GSWORD:
 		{
-
+			enemy = new SkelSmallGsword;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::MINOTAURS:
@@ -159,6 +166,14 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 			enemy->init();
 			enemy->setEnemyManager(this);
 		}
+		break;
+		case ENEMY_TYPE::BELIAL:
+		{
+			enemy = new Belial;
+			enemy->init(pos);
+			enemy->setEnemyManager(this);
+		}
+		break;
 	}
 
 	_enemies.push_back(enemy);
@@ -179,8 +194,6 @@ bool EnemyManager::detectPlayer(GameObject* object, const float distance)
 		return true;
 	}
 	return false;
-
-	
 }
 
 void EnemyManager::fireEnemy(Projectile * projectile, AttackInfo * attackInfo)

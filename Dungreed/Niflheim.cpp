@@ -58,7 +58,7 @@ void Niflheim::render()
 	{
 		_pillar[i].img->setScale(4);
 		_pillar[i].img->setAngle((_pillar[i].angle * (180 / PI)) + 90);
-		_pillar[i].img->setAnglePos(Vector2((_pillar[i].img->getFrameSize().x * 4) * 0.5f, (_pillar[i].img->getFrameSize().y * 4) * 0.5f));
+		//_pillar[i].img->setAnglePos(Vector2((_pillar[i].img->getFrameSize().x * 4) * 0.5f, (_pillar[i].img->getFrameSize().y * 4) * 0.5f));
 		_pillar[i].img->aniRender(CAMERA->getRelativeV2(_pillar[i].position), _pillar[i].ani);
 	}
 }

@@ -14,7 +14,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 	_detectRange = 50;
 
 	_scale = 4;
-	_size = _img->getFrameSize()*_scale;
+	_size = _img->getFrameSize() * _scale;
 	_rect = rectMakePivot(_position,_size,PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -153,7 +153,7 @@ void Ovibos::setState(ENEMY_STATE state)
 
 bool Ovibos::playerCollision(const Vector2 & playerPos)
 {
-	if (_rect.left <= playerPos.x && playerPos.x <= _rect.right)
+	if (_rect.left <= playerPos.x && playerPos.x <= _rect.right )
 	{
 		return true;
 	}

@@ -453,6 +453,18 @@
     <ClInclude Include="RestaurantRoom.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="Belial.h">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallDagger.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallGsword.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatBomb.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
     <ClInclude Include="BoomerangProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
@@ -757,6 +769,18 @@
     </ClCompile>
     <ClCompile Include="RestaurantRoom.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Belial.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallDagger.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallGsword.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatBomb.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BoomerangProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>

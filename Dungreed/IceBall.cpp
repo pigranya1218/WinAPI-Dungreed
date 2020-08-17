@@ -6,7 +6,9 @@ void IceBall::init()
 	//악세서리 타입
 	_itemCode = 0x03108;
 	_iconImg = IMAGE_MANAGER->findImage("IceBall");
-
+	_itemName = L"얼음 덩어리";
+	_displayInfos.push_back(L"모험가 주위를 돌며 적을 공격한다");
+	_displayText = L"\"싸늘함이 주변을 맴돈다";
 	//악세서리 옵션
 	_addStat.criticalChance = 1;
 	_addStat.defense = 1;

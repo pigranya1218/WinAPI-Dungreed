@@ -7,6 +7,11 @@ void watCher::init()
 	_iconImg = IMAGE_MANAGER->findImage("Watcher");
 	
 	//악세서리 옵션
+
+	_itemName = L"주시자";
+	_displayInfos.push_back(L"모함가 주위를 돌며 원거리 공격 방어");
+	_displayText = L"\"주변에 닿는 원거리 투사체들을 방어해준다.\"";
+
 	_addStat.evasion = 5;
 
 	_radius = 0;
