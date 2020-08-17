@@ -13,9 +13,9 @@ private:
 	int _minDamage;
 	int _maxDamage;
 	int _gunType;				//원거리 무기 타입
-	float _angle;
 	float _renderDegree;
 	float _degree;
+	float _attackDegree;
 	bool _isLeft;
 	Vector2 _pos;
 	Vector2 _gunPos;

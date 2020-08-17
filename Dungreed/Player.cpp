@@ -454,7 +454,7 @@ void Player::render()
 	}
 
 	// 캐릭터 그리기
-	 _costume->render(CAMERA->getRelativeV2(_position), _direction);
+	// _costume->render(CAMERA->getRelativeV2(_position), _direction);
 
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < 4; i++)

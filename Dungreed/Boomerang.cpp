@@ -63,7 +63,6 @@ void Boomerang::update(Player * player, float const elapsedTime)
 		if (_renderDegree < 0) _renderDegree += 360;
 	}
 
-
 	_pos = player->getPosition();
 
 	if (!_isAttack)
