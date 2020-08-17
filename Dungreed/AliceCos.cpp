@@ -29,8 +29,8 @@ void AliceCos::init()
 	_baseStat.attackSpeed = 0;
 	_baseStat.reloadSpeed = 0; // --
 	_baseStat.moveSpeed = 350;
-	_baseStat.dashXPower = 1600;
-	_baseStat.dashYPower = 1400;
+	_baseStat.dashXPower = 1700;
+	_baseStat.dashYPower = 1500;
 	_baseStat.jumpPower = 1400;
 	_baseStat.xGravity = 4000;
 	_baseStat.yGravity = 4000;

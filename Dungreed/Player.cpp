@@ -327,6 +327,7 @@ void Player::update(float const elapsedTime)
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
+		_currDashTime = 0.05f;
 		if (angle < 0)
 		{
 			_position.y += 1.5;
@@ -341,24 +342,40 @@ void Player::update(float const elapsedTime)
 		}
 	}
 	
-	if (_force.x != 0) // 대쉬 상태라면
+	if (_currDashTime > 0) // 대쉬 상태라면
 	{
-		if (_force.x > 0)
+		_currDashTime = max(0, _currDashTime - elapsedTime);
+		if (_currDashTime == 0)
 		{
-			_force.x -= _adjustStat.xGravity * elapsedTime;
-			if (_force.x < 0)
-			{
-				_force.x = 0;
-			}
+			//_force.y = 0;
+			// 대쉬 종료
 		}
-		else
+
+	}
+
+	
+	if (_force.x != 0) // 대쉬의 영향을 받고 있다면
+	{
+		if (_currDashTime == 0)
 		{
-			_force.x += _adjustStat.xGravity * elapsedTime;
 			if (_force.x > 0)
 			{
-				_force.x = 0;
+				_force.x -= _adjustStat.xGravity * elapsedTime;
+				if (_force.x < 0)
+				{
+					_force.x = 0;
+				}
+			}
+			else
+			{
+				_force.x += _adjustStat.xGravity * elapsedTime;
+				if (_force.x > 0)
+				{
+					_force.x = 0;
+				}
 			}
 		}
+
 		moveDir.x = _force.x * elapsedTime;
 	}
 
@@ -380,7 +397,10 @@ void Player::update(float const elapsedTime)
 		moveDir.y += 20;
 	}
 	
-	_force.y += _adjustStat.yGravity * elapsedTime;
+	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
+	{
+		_force.y += _adjustStat.yGravity * elapsedTime;
+	}
 	moveDir.y += _force.y * elapsedTime;
 
 
