@@ -398,7 +398,7 @@ HRESULT playGround::init()
 
 	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Move"		, L"resources/images/Enemy/Bat/Bomb/move.png"		 , 6, 1);	// 박쥐 (자폭) 이동
 	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Move_Shot"	, L"resources/images/Enemy/Bat/Bomb/move_shot.png"	 , 6, 1);	// 박쥐 (자폭) 이동 피격
-	IMAGE_MANAGER->addFrameImage("Bat/Bomb/attack_Begin", L"resources/images/Enemy/Bat/Bomb/attack_begin.png", 6, 3);	// 박쥐 (자폭) 폭발 준비
+	IMAGE_MANAGER->addFrameImage("Bat/Bomb/Attack_Begin", L"resources/images/Enemy/Bat/Bomb/attack_begin.png", 6, 3);	// 박쥐 (자폭) 폭발 준비
 
 	IMAGE_MANAGER->addFrameImage("Bat/Giant_Normal/Idle"		, L"resources/images/Enemy/Bat/Giant_Normal/idle.png"		,  7, 1);	// 박쥐 (거대 기본) 기본
 	IMAGE_MANAGER->addFrameImage("Bat/Giant_Normal/Idle_Shot"	, L"resources/images/Enemy/Bat/Giant_Normal/idle_shot.png"	,  7, 1);	// 박쥐 (거대 기본) 기본 피격
@@ -454,11 +454,13 @@ HRESULT playGround::init()
 
 	IMAGE_MANAGER->addImage("Skel/Small/Idle"			, L"resources/images/Enemy/Skel/Small/idle.png"				);	// 작은해골 기본
 	IMAGE_MANAGER->addImage("Skel/Small/Idle_Shot"		, L"resources/images/Enemy/Skel/Small/idle_shot.png"		);	// 작은해골 기본 피격
+	IMAGE_MANAGER->addImage("Skel/Small/Hand"			, L"resources/images/Enemy/Skel/Small/hand.png"				);	// 작은해골 손
 	IMAGE_MANAGER->addFrameImage("Skel/Small/Move"		, L"resources/images/Enemy/Skel/Small/move.png"		, 6, 1	);	// 작은해골 이동
 	IMAGE_MANAGER->addFrameImage("Skel/Small/Move_Shot"	, L"resources/images/Enemy/Skel/Small/move_shot.png", 6, 1	);	// 작은해골 이동 피격
 
-	IMAGE_MANAGER->addImage("Skel/Small/Bow_Idle"		, L"resources/images/Enemy/Skel/Small/Bow/idle.png"			);	// 작은해골 활 기본
-	IMAGE_MANAGER->addFrameImage("Skel/Small/Bow_Attack", L"resources/images/Enemy/Skel/Small/Bow/attack.png", 6, 1	);	// 작은해골 활 공격
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Bow"	, L"resources/images/Enemy/Skel/Small/bow.png"		,  6, 1);	// 작은해골 활
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Dagger", L"resources/images/Enemy/Skel/Small/dagger.png"	, 12, 1);	// 작은해골 단검
+	IMAGE_MANAGER->addFrameImage("Skel/Small/Gsword", L"resources/images/Enemy/Skel/Small/gSword.png"	, 15, 1);	// 작은해골 대검
 
 	// * 미노타우르스
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Idle"		, L"resources/images/Enemy/Minotaurs/idle.png"			, 6, 1);	// 미노타우르스 기본

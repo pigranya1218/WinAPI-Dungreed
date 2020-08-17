@@ -456,6 +456,15 @@
     <ClInclude Include="Belial.h">
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="SkelSmallDagger.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallGsword.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BatBomb.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -751,6 +760,15 @@
     </ClCompile>
     <ClCompile Include="Belial.cpp">
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallDagger.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallGsword.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BatBomb.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

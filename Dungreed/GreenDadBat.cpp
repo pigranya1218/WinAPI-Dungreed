@@ -119,7 +119,7 @@ void GreenDadBat::attack(Player * player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(170, 170));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, false, "BabyBatBulletFx", Vector2(170, 170), 300); // 사정거리 추가했어요 >> 황수현
+	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(500, 500), 300, false); // 사정거리 추가했어요 >> 황수현
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);

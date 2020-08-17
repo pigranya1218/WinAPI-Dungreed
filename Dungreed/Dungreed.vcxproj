@@ -155,6 +155,7 @@
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
+    <ClInclude Include="BatBomb.h" />
     <ClInclude Include="BatGiantNormal.h" />
     <ClInclude Include="BatGiantRed.h" />
     <ClInclude Include="Belial.h" />
@@ -242,6 +243,8 @@
     <ClInclude Include="SkelDog.h" />
     <ClInclude Include="SkelMagicianIce.h" />
     <ClInclude Include="SkelSmallBow.h" />
+    <ClInclude Include="SkelSmallDagger.h" />
+    <ClInclude Include="SkelSmallGsword.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="SpikeBall.h" />
     <ClInclude Include="Stage.h" />
@@ -264,6 +267,7 @@
     <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
+    <ClCompile Include="BatBomb.cpp" />
     <ClCompile Include="BatGiantNormal.cpp" />
     <ClCompile Include="BatGiantRed.cpp" />
     <ClCompile Include="Belial.cpp" />
@@ -342,6 +346,8 @@
     <ClCompile Include="SkelDog.cpp" />
     <ClCompile Include="SkelMagicianIce.cpp" />
     <ClCompile Include="SkelSmallBow.cpp" />
+    <ClCompile Include="SkelSmallDagger.cpp" />
+    <ClCompile Include="SkelSmallGsword.cpp" />
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="SpikeBall.cpp" />
     <ClCompile Include="Stage.cpp" />
