@@ -58,7 +58,6 @@ void Ghost::update(float const timeElapsed)
 				// 계속 움직임
 				setState(ENEMY_STATE::MOVE);
 				_moving.angle = RANDOM->getFromFloatTo(0, PI2);
-
 			}
 		}
 			break;
@@ -76,31 +75,6 @@ void Ghost::update(float const timeElapsed)
 				_moving.speed = 350;
 				setState(ENEMY_STATE::ATTACK);
 			}
-
-			//_enemyManager->moveEnemy(this, moveDir);
-			//if (!_ani->isPlay())
-			//{
-			//	if (_moving.update(timeElapsed))
-			//	{
-			//		setState(ENEMY_STATE::ATTACK);
-			//		_moving.speed = 350;
-			//		_moving.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
-			//	}
-			//	
-
-			//	/*if (_moving.count < count)
-			//	{
-			//		_ani->stop();
-			//		_ani->start();
-			//	}
-			//	else if (_moving.count >= count)
-			//	{
-			//		setState(ENEMY_STATE::ATTACK);
-			//		_moving.speed = 350;
-			//		_moving.count = 0;
-			//		_moving.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
-			//	}*/
-			//}
 		}
 			break;
 		case ENEMY_STATE::ATTACK:
@@ -116,25 +90,6 @@ void Ghost::update(float const timeElapsed)
 				_moving.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
 				//_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 				setState(ENEMY_STATE::MOVE);
-			}
-
-			if (!_ani->isPlay())
-			{
-				/*
-				if (_Attacking.count < count)
-				{
-					_ani->stop();
-					_ani->start();
-				}
-				else if (_Attacking.count >= count)
-				{
-					setState(ENEMY_STATE::MOVE);
-					_moving.speed = 50;
-					_Attacking.count = 0;
-					//_moving.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
-					_moving.angle = RANDOM->getFromFloatTo(0, PI2);
-				}
-				*/
 			}
 		}
 			break;

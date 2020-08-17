@@ -12,7 +12,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 	_detectRange = 50;
 
 	_scale = 4;
-	_size = _img->getFrameSize()*_scale;
+	_size = _img->getFrameSize() * _scale;
 	_rect = rectMakePivot(_position,_size,PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -65,7 +65,7 @@ void Ovibos::update(float const timeElapsed)
 					setState(ENEMY_STATE::ATTACK);
 					_direction = (playerpos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 				}
-				}
+			}
 	
 		}
 
@@ -76,8 +76,7 @@ void Ovibos::update(float const timeElapsed)
 
 	case(ENEMY_STATE::ATTACK):
 	{
-		_moving.speed = 1200;
-		_moveDir.x = (_moving.speed) * timeElapsed * (_direction == DIRECTION::RIGHT ? (1) : (-1));
+		_moving.speed = 1000;
 
 		if (playerCollision(playerpos))
 		{
@@ -92,7 +91,13 @@ void Ovibos::update(float const timeElapsed)
 	_moving.jumpPower += _moving.gravity * timeElapsed;
 	_moveDir.y += _moving.jumpPower * timeElapsed;
 
+	_moveDir.x = (_moving.speed) * timeElapsed * (_direction == DIRECTION::RIGHT ? (1) : (-1));
 	_enemyManager->moveEnemy(this, _moveDir);
+
+	if (_isStand)
+	{
+		_moving.jumpPower = 0;
+	}
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
@@ -103,6 +108,7 @@ void Ovibos::render()
 	_img->aniRender(CAMERA->getRelativeV2(_position),_ani, !(unsigned)_direction);
 	
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
+
 }
 
 void Ovibos::setState(ENEMY_STATE state)
@@ -138,7 +144,7 @@ void Ovibos::setState(ENEMY_STATE state)
 
 bool Ovibos::playerCollision(const Vector2 & playerPos)
 {
-	if (_rect.left <= playerPos.x && playerPos.x <= _rect.right)
+	if (_rect.left <= playerPos.x && playerPos.x <= _rect.right )
 	{
 		return true;
 	}

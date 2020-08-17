@@ -13,6 +13,7 @@
 #include "Minotaurs.h"
 #include "Ovibos.h"
 #include "Ghost.h"
+#include "Belial.h"
 
 class Stage;
 

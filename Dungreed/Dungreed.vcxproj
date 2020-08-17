@@ -156,6 +156,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
     <ClInclude Include="BatGiantRed.h" />
+    <ClInclude Include="Belial.h" />
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="Banshee.h" />
     <ClInclude Include="BatIce.h" />
@@ -254,6 +255,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
     <ClCompile Include="BatGiantRed.cpp" />
+    <ClCompile Include="Belial.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Banshee.cpp" />
     <ClCompile Include="BatIce.cpp" />
