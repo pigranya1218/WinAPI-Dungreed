@@ -1,8 +1,8 @@
-#include "stdafx.h"
-#include "NormalProjectile.h"
+#include "HeartOfCosmosProjectile.h"
 #include "ProjectileManager.h"
+#include "stdafx.h"
 
-void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate)
+void HeartOfCosmosProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_speed = speed;
@@ -21,7 +21,7 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 		_ani->start();
 	}
 
-	_checkCollision = checkCollision;
+	_checkCollision = isCollision;
 	_collisionEffect = collisionEffect;
 	_effectSize = effectSize;
 
@@ -30,7 +30,7 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 	_active = true;
 }
 
-void NormalProjectile::release()
+void HeartOfCosmosProjectile::release()
 {
 	if (_useAni)
 	{
@@ -41,7 +41,7 @@ void NormalProjectile::release()
 	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
 }
 
-void NormalProjectile::update(float elapsedTime)
+void HeartOfCosmosProjectile::update(float elapsedTime)
 {
 	Vector2 moveDir = Vector2(0, 0);
 	moveDir.x += cosf(_angleRadian) * _speed * elapsedTime;
@@ -71,34 +71,35 @@ void NormalProjectile::update(float elapsedTime)
 	// 사정거리를 넘어가면
 	if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
 	{
-		_active = false;		
+		_active = false;
 	}
 }
 
-void NormalProjectile::render()
+void HeartOfCosmosProjectile::render()
 {
 	if (_useRotate)
 	{
 		_img->setAngle(_angleRadian * (180 / PI));
 	}
 	if (_useAni)
-	{		
-		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);		
-		
+	{
+		if (_ani->isPlay()) {
+			_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
+		}
+
 	}
 	else
 	{
 		_img->render(CAMERA->getRelativeV2(_position), _size);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
-		
+
 	}
 }
 
-void NormalProjectile::aniUpdate(float const elapsedTime)
+void HeartOfCosmosProjectile::aniUpdate(float const elapsedTime)
 {
 	if (_useAni)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
 }
-

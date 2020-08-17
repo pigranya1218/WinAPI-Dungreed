@@ -1,5 +1,5 @@
 #include "HeartOfCosmos.h"
-#include "NormalProjectile.h"
+#include "HeartOfCosmosProjectile.h"
 void HeartOfCosmos::init()
 {
 	_itemCode = 0x03307;
@@ -7,7 +7,7 @@ void HeartOfCosmos::init()
 
 	_addStat.defense = 2;
 	_price = 4300;
-	_isExplosion = false;
+	
 }
 
 void HeartOfCosmos::release()
@@ -21,6 +21,7 @@ void HeartOfCosmos::update(Player * player, float const elapsedTime)
 
 void HeartOfCosmos::backRender(Player * player)
 {
+	
 }
 
 void HeartOfCosmos::frontRender(Player * player)
@@ -53,18 +54,15 @@ void HeartOfCosmos::getHit(Vector2 const position)
 
 void HeartOfCosmos::dash(Player * player)
 {
-	_isExplosion = true;
-	if (_isExplosion)
-	{
-		NormalProjectile* projectile = new NormalProjectile;		
+
+	    HeartOfCosmosProjectile* projectile = new HeartOfCosmosProjectile;
 		projectile->setPosition(_renderPos);
 		projectile->setSize(Vector2(200, 200));
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
-		projectile->init("HeartOfCosmos0", 0, 0, true, false, 15, false, "", Vector2(0, 0),true);
+		projectile->init("HeartOfCosmos0", 0, 0, true, false, 15, false, "", Vector2(0, 0), false);
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
 		player->attack(projectile, attackInfo);
-	}
 }
 
 void HeartOfCosmos::equip(Player * player)

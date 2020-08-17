@@ -29,6 +29,7 @@
 #include "Voluspa.h"
 #include "HeartOfCosmos.h"
 #include "DemonBoots.h"
+#include "MultiBullet.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -122,9 +123,9 @@ void Player::init()
 	//testAcc1->init();
 	//_inventory[0] = testAcc1;
 
-	//GreenBat* testAcc2 = new GreenBat;
-	//testAcc2->init();
-	//_inventory[1] = testAcc2;
+	GreenBat* testAcc2 = new GreenBat;
+	testAcc2->init();
+	_inventory[1] = testAcc2;
 
 
 	GreenDadBat* testAcc3 = new GreenDadBat;
@@ -147,20 +148,20 @@ void Player::init()
 	_inventory[5] = testAcc5;
 
 
-	IceBall* testAcc6 = new IceBall;
-	testAcc6->init();
-	_inventory[6] = testAcc6;
-
-
-	miniEarth* testAcc7 = new miniEarth;
-	testAcc7->init();
-	_inventory[7] = testAcc7;
-
-
-	watCher* testAcc8 = new watCher;
-	testAcc8->init();
-	_inventory[8] = testAcc8;
-
+	//IceBall* testAcc6 = new IceBall;
+	//testAcc6->init();
+	//_inventory[6] = testAcc6;
+	//
+	//
+	//miniEarth* testAcc7 = new miniEarth;
+	//testAcc7->init();
+	//_inventory[7] = testAcc7;
+	//
+	//
+	//watCher* testAcc8 = new watCher;
+	//testAcc8->init();
+	//_inventory[8] = testAcc8;
+	//
 	
 	MagnifyingGlass* testAcc10 = new MagnifyingGlass;
 	testAcc10->init();
@@ -172,11 +173,15 @@ void Player::init()
 
 	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
 	testAcc12->init();
-	_inventory[0] = testAcc12;
+	_inventory[6] = testAcc12;
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
-	_inventory[1] = testAcc13;
+	_inventory[7] = testAcc13;
+
+	MultiBullet* testAcc14 = new MultiBullet;
+	testAcc14->init();
+	_inventory[0] = testAcc14;
 
 	KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
@@ -195,7 +200,7 @@ void Player::init()
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
 
-	Boomerang* testWeapon5 = new Boomerang;
+	MatchLockGun* testWeapon5 = new MatchLockGun;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
 
