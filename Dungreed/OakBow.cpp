@@ -9,9 +9,9 @@ void OakBow::init()
 	_iconImg = IMAGE_MANAGER->findImage("OakBow");
 	_img = IMAGE_MANAGER->findImage("OakBowAni");
 
+	_addStat.minDamage = 20;
+	_addStat.maxDamage = 35;
 	_price = 360;
-	_minDamage = 20;
-	_maxDamage = 35;
 
 	// private 변수 설정
 	_minDamage = 12;
@@ -129,7 +129,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 			projectile->setPosition(arrowPos);
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, false, "", Vector2(), 300);
+			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(), 800);
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;

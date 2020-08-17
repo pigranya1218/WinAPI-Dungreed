@@ -39,6 +39,7 @@ void NormalProjectile::release()
 	}
 
 	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
+
 }
 
 void NormalProjectile::update(float elapsedTime)

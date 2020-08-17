@@ -453,6 +453,9 @@
     <ClInclude Include="RestaurantRoom.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="BoomerangProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -745,6 +748,9 @@
     </ClCompile>
     <ClCompile Include="RestaurantRoom.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomerangProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\GameScene\Item</Filter>
