@@ -32,6 +32,7 @@ class Item
 {
 protected:
 	int _itemCode; // 아이템 코드
+	string _itemName; // 아이템 이름
 	vector<string> _displayInfos; // 아이템 능력에 대한 설명
 	string _displayText; // 아이템 잡담
 
@@ -69,7 +70,9 @@ public:
 	virtual float getBulletRatio() { return 0.f; }
 
 	int getItemCode() const noexcept { return _itemCode; }
+	ITEM_TYPE getItemType() const noexcept;
 	int getPrice() const noexcept { return _price; }
+	string getItemName() const noexcept { return _itemName; }
 	vector<string> getDisplayInfos() const noexcept { return _displayInfos; }
 	string getDisplayText() const noexcept { return _displayText; }
 	Image* getIconImg() const noexcept { return _iconImg; }

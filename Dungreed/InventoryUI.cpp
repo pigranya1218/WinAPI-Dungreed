@@ -18,19 +18,32 @@ void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
 		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_BOTTOM);
 	}
 
-	D2D_RENDERER->fillRectangle(itemInfo, 0, 0, 0, 0.4);
+	D2D_RENDERER->fillRectangle(itemInfo, 0, 0, 0, 0.65);
 }
 
 void InventoryUI::drawAccInfo(Item* acc, Vector2 pos, bool isRT)
 {
 	if (acc == nullptr) return;
+
+	FloatRect itemInfo;
+
+	if (isRT)
+	{
+		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_TOP);
+	}
+	else
+	{
+		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_BOTTOM);
+	}
+
+	D2D_RENDERER->fillRectangle(itemInfo, 0, 0, 0, 0.65);
 }
 
 void InventoryUI::drawInvenInfo(int index, Vector2 pos)
 {
 	Item * item = _player->getInvenItem(index);
 	if (item == nullptr) return;
-	if (item->getItemCode() & static_cast<int>(ITEM_TYPE::ACC) == static_cast<int>(ITEM_TYPE::ACC))
+	if (item->getItemType() == ITEM_TYPE::ACC)
 	{
 		drawAccInfo(item, pos, false);
 	}
@@ -340,7 +353,7 @@ void InventoryUI::render()
 			weapon->getIconImg()->setScale(5);
 			weapon->getIconImg()->render(_equippedWeaponRc[i * 2].getCenter());
 
-			if ((weapon->getItemCode() & static_cast<int>(ITEM_TYPE::WEAPON_TWO_HAND) == static_cast<int>(ITEM_TYPE::WEAPON_TWO_HAND)))
+			if (weapon->getItemType() == ITEM_TYPE::WEAPON_TWO_HAND)
 			{
 				IMAGE_MANAGER->findImage("UI/INVENTORY/WEAPON_X")->setScale(5);
 				IMAGE_MANAGER->findImage("UI/INVENTORY/WEAPON_X")->render(_equippedWeaponRc[i * 2 + 1].getCenter());
