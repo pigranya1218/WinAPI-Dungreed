@@ -7,6 +7,11 @@ void KeresScythe::init()
 		_img = IMAGE_MANAGER->findImage("KeresScythe");
 	_effect = IMAGE_MANAGER->findImage("KeresScytheSwingFX");
 	_price = 600;
+
+
+
+	_itemName = L"케레스";
+	_displayText = L"\"죽기를 갈망하며 쓰러지면 큰 발톱으로 움켜잡고 타르타로스로 데려간다\"";
 	_itemCode = 0x02401;  //양손 전설 01
 
 	// 기본 보조옵션

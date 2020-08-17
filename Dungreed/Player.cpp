@@ -192,7 +192,7 @@ void Player::init()
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
-	MartialArtOfTiger* testWeapon3 = new MartialArtOfTiger;
+	CosmosSword* testWeapon3 = new CosmosSword;
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
