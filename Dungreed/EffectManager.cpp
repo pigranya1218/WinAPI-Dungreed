@@ -75,7 +75,7 @@ void EffectManager::addEffect(string effectName, const char * imageName, int fps
 	_totalEffect.insert(pair<string, vEffects>(effectName, vEffectBuffer));
 }
 
-void EffectManager::play(string effectName, Vector2 pos, float angle)
+void EffectManager::play(string effectName, Vector2 pos, float angle, bool bisymmetry)
 {
 	for (auto iter = _totalEffect.begin(); iter != _totalEffect.end(); iter++)
 	{
@@ -84,13 +84,13 @@ void EffectManager::play(string effectName, Vector2 pos, float angle)
 		for (int i = 0; i < effects.size(); i++)
 		{
 			if (effects[i]->getIsRunning()) continue;
-			effects[i]->startEffect(pos, angle);
+			effects[i]->startEffect(pos, angle, bisymmetry);
 			return;
 		}
 	}
 }
 
-void EffectManager::play(string effectName, Vector2 pos, Vector2 size, float angle)
+void EffectManager::play(string effectName, Vector2 pos, Vector2 size, float angle, bool bisymmetry)
 {
 	for (auto iter = _totalEffect.begin(); iter != _totalEffect.end(); iter++)
 	{
@@ -99,7 +99,7 @@ void EffectManager::play(string effectName, Vector2 pos, Vector2 size, float ang
 		for (int i = 0; i < effects.size(); i++)
 		{
 			if (effects[i]->getIsRunning()) continue;
-			effects[i]->startEffect(pos, size, angle);
+			effects[i]->startEffect(pos, size, angle, bisymmetry);
 			return;
 		}
 	}
