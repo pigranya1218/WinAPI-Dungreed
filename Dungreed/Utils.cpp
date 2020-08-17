@@ -34,4 +34,15 @@ namespace TTYONE_UTIL
 		USES_CONVERSION;
 		return A2W(src.c_str());
 	}
+	int getSize(int num)
+	{
+		int result = 0;
+		while (true)
+		{
+			num /= 10;
+			result++;
+			if (num == 0) break;
+		}
+		return result;
+	}
 }

@@ -154,6 +154,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_BASE", L"resources/images/gameScene/ui/inventory/accessory.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE", L"resources/images/gameScene/ui/inventory/inventory.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE_SELECTED", L"resources/images/gameScene/ui/inventory/inventory_select.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_INFO", L"resources/images/gameScene/ui/inventory/info.png");
 	// *** STATUS
 	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");

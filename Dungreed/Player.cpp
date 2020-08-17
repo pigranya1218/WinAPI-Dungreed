@@ -178,14 +178,14 @@ void Player::init()
 	testAcc13->init();
 	_inventory[1] = testAcc13;
 
-	KeresScythe* testWeapon1 = new KeresScythe;
+	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
 	_inventory[11] = testWeapon1;
-	
+	*/
 
-	/*ShortSpear* testWeapon2 = new ShortSpear;
+	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
-	_inventory[11] = testWeapon2;*/
+	_inventory[11] = testWeapon2;
 
 	MartialArtOfTiger* testWeapon3 = new MartialArtOfTiger;
 	testWeapon3->init();

@@ -23,3 +23,23 @@ ITEM_TYPE Item::getItemType() const noexcept
 		return ITEM_TYPE::FOOD;
 	}
 }
+
+ITEM_RANK Item::getItemRank() const noexcept
+{
+	if (((_itemCode % 4096) / 256) == static_cast<int>(ITEM_RANK::NORMAL) / 256)
+	{
+		return ITEM_RANK::NORMAL;
+	}
+	if (((_itemCode % 4096) / 256) == static_cast<int>(ITEM_RANK::HIGH) / 256)
+	{
+		return ITEM_RANK::HIGH;
+	}
+	if (((_itemCode % 4096) / 256) == static_cast<int>(ITEM_RANK::RARE) / 256)
+	{
+		return ITEM_RANK::RARE;
+	}
+	if (((_itemCode % 4096) / 256) == static_cast<int>(ITEM_RANK::LEGEND) / 256)
+	{
+		return ITEM_RANK::LEGEND;
+	}
+}
