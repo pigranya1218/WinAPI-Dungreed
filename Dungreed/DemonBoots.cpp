@@ -1,5 +1,5 @@
 #include "DemonBoots.h"
-#include "NormalProjectile.h"
+#include "HeartOfCosmosProjectile.h"
 
 void DemonBoots::init()
 {
@@ -7,7 +7,7 @@ void DemonBoots::init()
 	_iconImg = IMAGE_MANAGER->findImage("DemonBoots");
 	
 	_price = 4300;
-	_isExplosion = false;
+	
 }
 
 void DemonBoots::release()
@@ -16,16 +16,23 @@ void DemonBoots::release()
 
 void DemonBoots::update(Player * player, float const elapsedTime)
 {
-	_renderPos = player->getPosition();
+	_renderPos = player->getPosition();	
+	
+	
 }
 
 void DemonBoots::backRender(Player * player)
 {
-	NormalProjectile* projectile = new NormalProjectile;
+	HeartOfCosmosProjectile* projectile = new HeartOfCosmosProjectile;
+	float _angleY = 0;
+	_angleY = (-PI2 / 4);
 	projectile->setPosition(_renderPos);
-	projectile->setSize(Vector2(50, 50));
+	_renderPos.y = _renderPos.y;
+	projectile->setSize(Vector2(50, 100));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("DemonBoots0", 0, 0, true, false, 15, false, "", Vector2(0, 0), true);
+	_pos.y = _renderPos.y*_angleY;
+	_pos.x = _renderPos.x;
+	projectile->init("DemonBoots0", _pos.y, 0, true, false, 8, false, "DemonBoots0", Vector2(150, 150), false);
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);
@@ -66,4 +73,5 @@ void DemonBoots::dash(Player * player)
 
 void DemonBoots::equip(Player * player)
 {
+	
 }

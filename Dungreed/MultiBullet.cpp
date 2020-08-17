@@ -51,14 +51,7 @@ void MultiBullet::attack(FloatCircle * circle, AttackInfo * info)
 
 void MultiBullet::attack(Projectile * projectile, AttackInfo * info)
 {	
-	NormalProjectile* projectile1 = new NormalProjectile;
-	projectile1->setPosition(Vector2(300, 300));
-	projectile1->getSize();		
-	projectile1->getTeam();	
-	NormalProjectile* projectile2 = new NormalProjectile;
-	projectile2->setPosition(Vector2(500, 500));	
-	projectile2->getSize();
-	projectile2->getTeam();
+	
 
 }
 

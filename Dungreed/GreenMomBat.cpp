@@ -23,7 +23,7 @@ void GreenMomBat::init()
 	_ani->start();
 	_ani->init(_img->getWidth(), _img->getHeight(),
 		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(11);
+	_ani->setFPS(15);
 	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 }
 

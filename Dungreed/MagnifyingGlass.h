@@ -3,7 +3,7 @@
 class MagnifyingGlass : public Item
 {
 private:
-
+	ITEM_TYPE ITEM_TYPE;
 public:
 	virtual void init();
 	virtual void release();

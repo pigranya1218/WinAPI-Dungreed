@@ -85,6 +85,7 @@ void babyGreenBat::backRender(Player* player)
 
 void babyGreenBat::displayInfo()
 {
+	
 }
 
 void babyGreenBat::attack(Player* player)
