@@ -166,7 +166,7 @@ void Player::init()
 	testAcc10->init();
 	_inventory[9] = testAcc10;
 
-	CosmosSword* testAcc11 = new CosmosSword;
+	OakBow* testAcc11 = new OakBow;
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
