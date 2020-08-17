@@ -34,7 +34,7 @@ void DemonBoots::backRender(Player * player)
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 	_pos.y = _renderPos.y*_angleY;
 	_pos.x = _renderPos.x;
-	projectile->init("DemonBoots0", _pos.y, 0, true, false, 8, false, "DemonBoots0", Vector2(150, 150), false);
+	projectile->init("DemonBoots0", _pos.y, 0, true, false, 8, false, "DemonBoots0", Vector2(150, 150),50, false);
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);

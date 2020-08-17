@@ -85,7 +85,9 @@ void HeartOfCosmosProjectile::render()
 	{
 		if (_ani->isPlay()) {
 			_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
+			
 		}
+	
 
 	}
 	else
@@ -94,6 +96,8 @@ void HeartOfCosmosProjectile::render()
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 
 	}
+
+
 }
 
 void HeartOfCosmosProjectile::aniUpdate(float const elapsedTime)
