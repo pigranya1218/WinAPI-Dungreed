@@ -5,14 +5,18 @@
 
 #include "DebugStage.h"
 #include "VillageStage.h"
-#include "RestaurantRoom.h"
+
+#include "AllRoom.h"
+
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
-	//_currStageType = STAGE_TYPE::VILLAGE;
+	//_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::VILLAGE;
 	
 	makeStage();
+
+	_roomIndex = 0;
 }
 
 void StageManager::release()
@@ -22,12 +26,26 @@ void StageManager::release()
 
 void StageManager::update(float const elapsedTime)
 {
-	_currStage->update(elapsedTime);
+	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
+	{
+		if (_roomIndex >= _stages.size())return;
+			
+		_stages[_roomIndex]->update(elapsedTime);
+		
+	}
+
+	else	_currStage->update(elapsedTime);
 }
 
 void StageManager::render()
 {
-	_currStage->render();
+	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
+	{
+		if (_roomIndex >= _stages.size())return;
+		_stages[_roomIndex]->render();
+		
+	}
+	else _currStage->render();
 }
 
 void StageManager::attack(FloatRect* rect, AttackInfo* info)
@@ -62,7 +80,16 @@ void StageManager::attack(Projectile* projectile, AttackInfo* info)
 
 void StageManager::moveTo(GameObject* object, Vector2 moveDir)
 {
-	_currStage->moveTo(object, moveDir);
+	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
+	{
+		if (_roomIndex >= _stages.size())return;
+		_stages[_roomIndex]->moveTo(object, moveDir);
+
+	}
+	else _currStage->moveTo(object, moveDir);
+
+
+	
 }
 
 void StageManager::nextStage()
@@ -72,13 +99,57 @@ void StageManager::nextStage()
 	makeStage();
 }
 
+void StageManager::moveRoom()
+{
+	_roomIndex += 1;
+}
+
 void StageManager::makeStage()
 {
-	_currStage = new DebugStage();
-	//_currStage = new VillageStage();
+	switch (_currStageType)
+	{
+	case STAGE_TYPE::VILLAGE:
+		_currStage = new VillageStage();
+		_currStage->setStageManager(this);
+		_currStage->init();
+		break;
+	case STAGE_TYPE::DUNGEON_NORMAL:
+
+		_currStage = new StartRoom1();
+		_stages.push_back(_currStage);
+
+		_currStage = new Room1();
+		_stages.push_back(_currStage);
+
+		_currStage = new Room2();
+		_stages.push_back(_currStage);
+
+		_currStage = new RestaurantRoom();
+		_stages.push_back(_currStage);
+
+		_currStage = new DungeonShopRoom();
+		_stages.push_back(_currStage);
+		
+		_stages[_roomIndex]->setStageManager(this);
+		_stages[_roomIndex]->init();
+
+		break;
+	case STAGE_TYPE::DUNGEON_BOSS:
+		break;
+	case STAGE_TYPE::TEST:
+		_currStage = new DebugStage();
+		_currStage->setStageManager(this);
+		_currStage->init();
+		break;
+	default:
+		break;
+	}
+
+	
+	
 	//_currStage = new RestaurantRoom();
-	_currStage->setStageManager(this);
-	_currStage->init();
+	
+	
 
 }
 
@@ -95,3 +166,11 @@ Vector2 StageManager::getPlayerPos()
 {
 	return _player->getPosition();
 }
+
+void StageManager::setPlayerPos( int x, int y)
+{
+	
+	_player->setPosition(Vector2(x, y));
+}
+
+

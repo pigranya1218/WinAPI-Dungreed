@@ -1,26 +1,28 @@
 #include "VillageStage.h"
 #include "StageManager.h"
 
+
+
 void VillageStage::init()
 {
 	Stage::init();
 
-	/*_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(2005, 950), Vector2(2640, 1590)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(2640, 1590), Vector2(2718, 1590)), LINEAR_VALUE_TYPE::DOWN });
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950), Vector2(0,2005),Vector2(500,2000)));
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(2005, 950), Vector2(2640, 1590),Vector2(2005,2640),Vector2(950,1590)));
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(2640, 1590), Vector2(2718, 1590),Vector2(2640,2718),Vector2(1300,1700)));
 	
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(3110, 1585), Vector2(3265, 1585)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(3265, 1585), Vector2(3750, 1105)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(3750, 1105), Vector2(5910, 1105)), LINEAR_VALUE_TYPE::DOWN });
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(3110, 1585), Vector2(3265, 1585),Vector2(3110,3265),Vector2(1300,1700)));
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(3265, 1585), Vector2(3750, 1105),Vector2(3265,3750),Vector2(1585,1105)));
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(3750, 1105), Vector2(5910, 1105), Vector2(3750,5910),Vector2(1000,1200)));
 	
 
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(5910, 1105), Vector2(6388, 1585)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(6388, 1585), Vector2(6546, 1585)), LINEAR_VALUE_TYPE::DOWN });
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(5910, 1105), Vector2(6388, 1585), Vector2(5910,6388),Vector2(1105,1585)));
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(6388, 1585), Vector2(6546, 1585), Vector2(6388,6546),Vector2(1400,1600)));
 
 
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(7033, 1590), Vector2(7115, 1590)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(7115, 1590), Vector2(7750, 950)), LINEAR_VALUE_TYPE::DOWN });
-	_collisionPlatforms.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2(7750, 950), Vector2(9800, 950)), LINEAR_VALUE_TYPE::DOWN });*/
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(7033, 1590), Vector2(7115, 1590), Vector2(7033,7115),Vector2(1400,1700)));
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(7115, 1590), Vector2(7750, 950), Vector2(7115,7750),Vector2(1590,950)));
+	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(7750, 950), Vector2(9800, 950), Vector2(7750,9800),Vector2(800,1100)));
 
 
 	_BGL = IMAGE_MANAGER->findImage("Town_BGL");
@@ -28,12 +30,12 @@ void VillageStage::init()
 	_BG2 = IMAGE_MANAGER->findImage("Town_BG2");
 	_floor = IMAGE_MANAGER->findImage("Town_Floor");
 
-
+	
 
 	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 9000, 500);
 	
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile3");
-	loadMap("Town.map");
+	loadMap("Town3.map");
 
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
 }
@@ -50,8 +52,14 @@ void VillageStage::update(float const elapsedTime)
 	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);*/
 
 	Stage::update(elapsedTime);
-	
-	//CAMERA->setXY(_stageManager->getPlayerPos());
+
+	if (_stageManager->getPlayerPos().x >= 4000 && _stageManager->getPlayerPos().x <= 5800 && _stageManager->getPlayerPos().y >= 1600)
+	{
+		//_stageManager->nextStage();
+		_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
+		_stageManager->makeStage();
+		_stageManager->setPlayerPos(200, 400);
+	}
 }
 
 void VillageStage::render()
@@ -104,9 +112,14 @@ void VillageStage::render()
 	IMAGE_MANAGER->findImage("Tree0")->setScale(5);
 	CAMERA->render(IMAGE_MANAGER->findImage("Tree0"), Vector2(2150, 1520));
 
+
 	Stage::render();
 
 	IMAGE_MANAGER->findImage("TempleFront")->setScale(5);
 	CAMERA->render(IMAGE_MANAGER->findImage("TempleFront"), Vector2(4730, 1047 - IMAGE_MANAGER->findImage("TempleFront")->getHeight() * 2));
 }
+
+
+
+
 

@@ -223,7 +223,9 @@ HRESULT playGround::init()
 	// ** DUNGEON
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
 	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
-	
+	IMAGE_MANAGER->addFrameImage("CandleOn1", L"resources/images/Map/CandleOn1.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
 
 	// ** COSTUME
 	// *** BASE

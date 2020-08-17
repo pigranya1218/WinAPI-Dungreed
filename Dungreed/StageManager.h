@@ -23,10 +23,12 @@ private:
 	vector<Stage*> _stages; // 현재 스테이지들
 	Stage* _currStage; // 현재 스테이지
 	
+	int _roomIndex;
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
 	void setPlayer(Player* player) { _player = player; }
+	void setStageType(STAGE_TYPE currStageType) { _currStageType = currStageType; }
 
 	void init();
 	void release();
@@ -45,7 +47,7 @@ public:
 	void nextStage();
 
 	// 스테이지 이동 
-
+	void moveRoom();
 
 	// 스테이지 타입에 따른 맵 만들기
 	void makeStage();
@@ -55,5 +57,6 @@ public:
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
+	void setPlayerPos(int x, int y);
 };
 

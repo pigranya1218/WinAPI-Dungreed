@@ -5,6 +5,8 @@ void DebugStage::init()
 {
 	Stage::init();
 
+	
+
 	// ¸Ê ºÒ·¯¿À±â
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("testStage.map");

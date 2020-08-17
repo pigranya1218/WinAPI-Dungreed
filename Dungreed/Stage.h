@@ -9,7 +9,7 @@
 #include "Attackinfo.h"
 #include "MapTool.h"
 
-
+class Player;
 class StageManager;
 
 class Stage
@@ -18,7 +18,7 @@ protected:
 	StageManager* _stageManager;
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	
-	tagTileMap _tile[2000];
+	tagTileMap _tile[MAXTILEX*MAXTILEY];
 	Image* _tileImage;
 
 	EnemyManager* _enemyMgr;
@@ -31,6 +31,8 @@ protected:
 	vector<LinearFunc> _collisionPlatforms; // 플랫폼 땅
 	
 	bool _isVisited; // 방문한 스테이지인가? (UI 지도에서 그리기 위함)
+
+	Player* _player;
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
@@ -52,4 +54,5 @@ public:
 	inline Stage* getConnectedStage( DIRECTION const direction ) const { return _connectedStage[static_cast<int> (direction)];}
 	bool isVisited() const { return _isVisited; }
 	Vector2 getPlayerPos();
+	
 };
