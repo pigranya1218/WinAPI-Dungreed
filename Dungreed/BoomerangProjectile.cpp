@@ -3,11 +3,13 @@
 #include "ProjectileManager.h"
 #include "Player.h"
 
-void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, string collisionEffect, Vector2 effectSize, float range, bool useRotate)
+void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_speed = speed;
-	_range = range;
+	_maxTime = maxTime;
+	_count = 0;
+	_returnCount = 0;
 
 	_startPos = _position;
 
@@ -68,22 +70,34 @@ void BoomerangProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	// 사정거리를 넘어가면
-	if (!_ProjectileReturn)// && getDistance(_startPos.x, _startPos.y, _position.x, _position.y) <= _range)
+	//Vector2 returnPos;
+	/*if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
+	{
+		_ProjectileReturn = true;
+		if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
+		{
+			returnPos = _position;
+		}
+	}*/
+
+	_count += elapsedTime;
+	if (_count >= _maxTime)
+	{
+		_count = 0;
+		_ProjectileReturn = true;
+	}
+
+	if (!_ProjectileReturn)
 	{
 		moveDir.x += cosf(_angleRadian) * _speed * elapsedTime;
 		moveDir.y += -sinf(_angleRadian) * _speed * elapsedTime;
 	}
 
-	Vector2 returnPos;
-	if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
-	{
-		_ProjectileReturn = true;
-		returnPos = _position;
-	}
-
+	// 사정거리를 넘어가면
 	if (_ProjectileReturn)
 	{
+		_returnCount += elapsedTime;
+
 		float angleValue;
 		if ((_angleRadian + PI) > PI2)
 		{
@@ -95,12 +109,13 @@ void BoomerangProjectile::update(float elapsedTime)
 		}
 		moveDir.x += cosf(angleValue) * _speed * elapsedTime;
 		moveDir.y += -sinf(angleValue) * _speed * elapsedTime;
-		if (getDistance(returnPos.x, returnPos.y, _position.x, _position.y) > 1000)
-		{
-			setActive(false);
-		}
-	}
 
+		/*if (_returnCount >= _maxTime)
+		{
+			_returnCount = 0;
+			_ProjectileReturn = false;
+		}*/
+	}
 	_position += moveDir;
 }
 

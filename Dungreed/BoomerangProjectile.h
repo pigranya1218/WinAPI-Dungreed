@@ -10,8 +10,11 @@ private:
 	float		_radius;			// 충돌용
 
 	float		_range;				// 투사체 사정거리
+	float		_maxTime;
+	float		_count;
+	float       _returnCount;
 	Vector2		_startPos;			// 투사체 시작위치
-
+	Vector2		_returnPos;
 	Image*		_img;				// 투사체 이미지
 
 	bool		_useAni;			// 애니메이션 사용하는가

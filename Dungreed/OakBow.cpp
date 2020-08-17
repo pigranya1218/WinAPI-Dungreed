@@ -5,12 +5,20 @@ void OakBow::init()
 {
 	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	//_rank = ITEM_RANK::NORMAL;
-	_itemCode = 0x02161;
 	_iconImg = IMAGE_MANAGER->findImage("OakBow");
 	_img = IMAGE_MANAGER->findImage("OakBowAni");
 
+	_itemName = L"떡갈나무 활";
+	_itemCode = 0x02161;
+	//_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
+	_displayText = L"\"단단해서 때리는 데 쓸 수도 있을 것 같습니다.\"";
+
+	// 기본 보조옵션
+	//_addStat.dashDamage = 20;
+	_addStat.attackSpeed = 3.03;
 	_addStat.minDamage = 20;
 	_addStat.maxDamage = 35;
+
 	_price = 360;
 
 	// private 변수 설정

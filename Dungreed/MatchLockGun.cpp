@@ -5,7 +5,6 @@ void MatchLockGun::init()
 {
 	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	//_rank = ITEM_RANK::NORMAL;
-	_itemCode = 0x02261;
 	_iconImg = _img = IMAGE_MANAGER->findImage("MatchlockGun");
 	_price = 850;
 
@@ -15,8 +14,16 @@ void MatchLockGun::init()
 	_reloadAni->setDefPlayFrame(false, false);
 	_reloadAni->setFPS(15);
 
+	_itemCode = 0x02261;
+	_itemName = L"화승총";
+	//_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
+	_displayText = L"\"비가 오면 사용할 수 없는 총\"";
+
+	// 기본 보조옵션
+	//_addStat.dashDamage = 20;
 	_addStat.minDamage = 10;
 	_addStat.maxDamage = 20;
+	_addStat.attackSpeed = 0.4;
 
 	projectile = new NormalProjectile;
 
