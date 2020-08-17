@@ -281,7 +281,7 @@ void InventoryUI::init()
 	_dragAccIndex = -1;
 	_dragInvenIndex = -1;
 
-	_itemInfo = FloatRect(Vector2(0, 0), Vector2(450, 300), PIVOT::CENTER);
+	_itemInfo = FloatRect(Vector2(0, 0), Vector2(450, 350), PIVOT::CENTER);
 }
 
 void InventoryUI::release()
