@@ -4,8 +4,7 @@
 
 void GreenDadBat::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::HIGH;
+	_itemCode = 0x03305;
 	_iconImg = IMAGE_MANAGER->findImage("GreenDadBat");
 
 	_price = 3500;

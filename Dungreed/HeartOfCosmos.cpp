@@ -2,8 +2,7 @@
 #include "NormalProjectile.h"
 void HeartOfCosmos::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::HIGH;
+	_itemCode = 0x03307;
 	_iconImg = IMAGE_MANAGER->findImage("HeartOfCosmos");
 
 	_addStat.defense = 2;
