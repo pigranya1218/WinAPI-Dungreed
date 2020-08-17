@@ -3,8 +3,7 @@
 #include "NormalProjectile.h"
 void GreenMomBat::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::HIGH;
+	_itemCode = 0x03306;
 	_iconImg = IMAGE_MANAGER->findImage("GreenMomBat");
 
 	_price = 3500;

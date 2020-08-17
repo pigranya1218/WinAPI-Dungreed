@@ -3,8 +3,7 @@
 
 void DemonBoots::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::HIGH;
+	_itemCode = 0x03303;
 	_iconImg = IMAGE_MANAGER->findImage("DemonBoots");
 	
 	_price = 4300;
