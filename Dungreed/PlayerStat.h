@@ -21,7 +21,7 @@ enum class STAT_TYPE : int
 	MAX_HP,
 	MAX_JUMP_COUNT,
 	MAX_DASH_COUNT,
-	MAX_SATIETY
+	MAX_SATIETY,
 	END
 };
 

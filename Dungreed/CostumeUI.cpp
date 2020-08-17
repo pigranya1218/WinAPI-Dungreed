@@ -145,46 +145,46 @@ void CostumeUI::render()
 				{
 					stat1 = static_cast<int>(_costumeCell[i].differStat->defense);
 					color1 = ((stat1 >= 0) ?  D2D1::ColorF::Green : D2D1::ColorF::Red);
-					wstr1 = to_wstring(stat1) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::DEF);
+					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::DEF, false));
 					
 
 					stat2 = _costumeCell[i].differStat->maxHp;
 					color2 = ((stat2 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
-					wstr2 = to_wstring(stat2) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::MAX_HP);
+					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
 				}
 				if (i == 2)
 				{
 					stat1 = _costumeCell[i].differStat->maxHp;
 					stat1 >= 0 ? color1 = D2D1::ColorF::Green : color1 = D2D1::ColorF::Red;
-					wstr1 = to_wstring(stat1) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::MAX_HP);
+					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
 
 					stat2 = static_cast<int>(_costumeCell[i].differStat->power);
 					stat2 >= 0 ? color2 = D2D1::ColorF::Green : color2 = D2D1::ColorF::Red;
-					wstr2 = to_wstring(stat2) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::POW);
+					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::POW, false));
 				}
 				if (i == 3)
 				{
 					stat1 = _costumeCell[i].differStat->maxHp;
 					stat1 >= 0 ? color1 = D2D1::ColorF::Green : color1 = D2D1::ColorF::Red;
-					wstr1 = to_wstring(stat1) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::MAX_HP);
+					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
 
 					stat2 = static_cast<int>(_costumeCell[i].differStat->evasion);
 					stat2 >= 0 ? color2 = D2D1::ColorF::Green : color2 = D2D1::ColorF::Red;
-					wstr2 = to_wstring(stat2) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::EVADE);
+					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::EVADE, false));
 				}
 				if (i == 4)
 				{
 					stat1 = static_cast<int>(_costumeCell[i].differStat->dashDamage);
 					stat1 >= 0 ? color1 = D2D1::ColorF::Green : color1 = D2D1::ColorF::Red;
-					wstr1 = to_wstring(stat1) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::DASH_DAMAGE);
+					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::DASH_DAMAGE, false));
 
 					stat2 = _costumeCell[i].differStat->maxDashCount;
 					stat2 >= 0 ? color2 = D2D1::ColorF::Green : color2 = D2D1::ColorF::Red;
-					wstr2 = to_wstring(stat2) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::MAX_DASH_COUNT);
+					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_DASH_COUNT, false));
 
 					stat3 = static_cast<int>(_costumeCell[i].differStat->criticalChance);
 					stat3 >= 0 ? color3 = D2D1::ColorF::Green : color3 = D2D1::ColorF::Red;
-					wstr3 = to_wstring(stat3) + L" " + _costumeCell[i].differStat->getStatWstring(STAT_TYPE::CRITICAL);
+					wstr3 = to_wstring(stat3) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::CRITICAL, false));
 
 					D2D_RENDERER->renderTextField(530, WINSIZEY - 50, L"¢º", D2D1::ColorF::White, 25,
 						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);

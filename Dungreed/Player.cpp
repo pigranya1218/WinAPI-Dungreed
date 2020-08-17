@@ -332,7 +332,7 @@ void Player::update(float const elapsedTime)
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
-		_currDashTime = 0.05f;
+		_currDashTime = 0.1f;
 		if (angle < 0)
 		{
 			_position.y += 1.5;
@@ -407,7 +407,6 @@ void Player::update(float const elapsedTime)
 		_force.y += _adjustStat.yGravity * elapsedTime;
 	}
 	moveDir.y += _force.y * elapsedTime;
-
 
 	_gameScene->moveTo(this, moveDir);
 	//ÂøÁö

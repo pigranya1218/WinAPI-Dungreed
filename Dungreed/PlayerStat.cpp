@@ -104,6 +104,14 @@ string PlayerStat::getStatString(STAT_TYPE type, bool isEnglish)
 	case STAT_TYPE::TRUE_DAMAGE:
 		if (isEnglish) return "UI/STAT/TRUE_DAMAGE";
 		else return "고정 데미지";
+	case STAT_TYPE::MAX_HP:
+		return "최대 체력";
+	case STAT_TYPE::MAX_JUMP_COUNT:
+		return "최대 점프횟수";
+	case STAT_TYPE::MAX_DASH_COUNT:
+		return "최대 대쉬횟수";
+	case STAT_TYPE::MAX_SATIETY:
+		return "최대 포만감"; 
 	}
 }
 
