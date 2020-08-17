@@ -13,11 +13,13 @@ void KeresScythe::init()
 	_addStat.dashDamage = 20;
 	_handSize = Vector2(5, 5);
 
+
+	_addStat.minDamage = 5;
+	_addStat.maxDamage = 14;
+	_addStat.attackSpeed = 1.82;
 	
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_minDamage = 7;
-	_maxDamage = 10;
 	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;

@@ -8,11 +8,11 @@ void ShortSpear::init()
 	_itemCode = 0x02101; // 양손 일반
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
-
+	_addStat.minDamage = 13;
+	_addStat.maxDamage = 20;
+	_addStat.attackSpeed = 1.3;
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_minDamage = 7;
-	_maxDamage = 10;
 	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
