@@ -31,9 +31,9 @@ void Belial::init(const Vector2 & pos)
 	_lHand._Rect = rectMakePivot(_lHand._Position,_lHand._size, PIVOT::CENTER);
 
 	ZeroMemory(&_head._moving, sizeof(_head._moving));
-	_head._moving.speed = 30;
-	_head._moving.gravity = 0;
-	_head._moving.jumpPower = 0;
+	_head._moving.force.x = 30;
+	_head._moving.gravity.y = 0;
+	_head._moving.force.y = 0;
 	_head._moving.delay = 3;
 
 	ZeroMemory(&_head._attaking, sizeof(_head._attaking));
@@ -63,9 +63,9 @@ void Belial::update(float const timeElapsed)
 {
 
 	const Vector2 playerpos = _enemyManager->getPlayerPos();
-	_head._size = _head._img->getFrameSize() * _scale;
 	_head._moveDir.x = 0;
 	_head._moveDir.y = 0;
+
 
 	if (!_isDetect)
 	{
@@ -110,7 +110,7 @@ void Belial::update(float const timeElapsed)
 	{
 	case ENEMY_STATE::IDLE:
 	{	
-		_head._moveDir.y = (_head._moving.speed) * timeElapsed;
+		_head._moveDir.y = (_head._moving.force.y) * timeElapsed;
 		if (_head._attaking.update(timeElapsed))
 		{
 			setRHandState(ENEMY_STATE::ATTACK);

@@ -32,7 +32,7 @@ enum class ENEMY_TYPE : unsigned int
 	MINOTAURS,			// 미노타우르스
 	OVIBOS,				// 얼음맵 물소
 	BELIAL,				// 벨리알
-	NIPLEHEIM			// 니플헤임
+	NIFLHEIM			// 니플헤임
 };
 
 enum class DIRECTION : unsigned int

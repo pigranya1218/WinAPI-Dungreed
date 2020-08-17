@@ -106,11 +106,6 @@ void Ovibos::update(float const timeElapsed)
 
 	_ani->frameUpdate(timeElapsed);
 
-	if (_isStand)
-	{
-		_moving.jumpPower = 0;
-	}
-
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 

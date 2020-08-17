@@ -453,6 +453,9 @@
     <ClInclude Include="RestaurantRoom.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="Belial.h">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -745,6 +748,9 @@
     </ClCompile>
     <ClCompile Include="RestaurantRoom.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Belial.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

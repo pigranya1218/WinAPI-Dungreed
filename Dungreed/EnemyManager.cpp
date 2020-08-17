@@ -159,7 +159,7 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 			enemy->init();
 			enemy->setEnemyManager(this);
 		}
-	}
+	
 		break;
 		case ENEMY_TYPE::BELIAL:
 		{
