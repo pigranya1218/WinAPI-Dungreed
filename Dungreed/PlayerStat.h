@@ -16,7 +16,12 @@ enum class STAT_TYPE : int
 	DASH_DAMAGE,
 	TRUE_DAMAGE,
 	MIN_DAMAGE,
-	MAX_DAMAGE
+	MAX_DAMAGE,
+	//Ãß°¡
+	MAX_HP,
+	MAX_JUMP_COUNT,
+	MAX_DASH_COUNT,
+	MAX_SATIETY
 };
 
 class PlayerStat
@@ -54,6 +59,6 @@ public:
 
 public:
 	static string getStatString(STAT_TYPE type, bool isEnglish);
-
+	static wstring getStatWstring(STAT_TYPE type);
 }; 
 

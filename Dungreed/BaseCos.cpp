@@ -5,6 +5,11 @@ void BaseCos::init()
 	//코스튬 이름 설정
 	_costumeName = "BASE";
 
+	//코스튬 설명창에 보여줄 내용들
+	_costumeTitle = L"모험가";
+	_costumeSummary = L"던전을 탐사하기 위해 온 초보 모험가";
+	//_costumeDetails = nullptr;
+
 	_ani = new Animation;
 
 	//현재 재생할 이미지

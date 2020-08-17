@@ -118,3 +118,59 @@ string PlayerStat::getStatString(STAT_TYPE type, bool isEnglish)
 		break;
 	}
 }
+
+wstring PlayerStat::getStatWstring(STAT_TYPE type)
+{
+	switch (type)
+	{
+	case STAT_TYPE::POW:
+		return L"(무기공격력)위력";
+		break;
+	case STAT_TYPE::DEF:
+		return L"방어력";
+		break;
+	case STAT_TYPE::TOUGH:
+		return L"강인함";
+		break;
+	case STAT_TYPE::BLOCK:
+		return L"막기";
+		break;
+	case STAT_TYPE::CRITICAL:
+		return L"크리티컬";
+		break;
+	case STAT_TYPE::CRITICAL_DAMAGE:
+		return L"크리티컬 데미지";
+		break;
+	case STAT_TYPE::EVADE:
+		return L"회피";
+		break;
+	case STAT_TYPE::MOVE_SPEED:
+		return L"이동속도";
+		break;
+	case STAT_TYPE::ATTACK_SPEED:
+		return L"공격속도";
+		break;
+	case STAT_TYPE::RELOAD:
+		return L"재장전속도";
+		break;
+	case STAT_TYPE::DASH_DAMAGE:
+		return L"대쉬 공격력";
+		break;
+	case STAT_TYPE::TRUE_DAMAGE:
+		return L"고정 데미지";
+		break;
+	case STAT_TYPE::MAX_HP:
+		return L"최대 체력";
+		break;
+	case STAT_TYPE::MAX_JUMP_COUNT:
+		return L"최대 점프 횟수";
+		break;
+	case STAT_TYPE::MAX_DASH_COUNT:
+		return L"최대 대쉬 횟수";
+		break;
+	case STAT_TYPE::MAX_SATIETY:
+		return L"최대 포만감";
+		break;
+	}
+	return wstring();
+}
