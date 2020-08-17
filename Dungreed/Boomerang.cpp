@@ -7,11 +7,11 @@ void Boomerang::init()
 	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
 	//_rank = ITEM_RANK::RARE;
 
+	_addStat.minDamage = 16;
+	_addStat.maxDamage = 19;
 
 	_price = 550;
-	_minDamage = 16;
-	_maxDamage = 19;
-	_gunType = 4;
+
 	_isAttack = false;
 
 	_aniImg = IMAGE_MANAGER->findImage("Boomerang_Moving");
