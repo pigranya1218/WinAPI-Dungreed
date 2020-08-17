@@ -462,6 +462,9 @@
     <ClInclude Include="HeartOfCosmosProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="RestaurantNpc.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -766,6 +769,9 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\GameScene\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

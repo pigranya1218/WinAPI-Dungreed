@@ -1,5 +1,7 @@
 #include "stdafx.h"
+#include "Stage.h"
 #include "NpcManager.h"
+#include "RestaurantNpc.h"
 
 void NpcManager::init()
 {
@@ -27,4 +29,29 @@ void NpcManager::render()
 	{
 		_npcs[i]->render();
 	}
+}
+
+void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
+{
+	switch (type)
+	{
+	case NPC_TYPE::RESTAURANT:
+	{
+		RestaurantNpc* npc = new RestaurantNpc;
+		npc->init(pos, direction);
+		npc->setNpcManager(this);
+		_npcs.push_back(npc);
+	}
+	break;
+	case NPC_TYPE::SHOP:
+	{
+
+	}
+	break;
+	}
+}
+
+Vector2 NpcManager::getPlayerPos()
+{
+	return _stage->getPlayerPos();
 }
