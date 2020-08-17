@@ -16,7 +16,7 @@ void CosmosSword::init()
 	_ani->start();
 
 
-	_itemCode = 0x02400;
+	_itemCode = 0x02400; // 양손 전설
 
 	_price = 600;
 

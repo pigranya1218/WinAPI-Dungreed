@@ -3,11 +3,9 @@
 
 void ShortSpear::init()
 {
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;
-	_rank = ITEM_RANK::NORMAL;
 	_iconImg = _img = IMAGE_MANAGER->findImage("ShortSpear");
 	_price = 600;
-
+	_itemCode = 0x02101; // 양손 일반
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 

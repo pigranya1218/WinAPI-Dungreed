@@ -3,13 +3,14 @@
 
 void ShortSword::init()
 {
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;
-	_rank = ITEM_RANK::NORMAL;
 	_iconImg = _img = IMAGE_MANAGER->findImage("ShortSword");
 	_price = 600;
-
+	_itemCode = 0x01102; // 한손 일반 
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
+	_addStat.minDamage = 8;
+	_addStat.maxDamage = 10;
+	_addStat.attackSpeed = 3.03;
 
 	_handSize = Vector2(5, 5);
 

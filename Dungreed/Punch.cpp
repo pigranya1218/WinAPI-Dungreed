@@ -3,13 +3,11 @@
 
 void Punch::init()
 {
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;	//보조무기는 장착 가능
-	_rank = ITEM_RANK::NORMAL;
 	//주먹 이미지
 	//가격 없음
 	_price = 0;
 	//보조 옵션 없음
-	
+	_itemCode = 0x01100; // 한손 노말 00
 	_attackMove = Vector2(0, 0);
 	_minDamage = 1;
 	_maxDamage = 4;

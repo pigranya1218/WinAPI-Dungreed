@@ -20,6 +20,11 @@ enum class ITEM_RANK : int
 	LEGEND = 0x00400 // Àü¼³
 };
 
+
+
+
+
+
 class Item
 {
 protected:
