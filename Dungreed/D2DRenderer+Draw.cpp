@@ -185,7 +185,12 @@ void D2DRenderer::renderTextField(const int x, const int y, const wstring& text,
 
 	//브러쉬 생성
 	ID2D1SolidColorBrush* brush;
-	_D2DRenderTarget->CreateSolidColorBrush(D2D1::ColorF(color, alpha), &brush);
+	D2D1_COLOR_F clr;
+	clr.r = static_cast<float>(GetRValue(color)) / 255;
+	clr.g = static_cast<float>(GetGValue(color)) / 255;
+	clr.b = static_cast<float>(GetBValue(color)) / 255;
+	clr.a = alpha;
+	_D2DRenderTarget->CreateSolidColorBrush(clr, &brush);
 
 	// 회전 행렬 생성
 	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Rotation(angle, D2D1::Point2F(pos.x, pos.y)));

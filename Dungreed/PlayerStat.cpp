@@ -70,7 +70,7 @@ string PlayerStat::getStatString(STAT_TYPE type, bool isEnglish)
 	{
 	case STAT_TYPE::POW:
 		if(isEnglish) return "UI/STAT/POW";
-		else return "(무기공격력)위력";
+		else return "위력";
 		break;
 	case STAT_TYPE::DEF:
 		if (isEnglish) return "UI/STAT/DEF";
@@ -86,7 +86,7 @@ string PlayerStat::getStatString(STAT_TYPE type, bool isEnglish)
 		break;
 	case STAT_TYPE::CRITICAL:
 		if (isEnglish) return "UI/STAT/CRITICAL";
-		else return "크리티컬";
+		else return "크리티컬 확률";
 		break;
 	case STAT_TYPE::CRITICAL_DAMAGE:
 		if (isEnglish) return "UI/STAT/CRITICAL_DAMAGE";

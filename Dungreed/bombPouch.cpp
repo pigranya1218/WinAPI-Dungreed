@@ -3,13 +3,12 @@
 
 void bombPouch::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;
+	_itemCode = 0x03201;
 	_iconImg = IMAGE_MANAGER->findImage("BombPouch");
 	
 	_addStat.defense = 2;	
 	_price = 1200;	
-	_isExplosion = false;
+	
 	
 }
 
@@ -20,6 +19,7 @@ void bombPouch::release()
 void bombPouch::update(Player* player, float const elapsedTime)
 {
 	_renderPos = player->getPosition();	
+
 	
 }
 
@@ -63,23 +63,23 @@ void bombPouch::getHit(Vector2 const position)
 
 void bombPouch::dash(Player * player)
 {
-	_isExplosion = true;
-	if (_isExplosion)
-	{
 		NormalProjectile* projectile = new NormalProjectile;		
 		float _angleY = 0;
-		_angleY  = -(PI / 2);		
+		_angleY  = -PI2/4;
+		_renderPos.x = _renderPos.x + 100;
+		_renderPos.y = _renderPos.y ;
 		projectile->setPosition(_renderPos);
 		projectile->setSize(Vector2(200, 200));
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
-		projectile->init("BombPouch0", _angleY, 700, true, false, 20, false, "BabyBatBulletFx", Vector2(100, 100), 100);
+		projectile->init("BombPouch0", _angleY, 10, true, true, 20, true, "BombPouch2", Vector2(250, 250), 1000, true);
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
 		player->attack(projectile, attackInfo);
-	}
+	
 }
 
 void bombPouch::equip(Player* player)
 {
 
 }
+

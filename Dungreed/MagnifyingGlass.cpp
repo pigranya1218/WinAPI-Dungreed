@@ -5,12 +5,11 @@ void MagnifyingGlass::init()
 {
 
 	//厩技辑府 鸥涝
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;
+	_itemCode = 0x03209;
 	_iconImg = IMAGE_MANAGER->findImage("MagnifyingGlass");
 
 	//厩技辑府 可记
-	_addStat.power += 30;
+	_addStat.power = 30;
 
 	//厩技辑府 啊拜
 	_price = 2400;
@@ -51,7 +50,9 @@ void MagnifyingGlass::attack(FloatCircle * circle, AttackInfo * info)
 
 void MagnifyingGlass::attack(Projectile * projectile, AttackInfo * info)
 {
+	
 	projectile->setSize(projectile->getSize() * 3);
+	
 }
 
 void MagnifyingGlass::getHit(Vector2 const position)

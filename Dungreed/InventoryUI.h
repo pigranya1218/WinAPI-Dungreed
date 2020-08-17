@@ -1,6 +1,9 @@
 #pragma once
 
 class Player;
+class Item;
+enum class ITEM_TYPE;
+enum class ITEM_RANK;
 
 class InventoryUI
 {
@@ -26,6 +29,17 @@ private:
 	int _dragWeaponIndex;
 	int _dragAccIndex;
 	int _dragInvenIndex;
+
+	FloatRect _itemInfo;
+
+private:
+	void drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT);
+	void drawAccInfo(Item* acc, Vector2 pos, bool isRT);
+	void drawInvenInfo(int index, Vector2 pos);
+
+	void drawItemType(Vector2 pos, ITEM_TYPE type);
+	void drawItemRank(Vector2 pos, ITEM_RANK rank);
+	COLORREF getRankColor(ITEM_RANK rank);
 
 public:
 	void setPlayer(Player* player) { _player = player; }

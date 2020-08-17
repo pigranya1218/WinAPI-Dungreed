@@ -465,6 +465,15 @@
     <ClInclude Include="BatBomb.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="BoomerangProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiBullet.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartOfCosmosProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -769,6 +778,18 @@
     </ClCompile>
     <ClCompile Include="BatBomb.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomerangProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiBullet.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartOfCosmosProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Dungreed\GameScene\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

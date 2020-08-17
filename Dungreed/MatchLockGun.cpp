@@ -3,8 +3,9 @@
 
 void MatchLockGun::init()
 {
-	_type = ITEM_TYPE::WEAPON_TWO_HAND;
-	_rank = ITEM_RANK::NORMAL;
+	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
+	//_rank = ITEM_RANK::NORMAL;
+	_itemCode = 0x02261;
 	_iconImg = _img = IMAGE_MANAGER->findImage("MatchlockGun");
 	_price = 850;
 
@@ -14,8 +15,10 @@ void MatchLockGun::init()
 	_reloadAni->setDefPlayFrame(false, false);
 	_reloadAni->setFPS(15);
 
-	_minDamage = 10;
-	_maxDamage = 20;
+	_addStat.minDamage = 10;
+	_addStat.maxDamage = 20;
+
+	projectile = new NormalProjectile;
 
 	// private 변수 설정
 	_minDamage = 12;
@@ -169,7 +172,6 @@ void MatchLockGun::attack(Player* player)
 		angleRadian -= PI2;
 	}
 
-	NormalProjectile* projectile = new NormalProjectile;
 	Vector2 shootPos = renderPosHand;
 	float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
@@ -177,7 +179,7 @@ void MatchLockGun::attack(Player* player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(100, 30));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("GunBullet", angleRadian, 30, true, false, 10, false, "", Vector2(), 300);	// 사정거리 추가했어요 >> 황수현
+	projectile->init("GunBullet", angleRadian, 30, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
@@ -224,4 +226,9 @@ wstring MatchLockGun::getBulletUI()
 float MatchLockGun::getBulletRatio()
 {
 	return _currReloadDelay / _baseReloadDelay;
+}
+
+NormalProjectile* MatchLockGun::getBulletInfo()
+{
+	return projectile;
 }

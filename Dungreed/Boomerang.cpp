@@ -2,21 +2,35 @@
 
 void Boomerang::init()
 {
+	_itemCode = 0x02262;
 	_iconImg = _img = IMAGE_MANAGER->findImage("MetalBoomerang");
-	_type = ITEM_TYPE::WEAPON_TWO_HAND;
-	_rank = ITEM_RANK::RARE;
+	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
+	//_rank = ITEM_RANK::RARE;
+
+	_addStat.minDamage = 16;
+	_addStat.maxDamage = 19;
 
 	_price = 550;
-	_minDamage = 16;
-	_maxDamage = 19;
-	_gunType = 4;
+
 	_isAttack = false;
 
-	_aniImg = IMAGE_MANAGER->findImage("Boomerang_Moving");
-	_ani = new Animation;
-	_ani->init(_aniImg->getWidth(), _aniImg->getHeight(), 2, 1);
-	_ani->setPlayFrame(0, 2, false, true);
-	_ani->setFPS(15);
+	// private 변수 설정
+	_minDamage = 12;
+	_maxDamage = 18;
+	_baseAttackDelay = 1;
+	_currAttackDelay = 0;
+	_maxBullet = 1;
+	_currBullet = _maxBullet;
+	_baseReloadDelay = 2;
+	_currReloadDelay = 0;
+
+	//_aniImg = IMAGE_MANAGER->findImage("Boomerang_Moving");
+	//_ani = new Animation;
+	//_ani->init(_aniImg->getWidth(), _aniImg->getHeight(), 2, 1);
+	//_ani->setPlayFrame(0, 2, false, true);
+	//_ani->setFPS(15);
+
+	_projectile = nullptr;
 }
 
 void Boomerang::release()
@@ -25,23 +39,19 @@ void Boomerang::release()
 
 void Boomerang::update(Player * player, float const elapsedTime)
 {
-	if (_isAttack)
-	{
-		_timeCount++;
-		//_ani->frameUpdate(elapsedTime);
-		if (!_ani->isPlay())
-		{
-			_ani->start();
-		}
+	//if (_currAttackDelay > 0) // 공격 딜레이 대기 중
+	//{
+	//	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
+	//}
+	//else if (_currReloadDelay > 0) // 재장전 중
+	//{
+	//	_currReloadDelay = max(0, _currReloadDelay - elapsedTime);
 
-		if (_timeCount == 100)
-		{
-			_timeCount = 0;
-			_ani->stop();
-			_isAttack = false;
-		}
-		_ani->frameUpdate(elapsedTime);
-	}
+	//	if (_currReloadDelay == 0) // 장전이 끝난 경우
+	//	{
+	//		_currBullet = _maxBullet;
+	//	}
+	//}
 
 	_isLeft = (player->getDirection() == DIRECTION::LEFT);
 
@@ -64,19 +74,22 @@ void Boomerang::update(Player * player, float const elapsedTime)
 	}
 
 	_pos = player->getPosition();
+	_gunPos = _isLeft ? Vector2(_pos.x - 20, _pos.y + 15) : Vector2(_pos.x + 20, _pos.y + 15);
 
-	if (!_isAttack)
+	if (_projectile != nullptr)
 	{
-		_gunPos = _isLeft ? Vector2(_pos.x - 20, _pos.y + 15) : Vector2(_pos.x + 20, _pos.y + 15);
+		if (_projectile->getReturn())
+		{
+			FloatRect projectileRc = FloatRect(_projectile->getPosition(), _projectile->getSize(), PIVOT::CENTER);
+			FloatRect playerRc = FloatRect(player->getPosition(), player->getSize(), PIVOT::CENTER);
+			if (FloatRect::intersect(projectileRc, playerRc))
+			{
+				_projectile->setActive(false);
+				_projectile = nullptr;
+			}
+		}
 	}
-
-	if (_isAttack)
-	{
-		float speed = 5.0f;
-
-		_gunPos.x += cosf((_degree) * (PI / 180)) * speed;
-		_gunPos.y += -sinf((_degree) * (PI / 180)) * speed;
-	}
+	
 }
 
 void Boomerang::backRender(Player * player)
@@ -85,29 +98,17 @@ void Boomerang::backRender(Player * player)
 
 void Boomerang::frontRender(Player * player)
 {
-	
-	Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
-	_img->setScale(4);
-	_img->setAnglePos(_centerPos);
-
-	Vector2 size = Vector2(_aniImg->getFrameSize().x * 4, _aniImg->getFrameSize().y * 4);
-	_attackRect = rectMakePivot(_gunPos, size, PIVOT::CENTER);
-
-	/*if (_isLeft) { _gunPos = Vector2(pos.x - 20, pos.y + 15); }
-	else { _gunPos = Vector2(pos.x + 20, pos.y + 15); }*/
-
-	_img->setAngle(_renderDegree);
-
-	if (!_isAttack)
+	if (_projectile == nullptr)
 	{
+		Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
+		_img->setScale(4);
+		_img->setAnglePos(_centerPos);
+
+		_img->setAngle(_renderDegree);
 		_img->render(CAMERA->getRelativeV2(_gunPos), _isLeft);
 	}
-	if (_isAttack)
-	{
-		_aniImg->setScale(4);
-		_aniImg->aniRender(CAMERA->getRelativeV2(_gunPos), _ani, _isLeft);
-		D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_gunPos), _aniImg->getFrameSize().x * 2, D2D1::ColorF::Black, 1.0f, 1.0f);
-	}
+
+	//D2D_RENDERER->renderText(CAMERA->getRelativeX(player->getPosition().x), CAMERA->getRelativeY(player->getPosition().y - 100), to_wstring(_degree), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.0f);
 }
 
 void Boomerang::displayInfo()
@@ -116,8 +117,42 @@ void Boomerang::displayInfo()
 
 void Boomerang::attack(Player * player)
 {
-	if (!_isAttack) { _isAttack = true; }
-	
+	//if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
+	//if (_currReloadDelay > 0) return; // 장전 중엔 공격을 하지 않음
+	//if (_currBullet == 0) // 총알이 없다면
+	//{
+	//	if (_currReloadDelay == 0) // 재장전 중이 아니라면
+	//	{
+	//		_currReloadDelay = _baseReloadDelay; // 재장전 함
+	//	}
+	//	return;
+	//}
+
+	if (_projectile != nullptr) return;
+
+	float _angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _gunPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _gunPos.x)) + PI2;
+	if (_angleRadian > PI2)
+	{
+		_angleRadian -= PI2;
+	}
+
+	_projectile = new BoomerangProjectile;
+	_projectile->setPosition(_gunPos);
+	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
+	_projectile->setTeam(OBJECT_TEAM::PLAYER);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 20, true, true, 20, "", Vector2(), 500);
+
+	/*NormalProjectile* _projectile = new NormalProjectile;
+	_projectile->setPosition(_gunPos);
+	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
+	_projectile->setTeam(OBJECT_TEAM::PLAYER);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 10, true, true, 20, false, "", Vector2(), 1000);*/
+
+	AttackInfo* attackInfo = new AttackInfo;
+	attackInfo->team = OBJECT_TEAM::PLAYER;
+	player->attack(_projectile, attackInfo);
+	_currAttackDelay = _baseAttackDelay;	// 공격 쿨타임 설정
+	_currBullet -= 1;						// 탄환 1 줄임
 	
 }
 

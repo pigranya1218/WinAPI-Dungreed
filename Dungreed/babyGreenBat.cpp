@@ -2,8 +2,7 @@
 #include "NormalProjectile.h"
 void babyGreenBat::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::NORMAL;
+	_itemCode = 0x03100;
 	_iconImg = IMAGE_MANAGER->findImage("babyGreenBat");
 
 	_price = 600;
@@ -86,6 +85,7 @@ void babyGreenBat::backRender(Player* player)
 
 void babyGreenBat::displayInfo()
 {
+	
 }
 
 void babyGreenBat::attack(Player* player)
@@ -118,7 +118,7 @@ void babyGreenBat::attack(Player* player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(100, 100));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, false, "BabyBatBulletFx", Vector2(100,100), 300); // 사정거리 추가했어요 >> 황수현
+	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100,100), 500,false); 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;	
 	player->attack(projectile, attackInfo);
@@ -134,7 +134,7 @@ void babyGreenBat::attack(Player* player)
 	projectile0->setPosition(Vector2(shootPos0.x, shootPos0.y-15));
 	projectile0->setSize(Vector2(100, 100));
 	projectile0->setTeam(OBJECT_TEAM::PLAYER);
-	projectile0->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, false, "BabyBatBulletFx", Vector2(100, 100), 300); // 사정거리 추가했어요 >> 황수현
+	projectile0->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100, 100), 500, false);
 	AttackInfo* attackInfo0 = new AttackInfo;
 	attackInfo0->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile0, attackInfo0);

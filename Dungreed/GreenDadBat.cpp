@@ -4,8 +4,7 @@
 
 void GreenDadBat::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::HIGH;
+	_itemCode = 0x03305;
 	_iconImg = IMAGE_MANAGER->findImage("GreenDadBat");
 
 	_price = 3500;
@@ -18,7 +17,7 @@ void GreenDadBat::init()
 	_ani->start();
 	_ani->init(_img->getWidth(), _img->getHeight(),
 		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(9);
+	_ani->setFPS(13);
 	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 
 	_baseAttackDelay = 0.4;
@@ -105,7 +104,7 @@ void GreenDadBat::attack(Player * player)
 	Vector2 pos = _batPos;
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _batPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _batPos .x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _batPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _batPos.x)) + PI2;
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;
@@ -113,11 +112,11 @@ void GreenDadBat::attack(Player * player)
 
 	NormalProjectile* projectile = new NormalProjectile;
 	Vector2 shootPos = pos;
-	float length = _img->getWidth() * 0.6f * 0.1; // 무기 길이만큼
+	float length = _img->getWidth() * 0.1f; // 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	projectile->setPosition(shootPos);
-	projectile->setSize(Vector2(170, 170));
+	projectile->setSize(Vector2(190, 190));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(500, 500), 300, false); // 사정거리 추가했어요 >> 황수현
 	AttackInfo* attackInfo = new AttackInfo;

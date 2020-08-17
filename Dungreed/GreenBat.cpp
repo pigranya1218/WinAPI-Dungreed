@@ -3,8 +3,7 @@
 
 void GreenBat::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;	
+	_itemCode = 0x03204;
 	_iconImg = IMAGE_MANAGER->findImage("GreenBat");
 	_price = 600;
 
@@ -114,7 +113,7 @@ void GreenBat::attack(Player * player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(110, 110));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, false, "BabyBatBulletFx", Vector2(110, 110), 300);
+	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(110, 110), 550,false);
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);

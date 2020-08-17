@@ -4,9 +4,7 @@
 void IceBall::init()
 {
 	//厩技辑府 鸥涝
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::NORMAL;
-	
+	_itemCode = 0x03108;
 	_iconImg = IMAGE_MANAGER->findImage("IceBall");
 
 	//厩技辑府 可记

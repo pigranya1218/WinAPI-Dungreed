@@ -166,6 +166,7 @@
     <ClInclude Include="BatRed.h" />
     <ClInclude Include="babyGreenBat.h" />
     <ClInclude Include="bombPouch.h" />
+    <ClInclude Include="BoomerangProjectile.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CameraShakeEvent.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="GreenDadBat.h" />
     <ClInclude Include="GreenMomBat.h" />
     <ClInclude Include="HeartOfCosmos.h" />
+    <ClInclude Include="HeartOfCosmosProjectile.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -214,6 +216,7 @@
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
+    <ClInclude Include="MultiBullet.h" />
     <ClInclude Include="Niflheim.h" />
     <ClInclude Include="NormalProjectile.h" />
     <ClInclude Include="Npc.h" />
@@ -278,6 +281,7 @@
     <ClCompile Include="BatRed.cpp" />
     <ClCompile Include="babyGreenBat.cpp" />
     <ClCompile Include="bombPouch.cpp" />
+    <ClCompile Include="BoomerangProjectile.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
@@ -306,10 +310,12 @@
     <ClCompile Include="GreenDadBat.cpp" />
     <ClCompile Include="GreenMomBat.cpp" />
     <ClCompile Include="HeartOfCosmos.cpp" />
+    <ClCompile Include="HeartOfCosmosProjectile.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
     <ClCompile Include="InventoryUI.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="KeresScythe.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
@@ -322,6 +328,7 @@
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
+    <ClCompile Include="MultiBullet.cpp" />
     <ClCompile Include="Niflheim.cpp" />
     <ClCompile Include="NormalProjectile.cpp" />
     <ClCompile Include="Npc.cpp" />

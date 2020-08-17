@@ -22,4 +22,6 @@ namespace TTYONE_UTIL
 	float getAngle(float x1, float y1, float x2, float y2);
 
 	wstring stringTOwsting(string src);
+
+	int getSize(int num);
 }

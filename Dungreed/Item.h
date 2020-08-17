@@ -8,7 +8,8 @@ enum class ITEM_TYPE : int
 	WEAPON_ONE_HAND = 0x01000, // 한손 무기
 	WEAPON_TWO_HAND = 0x02000, // 양손 무기
 	ACC = 0x03000, // 악세사리
-	FOOD = 0x04000
+	WEAPON_SUB = 0x04000, // 보조 무기
+	FOOD = 0x05000
 };
 
 enum class ITEM_RANK : int
@@ -18,15 +19,26 @@ enum class ITEM_RANK : int
 	RARE = 0x00300, // 희귀
 	LEGEND = 0x00400 // 전설
 };
+//한손 전설 - 0x014xx;
+//근거리 0x0xx00~
+//원거리 0x0xx60~
+
+
+
+
+
 
 class Item
 {
 protected:
 	int _itemCode; // 아이템 코드
-	vector<string> _displayInfos; // 아이템 능력에 대한 설명
+	
+	wstring _itemName; // 아이템 이름
+	vector<wstring> _displayInfos; // 아이템 능력에 대한 설명
+	wstring _displayText; // 아이템 잡담
 
-	ITEM_TYPE _type; // 아이템 타입
-	ITEM_RANK _rank; // 아이템 등급
+	// ITEM_TYPE _type; // 아이템 타입
+	// ITEM_RANK _rank; // 아이템 등급
 	Image* _iconImg; // 아이템 이미지
 
 	
@@ -58,10 +70,13 @@ public:
 	virtual wstring getBulletUI() { return L""; }
 	virtual float getBulletRatio() { return 0.f; }
 
-	ITEM_TYPE getType() const noexcept { return _type; }
-
+	int getItemCode() const noexcept { return _itemCode; }
+	ITEM_TYPE getItemType() const noexcept;
+	ITEM_RANK getItemRank() const noexcept;
 	int getPrice() const noexcept { return _price; }
-	vector<string> getDisplayInfos() { return _displayInfos; }
+	wstring getItemName() const noexcept { return _itemName; }
+	vector<wstring> getDisplayInfos() const noexcept { return _displayInfos; }
+	wstring getDisplayText() const noexcept { return _displayText; }
 	Image* getIconImg() const noexcept { return _iconImg; }
 	PlayerStat getAddStat() const noexcept { return _addStat; }
 	

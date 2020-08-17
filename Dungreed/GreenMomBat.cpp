@@ -3,8 +3,7 @@
 #include "NormalProjectile.h"
 void GreenMomBat::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::HIGH;
+	_itemCode = 0x03306;
 	_iconImg = IMAGE_MANAGER->findImage("GreenMomBat");
 
 	_price = 3500;
@@ -24,7 +23,7 @@ void GreenMomBat::init()
 	_ani->start();
 	_ani->init(_img->getWidth(), _img->getHeight(),
 		_img->getMaxFrameX(), _img->getMaxFrameY());
-	_ani->setFPS(11);
+	_ani->setFPS(15);
 	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 }
 
@@ -114,7 +113,7 @@ void GreenMomBat::attack(Player * player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(170, 120));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 18, false, "BabyBatBulletFx", Vector2(170, 170), 300);	// 사정거리 추가했어요 >> 황수현
+	projectile->init("BabyBatBulletAt", angleRadian, 800, true, true, 18, true, "BabyBatBulletFx", Vector2(190, 190), 800,false);	
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);

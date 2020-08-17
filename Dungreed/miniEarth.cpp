@@ -4,8 +4,7 @@
 void miniEarth::init()
 {
 	//악세서리 타입
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::NORMAL;
+	_itemCode = 0x0310A;
 	_iconImg = IMAGE_MANAGER->findImage("MiniEarth");
 	_img = IMAGE_MANAGER->findImage("MiniEarth0");
 

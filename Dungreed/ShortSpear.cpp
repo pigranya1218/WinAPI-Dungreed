@@ -3,13 +3,19 @@
 
 void ShortSpear::init()
 {
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;
-	_rank = ITEM_RANK::NORMAL;
 	_iconImg = _img = IMAGE_MANAGER->findImage("ShortSpear");
 	_price = 600;
+	
+	_itemName = L"단창";
+	_itemCode = 0x02101; // 양손 일반
+	_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
+	_displayText = L"\"던질 수 있게 제작된 짧은 창\"";
 
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
+	_addStat.minDamage = 7;
+	_addStat.maxDamage = 10;
+	_addStat.attackSpeed = 0.4;
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
