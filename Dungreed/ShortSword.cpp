@@ -17,8 +17,6 @@ void ShortSword::init()
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_minDamage = 7;
-	_maxDamage = 10;
 	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;

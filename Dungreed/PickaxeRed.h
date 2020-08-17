@@ -18,7 +18,8 @@ private:
 	bool _oneAttack;
 	FloatRect _hand;
 	Vector2 _handSize;
-
+	float width; 
+	float height; 
 
 public:
 	virtual void init();
