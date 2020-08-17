@@ -38,6 +38,8 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	// 변수 초기화
 	_isDetect = 0;				// 플레이어 감지 플래그
 	_rushPos = Vector2(0, 0);	// 돌진 시작 위치
+
+	_active = true;
 }
 
 void Minotaurs::release()
@@ -264,6 +266,7 @@ void Minotaurs::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

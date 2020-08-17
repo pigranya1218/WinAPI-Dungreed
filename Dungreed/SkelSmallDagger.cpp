@@ -31,6 +31,7 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction)
 	_attack.distance = 100;
 
 	_isDetect = 0;
+	_active = true;
 }
 
 void SkelSmallDagger::release()
@@ -97,6 +98,9 @@ void SkelSmallDagger::update(float const timeElapsed)
 		}
 		break;
 		case ENEMY_STATE::DIE:
+		{
+
+		}
 		break;
 	}
 
@@ -177,6 +181,7 @@ void SkelSmallDagger::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

@@ -30,9 +30,11 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	// ÃÑ¾Ë ÃÊ±âÈ­
-	_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 3, 500, 1000, false, true, true, true);
+	_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 1, 1, 500, false, true, true, true, true);
 
 	_isDetect = 0;
+
+	_active = true;
 }
 
 void BatRed::release()
@@ -132,7 +134,7 @@ void BatRed::render()
 
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
 	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(unsigned)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void BatRed::setState(ENEMY_STATE state)
@@ -164,6 +166,7 @@ void BatRed::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

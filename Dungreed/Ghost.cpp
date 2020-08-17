@@ -27,6 +27,7 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction)
 	_moving.delay = 0.5;
 
 	_isDetect = 0;
+	_active = true;
 }
 
 void Ghost::release()
@@ -146,6 +147,7 @@ void Ghost::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

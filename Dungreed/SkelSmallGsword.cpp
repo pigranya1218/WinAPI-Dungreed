@@ -31,6 +31,8 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 	_attack.distance = 100;
 
 	_isDetect = 0;
+
+	_active = true;
 }
 
 void SkelSmallGsword::release()
@@ -51,52 +53,55 @@ void SkelSmallGsword::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
-	case ENEMY_STATE::IDLE:
-	{
-		if (_isDetect)
+		case ENEMY_STATE::IDLE:
 		{
-			if (_attack.update(timeElapsed * 10))
+			if (_isDetect)
 			{
-				setState(ENEMY_STATE::MOVE);
-			}
-		}
-	}
-	break;
-	case ENEMY_STATE::MOVE:
-	{
-		if (_moving.update(timeElapsed))
-		{
-			_direction = (_position.x > playerPos.x) ? (DIRECTION::LEFT) : (DIRECTION::RIGHT);
-
-			if (fabsf(_position.x - playerPos.x) < 50 && _isStand)
-			{
-				if (playerPos.y < (_position.y - _size.y * 2))
+				if (_attack.update(timeElapsed * 10))
 				{
-					_moving.force.y = -1400;
+					setState(ENEMY_STATE::MOVE);
 				}
 			}
 		}
-
-		moveDir.x += timeElapsed * _moving.force.x * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
-
-		if (getDistance(_position.x, _position.y, playerPos.x, playerPos.y) < _attack.distance)
+		break;
+		case ENEMY_STATE::MOVE:
 		{
-			if (_attack.update(timeElapsed))
+			if (_moving.update(timeElapsed))
 			{
-				setState(ENEMY_STATE::ATTACK);
+				_direction = (_position.x > playerPos.x) ? (DIRECTION::LEFT) : (DIRECTION::RIGHT);
+
+				if (fabsf(_position.x - playerPos.x) < 50 && _isStand)
+				{
+					if (playerPos.y < (_position.y - _size.y * 2))
+					{
+						_moving.force.y = -1400;
+					}
+				}
+			}
+
+			moveDir.x += timeElapsed * _moving.force.x * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
+
+			if (getDistance(_position.x, _position.y, playerPos.x, playerPos.y) < _attack.distance)
+			{
+				if (_attack.update(timeElapsed))
+				{
+					setState(ENEMY_STATE::ATTACK);
+				}
 			}
 		}
-	}
-	break;
-	case ENEMY_STATE::ATTACK:
-	{
-		if (!_weaponAni->isPlay())
+		break;
+		case ENEMY_STATE::ATTACK:
 		{
-			setState(ENEMY_STATE::IDLE);
+			if (!_weaponAni->isPlay())
+			{
+				setState(ENEMY_STATE::IDLE);
+			}
 		}
-	}
-	break;
-	case ENEMY_STATE::DIE:
+		break;
+		case ENEMY_STATE::DIE:
+		{
+
+		}
 		break;
 	}
 
@@ -149,35 +154,36 @@ void SkelSmallGsword::setState(ENEMY_STATE state)
 	// 상태에 따른 애니메이션 설정
 	switch (state)
 	{
-	case ENEMY_STATE::IDLE:
-	{
-		_ani->stop();
-		_weaponAni->stop();
-		_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
-	}
-	break;
-	case ENEMY_STATE::MOVE:
-	{
-		_ani->stop();
-		_weaponAni->stop();
-		_img = IMAGE_MANAGER->findImage("Skel/Small/Move");
-		_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
-		_ani->setDefPlayFrame(false, true);
-		_ani->setFPS(10);
-		_ani->start();
-	}
-	break;
-	case ENEMY_STATE::ATTACK:
-	{
-		_ani->stop();
-		_weaponAni->stop();
-		_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
-		_weaponAni->start();
-	}
-	break;
-	case ENEMY_STATE::DIE:
-	{
-	}
-	break;
+		case ENEMY_STATE::IDLE:
+		{
+			_ani->stop();
+			_weaponAni->stop();
+			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+		}
+		break;
+		case ENEMY_STATE::MOVE:
+		{
+			_ani->stop();
+			_weaponAni->stop();
+			_img = IMAGE_MANAGER->findImage("Skel/Small/Move");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setDefPlayFrame(false, true);
+			_ani->setFPS(10);
+			_ani->start();
+		}
+		break;
+		case ENEMY_STATE::ATTACK:
+		{
+			_ani->stop();
+			_weaponAni->stop();
+			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+			_weaponAni->start();
+		}
+		break;
+		case ENEMY_STATE::DIE:
+		{
+			_active = false;
+		}
+		break;
 	}
 }

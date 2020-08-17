@@ -26,6 +26,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	_isDetect = 0;
+	_active = true;
 }
 
 void BatNormal::release()
@@ -50,9 +51,8 @@ void BatNormal::update(float const timeElapsed)
 				_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 				setState(ENEMY_STATE::MOVE);
 			}
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::MOVE:
 		{
 			// 이동
@@ -61,26 +61,19 @@ void BatNormal::update(float const timeElapsed)
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
 			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);
 
-			//moveDir.x += cosf(_moving.angle);
-			//moveDir.y -= sinf(_moving.angle);
-			//moveDir = moveDir * (timeElapsed * _moving.speed);
-
 			_enemyManager->moveEnemy(this, moveDir);
 
-			// 일정 주기로 공격
-			
 			if (_moving.update(timeElapsed))
 			{
 				// 아이들 상태로 변경
 				setState(ENEMY_STATE::IDLE);
 			}
-
-			break;
 		}		
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
 		}
+		break;
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -92,7 +85,7 @@ void BatNormal::render()
 {
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
 	_img->setScale(_scale);
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(bool)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void BatNormal::setState(ENEMY_STATE state)
@@ -107,14 +100,14 @@ void BatNormal::setState(ENEMY_STATE state)
 			_img = IMAGE_MANAGER->findImage("Bat/Normal/Move");
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
+			_active = false;
 		}
+		break;
 	}
 }

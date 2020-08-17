@@ -53,9 +53,10 @@ protected:
 		bool				aniLoop;	// 애니메이션 루프여부
 		bool				isCollision;// 충돌 여부
 		bool				isRotate;	// 이미지 회전 여부
+		bool				isGravity;	// 중력 사용 여부
 		int					bulletNum;	// 생성할 총알 지정
 
-		void init(string bulletName, string effectName, float scale, float delay, float duration, float speed, bool isRotate, bool isCollision, bool isAni, bool aniLoop)
+		void init(string bulletName, string effectName, float scale, float delay, float duration, float speed, bool isRotate, bool isCollision, bool isAni, bool aniLoop, bool isGravity = 0)
 		{
 			this->bulletName = bulletName;
 			this->effectName = effectName;	
@@ -78,6 +79,7 @@ protected:
 			this->aniLoop = aniLoop;
 			this->isCollision = isCollision;
 			this->isRotate = isRotate;
+			this->isGravity = isGravity;
 		}
 		// 딜레이 업데이트
 		bool delayUpdate(float const timeElapsed)
@@ -102,7 +104,7 @@ protected:
 			bullet->setSize(effectSize);
 			bullet->setTeam(OBJECT_TEAM::ENEMY);
 
-			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, duration, isRotate);
+			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, duration, isRotate, isGravity);
 
 			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);

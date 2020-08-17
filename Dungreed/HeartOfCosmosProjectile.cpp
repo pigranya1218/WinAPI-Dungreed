@@ -38,7 +38,7 @@ void HeartOfCosmosProjectile::release()
 		delete _ani;
 	}
 
-	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
+	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian * (180 / PI)) : (0.0f)));
 }
 
 void HeartOfCosmosProjectile::update(float elapsedTime)

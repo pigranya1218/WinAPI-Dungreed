@@ -22,7 +22,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 
 	// 공격 관련 변수 초기화
 	//ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 300, 1000, true, true, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 1, 700, true, true, false, false);
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -31,6 +31,8 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	_isDetect = 0;
+
+	_active = true;
 }
 
 void BatIce::release()
@@ -66,9 +68,8 @@ void BatIce::update(float const timeElapsed)
 				_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 				setState(ENEMY_STATE::MOVE);
 			}
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::MOVE:
 		{
 			// 이동
@@ -76,10 +77,6 @@ void BatIce::update(float const timeElapsed)
 
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
 			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);
-
-			//moveDir.x += cosf(_moving.angle);
-			//moveDir.y -= sinf(_moving.angle);
-			//moveDir = moveDir * (timeElapsed * _moving.speed);
 
 			_enemyManager->moveEnemy(this, moveDir);
 
@@ -104,8 +101,8 @@ void BatIce::update(float const timeElapsed)
 					setState(ENEMY_STATE::IDLE);
 				}
 			}
-			break;
 		}
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
 			if (_ani->getPlayIndex() == 5)
@@ -117,12 +114,12 @@ void BatIce::update(float const timeElapsed)
 				// 공격 완료 후 IDLE 상태로 변경
 				setState(ENEMY_STATE::IDLE);
 			}
-			break;
 		}
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
 		}
+		break;
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -154,9 +151,8 @@ void BatIce::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
 			_ani->start();
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
 			_ani->stop();
@@ -165,12 +161,12 @@ void BatIce::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
 			_ani->start();
-
-			break;
 		}
+		break;
 		case ENEMY_STATE::DIE:
 		{
-			break;
+			_active = false;
 		}
+		break;
 	}
 }

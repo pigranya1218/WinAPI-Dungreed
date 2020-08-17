@@ -27,9 +27,10 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 0.5;	
 
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 300, 850, true, true, false, false);
+	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 1.3, 850, true, true, false, false);
 
 	_isDetect = _attacking = 0;
+	_active = true;
 }
 
 void SkelMagicianIce::release()
@@ -102,6 +103,8 @@ void SkelMagicianIce::update(float const timeElapsed)
 			}
 		}
 	}
+
+	_enemyManager->moveEnemy(this, moveDir);
 	
 	_ani->frameUpdate(timeElapsed);
 	_attackAni->frameUpdate(timeElapsed);
@@ -157,6 +160,7 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

@@ -29,6 +29,8 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction)
 
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
+
+	_active = true;
 }
 
 void SkelDog::release()
@@ -163,6 +165,9 @@ void SkelDog::setState(ENEMY_STATE state)
 		}
 		break;
 		case ENEMY_STATE::DIE:
-			break;
+		{
+			_active = false;
+		}
+		break;
 	}
 }

@@ -20,14 +20,18 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.2, 500, 1000, false, true, true, true);
+	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.3f, 500, 500, false, true, true, true);
 
 	_isDetect = 0;
 	_detectRange = 300;
+
+	_active = true;
 }
 
 void BatGiantNormal::release()
 {
+	_ani->release();
+	delete _ani;
 }
 
 void BatGiantNormal::update(float const timeElapsed)
@@ -147,6 +151,7 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			_active = false;
 		}
 		break;
 	}

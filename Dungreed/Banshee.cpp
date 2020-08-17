@@ -22,7 +22,9 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	// Åº¸· ÃÊ±âÈ­
-	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 500, 500, false, true, true, true);
+	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 2.2, 500, false, false, true, true);
+
+	_active = true;
 }
 
 void Banshee::release()
@@ -38,6 +40,7 @@ void Banshee::update(float const timeElapsed)
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
 	}
 
+	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -73,6 +76,8 @@ void Banshee::update(float const timeElapsed)
 		}
 	}
 
+	_enemyManager->moveEnemy(this, moveDir);
+
 	_ani->frameUpdate(timeElapsed);
 }
 
@@ -98,9 +103,8 @@ void Banshee::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
 			_ani->start();
-
-			break;
-		}		
+		}	
+		break;
 		case ENEMY_STATE::ATTACK:
 		{
 			_ani->stop();
@@ -109,13 +113,12 @@ void Banshee::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
 			_ani->start();			
-
-			break;
 		}		
+		break;
 		case ENEMY_STATE::DIE:
 		{
-
-			break;
+			_active = false;
 		}
+		break;
 	}
 }

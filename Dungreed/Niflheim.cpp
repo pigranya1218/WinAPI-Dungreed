@@ -1,6 +1,6 @@
 #include "Niflheim.h"
 
-void Niflheim::init()
+void Niflheim::init(const Vector2& pos, DIRECTION direction)
 {
 	_ani = new Animation;
 
@@ -27,6 +27,8 @@ void Niflheim::init()
 		_pillar[i].position.x += cosf(_pillar[i].angle) * 100;
 		_pillar[i].position.y -= sinf(_pillar[i].angle) * 100;
 	}
+
+	_active = true;
 }
 
 void Niflheim::release()

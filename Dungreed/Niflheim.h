@@ -20,7 +20,7 @@ private:
 	tagPillarInfo _pillar[4];
 
 public:
-	void init();
+	void init(const Vector2& pos, DIRECTION direction);
 	void release();
 	void update(float const timeElapsed);
 	void render();

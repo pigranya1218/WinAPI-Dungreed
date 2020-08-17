@@ -36,15 +36,15 @@ void Belial::init(const Vector2 & pos)
 	_lHand._Rect = rectMakePivot(_lHand._Position,_lHand._size, PIVOT::CENTER);
 
 	ZeroMemory(&_head._moving, sizeof(_head._moving));
-	_head._moving.gravity = 30;
+	_head._moving.gravity.y = 30;
 	_head._moving.delay = 1;
 
 	ZeroMemory(&_rHand._moving, sizeof(_rHand._moving));
-	_rHand._moving.speed = 300;
+	_rHand._moving.force.y = 300;
 	_rHand._moving.delay = 3;
 
 	ZeroMemory(&_lHand._moving, sizeof(_lHand._moving));
-	_lHand._moving.speed = 300;
+	_lHand._moving.force.y = 300;
 	_lHand._moving.delay = 3;
 
 
@@ -131,7 +131,7 @@ void Belial::update(float const timeElapsed)
 	break;
 	case ENEMY_STATE::ATTACK:
 	{
-		_head._moving.gravity = 0;
+		_head._moving.gravity.y = 0;
 		if (!_head._Ani->isPlay())
 		{
 			_head._Ani->stop();
@@ -140,7 +140,7 @@ void Belial::update(float const timeElapsed)
 		}
 		if (_head._attaking.update(timeElapsed))
 		{
-			_head._moving.gravity = 30.;
+			_head._moving.gravity.y = 30.;
 			setHeadState(ENEMY_STATE::IDLE);
 		}
 	}
@@ -174,13 +174,13 @@ void Belial::update(float const timeElapsed)
 		//움직이고 
 		case ENEMY_STATE::MOVE:
 		{
-			_rHand._moveDir.y -= sinf(_rHand._moving.angle)* (timeElapsed *_rHand._moving.speed);
+			_rHand._moveDir.y -= sinf(_rHand._moving.angle)* (timeElapsed *_rHand._moving.force.y);
 			setPosition(_position + _rHand._moveDir);
 
 			_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 
 			_rHand._moving.angle = getAngle(_rHand._Position.x, _rHand._Position.y, playerPos.x, playerPos.y);
-			_rHand._moving.speed = HANDSPEED;
+			_rHand._moving.force.y = HANDSPEED;
 
 			if (_rHand._attaking.update(timeElapsed))
 			{
@@ -235,13 +235,13 @@ void Belial::update(float const timeElapsed)
 		//움직이고 
 		case ENEMY_STATE::MOVE:
 		{
-			_lHand._moveDir.y -= sinf(_lHand._moving.angle)* (timeElapsed *_lHand._moving.speed);
+			_lHand._moveDir.y -= sinf(_lHand._moving.angle)* (timeElapsed *_lHand._moving.force.y);
 			setPosition(_position + _lHand._moveDir);
 
 			_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 
 			_lHand._moving.angle = getAngle(_lHand._Position.x, _lHand._Position.y, playerPos.x, playerPos.y);
-			_lHand._moving.speed = HANDSPEED;
+			_lHand._moving.force.y = HANDSPEED;
 
 			if (_lHand._attaking.update(timeElapsed))
 			{
@@ -287,7 +287,7 @@ void Belial::update(float const timeElapsed)
 		_lHand._Rect = rectMakePivot(_lHand._Position, _lHand._size, PIVOT::CENTER);
 	}
 
-	_head._moveDir.y += (_head._moving.gravity * timeElapsed);
+	_head._moveDir.y += (_head._moving.gravity.y * timeElapsed);
 	_head._Position = (_head._Position + _head._moveDir);
 
 	_rHand._Position = (_rHand._Position + _rHand._moveDir);
