@@ -55,31 +55,33 @@ void Effect::render()
 	if (_size.x != 0 && _size.y != 0)
 	{
 		_effectImage->setAngle(_angle);
-		CAMERA->aniRender(_effectImage, _position, _size, _effectAnimation);
+		CAMERA->aniRender(_effectImage, _position, _size, _effectAnimation, _bisymmetry);
 	}
 	else
 	{
 		_effectImage->setAngle(_angle);
-		CAMERA->aniRender(_effectImage, _position, _effectAnimation);
+		CAMERA->aniRender(_effectImage, _position, _effectAnimation, _bisymmetry);
 	}
 }
 
-void Effect::startEffect(Vector2 pos, float angle)
+void Effect::startEffect(Vector2 pos, float angle, bool bisymmetry)
 {
 	_isRunning = true;
 	_effectAnimation->start();
 	_position = pos;
 	_size = Vector2(0, 0);
 	_angle = angle;
+	_bisymmetry = bisymmetry;
 }
 
-void Effect::startEffect(Vector2 pos, Vector2 size, float angle)
+void Effect::startEffect(Vector2 pos, Vector2 size, float angle, bool bisymmetry)
 {
 	_isRunning = true;
 	_effectAnimation->start();
 	_position = pos;
 	_size = size;
 	_angle = angle;
+	_bisymmetry = bisymmetry;
 }
 
 void Effect::killEffect()
