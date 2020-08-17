@@ -191,11 +191,11 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/COSTUME/SELECTED", L"resources/images/gameScene/ui/boutique(costume)/CostumeOver.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/SHADOW", L"resources/images/gameScene/ui/boutique(costume)/CostumeShadow.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/UNLOCKED", L"resources/images/gameScene/ui/boutique(costume)/Costumeunlocked.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/0", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/base_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/1", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/metal_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/2", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/3", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/4", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/BASE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/base_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/METAL_PLATE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/metal_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/ALICE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/RED_LOTUS", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/PICKAX", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);

@@ -17,6 +17,11 @@ enum class STAT_TYPE : int
 	TRUE_DAMAGE,
 	MIN_DAMAGE,
 	MAX_DAMAGE,
+	//Ãß°¡
+	MAX_HP,
+	MAX_JUMP_COUNT,
+	MAX_DASH_COUNT,
+	MAX_SATIETY
 	END
 };
 

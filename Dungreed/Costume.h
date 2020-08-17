@@ -8,7 +8,8 @@ enum class COSTUME_TYPE : int
 	METAL_PLATE,
 	ALICE,
 	RED_LOTUS,
-	PICKAX
+	PICKAX,
+	END
 };
 
 enum class PLAYER_STATE : int
@@ -22,9 +23,13 @@ enum class PLAYER_STATE : int
 class Costume
 {
 protected:
-	string _costumeName; // 이미지를 찾기 위해 활용되는 코스튬별 이름
+	string _costumeName;	// 이미지를 찾기 위해 활용되는 코스튬별 이름
+	wstring _costumeTitle;	// 코스튬의 한글 이름
+	wstring _costumeSummary;	// 코스튬 개요
+	wstring _costumeDetails;	// 코스튬 상세내용
 
-	PlayerStat _baseStat; // 각 코스튬별 기본 스탯
+	PlayerStat _baseStat; // 기본 스탯
+	PlayerStat _differStat; // 코스튬별 다른 스탯
 
 	Image* _img;
 	Animation* _ani;
@@ -37,6 +42,11 @@ public:
 	virtual void render(Vector2 pos, DIRECTION dir) = 0;
 	virtual void setSprite(PLAYER_STATE state, bool isForced) = 0;	// 애니메이션을 재생시킬 함수
 	
-	PlayerStat const getBaseStat() { return _baseStat; } // 코스튬의 기본 스탯을 반환
+	PlayerStat const getBaseStat() { return _baseStat + _differStat; } // 코스튬의 기본 스탯을 반환
+	string getCostumeName() { return _costumeName; }
+	wstring getTitle() { return _costumeTitle; }
+	wstring getSummary() { return _costumeSummary; }
+	wstring getDetails() { return _costumeDetails; }
+	virtual PlayerStat* getDifferStat() { return &_differStat; } //코스튬의 변동 스탯 반환
 };
 

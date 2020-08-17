@@ -5,10 +5,19 @@ void AliceCos::init()
 	//코스튬 이름 설정
 	_costumeName = "ALICE";
 
+	//코스튬 설명창에 보여줄 내용들
+	_costumeTitle = L"앨리스";
+	_costumeSummary = L"토끼는 보이지 않고, 멋진 표적이 가득해";
+	_costumeDetails = L"원시: 일정 반경 안에 적이 있다면 위력이 -20 감소합니다.";
+
 	_ani = new Animation;
 
 	//현재 재생할 이미지
 	setSprite(PLAYER_STATE::IDLE, true);
+
+	//변동 스탯
+	_differStat.maxHp = -30;
+	_differStat.power = 40; //원 반경 내부에서는 -20이므로 20만 늘어남
 
 	//베이스 스탯
 	_baseStat.maxHp = 80;
