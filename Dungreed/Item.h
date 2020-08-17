@@ -33,6 +33,7 @@ class Item
 protected:
 	int _itemCode; // 아이템 코드
 	vector<string> _displayInfos; // 아이템 능력에 대한 설명
+	string _displayText; // 아이템 잡담
 
 	// ITEM_TYPE _type; // 아이템 타입
 	// ITEM_RANK _rank; // 아이템 등급
@@ -69,7 +70,8 @@ public:
 
 	int getItemCode() const noexcept { return _itemCode; }
 	int getPrice() const noexcept { return _price; }
-	vector<string> getDisplayInfos() { return _displayInfos; }
+	vector<string> getDisplayInfos() const noexcept { return _displayInfos; }
+	string getDisplayText() const noexcept { return _displayText; }
 	Image* getIconImg() const noexcept { return _iconImg; }
 	PlayerStat getAddStat() const noexcept { return _addStat; }
 	

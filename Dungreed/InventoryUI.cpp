@@ -3,6 +3,43 @@
 #include "Player.h"
 #include "Item.h"
 
+void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
+{
+	if (weapon == nullptr) return;
+	
+	FloatRect itemInfo;
+
+	if (isRT)
+	{
+		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_TOP);
+	}
+	else
+	{
+		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_BOTTOM);
+	}
+
+	D2D_RENDERER->fillRectangle(itemInfo, 0, 0, 0, 0.4);
+}
+
+void InventoryUI::drawAccInfo(Item* acc, Vector2 pos, bool isRT)
+{
+	if (acc == nullptr) return;
+}
+
+void InventoryUI::drawInvenInfo(int index, Vector2 pos)
+{
+	Item * item = _player->getInvenItem(index);
+	if (item == nullptr) return;
+	if (item->getItemCode() & static_cast<int>(ITEM_TYPE::ACC) == static_cast<int>(ITEM_TYPE::ACC))
+	{
+		drawAccInfo(item, pos, false);
+	}
+	else
+	{
+		drawWeaponInfo(item, pos, false);
+	}
+}
+
 void InventoryUI::init()
 {
 	_isActive = false;
@@ -38,6 +75,8 @@ void InventoryUI::init()
 	_dragWeaponIndex = -1;
 	_dragAccIndex = -1;
 	_dragInvenIndex = -1;
+
+	_itemInfo = FloatRect(Vector2(0, 0), Vector2(400, 400), PIVOT::CENTER);
 }
 
 void InventoryUI::release()
@@ -170,7 +209,6 @@ void InventoryUI::update(float elapsedTime)
 			}
 
 			// TODO : ÆÄ±«ÇÏ±â
-
 		}
 
 		_dragWeaponIndex = -1;
@@ -358,6 +396,29 @@ void InventoryUI::render()
 		{
 			_player->getInvenItem(_dragInvenIndex)->getIconImg()->setScale(5);
 			_player->getInvenItem(_dragInvenIndex)->getIconImg()->render(Vector2(_ptMouse));
+		}
+	}
+
+
+	for (int i = 0; i < 15; i++)
+	{
+		if (_invenRc[i].ptInRect(_ptMouse))
+		{
+			drawInvenInfo(i, _invenRc[i].getCenter());
+		}
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (_equippedWeaponRc[i].ptInRect(_ptMouse))
+		{
+			drawWeaponInfo(_player->getWeapon(i), _equippedWeaponRc[i].getCenter(), true);
+		}
+	}
+	for (int i = 0; i < 4; i++)
+	{
+		if (_equippedAccRc[i].ptInRect(_ptMouse))
+		{
+			drawAccInfo(_player->getAcc(i), _equippedAccRc[i].getCenter(), true);
 		}
 	}
 }
