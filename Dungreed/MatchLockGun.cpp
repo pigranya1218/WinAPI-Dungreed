@@ -25,7 +25,6 @@ void MatchLockGun::init()
 	_addStat.maxDamage = 20;
 	_addStat.attackSpeed = 0.4;
 
-	projectile = new NormalProjectile;
 
 	// private 변수 설정
 	_minDamage = 12;
@@ -183,10 +182,13 @@ void MatchLockGun::attack(Player* player)
 	float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
+	Image* _bulletImg = IMAGE_MANAGER->findImage("GunBullet");
+
+	projectile = new NormalProjectile;
 	projectile->setPosition(shootPos);
-	projectile->setSize(Vector2(100, 30));
+	projectile->setSize(Vector2(_bulletImg->getFrameSize().x * 4, _bulletImg->getFrameSize().y * 4));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("GunBullet", angleRadian, 30, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
+	projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;

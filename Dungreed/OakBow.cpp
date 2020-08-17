@@ -10,6 +10,7 @@ void OakBow::init()
 
 	_itemName = L"떡갈나무 활";
 	_itemCode = 0x02161;
+
 	//_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
 	_displayText = L"\"단단해서 때리는 데 쓸 수도 있을 것 같습니다.\"";
 
