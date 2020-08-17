@@ -15,7 +15,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
-	_moving.speed = 350;
+	_moving.force = Vector2(350, 0);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	// 사이즈 설정
@@ -58,8 +58,8 @@ void BatNormal::update(float const timeElapsed)
 			// 이동
 			Vector2 moveDir(0, 0);
 
-			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.speed);
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.speed);
+			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);
 
 			//moveDir.x += cosf(_moving.angle);
 			//moveDir.y -= sinf(_moving.angle);

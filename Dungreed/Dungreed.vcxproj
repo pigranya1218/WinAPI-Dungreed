@@ -212,6 +212,7 @@
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
+    <ClInclude Include="Niflheim.h" />
     <ClInclude Include="NormalProjectile.h" />
     <ClInclude Include="Npc.h" />
     <ClInclude Include="NpcManager.h" />
@@ -237,6 +238,7 @@
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SkelBigIce.h" />
     <ClInclude Include="SkelBigNormal.h" />
+    <ClInclude Include="SkelDog.h" />
     <ClInclude Include="SkelMagicianIce.h" />
     <ClInclude Include="SkelSmallBow.h" />
     <ClInclude Include="SoundManager.h" />
@@ -314,6 +316,7 @@
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
+    <ClCompile Include="Niflheim.cpp" />
     <ClCompile Include="NormalProjectile.cpp" />
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
@@ -334,6 +337,7 @@
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />
     <ClCompile Include="SkelBigNormal.cpp" />
+    <ClCompile Include="SkelDog.cpp" />
     <ClCompile Include="SkelMagicianIce.cpp" />
     <ClCompile Include="SkelSmallBow.cpp" />
     <ClCompile Include="SoundManager.cpp" />

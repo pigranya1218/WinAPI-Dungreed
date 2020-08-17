@@ -114,17 +114,15 @@ void OakBow::update(Player * player, float const elapsedTime)
 				_ani->stop();
 			}
 
-			float length = _img->getFrameSize().x * 0.5f * 3; // 무기 길이만큼
-
-			Vector2 arrowPos = renderPosWeapon;
-			arrowPos.x = (isLeft) ? (renderPosWeapon.x + anglePos.x + 15) : (renderPosWeapon.x + anglePos.x);
-			arrowPos.y = (isLeft) ? (renderPosWeapon.y + 10) : (renderPosWeapon.y);
-
-			NormalProjectile* projectile = new NormalProjectile;
-			projectile->setPosition(arrowPos);
-			projectile->setSize(Vector2(80, 15));
-			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 30, false, false, 20, false, "", Vector2());
+		NormalProjectile* projectile = new NormalProjectile;
+		Vector2 shootPos = renderPosHand;
+		float length = _img->getFrameSize().x * 0.6f * 4; // 무기 길이만큼
+		shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
+		shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
+		projectile->setPosition(shootPos);
+		projectile->setSize(Vector2(80, 15));
+		projectile->setTeam(OBJECT_TEAM::PLAYER);
+		projectile->init("Arrow00", angleRadian, 30, false, false, 20, false, "", Vector2(), 300); // 사정거리 추가했어요 >> 황수현
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;

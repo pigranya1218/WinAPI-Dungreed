@@ -26,11 +26,11 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
-	_moving.speed = 250;
+	_moving.force = Vector2(250, 0);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	// 총알 초기화
-	_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 3, 500, 1000, false, false, true, true);
+	_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 3, 500, 1000, false, true, true, true);
 
 	_isDetect = 0;
 }
@@ -75,8 +75,8 @@ void BatRed::update(float const timeElapsed)
 			// 이동
 			Vector2 moveDir(0, 0);
 
-			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.speed);
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.speed);
+			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);
 
 			_enemyManager->moveEnemy(this, moveDir);
 

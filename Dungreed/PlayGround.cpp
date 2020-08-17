@@ -461,6 +461,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Attack_Shot", L"resources/images/Enemy/Minotaurs/attack_shot.png"	, 7, 1);	// 미노타우르스 공격 피격
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill"		, L"resources/images/Enemy/Minotaurs/skill.png"			, 8, 1);	// 미노타우르스 돌진
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill_Shot"	, L"resources/images/Enemy/Minotaurs/skill_shot.png"	, 8, 1);	// 미노타우르스 돌진 피격
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Effect"		, L"resources/images/Enemy/Minotaurs/effect.png"		, 1, 8);	// 미노타우르스 돌진 이펙트
+
+	EFFECT_MANAGER->addEffect("Minotaurs/Effect", "Minotaurs/Effect", 15, 30);
 
 	// * 물소
 	IMAGE_MANAGER->addFrameImage("Ovibos/Idle"			, L"resources/images/Enemy/Ovibos/idle.png"			, 9, 1);	// 물소 기본
@@ -468,17 +471,35 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack"		, L"resources/images/Enemy/Ovibos/attack.png"		, 6, 1);	// 물소 공격 
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격
 
+	// ** BOSS
+	// * 니플헤임
+	IMAGE_MANAGER->addFrameImage("Niflheim/Idle"	, L"resources/images/boss/Niflheim/idle.png"	,  6, 1);	// 니플헤임 기본
+	IMAGE_MANAGER->addFrameImage("Niflheim/Attack_1", L"resources/images/boss/Niflheim/attack.png"	, 11, 1);	// 니플헤임 공격 1
+	IMAGE_MANAGER->addFrameImage("Niflheim/Attack_2", L"resources/images/boss/Niflheim/attack_1.png", 11, 1);	// 니플헤임 공격 2
+	IMAGE_MANAGER->addFrameImage("Niflheim/Spawn"	, L"resources/images/boss/Niflheim/enter.png"	, 16, 1);	// 니플헤임 등장
+	IMAGE_MANAGER->addFrameImage("Niflheim/Die"		, L"resources/images/boss/Niflheim/die.png"		, 30, 1);	// 니플헤임 죽음
+	IMAGE_MANAGER->addFrameImage("Niflheim/Pillar"	, L"resources/images/boss/Niflheim/pillar.png"	, 20, 1);	// 니플헤임 얼음기둥
+	IMAGE_MANAGER->addFrameImage("Niflheim/Icicle"	, L"resources/images/boss/Niflheim/icicle.png"	, 10, 1);	// 니플헤임 고드름
+	IMAGE_MANAGER->addFrameImage("Niflheim/Spear"	, L"resources/images/boss/Niflheim/spear.png"	, 13, 1);	// 니플헤임 얼음창
+
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// 수녀 총알
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// 수녀 총알 삭제
 
+	EFFECT_MANAGER->addEffect("Banshee/Bullet_FX", "Banshee/Bullet_FX", 15, 50);	// 이펙트 등록
+
 	IMAGE_MANAGER->addImage("IceBullet"			, L"resources/images/Enemy/Bullet/IceBullet.png"		 );	// 얼음 총알
 	IMAGE_MANAGER->addFrameImage("IceBullet_FX"	, L"resources/images/Enemy/Bullet/IceBullet_FX.png", 3, 1);	// 얼음 총알 삭제
+
+	EFFECT_MANAGER->addEffect("IceBullet_FX", "IceBullet_FX", 15, 50);
 	
 	IMAGE_MANAGER->addFrameImage("GiantBullet"		, L"resources/images/Enemy/Bullet/giantBullet.png"		, 5, 1);	// 박쥐 총알 큰 것
 	IMAGE_MANAGER->addFrameImage("GiantBullet_FX"	, L"resources/images/Enemy/Bullet/giantBullet_FX.png"	, 7, 1);	// 박쥐 총알 큰 것 삭제 이펙트
 	IMAGE_MANAGER->addFrameImage("SmallBullet"		, L"resources/images/Enemy/Bullet/smallBullet.png"		, 5, 1);	// 박쥐 총알 작은 것
 	IMAGE_MANAGER->addFrameImage("SmallBullet_FX"	, L"resources/images/Enemy/Bullet/smallBullet_FX.png"	, 7, 1);	// 박쥐 총알 작은 것 삭제 이펙트
+
+	EFFECT_MANAGER->addEffect("GiantBullet_FX", "GiantBullet_FX", 15, 50);
+	EFFECT_MANAGER->addEffect("SmallBullet_FX", "SmallBullet_FX", 15, 50);
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

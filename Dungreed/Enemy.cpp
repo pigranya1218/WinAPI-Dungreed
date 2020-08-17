@@ -18,7 +18,9 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 		if (!bullets.empty())
 		{
 			enemyManager->fireEnemy(bullets[bullets.size() - 1], attackInfo);
+			delete attackInfo;
+			//bullets[bullets.size() - 1]->release();
 			bullets.pop_back();
-		}
+		}		
 	}	
 }

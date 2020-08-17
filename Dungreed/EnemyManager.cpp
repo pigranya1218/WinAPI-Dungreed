@@ -111,6 +111,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		break;
 		case ENEMY_TYPE::SKEL_DOG:
 		{
+			enemy = new SkelDog;
+			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_MAGICIAN_ICE:
@@ -148,6 +151,12 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 		{
 			enemy = new Ovibos;
 			enemy->init(pos, direction);
+			enemy->setEnemyManager(this);
+		}
+		case ENEMY_TYPE::NIFLHEIM:
+		{
+			enemy = new Niflheim;
+			enemy->init();
 			enemy->setEnemyManager(this);
 		}
 	}

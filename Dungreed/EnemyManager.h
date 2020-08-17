@@ -10,10 +10,12 @@
 #include "SkelBigIce.h"
 #include "SkelBigNormal.h"
 #include "SkelMagicianIce.h"
+#include "SkelDog.h"
 #include "SkelSmallBow.h"
 #include "Minotaurs.h"
 #include "Ovibos.h"
 #include "Ghost.h"
+#include "Niflheim.h"
 
 class Stage;
 

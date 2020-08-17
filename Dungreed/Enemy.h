@@ -31,6 +31,9 @@ protected:
 	float				_scale;			// 렉트와 출력에 사용할 스케일
 	float				_detectRange;	// 플레이어 감지 거리	
 
+	//Synthesize(float, _curHp, Hp);
+	//Synthesize(float, _maxHp, Hp);
+
 	// 탄막 사용 시
 	struct tagShootingInfo
 	{
@@ -99,7 +102,7 @@ protected:
 			bullet->setSize(effectSize);
 			bullet->setTeam(OBJECT_TEAM::ENEMY);
 
-			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, isRotate);
+			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, range, isRotate);
 
 			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);
@@ -112,9 +115,11 @@ protected:
 			}
 		}
 		// 총알 출력
-		void render()
+		void render(int maxNum = -1)
 		{
-			for (int i = 0; i < bullets.size(); i++)
+			int loopSize = (maxNum == -1) ? (bullets.size()) : (maxNum);
+
+			for (int i = 0; i < loopSize; i++)
 			{
 				bullets[i]->render();
 			}
@@ -147,11 +152,10 @@ protected:
 	// 이동 관련 변수
 	struct tagMoveInfo
 	{
-		float speed;
-		float angle;
-		float gravity;
-		float jumpPower;
+		Vector2 force;
+		Vector2 gravity;
 
+		float angle;
 		float delay;
 		float count;
 
@@ -169,12 +173,13 @@ protected:
 	};	
 
 public:
-	virtual void init(const Vector2& pos, DIRECTION direction) = 0;
-	virtual void release() = 0;
-	virtual void update(float const timeElapsed) = 0;
-	virtual void render() = 0;
+	virtual void init() {}
+	virtual void init(const Vector2& pos, DIRECTION direction) {}
+	virtual void release() {};
+	virtual void update(float const timeElapsed) {};
+	virtual void render() {};
 
-	virtual void setState(ENEMY_STATE state) = 0;
+	virtual void setState(ENEMY_STATE state) {};
 
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
 

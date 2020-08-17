@@ -435,6 +435,12 @@
     <ClInclude Include="BatGiantNormal.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="SkelDog.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Niflheim.h">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClInclude>
     <ClInclude Include="CostumeUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
@@ -721,6 +727,12 @@
     </ClCompile>
     <ClCompile Include="BatGiantNormal.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelDog.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Niflheim.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="CostumeUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>
