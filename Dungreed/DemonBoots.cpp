@@ -5,7 +5,9 @@ void DemonBoots::init()
 {
 	_itemCode = 0x03303;
 	_iconImg = IMAGE_MANAGER->findImage("DemonBoots");
-	
+	_itemName = L"악마의 부츠";
+	_displayInfos.push_back(L"\"밟은 곳에 불이 붙습니다\"");
+	_displayText = L"\"신는 사람이 뒤에 열기를 쫒기게 되는 신발\"";
 	_price = 4300;
 	
 }

@@ -6,6 +6,9 @@ void GreenBat::init()
 	_itemCode = 0x03204;
 	_iconImg = IMAGE_MANAGER->findImage("GreenBat");
 	_price = 600;
+	_itemName = L"초록 박쥐";
+	_displayInfos.push_back(L"초록 박쥐 소환");
+	_displayText = L"\"카블로비니가 훈련을 시킨 초록 박쥐. 모험가의 공격을 지원한다.\"";
 
 	_batPos.x = WINSIZEX / 2;
 	_batPos.y = WINSIZEY / 2;

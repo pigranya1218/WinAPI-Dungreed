@@ -2,9 +2,16 @@
 #include "NormalProjectile.h"
 void babyGreenBat::init()
 {
-	_itemCode = 0x03100;
+	
 	_iconImg = IMAGE_MANAGER->findImage("babyGreenBat");
+	_itemCode = 0x03100;
 
+	_itemName = L"아기 초록 박쥐";	
+	_displayInfos.push_back(L"아기 초록 박쥐 소환");
+	_displayText = L"\"길을 잃지 않게 잘 이끌어주게.-카블로비나-\"";
+
+	
+	
 	_price = 600;
 	
 	_batPos.x = WINSIZEX / 2;
@@ -56,11 +63,11 @@ void babyGreenBat::update(Player* player, float const elapsedTime)
 	{
 		_batPos.x += 500 * elapsedTime;
 	}
-	if (_batPos.y > _renderPos.y + 5 && _batPos.y > _renderPos.y)
+	if (_batPos.y > _renderPos.y )
 	{
 		_batPos.y -= 500 * elapsedTime;
 	}
-	else if (_batPos.y < _renderPos.y - 5 && _batPos.y <= _renderPos.y)
+	else if (_batPos.y < _renderPos.y - 7 && _batPos.y <= _renderPos.y-2)
 	{
 		_batPos.y += 500 * elapsedTime;
 	}

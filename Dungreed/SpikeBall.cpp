@@ -11,6 +11,9 @@ void SpikeBall::init()
 	_addStat.criticalChance = 1;
 	_addStat.defense = 1;
 	
+	_itemName = L"뾰족 공";
+	_displayInfos.push_back(L"모험가 주위를 돌며 적을 공격");
+	_displayText = L"\"모험가의 주위를 돌면서 적들을 혼내준다.\"";
 	_x = _y = 0;
 
 	

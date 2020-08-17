@@ -9,7 +9,8 @@ void miniEarth::init()
 	_img = IMAGE_MANAGER->findImage("MiniEarth0");
 
 	//악세서리 옵션	
-
+	_itemName = L"초소형 행성";	
+	_displayText = L"\"엄청난 과학력을 지닌 행성. 하지만 3개의 위성을 잃어 과학력을 잃었다.\"";
 	//악세서리 가격
 	_price = 600;
 

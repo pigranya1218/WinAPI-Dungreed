@@ -6,7 +6,9 @@ void GreenDadBat::init()
 {
 	_itemCode = 0x03305;
 	_iconImg = IMAGE_MANAGER->findImage("GreenDadBat");
-
+	_itemName = L"아빠 초록 박쥐";
+	_displayInfos.push_back(L"아빠 초록 박쥐 소환");
+	_displayText = L"\"말을 잘 듣지 않아 훈련하기가 쉽지 않더군""\"-카블로비나";
 	_price = 3500;
 
 	_batPos.x = WINSIZEX / 2;

@@ -119,9 +119,9 @@ void Player::init()
 	_equippedAcc.resize(4);
 	_inventory.resize(15);
 
-	//babyGreenBat* testAcc1 = new babyGreenBat;
-	//testAcc1->init();
-	//_inventory[0] = testAcc1;
+	babyGreenBat* testAcc1 = new babyGreenBat;
+	testAcc1->init();
+	_inventory[4] = testAcc1;
 
 	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
@@ -140,7 +140,7 @@ void Player::init()
 
 	SpikeBall* testAcc9 = new SpikeBall;
 	testAcc9->init();
-	_inventory[4] = testAcc9;
+	_inventory[8] = testAcc9;
 
 
 	bombPouch* testAcc5 = new bombPouch;

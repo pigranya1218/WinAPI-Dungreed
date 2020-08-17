@@ -4,8 +4,9 @@ void HeartOfCosmos::init()
 {
 	_itemCode = 0x03307;
 	_iconImg = IMAGE_MANAGER->findImage("HeartOfCosmos");
-
-	_addStat.defense = 2;
+	_itemName = L"우주의 심장";
+	_displayInfos.push_back(L"대쉬한 자리에 에너지체를 남김");
+	_displayText = L"\"우주를 정복할 수 있는 힘을 가질 수 있을까?' 라는 물음에서 시작된 결정체""\"";	
 	_price = 4300;
 	
 }

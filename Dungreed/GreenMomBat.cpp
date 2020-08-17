@@ -5,7 +5,9 @@ void GreenMomBat::init()
 {
 	_itemCode = 0x03306;
 	_iconImg = IMAGE_MANAGER->findImage("GreenMomBat");
-
+	_itemName = L"엄마 초록 박쥐";
+	_displayInfos.push_back(L"엄마 초록 박쥐 소환");
+	_displayText = L"\"\"아기가 걱정된다고 해서...어떻게 대화하냐고?""\"-카블로비나";
 	_price = 3500;
 
 
