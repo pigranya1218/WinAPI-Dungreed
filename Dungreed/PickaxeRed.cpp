@@ -75,8 +75,8 @@ void PickaxeRed::frontRender(Player* player)
 	// 회전축 중점
 	originPos.x += ((isLeft) ? -20 : 20); // 바라보는 방향의 어깨
 	originPos.y += 0;
-	pos.x += ((isLeft) ? 0 : -40);
-	pos.y += 20;
+	pos.x += ((isLeft) ? 0 : 0);
+	//pos.y += 20;
 	// 회전축으로부터 마우스까지의 각도값
 	float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
 
@@ -93,14 +93,14 @@ void PickaxeRed::frontRender(Player* player)
 	
 	//renderPosHand.x += (width * 0.1 * 4);
 	// 손의 위치 
-	Vector2 renderPosHand = originPos;
+	Vector2 renderPosHand = pos;
 	// 무기 위치
 	Vector2 renderPosWeapon = originPos;
 	 
 		
-		renderPosHand.x += (isLeft) ? 40+ ( -cosf(handDegree * (PI / 180)) * width * 0.15f*4) : 80 - ( -cosf(handDegree * (PI / 180)) * width * 0.15f*4);
-		renderPosHand.y += 20+ (-sinf(weaponDegree * (PI / 180)) * width * 0.15 * 4);
-		//renderPosHand.y += (isLeft) ? (+20) : (-20);
+	renderPosHand.x += 0;// (isLeft) ? (-cosf(handDegree * (PI / 180)) * width * 0.15f * 4) : (-cosf(handDegree* (PI / 180)) * width * 0.15f * 4);
+		renderPosHand.y +=(-sinf(weaponDegree * (PI / 180)) * 0.90 * 4);
+		//renderPosHand.y += (isLeft) ? (+20) : (-20)
 		//renderPosHand.y += (isLeft) ? (20) : (-20);
 	//renderPosWeapon.y +=  (-sinf(weaponDegree * (PI / 180)) * width * 0.15 * 4);
 	
@@ -126,18 +126,44 @@ void PickaxeRed::frontRender(Player* player)
 
 
 	
-	FloatRect testHand = FloatRect(renderPosHand, _handSize, PIVOT::CENTER);
-	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(testHand), 0, 0,0, 1, (0), CAMERA->getRelativeV2(originPos));
+	//FloatRect testHand = FloatRect(renderPosHand, _handSize, PIVOT::CENTER);
+	//D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(testHand), 0, 0,0, 1, (0), CAMERA->getRelativeV2(originPos));
+		if (isLeft)
+		{
+			renderPosHand.x += width * 0.03f * 4;
+			renderPosHand.x += cosf(handDegree * (PI / 180)) * width * 0.03f * 4;
+			renderPosHand.y += -20;
+			_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos)); // 손의 렉트를 그린다
+			Vector2 renderPosHand2 = renderPosHand;
+			renderPosHand2.x -= 20;
+			renderPosHand2.x += cosf(handDegree * (PI / 180)) * width * 0.03f * 4;// width * 0.01f * 4;
 
+			FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, -(weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, -(weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos)); // 손의 렉트를 그린다
 
-	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
-	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos));
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
-	Vector2 renderPosHand2 = renderPosHand;
-	renderPosHand2.x += width * 0.06f * 4;
-	FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
-	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos));
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+		}
+		else
+		{
+
+			renderPosHand.x += width * 0.03f * 4;
+			renderPosHand.x += -cosf(handDegree * (PI / 180)) * width * 0.03f * 4;
+			renderPosHand.y += -20;
+			_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos)); // 손의 렉트를 그린다
+			Vector2 renderPosHand2 = renderPosHand;
+			renderPosHand2.x -= 20;
+			renderPosHand2.x += -cosf(handDegree * (PI / 180)) * width * 0.03f * 4;// width * 0.01f * 4;
+
+			FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos)); // 손의 렉트를 그린다
+
+		}
+	
 
 	if (_drawEffect) // 이펙트를 그린다
 	{
