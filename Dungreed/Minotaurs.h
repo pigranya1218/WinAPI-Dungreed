@@ -11,7 +11,6 @@ private:
 
 	Vector2			_lastPos;	// 이전 좌표
 	Vector2			_currPos;	// 현재 좌표
-	Vector2			_force;		// 돌진 시 공기저항
 	Vector2			_rushPos;	// 돌진 시작 포지션
 
 public:

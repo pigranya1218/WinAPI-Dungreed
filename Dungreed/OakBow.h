@@ -4,10 +4,6 @@
 class OakBow : public Item
 {
 private:
-	Image* _img;
-	Image* _frameImg;
-	Animation* _ani;
-
 	int _minDamage;
 	int _maxDamage;
 
@@ -21,6 +17,13 @@ private:
 
 	bool _isAttack;
 	float _chargeDelay;
+	Image* _img;
+	Animation* _ani;
+	Vector2 renderPosHand;
+	Vector2 renderPosWeapon;
+	Vector2 anglePos;
+	Vector2 subHandPos;
+	int effectCount;
 public:
 
 	virtual void init();
@@ -37,5 +40,5 @@ public:
 
 	virtual void getHit(Vector2 const position); // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
-	virtual PlayerStat equip(); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
+	virtual void equip(Player* player); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
 };

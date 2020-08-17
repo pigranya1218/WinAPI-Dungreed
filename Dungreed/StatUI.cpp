@@ -73,10 +73,10 @@ void StatUI::render()
 	}
 	
 	// STATUS, FOOD Á¦¸ñ
-	D2D_RENDERER->renderTextField(_statBaseRc.left, _statBaseRc.top, L"STATUS", RGB(255, 255, 255), 
-		50, _statBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"µÕ±Ù¸ð²Ã", 0);
-	D2D_RENDERER->renderTextField(_foodBaseRc.left, _foodBaseRc.top, L"FOODS", RGB(255, 255, 255),
-		50, _foodBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"µÕ±Ù¸ð²Ã", 0);
+	D2D_RENDERER->renderTextField(_statBaseRc.left, _statBaseRc.top - 5, L"STATUS", RGB(255, 255, 255), 
+		42, _statBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0);
+	D2D_RENDERER->renderTextField(_foodBaseRc.left, _foodBaseRc.top - 5, L"FOODS", RGB(255, 255, 255),
+		42, _foodBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0);
 	
 	// ½ºÅÈ
 	PlayerStat stat = _player->getCurrStat();

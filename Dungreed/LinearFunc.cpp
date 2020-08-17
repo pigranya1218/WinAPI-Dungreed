@@ -43,48 +43,25 @@ LINEAR_VALUE_TYPE LinearFunc::getValueType(float x, float y)
 	
 }
 
-Vector2 LinearFunc::getStart()
-{
-	if (a == INF_A)
-	{
-		return Vector2(b, start);
-	}
-	else
-	{
-		return Vector2(start, getY(start));
-	}
-}
-
-Vector2 LinearFunc::getEnd()
-{
-	if (a == INF_A)
-	{
-		return Vector2(b, end);
-	}
-	else
-	{
-		return Vector2(end, getY(end));
-	}
-}
-
-LinearFunc LinearFunc::getLinearFuncFromPoints(Vector2 start, Vector2 end)
+LinearFunc LinearFunc::getLinearFuncFromPoints(Vector2 pointA, Vector2 pointB, Vector2 rangeX, Vector2 rangeY)
 {
 	LinearFunc newFunc;
-	float differY = (start.y - end.y);
-	float differX = (start.x - end.x);
-	if (differX == 0 && differY != 0)
+	newFunc.start = pointA;
+	newFunc.end = pointB;
+	newFunc.rangeX = rangeX;
+	newFunc.rangeY = rangeY;
+
+	float differY = (pointA.y - pointB.y);
+	float differX = (pointA.x - pointB.x);
+	if (differX == 0 && differY != 0) // x = b 꼴의 수직 선분
 	{
 		newFunc.a = INF_A;
-		newFunc.b = start.x;
-		newFunc.start = start.y;
-		newFunc.end = end.y;
+		newFunc.b = pointA.x;
 	}
-	else
+	else // y = ax + b로 나타낼 수 있는 선분
 	{
 		newFunc.a = differY / differX; // x 변화량에 대한 y 변화량 비율
-		newFunc.b = start.y - (start.x * newFunc.a); // y 절편
-		newFunc.start = start.x;
-		newFunc.end = end.x;
+		newFunc.b = pointA.y - (pointA.x * newFunc.a); // y 절편
 	}
 	return newFunc;
 }

@@ -31,6 +31,9 @@ protected:
 	float				_scale;			// 렉트와 출력에 사용할 스케일
 	float				_detectRange;	// 플레이어 감지 거리	
 
+	//Synthesize(float, _curHp, Hp);
+	//Synthesize(float, _maxHp, Hp);
+
 	// 탄막 사용 시
 	struct tagShootingInfo
 	{
@@ -49,12 +52,14 @@ protected:
 		bool				isAni;		// 애니메이션 사용여부
 		bool				aniLoop;	// 애니메이션 루프여부
 		bool				isCollision;// 충돌 여부
+		bool				isRotate;	// 이미지 회전 여부
 		int					bulletNum;	// 생성할 총알 지정
 
-		void init(string bulletName, string effectName, float scale, float delay, float range, float speed, bool isCollision = 1, bool isAni = 0, bool aniLoop = 0)
+		void init(string bulletName, string effectName, float scale, float delay, float range, float speed, bool isRotate, bool isCollision, bool isAni, bool aniLoop)
 		{
 			this->bulletName = bulletName;
-			this->effectName = effectName;			
+			this->effectName = effectName;	
+
 			if (isAni)
 			{
 				this->effectSize = IMAGE_MANAGER->findImage(bulletName)->getFrameSize() * scale;
@@ -72,6 +77,7 @@ protected:
 			this->isAni = isAni;
 			this->aniLoop = aniLoop;
 			this->isCollision = isCollision;
+			this->isRotate = isRotate;
 		}
 		// 딜레이 업데이트
 		bool delayUpdate(float const timeElapsed)
@@ -96,21 +102,30 @@ protected:
 			bullet->setSize(effectSize);
 			bullet->setTeam(OBJECT_TEAM::ENEMY);
 
-			bullet->init(bulletName, angle, speed, isAni, aniLoop, 10, isCollision, effectName, effectSize);
+			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, range, isRotate);
 
-			if (bulletNum > 0) bulletNum--;
+			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);
 		}
-		// 총알 출력
-		void render()
+		void aniUpdate(const float timeElapsed)
 		{
 			for (int i = 0; i < bullets.size(); i++)
+			{
+				bullets[i]->aniUpdate(timeElapsed);
+			}
+		}
+		// 총알 출력
+		void render(int maxNum = -1)
+		{
+			int loopSize = (maxNum == -1) ? (bullets.size()) : (maxNum);
+
+			for (int i = 0; i < loopSize; i++)
 			{
 				bullets[i]->render();
 			}
 		}
 
-		void fireBullet(EnemyManager* enemyManager);
+		void fireBullet(EnemyManager* enemyManager, int fireCount = 0);
 	};
 
 	// 공격에 관련된 것들
@@ -137,11 +152,10 @@ protected:
 	// 이동 관련 변수
 	struct tagMoveInfo
 	{
-		float speed;
-		float angle;
-		float gravity;
-		float jumpPower;
+		Vector2 force;
+		Vector2 gravity;
 
+		float angle;
 		float delay;
 		float count;
 
@@ -159,14 +173,25 @@ protected:
 	};	
 
 public:
-	virtual void init(const Vector2& pos, DIRECTION direction) = 0;
-	virtual void release() = 0;
-	virtual void update(float const timeElapsed) = 0;
-	virtual void render() = 0;
+	virtual void init() {}
+	virtual void init(const Vector2& pos, DIRECTION direction) {}
+	virtual void release() {};
+	virtual void update(float const timeElapsed) {};
+	virtual void render() {};
 
-	virtual void setState(ENEMY_STATE state) = 0;
+	virtual void setState(ENEMY_STATE state) {};
 
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
+
+	// EnemyManager에서 체크를 위해 호출
+	bool isHit(FloatRect* rc, AttackInfo* info) { return false; }
+	bool isHit(FloatCircle* circle, AttackInfo* info) { return false; }
+	bool isHit(Projectile* projectile, AttackInfo* info) { return false; }
+
+	// Enemy에서 만약 맞았다면 호출될 가상함수
+	virtual bool hitEffect(FloatRect* rc, AttackInfo* info) { return false; }
+	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info) { return false; }
+	virtual bool hitEffect(Projectile* projectile, AttackInfo* info) { return false; }
 
 	void setDetectRange(float const range) { _detectRange = range; }
 };

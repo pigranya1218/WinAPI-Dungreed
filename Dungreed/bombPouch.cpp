@@ -1,4 +1,5 @@
 #include "bombPouch.h"
+#include "NormalProjectile.h"
 
 void bombPouch::init()
 {
@@ -6,13 +7,10 @@ void bombPouch::init()
 	_rank = ITEM_RANK::RARE;
 	_iconImg = IMAGE_MANAGER->findImage("BombPouch");
 	
-	_addStat.defense = 2;
+	_addStat.defense = 2;	
+	_price = 1200;	
+	_isExplosion = false;
 	
-	_price = 1200;
-
-
-	isBoom = false;
-
 }
 
 void bombPouch::release()
@@ -21,39 +19,22 @@ void bombPouch::release()
 
 void bombPouch::update(Player* player, float const elapsedTime)
 {
-	renderPos;
+	_renderPos = player->getPosition();	
 	
-	if (KEY_MANAGER->isOnceKeyDown('R') )
-	{
-		x = renderPos.x;
-		y = renderPos.y;
-		isBoom = true;	
-	}
-	if (RC.bottom > WINSIZEY)
-	{
-		isBoom = false;
-	}
-	if (isBoom)
-	{
-		RC = rectMakePivot(Vector2(x,y), Vector2(50, 50), PIVOT::CENTER);
-		y += 10;
-	}
-	else if (!isBoom )
-	{
-		
-		RC = rectMakePivot(Vector2(renderPos), Vector2(0, 0), PIVOT::CENTER);
-	}
 }
 
 void bombPouch::frontRender(Player* player)
 {
+	
+
+	
 
 }
 
 void bombPouch::backRender(Player* player)
 {
-	renderPos = player->getPosition();
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(RC));
+	
+
 }
 
 void bombPouch::displayInfo()
@@ -80,7 +61,25 @@ void bombPouch::getHit(Vector2 const position)
 {
 }
 
-PlayerStat bombPouch::equip()
+void bombPouch::dash(Player * player)
 {
-	return PlayerStat();
+	_isExplosion = true;
+	if (_isExplosion)
+	{
+		NormalProjectile* projectile = new NormalProjectile;		
+		float _angleY = 0;
+		_angleY  = -(PI / 2);		
+		projectile->setPosition(_renderPos);
+		projectile->setSize(Vector2(200, 200));
+		projectile->setTeam(OBJECT_TEAM::PLAYER);
+		projectile->init("BombPouch0", _angleY, 700, true, false, 20, false, "BabyBatBulletFx", Vector2(100, 100), 100);
+		AttackInfo* attackInfo = new AttackInfo;
+		attackInfo->team = OBJECT_TEAM::PLAYER;
+		player->attack(projectile, attackInfo);
+	}
+}
+
+void bombPouch::equip(Player* player)
+{
+
 }

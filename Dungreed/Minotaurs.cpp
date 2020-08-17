@@ -13,15 +13,17 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;		// 플레이어 감지 거리
+	_detectRange = 200;		// 플레이어 감지 거리
 
+	// 피격 렉트 및 사이즈 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	// 이동 관련 변수 >> 여기서는 돌진에 사용
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.speed = RUSHSPEED;
+	_moving.force = Vector2(RUSHSPEED, 0.0f);
+	_moving.gravity = Vector2(10, 4000);
 
 	// 공격 관련 변수
 	ZeroMemory(&_attack, sizeof(_attack));
@@ -34,10 +36,8 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_skill.distance = 800;	// 돌진 시전 시 최대 거리
 	
 	// 변수 초기화
-	_isDetect = _moving.jumpPower = 0;	// 플레이어 감지 플래그, 점프파워 초기화
-	_rushPos = Vector2(0, 0);			// 돌진 시작 위치
-	_force = Vector2(10, 0);			// 저항 변수 초기화
-	_moving.gravity = 4000;				// 중력 변수 초기화
+	_isDetect = 0;				// 플레이어 감지 플래그
+	_rushPos = Vector2(0, 0);	// 돌진 시작 위치
 }
 
 void Minotaurs::release()
@@ -116,8 +116,10 @@ void Minotaurs::update(float const timeElapsed)
 				if(_ani->isPlay()) _ani->pause();
 
 				// 돌진한다
-				_moving.speed -= _force.x;
-				moveDir.x += (_moving.speed) * timeElapsed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
+				_moving.force.x -= _moving.gravity.x;
+				moveDir.x += (_moving.force.x) * timeElapsed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
+
+				EFFECT_MANAGER->play("Minotaurs/Effect", Vector2(_position.x, _position.y), IMAGE_MANAGER->findImage("Minotaurs/Effect")->getFrameSize() * _scale);
 
 				// 이전 X축과 현재 X축이 같으면 벽에 부딪힌 것
 				if (_lastPos.x == _currPos.x)
@@ -125,7 +127,7 @@ void Minotaurs::update(float const timeElapsed)
 					_ani->resume();
 				}
 				// 돌진 힘이 끝났을 때
-				else if (_moving.speed < 0)
+				else if (_moving.force.x < 0)
 				{
 					_ani->resume();
 				}
@@ -143,9 +145,9 @@ void Minotaurs::update(float const timeElapsed)
 			// 돌진이 끝났을 때
 			if (!_ani->isPlay() && _ani->getPlayIndex() != 4)
 			{
-				_moving.speed = RUSHSPEED;
+				_moving.force.x = RUSHSPEED;
 
-				_force.x = 0;
+				//_moving.gravity.x = 0;
 
 				// 플레이어와 거리 계산 후
 				float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
@@ -175,21 +177,22 @@ void Minotaurs::update(float const timeElapsed)
 
 
 	// 마지막에 중력 적용	
-	if (_isStand && _moving.jumpPower == 0)
+	if (_isStand && _moving.force.y == 0)
 	{
 		_position.y -= 15;
 		moveDir.y += 25;
 	}
 
-	_moving.jumpPower += _moving.gravity * timeElapsed;
-	moveDir.y += _moving.jumpPower * timeElapsed;
+	_moving.force.y += _moving.gravity.y * timeElapsed;
+	moveDir.y += _moving.force.y * timeElapsed;
 
 	_lastPos = _position;
 	_enemyManager->moveEnemy(this, moveDir);
 	_currPos = _position;
+
 	if (_isStand)
 	{
-		_moving.jumpPower = 0;
+		_moving.force.y = 0;
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -220,7 +223,7 @@ void Minotaurs::render()
 		drawPos.y -= elapsePos.y / 2;
 	}
 	// 최종 렌더
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void Minotaurs::setState(ENEMY_STATE state)

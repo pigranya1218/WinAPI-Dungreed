@@ -16,8 +16,10 @@ class LinearFunc
 public:
 	static const int INF_A = 987654321;
 public:
-	SynthesizePublic(float, start, Start); // x의 시작, a = INF_A라면 y의 시작 값
-	SynthesizePublic(float, end, End); // x의 끝, a = INF_A라면 y의 끝 값
+	SynthesizePublic(Vector2, start, Start); // X의 범위
+	SynthesizePublic(Vector2, end, End); // X의 범위
+	SynthesizePublic(Vector2, rangeX, RangeX); // X의 범위
+	SynthesizePublic(Vector2, rangeY, RangeY); // Y의 범위
 	SynthesizePublic(float, a, A); // x 기울기, a = INF_A라면 x = b 꼴의 일차함수이다
 	SynthesizePublic(float, b, B); // y 절편, a = INF_A라면 x = b 꼴의 일차함수이다
 
@@ -29,9 +31,8 @@ public:
 	
 	float getX(float y) { return (y - b) / a; }
 	float getY(float x) { return a * x + b; }
-	Vector2 getStart();
-	Vector2 getEnd();
 
 public:
-	static LinearFunc getLinearFuncFromPoints(Vector2 start, Vector2 end);
-};
+	// start, end : 선분을 구하기 위한 두 점, rangeX : X의 범위, rangeY : Y의 범위
+	static LinearFunc getLinearFuncFromPoints(Vector2 pointA, Vector2 pointB, Vector2 rangeX, Vector2 rangeY);
+};;

@@ -51,6 +51,7 @@ private:
 		Vector2 frontBaseCenter;
 		Vector2 backBaseCenter;
 		FloatRect frontIndexRc;
+		FloatRect frontBulletRc;
 		
 		float moveSpeed;
 		int viewIndex;

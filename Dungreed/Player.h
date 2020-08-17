@@ -16,7 +16,6 @@ Synthesize(DIRECTION, _direction, Direction)
 
 private:
 	GameScene* _gameScene;
-	
 
 	// 현재 상태
 	Costume* _costume;				// 현재 장착한 코스튬
@@ -59,6 +58,16 @@ public:
 	virtual void release() override;
 	virtual void update(float const elapsedTime) override;
 	virtual void render() override;
+
+	// 피격 체크를 위해 호출
+	bool isHit(FloatRect* rc, AttackInfo* info);
+	bool isHit(FloatCircle* circle, AttackInfo* info);
+	bool isHit(Projectile* projectile, AttackInfo* info);
+
+	// 만약 피격되었다면 호출될 가상함수
+	bool hitEffect(FloatRect* rc, AttackInfo* info);
+	bool hitEffect(FloatCircle* circle, AttackInfo* info);
+	bool hitEffect(Projectile* projectile, AttackInfo* info);
 
 	// GETTER & SETTER
 	int getLevel() const noexcept { return _level; }

@@ -4,8 +4,6 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "MapToolScene.h"
-
-
 #include "Player.h"
 
 #include <string>
@@ -24,13 +22,13 @@ HRESULT playGround::init()
 {
 	GameNode::init(true);
 
-	
-
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
 
-	IMAGE_MANAGER->addFrameImage("sampleTile", L"resources/images/Map/tileAtlas3.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas3.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas1.png", 10, 10);
+	IMAGE_MANAGER->addFrameImage("AniPalette1", L"resources/images/Map/AniPalette1.png", 10, 10);
 
 	// ** MOUSE CURSOR
 	IMAGE_MANAGER->addImage("CURSOR_BASIC", L"resources/images/common/cursor/BasicCursor.png");
@@ -200,11 +198,28 @@ HRESULT playGround::init()
 
 	// ** VILLIGE
 	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
+	//IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/Town_BGL.png");
 	IMAGE_MANAGER->addImage("Town_BG", L"resources/images/Map/TownBG_Day.png");
 	IMAGE_MANAGER->addImage("Town_BG2", L"resources/images/Map/TownLayer_Day.png");
 	IMAGE_MANAGER->addImage("Town_Floor", L"resources/images/Map/TownFloor.png");
+	IMAGE_MANAGER->addImage("BlackSmith", L"resources/images/Villiage/BlackSmith.png");
+	IMAGE_MANAGER->addImage("BlackSmithDisplay", L"resources/images/Villiage/BlackSmithDisplay.png");
+	IMAGE_MANAGER->addImage("Boutique", L"resources/images/Villiage/Boutique.png");
+	IMAGE_MANAGER->addImage("Shop", L"resources/images/Villiage/Shop.png");
+	IMAGE_MANAGER->addImage("TrainingSchool", L"resources/images/Villiage/TrainingSchool.png");
+	IMAGE_MANAGER->addImage("TrainingHouse", L"resources/images/Villiage/TrainingHouse.png");
+	IMAGE_MANAGER->addImage("Temple", L"resources/images/Villiage/Temple.png");
+	IMAGE_MANAGER->addImage("TempleFront", L"resources/images/Villiage/TempleFront.png");
+	IMAGE_MANAGER->addImage("Gunsmith", L"resources/images/Villiage/Gunsmith.png");
+	IMAGE_MANAGER->addImage("Target", L"resources/images/Villiage/Target.png");
+	IMAGE_MANAGER->addImage("Tree0", L"resources/images/Map/Tree0.png");
+	IMAGE_MANAGER->addImage("Tree1", L"resources/images/Map/Tree1.png");
+	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 
 	// ** DUNGEON
+	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
+	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
+	
 
 	// ** COSTUME
 	// *** BASE
@@ -243,9 +258,13 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MatchlockGun", L"resources/images/weapon/longDistanceWeapon/MatchlockGun.png");
 	IMAGE_MANAGER->addImage("MetalBoomerang", L"resources/images/weapon/longDistanceWeapon/MetalBoomerang.png");
 	IMAGE_MANAGER->addImage("OakBow", L"resources/images/weapon/longDistanceWeapon/OakBow.png");
-
+	
 	IMAGE_MANAGER->addFrameImage("Boomerang_Moving", L"resources/images/weapon/longDistanceWeapon/Boomerang_Moving.png", 2, 1);
 	IMAGE_MANAGER->addFrameImage("OakBowAni", L"resources/images/weapon/longDistanceWeapon/OakBowAni.png", 6, 1);
+
+	// **** L_test
+	IMAGE_MANAGER->addFrameImage("test_OakBowAni", L"resources/images/weapon/longDistanceWeapon/test_OakBowAni.png", 6, 1);
+
 	// **** L_WeaponBullet
 	IMAGE_MANAGER->addImage("Arrow00", L"resources/images/weapon/longDistanceWeapon/Arrow00.png");
 	IMAGE_MANAGER->addFrameImage("GunBullet", L"resources/images/weapon/longDistanceWeapon/Bullet.png", 4, 1);
@@ -269,22 +288,45 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot02", "ShootEffect02", 30, 10);
 
 	// **** L_WeaponReload
-	IMAGE_MANAGER->addImage("ReloadBase", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
-	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
-	IMAGE_MANAGER->addFrameImage("Reload", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
-	EFFECT_MANAGER->addEffect("L_Effect_Reload", "Reload", 30, 10);
+	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
+	IMAGE_MANAGER->addImage("ReloadHandle", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
+	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
 
 	//***MeleeWeapon
-	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");
-	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");
-	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);
+	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");  //숏 스피어
+	IMAGE_MANAGER->addImage("ShortSword", L"resources/images/MeleeWeapon/ShortSword.png");  //숏 소드
+	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);//우주검 
+	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // 케레스(칼,창)
+	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // 붉은 곡괭이
+	
+	//***MeleeWeaponIcon
+	IMAGE_MANAGER->addImage("CosmosSwordIcon", L"resources/images/MeleeWeapon/CosmosSwordIcon.png"); // 우주검 아이콘
+	IMAGE_MANAGER->addImage("KeresScytheIcon", L"resources/images/MeleeWeapon/KeresScytheIcon.png"); // 케레스 아이콘
+	IMAGE_MANAGER->addImage("TigerPunchIcon", L"resources/images/MeleeWeapon/TigerPunchIcon.png"); // 타이거 펀치 아이콘
+	IMAGE_MANAGER->addImage("PickaxeRedIcon", L"resources/images/MeleeWeapon/PickaxeRedIcon.png"); // 붉은 곡괭이 아이콘
+
+
+
+
 
 	//***MeleeWeaponEffect
 	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
 	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
-	IMAGE_MANAGER->addFrameImage("CosmosSwordFx ", L"resources/images/MeleeWeapon/CosmosSwordFx .png",8, 1);
-	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 30, 10);
-	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 30, 10);
+	IMAGE_MANAGER->addFrameImage("CosmosSwordFx", L"resources/images/MeleeWeapon/CosmosSwordFx.png",8, 1); 
+	IMAGE_MANAGER->addFrameImage("KeresScytheSwingFX", L"resources/images/MeleeWeapon/KeresScytheSwingFX.png",8, 1);
+	IMAGE_MANAGER->addFrameImage("TigerPunch", L"resources/images/MeleeWeapon/TigerPunch.png",10,1);
+	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
+
+	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // 우주검 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // 낫 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // 일반 휘두르기 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // 일반 찌르기 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // 타이거펀치 이팩트
+	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // 붉은곡괭이 이팩트
+
+
+
+
 
 	// *Accessories
 	IMAGE_MANAGER->addImage("SpikeBall", L"resources/images/Accessories/SpikeBall.png");                       // 뾰족공	
@@ -292,7 +334,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Voluspa", L"resources/images/Accessories/Voluspa.png");                           // 볼루스파
 	IMAGE_MANAGER->addImage("Voluspa0", L"resources/images/Accessories/Voluspa0.png");                         // 볼루스파창
 	IMAGE_MANAGER->addImage("BombPouch", L"resources/images/Accessories/BombPouch.png");                       // 대쉬폭탄	
-	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch0.png", 12, 1);         // 대쉬폭탄 프레임이미지
+	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch1.png", 5, 1);          // 대쉬폭탄 프레임이미지
+	IMAGE_MANAGER->addFrameImage("BombPouch1", L"resources/images/Accessories/BombPouch2.png", 7, 1);          // 대쉬폭탄 터지는 프레임이미지
 	IMAGE_MANAGER->addImage("CarpCoinPurse", L"resources/images/Accessories/CarpCoinPurse.png");               // 잉어모양 동전지갑
 	IMAGE_MANAGER->addImage("DaisyRing", L"resources/images/Accessories/DaisyRing.png");                       // 데이지링
 	IMAGE_MANAGER->addImage("DemonBoots", L"resources/images/Accessories/DemonBoots.png");                     // 악마부츠
@@ -300,7 +343,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MultiBullet", L"resources/images/Accessories/MultiBullet.png");                   // 3갈래총탄
 	IMAGE_MANAGER->addImage("GoldenCandy", L"resources/images/Accessories/GoldenCandy.png");                   // 골드캔디
 	IMAGE_MANAGER->addImage("babyGreenBat", L"resources/images/Accessories/babyGreenBat.png");                 // 아기 그린박쥐
-	IMAGE_MANAGER->addImage("GreenBat", L"resources/images/Accessories/GreenBat.png");                    // 그린박쥐
+	IMAGE_MANAGER->addImage("GreenBat", L"resources/images/Accessories/GreenBat.png");                         // 그린박쥐
 	IMAGE_MANAGER->addImage("GreenMomBat", L"resources/images/Accessories/GreenMomBat.png");                   // 엄마그린박쥐
 	IMAGE_MANAGER->addImage("GreenDadBat", L"resources/images/Accessories/GreenDadBat.png");                   // 아빠그린박쥐
 	IMAGE_MANAGER->addFrameImage("BabyBatBulletAt", L"resources/images/Accessories/BabyBatBullet0.png", 5, 1); // 아기 그린박쥐 공격 프레임이미지
@@ -424,6 +467,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Attack_Shot", L"resources/images/Enemy/Minotaurs/attack_shot.png"	, 7, 1);	// 미노타우르스 공격 피격
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill"		, L"resources/images/Enemy/Minotaurs/skill.png"			, 8, 1);	// 미노타우르스 돌진
 	IMAGE_MANAGER->addFrameImage("Minotaurs/Skill_Shot"	, L"resources/images/Enemy/Minotaurs/skill_shot.png"	, 8, 1);	// 미노타우르스 돌진 피격
+	IMAGE_MANAGER->addFrameImage("Minotaurs/Effect"		, L"resources/images/Enemy/Minotaurs/effect.png"		, 1, 8);	// 미노타우르스 돌진 이펙트
+
+	EFFECT_MANAGER->addEffect("Minotaurs/Effect", "Minotaurs/Effect", 15, 30);
 
 	// * 물소
 	IMAGE_MANAGER->addFrameImage("Ovibos/Idle"			, L"resources/images/Enemy/Ovibos/idle.png"			, 9, 1);	// 물소 기본
@@ -431,15 +477,35 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack"		, L"resources/images/Enemy/Ovibos/attack.png"		, 6, 1);	// 물소 공격 
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격
 
-	// * 에너미 불릿
-	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Banshee/bullet.png"		, 4, 1);	// 수녀 총알
-	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Banshee/bullet_FX.png"	, 6, 1);	// 수녀 총알 삭제
+	// ** BOSS
+	// * 니플헤임
+	IMAGE_MANAGER->addFrameImage("Niflheim/Idle"	, L"resources/images/boss/Niflheim/idle.png"	,  6, 1);	// 니플헤임 기본
+	IMAGE_MANAGER->addFrameImage("Niflheim/Attack_1", L"resources/images/boss/Niflheim/attack.png"	, 11, 1);	// 니플헤임 공격 1
+	IMAGE_MANAGER->addFrameImage("Niflheim/Attack_2", L"resources/images/boss/Niflheim/attack_1.png", 11, 1);	// 니플헤임 공격 2
+	IMAGE_MANAGER->addFrameImage("Niflheim/Spawn"	, L"resources/images/boss/Niflheim/enter.png"	, 16, 1);	// 니플헤임 등장
+	IMAGE_MANAGER->addFrameImage("Niflheim/Die"		, L"resources/images/boss/Niflheim/die.png"		, 30, 1);	// 니플헤임 죽음
+	IMAGE_MANAGER->addFrameImage("Niflheim/Pillar"	, L"resources/images/boss/Niflheim/pillar.png"	, 20, 1);	// 니플헤임 얼음기둥
+	IMAGE_MANAGER->addFrameImage("Niflheim/Icicle"	, L"resources/images/boss/Niflheim/icicle.png"	, 10, 1);	// 니플헤임 고드름
+	IMAGE_MANAGER->addFrameImage("Niflheim/Spear"	, L"resources/images/boss/Niflheim/spear.png"	, 13, 1);	// 니플헤임 얼음창
 
-	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small"		, L"resources/images/Enemy/Bat/Bullet/Small/Bullet.png"		, 5, 1);	// 박쥐 총알 작은 거
-	//IMAGE_MANAGER->addFrameImage("Bat/Bullet/Small_FX"	, L"resources/images/Enemy/Bat/Bullet/Small/Bullet_FX.png"	, 7, 1);	// 박쥐 총알 작은 거 삭제
+	// * 에너미 불릿
+	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// 수녀 총알
+	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// 수녀 총알 삭제
+
+	EFFECT_MANAGER->addEffect("Banshee/Bullet_FX", "Banshee/Bullet_FX", 15, 50);	// 이펙트 등록
 
 	IMAGE_MANAGER->addImage("IceBullet"			, L"resources/images/Enemy/Bullet/IceBullet.png"		 );	// 얼음 총알
 	IMAGE_MANAGER->addFrameImage("IceBullet_FX"	, L"resources/images/Enemy/Bullet/IceBullet_FX.png", 3, 1);	// 얼음 총알 삭제
+
+	EFFECT_MANAGER->addEffect("IceBullet_FX", "IceBullet_FX", 15, 50);
+	
+	IMAGE_MANAGER->addFrameImage("GiantBullet"		, L"resources/images/Enemy/Bullet/giantBullet.png"		, 5, 1);	// 박쥐 총알 큰 것
+	IMAGE_MANAGER->addFrameImage("GiantBullet_FX"	, L"resources/images/Enemy/Bullet/giantBullet_FX.png"	, 7, 1);	// 박쥐 총알 큰 것 삭제 이펙트
+	IMAGE_MANAGER->addFrameImage("SmallBullet"		, L"resources/images/Enemy/Bullet/smallBullet.png"		, 5, 1);	// 박쥐 총알 작은 것
+	IMAGE_MANAGER->addFrameImage("SmallBullet_FX"	, L"resources/images/Enemy/Bullet/smallBullet_FX.png"	, 7, 1);	// 박쥐 총알 작은 것 삭제 이펙트
+
+	EFFECT_MANAGER->addEffect("GiantBullet_FX", "GiantBullet_FX", 15, 50);
+	EFFECT_MANAGER->addEffect("SmallBullet_FX", "SmallBullet_FX", 15, 50);
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
@@ -462,7 +528,7 @@ void playGround::release()
 	GameNode::release();
 }
 
-//연산
+//연산ds
 void playGround::update()
 {
 	GameNode::update();

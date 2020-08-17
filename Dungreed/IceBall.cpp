@@ -16,13 +16,13 @@ void IceBall::init()
 	//악세서리 가격
 	_price = 600;
 
-	radius = 0;
-	fspeed = 0;
-	x = y = 0;
+	_radius = 0;
+	_fspeed = 0;
+	_x = _y = 0;
 	_img = IMAGE_MANAGER->findImage("IceBall");
 	_ani = new Animation;
 	_ani->start();
-	setitem = false;
+	_setitem = false;
 }
 
 void IceBall::release()
@@ -33,32 +33,32 @@ void IceBall::update(Player * player, float const elapsedTime)
 {
 	if (KEY_MANAGER->isOnceKeyDown('6'))
 	{
-		setitem = false;
+		_setitem = false;
 
 	}
 	if (KEY_MANAGER->isOnceKeyDown('7'))
 	{
-		setitem = true;
+		_setitem = true;
 
 	}
 
-	if (!setitem)
+	if (!_setitem)
 	{
-		radius = 65;
+		_radius = 65;
 		_img = IMAGE_MANAGER->findImage("IceBall");
-		_angle -= 0.043f;
-		fspeed = 5;
+		_angle -= 1.843f*elapsedTime;
+		_fspeed = 5;
 	}
 	else
 	{
-		radius = 85;
+		_radius = 85;
 		_img = IMAGE_MANAGER->findImage("IceBall0");
-		_angle -= 0.062f;
-		fspeed = 10;
+		_angle -= 2.562f*elapsedTime;
+		_fspeed = 10;
 		_ani->frameUpdate(elapsedTime);
 		_ani->init(_img->getWidth(), _img->getHeight(),
 			_img->getMaxFrameX(), _img->getMaxFrameY());
-		_ani->setFPS(fspeed);
+		_ani->setFPS(_fspeed);
 		_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 	}
 
@@ -71,14 +71,14 @@ void IceBall::backRender(Player * player)
 {
 	
 
-	x = cosf(_angle) * radius;
-	y = -sinf(_angle) * radius;
+	_x = cosf(_angle) * _radius;
+	_y = -sinf(_angle) * _radius;
 
 	Vector2 renderPos = player->getPosition();
-	renderPos.x = renderPos.x + x + 5;
-	renderPos.y = renderPos.y + y - 20;
+	renderPos.x = renderPos.x + _x ;
+	renderPos.y = renderPos.y + _y ;
 	_img->setScale(4);
-	if (!setitem)
+	if (!_setitem)
 	{
 		_img->render(CAMERA->getRelativeV2(renderPos), false);
 		Vector2 size = Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4);
@@ -126,7 +126,6 @@ void IceBall::getHit(Vector2 const position)
 {
 }
 
-PlayerStat IceBall::equip()
+void IceBall::equip(Player* player)
 {
-	return PlayerStat();
 }

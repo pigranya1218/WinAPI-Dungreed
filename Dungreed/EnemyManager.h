@@ -6,13 +6,16 @@
 #include "BatIce.h"
 #include "BatNormal.h"
 #include "BatGiantRed.h"
+#include "BatGiantNormal.h"
 #include "SkelBigIce.h"
 #include "SkelBigNormal.h"
 #include "SkelMagicianIce.h"
+#include "SkelDog.h"
 #include "SkelSmallBow.h"
 #include "Minotaurs.h"
 #include "Ovibos.h"
 #include "Ghost.h"
+#include "Niflheim.h"
 
 class Stage;
 
@@ -36,6 +39,11 @@ public:
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
+
+	// 피격 체크 관련 함수
+	bool isHit(FloatRect* rc, AttackInfo* info);
+	bool isHit(FloatCircle* circle, AttackInfo* info);
+	bool isHit(Projectile* projectile, AttackInfo* info);
 
 	void setStage(Stage* stage) { _stage = stage; }
 };

@@ -30,7 +30,8 @@ enum class ENEMY_TYPE : unsigned int
 	SKEL_SMALL_GSWORD,	// 해골 대검
 	SKEL_SMALL_DAGGER,	// 해골 단검
 	MINOTAURS,			// 미노타우르스
-	OVIBOS				// 얼음맵 염소
+	OVIBOS,				// 얼음맵 물소
+	NIFLHEIM			// 얼음맵 보스
 };
 
 enum class DIRECTION : unsigned int

@@ -3,7 +3,8 @@
 #include "LinearFunc.h"
 
 #define TILESIZE 64
-
+#define MAXTILEX 150
+#define MAXTILEY 150
 #define SAMPLETILEX 10
 #define SAMPLETILEY 10
 
@@ -24,7 +25,9 @@ enum class DRAW_LINE_POSITION
 	RIGHT_BOTTOM,
 	
 	//프랫폼형태인가?
-	PLATFORM
+	PLATFORM_TOP,
+	PLATFORM_LEFT_DIAGONAL, // /이런 모양
+	PLATFORM_RIGHT_DIAGONAL // \이런 모양
 };
 
 //struct tagTileMap
@@ -89,11 +92,14 @@ private:
 	FloatRect _layer1Btn, _layer2Btn;
 	FloatRect _increaseTileX, _decreaseTileX;
 	FloatRect _increaseTileY, _decreaseTileY;
-
-	Image* _paletteImage;
-	tagTileMap _tile[2000];
-	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
 	
+	int _paletteNum;
+	Image* _paletteImage;
+	
+	tagTileMap _tile[MAXTILEX*MAXTILEY];
+	tagPalette _sampleTile[SAMPLETILEX * SAMPLETILEY];
+	tagPalette _aniPalette[4];
+
 	bool _selectDrag;
 	Vector2 _selectStart;
 	Vector2 _selectEnd;

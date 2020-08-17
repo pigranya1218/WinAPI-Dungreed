@@ -5,11 +5,13 @@
 
 #include "DebugStage.h"
 #include "VillageStage.h"
+#include "RestaurantRoom.h"
 
 void StageManager::init()
 {
 	_currStageType = STAGE_TYPE::TEST;
 	//_currStageType = STAGE_TYPE::VILLAGE;
+	
 	makeStage();
 }
 
@@ -30,10 +32,26 @@ void StageManager::render()
 
 void StageManager::attack(FloatRect* rect, AttackInfo* info)
 {
+	if (info->team == OBJECT_TEAM::PLAYER)
+	{
+		_currStage->isHitEnemy(rect, info);
+	}
+	else
+	{
+		_player->isHit(rect, info);
+	}
 }
 
 void StageManager::attack(FloatCircle* circle, AttackInfo* info)
 {
+	if (info->team == OBJECT_TEAM::PLAYER)
+	{
+		_currStage->isHitEnemy(circle, info);
+	}
+	else
+	{
+		_player->isHit(circle, info);
+	}
 }
 
 void StageManager::attack(Projectile* projectile, AttackInfo* info)
@@ -58,8 +76,10 @@ void StageManager::makeStage()
 {
 	_currStage = new DebugStage();
 	//_currStage = new VillageStage();
+	//_currStage = new RestaurantRoom();
 	_currStage->setStageManager(this);
 	_currStage->init();
+
 }
 
 void StageManager::releaseStage()
@@ -73,5 +93,5 @@ void StageManager::releaseStage()
 
 Vector2 StageManager::getPlayerPos()
 {
-	return _gameScene->getPlayerPos();
+	return _player->getPosition();
 }

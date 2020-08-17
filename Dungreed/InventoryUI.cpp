@@ -15,7 +15,7 @@ void InventoryUI::init()
 
 	_exitRc = FloatRect(890, 10, 980, 90);
 
-	_goldRc = FloatRect(1100, 798, 1500, 848);
+	_goldRc = FloatRect(1100, 803, 1505, 848);
 
 	_equippedWeaponRc[0] = rectMakePivot(Vector2(1108, 213), Vector2(96, 90), PIVOT::CENTER);
 	_equippedWeaponRc[1] = rectMakePivot(Vector2(1220, 213), Vector2(96, 90), PIVOT::CENTER);
@@ -332,23 +332,32 @@ void InventoryUI::render()
 	}
 
 	// 골드 적기	
-	D2D_RENDERER->renderTextField(_goldRc.left, _goldRc.top, to_wstring(_player->getGold()), RGB(255, 255, 255), _goldRc.getSize().y, _goldRc.getSize().x, _goldRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_TRAILING);
+	D2D_RENDERER->renderTextField(_goldRc.left, _goldRc.top, to_wstring(_player->getGold()), RGB(255, 255, 255), _goldRc.getSize().y, _goldRc.getSize().x, _goldRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
 
 
 	// 드래그 중이라면 마우스 위치에 아이템 그리기
 	if (_dragWeaponIndex != -1)
 	{
-		_player->getWeapon(_dragWeaponIndex)->getIconImg()->setScale(5);
-		_player->getWeapon(_dragWeaponIndex)->getIconImg()->render(Vector2(_ptMouse));
+		if (_player->getWeapon(_dragWeaponIndex) != nullptr)
+		{
+			_player->getWeapon(_dragWeaponIndex)->getIconImg()->setScale(5);
+			_player->getWeapon(_dragWeaponIndex)->getIconImg()->render(Vector2(_ptMouse));
+		}
 	}
 	else if (_dragAccIndex != -1)
 	{
-		_player->getAcc(_dragAccIndex)->getIconImg()->setScale(5);
-		_player->getAcc(_dragAccIndex)->getIconImg()->render(Vector2(_ptMouse));
+		if (_player->getAcc(_dragAccIndex) != nullptr)
+		{
+			_player->getAcc(_dragAccIndex)->getIconImg()->setScale(5);
+			_player->getAcc(_dragAccIndex)->getIconImg()->render(Vector2(_ptMouse));
+		}
 	}
 	else if (_dragInvenIndex != -1)
 	{
-		_player->getInvenItem(_dragInvenIndex)->getIconImg()->setScale(5);
-		_player->getInvenItem(_dragInvenIndex)->getIconImg()->render(Vector2(_ptMouse));
+		if (_player->getInvenItem(_dragInvenIndex) != nullptr)
+		{
+			_player->getInvenItem(_dragInvenIndex)->getIconImg()->setScale(5);
+			_player->getInvenItem(_dragInvenIndex)->getIconImg()->render(Vector2(_ptMouse));
+		}
 	}
 }
