@@ -166,6 +166,8 @@ void SkelSmallBow::render()
 	handPos.x += cosf(_attack.angle) * 35;
 	handPos.y -= sinf(_attack.angle) * 40;
 	_handImg->render(CAMERA->getRelativeV2(handPos));	// 다른 손 출력
+
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1, 2);
 }
 
 void SkelSmallBow::setState(ENEMY_STATE state)

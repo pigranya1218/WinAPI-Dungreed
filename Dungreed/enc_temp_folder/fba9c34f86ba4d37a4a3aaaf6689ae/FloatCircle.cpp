@@ -44,7 +44,7 @@ bool FloatCircle::isCollisionX(float x, Vector2 rangeY)
 		bool isCollision = false;
 		for (int i = 0; i < 2; i++)
 		{
-			if (rangeY.x <= y[i] && y[i] <= rangeY.y)
+			//if (rangeY.x <= y[i] && y[i] <= rangeY.y)
 			{
 				float radian = atan2f(-(y[i] - origin.y), (x - origin.x));
 				if (radian < 0)
@@ -71,7 +71,7 @@ bool FloatCircle::isCollisionY(float y, Vector2 rangeX)
 		bool isCollision = false;
 		for (int i = 0; i < 2; i++)
 		{
-			if (rangeX.x <= x[i] && x[i] <= rangeX.y)
+			//if (rangeX.x <= x[i] && x[i] <= rangeX.y)
 			{
 				float radian = atan2f(-(y - origin.y), (x[i] - origin.x));
 				if (radian < 0)

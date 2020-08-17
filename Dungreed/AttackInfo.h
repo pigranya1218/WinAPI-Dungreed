@@ -4,7 +4,7 @@
 class AttackInfo
 {
 public:
-	int attackID; // 어택 아이디, 공격에 대한 중복검사 판별을 위해서 사용
+	size_t attackID; // 어택 아이디, 공격에 대한 중복검사 판별을 위해서 사용
 	set<string> _usedItem; // 이것에 반영된 아이템 코드들
 
 	OBJECT_TEAM team; // 공격한 팀

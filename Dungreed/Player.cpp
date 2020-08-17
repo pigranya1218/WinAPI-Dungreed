@@ -72,7 +72,7 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용 (위력, 크리티컬)
+	// TODO : 플레이어 스탯 적용 (위력, 크리티컬)
 
 	_gameScene->attack(circle, info);
 }
