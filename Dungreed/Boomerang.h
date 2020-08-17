@@ -1,5 +1,7 @@
 #pragma once
 #include "Item.h"
+#include "NormalProjectile.h"
+
 class Boomerang :
 	public Item
 {
@@ -23,6 +25,16 @@ private:
 	bool _isAttack;
 	FloatRect _attackRect;
 	int _timeCount;
+
+	float _baseAttackDelay; // 공격 쿨타임
+	float _currAttackDelay; // 남은 공격 쿨타임
+	int _maxBullet; // 최대 총알 갯수
+	int _currBullet; // 현재 총알 갯수
+	float _baseReloadDelay; // 재장전 쿨타임
+	float _currReloadDelay; // 남은 재장전 쿨타임
+	bool _drawEffect; // 이번 render 함수에서 이펙트를 시작할 것인지 판단
+
+	NormalProjectile* _projectile;
 public:
 	virtual void init();
 	virtual void release();

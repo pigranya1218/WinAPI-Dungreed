@@ -15,8 +15,8 @@ void MatchLockGun::init()
 	_reloadAni->setDefPlayFrame(false, false);
 	_reloadAni->setFPS(15);
 
-	_minDamage = 10;
-	_maxDamage = 20;
+	_addStat.minDamage = 10;
+	_addStat.maxDamage = 20;
 
 	// private 변수 설정
 	_minDamage = 12;
