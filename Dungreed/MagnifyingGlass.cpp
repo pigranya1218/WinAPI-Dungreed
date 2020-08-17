@@ -5,12 +5,11 @@ void MagnifyingGlass::init()
 {
 
 	//厩技辑府 鸥涝
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;
+	_itemCode = 0x03209;
 	_iconImg = IMAGE_MANAGER->findImage("MagnifyingGlass");
 
 	//厩技辑府 可记
-	_addStat.power += 30;
+	_addStat.power = 30;
 
 	//厩技辑府 啊拜
 	_price = 2400;
