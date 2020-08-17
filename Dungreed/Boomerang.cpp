@@ -37,19 +37,19 @@ void Boomerang::release()
 
 void Boomerang::update(Player * player, float const elapsedTime)
 {
-	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
-	{
-		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
-	}
-	else if (_currReloadDelay > 0) // 재장전 중
-	{
-		_currReloadDelay = max(0, _currReloadDelay - elapsedTime);
+	//if (_currAttackDelay > 0) // 공격 딜레이 대기 중
+	//{
+	//	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
+	//}
+	//else if (_currReloadDelay > 0) // 재장전 중
+	//{
+	//	_currReloadDelay = max(0, _currReloadDelay - elapsedTime);
 
-		if (_currReloadDelay == 0) // 장전이 끝난 경우
-		{
-			_currBullet = _maxBullet;
-		}
-	}
+	//	if (_currReloadDelay == 0) // 장전이 끝난 경우
+	//	{
+	//		_currBullet = _maxBullet;
+	//	}
+	//}
 
 	_isLeft = (player->getDirection() == DIRECTION::LEFT);
 
@@ -84,7 +84,7 @@ void Boomerang::frontRender(Player * player)
 {
 	
 	Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
-	_img->setScale(5);
+	_img->setScale(4);
 	_img->setAnglePos(_centerPos);
 
 	_img->setAngle(_renderDegree);
@@ -103,16 +103,16 @@ void Boomerang::displayInfo()
 
 void Boomerang::attack(Player * player)
 {
-	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
-	if (_currReloadDelay > 0) return; // 장전 중엔 공격을 하지 않음
-	if (_currBullet == 0) // 총알이 없다면
-	{
-		if (_currReloadDelay == 0) // 재장전 중이 아니라면
-		{
-			_currReloadDelay = _baseReloadDelay; // 재장전 함
-		}
-		return;
-	}
+	//if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
+	//if (_currReloadDelay > 0) return; // 장전 중엔 공격을 하지 않음
+	//if (_currBullet == 0) // 총알이 없다면
+	//{
+	//	if (_currReloadDelay == 0) // 재장전 중이 아니라면
+	//	{
+	//		_currReloadDelay = _baseReloadDelay; // 재장전 함
+	//	}
+	//	return;
+	//}
 
 	if (!_isAttack) { _isAttack = true; }
 
@@ -121,12 +121,17 @@ void Boomerang::attack(Player * player)
 	{
 		_angleRadian -= PI2;
 	}
-	
-	_projectile = new NormalProjectile;
+	BoomerangProjectile* _projectile = new BoomerangProjectile;
 	_projectile->setPosition(_gunPos);
-	_projectile->setSize(Vector2(_img->getFrameSize().x * 5, _img->getFrameSize().y * 5));
+	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
 	_projectile->setTeam(OBJECT_TEAM::PLAYER);
-	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 10, true, true, 20, false, "", Vector2(), 500);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 10, true, true, 20, "", Vector2(), 500);
+
+	/*NormalProjectile* _projectile = new NormalProjectile;
+	_projectile->setPosition(_gunPos);
+	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
+	_projectile->setTeam(OBJECT_TEAM::PLAYER);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 10, true, true, 20, false, "", Vector2(), 1000);*/
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
