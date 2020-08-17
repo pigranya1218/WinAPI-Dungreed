@@ -133,12 +133,14 @@ void OakBow::update(Player * player, float const elapsedTime)
 			Vector2 arrowPos = renderPosWeapon;
 			arrowPos.x = (isLeft) ? (renderPosWeapon.x + anglePos.x + 5) : (renderPosWeapon.x + anglePos.x - 15);
 			//arrowPos.y = (isLeft) ? (renderPosWeapon.y + 10) : (renderPosWeapon.y);
+			
+			Image* effectImg = IMAGE_MANAGER->findImage("ArrowHitEffect");
 
 			NormalProjectile* projectile = new NormalProjectile;
 			projectile->setPosition(arrowPos);
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(), 800);
+			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
