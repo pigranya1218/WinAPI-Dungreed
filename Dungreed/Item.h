@@ -25,8 +25,8 @@ protected:
 	int _itemCode; // 아이템 코드
 	vector<string> _displayInfos; // 아이템 능력에 대한 설명
 
-	ITEM_TYPE _type; // 아이템 타입
-	ITEM_RANK _rank; // 아이템 등급
+	// ITEM_TYPE _type; // 아이템 타입
+	// ITEM_RANK _rank; // 아이템 등급
 	Image* _iconImg; // 아이템 이미지
 
 	
@@ -58,8 +58,7 @@ public:
 	virtual wstring getBulletUI() { return L""; }
 	virtual float getBulletRatio() { return 0.f; }
 
-	ITEM_TYPE getType() const noexcept { return _type; }
-
+	int getItemCode() const noexcept { return _itemCode; }
 	int getPrice() const noexcept { return _price; }
 	vector<string> getDisplayInfos() { return _displayInfos; }
 	Image* getIconImg() const noexcept { return _iconImg; }

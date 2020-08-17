@@ -15,13 +15,16 @@ void CosmosSword::init()
 	_ani->setFPS(20);
 	_ani->start();
 
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;
-	_rank = ITEM_RANK::NORMAL;
+
+	_itemCode = 0x02400;
 
 	_price = 600;
 
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
+	_addStat.minDamage = 7;
+	_addStat.maxDamage = 10;
+	_addStat.attackSpeed = 0.4;
 
 	_handSize = Vector2(5, 5);
 
