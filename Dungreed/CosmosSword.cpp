@@ -15,7 +15,8 @@ void CosmosSword::init()
 	_ani->setFPS(20);
 	_ani->start();
 
-
+	_itemName = L"우주검";
+	_displayText = L"\"이 검이 내뿜는 우주의 신비한 빛\"";
 	_itemCode = 0x02400; // 양손 전설
 
 	_price = 600;
