@@ -539,7 +539,7 @@ bool Player::hitEffect(Projectile* projectile, AttackInfo* info)
 	return false;
 }
 
-Image* Player::getWeaponImg(int index) const noexcept
+Image* Player::getWeaponImg(int index) const
 {
 	if (_equippedWeapon[index] != nullptr)
 	{

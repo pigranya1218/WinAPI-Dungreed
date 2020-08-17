@@ -84,10 +84,10 @@ public:
 	int getCurrDash() const noexcept { return _currDashCount; }
 
 	int getWeaponIndex() const noexcept { return _currWeaponIndex; }
-	Item* getWeapon(int index) const noexcept { return _equippedWeapon[index]; };
-	Item* getAcc(int index) const noexcept { return _equippedAcc[index]; }
-	Item* getInvenItem(int index) const noexcept { return _inventory[index]; }
-	Image* getWeaponImg(int index) const noexcept;
+	Item* getWeapon(int index) const { return _equippedWeapon[index]; };
+	Item* getAcc(int index) const { return _equippedAcc[index]; }
+	Item* getInvenItem(int index) const { return _inventory[index]; }
+	Image* getWeaponImg(int index) const;
 
 	void equipItem(int index);		// 인벤토리에 있던 아이템을 장착함
 	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함
