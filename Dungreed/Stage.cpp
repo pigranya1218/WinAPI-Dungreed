@@ -376,6 +376,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 {
 	object->setIsStand(false);
+	object->setIsCollision(false);
 	FloatRect lastRc = FloatRect(object->getPosition(), object->getSize(), PIVOT::CENTER);
 	FloatRect newRc = FloatRect(object->getPosition() + moveDir, object->getSize(), PIVOT::CENTER);
 
@@ -435,6 +436,7 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 			if (newRc.bottom == _collisionGroundRects[i].top)
 			{
 				object->setIsStand(true);
+				object->setIsCollision(true);
 			}
 		}
 	}
@@ -451,6 +453,7 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 					newRc.bottom = _collisionGroundLines[i].getY(newRc.left);
 					newRc.top = newRc.bottom - object->getSize().y;
 					object->setIsStand(true);
+					object->setIsCollision(true);
 				}
 			}
 		}
@@ -463,6 +466,7 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 					newRc.bottom = _collisionGroundLines[i].getY(newRc.right);
 					newRc.top = newRc.bottom - object->getSize().y;
 					object->setIsStand(true);
+					object->setIsCollision(true);
 				}
 			}
 		}
