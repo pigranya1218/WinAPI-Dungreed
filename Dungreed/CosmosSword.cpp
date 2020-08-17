@@ -22,17 +22,15 @@ void CosmosSword::init()
 
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
-	_addStat.minDamage = 7;
-	_addStat.maxDamage = 10;
-	_addStat.attackSpeed = 0.4;
+	_addStat.minDamage = 15;
+	_addStat.maxDamage = 25;
+	_addStat.attackSpeed = 2.17;
 
 	_handSize = Vector2(5, 5);
 
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_minDamage = 7;
-	_maxDamage = 10;
 	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;

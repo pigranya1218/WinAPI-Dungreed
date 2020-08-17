@@ -5,8 +5,7 @@ class bombPouch : public Item
 private:
 
 	
-	Image* _img;
-	bool _isExplosion;
+	Image* _img;	
 	Vector2 _renderPos;
 	int _x, _y;	
 	

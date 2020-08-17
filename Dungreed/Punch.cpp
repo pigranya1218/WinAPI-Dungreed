@@ -9,8 +9,6 @@ void Punch::init()
 	//보조 옵션 없음
 	_itemCode = 0x01100; // 한손 노말 00
 	_attackMove = Vector2(0, 0);
-	_minDamage = 1;
-	_maxDamage = 4;
 	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;

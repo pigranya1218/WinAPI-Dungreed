@@ -1,26 +1,11 @@
 #pragma once
 #include "Item.h"
-class PickaxeRed : public Item
+class MultiBullet : public Item
 {
 private:
-	// 공격 관련
 	Image* _img;
-	Image*	_effect;
-	int	_minDamage;
-	int _maxDamage;
-	Vector2 _attackMove;
-	float _baseAttackDelay; // 공격 쿨타임
-	float _currAttackDelay; // 남은 공격 쿨타임
-	float _attackAngle;
-	float _angleOffset;
-	bool _reverseMove;
-	bool _drawEffect;
-	bool _oneAttack;
-	FloatRect _hand;
-	Vector2 _handSize;
-	float width; 
-	float height; 
-
+	Vector2 _renderPos;	
+	int _x, _y;
 public:
 	virtual void init();
 	virtual void release();
@@ -35,8 +20,7 @@ public:
 	virtual void attack(Projectile* projectile, AttackInfo* info); // 탄환을 변경시키는 함수
 
 	virtual void getHit(Vector2 const position); // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
-
-	virtual PlayerStat equip(); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
-
+	virtual void dash(Player* player); // 플레이어가 대쉬했을 때
+	virtual void equip(Player* player); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
 };
 

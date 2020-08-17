@@ -154,6 +154,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/ACC_BASE", L"resources/images/gameScene/ui/inventory/accessory.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE", L"resources/images/gameScene/ui/inventory/inventory.png");
 	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_BASE_SELECTED", L"resources/images/gameScene/ui/inventory/inventory_select.png");
+	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_INFO", L"resources/images/gameScene/ui/inventory/info.png");
 	// *** STATUS
 	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");
@@ -335,7 +336,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Voluspa0", L"resources/images/Accessories/Voluspa0.png");                         // º¼·ç½ºÆÄÃ¢
 	IMAGE_MANAGER->addImage("BombPouch", L"resources/images/Accessories/BombPouch.png");                       // ´ë½¬ÆøÅº	
 	IMAGE_MANAGER->addFrameImage("BombPouch0", L"resources/images/Accessories/BombPouch1.png", 5, 1);          // ´ë½¬ÆøÅº ÇÁ·¹ÀÓÀÌ¹ÌÁö
-	IMAGE_MANAGER->addFrameImage("BombPouch1", L"resources/images/Accessories/BombPouch2.png", 7, 1);          // ´ë½¬ÆøÅº ÅÍÁö´Â ÇÁ·¹ÀÓÀÌ¹ÌÁö
+	IMAGE_MANAGER->addFrameImage("BombPouch2", L"resources/images/Accessories/BombPouch2.png", 7, 1);          // ´ë½¬ÆøÅº ÅÍÁö´Â ÇÁ·¹ÀÓÀÌ¹ÌÁö
 	IMAGE_MANAGER->addImage("CarpCoinPurse", L"resources/images/Accessories/CarpCoinPurse.png");               // À×¾î¸ğ¾ç µ¿ÀüÁö°©
 	IMAGE_MANAGER->addImage("DaisyRing", L"resources/images/Accessories/DaisyRing.png");                       // µ¥ÀÌÁö¸µ
 	IMAGE_MANAGER->addImage("DemonBoots", L"resources/images/Accessories/DemonBoots.png");                     // ¾Ç¸¶ºÎÃ÷
@@ -506,6 +507,8 @@ HRESULT playGround::init()
 
 	EFFECT_MANAGER->addEffect("GiantBullet_FX", "GiantBullet_FX", 15, 50);
 	EFFECT_MANAGER->addEffect("SmallBullet_FX", "SmallBullet_FX", 15, 50);
+	EFFECT_MANAGER->addEffect("BabyBatBulletFx","BabyBatBulletFx",15,50);
+	EFFECT_MANAGER->addEffect("BombPouch2", "BombPouch2", 15, 50);
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

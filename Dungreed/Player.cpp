@@ -29,6 +29,7 @@
 #include "Voluspa.h"
 #include "HeartOfCosmos.h"
 #include "DemonBoots.h"
+#include "MultiBullet.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -122,9 +123,9 @@ void Player::init()
 	//testAcc1->init();
 	//_inventory[0] = testAcc1;
 
-	//GreenBat* testAcc2 = new GreenBat;
-	//testAcc2->init();
-	//_inventory[1] = testAcc2;
+	GreenBat* testAcc2 = new GreenBat;
+	testAcc2->init();
+	_inventory[1] = testAcc2;
 
 
 	GreenDadBat* testAcc3 = new GreenDadBat;
@@ -147,20 +148,20 @@ void Player::init()
 	_inventory[5] = testAcc5;
 
 
-	IceBall* testAcc6 = new IceBall;
-	testAcc6->init();
-	_inventory[6] = testAcc6;
-
-
-	miniEarth* testAcc7 = new miniEarth;
-	testAcc7->init();
-	_inventory[7] = testAcc7;
-
-
-	watCher* testAcc8 = new watCher;
-	testAcc8->init();
-	_inventory[8] = testAcc8;
-
+	//IceBall* testAcc6 = new IceBall;
+	//testAcc6->init();
+	//_inventory[6] = testAcc6;
+	//
+	//
+	//miniEarth* testAcc7 = new miniEarth;
+	//testAcc7->init();
+	//_inventory[7] = testAcc7;
+	//
+	//
+	//watCher* testAcc8 = new watCher;
+	//testAcc8->init();
+	//_inventory[8] = testAcc8;
+	//
 	
 	MagnifyingGlass* testAcc10 = new MagnifyingGlass;
 	testAcc10->init();
@@ -172,20 +173,24 @@ void Player::init()
 
 	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
 	testAcc12->init();
-	_inventory[0] = testAcc12;
+	_inventory[6] = testAcc12;
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
-	_inventory[1] = testAcc13;
+	_inventory[7] = testAcc13;
 
-	KeresScythe* testWeapon1 = new KeresScythe;
+	MultiBullet* testAcc14 = new MultiBullet;
+	testAcc14->init();
+	_inventory[0] = testAcc14;
+
+	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
 	_inventory[11] = testWeapon1;
-	
+	*/
 
-	/*ShortSpear* testWeapon2 = new ShortSpear;
+	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
-	_inventory[11] = testWeapon2;*/
+	_inventory[11] = testWeapon2;
 
 	MartialArtOfTiger* testWeapon3 = new MartialArtOfTiger;
 	testWeapon3->init();
@@ -195,7 +200,7 @@ void Player::init()
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
 
-	Boomerang* testWeapon5 = new Boomerang;
+	MatchLockGun* testWeapon5 = new MatchLockGun;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
 
@@ -589,7 +594,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else // B : Inventory
 		{
-			if (_inventory[indexB - 6] == nullptr || !((_inventory[indexB - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)) == static_cast<int>(ITEM_TYPE::ACC)))
+			if (_inventory[indexB - 6] == nullptr || (_inventory[indexB - 6]->getItemType() != ITEM_TYPE::ACC))
 			{
 				swap(_equippedWeapon[indexA], _inventory[indexB - 6]);
 				if (_equippedWeapon[indexA] != nullptr)
@@ -616,7 +621,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else // B : Inventory
 		{
-			if (_inventory[indexB - 6] == nullptr || ((_inventory[indexB - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)) == static_cast<int>(ITEM_TYPE::ACC)))
+			if (_inventory[indexB - 6] == nullptr || (_inventory[indexB - 6]->getItemType() == ITEM_TYPE::ACC))
 			{
 				swap(_equippedAcc[indexA - 2], _inventory[indexB - 6]);
 				if (_equippedAcc[indexA - 2])
@@ -633,7 +638,8 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else if (indexB <= 1) // B : Weapon
 		{
-			if (!((_inventory[indexA - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)) == static_cast<int>(ITEM_TYPE::ACC)))
+			if ((_inventory[indexA - 6]->getItemType() == ITEM_TYPE::WEAPON_ONE_HAND) ||
+				(_inventory[indexA - 6]->getItemType() == ITEM_TYPE::WEAPON_TWO_HAND))
 			{
 				swap(_inventory[indexA - 6], _equippedWeapon[indexB]);
 				_equippedWeapon[indexB]->equip(this);
@@ -642,7 +648,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else if (indexB <= 5) // B : Acc
 		{
-			if (((_inventory[indexA - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)) == static_cast<int>(ITEM_TYPE::ACC)))
+			if ((_inventory[indexA - 6]->getItemType() == ITEM_TYPE::ACC))
 			{
 				swap(_inventory[indexA - 6], _equippedAcc[indexB - 2]);
 				_equippedAcc[indexB - 2]->equip(this);

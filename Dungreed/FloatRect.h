@@ -63,7 +63,7 @@ inline FloatRect rectMakePivot(const Vector2& pos, const Vector2& size, const PI
 		return result;
 	case PIVOT::RIGHT_BOTTOM:
 		result.left = pos.x - size.x;
-		result.top = pos.y - size.x;
+		result.top = pos.y - size.y;
 		result.right = pos.x;
 		result.bottom = pos.y;
 		return result;

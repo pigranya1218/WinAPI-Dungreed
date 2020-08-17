@@ -16,7 +16,8 @@ enum class STAT_TYPE : int
 	DASH_DAMAGE,
 	TRUE_DAMAGE,
 	MIN_DAMAGE,
-	MAX_DAMAGE
+	MAX_DAMAGE,
+	END
 };
 
 class PlayerStat

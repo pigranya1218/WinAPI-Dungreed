@@ -2,6 +2,8 @@
 #include "InventoryUI.h"
 #include "Player.h"
 #include "Item.h"
+#include <sstream>
+#include <iomanip>
 
 void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
 {
@@ -18,25 +20,228 @@ void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
 		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_BOTTOM);
 	}
 
-	D2D_RENDERER->fillRectangle(itemInfo, 0, 0, 0, 0.4);
+	D2D_RENDERER->fillRectangle(itemInfo, 0, 0, 0, 0.65);
+	
+	PlayerStat itemStat = weapon->getAddStat();
+	FloatRect nameRc = FloatRect(Vector2(itemInfo.left, itemInfo.top + 5), Vector2(itemInfo.getWidth(), 45.f), PIVOT::LEFT_TOP);
+	D2D_RENDERER->renderTextField(nameRc.left, nameRc.top, weapon->getItemName(), getRankColor(weapon->getItemRank()), 45, nameRc.getWidth(), 45, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+	
+	{
+		FloatRect mainRc = FloatRect(Vector2(itemInfo.left, nameRc.bottom + 10), Vector2(itemInfo.getWidth(), 80.f), PIVOT::LEFT_TOP);
+
+		FloatRect imgRc = FloatRect(Vector2(mainRc.left + 20, mainRc.top), Vector2(80.f, mainRc.getHeight()), PIVOT::LEFT_TOP);
+		IMAGE_MANAGER->findImage("UI/INVENTORY/INVEN_INFO")->render(imgRc.getCenter(), imgRc.getSize());
+		weapon->getIconImg()->setScale(4);
+		weapon->getIconImg()->render(imgRc.getCenter());
+
+		FloatRect mainInfoRc = FloatRect(Vector2(imgRc.right + 20, mainRc.top), Vector2(200.f, mainRc.getHeight()), PIVOT::LEFT_TOP);
+		Vector2 mainInfoTextPos1 = Vector2(mainInfoRc.left, mainInfoRc.getCenter().y - 25); // 공격력 적을 위치
+		Vector2 mainInfoTextPos2 = Vector2(mainInfoRc.left, mainInfoRc.getCenter().y); // 공격속도 적을 위치
+		D2D_RENDERER->renderTextField(mainInfoTextPos1.x, mainInfoTextPos1.y, L"공격력 : ", RGB(255, 255, 255), 25, 150, 25);
+		D2D_RENDERER->renderTextField(mainInfoTextPos1.x + 110, mainInfoTextPos1.y, to_wstring(static_cast<int>(itemStat.minDamage)) + L" ~ " + to_wstring(static_cast<int>(itemStat.maxDamage)),
+			RGB(255, 212, 0), 25, 150, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+		D2D_RENDERER->renderTextField(mainInfoTextPos2.x, mainInfoTextPos2.y, L"공격 속도 : ", RGB(255, 255, 255), 25, 150, 25);
+		
+		stringstream stream;
+		stream << fixed << setprecision(2) << itemStat.attackSpeed;
+		D2D_RENDERER->renderTextField(mainInfoTextPos2.x + 150, mainInfoTextPos2.y, TTYONE_UTIL::stringTOwsting(stream.str()),
+			RGB(255, 212, 0), 25, 150, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+
+		int count = 0;
+		vector<wstring> displayBonusOption = weapon->getDisplayInfos();
+		for (int i = 0; i < displayBonusOption.size(); i++)
+		{
+			Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
+			count++;
+			D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25);
+			D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, displayBonusOption[i], RGB(0, 255, 0), 23, 400, 25);
+		}
+		for (int i = 0; i < static_cast<int>(STAT_TYPE::END); i++)
+		{
+			STAT_TYPE statType = static_cast<STAT_TYPE>(i);
+			if (statType == STAT_TYPE::MIN_DAMAGE || statType == STAT_TYPE::MAX_DAMAGE || statType == STAT_TYPE::ATTACK_SPEED) continue;
+			int statValue = itemStat.getStat(statType);
+			if (statValue != 0)
+			{
+				Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
+				count++;
+				D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, ((statValue > 0)?L"+":L"") + to_wstring(statValue), (statValue > 0)?(RGB(0, 255, 0)):(RGB(255, 0, 0)), 23, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				int size = TTYONE_UTIL::getSize(statValue);
+				D2D_RENDERER->renderTextField(bonusPos.x + 30 + size * 25 + 8, bonusPos.y, TTYONE_UTIL::stringTOwsting(itemStat.getStatString(statType, false)), RGB(255, 255, 255), 23, 400, 25);
+			}
+		}
+
+		Vector2 rankPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 15 + 25 * count);
+		drawItemRank(rankPos, weapon->getItemRank());
+		
+		Vector2 typePos = Vector2(mainRc.left + 20, rankPos.y + 30);
+		drawItemType(typePos, weapon->getItemType());
+
+		Vector2 textPos = Vector2(mainRc.left + 20, typePos.y + 30);
+		D2D_RENDERER->renderTextField(textPos.x, textPos.y, weapon->getDisplayText(), RGB(202, 255, 255), 23, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+	}
+	
 }
 
 void InventoryUI::drawAccInfo(Item* acc, Vector2 pos, bool isRT)
 {
 	if (acc == nullptr) return;
+
+	FloatRect itemInfo;
+
+	if (isRT)
+	{
+		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_TOP);
+	}
+	else
+	{
+		itemInfo = FloatRect(pos, _itemInfo.getSize(), PIVOT::RIGHT_BOTTOM);
+	}
+
+	D2D_RENDERER->fillRectangle(itemInfo, 0, 0, 0, 0.65);
+
+	PlayerStat itemStat = acc->getAddStat();
+	FloatRect nameRc = FloatRect(Vector2(itemInfo.left, itemInfo.top + 5), Vector2(itemInfo.getWidth(), 45.f), PIVOT::LEFT_TOP);
+	D2D_RENDERER->renderTextField(nameRc.left, nameRc.top, acc->getItemName(), getRankColor(acc->getItemRank()), 45, nameRc.getWidth(), 45, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+
+	{
+		FloatRect mainRc = FloatRect(Vector2(itemInfo.left, nameRc.bottom + 10), Vector2(itemInfo.getWidth(), 80.f), PIVOT::LEFT_TOP);
+
+		FloatRect imgRc = FloatRect(Vector2(mainRc.left + 20, mainRc.top), Vector2(80.f, mainRc.getHeight()), PIVOT::LEFT_TOP);
+		IMAGE_MANAGER->findImage("UI/INVENTORY/INVEN_INFO")->render(imgRc.getCenter(), imgRc.getSize());
+		acc->getIconImg()->setScale(4);
+		acc->getIconImg()->render(imgRc.getCenter());
+
+		FloatRect mainInfoRc = FloatRect(Vector2(imgRc.right + 20, mainRc.top), Vector2(200.f, mainRc.getHeight()), PIVOT::LEFT_TOP);
+
+		int count = 0;
+		vector<wstring> displayBonusOption = acc->getDisplayInfos();
+		for (int i = 0; i < displayBonusOption.size(); i++)
+		{
+			Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
+			count++;
+			D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25);
+			D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, displayBonusOption[i], RGB(0, 255, 0), 23, 400, 25);
+		}
+		for (int i = 0; i < static_cast<int>(STAT_TYPE::END); i++)
+		{
+			STAT_TYPE statType = static_cast<STAT_TYPE>(i);
+			int statValue = itemStat.getStat(statType);
+			if (statValue != 0)
+			{
+				Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
+				count++;
+				D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, ((statValue > 0) ? L"+" : L"") + to_wstring(statValue), (statValue > 0) ? (RGB(0, 255, 0)) : (RGB(255, 0, 0)), 23, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				int size = TTYONE_UTIL::getSize(statValue);
+				D2D_RENDERER->renderTextField(bonusPos.x + 30 + size * 25 + 8, bonusPos.y, TTYONE_UTIL::stringTOwsting(itemStat.getStatString(statType, false)), RGB(255, 255, 255), 23, 400, 25);
+			}
+		}
+
+		Vector2 rankPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 15 + 25 * count);
+		drawItemRank(rankPos, acc->getItemRank());
+
+		Vector2 typePos = Vector2(mainRc.left + 20, rankPos.y + 30);
+		drawItemType(typePos, acc->getItemType());
+
+		Vector2 textPos = Vector2(mainRc.left + 20, typePos.y + 30);
+		D2D_RENDERER->renderTextField(textPos.x, textPos.y, acc->getDisplayText(), RGB(202, 255, 255), 23, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+	}
 }
 
 void InventoryUI::drawInvenInfo(int index, Vector2 pos)
 {
 	Item * item = _player->getInvenItem(index);
 	if (item == nullptr) return;
-	if (item->getItemCode() & static_cast<int>(ITEM_TYPE::ACC) == static_cast<int>(ITEM_TYPE::ACC))
+	if (item->getItemType() == ITEM_TYPE::ACC)
 	{
 		drawAccInfo(item, pos, false);
 	}
 	else
 	{
 		drawWeaponInfo(item, pos, false);
+	}
+}
+
+void InventoryUI::drawItemType(Vector2 pos, ITEM_TYPE type)
+{
+	switch (type)
+	{
+	case ITEM_TYPE::WEAPON_ONE_HAND:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"한손 (주무기)", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	case ITEM_TYPE::WEAPON_TWO_HAND:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"양손무기", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	case ITEM_TYPE::ACC:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"액세서리", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	case ITEM_TYPE::WEAPON_SUB:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"한손 (보조무기)", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	}
+}
+
+void InventoryUI::drawItemRank(Vector2 pos, ITEM_RANK rank)
+{
+	switch (rank)
+	{
+	case ITEM_RANK::NORMAL:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"일반 아이템", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	case ITEM_RANK::HIGH:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"고급 아이템", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	case ITEM_RANK::RARE:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"희귀 아이템", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	case ITEM_RANK::LEGEND:
+	{
+		D2D_RENDERER->renderTextField(pos.x, pos.y, L"전설 아이템", RGB(180, 180, 180), 23, 200, 25, 1);
+	}
+	break;
+	}
+}
+
+COLORREF InventoryUI::getRankColor(ITEM_RANK rank)
+{
+	switch (rank)
+	{
+	case ITEM_RANK::NORMAL:
+	{
+		return RGB(255, 255, 255);
+	}
+	break;
+	case ITEM_RANK::HIGH:
+	{
+		return RGB(43, 123, 255);
+	}
+	break;
+	case ITEM_RANK::RARE:
+	{
+		return RGB(255, 210, 0);
+	}
+	break;
+	case ITEM_RANK::LEGEND:
+	{
+		return RGB(255, 0, 120);
+	}
+	break;
 	}
 }
 
@@ -76,7 +281,7 @@ void InventoryUI::init()
 	_dragAccIndex = -1;
 	_dragInvenIndex = -1;
 
-	_itemInfo = FloatRect(Vector2(0, 0), Vector2(400, 400), PIVOT::CENTER);
+	_itemInfo = FloatRect(Vector2(0, 0), Vector2(450, 350), PIVOT::CENTER);
 }
 
 void InventoryUI::release()
@@ -340,7 +545,7 @@ void InventoryUI::render()
 			weapon->getIconImg()->setScale(5);
 			weapon->getIconImg()->render(_equippedWeaponRc[i * 2].getCenter());
 
-			if ((weapon->getItemCode() & static_cast<int>(ITEM_TYPE::WEAPON_TWO_HAND) == static_cast<int>(ITEM_TYPE::WEAPON_TWO_HAND)))
+			if (weapon->getItemType() == ITEM_TYPE::WEAPON_TWO_HAND)
 			{
 				IMAGE_MANAGER->findImage("UI/INVENTORY/WEAPON_X")->setScale(5);
 				IMAGE_MANAGER->findImage("UI/INVENTORY/WEAPON_X")->render(_equippedWeaponRc[i * 2 + 1].getCenter());

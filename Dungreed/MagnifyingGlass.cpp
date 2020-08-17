@@ -50,7 +50,9 @@ void MagnifyingGlass::attack(FloatCircle * circle, AttackInfo * info)
 
 void MagnifyingGlass::attack(Projectile * projectile, AttackInfo * info)
 {
+	
 	projectile->setSize(projectile->getSize() * 3);
+	
 }
 
 void MagnifyingGlass::getHit(Vector2 const position)
