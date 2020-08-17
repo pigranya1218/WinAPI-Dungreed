@@ -404,10 +404,13 @@ void MapTool::load()
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &read, NULL);
 	
+
+	
+	
 	CloseHandle(stageFile);
 	ShowCursor(false);
-	/*_tileX = _tile[0].tileX;
-	_tileY = _tile[0].tileY;*/
+	
+	
 }
 
 void MapTool::paletteChange()

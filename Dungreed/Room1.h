@@ -1,14 +1,10 @@
 #pragma once
 #include "Stage.h"
-#include "MapTool.h"
 
-class RestaurantRoom : public Stage
+
+class Room1 : public Stage
+	
 {
-private:
-	
-	
-	int _currentIndex;
-
 public:
 	virtual void init();
 	virtual void release();

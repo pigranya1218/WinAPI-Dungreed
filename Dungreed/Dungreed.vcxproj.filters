@@ -73,9 +73,6 @@
     <Filter Include="Dungreed\GameScene\Stage">
       <UniqueIdentifier>{9a0e7d88-bd8a-4386-a524-7bab0e407516}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\GameScene\UI">
-      <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Object">
       <UniqueIdentifier>{f89c22bc-65c8-4c41-98b1-bbff413b7784}</UniqueIdentifier>
     </Filter>
@@ -126,6 +123,9 @@
     </Filter>
     <Filter Include="2DGameFramework\CameraManager">
       <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\UI">
+      <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -238,7 +238,7 @@
       <Filter>Dungreed\GameScene\Stage</Filter>
     </ClInclude>
     <ClInclude Include="UIManager.h">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>Dungreed\GameScene\Object</Filter>
@@ -367,7 +367,7 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
     <ClInclude Include="InventoryUI.h">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClInclude>
     <ClInclude Include="Costume.h">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
@@ -412,7 +412,7 @@
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
     <ClInclude Include="StatUI.h">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClInclude>
     <ClInclude Include="OakBow.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
@@ -442,7 +442,7 @@
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="CostumeUI.h">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClInclude>
     <ClInclude Include="HeartOfCosmos.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
@@ -451,6 +451,24 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
     <ClInclude Include="RestaurantRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="AllRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonShopRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="StartRoom1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room3.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
@@ -546,7 +564,7 @@
       <Filter>Dungreed\GameScene\Stage</Filter>
     </ClCompile>
     <ClCompile Include="UIManager.cpp">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Dungreed\GameScene\Object</Filter>
@@ -654,7 +672,7 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="InventoryUI.cpp">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
     <ClCompile Include="CostumeManager.cpp">
       <Filter>Dungreed\GameScene\Player\Costume</Filter>
@@ -696,7 +714,7 @@
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="StatUI.cpp">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
     <ClCompile Include="MagnifyingGlass.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
@@ -735,7 +753,7 @@
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="CostumeUI.cpp">
-      <Filter>Dungreed\GameScene\UI</Filter>
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
     <ClCompile Include="HeartOfCosmos.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
@@ -744,6 +762,21 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="RestaurantRoom.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room1.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonShopRoom.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="StartRoom1.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room3.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>

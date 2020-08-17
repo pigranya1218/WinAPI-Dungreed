@@ -9,7 +9,7 @@
 #include "Attackinfo.h"
 #include "MapTool.h"
 
-
+class Player;
 class StageManager;
 
 class Stage
@@ -32,6 +32,8 @@ protected:
 	
 	bool _isVisited; // 방문한 스테이지인가? (UI 지도에서 그리기 위함)
 
+	Player* _player;
+
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
 	virtual void init();
@@ -52,4 +54,5 @@ public:
 	inline Stage* getConnectedStage( DIRECTION const direction ) const { return _connectedStage[static_cast<int> (direction)];}
 	bool isVisited() const { return _isVisited; }
 	Vector2 getPlayerPos();
+	
 };
