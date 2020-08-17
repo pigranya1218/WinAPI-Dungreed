@@ -160,6 +160,15 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 			enemy->setEnemyManager(this);
 		}
 	}
+		break;
+		case ENEMY_TYPE::BELIAL:
+		{
+			enemy = new Belial;
+			enemy->init(pos);
+			enemy->setEnemyManager(this);
+		}
+		break;
+	}
 
 	_enemies.push_back(enemy);
 }

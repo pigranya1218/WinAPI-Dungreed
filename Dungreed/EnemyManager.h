@@ -16,6 +16,7 @@
 #include "Ovibos.h"
 #include "Ghost.h"
 #include "Niflheim.h"
+#include "Belial.h"
 
 class Stage;
 

@@ -507,9 +507,29 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("GiantBullet_FX", "GiantBullet_FX", 15, 50);
 	EFFECT_MANAGER->addEffect("SmallBullet_FX", "SmallBullet_FX", 15, 50);
 
+	//** Boss
+	// * Belial
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle", L"resources/images/boss/Belial/idle.png", 10, 1);								//벨리알 머리 대기 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack", L"resources/images/boss/Belial/attack.png", 10, 1);							//벨리알 머리 공격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot", L"resources/images/boss/Belial/getHeadDamage_Idle.png", 10, 1);			//벨리알 머리 대기 피격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Head/IdAttackle_Shot", L"resources/images/boss/Belial/getHeadDamage_attack.png", 10, 1);	//벨리알 머리 공격 피격 상태
+
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle", L"resources/images/boss/Belial/HandIdle.png", 10, 1);							//벨리알 손 대기 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack", L"resources/images/boss/Belial/Handattack.png", 18, 1);						//벨리알 손 공격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle_Shot", L"resources/images/boss/Belial/getHandDamage_Idle.png", 10, 1);			//벨리알 손 대기 피격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/IdAttackle_Shot", L"resources/images/boss/Belial/getHandDamage_attack.png", 18, 1);	//벨리알 손 공격 피격 상태
+
+	IMAGE_MANAGER->addFrameImage("Belial/Back", L"resources/images/boss/Belial/back.png", 10, 1);									//벨리알 후광 구
+
+
+	// * Nipleheim
+
+
+
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
 	TIME_MANAGER->update();
+
 
 	// 모든 씬 SCENE_MANAGER에 
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
