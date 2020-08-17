@@ -2,13 +2,12 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate)
+void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_speed = speed;
-	_range = range;
-
-	_startPos = _position;
+	_maxTime = maxTime;
+	_count = 0;
 
 	_img = IMAGE_MANAGER->findImage(imgKey);
 	_useAni = useAni;
@@ -69,11 +68,12 @@ void NormalProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	// 사정거리를 넘어가면
-	if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
+	// 지속시간을 넘어가면
+	_count += elapsedTime;
+	if (_count >= _maxTime)
 	{
-		_active = false;		
-	}
+		_active = false;
+	}	
 }
 
 void NormalProjectile::render()

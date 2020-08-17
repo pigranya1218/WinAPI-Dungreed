@@ -46,7 +46,7 @@ protected:
 		float				delay;		// 딜레이
 		float				count;		// 카운트
 		float				angle;		// 각도
-		float				range;		// 사정거리
+		float				duration;	// 지속시간
 		float				speed;		// 스피드
 
 		bool				isAni;		// 애니메이션 사용여부
@@ -55,7 +55,7 @@ protected:
 		bool				isRotate;	// 이미지 회전 여부
 		int					bulletNum;	// 생성할 총알 지정
 
-		void init(string bulletName, string effectName, float scale, float delay, float range, float speed, bool isRotate, bool isCollision, bool isAni, bool aniLoop)
+		void init(string bulletName, string effectName, float scale, float delay, float duration, float speed, bool isRotate, bool isCollision, bool isAni, bool aniLoop)
 		{
 			this->bulletName = bulletName;
 			this->effectName = effectName;	
@@ -71,7 +71,7 @@ protected:
 			}
 
 			this->delay = delay;
-			this->range = range;
+			this->duration = duration;
 			this->speed = speed;
 
 			this->isAni = isAni;
@@ -102,7 +102,7 @@ protected:
 			bullet->setSize(effectSize);
 			bullet->setTeam(OBJECT_TEAM::ENEMY);
 
-			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, range, isRotate);
+			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, duration, isRotate);
 
 			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);
@@ -174,6 +174,7 @@ protected:
 
 public:
 	virtual void init() {}
+	virtual void init(Vector2 pos) {}
 	virtual void init(const Vector2& pos, DIRECTION direction) {}
 	virtual void release() {};
 	virtual void update(float const timeElapsed) {};
