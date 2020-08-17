@@ -6,6 +6,8 @@ class BoomerangProjectile :	public Projectile
 private:
 	float		_angleRadian;		// 투사체 날라가는 각도
 	float		_speed;				// 투사체 날라가는 속도
+	
+	float		_radius;			// 충돌용
 
 	float		_range;				// 투사체 사정거리
 	Vector2		_startPos;			// 투사체 시작위치
@@ -30,5 +32,7 @@ public:
 
 	// 애니메이션 업데이트 하려고 만듬 삭제하세욥
 	virtual void aniUpdate(float const elapsedTime);
+	float getRadius() { return _radius; }
+	bool getReturn() { return _ProjectileReturn; }
 };
 

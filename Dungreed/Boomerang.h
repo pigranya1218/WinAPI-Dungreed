@@ -12,7 +12,7 @@ private:
 	Image* _aniImg;
 	Image* _effect01;
 
-	Vector2 _position;
+	//Vector2 _position;
 	int _minDamage;
 	int _maxDamage;
 	int _gunType;				//원거리 무기 타입
@@ -35,6 +35,7 @@ private:
 	float _currReloadDelay; // 남은 재장전 쿨타임
 	bool _drawEffect; // 이번 render 함수에서 이펙트를 시작할 것인지 판단
 
+	BoomerangProjectile* _projectile;
 public:
 	virtual void init();
 	virtual void release();

@@ -29,6 +29,8 @@ void Boomerang::init()
 	//_ani->init(_aniImg->getWidth(), _aniImg->getHeight(), 2, 1);
 	//_ani->setPlayFrame(0, 2, false, true);
 	//_ani->setFPS(15);
+
+	_projectile = nullptr;
 }
 
 void Boomerang::release()
@@ -74,6 +76,20 @@ void Boomerang::update(Player * player, float const elapsedTime)
 	_pos = player->getPosition();
 	_gunPos = _isLeft ? Vector2(_pos.x - 20, _pos.y + 15) : Vector2(_pos.x + 20, _pos.y + 15);
 
+	if (_projectile != nullptr)
+	{
+		if (_projectile->getReturn())
+		{
+			FloatRect projectileRc = FloatRect(_projectile->getPosition(), _projectile->getSize(), PIVOT::CENTER);
+			FloatRect playerRc = FloatRect(player->getPosition(), player->getSize(), PIVOT::CENTER);
+			if (FloatRect::intersect(projectileRc, playerRc))
+			{
+				_projectile->setActive(false);
+				_projectile = nullptr;
+			}
+		}
+	}
+	
 }
 
 void Boomerang::backRender(Player * player)
@@ -82,15 +98,13 @@ void Boomerang::backRender(Player * player)
 
 void Boomerang::frontRender(Player * player)
 {
-	
-	Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
-	_img->setScale(4);
-	_img->setAnglePos(_centerPos);
-
-	_img->setAngle(_renderDegree);
-
-	if (!_isAttack)
+	if (_projectile == nullptr)
 	{
+		Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
+		_img->setScale(4);
+		_img->setAnglePos(_centerPos);
+
+		_img->setAngle(_renderDegree);
 		_img->render(CAMERA->getRelativeV2(_gunPos), _isLeft);
 	}
 
@@ -114,18 +128,19 @@ void Boomerang::attack(Player * player)
 	//	return;
 	//}
 
-	if (!_isAttack) { _isAttack = true; }
+	if (_projectile != nullptr) return;
 
 	float _angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _gunPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _gunPos.x)) + PI2;
 	if (_angleRadian > PI2)
 	{
 		_angleRadian -= PI2;
 	}
-	BoomerangProjectile* _projectile = new BoomerangProjectile;
+
+	_projectile = new BoomerangProjectile;
 	_projectile->setPosition(_gunPos);
 	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
 	_projectile->setTeam(OBJECT_TEAM::PLAYER);
-	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 10, true, true, 20, "", Vector2(), 500);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 20, true, true, 20, "", Vector2(), 500);
 
 	/*NormalProjectile* _projectile = new NormalProjectile;
 	_projectile->setPosition(_gunPos);
@@ -138,7 +153,6 @@ void Boomerang::attack(Player * player)
 	player->attack(_projectile, attackInfo);
 	_currAttackDelay = _baseAttackDelay;	// 공격 쿨타임 설정
 	_currBullet -= 1;						// 탄환 1 줄임
-	
 	
 }
 

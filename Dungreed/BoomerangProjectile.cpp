@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "BoomerangProjectile.h"
 #include "ProjectileManager.h"
+#include "Player.h"
 
 void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, string collisionEffect, Vector2 effectSize, float range, bool useRotate)
 {
@@ -28,6 +29,7 @@ void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bo
 
 	_ProjectileReturn = false;
 	_active = true;
+	_radius = _img->getFrameSize().x * 1.75;
 }
 
 void BoomerangProjectile::release()
@@ -94,8 +96,6 @@ void BoomerangProjectile::update(float elapsedTime)
 	}
 
 	_position += moveDir;
-
-
 }
 
 void BoomerangProjectile::render()
@@ -107,14 +107,14 @@ void BoomerangProjectile::render()
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _radius, D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
 		_img->render(CAMERA->getRelativeV2(_position), _size);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		//D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _img->getFrameSize().x * 2, D2D1::ColorF::Enum::Red, 5);
 	}
-
-
 }
 
 void BoomerangProjectile::aniUpdate(float const elapsedTime)
