@@ -11,7 +11,7 @@ void DebugStage::init()
 
 	// 에너미 테스트입니다.
 	_enemyMgr->setStage(this);
-	//_enemyMgr->spawnEnemy(ENEMY_TYPE::NIFLHEIM, Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	_enemyMgr->spawnEnemy(ENEMY_TYPE::NIFLHEIM, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BANSHEE, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_NORMAL, Vector2(WINSIZEX / 2 - 300, WINSIZEY / 2));
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_RED, Vector2(WINSIZEX / 2 + 100, WINSIZEY / 2));
