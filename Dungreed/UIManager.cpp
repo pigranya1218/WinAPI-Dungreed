@@ -119,27 +119,55 @@ void UIManager::update(float const elaspedTime)
 		_costumeUI.setActive(!_costumeUI.isActive());
 	}
 
+	
+
+	bool isClose = false;
+	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
+	{
+		isClose = true;
+	}
 
 	if (_inventoryUI.isActive())
 	{
-		_inventoryUI.update(elaspedTime);
+		if (isClose)
+		{
+			_inventoryUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_inventoryUI.update(elaspedTime);
+		}
 	}
 	if (_statUI.isActive())
 	{
-		_statUI.update(elaspedTime);
+		if (isClose)
+		{
+			_statUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_statUI.update(elaspedTime);
+		}
 	}
 	if (_costumeUI.isActive())
 	{
-		_costumeUI.update(elaspedTime);
+		if (isClose)
+		{
+			_costumeUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_costumeUI.update(elaspedTime);
+		}
 	}
 
 	_isActive = false;
 	_isActive |= _inventoryUI.isActive();
 	_isActive |= _statUI.isActive();
-	_isActive != _costumeUI.isActive();
-
-	
-	
+	_isActive |= _costumeUI.isActive();
 }
 
 void UIManager::render()

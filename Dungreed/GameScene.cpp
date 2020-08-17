@@ -36,7 +36,10 @@ void GameScene::update()
 {
 	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
 	{
-		PostQuitMessage(0);
+		if (!_uiMgr->isActive())
+		{
+			PostQuitMessage(0);
+		}
 	}
 
 	// 배속 관리
@@ -95,4 +98,9 @@ void GameScene::attack(FloatCircle* circle, AttackInfo* info)
 void GameScene::attack(Projectile* projectile, AttackInfo* info)
 {
 	_stageMgr->attack(projectile, info);
+}
+
+bool GameScene::isUIActive()
+{
+	return _uiMgr->isActive();
 }
