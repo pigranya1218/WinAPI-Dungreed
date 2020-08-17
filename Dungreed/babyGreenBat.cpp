@@ -85,6 +85,7 @@ void babyGreenBat::backRender(Player* player)
 
 void babyGreenBat::displayInfo()
 {
+	
 }
 
 void babyGreenBat::attack(Player* player)
@@ -117,7 +118,7 @@ void babyGreenBat::attack(Player* player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(100, 100));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100,100), 300); 
+	projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100,100), 500,false); 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;	
 	player->attack(projectile, attackInfo);
@@ -133,7 +134,7 @@ void babyGreenBat::attack(Player* player)
 	projectile0->setPosition(Vector2(shootPos0.x, shootPos0.y-15));
 	projectile0->setSize(Vector2(100, 100));
 	projectile0->setTeam(OBJECT_TEAM::PLAYER);
-	projectile0->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100, 100), 300); 
+	projectile0->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100, 100), 500, false);
 	AttackInfo* attackInfo0 = new AttackInfo;
 	attackInfo0->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile0, attackInfo0);
