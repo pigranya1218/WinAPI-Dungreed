@@ -302,7 +302,7 @@ void InventoryUI::render()
 			weapon->getIconImg()->setScale(5);
 			weapon->getIconImg()->render(_equippedWeaponRc[i * 2].getCenter());
 
-			if (weapon->getType() == ITEM_TYPE::WEAPON_TWO_HAND)
+			if (weapon->getItemCode() & static_cast<int>(ITEM_TYPE::WEAPON_TWO_HAND))
 			{
 				IMAGE_MANAGER->findImage("UI/INVENTORY/WEAPON_X")->setScale(5);
 				IMAGE_MANAGER->findImage("UI/INVENTORY/WEAPON_X")->render(_equippedWeaponRc[i * 2 + 1].getCenter());

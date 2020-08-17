@@ -3,12 +3,10 @@
 
 void MartialArtOfTiger::init()
 {
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;
-	_rank = ITEM_RANK::NORMAL;
 	_effect = IMAGE_MANAGER->findImage("EFFECT_TIGERPUNCH");
 	_iconImg =IMAGE_MANAGER->findImage("TigerPunchIcon");
 	_price = 600;
-	
+	_itemCode = 0x01300; //한손 에픽 00
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 

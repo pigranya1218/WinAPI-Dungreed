@@ -3,8 +3,7 @@
 void watCher::init()
 {
 	//厩技辑府 鸥涝
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;	
+	_itemCode = 0x0310D;
 	_iconImg = IMAGE_MANAGER->findImage("Watcher");
 	
 	//厩技辑府 可记

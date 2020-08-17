@@ -3,8 +3,7 @@
 
 void GreenBat::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;	
+	_itemCode = 0x03204;
 	_iconImg = IMAGE_MANAGER->findImage("GreenBat");
 	_price = 600;
 

@@ -525,7 +525,7 @@ Image* Player::getWeaponImg(int index) const noexcept
 void Player::equipItem(int index)
 {
 	if (_inventory[index] == nullptr) return;
-	if (_inventory[index]->getType() == ITEM_TYPE::ACC) // 악세사리의 경우
+	if (_inventory[index]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)) // 악세사리의 경우
 	{
 		for (int i = 0; i < 4; i++)
 		{
@@ -589,7 +589,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else // B : Inventory
 		{
-			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() != ITEM_TYPE::ACC)
+			if (_inventory[indexB - 6] == nullptr || !(_inventory[indexB - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)))
 			{
 				swap(_equippedWeapon[indexA], _inventory[indexB - 6]);
 				if (_equippedWeapon[indexA] != nullptr)
@@ -616,7 +616,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else // B : Inventory
 		{
-			if (_inventory[indexB - 6] == nullptr || _inventory[indexB - 6]->getType() == ITEM_TYPE::ACC)
+			if (_inventory[indexB - 6] == nullptr || (_inventory[indexB - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)))
 			{
 				swap(_equippedAcc[indexA - 2], _inventory[indexB - 6]);
 				if (_equippedAcc[indexA - 2])
@@ -633,7 +633,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else if (indexB <= 1) // B : Weapon
 		{
-			if (_inventory[indexA - 6]->getType() != ITEM_TYPE::ACC)
+			if (!(_inventory[indexA - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC)))
 			{
 				swap(_inventory[indexA - 6], _equippedWeapon[indexB]);
 				_equippedWeapon[indexB]->equip(this);
@@ -642,7 +642,7 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 		}
 		else if (indexB <= 5) // B : Acc
 		{
-			if (_inventory[indexA - 6]->getType() == ITEM_TYPE::ACC)
+			if (_inventory[indexA - 6]->getItemCode() & static_cast<int>(ITEM_TYPE::ACC))
 			{
 				swap(_inventory[indexA - 6], _equippedAcc[indexB - 2]);
 				_equippedAcc[indexB - 2]->equip(this);

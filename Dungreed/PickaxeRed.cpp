@@ -3,12 +3,10 @@
 
 void PickaxeRed::init()
 {
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;
-	_rank = ITEM_RANK::NORMAL;
 	_iconImg = IMAGE_MANAGER->findImage("PickaxeRedIcon");
 		_img = IMAGE_MANAGER->findImage("PickaxeRed");
 	_price = 600;
-
+	_itemCode = 0x02300; //양손 에픽 00;
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 

@@ -3,8 +3,7 @@
 
 void bombPouch::init()
 {
-	_type = ITEM_TYPE::ACC;
-	_rank = ITEM_RANK::RARE;
+	_itemCode = 0x03201;
 	_iconImg = IMAGE_MANAGER->findImage("BombPouch");
 	
 	_addStat.defense = 2;	
@@ -72,7 +71,7 @@ void bombPouch::dash(Player * player)
 		projectile->setPosition(_renderPos);
 		projectile->setSize(Vector2(200, 200));
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
-		projectile->init("BombPouch0", _angleY, 700, true, false, 20, false, "BabyBatBulletFx", Vector2(100, 100), 100);
+		projectile->init("BombPouch0", _angleY, 700, true, false, 20, true, "BabyBatBulletFx", Vector2(100, 100), 400);
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
 		player->attack(projectile, attackInfo);

@@ -3,19 +3,17 @@
 
 void KeresScythe::init()
 {
-	_type = ITEM_TYPE::WEAPON_ONE_HAND;
-	_rank = ITEM_RANK::NORMAL;
 	_iconImg = IMAGE_MANAGER->findImage("KeresScytheIcon");
 		_img = IMAGE_MANAGER->findImage("KeresScythe");
 	_effect = IMAGE_MANAGER->findImage("KeresScytheSwingFX");
 	_price = 600;
+	_itemCode = 0x02401;  //양손 전설 01
 
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
-
 	_handSize = Vector2(5, 5);
 
-
+	
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
 	_minDamage = 7;
