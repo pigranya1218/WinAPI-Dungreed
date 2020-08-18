@@ -33,6 +33,10 @@ void babyGreenBat::init()
 	_currReloadDelay = 0;
 	_drawEffect = false;
 
+
+	
+
+
 	
 }
 
@@ -158,6 +162,8 @@ void babyGreenBat::attack(Player* player)
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임
 	_drawEffect = true; // 이펙트 그리기
+	
+
 	
 }
 

@@ -540,6 +540,9 @@
     <ClInclude Include="GatlingGun.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
+    <ClInclude Include="MetalBoots.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -919,6 +922,9 @@
     </ClCompile>
     <ClCompile Include="DamageInfo.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MetalBoots.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

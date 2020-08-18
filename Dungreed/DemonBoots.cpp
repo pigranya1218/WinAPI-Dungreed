@@ -25,25 +25,27 @@ void DemonBoots::update(Player * player, float const elapsedTime)
 	_renderPos = player->getPosition();	
 	_renderPos.y = _renderPos.y - 15;
 	_renderPos.x = _renderPos.x - 30;
-	if (_Delay > 0)
-	{
-		_Delay = max(0, _Delay - elapsedTime);
-	}
-	if (_Delay1 > 0)
-	{
-		_Delay1 = max(0, _Delay1 - elapsedTime);
-	}
-	if (_Delay == 0)
-	{
-		_Delay = 1.0;
-		_renderPos.x = _renderPos.x + _random;
-		EFFECT_MANAGER->play("DemonBootsF", _renderPos, Vector2(60, 120), 0, false);
-	}
-	if (_Delay1 == 0)
-	{
-		_Delay1 = 1.0;
-		_renderPos.x = _renderPos.x + _random;
-		EFFECT_MANAGER->play("DemonBootsF", _renderPos, Vector2(60, 120), 0, false);
+	if (player->getIsStand()) {
+		if (_Delay > 0)
+		{
+			_Delay = max(0, _Delay - elapsedTime);
+		}
+		if (_Delay1 > 0)
+		{
+			_Delay1 = max(0, _Delay1 - elapsedTime);
+		}
+		if (_Delay == 0)
+		{
+			_Delay = 1.0;
+			_renderPos.x = _renderPos.x + _random;
+			EFFECT_MANAGER->play("DemonBootsF", _renderPos, Vector2(60, 120), 0, false);
+		}
+		if (_Delay1 == 0)
+		{
+			_Delay1 = 1.0;
+			_renderPos.x = _renderPos.x + _random;
+			EFFECT_MANAGER->play("DemonBootsF", _renderPos, Vector2(60, 120), 0, false);
+		}
 	}
 }
 

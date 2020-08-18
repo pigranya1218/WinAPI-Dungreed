@@ -13,6 +13,9 @@ void GreenBat::init()
 	_batPos.x = WINSIZEX / 2;
 	_batPos.y = WINSIZEY / 2;
 
+
+	
+
 	_baseAttackDelay = 0.1;
 	_currAttackDelay = 0;
 	_maxBullet = 1;

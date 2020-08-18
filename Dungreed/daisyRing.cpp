@@ -20,7 +20,7 @@ void DaisyRing::init()
 	for (int i = 0; i < 4; i++)
 	{
 		int k = RANDOM->getFromIntTo(0, 9);
-		_DaisyRingStat[k] = RANDOM->getFromIntTo(10, 50);
+		_DaisyRingStat[k] = RANDOM->getFromIntTo(10, 30);
 				
 	}
 
