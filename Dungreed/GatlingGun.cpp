@@ -161,11 +161,14 @@ void GatlingGun::frontRender(Player * player)
 		//shootEffectPos.x += renderPosHand.x + 70;
 		//shootEffectPos.y = renderPosHand.y + 25;
 
-		float length = _iconImg->getWidth() * 1.1f * 4; // 무기 길이만큼
-		shootEffectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		shootEffectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		
-		_shootEffectImg->setAngle(renderDegree);
+		float length = _iconImg->getWidth() * 1.00f * 4; // 무기 길이만큼
+		shootEffectPos.x += cosf(degree * (PI / 180)) * length;
+		shootEffectPos.y += -sinf(degree * (PI / 180)) * length;
+
+
+
+		_shootEffectImg->setAngle(degree);
+		//_shootEffectImg->setAnglePos(Vector2(0.0f, _shootEffectImg->getFrameSize().y * 0.5f));
 		_shootEffectImg->setScale(4);
 		_shootEffectImg->aniRender(CAMERA->getRelativeV2(shootEffectPos), _shootEffectAni);
 	}
