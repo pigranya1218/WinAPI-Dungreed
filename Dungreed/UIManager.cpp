@@ -83,6 +83,23 @@ void UIManager::release()
 
 void UIManager::update(float const elaspedTime)
 {
+
+	// Damage UI update
+	for (int i = 0; i < _damageUI.size();)
+	{
+		tagDamageUI damageUI = _damageUI[i];
+		if (_damageUI[i].remainTimes < 0)
+		{
+			_damageUI.erase(_damageUI.begin() + i);
+		}
+		else
+		{
+			_damageUI[i].pos.y -= elaspedTime * 40;
+			_damageUI[i].remainTimes -= elaspedTime;
+			i++;
+		}
+	}
+
 	// HP bar animation
 	_hpUI.hpAni->frameUpdate(elaspedTime);
 
@@ -177,6 +194,14 @@ void UIManager::render()
 
 	}
 	{
+		// DAMAGE UI
+		for (int i = 0; i < _damageUI.size(); i++)
+		{
+			D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 50), CAMERA->getRelativeY(_damageUI[i].pos.y), 
+				to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, 24,
+				100, 22, 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+		}
+
 		// PLAYER HPBAR
 		_hpUI.hpBgImg->render(_hpUI.hpBg.getCenter(), _hpUI.hpBg.getSize());
 		float hpRatio = (static_cast<float>(_player->getCurrHp()) / _player->getMaxHp());
@@ -362,5 +387,27 @@ void UIManager::render()
 		{
 			_costumeUI.render();
 		}	
+	}
+}
+
+void UIManager::showDamage(DamageInfo damage, Vector2 pos)
+{
+	tagDamageUI damageUI;
+	damageUI.value = damage.damage;
+	damageUI.pos = pos;
+	damageUI.remainTimes = 1;
+	damageUI.textColor = RGB(255, 0, 0);
+	_damageUI.push_back(damageUI);
+
+	if (damage.trueDamage != 0)
+	{
+		tagDamageUI trueDamageUI;
+		trueDamageUI.value = damage.trueDamage;
+		trueDamageUI.pos = pos;
+		trueDamageUI.pos.x += 10;
+		trueDamageUI.pos.y += 10;
+		trueDamageUI.remainTimes = 1;
+		trueDamageUI.textColor = RGB(255, 255, 255);
+		_damageUI.push_back(trueDamageUI);
 	}
 }

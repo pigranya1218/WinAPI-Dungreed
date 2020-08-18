@@ -248,7 +248,12 @@ bool SkelSmallBow::hitEffect(FloatCircle * circle, AttackInfo * info)
 		break;
 	}
 
-	return false;
+	DamageInfo damageInfo = info->getDamageInfo();
+	Vector2 renderPos = _position;
+	renderPos.y -= 20;
+	_enemyManager->showDamage(damageInfo, renderPos);
+
+	return true; // 맞았다면 TRUE 반환
 }
 
 bool SkelSmallBow::hitEffect(Projectile * projectile, AttackInfo * info)

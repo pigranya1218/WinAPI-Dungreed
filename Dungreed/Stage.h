@@ -54,5 +54,7 @@ public:
 	inline Stage* getConnectedStage( DIRECTION const direction ) const { return _connectedStage[static_cast<int> (direction)];}
 	bool isVisited() const { return _isVisited; }
 	Vector2 getPlayerPos();
+
+	void showDamage(DamageInfo info, Vector2 pos);
 	
 };

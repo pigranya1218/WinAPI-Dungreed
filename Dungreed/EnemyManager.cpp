@@ -257,3 +257,8 @@ bool EnemyManager::isHit(Projectile* projectile, AttackInfo* info)
 	}
 	return result;
 }
+
+void EnemyManager::showDamage(DamageInfo info, Vector2 pos)
+{
+	_stage->showDamage(info, pos);
+}

@@ -50,4 +50,6 @@ public:
 	bool isHit(Projectile* projectile, AttackInfo* info);
 
 	void setStage(Stage* stage) { _stage = stage; }
+
+	void showDamage(DamageInfo info, Vector2 pos);
 };

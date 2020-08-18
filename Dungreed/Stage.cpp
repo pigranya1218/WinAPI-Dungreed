@@ -510,5 +510,10 @@ Vector2 Stage::getPlayerPos()
 	return _stageManager->getPlayerPos();
 }
 
+void Stage::showDamage(DamageInfo info, Vector2 pos)
+{
+	_stageManager->showDamage(info, pos);
+}
+
 
 

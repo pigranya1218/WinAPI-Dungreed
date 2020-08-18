@@ -1,4 +1,5 @@
 #pragma once
+#include "DamageInfo.h"
 #include <set>
 
 class AttackInfo
@@ -10,8 +11,12 @@ public:
 	OBJECT_TEAM team; // 공격한 팀
 	float minDamage; // 최소 대미지
 	float maxDamage; // 최대 대미지
-	int critical; // 크리티컬 확률
-	int criticalDamage; // 크리티컬 추가대미지
+	float trueDamage; // 트루 대미지
+	int critical; // 크리티컬 확률 (critical%)
+	int criticalDamage; // 크리티컬 추가대미지 ((100 + criticalDamage)%)
 	float knockBack; // 넉백 (밀어내는 힘)
+
+public:
+	DamageInfo getDamageInfo();
 };
 
