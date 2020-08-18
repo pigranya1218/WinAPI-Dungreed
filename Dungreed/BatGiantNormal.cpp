@@ -26,7 +26,6 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	_hit.delay = 0.3f;
 
 	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 0), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
-	_shooting.attackInit(10, 15, 3);
 
 	_isDetect = 0;
 	_detectRange = 300.f;

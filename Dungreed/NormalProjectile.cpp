@@ -90,6 +90,13 @@ void NormalProjectile::update(float elapsedTime)
 	{
 		// TODO: PLAYER와의 충돌 검사 흐음
 
+	}	
+
+	// 지속시간을 넘어가면
+	_count += elapsedTime;
+	if (_count >= _maxTime)
+	{
+		_active = false;
 	}
 
 	// 애니메이션 사용 시 프레임 재생
@@ -97,13 +104,6 @@ void NormalProjectile::update(float elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
-
-	// 지속시간을 넘어가면
-	_count += elapsedTime;
-	if (_count >= _maxTime)
-	{
-		_active = false;
-	}	
 }
 
 void NormalProjectile::render()

@@ -14,8 +14,12 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 		// 발사한다.
 		if (!bullets.empty())
 		{
+			AttackInfo* attackInfo = new AttackInfo;
+			attackInfo->minDamage = 5;
+			attackInfo->maxDamage = 9;
+
 			enemyManager->fireEnemy(bullets[bullets.size() - 1], attackInfo);
-			// delete attackInfo;
+			//delete attackInfo;
 			//bullets[bullets.size() - 1]->release();
 			bullets.pop_back();
 		}		

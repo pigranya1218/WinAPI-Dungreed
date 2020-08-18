@@ -19,7 +19,7 @@ void ProjectileManager::update(float const elapsedTime)
 {
 	for (int i = 0; i < _projectiles.size();)
 	{
-		//_projectiles[i]->update(elapsedTime);
+		_projectiles[i]->update(elapsedTime);
 
 		if (!_projectiles[i]->getActive())
 		{
@@ -31,11 +31,7 @@ void ProjectileManager::update(float const elapsedTime)
 		{
 			++i;
 		}
-	}
-	for (int i = 0; i < _projectiles.size(); i++)
-	{
-		_projectiles[i]->update(elapsedTime);
-	}
+	}	
 }
 
 void ProjectileManager::render()

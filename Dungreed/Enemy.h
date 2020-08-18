@@ -41,8 +41,6 @@ protected:
 	{
 		vector<NormalProjectile*> bullets;	// 한 번에 여러개 만들어 놓고 쏘기 위해
 
-		AttackInfo*	attackInfo;
-
 		string	bulletName;			// 불렛 이미지 이름
 		string	effectName;			// 불렛 이펙트 이름
 
@@ -89,18 +87,7 @@ protected:
 			this->isGravity = isGravity;
 			this->collisionGround = collisionGround;
 			this->collisionPlatForm = collisionPlatForm;
-		}
-		// 공격 스탯 정보 초기화
-		void attackInit(float minDamage, float maxDamage, float trueDamage, float knockBack = 0)
-		{
-			if(!attackInfo) attackInfo = new AttackInfo;
-
-			attackInfo->minDamage = minDamage;
-			attackInfo->maxDamage = maxDamage;
-			attackInfo->trueDamage = trueDamage;
-			attackInfo->knockBack = knockBack;
-			attackInfo->team = OBJECT_TEAM::ENEMY;
-		}
+		}		
 		// 딜레이 업데이트
 		bool delayUpdate(float const timeElapsed)
 		{
@@ -122,11 +109,6 @@ protected:
 			bullet->setPosition(pos);
 			bullet->setSize(effectSize);
 			
-			attackInfo->team = OBJECT_TEAM::ENEMY;
-			attackInfo->minDamage = 10;
-			attackInfo->maxDamage = 20;
-			
-			bullet->setAttackInfo(attackInfo);
 			bullet->init(bulletName, effectName, effectSize, force, duration, angle, isAni, aniLoop, 15, isRotate, isGravity, collisionGround, collisionPlatForm);
 
 			if (bulletNum > 0) --bulletNum;

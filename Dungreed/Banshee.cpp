@@ -23,7 +23,6 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 
 	// ≈∫∏∑ √ ±‚»≠
 	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2.2, false, true, true, false, false, false);
-	_shooting.attackInit(10, 15, 3);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 
