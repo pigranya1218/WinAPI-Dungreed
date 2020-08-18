@@ -136,14 +136,14 @@ void GatlingGun::frontRender(Player * player)
 		//effectPos.x += 5;
 		//effectPos.y = renderPosWeapon.y + 15;
 
-		Image* effectImg = IMAGE_MANAGER->findImage("ShootEffect_test");
+		Image* effectImg = IMAGE_MANAGER->findImage("ShootEffect");
 		Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
 
 		float length = _iconImg->getWidth() * 0.6f * 7; // 무기 길이만큼
 		effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
 		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
 
-		EFFECT_MANAGER->play("L_Effect_Shoot_test", effectPos, effectSize, degree);
+		EFFECT_MANAGER->play("L_Effect_Shoot", effectPos, effectSize, degree);
 	}
 
 	// 재장전 중이라면 재장전 UI를 그린다.
