@@ -240,7 +240,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	QuarterStaffBig* testWeapon2 = new QuarterStaffBig;
+	ShortSpear* testWeapon2 = new ShortSpear;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 

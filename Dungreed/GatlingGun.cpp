@@ -11,14 +11,13 @@ void GatlingGun::init()
 
 	_addStat.minDamage = 2;
 	_addStat.maxDamage = 6;
-	_addStat.attackSpeed = 21.74;
+	_addStat.attackSpeed = 0.05;
+	_addStat.reloadSpeed = 4;
 
 	// private 변수 설정
-	_baseAttackDelay = 0.05;
 	_currAttackDelay = 0;
 	_maxBullet = 100;
 	_currBullet = _maxBullet;
-	_baseReloadDelay = 4;
 	_currReloadDelay = 0;
 
 	//개틀링건 돌아가는 애니메이션
@@ -167,7 +166,7 @@ void GatlingGun::frontRender(Player * player)
 	// 재장전 중이라면 재장전 UI를 그린다.
 	if (_currReloadDelay > 0)
 	{
-		float ratio = _currReloadDelay / _baseReloadDelay;
+		float ratio = _currReloadDelay / _adjustStat.reloadSpeed;
 		FloatRect reloadBar = FloatRect(Vector2(pos.x, pos.y - 60), Vector2(92, 4), PIVOT::CENTER);
 		FloatRect reloadHandle = FloatRect(Vector2(reloadBar.right - ratio * reloadBar.getSize().x, reloadBar.getCenter().y), Vector2(8, 12), PIVOT::CENTER);
 		IMAGE_MANAGER->findImage("ReloadBar")->render(CAMERA->getRelativeV2(reloadBar.getCenter()), reloadBar.getSize());
@@ -192,7 +191,7 @@ void GatlingGun::attack(Player * player)
 	{
 		if (_currReloadDelay == 0) // 재장전 중이 아니라면
 		{
-			_currReloadDelay = _baseReloadDelay; // 재장전 함
+			_currReloadDelay = _adjustStat.reloadSpeed; // 재장전 함
 		}
 		return;
 	}
@@ -236,7 +235,7 @@ void GatlingGun::attack(Player * player)
 
 	player->attack(projectile, attackInfo);
 	
-	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
+	_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임
 	_drawEffect = true; // 이펙트 그리기
 
@@ -261,7 +260,7 @@ void GatlingGun::reload(Player * player)
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currReloadDelay == 0) // 재장전 중이 아니라면
 	{
-		_currReloadDelay = _baseReloadDelay; // 재장전 함
+		_currReloadDelay = _adjustStat.reloadSpeed; // 재장전 함
 	}
 }
 
@@ -271,6 +270,11 @@ void GatlingGun::getHit(Vector2 const position)
 
 void GatlingGun::equip(Player * player)
 {
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
+	_adjustStat.reloadSpeed = _addStat.reloadSpeed * ((100 - stat.reloadSpeed) / 100);
 }
 
 wstring GatlingGun::getBulletUI()
@@ -280,5 +284,5 @@ wstring GatlingGun::getBulletUI()
 
 float GatlingGun::getBulletRatio()
 {
-	return _currReloadDelay / _baseReloadDelay;
+	return _currReloadDelay / _adjustStat.reloadSpeed;
 }

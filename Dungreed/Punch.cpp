@@ -154,5 +154,6 @@ void Punch::equip(Player * player)
 {
 	PlayerStat stat = player->getCurrStat();
 	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
 	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }
