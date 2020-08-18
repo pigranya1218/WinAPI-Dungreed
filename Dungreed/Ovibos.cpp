@@ -22,6 +22,8 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 	_moving.gravity = Vector2(50, 4000);
 
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void Ovibos::release()
@@ -89,6 +91,7 @@ void Ovibos::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerpos, moveDir, timeElapsed);
 
 	if (_isStand && _moving.force.y == 0)
 	{
@@ -113,9 +116,15 @@ void Ovibos::update(float const timeElapsed)
 void Ovibos::render()
 {
 	_img->setScale(_scale);
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-
 	_img->aniRender(CAMERA->getRelativeV2(_position),_ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp != _maxHp)
+	{
+		// DEBUG TEST
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void Ovibos::setState(ENEMY_STATE state)
@@ -126,8 +135,10 @@ void Ovibos::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Ovibos/Idle";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Ovibos/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -136,8 +147,10 @@ void Ovibos::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Ovibos/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Ovibos/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -149,6 +162,34 @@ void Ovibos::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void Ovibos::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_imageName = "Ovibos/Idle";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Ovibos/Attack";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
 	}
 }
 

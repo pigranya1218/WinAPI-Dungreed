@@ -2,6 +2,8 @@
 #include "EnemyManager.h"
 #include "BatNormal.h"
 
+#define DEFSPEED 250.0f	// 기본 스피드
+
 void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 {
 	_ani = new Animation;
@@ -15,7 +17,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
-	_moving.force = Vector2(350, 0);
+	_moving.force = Vector2(DEFSPEED, 0.0f);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
@@ -30,6 +32,8 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 
 	_isDetect = 0;
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void BatNormal::release()
@@ -79,7 +83,7 @@ void BatNormal::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 	
-	_enemyManager->moveEnemy(this, moveDir);
+	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
 
@@ -88,9 +92,15 @@ void BatNormal::update(float const timeElapsed)
 
 void BatNormal::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp < _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += _size.y * 0.6f;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void BatNormal::setState(ENEMY_STATE state)
@@ -101,8 +111,10 @@ void BatNormal::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::MOVE:
 		{
+			_imageName = "Bat/Normal/Move";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Normal/Move");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -128,46 +140,17 @@ void BatNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const 
 				case ENEMY_STATE::IDLE:
 				case ENEMY_STATE::MOVE:
 				{
-					_img = IMAGE_MANAGER->findImage("Bat/Normal/Move");
+					_imageName = "Bat/Normal/Move";
 				}
 				break;
 			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
+			_moving.force.x = DEFSPEED;
+			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
 		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
-
-		return;
-	}
-	_moving.force.x = 350;
-}
-
-bool BatNormal::hitEffect(FloatRect * rc, AttackInfo * info)
-{
-	return false;
-}
-
-bool BatNormal::hitEffect(FloatCircle * circle, AttackInfo * info)
-{
-	_hit.isHit = true;
-	_hit.hitCount = 0;
-	//_hit.knockCount = 0;
-	_moving.gravity.x = info->knockBack;
-
-	switch (_state)
-	{
-		case ENEMY_STATE::IDLE:
-		{
-			_img = IMAGE_MANAGER->findImage("Bat/Normal/Move_Shot");
-		}
-		break;
-	}
-
-	return false;
-}
-
-bool BatNormal::hitEffect(Projectile * projectile, AttackInfo * info)
-{
-	return false;
+	}	
 }
