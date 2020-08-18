@@ -39,7 +39,7 @@ bool FloatCircle::intersect(FloatRect rc)
 		}
 		
 		// 특이케이스
-		if (radians[0] < PI && radians[3] > 1.5 * PI)
+		if (radians[0] < 0.5 * PI && radians[3] > 1.5 * PI)
 		{
 			if (isIntersectRadian(Vector2(radians[3] - PI2, radians[0])))
 			{
@@ -81,7 +81,7 @@ bool FloatCircle::isCollisionX(float x, Vector2 rangeY)
 {
 	if (origin.x - size <= x && x <= origin.x + size)
 	{
-		float result = sqrt(size * size - (x - origin.x) * (x - origin.x));
+		float result = size * size - (x - origin.x) * (x - origin.x);
 		if (result < 0) return false;
 		result = sqrt(result);
 		float y[2] = { result + origin.y, -result + origin.y };
@@ -91,10 +91,6 @@ bool FloatCircle::isCollisionX(float x, Vector2 rangeY)
 			if (rangeY.x <= y[i] && y[i] <= rangeY.y)
 			{
 				float radian = atan2f(-(y[i] - origin.y), (x - origin.x));
-				if (radian < 0)
-				{
-					radian += PI2;
-				}
 				isCollision |= isInsideRadian(radian);
 			}
 		}
@@ -118,10 +114,6 @@ bool FloatCircle::isCollisionY(float y, Vector2 rangeX)
 			if (rangeX.x <= x[i] && x[i] <= rangeX.y)
 			{
 				float radian = atan2f(-(y - origin.y), (x[i] - origin.x));
-				if (radian < 0)
-				{
-					radian += PI2;
-				}
 				isCollision |= isInsideRadian(radian);
 			}
 		}
