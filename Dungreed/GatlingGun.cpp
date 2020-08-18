@@ -133,8 +133,8 @@ void GatlingGun::frontRender(Player * player)
 	{
 		_drawEffect = false;
 		Vector2 effectPos = renderPosHand; // 손의 위치로부터
-		//effectPos.x += 5;
-		//effectPos.y = renderPosWeapon.y + 15;
+		effectPos.x += 5;
+		//effectPos.y = renderPosHand.y + 15;
 
 		Image* effectImg = IMAGE_MANAGER->findImage("ShootEffect");
 		Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
