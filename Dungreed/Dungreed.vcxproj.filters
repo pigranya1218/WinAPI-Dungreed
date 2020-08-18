@@ -528,6 +528,9 @@
     <ClInclude Include="RestaurantNpc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
+    <ClInclude Include="RestaurantUI.h">
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
+    </ClInclude>
     <ClInclude Include="DamageInfo.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
@@ -904,6 +907,9 @@
     </ClCompile>
     <ClCompile Include="RestaurantNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantUI.cpp">
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
     <ClCompile Include="MagicStick.cpp">
       <Filter>Dungreed\GameScene\Item\Long</Filter>

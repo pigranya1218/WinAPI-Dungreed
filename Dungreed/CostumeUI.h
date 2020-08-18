@@ -13,6 +13,16 @@ enum class COSTUME_TYPE;
 class CostumeUI
 {
 private:
+	struct tagScrollBar
+	{
+		float totalWidth;
+		float width;
+		float ratio;
+		FloatRect bgRc;
+		FloatRect scrollRc;
+	};
+
+private:
 	Player*			_player;
 	Costume*		_costume;
 	MetalPlateCos*	_metalPlateCos;
@@ -24,12 +34,19 @@ private:
 
 	bool _isActive;
 
+	bool _mouseMove;
+	bool _isScroll;
+
+	POINT _lastPtMouse;
+
 	Image* _costumeBaseUpImg = IMAGE_MANAGER->findImage("UI/COSTUME/BASE_UP");
 	Image* _costumeBaseDownImg = IMAGE_MANAGER->findImage("UI/COSTUME/BASE_DOWN");
 	Image* _exitBtn = IMAGE_MANAGER->findImage("BUTTON_EXIT");
 	Image* _exitBtnSelected = IMAGE_MANAGER->findImage("BUTTON_EXIT_SELECTED");
 	FloatRect _exitRc;
 	FloatRect _midRc;
+
+	tagScrollBar _scrollBar;
 	//Vector2 _winCenter = Vector2(WINSIZEX / 2, WINSIZEY / 2);
 private:
 	struct tagCostumeCell

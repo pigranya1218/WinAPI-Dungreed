@@ -247,6 +247,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RestaurantNpc.h" />
     <ClInclude Include="RestaurantRoom.h" />
+    <ClInclude Include="RestaurantUI.h" />
     <ClInclude Include="Room10T.h" />
     <ClInclude Include="Room1R.h" />
     <ClInclude Include="Room21LR.h" />
@@ -385,6 +386,7 @@
     <ClCompile Include="Room4LR.cpp" />
     <ClCompile Include="Room8L.cpp" />
     <ClCompile Include="Room9B.cpp" />
+    <ClCompile Include="RestaurantUI.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />

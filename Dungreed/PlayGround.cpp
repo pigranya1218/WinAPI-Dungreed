@@ -196,6 +196,20 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/COSTUME/ALICE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/RED_LOTUS", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/PICKAX", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
+	// *** RESTAURANT(FOODS SHOP)
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE_LABEL", L"resources/images/gameScene/ui/restaurant/Label.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE_BACK", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBaseBack.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBase.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD", L"resources/images/gameScene/ui/restaurant/RestaurantMenu.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Selected.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_Selected.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/THANKYOU_KR", L"resources/images/gameScene/ui/restaurant/ThankYouKorean.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/GOLD_ICON", L"resources/images/gameScene/ui/restaurant/GoldCoin0.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/SATIETY_ICON", L"resources/images/gameScene/ui/restaurant/SatietyRate.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/HEAL_ICON", L"resources/images/gameScene/ui/restaurant/HealRate.png");
+	IMAGE_MANAGER->addFrameImage("UI/RESTAURANT/TABLE", L"resources/images/gameScene/ui/restaurant/RestaurantTable3Frame.png", 3, 1);
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/GAUGE_BASE", L"resources/images/gameScene/ui/restaurant/AltarGaugeBase.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);

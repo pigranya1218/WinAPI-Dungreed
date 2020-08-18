@@ -2,6 +2,7 @@
 #include "InventoryUI.h"
 #include "StatUI.h"
 #include "CostumeUI.h"
+#include "RestaurantUI.h"
 #include "DamageInfo.h"
 
 class GameScene;
@@ -99,8 +100,7 @@ private:
 	InventoryUI _inventoryUI;
 	StatUI _statUI;
 	CostumeUI _costumeUI;
-
-	
+	RestaurantUI _restaurantUI;
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
