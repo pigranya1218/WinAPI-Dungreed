@@ -64,6 +64,7 @@ private:
 		float value; // 대미지 값
 		COLORREF textColor;
 		float remainTimes; // 사라지기까지 남은 시간
+		float fontSize; // 글자 크기, 크리티컬이냐에 따라 다름
 		Vector2 pos; // 그릴 위치
 		float alpha;
 	};

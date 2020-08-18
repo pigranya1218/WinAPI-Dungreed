@@ -17,7 +17,7 @@ void AliceCos::init()
 
 	//변동 스탯
 	_differStat.maxHp = -30;
-	_differStat.power = 40; //원 반경 내부에서는 -20이므로 20만 늘어남
+	_differStat.power = 0;
 
 	//베이스 스탯
 	_baseStat.maxHp = 80;
@@ -25,12 +25,12 @@ void AliceCos::init()
 	_baseStat.maxDashCount = 5;
 	_baseStat.dashCoolTime = 1.5f;
 	_baseStat.maxSatiety = 100;
-	_baseStat.power = 5;
+	_baseStat.power = 0;
 	_baseStat.minDamage = 0; //0 ~ 4
 	_baseStat.maxDamage = 0; //0 ~ 4
 	_baseStat.trueDamage = 0;
-	_baseStat.criticalChance = 2;
-	_baseStat.criticalDamage = 1; // + 100%
+	_baseStat.criticalChance = 20;
+	_baseStat.criticalDamage = 100; // + 100%
 	_baseStat.toughness = 0;
 	_baseStat.defense = 0;
 	_baseStat.block = 0;

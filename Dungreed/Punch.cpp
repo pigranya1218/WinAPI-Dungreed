@@ -7,9 +7,12 @@ void Punch::init()
 	//가격 없음
 	_price = 0;
 	//보조 옵션 없음
+	_addStat.minDamage = 1;
+	_addStat.maxDamage = 2;
+	_addStat.attackSpeed = 0.4;
+
 	_itemCode = 0x01100; // 한손 노말 00
 	_attackMove = Vector2(0, 0);
-	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 
@@ -26,7 +29,7 @@ void Punch::update(Player* player, float const elapsedTime)
 {
 	if (_currAttackDelay == 0) return;
 
-	float ratio = elapsedTime / (_baseAttackDelay * 0.08);
+	float ratio = elapsedTime / (_adjustStat.attackSpeed * 0.08);
 	if (_reverseMove)
 	{
 		_attackMove.x = max(0, _attackMove.x - abs(cosf(_attackAngle) * 30 * ratio));
@@ -37,7 +40,7 @@ void Punch::update(Player* player, float const elapsedTime)
 		_attackMove.x = min(abs(cosf(_attackAngle) * 30), _attackMove.x + abs(cosf(_attackAngle) * 30 * ratio));
 		_attackMove.y = min(abs(-sinf(_attackAngle) * 30), _attackMove.y + abs((-sinf(_attackAngle)) * 30 * ratio));
 
-		if (_currAttackDelay <= _baseAttackDelay * 0.88)
+		if (_currAttackDelay <= _adjustStat.attackSpeed * 0.88)
 		{
 			_reverseMove = true;
 		}
@@ -128,7 +131,7 @@ void Punch::attack(Player* player)
 
 	_reverseMove = false;
 	_attackAngle = angle;
-	_currAttackDelay = _baseAttackDelay;
+	_currAttackDelay = _adjustStat.attackSpeed;
 }
 
 void Punch::attack(FloatRect * rect, AttackInfo * info)
@@ -149,4 +152,7 @@ void Punch::getHit(Vector2 const position)
 
 void Punch::equip(Player * player)
 {
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }

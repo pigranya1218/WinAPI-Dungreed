@@ -207,8 +207,8 @@ void UIManager::render()
 		for (int i = 0; i < _damageUI.size(); i++)
 		{
 			D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 50), CAMERA->getRelativeY(_damageUI[i].pos.y), 
-				to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, 30,
-				100, 30, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+				to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, _damageUI[i].fontSize,
+				100, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
 		}
 
 		// ENEMY HP UI
@@ -416,12 +416,20 @@ void UIManager::showDamage(DamageInfo damage, Vector2 pos)
 	damageUI.value = damage.damage;
 	damageUI.pos = pos;
 	damageUI.remainTimes = 1;
-	if (damage.damage < 20)
+	damageUI.fontSize = 30;
+	if (damage.isCritical)
 	{
+		damageUI.fontSize = 35;
+		damageUI.textColor = RGB(243, 152, 0);
+	}
+	else if (damage.damage < 20)
+	{
+		damageUI.fontSize = 30;
 		damageUI.textColor = RGB(255, 255, 255);
 	}
 	else
 	{
+		damageUI.fontSize = 30; 
 		damageUI.textColor = RGB(255, 212, 0);
 	}
 	damageUI.alpha = 1;

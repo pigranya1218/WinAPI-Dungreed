@@ -37,6 +37,32 @@
 void Player::updateAdjustStat()
 {
 	_adjustStat = _costume->getBaseStat();
+
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_adjustStat = _adjustStat + _equippedWeapon[_currWeaponIndex]->getAddStat();
+	}
+	else
+	{
+		_adjustStat = _adjustStat + _hand->getAddStat();
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (_equippedAcc[i] != nullptr)
+		{
+			_adjustStat = _adjustStat + _equippedAcc[i]->getAddStat();
+		}
+	}
+
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_equippedWeapon[_currWeaponIndex]->equip(this);
+	}
+	else
+	{
+		_hand->equip(this);
+	}
 }
 
 void Player::swap(Item *& a, Item *& b)
@@ -44,6 +70,7 @@ void Player::swap(Item *& a, Item *& b)
 	Item* temp = a;
 	a = b;
 	b = temp;
+	updateAdjustStat();
 }
 
 void Player::attack(FloatRect* rect, AttackInfo* info)
@@ -58,6 +85,11 @@ void Player::attack(FloatRect* rect, AttackInfo* info)
 	}
 
 	// 플레이어 스탯 적용 (위력, 크리티컬)
+	info->minDamage *= ((100 + _adjustStat.power) / 100);
+	info->maxDamage *= ((100 + _adjustStat.power) / 100);
+	info->critical += _adjustStat.criticalChance;
+	info->criticalDamage += _adjustStat.criticalDamage;
+	info->trueDamage += _adjustStat.trueDamage;
 
 	_gameScene->attack(rect, info);
 }
@@ -74,6 +106,11 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 	}
 
 	// TODO : 플레이어 스탯 적용 (위력, 크리티컬)
+	info->minDamage *= ((100 + _adjustStat.power) / 100);
+	info->maxDamage *= ((100 + _adjustStat.power) / 100);
+	info->critical += _adjustStat.criticalChance;
+	info->criticalDamage += _adjustStat.criticalDamage;
+	info->trueDamage += _adjustStat.trueDamage;
 
 	_gameScene->attack(circle, info);
 }
@@ -90,6 +127,11 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 	}
 
 	// 플레이어 스탯 적용 (위력, 크리티컬)
+	info->minDamage *= ((100 + _adjustStat.power) / 100);
+	info->maxDamage *= ((100 + _adjustStat.power) / 100);
+	info->critical += _adjustStat.criticalChance;
+	info->criticalDamage += _adjustStat.criticalDamage;
+	info->trueDamage += _adjustStat.trueDamage;
 
 	_gameScene->attack(projectile, info);
 }
@@ -104,7 +146,6 @@ void Player::init()
 	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE);
 	_costume->init();
 
-	updateAdjustStat();
 	_level = 1;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
@@ -119,6 +160,7 @@ void Player::init()
 	_equippedWeapon.resize(2);
 	_equippedAcc.resize(4);
 	_inventory.resize(15);
+
 
 	babyGreenBat* testAcc1 = new babyGreenBat;
 	testAcc1->init();
@@ -218,6 +260,8 @@ void Player::init()
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
+
+	updateAdjustStat();
 }
 
 void Player::release()
@@ -265,6 +309,7 @@ void Player::update(float const elapsedTime)
 	{
 		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
+		updateAdjustStat();
 	}
 
 	// 장비 교체 시간 딜레이
@@ -688,5 +733,29 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (indexA == indexB) return;
 			swap(_inventory[indexA - 6], _inventory[indexB - 6]);
 		}
+	}
+}
+
+float Player::getAttackSpeed()
+{
+	if (_equippedWeapon[_currWeaponIndex] == nullptr)
+	{
+		return _hand->getAttackSpeed();
+	}
+	else
+	{
+		return _equippedWeapon[_currWeaponIndex]->getAttackSpeed();
+	}
+}
+
+float Player::getReloadSpeed()
+{
+	if (_equippedWeapon[_currWeaponIndex] == nullptr)
+	{
+		return _hand->getReloadSpeed();
+	}
+	else
+	{
+		return _equippedWeapon[_currWeaponIndex]->getReloadSpeed();
 	}
 }
