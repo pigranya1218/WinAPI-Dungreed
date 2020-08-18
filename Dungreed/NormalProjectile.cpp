@@ -53,7 +53,7 @@ void NormalProjectile::update(float elapsedTime)
 	moveDir.x += cosf(_angleRadian) * _speed.x * elapsedTime;	
 	if (_useGravity)
 	{
-		_speed.y += _gravity.y * elapsedTime;
+		_speed.y += _gravity.y * elapsedTime * ((_angleRadian > PI) ? (1) : (-1));
 		moveDir.y += -sinf(_angleRadian) * _speed.y * elapsedTime;
 	}
 	else
