@@ -1,9 +1,8 @@
 #pragma once
 #include "Stage.h"
-class Room2 :
+class Room10T :
 	public Stage
 {
-public:
 	virtual void init();
 	virtual void release();
 	virtual void update(float const elapsedTime);

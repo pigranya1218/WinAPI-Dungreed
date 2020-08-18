@@ -450,22 +450,46 @@
     <ClInclude Include="RestaurantRoom.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
-    <ClInclude Include="Room1.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
     <ClInclude Include="AllRoom.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="DungeonShopRoom.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
-    <ClInclude Include="Room2.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
     <ClInclude Include="StartRoom1.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
-    <ClInclude Include="Room3.h">
+    <ClInclude Include="StartRoom2.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room21LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room20LTRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room22LTRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room1R.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2LTR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room3LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room8L.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room9B.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room10T.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="Belial.h">
@@ -794,19 +818,43 @@
     <ClCompile Include="RestaurantRoom.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
-    <ClCompile Include="Room1.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
     <ClCompile Include="DungeonShopRoom.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
-    <ClCompile Include="Room2.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="StartRoom1.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
-    <ClCompile Include="Room3.cpp">
+    <ClCompile Include="StartRoom2.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room21LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room20LTRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room22LTRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room1R.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2LTR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room3LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room8L.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room9B.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room10T.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="Belial.cpp">

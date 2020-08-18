@@ -116,7 +116,77 @@ void StageManager::makeStage()
 		break;
 	case STAGE_TYPE::DUNGEON_NORMAL:
 
-		_currStage = new StartRoom1();
+	
+		_restaurantRoom = new RestaurantRoom();
+		
+	    //_downStair = new StartRoom1();
+		
+		 _shopRoom = new DungeonShopRoom();
+		
+
+	
+
+
+		//일단 방을 _stages에 넣고
+		//_stages.push_back(_currStage);
+		//그걸 벡터에 넣어서 이중 구조로
+	    //_vStage.push_back(_stages);
+
+		//이런 느낌으로 접근 가능
+	/*	for (int i = 0; i < 10; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+
+				int k = RANDOM->getFromIntTo(0, 10);
+				int l = RANDOM->getFromIntTo(0, 10);
+
+				_vStage[k][l] = _currStage;
+			}
+		}
+		*/
+
+		
+		/*for (iter = _currStage->getStageDirection().begin(); iter != _currStage->getStageDirection().end(); ++iter)
+		{
+			switch (*iter)
+			{
+			case DIRECTION::RIGHT:
+			
+
+				break;
+			case DIRECTION::LEFT:
+				break;
+			case DIRECTION::UP:
+				break;
+			case DIRECTION::DOWN:
+				break;
+			default:
+				break;
+			}
+			
+			
+		}*/
+		//for (int i = 0; i < 10; i++)
+		//{
+		//	for (int j = 0; j < 10; j++)
+		//	{
+		//		if (i == 0 && j == 0)
+		//		{
+		//			int rnd = RANDOM->getInt(2);
+		//			if (rnd == 0) _currStage = new StartRoom1();
+		//			 else _currStage= new StartRoom2() ;
+		//			//일단 방을 _stages에 넣고
+		//			_stages.push_back(_currStage);
+		//			//그걸 벡터에 넣어서 이중 구조로
+		//			_vStage.push_back(_stages);
+		//		}
+
+		//	}
+		//}
+
+
+		/*_currStage = new StartRoom1();
 		_stages.push_back(_currStage);
 
 		_currStage = new Room1();
@@ -132,7 +202,7 @@ void StageManager::makeStage()
 		_stages.push_back(_currStage);
 		
 		_stages[_roomIndex]->setStageManager(this);
-		_stages[_roomIndex]->init();
+		_stages[_roomIndex]->init();*/
 
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
