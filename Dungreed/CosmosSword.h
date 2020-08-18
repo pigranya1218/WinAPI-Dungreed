@@ -19,8 +19,8 @@ private:
 	FloatRect _hand;
 	Vector2 _handSize;
 	Animation* _ani;
-	float width;
-	float height;
+	float _width;
+	float _height;
 public:
 	virtual void init();
 	virtual void release();

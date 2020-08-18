@@ -1,6 +1,6 @@
 #pragma once
 #include "Item.h"
-class PickaxeRed : public Item
+class PowerKatana : public Item
 {
 private:
 	// 공격 관련
@@ -18,8 +18,8 @@ private:
 	bool _oneAttack;
 	FloatRect _hand;
 	Vector2 _handSize;
-	float _width; 
-	float _height; 
+	float _width;
+	float _height;
 
 public:
 	virtual void init();
@@ -39,4 +39,3 @@ public:
 	virtual PlayerStat equip(); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
 
 };
-

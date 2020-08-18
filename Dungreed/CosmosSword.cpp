@@ -6,8 +6,8 @@ void CosmosSword::init()
 	_img = IMAGE_MANAGER->findImage("CosmosSword");
 	_iconImg = IMAGE_MANAGER->findImage("CosmosSwordIcon");
 
-	width = _img->getFrameSize().x;
-	height = _img->getFrameSize().y;
+	_width = _img->getFrameSize().x;
+	_height = _img->getFrameSize().y;
 
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
@@ -85,22 +85,22 @@ void CosmosSword::backRender(Player* player)
 
 		// 손의 위치 
 		Vector2 renderPosHand = originPos;
-		renderPosHand.x += (width * 0.1 * 4);
+		renderPosHand.x += (_width * 0.1 * 4);
 		// 무기 위치
 		Vector2 renderPosWeapon = originPos;
-		renderPosWeapon.x += (isLeft)?(-width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4): (width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4);
-		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * width * 0.15 * 4;
+		renderPosWeapon.x += (isLeft)?(-_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4): (_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
+		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * _width * 0.15 * 4;
 
 		_img->setScale(4); // 이미지 크기 
 		_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
-		_img->setAnglePos(Vector2(0.15f * width, 0.5f * height)); // 이미지 회전시킬 중점
+		_img->setAnglePos(Vector2(0.15f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 		_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
 
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
 		Vector2 renderPosHand2 = renderPosHand;
-		renderPosHand2.x += width * 0.06f * 4;
+		renderPosHand2.x += _width * 0.06f * 4;
 		FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
@@ -109,7 +109,7 @@ void CosmosSword::backRender(Player* player)
 		{
 			_drawEffect = false;
 			Vector2 effectPos = originPos; // 회전축의 위치로부터
-			float length = width * 4 * 1; // 무기 길이만큼
+			float length = _width * 4 * 1; // 무기 길이만큼
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
 			EFFECT_MANAGER->play("EFFECT_COSMOSSWING", effectPos, Vector2(250, 300), degree);
@@ -144,22 +144,22 @@ void CosmosSword::frontRender(Player* player)
 
 		// 손의 위치 
 		Vector2 renderPosHand = originPos;
-		renderPosHand.x += (width * 0.1 * 4);
+		renderPosHand.x += (_width * 0.1 * 4);
 		// 무기 위치
 		Vector2 renderPosWeapon = originPos;
-		renderPosWeapon.x += (isLeft) ? (-width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4) : (width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4);
-		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * width * 0.15 * 4;
+		renderPosWeapon.x += (isLeft) ? (-_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4) : (_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
+		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * _width * 0.15 * 4;
 
 		_img->setScale(4); // 이미지 크기 
 		_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
-		_img->setAnglePos(Vector2(0.15f * width, 0.5f * height)); // 이미지 회전시킬 중점
+		_img->setAnglePos(Vector2(0.15f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 		_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
 
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
 		Vector2 renderPosHand2 = renderPosHand;
-		renderPosHand2.x += width * 0.06f * 4;
+		renderPosHand2.x += _width * 0.06f * 4;
 		FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
@@ -168,7 +168,7 @@ void CosmosSword::frontRender(Player* player)
 		{
 			_drawEffect = false;
 			Vector2 effectPos = originPos; // 회전축의 위치로부터
-			float length = width * 4 * 1; // 무기 길이만큼
+			float length = _width * 4 * 1; // 무기 길이만큼
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
 			EFFECT_MANAGER->play("EFFECT_COSMOSSWING", effectPos, Vector2(250, 300), degree);

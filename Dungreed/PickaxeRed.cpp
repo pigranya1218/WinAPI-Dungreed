@@ -29,8 +29,8 @@ void PickaxeRed::init()
 	_drawEffect = false;
 	_oneAttack = true;
 	_angleOffset = 0;
-	width =  _img->getWidth();
-	height =  _img->getHeight();
+	_width =  _img->getWidth();
+	_height =  _img->getHeight();
 }
 
 void PickaxeRed::release()
@@ -44,7 +44,7 @@ void PickaxeRed::update(Player* player, float const elapsedTime)
 
 	if (_oneAttack)
 	{	
-		_angleOffset = max(-180, (_angleOffset) - (elapsedTime * ratio));
+		_angleOffset = max(0, (_angleOffset) - (elapsedTime * ratio));
 		if (_angleOffset == -180)
 		{
 			_oneAttack = false;
@@ -111,7 +111,7 @@ void PickaxeRed::frontRender(Player* player)
 			_img->setScale(4); // 이미지 크기 
 			
 			_img->setAngle(weaponDegree + _angleOffset);//*+ _angleOffset*/); // 이미지 각도 
-			_img->setAnglePos(Vector2(0.35f * width, 0.5f * height)); // 이미지 회전시킬 중점
+			_img->setAnglePos(Vector2(0.35f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 			_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
 		}
 		else
@@ -119,7 +119,7 @@ void PickaxeRed::frontRender(Player* player)
 
 			_img->setScale(4); // 이미지 크기 
 			_img->setAngle(weaponDegree + _angleOffset);//*+ _angleOffset*/); // 이미지 각도 
-			_img->setAnglePos(Vector2(0.35f * width, 0.5f * height)); // 이미지 회전시킬 중점
+			_img->setAnglePos(Vector2(0.35f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 			_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
 		}
 		
@@ -130,15 +130,15 @@ void PickaxeRed::frontRender(Player* player)
 	//D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(testHand), 0, 0,0, 1, (0), CAMERA->getRelativeV2(originPos));
 		if (isLeft)
 		{
-			renderPosHand.x += width * 0.03f * 4;
-			renderPosHand.x += cosf(handDegree * (PI / 180)) * width * 0.03f * 4;
+			renderPosHand.x += _width * 0.03f * 4;
+			renderPosHand.x += cosf(handDegree * (PI / 180)) * _width * 0.03f * 4;
 			renderPosHand.y += -20;
 			_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
 			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos)); // 손의 렉트를 그린다
 			Vector2 renderPosHand2 = renderPosHand;
 			renderPosHand2.x -= 20;
-			renderPosHand2.x += cosf(handDegree * (PI / 180)) * width * 0.03f * 4;// width * 0.01f * 4;
+			renderPosHand2.x += cosf(handDegree * (PI / 180)) * _width * 0.03f * 4;// width * 0.01f * 4;
 
 			FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, -(weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
@@ -148,15 +148,15 @@ void PickaxeRed::frontRender(Player* player)
 		else
 		{
 
-			renderPosHand.x += width * 0.03f * 4;
-			renderPosHand.x += -cosf(handDegree * (PI / 180)) * width * 0.03f * 4;
+			renderPosHand.x += _width * 0.03f * 4;
+			renderPosHand.x += -cosf(handDegree * (PI / 180)) * _width * 0.03f * 4;
 			renderPosHand.y += -20;
 			_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
 			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos)); // 손의 렉트를 그린다
 			Vector2 renderPosHand2 = renderPosHand;
 			renderPosHand2.x -= 20;
-			renderPosHand2.x += -cosf(handDegree * (PI / 180)) * width * 0.03f * 4;// width * 0.01f * 4;
+			renderPosHand2.x += -cosf(handDegree * (PI / 180)) * _width * 0.03f * 4;// width * 0.01f * 4;
 
 			FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos));
@@ -168,7 +168,7 @@ void PickaxeRed::frontRender(Player* player)
 	if (_drawEffect) // 이펙트를 그린다
 	{
 		Vector2 effectPos = originPos; // 회전축의 위치로부터
-		float length = width * 4 * 0.5; // 무기 길이만큼
+		float length = _width * 4 * 0.5; // 무기 길이만큼
 		_drawEffect = false;
 		bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 		if (!isLeft)

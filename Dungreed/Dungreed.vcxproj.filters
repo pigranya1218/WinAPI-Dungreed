@@ -462,6 +462,15 @@
     <ClInclude Include="HeartOfCosmosProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="PowerKatana.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="QuarterStaffBig.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="BigPaintBlush.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -766,6 +775,15 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\GameScene\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerKatana.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="QuarterStaffBig.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="BigPaintBlush.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

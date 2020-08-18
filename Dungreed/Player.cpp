@@ -10,6 +10,9 @@
 #include "KeresScythe.h"
 #include "MartialArtOfTiger.h"
 #include "PickaxeRed.h"
+#include "PowerKatana.h"
+#include "QuarterStaffBig.h"
+#include "BigPaintBlush.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -188,7 +191,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	ShortSpear* testWeapon2 = new ShortSpear;
+	QuarterStaffBig* testWeapon2 = new QuarterStaffBig;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
@@ -196,11 +199,11 @@ void Player::init()
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
-	PickaxeRed* testWeapon4 = new PickaxeRed;
+	PowerKatana* testWeapon4 = new PowerKatana;
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
 
-	MatchLockGun* testWeapon5 = new MatchLockGun;
+	BigPaintBlush* testWeapon5 = new BigPaintBlush;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
 
@@ -482,7 +485,7 @@ void Player::render()
 		_hand->frontRender(this);
 	}
 
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
+	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }
 
 bool Player::isHit(FloatRect* rc, AttackInfo* info)
