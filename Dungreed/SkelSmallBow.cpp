@@ -40,6 +40,10 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.gravity = Vector2(0, 4000);
 
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+	_hit.knockDelay = 0.1;
+
 	_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
 
 	// 플레이어 감지 변수 초기화
@@ -110,6 +114,26 @@ void SkelSmallBow::update(float const timeElapsed)
 		break;
 	}
 
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				case ENEMY_STATE::ATTACK:
+				{
+					_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+				}
+				break;
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		//_moving.gravity.x -= _moving.gravity.x * timeElapsed;		
+		moveDir.x += _moving.force.x * timeElapsed;
+	}
+
 	if (_isStand && _moving.force.y == 0)
 	{
 		_position.y -= 15;
@@ -123,7 +147,7 @@ void SkelSmallBow::update(float const timeElapsed)
 	if (_isStand)
 	{
 		_moving.force.y = 0;
-	}
+	}	
 
 	_weaponAni->frameUpdate(timeElapsed);
 
@@ -200,4 +224,34 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+bool SkelSmallBow::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool SkelSmallBow::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		case ENEMY_STATE::ATTACK:
+		{
+			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle_Shot");
+		}
+		break;
+	}
+
+	return false;
+}
+
+bool SkelSmallBow::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
 }

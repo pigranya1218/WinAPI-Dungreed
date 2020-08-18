@@ -176,6 +176,42 @@ protected:
 		}
 	};	
 
+	// 피격 관련
+	struct tagHitInfo
+	{
+		bool isHit;
+
+		float hitDelay;
+		float hitCount;
+
+		float knockDelay;
+		float knockCount;
+
+		bool hitUpdate(const float timeElapsed)
+		{
+			hitCount += timeElapsed;
+
+			if (hitCount >= hitDelay)
+			{
+				hitCount -= hitDelay;
+				return true;
+			}
+			return false;
+		}
+
+		bool knockUpdate(const float timeElapsed)
+		{
+			knockCount += timeElapsed;
+
+			if (knockCount >= knockDelay)
+			{
+				knockCount -= knockDelay;
+				return true;
+			}
+			return false;
+		}
+	};
+
 public:
 	virtual void init() {}
 	virtual void init(const Vector2& pos) {}
