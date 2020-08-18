@@ -768,3 +768,27 @@ float Player::getReloadSpeed()
 		return _equippedWeapon[_currWeaponIndex]->getReloadSpeed();
 	}
 }
+
+float Player::getMinDamage()
+{
+	if (_equippedWeapon[_currWeaponIndex] == nullptr)
+	{
+		return _hand->getMinDamage();
+	}
+	else
+	{
+		return _equippedWeapon[_currWeaponIndex]->getMinDamage();
+	}
+}
+
+float Player::getMaxDamage()
+{
+	if (_equippedWeapon[_currWeaponIndex] == nullptr)
+	{
+		return _hand->getMaxDamage();
+	}
+	else
+	{
+		return _equippedWeapon[_currWeaponIndex]->getMaxDamage();
+	}
+}

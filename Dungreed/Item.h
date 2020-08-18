@@ -82,5 +82,7 @@ public:
 	PlayerStat getAddStat() const noexcept { return _addStat; }
 	float getAttackSpeed() { return _adjustStat.attackSpeed; }
 	float getReloadSpeed() { return _adjustStat.reloadSpeed; }
+	float getMinDamage() { return _addStat.minDamage; }
+	float getMaxDamage() { return _addStat.maxDamage; }
 
 };
