@@ -105,14 +105,14 @@ void PowerKatana::frontRender(Player* player)
 			//degree = degree + 180;
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
-			EFFECT_MANAGER->play("EFFECT_POWERKATANA", effectPos, Vector2(250, 300), degree , isLeft);
+			EFFECT_MANAGER->play("EFFECT_EXKATANAFX", effectPos, Vector2(250, 300), degree , isLeft);
 		}
 		else
 		{
 
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
-			EFFECT_MANAGER->play("EFFECT_POWERKATANA", effectPos, Vector2(250, 300), -degree+ 180 , isLeft);
+			EFFECT_MANAGER->play("EFFECT_EXKATANAFX", effectPos, Vector2(250, 300), -degree+ 180 , isLeft);
 		}
 
 	}

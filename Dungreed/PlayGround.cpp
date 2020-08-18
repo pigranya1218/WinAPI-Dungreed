@@ -323,8 +323,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",4,1);
+	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
 
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // 우주검 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSLASH", "CosmosSlashFX0", 30, 10);	  // 우주검 피격시 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // 낫 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // 일반 휘두르기 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // 일반 찌르기 이펙트
@@ -332,7 +334,9 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // 붉은곡괭이 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_POWERKATANA", "PowerKatanaEf", 30, 10);	  // 육도가이(카타나) 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_PAINTSWING", "PaintSwing", 30, 10);	  // 서예용 붓 이펙트
-
+	//**** 크리티컬 이펙트
+	IMAGE_MANAGER->addFrameImage("EXPowerKatanaSwingFX", L"resources/images/MeleeWeapon/EXPowerKatanaSwingFX.png",10,1); // 카타나 크리티컬
+	EFFECT_MANAGER->addEffect("EFFECT_EXKATANAFX", "EXPowerKatanaSwingFX", 30, 10);	  // 카타나 크리티컬 이펙트
 
 
 
