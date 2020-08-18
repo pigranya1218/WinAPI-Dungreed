@@ -31,7 +31,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_skill.distance = 300;
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3f;
+	_hit.delay = 0.3f;
 
 	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 1, 700, true, true, false, false);
 
@@ -256,7 +256,7 @@ void SkelBigIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

@@ -184,7 +184,7 @@ void SkelDog::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const fl
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

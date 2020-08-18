@@ -27,7 +27,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 	ZeroMemory(&_moving, sizeof(_moving));
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	_active = true;
 
@@ -144,7 +144,7 @@ void Banshee::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const fl
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

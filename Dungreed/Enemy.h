@@ -181,19 +181,16 @@ protected:
 	{
 		bool isHit;
 
-		float hitDelay;
-		float hitCount;
+		float delay;
+		float count;
 
-		float knockDelay;
-		float knockCount;
-
-		bool hitUpdate(const float timeElapsed)
+		bool update(const float timeElapsed)
 		{
-			hitCount += timeElapsed;
+			count += timeElapsed;
 
-			if (hitCount >= hitDelay)
+			if (count >= delay)
 			{
-				hitCount = 0;
+				count = 0;
 				return true;
 			}
 			return false;

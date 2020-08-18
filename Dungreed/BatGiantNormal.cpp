@@ -18,21 +18,21 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 3;
+	_attack.delay = 3.f;
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3f;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.3f, 500, 500, false, true, true, true);
+	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.3f, 500.f, 500.f, false, true, true, true);
 
 	_isDetect = 0;
-	_detectRange = 300;
+	_detectRange = 300.f;
 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 100.f;
 }
 
 void BatGiantNormal::release()
@@ -179,7 +179,7 @@ void BatGiantNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, c
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

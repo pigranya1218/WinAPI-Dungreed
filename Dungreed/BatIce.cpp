@@ -31,7 +31,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	_isDetect = 0;
 
@@ -188,7 +188,7 @@ void BatIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

@@ -138,7 +138,7 @@ bool Enemy::hitEffect(FloatCircle * circle, AttackInfo * info)
 {
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 
@@ -159,7 +159,7 @@ bool Enemy::hitEffect(Projectile * projectile)
 	AttackInfo* info = projectile->getAttackInfo();
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 

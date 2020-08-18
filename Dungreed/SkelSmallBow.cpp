@@ -41,7 +41,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
 
@@ -225,7 +225,7 @@ void SkelSmallBow::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, con
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

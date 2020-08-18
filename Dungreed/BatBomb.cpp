@@ -27,7 +27,7 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 	_moving.angle = 0;
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	_isDetect = 0;
 	_active = true;
@@ -162,7 +162,7 @@ void BatBomb::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const fl
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -191,7 +191,7 @@ bool BatBomb::hitEffect(FloatCircle * circle, AttackInfo * info)
 {
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 
@@ -215,7 +215,7 @@ bool BatBomb::hitEffect(Projectile * projectile)
 	AttackInfo* info = projectile->getAttackInfo();
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 
