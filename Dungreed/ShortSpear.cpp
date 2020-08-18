@@ -46,10 +46,15 @@ void ShortSpear::update(Player* player, float const elapsedTime)
 		_attackMove.x = min(abs(cosf(_attackAngle) * 40), _attackMove.x + abs(cosf(_attackAngle) * 40 * ratio));
 		_attackMove.y = min(abs(-sinf(_attackAngle) * 40), _attackMove.y + abs((-sinf(_attackAngle)) * 40 * ratio));
 
+		// 찌르는 모션동안 계속 공격판정
+		player->attack(_attackCircle, _attackInfo);
+
 		if (_currAttackDelay <= _baseAttackDelay * 0.8)
 		{
 			_reverseMove = true;
 			_drawEffect = true;
+			delete _attackCircle;
+			delete _attackInfo;
 		}
 	}
 
@@ -116,6 +121,11 @@ void ShortSpear::frontRender(Player* player)
 		// D2D_RENDERER->drawRectangle(FloatRect(effectPos, Vector2(10, 10), PIVOT::CENTER), D2DRenderer::DefaultBrush::Black, 1, angle, effectPos);
 		EFFECT_MANAGER->play("EFFECT_STAB", effectPos, Vector2(35, 35), degree);
 	}
+
+	if (_attackCircle != nullptr)
+	{
+		_attackCircle->render(true);
+	}
 }
 
 void ShortSpear::displayInfo()
@@ -142,6 +152,31 @@ void ShortSpear::attack(Player* player)
 	_reverseMove = false;
 	_attackAngle = angle;
 	_currAttackDelay = _baseAttackDelay;
+
+	Vector2 originPos = player->getPosition();
+	originPos.x += ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4)); // 손의 위치는 무기의 회전 중심점
+	originPos.y += 20; // 플레이어의 중점으로부터 무기를 들고 있는 높이
+	float attackRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x));
+	if (attackRadian < 0)
+	{
+		attackRadian += PI2;
+	}
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+
+	_attackCircle = new FloatCircle;
+	_attackCircle->origin = originPos;
+	_attackCircle->size = 200;
+	_attackCircle->startRadian = attackRadian - PI * 0.05;
+	_attackCircle->endRadian = attackRadian + PI * 0.05;
+
+	_attackInfo = new AttackInfo;
+	_attackInfo->team = OBJECT_TEAM::PLAYER;
+	_attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	_attackInfo->critical = 0;
+	_attackInfo->criticalDamage = 0;
+	_attackInfo->minDamage = _addStat.minDamage;
+	_attackInfo->maxDamage = _addStat.maxDamage;
+	_attackInfo->knockBack = 5;
 }
 
 void ShortSpear::attack(FloatRect * rect, AttackInfo* info)

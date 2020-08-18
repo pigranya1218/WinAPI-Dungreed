@@ -100,3 +100,15 @@ bool FloatCircle::isInsideRadian(float radian)
 
 	return (sRadian <= radian && radian <= eRadian);
 }
+
+void FloatCircle::render(bool useCamera)
+{
+	Vector2 renderOrigin = origin;
+	if (useCamera)
+	{
+		renderOrigin = CAMERA->getRelativeV2(renderOrigin);
+	}
+	D2D_RENDERER->drawEllipse(renderOrigin, size, D2D1::ColorF::Enum::Black, 2);
+	D2D_RENDERER->drawLine(renderOrigin, Vector2(renderOrigin.x + cosf(startRadian) * size, renderOrigin.y + -sinf(startRadian) * size));
+	D2D_RENDERER->drawLine(renderOrigin, Vector2(renderOrigin.x + cosf(endRadian) * size, renderOrigin.y + -sinf(endRadian) * size));
+}
