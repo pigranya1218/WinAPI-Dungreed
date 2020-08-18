@@ -25,14 +25,13 @@ void CosmosSword::init()
 	_addStat.dashDamage = 20;
 	_addStat.minDamage = 15;
 	_addStat.maxDamage = 25;
-	_addStat.attackSpeed = 2.17;
+	_addStat.attackSpeed = 0.4;
 
 	_handSize = Vector2(5, 5);
-
+	
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
@@ -197,7 +196,7 @@ void CosmosSword::attack(Player* player)
 	_oneAttack = !_oneAttack;
 	
 	_drawEffect = true;
-	_currAttackDelay = _baseAttackDelay;
+	_currAttackDelay = _addStat.attackSpeed;
 
 	Vector2 originPos = player->getPosition();
 	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15); // 바라보는 방향의 어깨
@@ -250,4 +249,8 @@ void CosmosSword::getHit(Vector2 const position)
 
 void CosmosSword::equip(Player* player)
 {
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }

@@ -16,14 +16,13 @@ void PickaxeRed::init()
 
 	_addStat.minDamage = 5;
 	_addStat.maxDamage = 15;
-	_addStat.attackSpeed = 10;
+	_addStat.attackSpeed = 0.1;
 	//_addStat.attackSpeed = 5.56;
 	//보조옵션
 	_addStat.defense = -30;
 	_addStat.power = -30;
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_baseAttackDelay = 0.1;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
@@ -206,7 +205,7 @@ void PickaxeRed::attack(Player* player)
 	// 손으로부터 마우스 에임까지의 각도
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_drawEffect = true;
-	_currAttackDelay = _baseAttackDelay;
+	_currAttackDelay = _addStat.attackSpeed;
 }
 
 void PickaxeRed::attack(FloatRect* rect, AttackInfo* info)
@@ -225,7 +224,10 @@ void PickaxeRed::getHit(Vector2 const position)
 {
 }
 
-PlayerStat PickaxeRed::equip()
+void PickaxeRed::equip(Player* player)
 {
-	return PlayerStat();
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }
