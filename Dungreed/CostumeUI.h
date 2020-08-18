@@ -1,16 +1,26 @@
 #pragma once
 
 class Player;
+class PlayerStat;
 class Costume;
+class MetalPlateCos;
+class AliceCos;
+class RedLotusCos;
+class PickaxCos;
 
 enum class COSTUME_TYPE;
 
 class CostumeUI
 {
 private:
-	Player* _player;
-	Costume* _costume;
-	COSTUME_TYPE _cosType;
+	Player*			_player;
+	Costume*		_costume;
+	MetalPlateCos*	_metalPlateCos;
+	AliceCos*		_aliceCos;
+	RedLotusCos*	_redLotusCos;
+	PickaxCos*		_pickaxCos;
+
+	COSTUME_TYPE	_cosType;
 
 	bool _isActive;
 
@@ -38,6 +48,15 @@ private:
 
 		// 코스튬 샘플 이미지
 		Image* costumeSample;
+		// 코스튬 이름
+		wstring cosTitle;
+		// 코스튬 개요 
+		wstring cosSummary;
+		// 코스튬 상세내용
+		wstring cosDetails;
+		// 코스튬 변동 스탯
+		PlayerStat* differStat;
+
 	};
 
 	tagCostumeCell _costumeCell[7];

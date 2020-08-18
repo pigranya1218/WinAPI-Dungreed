@@ -6,6 +6,7 @@ class RestaurantRoom : public Stage
 {
 private:
 	
+	
 	int _currentIndex;
 
 public:

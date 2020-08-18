@@ -5,10 +5,20 @@ void PickaxCos::init()
 	//코스튬 이름 설정
 	_costumeName = "PICKAX";
 
+	//코스튬 설명창에 보여줄 내용들
+	_costumeTitle = L"곡괭이의 왕";
+	_costumeSummary = L"세상을 지배할 뻔한 살아있는 전설";
+	//_costumeDetails = nullptr;
+
 	_ani = new Animation;
 
 	//현재 재생할 이미지
 	setSprite(PLAYER_STATE::IDLE, true);
+
+	//변동 스탯
+	_differStat.dashDamage = 33; //33%
+	_differStat.maxDashCount = 1; //대시 카운트 1추가
+	_differStat.criticalChance = -25;
 
 	//베이스 스탯
 	_baseStat.maxHp = 80;

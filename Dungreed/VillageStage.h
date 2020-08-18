@@ -3,6 +3,7 @@
 #include "MapTool.h"
 
 
+
 class VillageStage :public Stage
 {
 private:
@@ -14,6 +15,8 @@ private:
 
 	
 	int _currentIndex;
+
+
 
 public:
 	virtual void init();

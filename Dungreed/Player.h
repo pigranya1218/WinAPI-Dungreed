@@ -25,8 +25,10 @@ private:
 	int		_currJumpCount;			// 현재 남은 점프 카운트
 	int		_currDashCount;			// 현재 남은 대쉬 카운트
 	float	_currDashCoolTime;		// 현재 대쉬 쿨타임
+	float	_currDashTime;			// 현재 대쉬 남은 유지시간
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
+	
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
@@ -82,10 +84,10 @@ public:
 	int getCurrDash() const noexcept { return _currDashCount; }
 
 	int getWeaponIndex() const noexcept { return _currWeaponIndex; }
-	Item* getWeapon(int index) const noexcept { return _equippedWeapon[index]; };
-	Item* getAcc(int index) const noexcept { return _equippedAcc[index]; }
-	Item* getInvenItem(int index) const noexcept { return _inventory[index]; }
-	Image* getWeaponImg(int index) const noexcept;
+	Item* getWeapon(int index) const { return _equippedWeapon[index]; };
+	Item* getAcc(int index) const { return _equippedAcc[index]; }
+	Item* getInvenItem(int index) const { return _inventory[index]; }
+	Image* getWeaponImg(int index) const;
 
 	void equipItem(int index);		// 인벤토리에 있던 아이템을 장착함
 	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함

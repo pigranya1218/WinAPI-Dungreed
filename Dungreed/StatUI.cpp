@@ -92,5 +92,23 @@ void StatUI::render()
 		}
 		D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(stat.getStat(static_cast<STAT_TYPE>(i)))), RGB(255, 255, 255), 35, 100, 50, 1.f);
 	}
+
+	for (int i = 0; i < 12; i++)
+	{
+		if (_statEntity[i].iconRc.ptInRect(_ptMouse))
+		{
+			renderStatInfo(_statEntity[i].iconRc.getCenter(), static_cast<STAT_TYPE>(i));
+		}
+	}
+}
+
+void StatUI::renderStatInfo(Vector2 pos, STAT_TYPE type)
+{
+	FloatRect textRc = FloatRect(pos, Vector2(430, 150), PIVOT::LEFT_TOP);
+	D2D_RENDERER->fillRectangle(textRc, 0, 0, 0, 0.75);
+	D2D_RENDERER->renderTextField(textRc.left + 5, textRc.top + 5, TTYONE_UTIL::stringTOwsting(PlayerStat::getStatString(type, false)), 
+		RGB(255, 238, 184), 40, textRc.getWidth(), 40, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+	D2D_RENDERER->renderTextField(textRc.left + 5, textRc.top + 55, TTYONE_UTIL::stringTOwsting(PlayerStat::getStatInfo(type)),
+		RGB(255, 255, 255), 30, textRc.getWidth(), 90, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 }
 

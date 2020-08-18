@@ -5,10 +5,19 @@ void RedLotusCos::init()
 	//코스튬 이름 설정
 	_costumeName = "RED_LOTUS";
 
+	//코스튬 설명창에 보여줄 내용들
+	_costumeTitle = L"홍련";
+	_costumeSummary = L"저 너머로...개화하고 싶지 않은가, 그대?";
+	_costumeDetails = L"표식: 적을 공격하면 위력을 6올려주는 표식을 남깁니다. (최대 10개)";
+
 	_ani = new Animation;
 
 	//현재 재생할 이미지
 	setSprite(PLAYER_STATE::IDLE, true);
+
+	//변동 스탯
+	_differStat.maxHp = -15;
+	_differStat.evasion = -5;
 
 	//베이스 스탯
 	_baseStat.maxHp = 80;

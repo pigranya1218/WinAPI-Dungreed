@@ -72,7 +72,7 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용 (위력, 크리티컬)
+	// TODO : 플레이어 스탯 적용 (위력, 크리티컬)
 
 	_gameScene->attack(circle, info);
 }
@@ -119,9 +119,9 @@ void Player::init()
 	_equippedAcc.resize(4);
 	_inventory.resize(15);
 
-	//babyGreenBat* testAcc1 = new babyGreenBat;
-	//testAcc1->init();
-	//_inventory[0] = testAcc1;
+	babyGreenBat* testAcc1 = new babyGreenBat;
+	testAcc1->init();
+	_inventory[4] = testAcc1;
 
 	GreenBat* testAcc2 = new GreenBat;
 	testAcc2->init();
@@ -140,7 +140,7 @@ void Player::init()
 
 	SpikeBall* testAcc9 = new SpikeBall;
 	testAcc9->init();
-	_inventory[4] = testAcc9;
+	_inventory[8] = testAcc9;
 
 
 	bombPouch* testAcc5 = new bombPouch;
@@ -192,13 +192,17 @@ void Player::init()
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
-	MartialArtOfTiger* testWeapon3 = new MartialArtOfTiger;
+	CosmosSword* testWeapon3 = new CosmosSword;
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
 	PickaxeRed* testWeapon4 = new PickaxeRed;
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
+
+	/*Boomerang* testWeapon5 = new Boomerang;
+	testWeapon5->init();
+	_inventory[14] = testWeapon5;*/
 
 	MatchLockGun* testWeapon5 = new MatchLockGun;
 	testWeapon5->init();
@@ -266,7 +270,7 @@ void Player::update(float const elapsedTime)
 	}
 
 	// 공격
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)) && !_gameScene->isUIActive())
 	{
 		if (_equippedWeapon[_currWeaponIndex] == nullptr)
 		{
@@ -288,7 +292,8 @@ void Player::update(float const elapsedTime)
 	//이동
 	Vector2 moveDir(0, 0);
 	
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)) || KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT))) // 좌우 이동중
+	if (!_gameScene->isUIActive() && 
+		(KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)) || KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))) // 좌우 이동중
 	{
 		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
 		{
@@ -306,7 +311,7 @@ void Player::update(float const elapsedTime)
 	}
 
 	// 점프
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)))
+	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::JUMP)))
 	{
 		if (_isStand && KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_DOWN)))
 		{
@@ -321,12 +326,13 @@ void Player::update(float const elapsedTime)
 	}
 
 	// 대쉬
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
+	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
+		_currDashTime = 0.1f;
 		if (angle < 0)
 		{
 			_position.y += 1.5;
@@ -341,24 +347,40 @@ void Player::update(float const elapsedTime)
 		}
 	}
 	
-	if (_force.x != 0) // 대쉬 상태라면
+	if (_currDashTime > 0) // 대쉬 상태라면
 	{
-		if (_force.x > 0)
+		_currDashTime = max(0, _currDashTime - elapsedTime);
+		if (_currDashTime == 0)
 		{
-			_force.x -= _adjustStat.xGravity * elapsedTime;
-			if (_force.x < 0)
-			{
-				_force.x = 0;
-			}
+			//_force.y = 0;
+			// 대쉬 종료
 		}
-		else
+
+	}
+
+	
+	if (_force.x != 0) // 대쉬의 영향을 받고 있다면
+	{
+		if (_currDashTime == 0)
 		{
-			_force.x += _adjustStat.xGravity * elapsedTime;
 			if (_force.x > 0)
 			{
-				_force.x = 0;
+				_force.x -= _adjustStat.xGravity * elapsedTime;
+				if (_force.x < 0)
+				{
+					_force.x = 0;
+				}
+			}
+			else
+			{
+				_force.x += _adjustStat.xGravity * elapsedTime;
+				if (_force.x > 0)
+				{
+					_force.x = 0;
+				}
 			}
 		}
+
 		moveDir.x = _force.x * elapsedTime;
 	}
 
@@ -380,9 +402,11 @@ void Player::update(float const elapsedTime)
 		moveDir.y += 20;
 	}
 	
-	_force.y += _adjustStat.yGravity * elapsedTime;
+	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
+	{
+		_force.y += _adjustStat.yGravity * elapsedTime;
+	}
 	moveDir.y += _force.y * elapsedTime;
-
 
 	_gameScene->moveTo(this, moveDir);
 	//착지
@@ -399,7 +423,7 @@ void Player::update(float const elapsedTime)
 	}
 
 	// 재장전 키를 눌렀을 때
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::RELOAD)))
+	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::RELOAD)))
 	{
 		if (_equippedWeapon[_currWeaponIndex] != nullptr)
 		{
@@ -515,7 +539,7 @@ bool Player::hitEffect(Projectile* projectile, AttackInfo* info)
 	return false;
 }
 
-Image* Player::getWeaponImg(int index) const noexcept
+Image* Player::getWeaponImg(int index) const
 {
 	if (_equippedWeapon[index] != nullptr)
 	{

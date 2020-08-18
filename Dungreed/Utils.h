@@ -24,4 +24,6 @@ namespace TTYONE_UTIL
 	wstring stringTOwsting(string src);
 
 	int getSize(int num);
+
+	size_t getHash(string value);
 }

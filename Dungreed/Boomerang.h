@@ -19,6 +19,7 @@ private:
 	float _renderDegree;
 	float _degree;
 	float _attackDegree;
+	float _returnCount;
 	bool _isLeft;
 	Vector2 _pos;
 	Vector2 _gunPos;

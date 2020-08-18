@@ -17,7 +17,7 @@ void Belial::init(const Vector2 & pos)
 	}
 
 	{
-		_scale = 6;
+		_scale = 5;
 		_head._size = _head._img->getFrameSize() * _scale;
 		_rHand._size = _rHand._img->getFrameSize() * _scale;
 		_lHand._size = _lHand._img->getFrameSize() * _scale;

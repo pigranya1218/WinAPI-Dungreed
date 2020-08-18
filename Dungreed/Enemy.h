@@ -31,6 +31,8 @@ protected:
 	float				_scale;			// 렉트와 출력에 사용할 스케일
 	float				_detectRange;	// 플레이어 감지 거리	
 
+	vector<size_t>		_attackedId; // 최근 공격받았던 공격들의 아이디 값들을 저장하는 벡터, 최대 10칸 정도 저장하면 적당할 듯
+
 	//Synthesize(float, _curHp, Hp);
 	//Synthesize(float, _maxHp, Hp);
 
@@ -187,9 +189,9 @@ public:
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
 
 	// EnemyManager에서 체크를 위해 호출
-	bool isHit(FloatRect* rc, AttackInfo* info) { return false; }
-	bool isHit(FloatCircle* circle, AttackInfo* info) { return false; }
-	bool isHit(Projectile* projectile, AttackInfo* info) { return false; }
+	bool isHit(FloatRect* rc, AttackInfo* info);
+	bool isHit(FloatCircle* circle, AttackInfo* info);
+	bool isHit(Projectile* projectile, AttackInfo* info);
 
 	// Enemy에서 만약 맞았다면 호출될 가상함수
 	virtual bool hitEffect(FloatRect* rc, AttackInfo* info) { return false; }

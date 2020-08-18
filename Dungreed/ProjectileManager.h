@@ -19,7 +19,7 @@ public:
 	void render();
 
 	void setStage(Stage* stage) { _stage = stage; }
-	void moveTo(GameObject* gameObject, Vector2 moveDir);
+	void moveTo(GameObject* gameObject, Vector2 moveDir, bool checkCollisionGround = true, bool checkCollisionPlatform = true);
 	void addProjectile(Projectile* projectile) { projectile->setProjectileManager(this); _projectiles.push_back(projectile); }
 };
 

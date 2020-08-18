@@ -34,7 +34,7 @@ public:
 	void attack(Projectile* projectile, AttackInfo* info);
 
 	// UI 관련 함수
-
+	bool isUIActive();
 
 
 };

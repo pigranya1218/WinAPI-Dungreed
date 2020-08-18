@@ -191,11 +191,14 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/COSTUME/SELECTED", L"resources/images/gameScene/ui/boutique(costume)/CostumeOver.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/SHADOW", L"resources/images/gameScene/ui/boutique(costume)/CostumeShadow.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/UNLOCKED", L"resources/images/gameScene/ui/boutique(costume)/Costumeunlocked.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/0", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/base_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/1", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/metal_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/2", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/3", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
-	IMAGE_MANAGER->addImage("UI/COSTUME/4", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/BASE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/base_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/METAL_PLATE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/metal_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/ALICE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/RED_LOTUS", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
+	IMAGE_MANAGER->addImage("UI/COSTUME/PICKAX", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
+
+	// ** NPC
+	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
 
 	// ** VILLIGE
 	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
@@ -220,7 +223,9 @@ HRESULT playGround::init()
 	// ** DUNGEON
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
 	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
-	
+	IMAGE_MANAGER->addFrameImage("CandleOn1", L"resources/images/Map/CandleOn1.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
 
 	// ** COSTUME
 	// *** BASE
@@ -355,6 +360,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("GreenMomBatF", L"resources/images/Accessories/GreenMomBat2.png", 7, 1);      // 엄마 그린박쥐 프레임이미지
 	IMAGE_MANAGER->addImage("HeartOfCosmos", L"resources/images/Accessories/HeartOfCosmos.png");               // 우주심장
 	IMAGE_MANAGER->addFrameImage("HeartOfCosmos0", L"resources/images/Accessories/HeartOfCosmos0.png", 20, 1); // 우주심장 공격 프레임
+	IMAGE_MANAGER->addFrameImage("HeartOfCosmosF", L"resources/images/Accessories/HeartOfCosmosF.png", 11, 1); // 우주심장 공격 프레임
 	IMAGE_MANAGER->addImage("IceBall", L"resources/images/Accessories/IceBall.png");                           // 얼음공
 	IMAGE_MANAGER->addFrameImage("IceBall0", L"resources/images/Accessories/IceBall0.png", 7, 1);              // 얼음공 세트 완성 프레임이미지
 	IMAGE_MANAGER->addImage("Jarngreipr", L"resources/images/Accessories/Jarngreipr.png");                     // 야른그레이프르
@@ -503,6 +509,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("SmallBullet_FX", "SmallBullet_FX", 15, 50);
 	EFFECT_MANAGER->addEffect("BabyBatBulletFx","BabyBatBulletFx",15,50);
 	EFFECT_MANAGER->addEffect("BombPouch2", "BombPouch2", 15, 50);
+	EFFECT_MANAGER->addEffect("HeartOfCosmosF", "HeartOfCosmosF", 15, 50);
 
 	//** Boss
 	// * Belial

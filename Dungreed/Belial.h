@@ -63,7 +63,7 @@ private:
 
 public:
 
-	void init(const Vector2& pos);
+	virtual void init(const Vector2& pos) override;
 	void release();
 	void update(float const timeElapsed);
 	void render();
