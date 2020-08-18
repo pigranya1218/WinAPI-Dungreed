@@ -63,5 +63,6 @@ public:
 	void setPlayerPos(int x, int y);
 
 	void showDamage(DamageInfo info, Vector2 pos);
+	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 };
 

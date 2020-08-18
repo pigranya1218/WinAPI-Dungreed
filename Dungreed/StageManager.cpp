@@ -179,4 +179,9 @@ void StageManager::showDamage(DamageInfo info, Vector2 pos)
 	_uiMgr->showDamage(info, pos);
 }
 
+void StageManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	_uiMgr->showEnemyHp(maxHp, curHp, pos);
+}
+
 

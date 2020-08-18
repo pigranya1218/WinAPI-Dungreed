@@ -52,4 +52,5 @@ public:
 	void setStage(Stage* stage) { _stage = stage; }
 
 	void showDamage(DamageInfo info, Vector2 pos);
+	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 };

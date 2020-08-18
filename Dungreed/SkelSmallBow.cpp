@@ -49,6 +49,10 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect = 0;
 
 	_active = true;
+
+	// TEST
+	_maxHp = 100;
+	_curHp = 100;
 }
 
 void SkelSmallBow::release()
@@ -226,6 +230,11 @@ void SkelSmallBow::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, con
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
 		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+	
+		// DEBUG TEST
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
 
@@ -255,6 +264,7 @@ bool SkelSmallBow::hitEffect(FloatCircle * circle, AttackInfo * info)
 	Vector2 renderPos = _position;
 	renderPos.y -= 20;
 	_enemyManager->showDamage(damageInfo, renderPos);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
 
 	return true; // 맞았다면 TRUE 반환
 }

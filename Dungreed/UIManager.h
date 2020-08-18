@@ -65,6 +65,7 @@ private:
 		COLORREF textColor;
 		float remainTimes; // 사라지기까지 남은 시간
 		Vector2 pos; // 그릴 위치
+		float alpha;
 	};
 
 	struct tagEnemyHpUI // 에너미 체력
@@ -113,5 +114,6 @@ public:
 	bool isActive() const noexcept { return _isActive; }
 
 	void showDamage(DamageInfo damage, Vector2 pos);
+	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 };
 

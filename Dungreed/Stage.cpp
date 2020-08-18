@@ -515,5 +515,10 @@ void Stage::showDamage(DamageInfo info, Vector2 pos)
 	_stageManager->showDamage(info, pos);
 }
 
+void Stage::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	_stageManager->showEnemyHp(maxHp, curHp, pos);
+}
+
 
 

@@ -262,3 +262,8 @@ void EnemyManager::showDamage(DamageInfo info, Vector2 pos)
 {
 	_stage->showDamage(info, pos);
 }
+
+void EnemyManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	_stage->showEnemyHp(maxHp, curHp, pos);
+}
