@@ -1,25 +1,23 @@
-#include "Room3.h"
+#include "Room8L.h"
 
-void Room3::init()
+void Room8L::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("Stage22.map");
+	loadMap("Stage8L.map");
 }
 
-void Room3::release()
+void Room8L::release()
 {
 	Stage::release();
-
 }
 
-void Room3::update(float const elapsedTime)
+void Room8L::update(float const elapsedTime)
 {
 	Stage::update(elapsedTime);
-
 }
 
-void Room3::render()
+void Room8L::render()
 {
 	Stage::render();
 }

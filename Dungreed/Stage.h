@@ -34,6 +34,8 @@ protected:
 
 	Player* _player;
 
+	vector<DIRECTION> _direction;
+	vector<DIRECTION>::iterator _viDirection;
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
 	virtual void init();
@@ -55,4 +57,6 @@ public:
 	bool isVisited() const { return _isVisited; }
 	Vector2 getPlayerPos();
 	
+	vector<DIRECTION> getStageDirection() {return _direction ; }
+	vector<DIRECTION>::iterator getVItageDirection() { return _viDirection; }
 };

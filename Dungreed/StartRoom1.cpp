@@ -6,6 +6,7 @@ void StartRoom1::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("StartRoom1.map");
+	_direction.push_back(DIRECTION::RIGHT);
 }
 
 void StartRoom1::release()
