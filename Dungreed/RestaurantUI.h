@@ -10,8 +10,6 @@ private:
 	bool _isActive;
 
 	// *사용되는 이미지
-	// ** 상점 뒷배경
-
 	// ** 상단 npc아이콘 띠
 	Image* _baseLabel = IMAGE_MANAGER->findImage("UI/RESTAURANT/BASE_LABEL");
 	// ** 현재 남은 체력 게이지 
@@ -37,10 +35,15 @@ private:
 	// ** 창닫기
 	Image* _exitBtn = IMAGE_MANAGER->findImage("BUTTON_EXIT");
 	Image* _exitBtnSelected = IMAGE_MANAGER->findImage("BUTTON_EXIT_SELECTED");
+	
+	// * 사용되는 렉트
+	// 뒷배경 fillRectangle -> 색상RGB(34, 32, 52)
+	FloatRect _bgRc;
 	// 창닫기 버튼 렉트
 	FloatRect _exitRc;
 	// 음식 목록창 렉트
 	FloatRect _foodListViewRc;
+	
 private:
 	//음식 목록
 	struct tagFoodsCell
