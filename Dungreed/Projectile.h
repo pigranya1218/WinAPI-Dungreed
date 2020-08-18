@@ -17,4 +17,5 @@ public:
 
 	void setProjectileManager(ProjectileManager* projectileMgr) { _projectileMgr = projectileMgr; }
 	void setAttackInfo(AttackInfo* info) { _info = info; }
+	AttackInfo* getAttackInfo() { return _info; }
 };

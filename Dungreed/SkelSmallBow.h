@@ -25,6 +25,6 @@ public:
 	// 에너미 피격시 호출될 함수들 재정의
 	bool hitEffect(FloatRect* rc, AttackInfo* info);
 	bool hitEffect(FloatCircle* circle, AttackInfo* info);
-	bool hitEffect(Projectile* projectile, AttackInfo* info);
+	bool hitEffect(Projectile* projectile);
 };
 

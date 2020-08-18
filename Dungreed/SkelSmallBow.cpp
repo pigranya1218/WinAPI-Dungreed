@@ -269,7 +269,7 @@ bool SkelSmallBow::hitEffect(FloatCircle * circle, AttackInfo * info)
 	return true; // 맞았다면 TRUE 반환
 }
 
-bool SkelSmallBow::hitEffect(Projectile * projectile, AttackInfo * info)
+bool SkelSmallBow::hitEffect(Projectile * projectile)
 {
 	return false;
 }

@@ -47,7 +47,7 @@ public:
 	// 피격 체크 관련 함수
 	bool isHit(FloatRect* rc, AttackInfo* info);
 	bool isHit(FloatCircle* circle, AttackInfo* info);
-	bool isHit(Projectile* projectile, AttackInfo* info);
+	bool isHit(Projectile* projectile, bool isOnceCollision);
 
 	void setStage(Stage* stage) { _stage = stage; }
 

@@ -270,7 +270,7 @@ void Player::update(float const elapsedTime)
 	}
 
 	// АјАн
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)) && !_gameScene->isUIActive())
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)) && !_gameScene->isUIActive())
 	{
 		if (_equippedWeapon[_currWeaponIndex] == nullptr)
 		{

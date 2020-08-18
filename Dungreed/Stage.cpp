@@ -7,11 +7,14 @@ void Stage::init()
 	_objectMgr = new ObjectManager;
 	
 	_npcMgr = new NpcManager;
-	
+	_npcMgr->setStage(this);
+
 	_enemyMgr = new EnemyManager;
+	_enemyMgr->setStage(this);
 	
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
+	_projectileMgr->setEnemyManager(_enemyMgr);
 }
 
 void Stage::release()

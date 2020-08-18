@@ -240,12 +240,12 @@ public:
 	// EnemyManager에서 체크를 위해 호출
 	bool isHit(FloatRect* rc, AttackInfo* info);
 	bool isHit(FloatCircle* circle, AttackInfo* info);
-	bool isHit(Projectile* projectile, AttackInfo* info);
+	bool isHit(Projectile* projectile);
 
 	// Enemy에서 만약 맞았다면 호출될 가상함수
 	virtual bool hitEffect(FloatRect* rc, AttackInfo* info) { return false; }
 	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info) { return false; }
-	virtual bool hitEffect(Projectile* projectile, AttackInfo* info) { return false; }
+	virtual bool hitEffect(Projectile* projectile) { return false; }
 
 	void setDetectRange(float const range) { _detectRange = range; }
 };

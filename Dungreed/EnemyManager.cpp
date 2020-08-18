@@ -245,14 +245,18 @@ bool EnemyManager::isHit(FloatCircle* circle, AttackInfo* info)
 	return result;
 }
 
-bool EnemyManager::isHit(Projectile* projectile, AttackInfo* info)
+bool EnemyManager::isHit(Projectile* projectile, bool isOnceCollision)
 {
 	bool result = false;
 	for (int i = 0; i < _enemies.size(); i++)
 	{
-		if (_enemies[i]->isHit(projectile, info))
+		if (_enemies[i]->isHit(projectile))
 		{
-			result = _enemies[i]->hitEffect(projectile, info);
+			result = _enemies[i]->hitEffect(projectile);
+			if (result && isOnceCollision)
+			{
+				return result;
+			}
 		}
 	}
 	return result;

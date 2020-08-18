@@ -44,7 +44,6 @@ void NormalProjectile::release()
 	}
 
 	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
-
 }
 
 void NormalProjectile::update(float elapsedTime)
@@ -76,6 +75,21 @@ void NormalProjectile::update(float elapsedTime)
 	else // 스테이지와 충돌 검사 안함
 	{
 		_position += moveDir;
+	}
+
+	// 타입에 따른 충돌 검사
+	if (_info->team == OBJECT_TEAM::PLAYER)
+	{
+		// ENEMY와의 충돌 검사
+		if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
+		{
+			_active = false;
+		}
+	}
+	else
+	{
+		// TODO: PLAYER와의 충돌 검사
+
 	}
 
 	if (_useAni)
