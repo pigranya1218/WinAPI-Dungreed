@@ -252,9 +252,9 @@ void Player::init()
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
 
-	BigPaintBlush* testWeapon5 = new BigPaintBlush;
+	/*BigPaintBlush* testWeapon5 = new BigPaintBlush;
 	testWeapon5->init();
-	_inventory[14] = testWeapon5;
+	_inventory[14] = testWeapon5;*/
 
 	GatlingGun* testWeapon5 = new GatlingGun;
 	testWeapon5->init();

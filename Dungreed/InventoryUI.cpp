@@ -615,11 +615,11 @@ void InventoryUI::render()
 			drawInvenInfo(i, _invenRc[i].getCenter());
 		}
 	}
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 2; i++)
 	{
-		if (_equippedWeaponRc[i].ptInRect(_ptMouse))
+		if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
 		{
-			drawWeaponInfo(_player->getWeapon(i), _equippedWeaponRc[i].getCenter(), true);
+			drawWeaponInfo(_player->getWeapon(i), _equippedWeaponRc[i * 2].getCenter(), true);
 		}
 	}
 	for (int i = 0; i < 4; i++)
