@@ -32,6 +32,8 @@ void babyGreenBat::init()
 	_baseReloadDelay = 0.15;
 	_currReloadDelay = 0;
 	_drawEffect = false;
+
+	
 }
 
 void babyGreenBat::release()
