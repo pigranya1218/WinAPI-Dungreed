@@ -264,17 +264,21 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("MatchlockGun", L"resources/images/weapon/longDistanceWeapon/MatchlockGun.png");
 	IMAGE_MANAGER->addImage("MetalBoomerang", L"resources/images/weapon/longDistanceWeapon/MetalBoomerang.png");
 	IMAGE_MANAGER->addImage("OakBow", L"resources/images/weapon/longDistanceWeapon/OakBow.png");
-	
+	IMAGE_MANAGER->addImage("GatlingGun", L"resources/images/weapon/longDistanceWeapon/GatlingGun1.png");
+
+	IMAGE_MANAGER->addFrameImage("GatlingGun_Ani", L"resources/images/weapon/longDistanceWeapon/GatlingGunAni.png", 2, 1);
 	IMAGE_MANAGER->addFrameImage("Boomerang_Moving", L"resources/images/weapon/longDistanceWeapon/Boomerang_Moving.png", 2, 1);
 	IMAGE_MANAGER->addFrameImage("OakBowAni", L"resources/images/weapon/longDistanceWeapon/OakBowAni.png", 6, 1);
-
-	// **** L_test
-	IMAGE_MANAGER->addFrameImage("test_OakBowAni", L"resources/images/weapon/longDistanceWeapon/test_OakBowAni.png", 6, 1);
 
 	// **** L_WeaponBullet
 	IMAGE_MANAGER->addImage("Arrow00", L"resources/images/weapon/longDistanceWeapon/Arrow00.png");
 	IMAGE_MANAGER->addFrameImage("GunBullet", L"resources/images/weapon/longDistanceWeapon/Bullet.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("lalaStickBullet", L"resources/images/weapon/longDistanceWeapon/lalaStickBullet.png", 4, 1);
+
+	// **** L_WeaponReload
+	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
+	IMAGE_MANAGER->addImage("ReloadHandle", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
+	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
 
 	// **** L_WeaponEffect
 	IMAGE_MANAGER->addFrameImage("ArrowHitEffect", L"resources/images/weapon/longDistanceWeapon/effect/ArrowHitEffect.png", 6, 1);
@@ -284,6 +288,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("ShootEffect", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect.png", 3, 1);
 	IMAGE_MANAGER->addFrameImage("ShootEffect01", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect01.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("ShootEffect02", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect02.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("lalaStickEffect", L"resources/images/weapon/longDistanceWeapon/effect/lalaStickEffect.png", 7, 1);
 
 	EFFECT_MANAGER->addEffect("L_Effect_ArrowHit", "ArrowHitEffect", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Boomerang", "BoomerangEffect", 30, 10);
@@ -292,11 +297,14 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot", "ShootEffect", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot01", "ShootEffect01", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot02", "ShootEffect02", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_lalaStick", "lalaStickEffect", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_Reload", "ReloadFinish", 30, 10);
 
-	// **** L_WeaponReload
-	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
-	IMAGE_MANAGER->addImage("ReloadHandle", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
-	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
+	// **** L_test
+	IMAGE_MANAGER->addFrameImage("test_OakBowAni", L"resources/images/weapon/longDistanceWeapon/test_OakBowAni.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("ShootEffect_test", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect_test.png", 3, 1);
+	EFFECT_MANAGER->addEffect("L_Effect_Shoot_test", "ShootEffect_test", 30, 10);
+
 
 	//***MeleeWeapon
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");  //¼ô ½ºÇÇ¾î

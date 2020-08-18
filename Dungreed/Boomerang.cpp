@@ -155,7 +155,7 @@ void Boomerang::attack(Player * player)
 	_projectile->setPosition(_gunPos);
 	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
 	_projectile->setTeam(OBJECT_TEAM::PLAYER);
-	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 25, true, true, 20, "", Vector2(), 1);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 15, true, true, 20, "", Vector2(), 1);
 
 	/*NormalProjectile* _projectile = new NormalProjectile;
 	_projectile->setPosition(_gunPos);
