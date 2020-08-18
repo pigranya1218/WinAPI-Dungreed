@@ -27,10 +27,17 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 0.5;	
 
+	ZeroMemory(&_moving, sizeof(_moving));
+	
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 1.3, 850, true, true, false, false);
 
 	_isDetect = _attacking = 0;
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void SkelMagicianIce::release()
@@ -126,6 +133,13 @@ void SkelMagicianIce::render()
 	{
 		_attackImg->aniRender(CAMERA->getRelativeV2(_attackPos), _attackAni);
 	}
+
+	if (_curHp != _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void SkelMagicianIce::setState(ENEMY_STATE state)
@@ -137,8 +151,10 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Skel/Magician_Ice/Idle";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Magician_Ice/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -147,8 +163,10 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Skel/Magician_Ice/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Magician_Ice/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
@@ -163,5 +181,35 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void SkelMagicianIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_imageName = "Skel/Magician_Ice/Idle";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Skel/Magician_Ice/Attack";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+
+		return;
 	}
 }

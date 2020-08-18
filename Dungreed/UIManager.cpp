@@ -10,6 +10,7 @@ void UIManager::setPlayer(Player * player)
 	_inventoryUI.setPlayer(player);
 	_statUI.setPlayer(player);
 	_costumeUI.setPlayer(player);
+	_restaurantUI.setPlayer(player);
 }
 
 void UIManager::init()
@@ -72,6 +73,9 @@ void UIManager::init()
 
 	// COSTUME UI
 	_costumeUI.init();
+
+	// RESTAURANT UI
+	_restaurantUI.init();
 }
 
 void UIManager::release()
@@ -79,6 +83,7 @@ void UIManager::release()
 	_inventoryUI.release();
 	_statUI.release();
 	_costumeUI.release();
+	_restaurantUI.release();
 }
 
 void UIManager::update(float const elaspedTime)
@@ -144,7 +149,11 @@ void UIManager::update(float const elaspedTime)
 	{
 		_costumeUI.setActive(!_costumeUI.isActive());
 	}
-
+	// Restaurant Open
+	if (KEY_MANAGER->isOnceKeyDown(VK_F2))
+	{
+		_restaurantUI.setActive(!_restaurantUI.isActive());
+	}
 	
 
 	bool isClose = false;
@@ -189,11 +198,24 @@ void UIManager::update(float const elaspedTime)
 			_costumeUI.update(elaspedTime);
 		}
 	}
+	if (_restaurantUI.isActive())
+	{
+		if (isClose)
+		{
+			_restaurantUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_restaurantUI.update(elaspedTime);
+		}
+	}
 
 	_isActive = false;
 	_isActive |= _inventoryUI.isActive();
 	_isActive |= _statUI.isActive();
 	_isActive |= _costumeUI.isActive();
+	_isActive |= _restaurantUI.isActive();
 }
 
 void UIManager::render()
@@ -207,8 +229,8 @@ void UIManager::render()
 		for (int i = 0; i < _damageUI.size(); i++)
 		{
 			D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 50), CAMERA->getRelativeY(_damageUI[i].pos.y), 
-				to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, 30,
-				100, 30, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+				to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, _damageUI[i].fontSize,
+				100, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
 		}
 
 		// ENEMY HP UI
@@ -406,7 +428,13 @@ void UIManager::render()
 		if (_costumeUI.isActive())
 		{
 			_costumeUI.render();
-		}	
+		}
+
+		// RestaurantUI
+		if (_restaurantUI.isActive())
+		{
+			_restaurantUI.render();
+		}
 	}
 }
 
@@ -416,12 +444,20 @@ void UIManager::showDamage(DamageInfo damage, Vector2 pos)
 	damageUI.value = damage.damage;
 	damageUI.pos = pos;
 	damageUI.remainTimes = 1;
-	if (damage.damage < 20)
+	damageUI.fontSize = 30;
+	if (damage.isCritical)
 	{
+		damageUI.fontSize = 35;
+		damageUI.textColor = RGB(243, 152, 0);
+	}
+	else if (damage.damage < 20)
+	{
+		damageUI.fontSize = 30;
 		damageUI.textColor = RGB(255, 255, 255);
 	}
 	else
 	{
+		damageUI.fontSize = 30; 
 		damageUI.textColor = RGB(255, 212, 0);
 	}
 	damageUI.alpha = 1;

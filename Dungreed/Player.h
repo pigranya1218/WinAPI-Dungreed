@@ -98,5 +98,7 @@ public:
 	
 	Costume* getCurrCostume() { return _costume; }
 	void setCurrCostume(Costume* costume) { _costume = costume; }
+	float getAttackSpeed();
+	float getReloadSpeed();
 };
 

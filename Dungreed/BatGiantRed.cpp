@@ -31,6 +31,8 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	_detectRange = 300;
 	_renderNum = -1;
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void BatGiantRed::release()
@@ -103,7 +105,7 @@ void BatGiantRed::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	_enemyManager->moveEnemy(this, moveDir);
+	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
 	_shooting.aniUpdate(timeElapsed);
@@ -122,6 +124,13 @@ void BatGiantRed::render()
 	{
 		_shooting.render(_renderNum);
 	}	
+
+	if (_curHp < _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += _size.y * 0.6f;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void BatGiantRed::setState(ENEMY_STATE state)
@@ -132,8 +141,10 @@ void BatGiantRed::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Bat/Giant_Red/Idle";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -142,8 +153,10 @@ void BatGiantRed::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Bat/Giant_Red/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
@@ -168,53 +181,20 @@ void BatGiantRed::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, cons
 			{
 				case ENEMY_STATE::IDLE:
 				{
-					_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Idle");
+					_imageName = "Bat/Giant_Red/Idle";
 				}
 				break;
 				case ENEMY_STATE::ATTACK:
 				{
-					_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Attack");
+					_imageName = "Bat/Giant_Red/Attack";
 				}
 				break;
 			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
 		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
 	}
-}
-
-bool BatGiantRed::hitEffect(FloatRect * rc, AttackInfo * info)
-{
-	return false;
-}
-
-bool BatGiantRed::hitEffect(FloatCircle * circle, AttackInfo * info)
-{
-	_hit.isHit = true;
-	_hit.hitCount = 0;
-	//_hit.knockCount = 0;
-	_moving.gravity.x = info->knockBack;
-
-	switch (_state)
-	{
-		case ENEMY_STATE::IDLE:
-		{
-			_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Idle_Shot");
-		}
-		break;
-		case ENEMY_STATE::ATTACK:
-		{
-			_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Attack_Shot");
-		}
-		break;
-	}
-
-	return false;
-}
-
-bool BatGiantRed::hitEffect(Projectile * projectile, AttackInfo * info)
-{
-	return false;
 }

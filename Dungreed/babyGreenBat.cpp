@@ -41,6 +41,12 @@ void babyGreenBat::release()
 
 void babyGreenBat::update(Player* player, float const elapsedTime)
 {
+	if (_batPos.x < _renderPos.x - 600 || _batPos.x > _renderPos.x + 600 || _batPos.y < _renderPos.y - 600 || _batPos.x > _renderPos.x + 600)
+	{
+		_batPos.x = _renderPos.x;
+		_batPos.y = _renderPos.y;
+	}
+	_renderPos = player->getPosition();
 	_direction = player->getDirection();
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
@@ -54,7 +60,7 @@ void babyGreenBat::update(Player* player, float const elapsedTime)
 			_currBullet = _maxBullet;
 		}
 	}		
-	_renderPos = player->getPosition();
+	
 	if (_batPos.x > _renderPos.x + 60)
 	{
 		_batPos.x -= 500*elapsedTime;
@@ -71,6 +77,8 @@ void babyGreenBat::update(Player* player, float const elapsedTime)
 	{
 		_batPos.y += 500 * elapsedTime;
 	}
+
+	
 	
 	_ani->frameUpdate(elapsedTime);
 	
@@ -170,4 +178,5 @@ void babyGreenBat::getHit(Vector2 const position)
 
 void babyGreenBat::equip(Player* player)
 {
+	
 }

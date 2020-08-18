@@ -193,19 +193,7 @@ protected:
 
 			if (hitCount >= hitDelay)
 			{
-				hitCount -= hitDelay;
-				return true;
-			}
-			return false;
-		}
-
-		bool knockUpdate(const float timeElapsed)
-		{
-			knockCount += timeElapsed;
-
-			if (knockCount >= knockDelay)
-			{
-				knockCount -= knockDelay;
+				hitCount = 0;
 				return true;
 			}
 			return false;
@@ -244,8 +232,8 @@ public:
 
 	// Enemy에서 만약 맞았다면 호출될 가상함수
 	virtual bool hitEffect(FloatRect* rc, AttackInfo* info) { return false; }
-	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info) { return false; }
-	virtual bool hitEffect(Projectile* projectile) { return false; }
+	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info);
+	virtual bool hitEffect(Projectile* projectile);
 
 	void setDetectRange(float const range) { _detectRange = range; }
 };

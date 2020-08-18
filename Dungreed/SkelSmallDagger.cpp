@@ -30,8 +30,13 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay = 3;
 	_attack.distance = 100;
 
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_isDetect = 0;
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void SkelSmallDagger::release()
@@ -103,6 +108,7 @@ void SkelSmallDagger::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	if (_isStand && _moving.force.y == 0)
 	{
@@ -144,6 +150,13 @@ void SkelSmallDagger::render()
 	{
 		_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
 	}
+
+	if (_curHp != _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void SkelSmallDagger::setState(ENEMY_STATE state)
@@ -155,16 +168,20 @@ void SkelSmallDagger::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Skel/Small/Idle";
+
 			_ani->stop();
 			_weaponAni->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 		}
 		break;
 		case ENEMY_STATE::MOVE:
 		{
+			_imageName = "Skel/Small/Move";
+
 			_ani->stop();
 			_weaponAni->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Move");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(10);
@@ -173,9 +190,11 @@ void SkelSmallDagger::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Skel/Small/Idle";
+
 			_ani->stop();
 			_weaponAni->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_weaponAni->start();
 		}
 		break;
@@ -184,5 +203,40 @@ void SkelSmallDagger::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void SkelSmallDagger::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+			case ENEMY_STATE::IDLE:
+			{
+				_imageName = "Skel/Small/Idle";
+			}
+			break;
+			case ENEMY_STATE::MOVE:
+			{
+				_imageName = "Skel/Small/Move";
+			}
+			break;
+			case ENEMY_STATE::ATTACK:
+			{
+				_imageName = "Skel/Small/Idle";
+			}
+			break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+
+		return;
 	}
 }

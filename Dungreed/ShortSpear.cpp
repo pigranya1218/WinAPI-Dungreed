@@ -21,7 +21,6 @@ void ShortSpear::init()
 	_attackMove = Vector2(0, 0);
 	_minDamage = 7;
 	_maxDamage = 10;
-	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
@@ -35,7 +34,7 @@ void ShortSpear::update(Player* player, float const elapsedTime)
 {
 	if (_currAttackDelay == 0) return;
 
-	float ratio = elapsedTime / (_baseAttackDelay * 0.15);
+	float ratio = elapsedTime / (_adjustStat.attackSpeed * 0.15);
 	if (_reverseMove)
 	{
 		_attackMove.x = max(0, _attackMove.x - abs(cosf(_attackAngle) * 40 * ratio));
@@ -49,7 +48,7 @@ void ShortSpear::update(Player* player, float const elapsedTime)
 		// 찌르는 모션동안 계속 공격판정
 		player->attack(_attackCircle, _attackInfo);
 
-		if (_currAttackDelay <= _baseAttackDelay * 0.8)
+		if (_currAttackDelay <= _adjustStat.attackSpeed * 0.8)
 		{
 			_reverseMove = true;
 			_drawEffect = true;
@@ -151,7 +150,7 @@ void ShortSpear::attack(Player* player)
 
 	_reverseMove = false;
 	_attackAngle = angle;
-	_currAttackDelay = _baseAttackDelay;
+	_currAttackDelay = _adjustStat.attackSpeed;
 
 	Vector2 originPos = player->getPosition();
 	originPos.x += ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4)); // 손의 위치는 무기의 회전 중심점
@@ -197,4 +196,8 @@ void ShortSpear::getHit(Vector2 const position)
 
 void ShortSpear::equip(Player* player)
 {
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }

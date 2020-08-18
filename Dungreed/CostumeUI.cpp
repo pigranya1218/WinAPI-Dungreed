@@ -11,6 +11,11 @@
 void CostumeUI::init()
 {
 	_isActive = false;
+	_mouseMove = false;
+	_isScroll = false;
+
+	_lastPtMouse = _ptMouse;
+
 	_cosType = COSTUME_TYPE::ALICE;
 
 	//Ã¢´Ý±â ¹öÆ°
@@ -41,14 +46,16 @@ void CostumeUI::init()
 		_costumeCell[i].cosSummary = costume->getSummary();
 		_costumeCell[i].cosDetails = costume->getDetails();
 		_costumeCell[i].differStat = costume->getDifferStat();
-	
-		/*if (_costumeCell[i].differStat != 0)
-		{
-
-		}*/
 
 	}
 
+	//½ºÅ©·Ñ ¹Ù
+	_isScroll = false;
+	_scrollBar.totalWidth = 360 * static_cast<int>(COSTUME_TYPE::END);
+	_scrollBar.width = WINSIZEX;
+	_scrollBar.ratio = 0;
+	_scrollBar.bgRc = FloatRect(0, WINSIZEY - 200, WINSIZEX, WINSIZEY - 190);
+	_scrollBar.scrollRc = FloatRect(0.0, static_cast<float>(WINSIZEY - 200), (static_cast<float>(_scrollBar.width) / _scrollBar.totalWidth) * (_scrollBar.bgRc.right - _scrollBar.bgRc.left), static_cast<float>(WINSIZEY - 190));
 }
 
 void CostumeUI::release()
@@ -57,7 +64,7 @@ void CostumeUI::release()
 
 void CostumeUI::update(float elapsedTime)
 {
-	
+	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, _scrollBar.totalWidth - WINSIZEX, 0);
 	if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
 		//Ã¢´Ý±â
@@ -74,7 +81,36 @@ void CostumeUI::update(float elapsedTime)
 				_player->setCurrCostume(DATA_MANAGER->getCostume(_cosType));
 			}
 		}
+		//½ºÅ©·Ñ µå·¡±×
+		if (_scrollBar.scrollRc.ptInRect(_ptMouse))
+		{
+			_isScroll = true;
+		}
 	}
+
+	/*if (KEY_MANAGER->isStayKeyDown(VK_LBUTTON))
+	{
+		CAMERA->setConfig(360 * static_cast<int>(COSTUME_TYPE::END), 0, _scrollBar.width, WINSIZEY - 364, 0, 0, _scrollBar.totalWidth - _scrollBar.width, 0);
+	}*/
+	if (_isScroll)
+	{
+		Vector2 currCenter = _scrollBar.scrollRc.getCenter();
+		int move = _ptMouse.x - _lastPtMouse.x;
+		currCenter.x += move;
+		currCenter.x = min(currCenter.x, _scrollBar.bgRc.right - (_scrollBar.scrollRc.getSize().x / 2));
+		currCenter.x = max(currCenter.x, _scrollBar.bgRc.left + (_scrollBar.scrollRc.getSize().x / 2));
+		_scrollBar.scrollRc = FloatRect(currCenter, _scrollBar.scrollRc.getSize(), PIVOT::CENTER);
+		_scrollBar.ratio = (currCenter.x - (_scrollBar.bgRc.left + (_scrollBar.scrollRc.getSize().x / 2)))
+			/ ((_scrollBar.bgRc.right - (_scrollBar.scrollRc.getSize().x / 2)) - (_scrollBar.bgRc.left + (_scrollBar.scrollRc.getSize().x / 2)));
+		CAMERA->setL((_scrollBar.totalWidth - _scrollBar.width) * _scrollBar.ratio);
+	}
+
+	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
+	{
+		_isScroll = false;
+	}
+
+	_lastPtMouse = _ptMouse;
 }
 
 void CostumeUI::render()
@@ -96,117 +132,220 @@ void CostumeUI::render()
 	for (int i = 0; i < static_cast<int>(COSTUME_TYPE::END); i++)
 	{
 		//¼¿ µÞ¹è°æ
-		_costumeCell[i].costumeBackImg->render(_costumeCell[i].cellRect.getCenter(), _costumeCell[i].cellRect.getSize(), false);
+		//_costumeCell[i].costumeBackImg->render(_costumeCell[i].cellRect.getCenter(), _costumeCell[i].cellRect.getSize(), false);
+		_costumeCell[i].costumeBackImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x ), _costumeCell[i].cellRect.getCenter().y), 
+			_costumeCell[i].cellRect.getSize(), false);
 		//¶ô/¾ð¶ô ¹è°æ
 		if (i != static_cast<int>(_cosType))
 		{
 			//_costumeCell[i].costumeUnlockedImg->setScale(5.2);
 			_costumeCell[i].costumeUnlockedImg->setSize(Vector2(300, 500));
-			_costumeCell[i].costumeUnlockedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
+			//_costumeCell[i].costumeUnlockedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
+			_costumeCell[i].costumeUnlockedImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 10), false);
 		}
 		//ÇöÀç ÀåÂøÁßÀÎ ÄÚ½ºÆ¬
 		else 
 		{
 			_costumeCell[i].costumeEquippedImg->setSize(Vector2(300, 500));
-			_costumeCell[i].costumeEquippedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
-			//_costumeCell[i].costumeEquippedImg->render(_costumeCell[i].cellRect.getCenter(), false);
+			//_costumeCell[i].costumeEquippedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
+			_costumeCell[i].costumeEquippedImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 10), false);
 		}
 		//ÇöÀç ¼±ÅÃÇÑ ÄÚ½ºÆ¬
 		if (_costumeCell[i].cellRect.ptInRect(_ptMouse))
 		{
 			_costumeCell[i].costumeSelectedImg->setSize(Vector2(300, 500));
-			_costumeCell[i].costumeSelectedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
+			//_costumeCell[i].costumeSelectedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
+			_costumeCell[i].costumeSelectedImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 10), false);
+
 			//ÄÚ½ºÆ¬ ÀÌ¸§
-			D2D_RENDERER->renderTextField(20, WINSIZEY - 140, _costumeCell[i].cosTitle, D2D1::ColorF::Gold, 45,
+			D2D_RENDERER->renderTextField(20, WINSIZEY - 140, _costumeCell[i].cosTitle, RGB(255,246,18), 45,
 				500, 0, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"µÕ±Ù¸ð²Ã", 0.f);
 			//ÄÚ½ºÆ¬ °³¿ä
-			D2D_RENDERER->renderTextField(30, WINSIZEY - 80, _costumeCell[i].cosSummary, D2D1::ColorF::White, 25,
+			D2D_RENDERER->renderTextField(30, WINSIZEY - 80, _costumeCell[i].cosSummary, RGB(255, 255, 255), 25,
 				500, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 			//ÄÚ½ºÆ¬ »ó¼¼³»¿ë
 			if (_costumeCell[i].cosDetails != L"")
 			{
 				D2D_RENDERER->renderTextField(530, WINSIZEY - 140, L"¢º", D2D1::ColorF::White, 25,
 					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
-				D2D_RENDERER->renderTextField(560, WINSIZEY - 140, _costumeCell[i].cosDetails, D2D1::ColorF::Green, 25,
+				D2D_RENDERER->renderTextField(560, WINSIZEY - 140, _costumeCell[i].cosDetails, RGB(65,255,58), 25,
 					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 			}
 			//º¯µ¿½ºÅÈ
-			wstring wstr1, wstr2, wstr3;
+			wstring statValue1, statValue2, statValue3;
+			wstring statName1, statName2, statName3;
 			int stat1 = 0;
 			int stat2 = 0;
 			int stat3 = 0;
 			//D2D1::ColorF::Enum color1, color2, color3;
-			D2D1::ColorF::Enum color1 =  D2D1::ColorF::White;
+			/*D2D1::ColorF::Enum color1 =  D2D1::ColorF::White;
 			D2D1::ColorF::Enum color2 = D2D1::ColorF::White;
-			D2D1::ColorF::Enum color3 = D2D1::ColorF::White;
+			D2D1::ColorF::Enum color3 = D2D1::ColorF::White;*/
+			int r1, g1, b1;
+			int r2, g2, b2;
+			int r3, g3, b3;
+		
 			if (i > 0)
 			{
 				if (i == 1)
 				{
 					stat1 = static_cast<int>(_costumeCell[i].differStat->defense);
-					color1 = ((stat1 >= 0) ?  D2D1::ColorF::Green : D2D1::ColorF::Red);
-					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::DEF, false));
-					
+					//color1 = ((stat1 >= 0) ?  D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat1 >= 0)
+					{
+						r1 = 65, g1 = 255, b1 = 58;
+					}
+					else if (stat1 < 0)
+					{
+						r1 = 255, g1 = 0, b1 = 0;
+					}
+					statValue1 = ((stat1 >= 0)? L"+" + to_wstring(stat1) : to_wstring(stat1));
+					statName1 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::DEF, false));
 
 					stat2 = _costumeCell[i].differStat->maxHp;
-					color2 = ((stat2 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
-					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
+					//color2 = ((stat2 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat2 >= 0)
+					{
+						r2 = 65, g2 = 255, b2 = 58;
+					}
+					else if (stat2 < 0)
+					{
+						r2 = 255, g2 = 0, b2 = 0;
+					}
+					statValue2 = ((stat2 >= 0) ? L"+" + to_wstring(stat2) : to_wstring(stat2));
+					statName2 =	TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
 				}
 				if (i == 2)
 				{
 					stat1 = _costumeCell[i].differStat->maxHp;
-					stat1 >= 0 ? color1 = D2D1::ColorF::Green : color1 = D2D1::ColorF::Red;
-					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
+					//color1 = ((stat1 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat1 >= 0)
+					{
+						r1 = 65, g1 = 255, b1 = 58;
+					}
+					else if (stat1 < 0)
+					{
+						r1 = 255, g1 = 0, b1 = 0;
+					}
+					statValue1 = ((stat1 >= 0) ? L"+" + to_wstring(stat1) : to_wstring(stat1));
+					statName1 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
 
 					stat2 = static_cast<int>(_costumeCell[i].differStat->power);
-					stat2 >= 0 ? color2 = D2D1::ColorF::Green : color2 = D2D1::ColorF::Red;
-					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::POW, false));
+					//color2 = ((stat2 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat2 >= 0)
+					{
+						r2 = 65, g2 = 255, b2 = 58;
+					}
+					else if (stat2 < 0)
+					{
+						r2 = 255, g2 = 0, b2 = 0;
+					}
+					statValue2 = ((stat2 >= 0) ? L"+" + to_wstring(stat2) : to_wstring(stat2));
+					statName2 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::POW, false));
 				}
 				if (i == 3)
 				{
 					stat1 = _costumeCell[i].differStat->maxHp;
-					stat1 >= 0 ? color1 = D2D1::ColorF::Green : color1 = D2D1::ColorF::Red;
-					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
+					//color1 = ((stat1 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat1 >= 0)
+					{
+						r1 = 65, g1 = 255, b1 = 58;
+					}
+					else if (stat1 < 0)
+					{
+						r1 = 255, g1 = 0, b1 = 0;
+					}
+					statValue1 = ((stat1 >= 0) ? L"+" + to_wstring(stat1) : to_wstring(stat1));
+					statName1 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_HP, false));
 
 					stat2 = static_cast<int>(_costumeCell[i].differStat->evasion);
-					stat2 >= 0 ? color2 = D2D1::ColorF::Green : color2 = D2D1::ColorF::Red;
-					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::EVADE, false));
+					//color2 = ((stat2 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat2 >= 0)
+					{
+						r2 = 65, g2 = 255, b2 = 58;
+					}
+					else if (stat2 < 0)
+					{
+						r2 = 255, g2 = 0, b2 = 0;
+					}
+					statValue2 = ((stat2 >= 0) ? L"+" + to_wstring(stat2) : to_wstring(stat2));
+					statName2 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::EVADE, false));
 				}
 				if (i == 4)
 				{
 					stat1 = static_cast<int>(_costumeCell[i].differStat->dashDamage);
-					stat1 >= 0 ? color1 = D2D1::ColorF::Green : color1 = D2D1::ColorF::Red;
-					wstr1 = to_wstring(stat1) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::DASH_DAMAGE, false));
+					//color1 = ((stat1 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat1 >= 0)
+					{
+						r1 = 65, g1 = 255, b1 = 58;
+					}
+					else if (stat1 < 0)
+					{
+						r1 = 255, g1 = 0, b1 = 0;
+					}
+					statValue1 = ((stat1 >= 0) ? L"+" + to_wstring(stat1) : to_wstring(stat1)); 
+					statName1 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::DASH_DAMAGE, false));
 
 					stat2 = _costumeCell[i].differStat->maxDashCount;
-					stat2 >= 0 ? color2 = D2D1::ColorF::Green : color2 = D2D1::ColorF::Red;
-					wstr2 = to_wstring(stat2) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_DASH_COUNT, false));
+					//color2 = ((stat2 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat2 >= 0)
+					{
+						r2 = 65, g2 = 255, b2 = 58;
+					}
+					else if (stat2 < 0)
+					{
+						r2 = 255, g2 = 0, b2 = 0;
+					}
+					statValue2 = ((stat2 >= 0) ? L"+" + to_wstring(stat2) : to_wstring(stat2));
+					statName2 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::MAX_DASH_COUNT, false));
 
 					stat3 = static_cast<int>(_costumeCell[i].differStat->criticalChance);
-					stat3 >= 0 ? color3 = D2D1::ColorF::Green : color3 = D2D1::ColorF::Red;
-					wstr3 = to_wstring(stat3) + L" " + TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::CRITICAL, false));
+					//color3 = ((stat3 >= 0) ? D2D1::ColorF::Green : D2D1::ColorF::Red);
+					if (stat3 >= 0)
+					{
+						r3 = 65, g3 = 255, b3 = 58;
+					}
+					else if(stat3 < 0)
+					{
+						r3 = 255, g3 = 0, b3 = 0;
+					}
+					statValue3 = ((stat3 >= 0) ? L"+" + to_wstring(stat3) : to_wstring(stat3));
+					statName3 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::CRITICAL, false));
 
-					D2D_RENDERER->renderTextField(530, WINSIZEY - 50, L"¢º", D2D1::ColorF::White, 25,
+					D2D_RENDERER->renderTextField(530, WINSIZEY - 50, L"¢º", RGB(255,255,255), 25,
 						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
-					D2D_RENDERER->renderTextField(560, WINSIZEY - 50, wstr3, color3, 25,
+					D2D_RENDERER->renderTextField(560, WINSIZEY - 50, statValue3, RGB(r3,g3,b3), 25,
+						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
+					D2D_RENDERER->renderTextField(605, WINSIZEY - 50, statName3, RGB(255, 255, 255), 25,
 						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 				}
-				D2D_RENDERER->renderTextField(530, WINSIZEY - 110, L"¢º", D2D1::ColorF::White, 25,
+				D2D_RENDERER->renderTextField(530, WINSIZEY - 110, L"¢º", RGB(255, 255, 255), 25,
 					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
-				D2D_RENDERER->renderTextField(560, WINSIZEY - 110, wstr1, color1, 25,
+				D2D_RENDERER->renderTextField(560, WINSIZEY - 110, statValue1, RGB(r1, g1, b1), 25,
 					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
-				D2D_RENDERER->renderTextField(530, WINSIZEY - 80, L"¢º", D2D1::ColorF::White, 25,
+				D2D_RENDERER->renderTextField(605, WINSIZEY - 110, statName1, RGB(255, 255, 255), 25,
 					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
-				D2D_RENDERER->renderTextField(560, WINSIZEY - 80, wstr2, color2, 25,
+
+				D2D_RENDERER->renderTextField(530, WINSIZEY - 80, L"¢º", RGB(255, 255, 255), 25,
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
+				D2D_RENDERER->renderTextField(560, WINSIZEY - 80, statValue2, RGB(r2, g2, b2), 25,
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
+				D2D_RENDERER->renderTextField(605, WINSIZEY - 80, statName2, RGB(255, 255, 255), 25,
 					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 			}
 		}
+		//½ºÅ©·Ñ¹Ù
+		//D2D_RENDERER->drawRectangle(_scrollBar.bgRc, D2D1::ColorF::Gray, 1, 1);
+		D2D_RENDERER->fillRectangle(_scrollBar.bgRc, D2D1::ColorF::Gray, 1);
+		//D2D_RENDERER->drawRectangle(_scrollBar.scrollRc, D2D1::ColorF::Cyan, 1, 1);
+		D2D_RENDERER->fillRectangle(_scrollBar.scrollRc, D2D1::ColorF::Goldenrod, 1);
 
 		//ÄÚ½ºÆ¬ »ùÇÃ ÀÌ¹ÌÁö
 		if (i >= static_cast<int>(COSTUME_TYPE::END)) continue;
 		_costumeCell[i].costumeSample->setScale(5);
-		_costumeCell[i].costumeSample->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 131), false); 
-		
+		//_costumeCell[i].costumeSample->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 131), false); 
+		_costumeCell[i].costumeSample->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 131), false);
+
 		//_costumeCell[i].costumeSample->render(_costumeCell[i].cellRect.getCenter(), false);
 		/*D2D_RENDERER->drawRectangle(_costumeCell[i].cellRect, D2D1::ColorF::Enum::Red, 1.0f, 3.0f);
 		D2D_RENDERER->drawRectangle(FloatRect(_costumeCell[i].cellRect.getCenter(), _costumeCell[i].costumeSample->getSize(), PIVOT::CENTER), D2D1::ColorF::Enum::Red, 1.0f, 3.0f);*/

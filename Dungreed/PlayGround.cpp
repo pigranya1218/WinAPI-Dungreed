@@ -196,6 +196,20 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/COSTUME/ALICE", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/alice_sample.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/RED_LOTUS", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/redLotus_sample.png");
 	IMAGE_MANAGER->addImage("UI/COSTUME/PICKAX", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
+	// *** RESTAURANT(FOODS SHOP)
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE_LABEL", L"resources/images/gameScene/ui/restaurant/Label.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE_BACK", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBaseBack.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBase.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD", L"resources/images/gameScene/ui/restaurant/RestaurantMenu.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Selected.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_Selected.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/THANKYOU_KR", L"resources/images/gameScene/ui/restaurant/ThankYouKorean.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/GOLD_ICON", L"resources/images/gameScene/ui/restaurant/GoldCoin0.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/SATIETY_ICON", L"resources/images/gameScene/ui/restaurant/SatietyRate.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/HEAL_ICON", L"resources/images/gameScene/ui/restaurant/HealRate.png");
+	IMAGE_MANAGER->addFrameImage("UI/RESTAURANT/TABLE", L"resources/images/gameScene/ui/restaurant/RestaurantTable3Frame.png", 3, 1);
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/GAUGE_BASE", L"resources/images/gameScene/ui/restaurant/AltarGaugeBase.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
@@ -314,12 +328,16 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);//¿ìÁÖ°Ë 
 	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // ÄÉ·¹½º(Ä®,Ã¢)
 	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // ºÓÀº °î±ªÀÌ
+	IMAGE_MANAGER->addImage("PowerKatanaHUD", L"resources/images/MeleeWeapon/PowerKatanaHUD.png"); // À°µµ°¡ÀÌ(Ä«Å¸³ª)
 	
 	//***MeleeWeaponIcon
 	IMAGE_MANAGER->addImage("CosmosSwordIcon", L"resources/images/MeleeWeapon/CosmosSwordIcon.png"); // ¿ìÁÖ°Ë ¾ÆÀÌÄÜ
 	IMAGE_MANAGER->addImage("KeresScytheIcon", L"resources/images/MeleeWeapon/KeresScytheIcon.png"); // ÄÉ·¹½º ¾ÆÀÌÄÜ
 	IMAGE_MANAGER->addImage("TigerPunchIcon", L"resources/images/MeleeWeapon/TigerPunchIcon.png"); // Å¸ÀÌ°Å ÆÝÄ¡ ¾ÆÀÌÄÜ
 	IMAGE_MANAGER->addImage("PickaxeRedIcon", L"resources/images/MeleeWeapon/PickaxeRedIcon.png"); // ºÓÀº °î±ªÀÌ ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("PowerKatana", L"resources/images/MeleeWeapon/PowerKatana.png"); // À°µµ°¡ÀÌ(Ä«Å¸³ª) ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("QuarterStaffBig", L"resources/images/MeleeWeapon/QuarterStaff_Big.png"); // ¹Ú´Þ³ª¹« ½Ö´ÜºÀ ¾ÆÀÌÄÜ°â ÀÌ¹ÌÁö
+	IMAGE_MANAGER->addImage("BigPaintBlush", L"resources/images/MeleeWeapon/BigPaintBlush.png"); // ¼­¿¹¿ë º× ¾ÆÀÌÄÜ°â ÀÌ¹ÌÁö
 
 
 
@@ -332,13 +350,17 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("KeresScytheSwingFX", L"resources/images/MeleeWeapon/KeresScytheSwingFX.png",8, 1);
 	IMAGE_MANAGER->addFrameImage("TigerPunch", L"resources/images/MeleeWeapon/TigerPunch.png",10,1);
 	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
+	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
+	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",4,1);
 
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // ¿ìÁÖ°Ë ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // ³´ ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // ÀÏ¹Ý ÈÖµÎ¸£±â ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // ÀÏ¹Ý Âî¸£±â ÀÌÆåÆ®
-	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆÑÆ®
-	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // ºÓÀº°î±ªÀÌ ÀÌÆÑÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // ºÓÀº°î±ªÀÌ ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_POWERKATANA", "PowerKatanaEf", 30, 10);	  // À°µµ°¡ÀÌ(Ä«Å¸³ª) ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_PAINTSWING", "PaintSwing", 30, 10);	  // ¼­¿¹¿ë º× ÀÌÆåÆ®
 
 
 
@@ -520,6 +542,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("BabyBatBulletFx","BabyBatBulletFx",15,50);
 	EFFECT_MANAGER->addEffect("BombPouch2", "BombPouch2", 15, 50);
 	EFFECT_MANAGER->addEffect("HeartOfCosmosF", "HeartOfCosmosF", 15, 50);
+	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 
 	//** Boss
 	// * Belial

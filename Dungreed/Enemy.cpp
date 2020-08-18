@@ -133,3 +133,44 @@ bool Enemy::isHit(Projectile* projectile)
 
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }
+
+bool Enemy::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_isDetect = true;
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
+
+	DamageInfo damageInfo = info->getDamageInfo();
+	Vector2 renderPos = _position;
+	renderPos.y -= _size.y * 0.25f;
+	renderPos.x += RANDOM->getFromFloatTo(-_size.x * 0.5f, _size.x * 0.5f);
+	_enemyManager->showDamage(damageInfo, renderPos);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
+
+	return true;
+}
+//
+bool Enemy::hitEffect(Projectile * projectile)
+{
+	AttackInfo* info = projectile->getAttackInfo();
+	_isDetect = true;
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
+
+	DamageInfo damageInfo = info->getDamageInfo();
+	Vector2 renderPos = _position;
+	renderPos.y -= _size.y * 0.25f;
+	renderPos.x += RANDOM->getFromFloatTo(-_size.x * 0.5f, _size.x * 0.5f);
+	_enemyManager->showDamage(damageInfo, renderPos);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
+
+	return true;
+}

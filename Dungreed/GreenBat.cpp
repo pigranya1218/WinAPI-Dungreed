@@ -35,6 +35,11 @@ void GreenBat::release()
 
 void GreenBat::update(Player * player, float const elapsedTime)
 {
+	if (_batPos.x < _renderPos.x - 600 || _batPos.x > _renderPos.x + 600 || _batPos.y < _renderPos.y - 600 || _batPos.x > _renderPos.x + 600)
+	{
+		_batPos.x = _renderPos.x;
+		_batPos.y = _renderPos.y;
+	}
 	_direction = player->getDirection();
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{

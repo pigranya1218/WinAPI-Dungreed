@@ -20,6 +20,8 @@ public:
 
 	void setState(ENEMY_STATE state);
 
+	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
+
 	bool playerCollision(const Vector2& playerPos);
 };
 
