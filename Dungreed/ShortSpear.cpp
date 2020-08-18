@@ -165,7 +165,7 @@ void ShortSpear::attack(Player* player)
 
 	_attackCircle = new FloatCircle;
 	_attackCircle->origin = originPos;
-	_attackCircle->size = 200;
+	_attackCircle->size = 150;
 	_attackCircle->startRadian = attackRadian - PI * 0.05;
 	_attackCircle->endRadian = attackRadian + PI * 0.05;
 

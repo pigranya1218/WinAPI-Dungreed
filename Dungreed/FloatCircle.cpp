@@ -149,12 +149,20 @@ bool FloatCircle::isIntersectRadian(Vector2 rangeRadian)
 {
 	float oppStartRadian = rangeRadian.x;
 	float oppEndRadian = rangeRadian.y;
+	float sRadian = startRadian;
+	float eRadian = endRadian;
 	if (oppStartRadian < 0)
 	{
 		oppStartRadian += PI2;
 		oppEndRadian += PI2;
+
+		if (0 < sRadian && sRadian < PI)
+		{
+			sRadian += PI2;
+			eRadian += PI2;
+		}
 	}
-	if (oppStartRadian <= endRadian &&  startRadian <= oppEndRadian)
+	if (oppStartRadian <= eRadian && sRadian <= oppEndRadian)
 	{
 		return true;
 	}
