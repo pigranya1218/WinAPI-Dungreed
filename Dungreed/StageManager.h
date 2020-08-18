@@ -5,6 +5,7 @@
 
 class GameScene;
 class Player;
+class UIManager;
 
 enum class STAGE_TYPE : int
 {
@@ -17,17 +18,26 @@ enum class STAGE_TYPE : int
 class StageManager
 {
 private:
+	typedef vector<Stage*> VStage;
+
 	GameScene* _gameScene;
 	Player* _player;
+	UIManager* _uiMgr;
 	STAGE_TYPE _currStageType; // 현재 스테이지 타입
 	vector<Stage*> _stages; // 현재 스테이지들
-	Stage* _currStage; // 현재 스테이지
+	Stage* _currStage; // 현재 스테이지 
 	
-	int _roomIndex;
+	Stage* _downStair;
+	Stage* _restaurantRoom;
+	Stage* _shopRoom;
 
+	int _roomIndex;
+	vector<VStage> _vStage;
+	vector<DIRECTION>::iterator iter;
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
 	void setPlayer(Player* player) { _player = player; }
+	void setUIManager(UIManager* uiMgr) { _uiMgr = uiMgr; }
 	void setStageType(STAGE_TYPE currStageType) { _currStageType = currStageType; }
 
 	void init();
@@ -58,5 +68,8 @@ public:
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
 	void setPlayerPos(int x, int y);
+
+	void showDamage(DamageInfo info, Vector2 pos);
+	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 };
 

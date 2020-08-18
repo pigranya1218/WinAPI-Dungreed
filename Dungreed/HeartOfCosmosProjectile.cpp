@@ -2,13 +2,12 @@
 #include "ProjectileManager.h"
 #include "stdafx.h"
 
-void HeartOfCosmosProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate)
+void HeartOfCosmosProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_speed = speed;
-	_range = range;
-
-	_startPos = _position;
+	_maxTime = maxTime;
+	_count = 0;
 
 	_img = IMAGE_MANAGER->findImage(imgKey);
 	_useAni = useAni;
@@ -53,7 +52,7 @@ void HeartOfCosmosProjectile::update(float elapsedTime)
 		_projectileMgr->moveTo(this, moveDir);
 		Vector2 currDir = _position;
 
-		if (lastDir.x == currDir.x || lastDir.y == currDir.y)
+		if (lastDir + moveDir != currDir)
 		{
 			_active = false;
 		}
@@ -68,11 +67,12 @@ void HeartOfCosmosProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	// 사정거리를 넘어가면
-	if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
+	// 지속시간을 넘어가면
+	_count += elapsedTime;
+	if (_count >= _maxTime)
 	{
 		_active = false;
-	}
+	}	
 }
 
 void HeartOfCosmosProjectile::render()
@@ -86,9 +86,7 @@ void HeartOfCosmosProjectile::render()
 		if (_ani->isPlay()) {
 			_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
 			
-		}
-	
-
+		}		
 	}
 	else
 	{

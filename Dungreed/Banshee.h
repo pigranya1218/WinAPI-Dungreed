@@ -13,5 +13,7 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
+
+	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
 };
 

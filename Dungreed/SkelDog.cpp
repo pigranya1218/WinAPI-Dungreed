@@ -31,6 +31,8 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction)
 	_attack.delay = 3;
 
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void SkelDog::release()
@@ -99,6 +101,7 @@ void SkelDog::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	if (_isStand && _moving.force.y == 0)
 	{
@@ -129,6 +132,14 @@ void SkelDog::render()
 {
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp != _maxHp)
+	{
+		// DEBUG TEST
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void SkelDog::setState(ENEMY_STATE state)
@@ -139,9 +150,10 @@ void SkelDog::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
-			_ani->stop();
+			_imageName = "Skel/Dog/Idle";
 
-			_img = IMAGE_MANAGER->findImage("Skel/Dog/Idle");
+			_ani->stop();
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -150,18 +162,14 @@ void SkelDog::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::MOVE:
 		{
-			_ani->stop();
+			_imageName = "Skel/Dog/Move";
 
-			_img = IMAGE_MANAGER->findImage("Skel/Dog/Move");
+			_ani->stop();
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
 			_ani->start();
-		}
-		break;
-		case ENEMY_STATE::ATTACK:
-		{
-
 		}
 		break;
 		case ENEMY_STATE::DIE:
@@ -170,4 +178,37 @@ void SkelDog::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void SkelDog::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_imageName = "Skel/Big_Normal/Idle";
+				}
+				break;
+				case ENEMY_STATE::MOVE:
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Skel/Big_Normal/Move";
+				}
+				break;			
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+
+		return;
+	}
+
+	_moving.force.x = 150;
 }

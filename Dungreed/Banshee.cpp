@@ -24,7 +24,14 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 	// Åº¸· ÃÊ±âÈ­
 	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 2.2, 500, false, false, true, true);
 
+	ZeroMemory(&_moving, sizeof(_moving));
+
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void Banshee::release()
@@ -75,18 +82,24 @@ void Banshee::update(float const timeElapsed)
 			break;
 		}
 	}
+	hitReaction(_enemyManager->getPlayerPos(), moveDir, timeElapsed);
 
-	_enemyManager->moveEnemy(this, moveDir);
+	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
 }
 
 void Banshee::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(bool)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp < _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += _size.y * 0.6f;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void Banshee::setState(ENEMY_STATE state)
@@ -97,8 +110,10 @@ void Banshee::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Banshee/Idle";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Banshee/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -107,8 +122,10 @@ void Banshee::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Banshee/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Banshee/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
@@ -120,5 +137,34 @@ void Banshee::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void Banshee::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_imageName = "Banshee/Idle";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Banshee/Attack";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
 	}
 }

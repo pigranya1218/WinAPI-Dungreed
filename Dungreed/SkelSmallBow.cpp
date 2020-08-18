@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "EnemyManager.h"
 #include "SkelSmallBow.h"
 
@@ -40,12 +40,18 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.gravity = Vector2(0, 4000);
 
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
 
 	// 플레이어 감지 변수 초기화
 	_isDetect = 0;
 
 	_active = true;
+
+	// TEST
+	_curHp = _maxHp = 100;
 }
 
 void SkelSmallBow::release()
@@ -108,7 +114,8 @@ void SkelSmallBow::update(float const timeElapsed)
 		
 		}
 		break;
-	}
+	}	
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	if (_isStand && _moving.force.y == 0)
 	{
@@ -123,7 +130,7 @@ void SkelSmallBow::update(float const timeElapsed)
 	if (_isStand)
 	{
 		_moving.force.y = 0;
-	}
+	}	
 
 	_weaponAni->frameUpdate(timeElapsed);
 
@@ -154,8 +161,8 @@ void SkelSmallBow::render()
 	// 활 시위 당기는 프레임에 따라 손 좌표도 수정
 	if (_weaponAni->getPlayIndex() <= 3)
 	{
-		handPos.x += cosf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (5) : (-5)));
-		handPos.y -= sinf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (5) : (-5)));
+		handPos.x += cosf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
+		handPos.y -= sinf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
 	}
 	_handImg->render(CAMERA->getRelativeV2(handPos));	// 손 출력
 
@@ -166,6 +173,16 @@ void SkelSmallBow::render()
 	handPos.x += cosf(_attack.angle) * 35;
 	handPos.y -= sinf(_attack.angle) * 40;
 	_handImg->render(CAMERA->getRelativeV2(handPos));	// 다른 손 출력
+
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1, 2);
+
+	if (_curHp != _maxHp)
+	{
+		// DEBUG TEST
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void SkelSmallBow::setState(ENEMY_STATE state)
@@ -177,18 +194,22 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Skel/Small/Idle";
+
 			_ani->stop();
 			_weaponAni->stop();
 
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 		}
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Skel/Small/Idle";
+
 			_weaponAni->stop();
 			_ani->stop();
 
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_weaponAni->start();
 		}
 		break;
@@ -197,5 +218,29 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void SkelSmallBow::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Skel/Small/Idle";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));		
 	}
 }

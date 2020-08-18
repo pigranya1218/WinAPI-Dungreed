@@ -5,12 +5,9 @@ class SkelSmallBow : public Enemy
 {
 private:
 	tagAttackInfo	_attack;		// 공격
-	tagMoveInfo		_moving;		// 이동
 	tagShootingInfo _shooting;		// 화살
 	Animation*		_weaponAni;		// 무기 애니메이션
 	Image*			_weaponImg;		// 무기 이미지
-
-	Vector2			_weaponPos;		// 무기 좌표 저장용
 
 	Image*			_handImg;		// 손 이미지
 
@@ -21,5 +18,7 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
+
+	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
 };
 

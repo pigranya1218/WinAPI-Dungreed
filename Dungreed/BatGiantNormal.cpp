@@ -20,12 +20,19 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 
+	ZeroMemory(&_moving, sizeof(_moving));
+	
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.3f, 500, 500, false, true, true, true);
 
 	_isDetect = 0;
 	_detectRange = 300;
 
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void BatGiantNormal::release()
@@ -106,7 +113,9 @@ void BatGiantNormal::update(float const timeElapsed)
 		}
 		break;
 	}
-	_enemyManager->moveEnemy(this, moveDir);
+	hitReaction(playerPos, moveDir, timeElapsed);
+
+	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
 	_shooting.aniUpdate(timeElapsed);
@@ -116,11 +125,16 @@ void BatGiantNormal::update(float const timeElapsed)
 
 void BatGiantNormal::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 	_shooting.render();
+
+	if (_curHp < _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += _size.y * 0.6f;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void BatGiantNormal::setState(ENEMY_STATE state)
@@ -131,8 +145,10 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Bat/Giant_Normal/Idle";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Giant_Normal/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -141,8 +157,10 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Bat/Giant_Normal/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Giant_Normal/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
@@ -154,5 +172,33 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void BatGiantNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_imageName = "Bat/Giant_Normal/Idle";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Bat/Giant_Normal/Attack";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
 	}
 }

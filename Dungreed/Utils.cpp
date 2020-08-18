@@ -45,4 +45,9 @@ namespace TTYONE_UTIL
 		}
 		return result;
 	}
+	size_t getHash(string value)
+	{
+		hash<string> hash_string;
+		return hash_string(value.c_str());
+	}
 }

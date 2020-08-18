@@ -35,6 +35,11 @@ void GreenMomBat::release()
 
 void GreenMomBat::update(Player * player, float const elapsedTime)
 {
+	if (_batPos.x < _renderPos.x - 600 || _batPos.x > _renderPos.x + 600 || _batPos.y < _renderPos.y - 600 || _batPos.x > _renderPos.x + 600)
+	{
+		_batPos.x = _renderPos.x;
+		_batPos.y = _renderPos.y;
+	}
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);

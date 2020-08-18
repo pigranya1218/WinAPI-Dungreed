@@ -19,15 +19,17 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attacking, sizeof(_attacking));
 	_attacking.delay = 3;
 
-	ZeroMemory(&_moving, sizeof(_moving));
-	//움직이는 각도
-	//_moving.angle = RANDOM->getFromFloatTo(0, PI2);
-	//나아가는 방향(이동속도)     랜덤으로 -> 0~ 360 까지의 값을 float 값으로 가져온다
+	ZeroMemory(&_moving, sizeof(_moving));	
 	_moving.force = Vector2(150, 0);
 	_moving.delay = 0.5;
 
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3f;
+
 	_isDetect = 0;
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void Ghost::release()
@@ -71,9 +73,7 @@ void Ghost::update(float const timeElapsed)
 			setPosition(_position + moveDir);			
 
 			if (_attacking.update(timeElapsed))
-			{
-				//_moving.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
-				//_moving.force.x = 350;
+			{				
 				setState(ENEMY_STATE::ATTACK);
 			}
 		}
@@ -81,10 +81,7 @@ void Ghost::update(float const timeElapsed)
 		case ENEMY_STATE::ATTACK:
 		{
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * (_moving.force.x * 2.5f));
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * (_moving.force.x * 2.5f));
-
-			setPosition(_position + moveDir);
-			//_enemyManager->moveEnemy(this, moveDir);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * (_moving.force.x * 2.5f));			
 
 			if (_attacking.update(timeElapsed * 3))
 			{
@@ -98,6 +95,9 @@ void Ghost::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
+
+	_enemyManager->moveEnemy(this, moveDir, false, false);
 
 	_ani->frameUpdate(timeElapsed);
 
@@ -106,11 +106,16 @@ void Ghost::update(float const timeElapsed)
 
 void Ghost::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
-
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));	
+
+	if (_curHp < _maxHp)
+	{
+		// DEBUG TEST
+		Vector2 renderPos = _position;
+		renderPos.y += _size.y * 0.6f;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 // 이미지 및 프레임 설정
@@ -123,9 +128,10 @@ void Ghost::setState(ENEMY_STATE state)
 		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{
-			_ani->stop();
+			_imageName = "Ghost/Move";
 
-			_img = IMAGE_MANAGER->findImage("Ghost/Move");
+			_ani->stop();
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -135,9 +141,10 @@ void Ghost::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			_ani->stop();
+			_imageName = "Ghost/Attack";
 
-			_img = IMAGE_MANAGER->findImage("Ghost/Attack");			
+			_ani->stop();
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -151,4 +158,35 @@ void Ghost::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void Ghost::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				case ENEMY_STATE::MOVE:
+				{
+					_imageName = "Ghost/Move";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Ghost/Attack";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+			_moving.force.x = 150;
+			return;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+	}	
 }

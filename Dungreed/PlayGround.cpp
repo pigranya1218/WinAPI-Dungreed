@@ -275,20 +275,26 @@ HRESULT playGround::init()
 	// ** WEAPON
 	// *** LongDistanceWeapon
 	IMAGE_MANAGER->addImage("Lala'sMagicWand", L"resources/images/weapon/longDistanceWeapon/Lala'sMagicWand.png");
+	IMAGE_MANAGER->addImage("Lala'sMagicWand02", L"resources/images/weapon/longDistanceWeapon/Lala'sMagicWand02.png");
+
 	IMAGE_MANAGER->addImage("MatchlockGun", L"resources/images/weapon/longDistanceWeapon/MatchlockGun.png");
 	IMAGE_MANAGER->addImage("MetalBoomerang", L"resources/images/weapon/longDistanceWeapon/MetalBoomerang.png");
 	IMAGE_MANAGER->addImage("OakBow", L"resources/images/weapon/longDistanceWeapon/OakBow.png");
-	
+	IMAGE_MANAGER->addImage("GatlingGun", L"resources/images/weapon/longDistanceWeapon/GatlingGun1.png");
+
+	IMAGE_MANAGER->addFrameImage("GatlingGun_Ani", L"resources/images/weapon/longDistanceWeapon/GatlingGunAni.png", 2, 1);
 	IMAGE_MANAGER->addFrameImage("Boomerang_Moving", L"resources/images/weapon/longDistanceWeapon/Boomerang_Moving.png", 2, 1);
 	IMAGE_MANAGER->addFrameImage("OakBowAni", L"resources/images/weapon/longDistanceWeapon/OakBowAni.png", 6, 1);
-
-	// **** L_test
-	IMAGE_MANAGER->addFrameImage("test_OakBowAni", L"resources/images/weapon/longDistanceWeapon/test_OakBowAni.png", 6, 1);
 
 	// **** L_WeaponBullet
 	IMAGE_MANAGER->addImage("Arrow00", L"resources/images/weapon/longDistanceWeapon/Arrow00.png");
 	IMAGE_MANAGER->addFrameImage("GunBullet", L"resources/images/weapon/longDistanceWeapon/Bullet.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("lalaStickBullet", L"resources/images/weapon/longDistanceWeapon/lalaStickBullet.png", 4, 1);
+
+	// **** L_WeaponReload
+	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
+	IMAGE_MANAGER->addImage("ReloadHandle", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
+	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
 
 	// **** L_WeaponEffect
 	IMAGE_MANAGER->addFrameImage("ArrowHitEffect", L"resources/images/weapon/longDistanceWeapon/effect/ArrowHitEffect.png", 6, 1);
@@ -298,6 +304,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("ShootEffect", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect.png", 3, 1);
 	IMAGE_MANAGER->addFrameImage("ShootEffect01", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect01.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("ShootEffect02", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect02.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("lalaStickEffect", L"resources/images/weapon/longDistanceWeapon/effect/lalaStickEffect.png", 7, 1);
 
 	EFFECT_MANAGER->addEffect("L_Effect_ArrowHit", "ArrowHitEffect", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Boomerang", "BoomerangEffect", 30, 10);
@@ -306,11 +313,14 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot", "ShootEffect", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot01", "ShootEffect01", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot02", "ShootEffect02", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_lalaStick", "lalaStickEffect", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_Reload", "ReloadFinish", 30, 10);
 
-	// **** L_WeaponReload
-	IMAGE_MANAGER->addImage("ReloadBar", L"resources/images/weapon/longDistanceWeapon/ReloadBase.png");
-	IMAGE_MANAGER->addImage("ReloadHandle", L"resources/images/weapon/longDistanceWeapon/ReloadBar.png");
-	IMAGE_MANAGER->addFrameImage("ReloadFinish", L"resources/images/weapon/longDistanceWeapon/effect/Reload.png", 4, 1);
+	// **** L_test
+	IMAGE_MANAGER->addFrameImage("test_OakBowAni", L"resources/images/weapon/longDistanceWeapon/test_OakBowAni.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("ShootEffect_test", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect_test.png", 3, 1);
+	EFFECT_MANAGER->addEffect("L_Effect_Shoot_test", "ShootEffect_test", 30, 10);
+
 
 	//***MeleeWeapon
 	IMAGE_MANAGER->addImage("ShortSpear", L"resources/images/MeleeWeapon/ShortSpear.png");  //¼ô ½ºÇÇ¾î
@@ -318,12 +328,16 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);//¿ìÁÖ°Ë 
 	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // ÄÉ·¹½º(Ä®,Ã¢)
 	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // ºÓÀº °î±ªÀÌ
+	IMAGE_MANAGER->addImage("PowerKatanaHUD", L"resources/images/MeleeWeapon/PowerKatanaHUD.png"); // À°µµ°¡ÀÌ(Ä«Å¸³ª)
 	
 	//***MeleeWeaponIcon
 	IMAGE_MANAGER->addImage("CosmosSwordIcon", L"resources/images/MeleeWeapon/CosmosSwordIcon.png"); // ¿ìÁÖ°Ë ¾ÆÀÌÄÜ
 	IMAGE_MANAGER->addImage("KeresScytheIcon", L"resources/images/MeleeWeapon/KeresScytheIcon.png"); // ÄÉ·¹½º ¾ÆÀÌÄÜ
 	IMAGE_MANAGER->addImage("TigerPunchIcon", L"resources/images/MeleeWeapon/TigerPunchIcon.png"); // Å¸ÀÌ°Å ÆÝÄ¡ ¾ÆÀÌÄÜ
 	IMAGE_MANAGER->addImage("PickaxeRedIcon", L"resources/images/MeleeWeapon/PickaxeRedIcon.png"); // ºÓÀº °î±ªÀÌ ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("PowerKatana", L"resources/images/MeleeWeapon/PowerKatana.png"); // À°µµ°¡ÀÌ(Ä«Å¸³ª) ¾ÆÀÌÄÜ
+	IMAGE_MANAGER->addImage("QuarterStaffBig", L"resources/images/MeleeWeapon/QuarterStaff_Big.png"); // ¹Ú´Þ³ª¹« ½Ö´ÜºÀ ¾ÆÀÌÄÜ°â ÀÌ¹ÌÁö
+	IMAGE_MANAGER->addImage("BigPaintBlush", L"resources/images/MeleeWeapon/BigPaintBlush.png"); // ¼­¿¹¿ë º× ¾ÆÀÌÄÜ°â ÀÌ¹ÌÁö
 
 
 
@@ -336,14 +350,22 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("KeresScytheSwingFX", L"resources/images/MeleeWeapon/KeresScytheSwingFX.png",8, 1);
 	IMAGE_MANAGER->addFrameImage("TigerPunch", L"resources/images/MeleeWeapon/TigerPunch.png",10,1);
 	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
+	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
+	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",4,1);
+	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
 
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // ¿ìÁÖ°Ë ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSLASH", "CosmosSlashFX0", 30, 10);	  // ¿ìÁÖ°Ë ÇÇ°Ý½Ã ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // ³´ ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // ÀÏ¹Ý ÈÖµÎ¸£±â ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // ÀÏ¹Ý Âî¸£±â ÀÌÆåÆ®
-	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆÑÆ®
-	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // ºÓÀº°î±ªÀÌ ÀÌÆÑÆ®
-
+	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // ºÓÀº°î±ªÀÌ ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_POWERKATANA", "PowerKatanaEf", 30, 10);	  // À°µµ°¡ÀÌ(Ä«Å¸³ª) ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_PAINTSWING", "PaintSwing", 30, 10);	  // ¼­¿¹¿ë º× ÀÌÆåÆ®
+	//**** Å©¸®Æ¼ÄÃ ÀÌÆåÆ®
+	IMAGE_MANAGER->addFrameImage("EXPowerKatanaSwingFX", L"resources/images/MeleeWeapon/EXPowerKatanaSwingFX.png",10,1); // Ä«Å¸³ª Å©¸®Æ¼ÄÃ
+	EFFECT_MANAGER->addEffect("EFFECT_EXKATANAFX", "EXPowerKatanaSwingFX", 30, 10);	  // Ä«Å¸³ª Å©¸®Æ¼ÄÃ ÀÌÆåÆ®
 
 
 
@@ -524,6 +546,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("BabyBatBulletFx","BabyBatBulletFx",15,50);
 	EFFECT_MANAGER->addEffect("BombPouch2", "BombPouch2", 15, 50);
 	EFFECT_MANAGER->addEffect("HeartOfCosmosF", "HeartOfCosmosF", 15, 50);
+	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 
 	//** Boss
 	// * Belial

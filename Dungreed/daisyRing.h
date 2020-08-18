@@ -4,11 +4,13 @@
 
 
 
-class daisyRing : public Item
+class DaisyRing : public Item
 {
 private:
 	
 
+	int _DaisyRingStat[11];
+	int _count;
 	
 	
 

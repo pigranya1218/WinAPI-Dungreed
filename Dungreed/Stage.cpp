@@ -7,11 +7,14 @@ void Stage::init()
 	_objectMgr = new ObjectManager;
 	
 	_npcMgr = new NpcManager;
-	
+	_npcMgr->setStage(this);
+
 	_enemyMgr = new EnemyManager;
+	_enemyMgr->setStage(this);
 	
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
+	_projectileMgr->setEnemyManager(_enemyMgr);
 }
 
 void Stage::release()
@@ -373,7 +376,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 	}
 }
 
-void Stage::moveTo(GameObject* object, Vector2 const moveDir)
+void Stage::moveTo(GameObject* object, Vector2 const moveDir, bool checkCollisionGround, bool checkCollisionPlatform)
 {
 	object->setIsStand(false);
 	FloatRect lastRc = FloatRect(object->getPosition(), object->getSize(), PIVOT::CENTER);
@@ -389,8 +392,11 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 			{
 				if (lastRc.bottom <= _collisionPlatforms[i].b && newRc.bottom > _collisionPlatforms[i].b)
 				{
-					newRc.bottom = _collisionPlatforms[i].b;
-					newRc.top = newRc.bottom - object->getSize().y;
+					if (checkCollisionPlatform)
+					{
+						newRc.bottom = _collisionPlatforms[i].b;
+						newRc.top = newRc.bottom - object->getSize().y;
+					}
 					object->setIsStand(true); // 땅에 서있는 경우
 				}
 			}
@@ -403,8 +409,11 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 						if (_collisionPlatforms[i].getValueType(lastRc.left, lastRc.bottom) != LINEAR_VALUE_TYPE::DOWN
 							&& _collisionPlatforms[i].getValueType(newRc.left, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
 						{
-							newRc.bottom = _collisionPlatforms[i].getY(newRc.left);
-							newRc.top = newRc.bottom - object->getSize().y;
+							if (checkCollisionPlatform)
+							{
+								newRc.bottom = _collisionPlatforms[i].getY(newRc.left);
+								newRc.top = newRc.bottom - object->getSize().y;
+							}
 							object->setIsStand(true);
 						}
 					}
@@ -416,8 +425,11 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 						if (_collisionPlatforms[i].getValueType(lastRc.right, lastRc.bottom) != LINEAR_VALUE_TYPE::DOWN
 							&& _collisionPlatforms[i].getValueType(newRc.right, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
 						{
-							newRc.bottom = _collisionPlatforms[i].getY(newRc.right);
-							newRc.top = newRc.bottom - object->getSize().y;
+							if (checkCollisionPlatform)
+							{
+								newRc.bottom = _collisionPlatforms[i].getY(newRc.right);
+								newRc.top = newRc.bottom - object->getSize().y;
+							}
 							object->setIsStand(true);
 						}
 					}
@@ -430,11 +442,14 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 	// 땅 사각형 검사
 	for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
-		if (_collisionGroundRects[i].intersectEffect(newRc))
+		if (checkCollisionGround)
 		{
-			if (newRc.bottom == _collisionGroundRects[i].top)
+			if (_collisionGroundRects[i].intersectEffect(newRc))
 			{
-				object->setIsStand(true);
+				if (newRc.bottom == _collisionGroundRects[i].top)
+				{
+					object->setIsStand(true);
+				}
 			}
 		}
 	}
@@ -448,8 +463,11 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 			{
 				if (_collisionGroundLines[i].getValueType(newRc.left, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
 				{
-					newRc.bottom = _collisionGroundLines[i].getY(newRc.left);
-					newRc.top = newRc.bottom - object->getSize().y;
+					if (checkCollisionGround)
+					{
+						newRc.bottom = _collisionGroundLines[i].getY(newRc.left);
+						newRc.top = newRc.bottom - object->getSize().y;
+					}
 					object->setIsStand(true);
 				}
 			}
@@ -460,8 +478,11 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir)
 			{
 				if(_collisionGroundLines[i].getValueType(newRc.right, newRc.bottom) == LINEAR_VALUE_TYPE::DOWN)
 				{
-					newRc.bottom = _collisionGroundLines[i].getY(newRc.right);
-					newRc.top = newRc.bottom - object->getSize().y;
+					if (checkCollisionGround)
+					{
+						newRc.bottom = _collisionGroundLines[i].getY(newRc.right);
+						newRc.top = newRc.bottom - object->getSize().y;
+					}
 					object->setIsStand(true);
 				}
 			}
@@ -490,6 +511,16 @@ bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 Vector2 Stage::getPlayerPos()
 {
 	return _stageManager->getPlayerPos();
+}
+
+void Stage::showDamage(DamageInfo info, Vector2 pos)
+{
+	_stageManager->showDamage(info, pos);
+}
+
+void Stage::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	_stageManager->showEnemyHp(maxHp, curHp, pos);
 }
 
 

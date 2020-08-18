@@ -31,8 +31,10 @@ protected:
 	float				_scale;			// 렉트와 출력에 사용할 스케일
 	float				_detectRange;	// 플레이어 감지 거리	
 
-	//Synthesize(float, _curHp, Hp);
-	//Synthesize(float, _maxHp, Hp);
+	float _curHp;
+	float _maxHp;
+
+	vector<size_t>		_attackedId; // 최근 공격받았던 공격들의 아이디 값들을 저장하는 벡터, 최대 10칸 정도 저장하면 적당할 듯
 
 	// 탄막 사용 시
 	struct tagShootingInfo
@@ -174,27 +176,64 @@ protected:
 		}
 	};	
 
+	// 피격 관련
+	struct tagHitInfo
+	{
+		bool isHit;
+
+		float hitDelay;
+		float hitCount;
+
+		float knockDelay;
+		float knockCount;
+
+		bool hitUpdate(const float timeElapsed)
+		{
+			hitCount += timeElapsed;
+
+			if (hitCount >= hitDelay)
+			{
+				hitCount = 0;
+				return true;
+			}
+			return false;
+		}
+	};
+
+	tagHitInfo	_hit;
+	tagMoveInfo	_moving;
+
 public:
 	virtual void init() {}
-	virtual void init(Vector2 pos) {}
+	virtual void init(const Vector2& pos) {}
 	virtual void init(const Vector2& pos, DIRECTION direction) {}
-	virtual void release() {};
-	virtual void update(float const timeElapsed) {};
-	virtual void render() {};
+	virtual void release() = 0;
+	virtual void update(float const timeElapsed) = 0;
+	virtual void render() = 0;
 
 	virtual void setState(ENEMY_STATE state) {};
 
+	virtual void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed) {}
+
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
 
+	// 현재체력 접근자 설정자
+	void setCurHp(float curHp) { _curHp = curHp; }
+	float getCurHp() const { return _curHp; }
+
+	// 최대체력 접근자 설정자
+	void setMaxHp(float maxHp) { _maxHp = maxHp; }
+	float getMaxHp() const { return _maxHp; }
+
 	// EnemyManager에서 체크를 위해 호출
-	bool isHit(FloatRect* rc, AttackInfo* info) { return false; }
-	bool isHit(FloatCircle* circle, AttackInfo* info) { return false; }
-	bool isHit(Projectile* projectile, AttackInfo* info) { return false; }
+	bool isHit(FloatRect* rc, AttackInfo* info);
+	bool isHit(FloatCircle* circle, AttackInfo* info);
+	bool isHit(Projectile* projectile);
 
 	// Enemy에서 만약 맞았다면 호출될 가상함수
 	virtual bool hitEffect(FloatRect* rc, AttackInfo* info) { return false; }
-	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info) { return false; }
-	virtual bool hitEffect(Projectile* projectile, AttackInfo* info) { return false; }
+	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info);
+	virtual bool hitEffect(Projectile* projectile);
 
 	void setDetectRange(float const range) { _detectRange = range; }
 };

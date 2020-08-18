@@ -28,13 +28,18 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	_moving.delay = 3;
 	_moving.force = Vector2(250, 0);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
+	
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
 
 	// 총알 초기화
-	_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 1, 1, 500, false, true, true, true, true);
+	_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 1, 1, 500, false, true, true, true, false);
 
 	_isDetect = 0;
 
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void BatRed::release()
@@ -59,6 +64,7 @@ void BatRed::update(float const timeElapsed)
 		_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 	}
 
+	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -75,12 +81,8 @@ void BatRed::update(float const timeElapsed)
 		case ENEMY_STATE::MOVE:
 		{
 			// 이동
-			Vector2 moveDir(0, 0);
-
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
 			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);
-
-			_enemyManager->moveEnemy(this, moveDir);
 
 			// 일정 주기로 공격
 			if (_isDetect)
@@ -122,6 +124,9 @@ void BatRed::update(float const timeElapsed)
 		}		
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
+
+	_enemyManager->moveEnemy(this, moveDir);
 
 	_ani->frameUpdate(timeElapsed);
 
@@ -131,10 +136,15 @@ void BatRed::update(float const timeElapsed)
 void BatRed::render()
 {
 	_img->setScale(_scale);
-
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp != _maxHp)
+	{
+		// DEBUG TEST
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void BatRed::setState(ENEMY_STATE state)
@@ -146,8 +156,10 @@ void BatRed::setState(ENEMY_STATE state)
 		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{
+			_imageName = "Bat/Red/Move";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Red/Move");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -156,8 +168,10 @@ void BatRed::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Bat/Red/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Red/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
@@ -170,4 +184,36 @@ void BatRed::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void BatRed::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				case ENEMY_STATE::MOVE:
+				{
+					_imageName = "Bat/Red/Move";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Bat/Red/Attack";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+
+		return;
+	}
+	_moving.force.x = 350;
 }

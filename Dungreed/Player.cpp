@@ -10,10 +10,15 @@
 #include "KeresScythe.h"
 #include "MartialArtOfTiger.h"
 #include "PickaxeRed.h"
+#include "PowerKatana.h"
+#include "QuarterStaffBig.h"
+#include "BigPaintBlush.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
 #include "Boomerang.h"
+#include "GatlingGun.h"
+#include "MagicStick.h"
 
 #include "SpikeBall.h"
 #include "IceBall.h"
@@ -30,12 +35,39 @@
 #include "HeartOfCosmos.h"
 #include "DemonBoots.h"
 #include "MultiBullet.h"
+#include "DaisyRing.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
 void Player::updateAdjustStat()
 {
 	_adjustStat = _costume->getBaseStat();
+
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_adjustStat = _adjustStat + _equippedWeapon[_currWeaponIndex]->getAddStat();
+	}
+	else
+	{
+		_adjustStat = _adjustStat + _hand->getAddStat();
+	}
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (_equippedAcc[i] != nullptr)
+		{
+			_adjustStat = _adjustStat + _equippedAcc[i]->getAddStat();
+		}
+	}
+
+	if (_equippedWeapon[_currWeaponIndex] != nullptr)
+	{
+		_equippedWeapon[_currWeaponIndex]->equip(this);
+	}
+	else
+	{
+		_hand->equip(this);
+	}
 }
 
 void Player::swap(Item *& a, Item *& b)
@@ -43,6 +75,7 @@ void Player::swap(Item *& a, Item *& b)
 	Item* temp = a;
 	a = b;
 	b = temp;
+	updateAdjustStat();
 }
 
 void Player::attack(FloatRect* rect, AttackInfo* info)
@@ -57,6 +90,11 @@ void Player::attack(FloatRect* rect, AttackInfo* info)
 	}
 
 	// 플레이어 스탯 적용 (위력, 크리티컬)
+	info->minDamage *= ((100 + _adjustStat.power) / 100);
+	info->maxDamage *= ((100 + _adjustStat.power) / 100);
+	info->critical += _adjustStat.criticalChance;
+	info->criticalDamage += _adjustStat.criticalDamage;
+	info->trueDamage += _adjustStat.trueDamage;
 
 	_gameScene->attack(rect, info);
 }
@@ -72,7 +110,12 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 		}
 	}
 
-	// 플레이어 스탯 적용 (위력, 크리티컬)
+	// TODO : 플레이어 스탯 적용 (위력, 크리티컬)
+	info->minDamage *= ((100 + _adjustStat.power) / 100);
+	info->maxDamage *= ((100 + _adjustStat.power) / 100);
+	info->critical += _adjustStat.criticalChance;
+	info->criticalDamage += _adjustStat.criticalDamage;
+	info->trueDamage += _adjustStat.trueDamage;
 
 	_gameScene->attack(circle, info);
 }
@@ -89,6 +132,11 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 	}
 
 	// 플레이어 스탯 적용 (위력, 크리티컬)
+	info->minDamage *= ((100 + _adjustStat.power) / 100);
+	info->maxDamage *= ((100 + _adjustStat.power) / 100);
+	info->critical += _adjustStat.criticalChance;
+	info->criticalDamage += _adjustStat.criticalDamage;
+	info->trueDamage += _adjustStat.trueDamage;
 
 	_gameScene->attack(projectile, info);
 }
@@ -103,7 +151,6 @@ void Player::init()
 	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE);
 	_costume->init();
 
-	updateAdjustStat();
 	_level = 1;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
@@ -118,6 +165,7 @@ void Player::init()
 	_equippedWeapon.resize(2);
 	_equippedAcc.resize(4);
 	_inventory.resize(15);
+
 
 	babyGreenBat* testAcc1 = new babyGreenBat;
 	testAcc1->init();
@@ -143,9 +191,9 @@ void Player::init()
 	_inventory[8] = testAcc9;
 
 
-	bombPouch* testAcc5 = new bombPouch;
-	testAcc5->init();
-	_inventory[5] = testAcc5;
+	//bombPouch* testAcc5 = new bombPouch;
+	//testAcc5->init();
+	//_inventory[5] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
@@ -177,11 +225,15 @@ void Player::init()
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
-	_inventory[7] = testAcc13;
+	_inventory[5] = testAcc13;
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
 	_inventory[0] = testAcc14;
+
+	DaisyRing* testAcc15 = new DaisyRing;
+	testAcc15->init();
+	_inventory[7] = testAcc15;
 
 	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
@@ -196,23 +248,29 @@ void Player::init()
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
-	PickaxeRed* testWeapon4 = new PickaxeRed;
+	PowerKatana* testWeapon4 = new PowerKatana;
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
 
-	/*Boomerang* testWeapon5 = new Boomerang;
+	/*BigPaintBlush* testWeapon5 = new BigPaintBlush;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	MatchLockGun* testWeapon5 = new MatchLockGun;
+	GatlingGun* testWeapon5 = new GatlingGun;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
+
+	//MagicStick* testWeapon5 = new MagicStick;
+	//testWeapon5->init();
+	//_inventory[14] = testWeapon5;
 
 	_hand = new Punch;
 	_hand->init();
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
+
+	updateAdjustStat();
 }
 
 void Player::release()
@@ -260,6 +318,7 @@ void Player::update(float const elapsedTime)
 	{
 		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
+		updateAdjustStat();
 	}
 
 	// 장비 교체 시간 딜레이
@@ -270,7 +329,7 @@ void Player::update(float const elapsedTime)
 	}
 
 	// 공격
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)) && !_gameScene->isUIActive())
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)) && !_gameScene->isUIActive())
 	{
 		if (_equippedWeapon[_currWeaponIndex] == nullptr)
 		{
@@ -506,7 +565,7 @@ void Player::render()
 		_hand->frontRender(this);
 	}
 
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
+	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }
 
 bool Player::isHit(FloatRect* rc, AttackInfo* info)
@@ -683,5 +742,29 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			if (indexA == indexB) return;
 			swap(_inventory[indexA - 6], _inventory[indexB - 6]);
 		}
+	}
+}
+
+float Player::getAttackSpeed()
+{
+	if (_equippedWeapon[_currWeaponIndex] == nullptr)
+	{
+		return _hand->getAttackSpeed();
+	}
+	else
+	{
+		return _equippedWeapon[_currWeaponIndex]->getAttackSpeed();
+	}
+}
+
+float Player::getReloadSpeed()
+{
+	if (_equippedWeapon[_currWeaponIndex] == nullptr)
+	{
+		return _hand->getReloadSpeed();
+	}
+	else
+	{
+		return _equippedWeapon[_currWeaponIndex]->getReloadSpeed();
 	}
 }

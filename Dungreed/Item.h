@@ -43,7 +43,8 @@ protected:
 
 	
 	int _price; // 가격
-	PlayerStat _addStat; // 아이템 스탯 옵션
+	PlayerStat _addStat; // 아이템 스탯 옵션 (플레이어의 스탯에 더해지는 스탯)
+	PlayerStat _adjustStat; // 플레이어의 스탯이 반영된 무기 스탯 (현재는 attackSpeed, reloadSpeed만 신경씀)
 	
 	ProjectileManager* _projecttileMng;		//투사체 매니저
 
@@ -65,7 +66,7 @@ public:
 
 	virtual void getHit(Vector2 const position) = 0; // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
-	virtual void equip(Player* player) const {}; // 아이템을 장착했을 때 호출될 함수
+	virtual void equip(Player* player) {}; // 아이템을 장착했을 때 호출될 함수(플레이어 스탯에 비례하여 장비 스탯 변화, 장비 위치 변화 등)
 	
 	virtual wstring getBulletUI() { return L""; }
 	virtual float getBulletRatio() { return 0.f; }
@@ -79,5 +80,7 @@ public:
 	wstring getDisplayText() const noexcept { return _displayText; }
 	Image* getIconImg() const noexcept { return _iconImg; }
 	PlayerStat getAddStat() const noexcept { return _addStat; }
-	
+	float getAttackSpeed() { return _adjustStat.attackSpeed; }
+	float getReloadSpeed() { return _adjustStat.reloadSpeed; }
+
 };

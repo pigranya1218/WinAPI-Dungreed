@@ -34,12 +34,17 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_skill, sizeof(_skill));
 	_skill.delay = 1;		// 돌진 딜레이 초기화
 	_skill.distance = 800;	// 돌진 시전 시 최대 거리
+
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
 	
 	// 변수 초기화
 	_isDetect = 0;				// 플레이어 감지 플래그
 	_rushPos = Vector2(0, 0);	// 돌진 시작 위치
 
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void Minotaurs::release()
@@ -176,7 +181,7 @@ void Minotaurs::update(float const timeElapsed)
 		}
 		break;
 	}
-
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	// 마지막에 중력 적용	
 	if (_isStand && _moving.force.y == 0)
@@ -226,6 +231,14 @@ void Minotaurs::render()
 	}
 	// 최종 렌더
 	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp != _maxHp)
+	{
+		// DEBUG TEST
+		Vector2 renderPos = _position;
+		renderPos.y += 50;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void Minotaurs::setState(ENEMY_STATE state)
@@ -237,30 +250,36 @@ void Minotaurs::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Minotaurs/Idle";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Minotaurs/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 		}	
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Minotaurs/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Minotaurs/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 		}
 		break;
 		case ENEMY_STATE::SKILL:
 		{
-			_img = IMAGE_MANAGER->findImage("Minotaurs/Skill");
+			_imageName = "Minotaurs/Skill";
+
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 		}
 		break;
@@ -269,6 +288,39 @@ void Minotaurs::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void Minotaurs::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_imageName = "Minotaurs/Idle";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Minotaurs/Attack";
+				}
+				break;
+				case ENEMY_STATE::SKILL:
+				{
+					_imageName = "Minotaurs/Skill";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		/*_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));*/
 	}
 }
 

@@ -88,6 +88,32 @@ void UIManager::release()
 
 void UIManager::update(float const elaspedTime)
 {
+
+	// Damage UI update
+	for (int i = 0; i < _damageUI.size();)
+	{
+		tagDamageUI damageUI = _damageUI[i];
+		if (_damageUI[i].remainTimes < 0)
+		{
+			if (_damageUI[i].alpha == 0)
+			{
+				_damageUI.erase(_damageUI.begin() + i);
+				continue;
+			}
+			else
+			{
+				_damageUI[i].alpha = max(0, _damageUI[i].alpha - elaspedTime * 2);
+			}
+		}
+		else
+		{
+			_damageUI[i].pos.y -= elaspedTime * 40;
+			_damageUI[i].remainTimes -= elaspedTime;
+		}
+		i++;
+
+	}
+
 	// HP bar animation
 	_hpUI.hpAni->frameUpdate(elaspedTime);
 
@@ -199,6 +225,25 @@ void UIManager::render()
 
 	}
 	{
+		// DAMAGE UI
+		for (int i = 0; i < _damageUI.size(); i++)
+		{
+			D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 50), CAMERA->getRelativeY(_damageUI[i].pos.y), 
+				to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, _damageUI[i].fontSize,
+				100, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+		}
+
+		// ENEMY HP UI
+		for (int i = 0; i < _enemyHpUI.size(); i++)
+		{
+			FloatRect bg = FloatRect(_enemyHpUI[i].pos, Vector2(64, 20), PIVOT::CENTER);
+			FloatRect gage = FloatRect(_enemyHpUI[i].pos, Vector2(60, 16), PIVOT::CENTER);
+			gage.right = gage.left + (_enemyHpUI[i].currHp / _enemyHpUI[i].maxHp) * gage.getWidth();
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(bg), 16, 15, 28, 1);
+			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(gage), 133, 14, 0, 1);
+		}
+		_enemyHpUI.clear();
+
 		// PLAYER HPBAR
 		_hpUI.hpBgImg->render(_hpUI.hpBg.getCenter(), _hpUI.hpBg.getSize());
 		float hpRatio = (static_cast<float>(_player->getCurrHp()) / _player->getMaxHp());
@@ -391,4 +436,52 @@ void UIManager::render()
 			_restaurantUI.render();
 		}
 	}
+}
+
+void UIManager::showDamage(DamageInfo damage, Vector2 pos)
+{
+	tagDamageUI damageUI;
+	damageUI.value = damage.damage;
+	damageUI.pos = pos;
+	damageUI.remainTimes = 1;
+	damageUI.fontSize = 30;
+	if (damage.isCritical)
+	{
+		damageUI.fontSize = 35;
+		damageUI.textColor = RGB(243, 152, 0);
+	}
+	else if (damage.damage < 20)
+	{
+		damageUI.fontSize = 30;
+		damageUI.textColor = RGB(255, 255, 255);
+	}
+	else
+	{
+		damageUI.fontSize = 30; 
+		damageUI.textColor = RGB(255, 212, 0);
+	}
+	damageUI.alpha = 1;
+	_damageUI.push_back(damageUI);
+
+	if (damage.trueDamage != 0)
+	{
+		tagDamageUI trueDamageUI;
+		trueDamageUI.value = damage.trueDamage;
+		trueDamageUI.pos = pos;
+		trueDamageUI.pos.x += 10;
+		trueDamageUI.pos.y += 10;
+		trueDamageUI.remainTimes = 1;
+		trueDamageUI.textColor = RGB(255, 255, 255);
+		trueDamageUI.alpha = 1;
+		_damageUI.push_back(trueDamageUI);
+	}
+}
+
+void UIManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	tagEnemyHpUI hpUI;
+	hpUI.pos = pos;
+	hpUI.maxHp = maxHp;
+	hpUI.currHp = curHp;
+	_enemyHpUI.push_back(hpUI);
 }

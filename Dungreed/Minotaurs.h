@@ -7,7 +7,6 @@ class Minotaurs : public Enemy
 private:
 	tagAttackInfo	_skill;		// 돌진 모션
 	tagAttackInfo	_attack;	// 도끼 휘두르는 모션
-	tagMoveInfo		_moving;	// 이동 전용
 
 	Vector2			_lastPos;	// 이전 좌표
 	Vector2			_currPos;	// 현재 좌표
@@ -20,6 +19,8 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
+
+	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
 
 	bool playerCollision(const Vector2& playerPos);
 };

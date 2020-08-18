@@ -17,6 +17,7 @@ private:
 
 	bool _isAttack;
 	float _chargeDelay;
+	float _effectAngleRadianValue;
 	Image* _img;
 	Animation* _ani;
 	Vector2 renderPosHand;
