@@ -10,6 +10,7 @@ void UIManager::setPlayer(Player * player)
 	_inventoryUI.setPlayer(player);
 	_statUI.setPlayer(player);
 	_costumeUI.setPlayer(player);
+	_restaurantUI.setPlayer(player);
 }
 
 void UIManager::init()
@@ -72,6 +73,9 @@ void UIManager::init()
 
 	// COSTUME UI
 	_costumeUI.init();
+
+	// RESTAURANT UI
+	_restaurantUI.init();
 }
 
 void UIManager::release()
@@ -79,6 +83,7 @@ void UIManager::release()
 	_inventoryUI.release();
 	_statUI.release();
 	_costumeUI.release();
+	_restaurantUI.release();
 }
 
 void UIManager::update(float const elaspedTime)
@@ -118,7 +123,11 @@ void UIManager::update(float const elaspedTime)
 	{
 		_costumeUI.setActive(!_costumeUI.isActive());
 	}
-
+	// Restaurant Open
+	if (KEY_MANAGER->isOnceKeyDown(VK_F2))
+	{
+		_restaurantUI.setActive(!_restaurantUI.isActive());
+	}
 	
 
 	bool isClose = false;
@@ -163,11 +172,24 @@ void UIManager::update(float const elaspedTime)
 			_costumeUI.update(elaspedTime);
 		}
 	}
+	if (_restaurantUI.isActive())
+	{
+		if (isClose)
+		{
+			_restaurantUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_restaurantUI.update(elaspedTime);
+		}
+	}
 
 	_isActive = false;
 	_isActive |= _inventoryUI.isActive();
 	_isActive |= _statUI.isActive();
 	_isActive |= _costumeUI.isActive();
+	_isActive |= _restaurantUI.isActive();
 }
 
 void UIManager::render()
@@ -361,6 +383,12 @@ void UIManager::render()
 		if (_costumeUI.isActive())
 		{
 			_costumeUI.render();
-		}	
+		}
+
+		// RestaurantUI
+		if (_restaurantUI.isActive())
+		{
+			_restaurantUI.render();
+		}
 	}
 }
