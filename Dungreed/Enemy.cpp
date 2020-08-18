@@ -11,9 +11,6 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 	// 생성해놓은 총알을
 	for (int i = 0; i < fireLoop; i++)
 	{
-		AttackInfo* attackInfo = new AttackInfo;
-		attackInfo->team = OBJECT_TEAM::ENEMY;
-
 		// 발사한다.
 		if (!bullets.empty())
 		{

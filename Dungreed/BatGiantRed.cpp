@@ -25,8 +25,10 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.02, 1, 500, false, true, true, true);
-
+	// 투사체 초기화
+	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 0), _scale, 0.02f, 1.5f, false, true, true, false, true, false);
+	_shooting.attackInit(10, 15, 3);
+	
 	_isDetect = 0;
 	_detectRange = 300;
 	_renderNum = -1;

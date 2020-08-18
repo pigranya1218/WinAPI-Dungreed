@@ -22,7 +22,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 
 	// 공격 관련 변수 초기화
 	//ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 1, 700, true, true, false, false);
+	//_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 1, 700, true, true, false, false);
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));

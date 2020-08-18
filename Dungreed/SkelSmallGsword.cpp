@@ -2,6 +2,8 @@
 #include "EnemyManager.h"
 #include "SkelSmallGsword.h"
 
+#define DEFSPEED 150.0f
+
 void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 {
 	_ani = new Animation;
@@ -23,7 +25,7 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 0.3;
-	_moving.force = Vector2(150, 0);
+	_moving.force = Vector2(DEFSPEED, 0.f);
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_attack, sizeof(_attack));
@@ -169,16 +171,20 @@ void SkelSmallGsword::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Skel/Small/Idle";
+
 			_ani->stop();
 			_weaponAni->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 		}
 		break;
 		case ENEMY_STATE::MOVE:
 		{
+			_imageName = "Skel/Small/Move";
+
 			_ani->stop();
 			_weaponAni->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Move");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(10);
@@ -187,9 +193,11 @@ void SkelSmallGsword::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Skel/Small/Idle";
+
 			_ani->stop();
 			_weaponAni->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_weaponAni->start();
 		}
 		break;
@@ -231,7 +239,5 @@ void SkelSmallGsword::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, 
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
 		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
-
-		return;
 	}
 }

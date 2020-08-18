@@ -19,18 +19,22 @@ void ProjectileManager::update(float const elapsedTime)
 {
 	for (int i = 0; i < _projectiles.size();)
 	{
-		_projectiles[i]->update(elapsedTime);
+		//_projectiles[i]->update(elapsedTime);
 
 		if (!_projectiles[i]->getActive())
 		{
 			_projectiles[i]->release();
-			delete _projectiles[i];
+			SAFE_DELETE(_projectiles[i]);
 			_projectiles.erase(_projectiles.begin() + i);
 		}
 		else
 		{
 			++i;
 		}
+	}
+	for (int i = 0; i < _projectiles.size(); i++)
+	{
+		_projectiles[i]->update(elapsedTime);
 	}
 }
 

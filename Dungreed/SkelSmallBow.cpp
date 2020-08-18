@@ -43,7 +43,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
 
-	_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
+	//_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
 
 	// 플레이어 감지 변수 초기화
 	_isDetect = 0;
@@ -176,11 +176,10 @@ void SkelSmallBow::render()
 
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1, 2);
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
-		// DEBUG TEST
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
@@ -238,6 +237,7 @@ void SkelSmallBow::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, con
 			}
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
+			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;

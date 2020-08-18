@@ -123,7 +123,7 @@ void Minotaurs::update(float const timeElapsed)
 				if(_ani->isPlay()) _ani->pause();
 
 				// 돌진한다
-				_moving.force.x -= _moving.gravity.x;
+				_moving.force.x -= _moving.gravity.x * timeElapsed;
 				moveDir.x += (_moving.force.x) * timeElapsed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
 				//EFFECT_MANAGER->play("Minotaurs/Effect", Vector2(_position.x, _position.y), IMAGE_MANAGER->findImage("Minotaurs/Effect")->getFrameSize() * _scale);

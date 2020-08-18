@@ -2,7 +2,8 @@
 #include "EnemyManager.h"
 #include "Ovibos.h"
 
-#define RUSHSPEED 1200.0f
+#define RUSHSPEED 500.0f
+#define GRAVITYX 600.0f
 
 void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 {
@@ -18,7 +19,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(RUSHSPEED, 0.0f);
-	_moving.gravity = Vector2(50, 4000);
+	_moving.gravity = Vector2(GRAVITYX, 4000.0f);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -48,35 +49,30 @@ void Ovibos::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			switch (_direction)
+			if (_ani->getPlayIndex() == _img->getMaxFrameX() - 1)
 			{
-				case DIRECTION::LEFT:
+				switch (_direction)
 				{
-					if (_position.x < playerpos.x)
+					case DIRECTION::LEFT:
 					{
-						if (_ani->getPlayIndex() == _img->getMaxFrameX() - 1)
+						if (_position.x < playerpos.x)
 						{
 							if (_ani->isPlay()) _ani->pause();
-
-							_moving.force.x -= _moving.gravity.x;
+							_moving.force.x -= _moving.gravity.x * timeElapsed;
 						}
 					}
-				}
-				break;
-				case DIRECTION::RIGHT:
-				{
-					if (_position.x > playerpos.x)
+					break;
+					case DIRECTION::RIGHT:
 					{
-						if (_ani->getPlayIndex() == _img->getMaxFrameX() - 1)
+						if (_position.x > playerpos.x)
 						{
 							if (_ani->isPlay()) _ani->pause();
-
-							_moving.force.x -= _moving.gravity.x;
+							_moving.force.x -= _moving.gravity.x * timeElapsed;
 						}
 					}
+					break;
 				}
-				break;
-			}
+			}			
 
 			moveDir.x += timeElapsed * _moving.force.x * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
@@ -181,18 +177,24 @@ void Ovibos::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
 		}
-		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		/*_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
-		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));*/
 	}
 }
 
 bool Ovibos::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
+	if (_state == ENEMY_STATE::IDLE || !_ani->isPlay())
+	{
+		setState(ENEMY_STATE::ATTACK);
+		_moving.force.x = RUSHSPEED;
+	}
+
 	_hit.isHit = true;
 	_hit.count = 0;	
 
-	_moving.gravity.x = info->knockBack;
+	_moving.gravity.x = GRAVITYX + info->knockBack;
 
 	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
 
@@ -201,9 +203,7 @@ bool Ovibos::hitEffect(FloatCircle* circle, AttackInfo* info)
 	renderPos.y -= _size.y * 0.25f;
 	renderPos.x += RANDOM->getFromFloatTo(-_size.x * 0.5f, _size.x * 0.5f);
 	_enemyManager->showDamage(damageInfo, renderPos);
-	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
-
-	setState(ENEMY_STATE::ATTACK);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));	
 
 	_direction = (_enemyManager->getPlayerPos().x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 
@@ -212,11 +212,17 @@ bool Ovibos::hitEffect(FloatCircle* circle, AttackInfo* info)
 
 bool Ovibos::hitEffect(Projectile* projectile)
 {
+	if (_state == ENEMY_STATE::IDLE || !_ani->isPlay())
+	{
+		setState(ENEMY_STATE::ATTACK);
+		_moving.force.x = RUSHSPEED;
+	}
+
 	AttackInfo* info = projectile->getAttackInfo();
 	_hit.isHit = true;
 	_hit.count = 0;
 
-	_moving.gravity.x = info->knockBack;
+	_moving.gravity.x = GRAVITYX + info->knockBack;
 
 	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
 
@@ -225,9 +231,7 @@ bool Ovibos::hitEffect(Projectile* projectile)
 	renderPos.y -= _size.y * 0.25f;
 	renderPos.x += RANDOM->getFromFloatTo(-_size.x * 0.5f, _size.x * 0.5f);
 	_enemyManager->showDamage(damageInfo, renderPos);
-	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
-
-	setState(ENEMY_STATE::ATTACK);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));	
 
 	_direction = (_enemyManager->getPlayerPos().x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 
