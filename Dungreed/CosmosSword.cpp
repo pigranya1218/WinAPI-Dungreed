@@ -175,9 +175,7 @@ void CosmosSword::frontRender(Player* player)
 		}
 	}
 
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_attackDebug.origin), _attackDebug.size, D2D1::ColorF::Enum::Black, 2);
-	D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_attackDebug.origin), CAMERA->getRelativeV2(Vector2(_attackDebug.origin.x + cosf(_attackDebug.startRadian) * _attackDebug.size, _attackDebug.origin.y + -sinf(_attackDebug.startRadian) * _attackDebug.size)));
-	D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_attackDebug.origin), CAMERA->getRelativeV2(Vector2(_attackDebug.origin.x + cosf(_attackDebug.endRadian) * _attackDebug.size, _attackDebug.origin.y + -sinf(_attackDebug.endRadian) * _attackDebug.size)));
+	_attackDebug.render(true);
 }
 
 void CosmosSword::displayInfo()
@@ -229,6 +227,9 @@ void CosmosSword::attack(Player* player)
 	attackInfo->knockBack = 15;
 
 	player->attack(attackCircle, attackInfo);
+
+	delete attackCircle;
+	delete attackInfo;
 }
 
 void CosmosSword::attack(FloatRect* rect, AttackInfo* info)

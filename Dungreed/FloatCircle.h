@@ -16,5 +16,7 @@ public:
 	bool isCollisionX(float x, Vector2 rangeY);
 	bool isCollisionY(float y, Vector2 rangeX);
 	bool isInsideRadian(float radian);
+
+	void render(bool useCamera);
 };
 

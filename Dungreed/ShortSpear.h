@@ -15,6 +15,10 @@ private:
 	bool _reverseMove;
 	bool _drawEffect;
 
+
+	FloatCircle* _attackCircle;
+	AttackInfo*	_attackInfo;
+
 public:
 	virtual void init();
 	virtual void release();
