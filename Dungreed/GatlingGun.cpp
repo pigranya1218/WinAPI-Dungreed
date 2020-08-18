@@ -34,6 +34,13 @@ void GatlingGun::init()
 	_reloadAni->init(_reloadEffect->getWidth(), _reloadEffect->getHeight(), _reloadEffect->getMaxFrameX(), _reloadEffect->getMaxFrameY());
 	_reloadAni->setDefPlayFrame(false, false);
 	_reloadAni->setFPS(15);
+
+	//쏠때 이펙트
+	_shootEffectImg = IMAGE_MANAGER->findImage("ShootEffect");
+	_shootEffectAni = new Animation;
+	_shootEffectAni->init(_shootEffectImg->getWidth(), _shootEffectImg->getHeight(), _shootEffectImg->getMaxFrameX(), _shootEffectImg->getMaxFrameY());
+	_shootEffectAni->setDefPlayFrame(false, false);
+	_shootEffectAni->setFPS(15);
 }
 
 void GatlingGun::release()
@@ -59,10 +66,12 @@ void GatlingGun::update(Player * player, float const elapsedTime)
 	}
 	_attackAni->frameUpdate(elapsedTime);
 	_reloadAni->frameUpdate(elapsedTime);
+	_shootEffectAni->frameUpdate(elapsedTime);
 
 	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
 		_attackAni->stop();
+		_shootEffectAni->stop();
 	}
 }
 
@@ -129,21 +138,30 @@ void GatlingGun::frontRender(Player * player)
 	renderPosHand02.x += ((isLeft) ? (_iconImg->getWidth() * 0.1f * 4) : -(_iconImg->getWidth() * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
 	renderPosHand02.y += 30; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
-	if (_drawEffect) // 발사 이펙트를 그린다
+	//if (_drawEffect) // 발사 이펙트를 그린다
+	//{
+	//	_drawEffect = false;
+	//	Vector2 effectPos = renderPosHand; // 손의 위치로부터
+	//	effectPos.x += 5;
+	//	//effectPos.y = renderPosHand.y + 15;
+
+	//	Image* effectImg = IMAGE_MANAGER->findImage("ShootEffect");
+	//	Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+
+	//	float length = _iconImg->getWidth() * 0.6f * 7; // 무기 길이만큼
+	//	effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+	//	effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+
+	//	EFFECT_MANAGER->play("L_Effect_Shoot", effectPos, effectSize, degree);
+	//}
+
+	if (_shootEffectAni->isPlay())
 	{
-		_drawEffect = false;
-		Vector2 effectPos = renderPosHand; // 손의 위치로부터
-		effectPos.x += 5;
-		//effectPos.y = renderPosHand.y + 15;
+		Vector2 shootEffectPos = renderPosHand;
 
-		Image* effectImg = IMAGE_MANAGER->findImage("ShootEffect");
-		Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
-
-		float length = _iconImg->getWidth() * 0.6f * 7; // 무기 길이만큼
-		effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-
-		EFFECT_MANAGER->play("L_Effect_Shoot", effectPos, effectSize, degree);
+		_shootEffectImg->setAngle(renderDegree);
+		_shootEffectImg->setScale(4);
+		_shootEffectImg->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _shootEffectAni);
 	}
 
 	// 재장전 중이라면 재장전 UI를 그린다.
@@ -194,7 +212,7 @@ void GatlingGun::attack(Player * player)
 	}
 
 	Vector2 shootPos = renderPosHand;
-	float length = _iconImg->getWidth() * 0.6f * 6; // 무기 길이만큼
+	float length = _iconImg->getWidth() * 0.6f * 9; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.05) : (0.05))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.1) : (0.1))) * length;
 	Image* _bulletImg = IMAGE_MANAGER->findImage("GunBullet");
@@ -223,6 +241,7 @@ void GatlingGun::attack(Player * player)
 	_drawEffect = true; // 이펙트 그리기
 
 	_attackAni->start();
+	_shootEffectAni->start();
 }
 
 void GatlingGun::attack(FloatRect * rect, AttackInfo * info)
