@@ -17,7 +17,7 @@ void Belial::init(const Vector2 & pos)
 	}
 
 	{
-		_scale = 6;
+		_scale = 5;
 		_head._size = _head._img->getFrameSize() * _scale;
 		_rHand._size = _rHand._img->getFrameSize() * _scale;
 		_lHand._size = _lHand._img->getFrameSize() * _scale;
@@ -82,25 +82,17 @@ void Belial::release()
 
 void Belial::update(float const timeElapsed)
 {
-	_count = RANDOM->getFromIntTo(0,10);
-	_head._size = _head._img->getFrameSize() * _scale;
-
+	_count = RANDOM->getFromIntTo(0, 10);
 	const Vector2 playerPos = _enemyManager->getPlayerPos();
 
-	Vector2 _moveDir(0,0);
+	Vector2 _moveDir(0, 0);
+
+	_head._size = _head._img->getFrameSize() * _scale;
+
 	_head._moveDir = _moveDir;
 	_rHand._moveDir = _moveDir;
 	_lHand._moveDir = _moveDir;
 
-
-	{
-		_back._Ani->stop();
-		_back._backimg = IMAGE_MANAGER->findImage("Belial/Back");
-		_back._Ani->init(_back._backimg->getWidth(), _back._backimg->getHeight(), _back._backimg->getMaxFrameX(), _back._backimg->getMaxFrameY());
-		_back._Ani->setDefPlayFrame(false, true);
-		_back._Ani->setFPS(10);
-		_back._Ani->start();
-	}
 
 	if (!_isDetect)
 	{
@@ -117,11 +109,11 @@ void Belial::update(float const timeElapsed)
 		{
 			_head._moving.gravity = _head._moving.gravity * (_direction == DIRECTION::UP ? (-1) : (1));
 		}
-		if (_head._attaking.update(timeElapsed)&&_rHand._State == ENEMY_STATE::IDLE)
+		if (_head._attaking.update(timeElapsed) && _rHand._State == ENEMY_STATE::IDLE)
 		{
 			setHeadState(ENEMY_STATE::ATTACK);
 		}
-	
+
 	}
 
 	case ENEMY_STATE::MOVE:
@@ -132,6 +124,7 @@ void Belial::update(float const timeElapsed)
 	case ENEMY_STATE::ATTACK:
 	{
 		_head._moving.gravity.y = 0;
+
 		if (!_head._Ani->isPlay())
 		{
 			_head._Ani->stop();
@@ -216,61 +209,61 @@ void Belial::update(float const timeElapsed)
 		}
 	}
 	switch (_lHand._State)
-		{
+	{
 
-		case ENEMY_STATE::IDLE:
+	case ENEMY_STATE::IDLE:
+	{
+		if (_isDetect)
 		{
-			if (_isDetect)
-			{
-				// 계속 움직임
-				_lHand._moving.angle = RANDOM->getFromFloatTo(0, PI2);
-			}
-			if (_lHand._moving.update(timeElapsed))
-			{
-
-			}
+			// 계속 움직임
+			_lHand._moving.angle = RANDOM->getFromFloatTo(0, PI2);
 		}
+		if (_lHand._moving.update(timeElapsed))
+		{
+
+		}
+	}
+	break;
+
+	//움직이고 
+	case ENEMY_STATE::MOVE:
+	{
+		_lHand._moveDir.y -= sinf(_lHand._moving.angle)* (timeElapsed *_lHand._moving.force.y);
+		setPosition(_position + _lHand._moveDir);
+
+		_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
+
+		_lHand._moving.angle = getAngle(_lHand._Position.x, _lHand._Position.y, playerPos.x, playerPos.y);
+		_lHand._moving.force.y = HANDSPEED;
+
+		if (_lHand._attaking.update(timeElapsed))
+		{
+			setLHandState(ENEMY_STATE::ATTACK);
+			setRHandState(ENEMY_STATE::IDLE);
+		}
+	}
+	break;
+	//발사
+	case ENEMY_STATE::ATTACK:
+	{
+		if (!_lHand._Ani->isPlay())
+		{
+			_lHand._Ani->stop();
+			_lHand._Ani->setPlayFrame(11, 15, false, true);
+			_lHand._Ani->start();
+		}
+		if (_lHand._attaking.update(timeElapsed))
+		{
+			setLHandState(ENEMY_STATE::IDLE);
+		}
+
+	}
+	break;
+
+	case ENEMY_STATE::DIE:
 		break;
 
-		//움직이고 
-		case ENEMY_STATE::MOVE:
-		{
-			_lHand._moveDir.y -= sinf(_lHand._moving.angle)* (timeElapsed *_lHand._moving.force.y);
-			setPosition(_position + _lHand._moveDir);
-
-			_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
-
-			_lHand._moving.angle = getAngle(_lHand._Position.x, _lHand._Position.y, playerPos.x, playerPos.y);
-			_lHand._moving.force.y = HANDSPEED;
-
-			if (_lHand._attaking.update(timeElapsed))
-			{
-				setLHandState(ENEMY_STATE::ATTACK);
-				setRHandState(ENEMY_STATE::IDLE);
-			}
-		}
-		break;
-		//발사
-		case ENEMY_STATE::ATTACK:
-		{
-			if (!_lHand._Ani->isPlay())
-			{
-				_lHand._Ani->stop();
-				_lHand._Ani->setPlayFrame(11, 15, false, true);
-				_lHand._Ani->start();
-			}
-			if (_lHand._attaking.update(timeElapsed))
-			{
-				setLHandState(ENEMY_STATE::IDLE);
-			}
-
-		}
-		break;
-
-		case ENEMY_STATE::DIE:
-			break;
-
-		}
+	}
 
 
 	//프레임 업데이트
@@ -285,6 +278,14 @@ void Belial::update(float const timeElapsed)
 		_head._Rect = rectMakePivot(_head._Position, _head._size, PIVOT::CENTER);
 		_rHand._Rect = rectMakePivot(_rHand._Position, _rHand._size, PIVOT::CENTER);
 		_lHand._Rect = rectMakePivot(_lHand._Position, _lHand._size, PIVOT::CENTER);
+	}
+
+	{
+		_back._backimg = IMAGE_MANAGER->findImage("Belial/Back");
+		_back._Ani->init(_back._backimg->getWidth(), _back._backimg->getHeight(), _back._backimg->getMaxFrameX(), _back._backimg->getMaxFrameY());
+		_back._Ani->setDefPlayFrame(false, true);
+		_back._Ani->setFPS(10);
+		_back._Ani->start();
 	}
 
 	_head._moveDir.y += (_head._moving.gravity.y * timeElapsed);
@@ -325,8 +326,8 @@ void Belial::setHeadState(ENEMY_STATE headState)
 	case ENEMY_STATE::IDLE :
 	{
 		_head._Rect = rectMakePivot(_head._Position, _size, PIVOT::CENTER);
-		_head._Ani->stop();
 		_head._img = IMAGE_MANAGER->findImage("Belial/Head/Idle");
+		_head._Ani->stop();
 		_head._Ani->init(_head._img->getWidth(), _head._img->getHeight(), _head._img->getMaxFrameX(), _head._img->getMaxFrameY());
 		_head._Ani->setDefPlayFrame(false,true);
 		_head._Ani->setFPS(10);
@@ -336,9 +337,8 @@ void Belial::setHeadState(ENEMY_STATE headState)
 		break;
 	case ENEMY_STATE::ATTACK:
 	{
-		_head._Ani->stop();
-
 		_head._img = IMAGE_MANAGER->findImage("Belial/Head/Attack");
+		_head._Ani->stop();
 		_head._Ani->init(_head._img->getWidth(), _head._img->getHeight(), _head._img->getMaxFrameX(), _head._img->getMaxFrameY());
 		_head._Ani->setDefPlayFrame(false, false);
 		_head._Ani->setFPS(10);
@@ -414,13 +414,6 @@ void Belial::setLHandState(ENEMY_STATE LhandState)
 		_lHand._Ani->setFPS(15);
 		_lHand._Ani->start();
 
-
-
-
-
-
-
-
 	}
 	break;
 	case ENEMY_STATE::ATTACK:
@@ -431,13 +424,6 @@ void Belial::setLHandState(ENEMY_STATE LhandState)
 		_lHand._Ani->setDefPlayFrame(false, true);
 		_lHand._Ani->setFPS(8);
 		_lHand._Ani->start();
-
-
-
-
-
-
-
 
 	}
 	break;

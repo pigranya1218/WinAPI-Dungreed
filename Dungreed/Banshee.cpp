@@ -75,7 +75,6 @@ void Banshee::update(float const timeElapsed)
 			break;
 		}
 	}
-
 	_enemyManager->moveEnemy(this, moveDir);
 
 	_ani->frameUpdate(timeElapsed);

@@ -176,7 +176,7 @@ protected:
 
 public:
 	virtual void init() {}
-	virtual void init(Vector2 pos) {}
+	virtual void init(const Vector2& pos) {}
 	virtual void init(const Vector2& pos, DIRECTION direction) {}
 	virtual void release() {};
 	virtual void update(float const timeElapsed) {};
