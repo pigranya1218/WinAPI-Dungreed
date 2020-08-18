@@ -11,10 +11,11 @@ protected:
 	AttackInfo* _info;
 
 public:
-	virtual void release() = 0;
+	virtual void release() { delete _info; };
 	virtual void update(float elapsedTime) = 0;
 	virtual void render() = 0;
 
 	void setProjectileManager(ProjectileManager* projectileMgr) { _projectileMgr = projectileMgr; }
 	void setAttackInfo(AttackInfo* info) { _info = info; }
+	AttackInfo* getAttackInfo() { return _info; }
 };

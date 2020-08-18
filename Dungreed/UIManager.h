@@ -2,6 +2,7 @@
 #include "InventoryUI.h"
 #include "StatUI.h"
 #include "CostumeUI.h"
+#include "DamageInfo.h"
 
 class GameScene;
 class Player;
@@ -58,9 +59,20 @@ private:
 		Vector2 move;
 	};
 
-	struct tagSkillUI // 현재 스킬
+	struct tagDamageUI // 대미지에 따른 숫자 표기
 	{
+		float value; // 대미지 값
+		COLORREF textColor;
+		float remainTimes; // 사라지기까지 남은 시간
+		Vector2 pos; // 그릴 위치
+		float alpha;
+	};
 
+	struct tagEnemyHpUI // 에너미 체력
+	{
+		float maxHp;
+		float currHp;
+		Vector2 pos; // 그릴 위치
 	};
 
 	struct tagMiniMap // 미니맵
@@ -79,10 +91,15 @@ private:
 	tagLabelUI	_satietyUI; // 플레이어 포만감 라벨
 	tagProgressUI	_satietyProgress; // 플레이어 포만감 프로그레스바
 	tagWeaponUI	_weaponUI; // 무기 UI
+	vector<tagDamageUI> _damageUI; // 대미지 표기 숫자 UI
+	vector<tagEnemyHpUI> _enemyHpUI; // 적 체력바 UI
+	
+	
 	InventoryUI _inventoryUI;
 	StatUI _statUI;
 	CostumeUI _costumeUI;
 
+	
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
@@ -95,5 +112,8 @@ public:
 	void render();
 
 	bool isActive() const noexcept { return _isActive; }
+
+	void showDamage(DamageInfo damage, Vector2 pos);
+	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 };
 

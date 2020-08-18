@@ -192,9 +192,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 	_enemies.push_back(enemy);
 }
 
-void EnemyManager::moveEnemy(GameObject* object, const Vector2 moveDir)
+void EnemyManager::moveEnemy(GameObject* object, const Vector2 moveDir, bool collisionGround, bool collisionPlatForm)
 {
-	_stage->moveTo(object, moveDir);
+	_stage->moveTo(object, moveDir, collisionGround, collisionPlatForm);
 }
 
 bool EnemyManager::detectPlayer(GameObject* object, const float distance)
@@ -245,15 +245,29 @@ bool EnemyManager::isHit(FloatCircle* circle, AttackInfo* info)
 	return result;
 }
 
-bool EnemyManager::isHit(Projectile* projectile, AttackInfo* info)
+bool EnemyManager::isHit(Projectile* projectile, bool isOnceCollision)
 {
 	bool result = false;
 	for (int i = 0; i < _enemies.size(); i++)
 	{
-		if (_enemies[i]->isHit(projectile, info))
+		if (_enemies[i]->isHit(projectile))
 		{
-			result = _enemies[i]->hitEffect(projectile, info);
+			result = _enemies[i]->hitEffect(projectile);
+			if (result && isOnceCollision)
+			{
+				return result;
+			}
 		}
 	}
 	return result;
+}
+
+void EnemyManager::showDamage(DamageInfo info, Vector2 pos)
+{
+	_stage->showDamage(info, pos);
+}
+
+void EnemyManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	_stage->showEnemyHp(maxHp, curHp, pos);
 }

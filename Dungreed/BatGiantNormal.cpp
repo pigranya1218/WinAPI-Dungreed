@@ -20,6 +20,11 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 
+	ZeroMemory(&_moving, sizeof(_moving));
+	
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.3f, 500, 500, false, true, true, true);
 
 	_isDetect = 0;
@@ -106,6 +111,8 @@ void BatGiantNormal::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
+
 	_enemyManager->moveEnemy(this, moveDir);
 
 	_ani->frameUpdate(timeElapsed);
@@ -116,8 +123,6 @@ void BatGiantNormal::update(float const timeElapsed)
 
 void BatGiantNormal::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 	_shooting.render();
@@ -155,4 +160,65 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void BatGiantNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_img = IMAGE_MANAGER->findImage("Bat/Giant_Normal/Idle");
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_img = IMAGE_MANAGER->findImage("Bat/Giant_Normal/Attack");
+				}
+				break;
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+	}
+}
+
+bool BatGiantNormal::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool BatGiantNormal::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		{
+			_img = IMAGE_MANAGER->findImage("Bat/Giant_Normal/Idle_Shot");
+		}
+		break;
+		case ENEMY_STATE::ATTACK:
+		{
+			_img = IMAGE_MANAGER->findImage("Bat/Giant_Normal/Attack_Shot");
+		}
+		break;
+	}
+
+	return false;
+}
+
+bool BatGiantNormal::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
 }

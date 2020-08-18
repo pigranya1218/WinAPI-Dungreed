@@ -7,11 +7,14 @@ void Stage::init()
 	_objectMgr = new ObjectManager;
 	
 	_npcMgr = new NpcManager;
-	
+	_npcMgr->setStage(this);
+
 	_enemyMgr = new EnemyManager;
+	_enemyMgr->setStage(this);
 	
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
+	_projectileMgr->setEnemyManager(_enemyMgr);
 }
 
 void Stage::release()
@@ -508,6 +511,16 @@ bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 Vector2 Stage::getPlayerPos()
 {
 	return _stageManager->getPlayerPos();
+}
+
+void Stage::showDamage(DamageInfo info, Vector2 pos)
+{
+	_stageManager->showDamage(info, pos);
+}
+
+void Stage::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	_stageManager->showEnemyHp(maxHp, curHp, pos);
 }
 
 

@@ -2,6 +2,7 @@
 #include "StageManager.h"
 #include "GameScene.h"
 #include "Player.h"
+#include "UIManager.h"
 
 #include "DebugStage.h"
 #include "VillageStage.h"
@@ -171,6 +172,16 @@ void StageManager::setPlayerPos( int x, int y)
 {
 	
 	_player->setPosition(Vector2(x, y));
+}
+
+void StageManager::showDamage(DamageInfo info, Vector2 pos)
+{
+	_uiMgr->showDamage(info, pos);
+}
+
+void StageManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
+{
+	_uiMgr->showEnemyHp(maxHp, curHp, pos);
 }
 
 

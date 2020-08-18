@@ -37,6 +37,8 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 
 void NormalProjectile::release()
 {
+	Projectile::release();
+
 	if (_useAni)
 	{
 		_ani->release();
@@ -44,7 +46,6 @@ void NormalProjectile::release()
 	}
 
 	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
-
 }
 
 void NormalProjectile::update(float elapsedTime)
@@ -53,7 +54,7 @@ void NormalProjectile::update(float elapsedTime)
 	moveDir.x += cosf(_angleRadian) * _speed.x * elapsedTime;	
 	if (_useGravity)
 	{
-		_speed.y += _gravity.y * elapsedTime;
+		_speed.y += _gravity.y * elapsedTime * ((_angleRadian > PI) ? (1) : (-1));
 		moveDir.y += -sinf(_angleRadian) * _speed.y * elapsedTime;
 	}
 	else
@@ -78,6 +79,22 @@ void NormalProjectile::update(float elapsedTime)
 		_position += moveDir;
 	}
 
+	// 타입에 따른 충돌 검사
+	if (_info->team == OBJECT_TEAM::PLAYER)
+	{
+		// ENEMY와의 충돌 검사
+		if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
+		{
+			_active = false;
+			return;
+		}
+	}
+	else
+	{
+		// TODO: PLAYER와의 충돌 검사
+
+	}
+
 	if (_useAni)
 	{
 		_ani->frameUpdate(elapsedTime);
@@ -100,6 +117,7 @@ void NormalProjectile::render()
 	if (_useAni)
 	{		
 		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);		
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		
 	}
 	else

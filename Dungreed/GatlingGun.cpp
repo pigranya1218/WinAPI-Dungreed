@@ -14,7 +14,7 @@ void GatlingGun::init()
 	_addStat.attackSpeed = 21.74;
 
 	// private 변수 설정
-	_baseAttackDelay = 0;
+	_baseAttackDelay = 0.05;
 	_currAttackDelay = 0;
 	_maxBullet = 100;
 	_currBullet = _maxBullet;
@@ -44,7 +44,7 @@ void GatlingGun::update(Player * player, float const elapsedTime)
 {
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
-		_currAttackDelay = max(0, abs(_currAttackDelay - elapsedTime));
+		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 	}
 	else if (_currReloadDelay > 0) // 재장전 중
 	{
@@ -187,7 +187,7 @@ void GatlingGun::attack(Player * player)
 	renderPosHand.y += 25; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
 	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2;
+	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2 + RANDOM->getFromFloatTo(-PI * 0.02, PI * 0.02);
 	if (angleRadian > PI2)
 	{
 		angleRadian -= PI2;
@@ -199,23 +199,30 @@ void GatlingGun::attack(Player * player)
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.1) : (0.1))) * length;
 	Image* _bulletImg = IMAGE_MANAGER->findImage("GunBullet");
 
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
-	{
-		_projectile = new NormalProjectile;
-		_projectile->setPosition(shootPos);
-		_projectile->setSize(Vector2(_bulletImg->getFrameSize().x * 4, _bulletImg->getFrameSize().y * 3.1f));
-		_projectile->setTeam(OBJECT_TEAM::PLAYER);
-		_projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
+	NormalProjectile* projectile = new NormalProjectile;
+	projectile->setPosition(shootPos);
+	projectile->setSize(Vector2(_bulletImg->getFrameSize().x * 4, _bulletImg->getFrameSize().y * 3.1f));
+	projectile->setTeam(OBJECT_TEAM::PLAYER);
+	projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, true, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
 
-		AttackInfo* attackInfo = new AttackInfo;
-		attackInfo->team = OBJECT_TEAM::PLAYER;
-		player->attack(_projectile, attackInfo);
-		_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
-		_currBullet -= 1; // 탄환 1 줄임
-		_drawEffect = true; // 이펙트 그리기
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
-		_attackAni->start();
-	}
+	AttackInfo* attackInfo = new AttackInfo;
+	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo->critical = 0;
+	attackInfo->criticalDamage = 0;
+	attackInfo->minDamage = _addStat.minDamage;
+	attackInfo->maxDamage = _addStat.maxDamage;
+	attackInfo->knockBack = 30;
+
+	player->attack(projectile, attackInfo);
+	
+	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
+	_currBullet -= 1; // 탄환 1 줄임
+	_drawEffect = true; // 이펙트 그리기
+
+	_attackAni->start();
 }
 
 void GatlingGun::attack(FloatRect * rect, AttackInfo * info)
