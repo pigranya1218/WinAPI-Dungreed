@@ -31,6 +31,8 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 
 	_isDetect = 0;
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void BatBomb::release()
@@ -99,7 +101,7 @@ void BatBomb::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	_enemyManager->moveEnemy(this, moveDir);
+	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
 }
@@ -107,8 +109,14 @@ void BatBomb::update(float const timeElapsed)
 void BatBomb::render()
 {
 	_img->setScale(_scale);
-
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp < _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += _size.y * 0.6f;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void BatBomb::setState(ENEMY_STATE state)
@@ -120,8 +128,10 @@ void BatBomb::setState(ENEMY_STATE state)
 		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{
+			_imageName = "Bat/Bomb/Move";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Bomb/Move");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
@@ -130,8 +140,10 @@ void BatBomb::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Bat/Bomb/Attack_Begin";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Bat/Bomb/Attack_Begin");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
@@ -157,42 +169,44 @@ void BatBomb::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const fl
 				case ENEMY_STATE::IDLE:
 				case ENEMY_STATE::MOVE:
 				{
-					_img = IMAGE_MANAGER->findImage("Bat/Bomb/Move");
+					_imageName = "Bat/Bomb/Move";					
 				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					//_imageName = "Bat/Bomb/Attack_Begin";
+				}
+				break;
 			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
-		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
 	}
-}
-
-bool BatBomb::hitEffect(FloatRect * rc, AttackInfo * info)
-{
-	return false;
 }
 
 bool BatBomb::hitEffect(FloatCircle * circle, AttackInfo * info)
 {
+	_isDetect = true;
 	_hit.isHit = true;
 	_hit.hitCount = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 
-	switch (_state)
+	if (_state == ENEMY_STATE::IDLE || _state == ENEMY_STATE::MOVE)
 	{
-		case ENEMY_STATE::IDLE:
-		case ENEMY_STATE::MOVE:
-		{
-			_img = IMAGE_MANAGER->findImage("Bat/Bomb/Move_Shot");
-		}
-	}
+		_imageName += "_Shot";
+	}	
+	_img = IMAGE_MANAGER->findImage(_imageName);
 
-	return false;
-}
+	DamageInfo damageInfo = info->getDamageInfo();
+	Vector2 renderPos = _position;
+	renderPos.y -= _size.y * 0.25f;
+	renderPos.x += RANDOM->getFromFloatTo(-_size.x * 0.5f, _size.x * 0.5f);
+	_enemyManager->showDamage(damageInfo, renderPos);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
 
-bool BatBomb::hitEffect(Projectile * projectile, AttackInfo * info)
-{
-	return false;
+	return true;
 }

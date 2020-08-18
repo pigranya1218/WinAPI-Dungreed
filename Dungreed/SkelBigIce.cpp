@@ -30,11 +30,15 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_skill.delay = 2;
 	_skill.distance = 300;
 
-	//ZeroMemory(&_shooting, sizeof(_shooting));
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3f;
+
 	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 1, 700, true, true, false, false);
 
 	_isDetect = 0;
 	_active = true;
+
+	_curHp = _maxHp = 100;
 }
 
 void SkelBigIce::release()
@@ -137,6 +141,7 @@ void SkelBigIce::update(float const timeElapsed)
 		}		
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	if (_isStand && _moving.force.y == 0)
 	{
@@ -193,40 +198,49 @@ void SkelBigIce::setState(ENEMY_STATE state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
+			_imageName = "Skel/Big_Ice/Idle";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Big_Ice/Idle");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 		}		
 		break;
 		case ENEMY_STATE::MOVE:
 		{
+			_imageName = "Skel/Big_Ice/Move";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Big_Ice/Move");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 		}		
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			_imageName = "Skel/Big_Ice/Attack";
+
 			_ani->stop();
-			_img = IMAGE_MANAGER->findImage("Skel/Big_Ice/Attack");
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 		}		
 		break;
 		case ENEMY_STATE::SKILL:
 		{
-			_img = IMAGE_MANAGER->findImage("Skel/Big_Ice/Skill");
+			_imageName = "Skel/Big_Ice/Skill";
+
+			_ani->stop();
+			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
-			_ani->setFPS(10);
+			_ani->setFPS(15);
 			_ani->start();
 		}		
 		break;
@@ -236,4 +250,46 @@ void SkelBigIce::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void SkelBigIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_imageName = "Skel/Big_Ice/Idle";
+				}
+				break;
+				case ENEMY_STATE::MOVE:
+				{
+					_imageName = "Skel/Big_Ice/Move";
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_imageName = "Skel/Big_Ice/Attack";
+				}
+				break;
+				case ENEMY_STATE::SKILL:
+				{
+					_imageName = "Skel/Big_Ice/Skill";
+				}
+				break;
+			}
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+
+		return;
+	}
+
+	_moving.force.x = 200;
 }

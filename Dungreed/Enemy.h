@@ -193,19 +193,7 @@ protected:
 
 			if (hitCount >= hitDelay)
 			{
-				hitCount -= hitDelay;
-				return true;
-			}
-			return false;
-		}
-
-		bool knockUpdate(const float timeElapsed)
-		{
-			knockCount += timeElapsed;
-
-			if (knockCount >= knockDelay)
-			{
-				knockCount -= knockDelay;
+				hitCount = 0;
 				return true;
 			}
 			return false;
