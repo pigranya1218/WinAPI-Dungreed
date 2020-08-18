@@ -314,12 +314,16 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CosmosSword", L"resources/images/MeleeWeapon/CosmosSword.png",12,1);//우주검 
 	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // 케레스(칼,창)
 	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // 붉은 곡괭이
+	IMAGE_MANAGER->addImage("PowerKatanaHUD", L"resources/images/MeleeWeapon/PowerKatanaHUD.png"); // 육도가이(카타나)
 	
 	//***MeleeWeaponIcon
 	IMAGE_MANAGER->addImage("CosmosSwordIcon", L"resources/images/MeleeWeapon/CosmosSwordIcon.png"); // 우주검 아이콘
 	IMAGE_MANAGER->addImage("KeresScytheIcon", L"resources/images/MeleeWeapon/KeresScytheIcon.png"); // 케레스 아이콘
 	IMAGE_MANAGER->addImage("TigerPunchIcon", L"resources/images/MeleeWeapon/TigerPunchIcon.png"); // 타이거 펀치 아이콘
 	IMAGE_MANAGER->addImage("PickaxeRedIcon", L"resources/images/MeleeWeapon/PickaxeRedIcon.png"); // 붉은 곡괭이 아이콘
+	IMAGE_MANAGER->addImage("PowerKatana", L"resources/images/MeleeWeapon/PowerKatana.png"); // 육도가이(카타나) 아이콘
+	IMAGE_MANAGER->addImage("QuarterStaffBig", L"resources/images/MeleeWeapon/QuarterStaff_Big.png"); // 박달나무 쌍단봉 아이콘겸 이미지
+	IMAGE_MANAGER->addImage("BigPaintBlush", L"resources/images/MeleeWeapon/BigPaintBlush.png"); // 서예용 붓 아이콘겸 이미지
 
 
 
@@ -332,13 +336,17 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("KeresScytheSwingFX", L"resources/images/MeleeWeapon/KeresScytheSwingFX.png",8, 1);
 	IMAGE_MANAGER->addFrameImage("TigerPunch", L"resources/images/MeleeWeapon/TigerPunch.png",10,1);
 	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
+	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
+	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",4,1);
 
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // 우주검 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // 낫 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // 일반 휘두르기 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // 일반 찌르기 이펙트
-	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // 타이거펀치 이팩트
-	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // 붉은곡괭이 이팩트
+	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // 타이거펀치 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // 붉은곡괭이 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_POWERKATANA", "PowerKatanaEf", 30, 10);	  // 육도가이(카타나) 이펙트
+	EFFECT_MANAGER->addEffect("EFFECT_PAINTSWING", "PaintSwing", 30, 10);	  // 서예용 붓 이펙트
 
 
 

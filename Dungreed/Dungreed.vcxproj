@@ -159,6 +159,7 @@
     <ClInclude Include="BatBomb.h" />
     <ClInclude Include="BatGiantNormal.h" />
     <ClInclude Include="BatGiantRed.h" />
+    <ClInclude Include="BigPaintBlush.h" />
     <ClInclude Include="Belial.h" />
     <ClInclude Include="Boomerang.h" />
     <ClInclude Include="Banshee.h" />
@@ -235,10 +236,12 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="PlayGround.h" />
+    <ClInclude Include="PowerKatana.h" />
     <ClInclude Include="ProgressBar.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="ProjectileManager.h" />
     <ClInclude Include="Punch.h" />
+    <ClInclude Include="QuarterStaffBig.h" />
     <ClInclude Include="randomFunction.h" />
     <ClInclude Include="RedLotusCos.h" />
     <ClInclude Include="Resource.h" />
@@ -291,6 +294,7 @@
     <ClCompile Include="BatBomb.cpp" />
     <ClCompile Include="BatGiantNormal.cpp" />
     <ClCompile Include="BatGiantRed.cpp" />
+    <ClCompile Include="BigPaintBlush.cpp" />
     <ClCompile Include="Belial.cpp" />
     <ClCompile Include="Boomerang.cpp" />
     <ClCompile Include="Banshee.cpp" />
@@ -363,8 +367,10 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="PlayGround.cpp" />
+    <ClCompile Include="PowerKatana.cpp" />
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Punch.cpp" />
+    <ClCompile Include="QuarterStaffBig.cpp" />
     <ClCompile Include="RedLotusCos.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="RestaurantNpc.cpp" />
