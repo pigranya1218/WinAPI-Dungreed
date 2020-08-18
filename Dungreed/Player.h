@@ -100,5 +100,7 @@ public:
 	void setCurrCostume(Costume* costume) { _costume = costume; }
 	float getAttackSpeed();
 	float getReloadSpeed();
+	float getMinDamage();
+	float getMaxDamage();
 };
 

@@ -91,21 +91,25 @@ void StatUI::render()
 		{
 			_statEntity[i].icon->render(_statEntity[i].iconRc.getCenter(), _statEntity[i].iconRc.getSize());
 		}
-		if (static_cast<STAT_TYPE>(i) == STAT_TYPE::ATTACK_SPEED)
+		if (static_cast<STAT_TYPE>(i) == STAT_TYPE::POW)
+		{
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(_player->getMinDamage())) + L" ~ " + to_wstring(static_cast<int>(_player->getMaxDamage())) + L" (" + to_wstring(static_cast<int>(stat.getStat(STAT_TYPE::POW))) + L")", RGB(255, 255, 255), 35, 300, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+		}
+		else if (static_cast<STAT_TYPE>(i) == STAT_TYPE::ATTACK_SPEED)
 		{
 			stringstream stream;
 			stream << fixed << setprecision(2) << _player->getAttackSpeed();
-			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f);
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
 		}
 		else if (static_cast<STAT_TYPE>(i) == STAT_TYPE::RELOAD)
 		{
 			stringstream stream;
 			stream << fixed << setprecision(2) << _player->getReloadSpeed();
-			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f);
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
 		}
 		else
 		{
-			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(stat.getStat(static_cast<STAT_TYPE>(i)))), RGB(255, 255, 255), 35, 100, 50, 1.f);
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(stat.getStat(static_cast<STAT_TYPE>(i)))), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
 		}
 	}
 
