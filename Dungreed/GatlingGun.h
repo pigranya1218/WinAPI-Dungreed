@@ -11,6 +11,9 @@ private:
 	Image* _reloadEffect;
 	Animation* _reloadAni;
 
+	Image* _shootEffectImg;
+	Animation* _shootEffectAni;
+
 	float _baseAttackDelay; // 공격 쿨타임
 	float _currAttackDelay; // 남은 공격 쿨타임
 	int _maxBullet; // 최대 총알 갯수

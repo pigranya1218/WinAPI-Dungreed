@@ -261,6 +261,8 @@ HRESULT playGround::init()
 	// ** WEAPON
 	// *** LongDistanceWeapon
 	IMAGE_MANAGER->addImage("Lala'sMagicWand", L"resources/images/weapon/longDistanceWeapon/Lala'sMagicWand.png");
+	IMAGE_MANAGER->addImage("Lala'sMagicWand02", L"resources/images/weapon/longDistanceWeapon/Lala'sMagicWand02.png");
+
 	IMAGE_MANAGER->addImage("MatchlockGun", L"resources/images/weapon/longDistanceWeapon/MatchlockGun.png");
 	IMAGE_MANAGER->addImage("MetalBoomerang", L"resources/images/weapon/longDistanceWeapon/MetalBoomerang.png");
 	IMAGE_MANAGER->addImage("OakBow", L"resources/images/weapon/longDistanceWeapon/OakBow.png");

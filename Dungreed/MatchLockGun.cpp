@@ -3,8 +3,6 @@
 
 void MatchLockGun::init()
 {
-	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
-	//_rank = ITEM_RANK::NORMAL;
 	_iconImg = _img = IMAGE_MANAGER->findImage("MatchlockGun");
 	_price = 850;
 
@@ -16,7 +14,6 @@ void MatchLockGun::init()
 
 	_itemCode = 0x02261;
 	_itemName = L"화승총";
-	//_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
 	_displayText = L"\"비가 오면 사용할 수 없는 총\"";
 
 	// 기본 보조옵션
@@ -126,6 +123,15 @@ void MatchLockGun::frontRender(Player* player)
 		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;*/
 
 		EFFECT_MANAGER->play("L_Effect_HecateSmoke", effectPos, effectSize, degree);
+
+		Image* effectImg = IMAGE_MANAGER->findImage("ShootEffect");
+		Vector2 effectSize02 = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+
+		float length02 = _iconImg->getWidth() * 0.6f * 3; // 무기 길이만큼
+		effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length02;
+		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length02;
+
+		EFFECT_MANAGER->play("L_Effect_Shoot", effectPos, effectSize02, degree);
 	}
 
 	// 재장전 중이라면 재장전 UI를 그린다.
