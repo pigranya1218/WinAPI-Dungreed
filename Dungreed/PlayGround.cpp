@@ -513,6 +513,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("BabyBatBulletFx","BabyBatBulletFx",15,50);
 	EFFECT_MANAGER->addEffect("BombPouch2", "BombPouch2", 15, 50);
 	EFFECT_MANAGER->addEffect("HeartOfCosmosF", "HeartOfCosmosF", 15, 50);
+	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 
 	//** Boss
 	// * Belial

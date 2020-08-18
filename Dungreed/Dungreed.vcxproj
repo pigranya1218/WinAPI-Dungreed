@@ -176,7 +176,7 @@
     <ClInclude Include="CostumeManager.h" />
     <ClInclude Include="CostumeUI.h" />
     <ClInclude Include="D2DRenderer.h" />
-    <ClInclude Include="daisyRing.h" />
+    <ClInclude Include="DaisyRing.h" />
     <ClInclude Include="DataManager.h" />
     <ClInclude Include="DebugManager.h" />
     <ClInclude Include="DebugStage.h" />
@@ -291,7 +291,7 @@
     <ClCompile Include="CostumeUI.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
     <ClCompile Include="D2DRenderer.cpp" />
-    <ClCompile Include="daisyRing.cpp" />
+    <ClCompile Include="DaisyRing.cpp" />
     <ClCompile Include="DataManager.cpp" />
     <ClCompile Include="DebugManager.cpp" />
     <ClCompile Include="DebugStage.cpp" />

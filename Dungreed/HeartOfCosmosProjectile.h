@@ -6,8 +6,8 @@ private:
 	float		_angleRadian;		// 투사체 날라가는 각도
 	float		_speed;				// 투사체 날라가는 속도
 
-	float		_range;				// 투사체 사정거리
-	Vector2		_startPos;			// 투사체 시작위치
+	float		_maxTime;			// 투사체 지속시간
+	float		_count;				// 시간 계산용
 
 	Image*		_img;				// 투사체 이미지
 
@@ -18,10 +18,11 @@ private:
 	string		_collisionEffect;	// 부딪혀서 폭발할 때 이펙트
 	Vector2		_effectSize;		// 부딪혀서 폭발할 때 이펙트 사이즈
 
-	bool _useRotate;				// 투사체를 돌릴 것인가
+	bool		_useRotate;			// 투사체를 돌릴 것인가
+
 
 public:
-	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate = 1);
+	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate = 1);
 	virtual void release();
 	virtual void update(float elapsedTime);
 	virtual void render();

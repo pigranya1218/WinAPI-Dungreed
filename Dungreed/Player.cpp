@@ -30,6 +30,7 @@
 #include "HeartOfCosmos.h"
 #include "DemonBoots.h"
 #include "MultiBullet.h"
+#include "DaisyRing.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -143,9 +144,9 @@ void Player::init()
 	_inventory[8] = testAcc9;
 
 
-	bombPouch* testAcc5 = new bombPouch;
-	testAcc5->init();
-	_inventory[5] = testAcc5;
+	//bombPouch* testAcc5 = new bombPouch;
+	//testAcc5->init();
+	//_inventory[5] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
@@ -177,11 +178,15 @@ void Player::init()
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
-	_inventory[7] = testAcc13;
+	_inventory[5] = testAcc13;
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
 	_inventory[0] = testAcc14;
+
+	DaisyRing* testAcc15 = new DaisyRing;
+	testAcc15->init();
+	_inventory[7] = testAcc15;
 
 	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();

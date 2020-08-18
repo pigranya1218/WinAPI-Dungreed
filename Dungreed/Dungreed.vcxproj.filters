@@ -354,9 +354,6 @@
     <ClInclude Include="Minotaurs.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="daisyRing.h">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
-    </ClInclude>
     <ClInclude Include="IceBall.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
@@ -473,6 +470,9 @@
     </ClInclude>
     <ClInclude Include="HeartOfCosmosProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="DaisyRing.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -665,9 +665,6 @@
     <ClCompile Include="Minotaurs.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="daisyRing.cpp">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
-    </ClCompile>
     <ClCompile Include="miniEarth.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
@@ -790,6 +787,9 @@
     </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\GameScene\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="DaisyRing.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
