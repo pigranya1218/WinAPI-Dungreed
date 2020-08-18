@@ -31,11 +31,14 @@ private:
 	// ** 힐 아이콘
 	Image* _healIcon = IMAGE_MANAGER->findImage("UI/RESTAURANT/HEAL_ICON");
 	// ** 음식 목록 뷰 
-	//Image* _foodListView = IMAGE_MANAGER->findImage();
+	Image* _foodListView = IMAGE_MANAGER->findImage("UI/STAT/BASE");
 	// ** 창닫기
 	Image* _exitBtn = IMAGE_MANAGER->findImage("BUTTON_EXIT");
 	Image* _exitBtnSelected = IMAGE_MANAGER->findImage("BUTTON_EXIT_SELECTED");
-	
+	// ** 스크롤
+	Image* _scrollBarBg = IMAGE_MANAGER->findImage("SCROLL_BG");
+	Image* _scrollBarHeader = IMAGE_MANAGER->findImage("SCROLL_HEADER");
+
 	// * 사용되는 렉트
 	// 뒷배경 fillRectangle -> 색상RGB(34, 32, 52)
 	FloatRect _bgRc;
@@ -43,6 +46,10 @@ private:
 	FloatRect _exitRc;
 	// 음식 목록창 렉트
 	FloatRect _foodListViewRc;
+	// 음식 목록 스크롤바 바탕 렉트
+	FloatRect _scrollBarBgRc;
+	// 음식 목록 스크롤바 헤더 렉트
+	FloatRect _scrollBarHeaderRc;
 	
 private:
 	//음식 목록

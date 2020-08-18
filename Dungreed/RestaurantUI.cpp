@@ -9,6 +9,8 @@ void RestaurantUI::init()
 	_bgRc = FloatRect(0, 0, WINSIZEX, WINSIZEY);
 	//창닫기 버튼
 	_exitRc = FloatRect(WINSIZEX - 150, 40, WINSIZEX - 30, 130);
+	//리스트 배경
+	_foodListViewRc = FloatRect(30, 200, 530, 800);
 }
 
 void RestaurantUI::release()
@@ -43,4 +45,7 @@ void RestaurantUI::render()
 	{
 		_exitBtn->render(_exitRc.getCenter(), _exitRc.getSize());
 	}
+
+	//리스트 뒷배경
+	_foodListView->render(_foodListViewRc.getCenter(), _foodListViewRc.getSize());
 }
