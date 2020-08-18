@@ -13,7 +13,7 @@ void MagnifyingGlass::init()
 	//厩技辑府 可记
 	_addStat.maxDamage = _addStat.maxDamage*1.7f;
 	_addStat.minDamage = _addStat.minDamage*1.7f;
-	_addStat.attackSpeed = _addStat.attackSpeed / 0.3f;
+	_addStat.attackSpeed = _addStat.attackSpeed - _addStat.attackSpeed * 0.3f;
 
 	//厩技辑府 啊拜
 	_price = 2400;

@@ -1,5 +1,7 @@
 #include "DemonBoots.h"
 #include "HeartOfCosmosProjectile.h"
+#include "GameScene.h"
+
 
 void DemonBoots::init()
 {
@@ -8,8 +10,9 @@ void DemonBoots::init()
 	_itemName = L"악마의 부츠";
 	_displayInfos.push_back(L"\"밟은 곳에 불이 붙습니다\"");
 	_displayText = L"\"신는 사람이 뒤에 열기를 쫒기게 되는 신발\"";
-	_price = 4300;
-	
+	_price = 4300;	
+	_Delay = 1.0;
+	_Delay1 = 1.5;
 }
 
 void DemonBoots::release()
@@ -18,26 +21,36 @@ void DemonBoots::release()
 
 void DemonBoots::update(Player * player, float const elapsedTime)
 {
+	_random = RANDOM->getFromIntTo(0, 65);
 	_renderPos = player->getPosition();	
-	
-	
+	_renderPos.y = _renderPos.y - 15;
+	_renderPos.x = _renderPos.x - 30;
+	if (_Delay > 0)
+	{
+		_Delay = max(0, _Delay - elapsedTime);
+	}
+	if (_Delay1 > 0)
+	{
+		_Delay1 = max(0, _Delay1 - elapsedTime);
+	}
+	if (_Delay == 0)
+	{
+		_Delay = 1.0;
+		_renderPos.x = _renderPos.x + _random;
+		EFFECT_MANAGER->play("DemonBootsF", _renderPos, Vector2(60, 120), 0, false);
+	}
+	if (_Delay1 == 0)
+	{
+		_Delay1 = 1.0;
+		_renderPos.x = _renderPos.x + _random;
+		EFFECT_MANAGER->play("DemonBootsF", _renderPos, Vector2(60, 120), 0, false);
+	}
 }
 
 void DemonBoots::backRender(Player * player)
 {
-	HeartOfCosmosProjectile* projectile = new HeartOfCosmosProjectile;
-	float _angleY = 0;
-	_angleY = (-PI2 / 4);
-	projectile->setPosition(_renderPos);
-	_renderPos.y = _renderPos.y;
-	projectile->setSize(Vector2(50, 100));
-	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	_pos.y = _renderPos.y*_angleY;
-	_pos.x = _renderPos.x;
-	projectile->init("DemonBoots0", _pos.y, 0, true, false, 8, false, "DemonBoots0", Vector2(150, 150),50, false);
-	AttackInfo* attackInfo = new AttackInfo;
-	attackInfo->team = OBJECT_TEAM::PLAYER;
-	player->attack(projectile, attackInfo);
+	
+	
 }
 
 void DemonBoots::frontRender(Player * player)

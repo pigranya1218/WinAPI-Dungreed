@@ -5,8 +5,10 @@ class DemonBoots : public Item
 private:
 	Image* _img;	
 	Vector2 _renderPos;
-	Vector2 _pos;
-	
+	Vector2 _pos;	
+	float _Delay;   // 불 쿨타임
+	float _Delay1;   // 불 쿨타임
+	int _random;
 
 public:
 	virtual void init();
