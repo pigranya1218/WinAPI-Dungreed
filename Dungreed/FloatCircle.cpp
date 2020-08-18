@@ -4,7 +4,7 @@
 bool FloatCircle::intersect(FloatRect rc)
 {
 	POINT circleCenter = { origin.x, origin.y };
-	if (rc.ptInRect(circleCenter)) // 호의 중점이 사각형 안에 있는 경우 (원이 더 작은 경우)
+	if (rc.ptInRect(circleCenter)) // 호의 중점이 사각형 안에 있는 경우 (원이 더 작은 경우) 
 	{
 		// 무조건 교차함
 		return true;
@@ -13,7 +13,7 @@ bool FloatCircle::intersect(FloatRect rc)
 	// (원이 큰 경우)
 	if (TTYONE_UTIL::getDistance(rc.getCenter().x, rc.getCenter().y, origin.x, origin.y) < size)
 	{
-		float radian = atan2f(-(rc.getCenter().y - origin.y), (rc.getCenter().x - origin.x));
+		/*float radian = atan2f(-(rc.getCenter().y - origin.y), (rc.getCenter().x - origin.x));
 		if (radian < 0)
 		{
 			radian += PI;
@@ -21,14 +21,58 @@ bool FloatCircle::intersect(FloatRect rc)
 		if (isInsideRadian(radian))
 		{
 			return true;
+		}*/
+		
+		// 사각형의 꼭지점들에 대하여 각도 계산
+		float calcSup[4][2] = { {-0.5, -0.5}, {0.5, -0.5}, {0.5, 0.5}, {-0.5, 0.5} };
+		float radians[4];
+		for (int i = 0; i < 4; i++)
+		{
+			Vector2 point = rc.getCenter();
+			point.x += calcSup[i][0] * rc.getWidth();
+			point.y += calcSup[i][1] * rc.getHeight();
+			radians[i] = atan2f(-(point.y - origin.y), (point.x - origin.x));
+			if (radians[i] < 0)
+			{
+				radians[i] += PI2;
+			}
 		}
+		
+		// 특이케이스
+		if (radians[0] < PI && radians[3] > 1.5 * PI)
+		{
+			if (isIntersectRadian(Vector2(radians[3] - PI2, radians[0])))
+			{
+				return true;
+			}
+		}
+		else
+		{
+			float minRadian = PI2;
+			float maxRadian = 0;
+			for (int i = 0; i < 4; i++)
+			{
+				if (minRadian > radians[i])
+				{
+					minRadian = radians[i];
+				}
+				if (maxRadian < radians[i])
+				{
+					maxRadian = radians[i];
+				}
+			}
+			if(isIntersectRadian(Vector2(minRadian, maxRadian)))
+			{
+				return true;
+			}
+		}
+
 	}
 	// 사각형의 모서리와 교차점 비교 (원과 사각형의 크기가 비슷한 경우)
 	else if (isCollisionX(rc.left, Vector2(rc.top, rc.bottom)) || isCollisionX(rc.right, Vector2(rc.top, rc.bottom)) || isCollisionY(rc.top, Vector2(rc.left, rc.right)) || isCollisionY(rc.bottom, Vector2(rc.left, rc.right)))
 	{
 		return true;
 	}
-
 	
 	return false;
 }
@@ -99,6 +143,23 @@ bool FloatCircle::isInsideRadian(float radian)
 	}
 
 	return (sRadian <= radian && radian <= eRadian);
+}
+
+bool FloatCircle::isIntersectRadian(Vector2 rangeRadian)
+{
+	float oppStartRadian = rangeRadian.x;
+	float oppEndRadian = rangeRadian.y;
+	if (oppStartRadian < 0)
+	{
+		oppStartRadian += PI2;
+		oppEndRadian += PI2;
+	}
+	if (oppStartRadian <= endRadian &&  startRadian <= oppEndRadian)
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void FloatCircle::render(bool useCamera)
