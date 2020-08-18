@@ -192,9 +192,9 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 	_enemies.push_back(enemy);
 }
 
-void EnemyManager::moveEnemy(GameObject* object, const Vector2 moveDir)
+void EnemyManager::moveEnemy(GameObject* object, const Vector2 moveDir, bool collisionGround, bool collisionPlatForm)
 {
-	_stage->moveTo(object, moveDir);
+	_stage->moveTo(object, moveDir, collisionGround, collisionPlatForm);
 }
 
 bool EnemyManager::detectPlayer(GameObject* object, const float distance)

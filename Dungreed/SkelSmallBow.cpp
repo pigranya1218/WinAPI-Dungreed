@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "EnemyManager.h"
 #include "SkelSmallBow.h"
 
@@ -42,7 +42,6 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.hitDelay = 0.3;
-	_hit.knockDelay = 0.1;
 
 	_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
 
@@ -112,27 +111,8 @@ void SkelSmallBow::update(float const timeElapsed)
 		
 		}
 		break;
-	}
-
-	if (_hit.isHit)
-	{
-		if (_hit.hitUpdate(timeElapsed))
-		{
-			switch (_state)
-			{
-				case ENEMY_STATE::IDLE:
-				case ENEMY_STATE::ATTACK:
-				{
-					_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
-				}
-				break;
-			}
-			_hit.isHit = false;
-		}
-		_moving.force.x -= _moving.gravity.x * timeElapsed;
-		//_moving.gravity.x -= _moving.gravity.x * timeElapsed;		
-		moveDir.x += _moving.force.x * timeElapsed;
-	}
+	}	
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	if (_isStand && _moving.force.y == 0)
 	{
@@ -223,6 +203,29 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 			_active = false;
 		}
 		break;
+	}
+}
+
+void SkelSmallBow::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				case ENEMY_STATE::ATTACK:
+				{
+					_img = IMAGE_MANAGER->findImage("Skel/Small/Idle");
+				}
+				break;
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
 	}
 }
 

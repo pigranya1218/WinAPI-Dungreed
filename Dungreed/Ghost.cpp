@@ -81,10 +81,7 @@ void Ghost::update(float const timeElapsed)
 		case ENEMY_STATE::ATTACK:
 		{
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * (_moving.force.x * 2.5f));
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * (_moving.force.x * 2.5f));
-
-			setPosition(_position + moveDir);
-			//_enemyManager->moveEnemy(this, moveDir);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * (_moving.force.x * 2.5f));			
 
 			if (_attacking.update(timeElapsed * 3))
 			{
@@ -98,6 +95,9 @@ void Ghost::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
+
+	_enemyManager->moveEnemy(this, moveDir, false, false);
 
 	_ani->frameUpdate(timeElapsed);
 
@@ -151,4 +151,70 @@ void Ghost::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void Ghost::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+			case ENEMY_STATE::IDLE:
+			case ENEMY_STATE::MOVE:
+			{
+				_img = IMAGE_MANAGER->findImage("Ghost/Move");
+			}
+			break;
+			case ENEMY_STATE::ATTACK:
+			{
+				_img = IMAGE_MANAGER->findImage("Ghost/Attack");
+			}
+			break;
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+
+		return;
+	}
+	_moving.force.x = 150;
+}
+
+bool Ghost::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool Ghost::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		case ENEMY_STATE::MOVE:
+		{
+			_img = IMAGE_MANAGER->findImage("Ghost/Move_Shot");
+		}
+		break;
+		case ENEMY_STATE::ATTACK:
+		{
+			_img = IMAGE_MANAGER->findImage("Ghost/Attack_Shot");
+		}
+		break;
+	}
+
+	return false;
+}
+
+bool Ghost::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
 }

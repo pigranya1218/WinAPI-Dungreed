@@ -24,6 +24,11 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 	// Åº¸· ÃÊ±âÈ­
 	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 2.2, 500, false, false, true, true);
 
+	ZeroMemory(&_moving, sizeof(_moving));
+
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_active = true;
 }
 
@@ -75,6 +80,7 @@ void Banshee::update(float const timeElapsed)
 			break;
 		}
 	}
+	hitReaction(_enemyManager->getPlayerPos(), moveDir, timeElapsed);
 
 	_enemyManager->moveEnemy(this, moveDir);
 
@@ -83,10 +89,8 @@ void Banshee::update(float const timeElapsed)
 
 void Banshee::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, !(bool)_direction);
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 }
 
 void Banshee::setState(ENEMY_STATE state)
@@ -121,4 +125,65 @@ void Banshee::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void Banshee::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_img = IMAGE_MANAGER->findImage("Banshee/Idle");
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_img = IMAGE_MANAGER->findImage("Banshee/Attack");
+				}
+				break;
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+	}
+}
+
+bool Banshee::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool Banshee::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		{
+			_img = IMAGE_MANAGER->findImage("Banshee/Idle_Shot");
+		}
+		break;
+		case ENEMY_STATE::ATTACK:
+		{
+			_img = IMAGE_MANAGER->findImage("Banshee/Attack_Shot");
+		}
+		break;
+	}
+
+	return false;
+}
+
+bool Banshee::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
 }

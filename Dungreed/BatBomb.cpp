@@ -26,6 +26,9 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 	_moving.force = Vector2(500, 0);
 	_moving.angle = 0;
 
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_isDetect = 0;
 	_active = true;
 }
@@ -52,6 +55,7 @@ void BatBomb::update(float const timeElapsed)
 		_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 	}
 
+	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -64,17 +68,14 @@ void BatBomb::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::MOVE:
 		{
-			// 이동
-			Vector2 moveDir(0, 0);
+			// 이동			
 			if (_moving.update(timeElapsed))
 			{
 				_moving.angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
 			}
 
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);	
-
-			_enemyManager->moveEnemy(this, moveDir);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);				
 
 			if (getDistance(_position.x, _position.y, playerPos.x, playerPos.y) < 50)
 			{
@@ -92,22 +93,21 @@ void BatBomb::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-			EFFECT_MANAGER->play("Bat_Explosion", _position, Vector2(250, 250));
+			//EFFECT_MANAGER->play("Bat_Explosion", _position, Vector2(250, 250));
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
+
+	_enemyManager->moveEnemy(this, moveDir);
 
 	_ani->frameUpdate(timeElapsed);
-
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
 void BatBomb::render()
 {
 	_img->setScale(_scale);
 
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 }
 
@@ -144,4 +144,55 @@ void BatBomb::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void BatBomb::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				case ENEMY_STATE::MOVE:
+				{
+					_img = IMAGE_MANAGER->findImage("Bat/Bomb/Move");
+				}
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+	}
+}
+
+bool BatBomb::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool BatBomb::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		case ENEMY_STATE::MOVE:
+		{
+			_img = IMAGE_MANAGER->findImage("Bat/Bomb/Move_Shot");
+		}
+	}
+
+	return false;
+}
+
+bool BatBomb::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
 }
