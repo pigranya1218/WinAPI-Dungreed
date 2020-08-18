@@ -133,16 +133,29 @@ bool FloatCircle::isCollisionY(float y, Vector2 rangeX)
 
 bool FloatCircle::isInsideRadian(float radian)
 {
-	float sRadian = startRadian;
-	float eRadian = endRadian;
-	if (sRadian < 0)
+	return isInsideRadian(radian, Vector2(startRadian, endRadian));
+}
+
+bool FloatCircle::isInsideRadian(float radian, Vector2 radianRange)
+{
+	float sRadian = radianRange.x;
+	float eRadian = radianRange.y;
+	sRadian += PI2;
+	eRadian += PI2;
+	radian += PI2;
+	if (sRadian > PI2) sRadian -= PI2;
+	if (eRadian > PI2) eRadian -= PI2;
+	if (radian > PI2) radian -= PI2;
+
+	if (sRadian <= eRadian) // 정상 판별의 경우
 	{
-		sRadian += PI2;
-		eRadian += PI2;
-		radian += PI2;
+		return (sRadian <= radian && radian <= eRadian);
+	}
+	else
+	{
+		return !(eRadian <= radian && radian <= sRadian);
 	}
 
-	return (sRadian <= radian && radian <= eRadian);
 }
 
 bool FloatCircle::isIntersectRadian(Vector2 rangeRadian)
@@ -151,18 +164,10 @@ bool FloatCircle::isIntersectRadian(Vector2 rangeRadian)
 	float oppEndRadian = rangeRadian.y;
 	float sRadian = startRadian;
 	float eRadian = endRadian;
-	if (oppStartRadian < 0)
-	{
-		oppStartRadian += PI2;
-		oppEndRadian += PI2;
-
-		if (0 < sRadian && sRadian < PI)
-		{
-			sRadian += PI2;
-			eRadian += PI2;
-		}
-	}
-	if (oppStartRadian <= eRadian && sRadian <= oppEndRadian)
+	if (isInsideRadian(oppStartRadian, Vector2(sRadian, eRadian)) ||
+		isInsideRadian(oppEndRadian, Vector2(sRadian, eRadian)) ||
+		isInsideRadian(sRadian, Vector2(oppStartRadian, oppEndRadian)) ||
+		isInsideRadian(eRadian, Vector2(oppStartRadian, oppEndRadian)))
 	{
 		return true;
 	}
