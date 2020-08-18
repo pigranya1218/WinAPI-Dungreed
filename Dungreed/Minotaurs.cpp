@@ -272,6 +272,49 @@ void Minotaurs::setState(ENEMY_STATE state)
 	}
 }
 
+void Minotaurs::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+}
+
+bool Minotaurs::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool Minotaurs::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		{
+			_img = IMAGE_MANAGER->findImage("Minotaurs/Idle_Shot");
+		}
+		break;
+		case ENEMY_STATE::ATTACK:
+		{
+			_img = IMAGE_MANAGER->findImage("Minotaurs/Attack_Shot");
+		}
+		break;
+		case ENEMY_STATE::SKILL:
+		{
+			_img = IMAGE_MANAGER->findImage("Minotaurs/Skill_Shot");
+		}
+		break;
+	}
+
+	return false;
+}
+
+bool Minotaurs::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
+}
+
 bool Minotaurs::playerCollision(const Vector2& playerPos)
 {
 	if (_rect.left <= playerPos.x && playerPos.x <= _rect.right &&

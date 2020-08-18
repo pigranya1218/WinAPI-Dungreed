@@ -30,6 +30,9 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_moving.force = Vector2(250, 0);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_isDetect = 0;
 
 	_active = true;
@@ -57,6 +60,7 @@ void BatIce::update(float const timeElapsed)
 		_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 	}
 
+	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -73,12 +77,8 @@ void BatIce::update(float const timeElapsed)
 		case ENEMY_STATE::MOVE:
 		{
 			// 이동
-			Vector2 moveDir(0, 0);
-
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);
-
-			_enemyManager->moveEnemy(this, moveDir);
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);			
 
 			// 일정 주기로 공격
 			if (_isDetect)
@@ -121,6 +121,9 @@ void BatIce::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
+
+	_enemyManager->moveEnemy(this, moveDir);
 
 	_ani->frameUpdate(timeElapsed);
 
@@ -130,9 +133,6 @@ void BatIce::update(float const timeElapsed)
 void BatIce::render()
 {
 	_img->setScale(_scale);
-
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 }
 
@@ -169,4 +169,69 @@ void BatIce::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void BatIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				case ENEMY_STATE::MOVE:
+				{
+					_img = IMAGE_MANAGER->findImage("Bat/Ice/Move");
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_img = IMAGE_MANAGER->findImage("Bat/Ice/Attack");
+				}
+				break;
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+
+		return;
+	}
+	_moving.force.x = 250;
+}
+
+bool BatIce::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool BatIce::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		{
+			_img = IMAGE_MANAGER->findImage("Bat/Ice/Move_Shot");
+		}
+		break;
+		case ENEMY_STATE::ATTACK:
+		{
+			_img = IMAGE_MANAGER->findImage("Bat/Ice/Attack_Shot");
+		}
+		break;
+	}
+
+	return false;
+}
+
+bool BatIce::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
 }

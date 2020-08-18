@@ -20,6 +20,11 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 
+	ZeroMemory(&_moving, sizeof(_moving));
+
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.hitDelay = 0.3;
+
 	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.02, 1, 500, false, true, true, true);
 
 	_isDetect = 0;
@@ -96,6 +101,7 @@ void BatGiantRed::update(float const timeElapsed)
 		}
 		break;
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	_enemyManager->moveEnemy(this, moveDir);
 
@@ -150,4 +156,65 @@ void BatGiantRed::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+}
+
+void BatGiantRed::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
+{
+	if (_hit.isHit)
+	{
+		if (_hit.hitUpdate(timeElapsed))
+		{
+			switch (_state)
+			{
+				case ENEMY_STATE::IDLE:
+				{
+					_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Idle");
+				}
+				break;
+				case ENEMY_STATE::ATTACK:
+				{
+					_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Attack");
+				}
+				break;
+			}
+			_hit.isHit = false;
+		}
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+	}
+}
+
+bool BatGiantRed::hitEffect(FloatRect * rc, AttackInfo * info)
+{
+	return false;
+}
+
+bool BatGiantRed::hitEffect(FloatCircle * circle, AttackInfo * info)
+{
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+		case ENEMY_STATE::IDLE:
+		{
+			_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Idle_Shot");
+		}
+		break;
+		case ENEMY_STATE::ATTACK:
+		{
+			_img = IMAGE_MANAGER->findImage("Bat/Giant_Red/Attack_Shot");
+		}
+		break;
+	}
+
+	return false;
+}
+
+bool BatGiantRed::hitEffect(Projectile * projectile, AttackInfo * info)
+{
+	return false;
 }

@@ -4,7 +4,6 @@
 class BatNormal : public Enemy
 {
 private:
-	tagMoveInfo		_moving;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);
@@ -13,5 +12,11 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
+
+	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
+
+	bool hitEffect(FloatRect* rc, AttackInfo* info);
+	bool hitEffect(FloatCircle* circle, AttackInfo* info);
+	bool hitEffect(Projectile* projectile, AttackInfo* info);
 };
 
