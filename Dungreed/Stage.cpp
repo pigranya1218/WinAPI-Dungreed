@@ -5,13 +5,14 @@
 void Stage::init()
 {
 	_objectMgr = new ObjectManager;
-	
+
 	_npcMgr = new NpcManager;
-	
+
 	_enemyMgr = new EnemyManager;
-	
+
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
+
 }
 
 void Stage::release()

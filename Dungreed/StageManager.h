@@ -17,21 +17,26 @@ enum class STAGE_TYPE : int
 class StageManager
 {
 private:
-	typedef vector<Stage*> VStage;
-
 	GameScene* _gameScene;
 	Player* _player;
 	STAGE_TYPE _currStageType; // 현재 스테이지 타입
 	vector<Stage*> _stages; // 현재 스테이지들
 	Stage* _currStage; // 현재 스테이지 
 	
+	Stage* _stage;
 	Stage* _downStair;
 	Stage* _restaurantRoom;
 	Stage* _shopRoom;
 
 	int _roomIndex;
-	vector<VStage> _vStage;
+	int _currIndexX, _currIndexY;
+	int k;
+	int l;
+	
+	vector<vector<Stage*>> _vStage;
 	vector<DIRECTION>::iterator iter;
+
+	int rnd;
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
 	void setPlayer(Player* player) { _player = player; }

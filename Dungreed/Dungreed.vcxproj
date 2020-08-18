@@ -165,6 +165,7 @@
     <ClInclude Include="BatRed.h" />
     <ClInclude Include="babyGreenBat.h" />
     <ClInclude Include="bombPouch.h" />
+    <ClInclude Include="BossRoom1.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CameraShakeEvent.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="DebugStage.h" />
     <ClInclude Include="BaseCos.h" />
     <ClInclude Include="DemonBoots.h" />
+    <ClInclude Include="DownStair1L.h" />
     <ClInclude Include="DungeonShopRoom.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
@@ -286,6 +288,7 @@
     <ClCompile Include="BatRed.cpp" />
     <ClCompile Include="babyGreenBat.cpp" />
     <ClCompile Include="bombPouch.cpp" />
+    <ClCompile Include="BossRoom1.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
@@ -301,6 +304,7 @@
     <ClCompile Include="DebugStage.cpp" />
     <ClCompile Include="BaseCos.cpp" />
     <ClCompile Include="DemonBoots.cpp" />
+    <ClCompile Include="DownStair1L.cpp" />
     <ClCompile Include="DungeonShopRoom.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />

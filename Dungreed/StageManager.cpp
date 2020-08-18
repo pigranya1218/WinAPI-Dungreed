@@ -17,6 +17,14 @@ void StageManager::init()
 	makeStage();
 
 	_roomIndex = 0;
+
+
+	rnd = RANDOM->getFromIntTo(0, 5);
+	k = RANDOM->getFromIntTo(0, 10);
+	l = RANDOM->getFromIntTo(0, 10);
+	_currIndexX = k;
+	_currIndexY = l;
+	
 }
 
 void StageManager::release()
@@ -28,10 +36,11 @@ void StageManager::update(float const elapsedTime)
 {
 	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
 	{
-		if (_roomIndex >= _stages.size())return;
+		/*if (_roomIndex >= _stages.size())return;
 			
-		_stages[_roomIndex]->update(elapsedTime);
-		
+		_stages[_roomIndex]->update(elapsedTime);*/
+		_vStage[_currIndexX][_currIndexY]->update(elapsedTime);
+
 	}
 
 	else	_currStage->update(elapsedTime);
@@ -41,9 +50,9 @@ void StageManager::render()
 {
 	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
 	{
-		if (_roomIndex >= _stages.size())return;
-		_stages[_roomIndex]->render();
-		
+		/*if (_roomIndex >= _stages.size())return;
+		_stages[_roomIndex]->render();*/
+		_vStage[_currIndexX][_currIndexY]->render();
 	}
 	else _currStage->render();
 }
@@ -82,9 +91,9 @@ void StageManager::moveTo(GameObject* object, Vector2 moveDir)
 {
 	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
 	{
-		if (_roomIndex >= _stages.size())return;
-		_stages[_roomIndex]->moveTo(object, moveDir);
-
+		/*if (_roomIndex >= _stages.size())return;
+		_stages[_roomIndex]->moveTo(object, moveDir);*/
+		_vStage[_currIndexX][_currIndexY]->moveTo(object, moveDir);
 	}
 	else _currStage->moveTo(object, moveDir);
 
@@ -101,11 +110,18 @@ void StageManager::nextStage()
 
 void StageManager::moveRoom()
 {
-	_roomIndex += 1;
+	_currIndexX += 1;
+	//_roomIndex += 1;
 }
 
 void StageManager::makeStage()
 {
+	_vStage.resize(10);
+	for (int i = 0; i < 10; i++)
+	{
+		_vStage[i].resize(10);
+	}
+	
 	switch (_currStageType)
 	{
 	case STAGE_TYPE::VILLAGE:
@@ -114,13 +130,68 @@ void StageManager::makeStage()
 		_currStage->init();
 		break;
 	case STAGE_TYPE::DUNGEON_NORMAL:
-
+		
 	
-		_restaurantRoom = new RestaurantRoom();
+		_currStage = new StartRoom1();
+	
+		//_stages.push_back(_currStage);
+
+		_vStage[k][l] = _currStage;
+
+		_vStage[_currIndexX][_currIndexY]->setStageManager(this);
+		_vStage[_currIndexX][_currIndexY]->init();
+
+		if (_currStage->getOpenDirection(2))
+		{
+			_stage = new Room4LR();
+			_vStage[k + 1][l] = _stage;
+			
+		}
+
+		/*_vStage[_currIndexX][_currIndexY]->setStageManager(this);
+		_vStage[_currIndexX][_currIndexY]->init();*/
 		
-	    //_downStair = new StartRoom1();
+		/*for (iter = _currStage->getStageDirection().begin(); iter != _currStage->getStageDirection().end();)
+				{
+					switch (*iter)
+					{
+					case DIRECTION::RIGHT:
+
+						if (rnd == 0)_currStage = new Room20LTRB();
+						else if (rnd == 1)_currStage = new Room2LTR();
+						else if (rnd == 2)_currStage = new Room4LR();
+						else if (rnd == 3)_currStage = new Room21LR();
+						else if (rnd == 4)_currStage = new Room22LTRB();
+						else _currStage = new Room20LTRB();
+
+						_vStage[k][l + 1] = _currStage;
+
+						break;
+					case DIRECTION::LEFT:
+						break;
+					case DIRECTION::UP:
+						break;
+					case DIRECTION::DOWN:
+						if (rnd == 0)_currStage = new Room20LTRB;
+						else if (rnd == 1)_currStage = new Room22LTRB;
+						else if (rnd == 2)_currStage = new Room2LTR;
+						else _currStage = new Room20LTRB;
+
+
+						_vStage[k + 1][l] = _currStage;
+
+						break;
+					default:
+						break;
+					}
+					++iter;
+				}*/
+
+		/*_restaurantRoom = new RestaurantRoom();
 		
-		 _shopRoom = new DungeonShopRoom();
+	    _downStair = new StartRoom1();
+		
+		 _shopRoom = new DungeonShopRoom();*/
 		
 
 	

@@ -495,6 +495,12 @@
     <ClInclude Include="Room10T.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="DownStair1L.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRoom1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -825,6 +831,12 @@
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="Room10T.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair1L.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoom1.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
