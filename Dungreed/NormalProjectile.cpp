@@ -37,6 +37,8 @@ void NormalProjectile::init(string imgKey, float angleRadian, float speed, bool 
 
 void NormalProjectile::release()
 {
+	Projectile::release();
+
 	if (_useAni)
 	{
 		_ani->release();
@@ -84,6 +86,7 @@ void NormalProjectile::update(float elapsedTime)
 		if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
 		{
 			_active = false;
+			return;
 		}
 	}
 	else
@@ -114,6 +117,7 @@ void NormalProjectile::render()
 	if (_useAni)
 	{		
 		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);		
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		
 	}
 	else

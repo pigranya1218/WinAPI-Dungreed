@@ -17,7 +17,7 @@ void ProjectileManager::release()
 
 void ProjectileManager::update(float const elapsedTime)
 {
-	for (int i = 0; i < _projectiles.size(); i++)
+	for (int i = 0; i < _projectiles.size();)
 	{
 		_projectiles[i]->update(elapsedTime);
 
@@ -49,7 +49,7 @@ void ProjectileManager::moveTo(GameObject* gameObject, Vector2 moveDir, bool che
 
 bool ProjectileManager::checkEnemyCollision(Projectile* projectile, bool isOnceCollision)
 {
-	_enemyManager->isHit(projectile, isOnceCollision);
+	return _enemyManager->isHit(projectile, isOnceCollision);
 }
 
 bool ProjectileManager::checkPlayerCollision(Projectile* projectile)

@@ -271,5 +271,27 @@ bool SkelSmallBow::hitEffect(FloatCircle * circle, AttackInfo * info)
 
 bool SkelSmallBow::hitEffect(Projectile * projectile)
 {
-	return false;
+	AttackInfo* info = projectile->getAttackInfo();
+	_hit.isHit = true;
+	_hit.hitCount = 0;
+	//_hit.knockCount = 0;
+	_moving.gravity.x = info->knockBack;
+
+	switch (_state)
+	{
+	case ENEMY_STATE::IDLE:
+	case ENEMY_STATE::ATTACK:
+	{
+		_img = IMAGE_MANAGER->findImage("Skel/Small/Idle_Shot");
+	}
+	break;
+	}
+
+	DamageInfo damageInfo = info->getDamageInfo();
+	Vector2 renderPos = _position;
+	renderPos.y -= 20;
+	_enemyManager->showDamage(damageInfo, renderPos);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
+
+	return true; // 맞았다면 TRUE 반환
 }
