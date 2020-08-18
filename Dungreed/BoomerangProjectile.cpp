@@ -49,22 +49,6 @@ void BoomerangProjectile::update(float elapsedTime)
 {
 	Vector2 moveDir = Vector2(0, 0);
 
-	//if (_checkCollision) // 스테이지와 충돌 검사함
-	//{
-	//	Vector2 lastDir = _position;
-	//	_projectileMgr->moveTo(this, moveDir);
-	//	Vector2 currDir = _position;
-
-	//	if (lastDir.x == currDir.x || lastDir.y == currDir.y)
-	//	{
-	//		_active = false;
-	//	}
-	//}
-	//else // 스테이지와 충돌 검사 안함
-	//{
-	//	_position += moveDir;
-	//}
-
 	if (_useAni)
 	{
 		_ani->frameUpdate(elapsedTime);

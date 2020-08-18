@@ -64,8 +64,6 @@ void OakBow::update(Player * player, float const elapsedTime)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 
-
-
 	if (_ani->isPlay())
 	{
 		_ani->frameUpdate(elapsedTime);
@@ -74,7 +72,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 	if (_ani->getPlayIndex() == 3)
 	{
 		effectCount++;
-		if (effectCount == 1)
+		if (effectCount == 20)
 		{
 			_drawEffect = true;						// 이펙트 그리기
 		}
@@ -98,6 +96,10 @@ void OakBow::update(Player * player, float const elapsedTime)
 	{
 		angleRadian -= PI2;
 	}
+
+	//이펙트 각도값
+	_effectAngleRadianValue = angleRadian;
+
 	renderPosWeapon = (isLeft) ? Vector2(renderPosHand.x - 9.0f, renderPosHand.y) : Vector2(renderPosHand.x + 9.0f, renderPosHand.y);
 
 	anglePos = Vector2(0.35f * _img->getFrameSize().x, 0.5f * _img->getFrameSize().y);
@@ -184,8 +186,6 @@ void OakBow::frontRender(Player * player)
 	_img->setAnglePos(anglePos);
 	_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
 
-
-
 	//손 그리기 어케해야하누...음...
 	Vector2 renderSunHandPos = subHandPos;
 
@@ -210,7 +210,7 @@ void OakBow::frontRender(Player * player)
 		effectPos01.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
 		effectPos01.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.1) : (0.1))) * length;
 
-		EFFECT_MANAGER->play("L_Effect_Charge", effectPos01, effectSize01, degree);
+		EFFECT_MANAGER->play("L_Effect_Charge", effectPos01, effectSize01, _effectAngleRadianValue);
 	}
 }
 

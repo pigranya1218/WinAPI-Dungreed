@@ -21,14 +21,12 @@ void MatchLockGun::init()
 
 	// 기본 보조옵션
 	//_addStat.dashDamage = 20;
-	_addStat.minDamage = 10;
-	_addStat.maxDamage = 20;
-	_addStat.attackSpeed = 0.4;
+	_addStat.minDamage = 30;
+	_addStat.maxDamage = 40;
+	_addStat.attackSpeed = 1;
 
 
 	// private 변수 설정
-	_minDamage = 12;
-	_maxDamage = 18;
 	_baseAttackDelay = 1;
 	_currAttackDelay = 0;
 	_maxBullet = 1;

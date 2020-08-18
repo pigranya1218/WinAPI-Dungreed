@@ -195,6 +195,7 @@
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="GatlingGun.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="GreenBat.h" />
     <ClInclude Include="GreenDadBat.h" />
@@ -210,6 +211,7 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
+    <ClInclude Include="MagicStick.h" />
     <ClInclude Include="MagnifyingGlass.h" />
     <ClInclude Include="MainScene.h" />
     <ClInclude Include="MapTool.h" />
@@ -315,6 +317,7 @@
     <ClCompile Include="FloatRect.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="GatlingGun.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="GreenBat.cpp" />
     <ClCompile Include="GreenDadBat.cpp" />
@@ -329,6 +332,7 @@
     <ClCompile Include="KeresScythe.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
+    <ClCompile Include="MagicStick.cpp" />
     <ClCompile Include="MagnifyingGlass.cpp" />
     <ClCompile Include="MainScene.cpp" />
     <ClCompile Include="MapTool.cpp" />

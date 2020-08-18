@@ -14,6 +14,7 @@
 #include "OakBow.h"
 #include "MatchLockGun.h"
 #include "Boomerang.h"
+#include "GatlingGun.h"
 
 #include "SpikeBall.h"
 #include "IceBall.h"
@@ -204,7 +205,11 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	MatchLockGun* testWeapon5 = new MatchLockGun;
+	/*MatchLockGun* testWeapon5 = new MatchLockGun;
+	testWeapon5->init();
+	_inventory[14] = testWeapon5;*/
+
+	GatlingGun* testWeapon5 = new GatlingGun;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
 
@@ -487,7 +492,7 @@ void Player::render()
 	}
 
 	// 캐릭터 그리기
-	_costume->render(CAMERA->getRelativeV2(_position), _direction);
+	//_costume->render(CAMERA->getRelativeV2(_position), _direction);
 
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < 4; i++)

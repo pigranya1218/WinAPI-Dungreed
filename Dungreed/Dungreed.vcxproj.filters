@@ -498,6 +498,12 @@
     <ClInclude Include="DamageInfo.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
+    <ClInclude Include="MagicStick.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="GatlingGun.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -832,6 +838,12 @@
     </ClCompile>
     <ClCompile Include="RestaurantNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicStick.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="GatlingGun.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClCompile>
     <ClCompile Include="DamageInfo.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
