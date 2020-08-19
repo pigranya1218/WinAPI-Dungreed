@@ -57,8 +57,9 @@ void VillageStage::update(float const elapsedTime)
 	{
 		//_stageManager->nextStage();
 		_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
-		_stageManager->makeStage();
+		
 		_stageManager->setPlayerPos(200, 400);
+		_stageManager->makeStage();
 	}
 }
 
