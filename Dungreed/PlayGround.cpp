@@ -198,6 +198,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/COSTUME/PICKAX", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
 	// *** RESTAURANT(FOODS SHOP)
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE_LABEL", L"resources/images/gameScene/ui/restaurant/Label.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE", L"resources/images/gameScene/ui/restaurant/Base_0.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE2", L"resources/images/gameScene/ui/restaurant/Base_3.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE_BACK", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBaseBack.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBase.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD", L"resources/images/gameScene/ui/restaurant/RestaurantMenu.png");
