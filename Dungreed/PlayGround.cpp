@@ -339,6 +339,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("PowerKatana", L"resources/images/MeleeWeapon/PowerKatana.png"); // 육도가이(카타나) 아이콘
 	IMAGE_MANAGER->addImage("QuarterStaffBig", L"resources/images/MeleeWeapon/QuarterStaff_Big.png"); // 박달나무 쌍단봉 아이콘겸 이미지
 	IMAGE_MANAGER->addImage("BigPaintBlush", L"resources/images/MeleeWeapon/BigPaintBlush.png"); // 서예용 붓 아이콘겸 이미지
+	IMAGE_MANAGER->addImage("Lumber", L"resources/images/MeleeWeapon/Lumber0.png"); // 각목 아이콘겸 이미지
+	IMAGE_MANAGER->addImage("Lumber1", L"resources/images/MeleeWeapon/Lumber1.png"); // 부서진 각목 아이콘겸 이미지
+	IMAGE_MANAGER->addImage("FluteGreatSword", L"resources/images/MeleeWeapon/FluteGreatSword.png"); // 흑장미칼 아이콘겸 이미지
+
 
 
 

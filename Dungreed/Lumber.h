@@ -1,11 +1,11 @@
 #pragma once
 #include "Item.h"
-class ShortSword : public Item
+class Lumber : public Item
 {
 private:
 	// 공격 관련
-	Image* _img;
 	Image*	_effect;
+	Image* _img;
 	int	_minDamage;
 	int _maxDamage;
 	Vector2 _attackMove;
@@ -16,10 +16,12 @@ private:
 	bool _reverseMove;
 	bool _drawEffect;
 	bool _oneAttack;
-	
+	bool _isBroken;
 	FloatRect _hand;
 	Vector2 _handSize;
-	
+	Animation* _ani;
+	float _width;
+	float _height;
 
 public:
 	virtual void init();
@@ -39,4 +41,3 @@ public:
 	virtual void equip(Player* player); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
 
 };
-

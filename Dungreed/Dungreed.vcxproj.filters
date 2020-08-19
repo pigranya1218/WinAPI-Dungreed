@@ -540,6 +540,12 @@
     <ClInclude Include="GatlingGun.h">
       <Filter>Dungreed\GameScene\Item\Long</Filter>
     </ClInclude>
+    <ClInclude Include="Lumber.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="FluteGreatSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -919,6 +925,12 @@
     </ClCompile>
     <ClCompile Include="DamageInfo.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Lumber.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="FluteGreatSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

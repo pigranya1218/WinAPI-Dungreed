@@ -18,7 +18,7 @@ void MartialArtOfTiger::init()
 
 	_addStat.minDamage = 10;
 	_addStat.maxDamage = 22;
-	_addStat.attackSpeed = 0.3;
+	_addStat.attackSpeed = 0.6;
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
 	_currAttackDelay = 0;
