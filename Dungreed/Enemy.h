@@ -42,6 +42,7 @@ protected:
 	struct tagShootingInfo
 	{
 		vector<NormalProjectile*> bullets;	// 한 번에 여러개 만들어 놓고 쏘기 위해
+		AttackInfo info;
 
 		string	bulletName;			// 불렛 이미지 이름
 		string	effectName;			// 불렛 이펙트 이름
@@ -64,11 +65,6 @@ protected:
 		bool	isGravity;			// 중력 사용 여부
 
 		int		bulletNum;			// 생성할 총알 지정
-
-		float	minDamage;			// 최소 데미지
-		float	maxDamage;			// 최대 데미지
-		float	trueDamage;			// 고정 데미지
-		float	knockBack;			// 밀어내는 힘
 
 		// 총알 초기화 >> 불렛 이미지이름, 이펙트 이름, 투사체 날아가는 힘, 스케일, 투사체 발사주기, 투사체 지속시간, 이미지 회전여부, 프레임 사용여부, 프레임 루프여부, 중력 적용여부, 붉은 선 충돌여부, 푸른 선 충돌여부
 		void init(string bulletName, string effectName, Vector2 force, float scale, float delay, float duration, bool isRotate = 0, bool isAni = 1, bool aniLoop = 1, bool isGravity = 0, bool collisionGround = 1, bool collisionPlatForm = 1)
@@ -99,10 +95,10 @@ protected:
 		}		
 		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 0)
 		{
-			this->minDamage = minDamage;
-			this->maxDamage = maxDamage;
-			this->trueDamage = trueDamage;
-			this->knockBack = knockBack;
+			info.minDamage = minDamage;
+			info.maxDamage = maxDamage;
+			info.trueDamage = trueDamage;
+			info.knockBack = knockBack;
 		}
 		// 딜레이 업데이트
 		bool delayUpdate(float const timeElapsed)
@@ -148,7 +144,7 @@ protected:
 			}
 		}
 
-		void fireBullet(EnemyManager* enemyManager, int fireCount = 0);
+		void fireBullet(int enemyCode, EnemyManager* enemyManager, int fireCount = 0);
 	};
 
 	// 공격에 관련된 것들

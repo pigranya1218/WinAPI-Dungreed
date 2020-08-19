@@ -43,15 +43,18 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
 
-	//_shooting.init("Arrow00", "ArrowHitEffect", _scale, 1.5, 400, 500, true, true, false, false);
+	_shooting.init("Arrow00", "ArrowHitEffect", Vector2(500, 500), _scale, 1.5, 2.5, true, false, false, false, true, false);
+	_shooting.attackInit(3, 5, 3);
 
 	// 플레이어 감지 변수 초기화
-	_isDetect = 0;
+	_isDetect = _attacking = 0;
 
 	_active = true;
 
 	// TEST
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_BOW);
 }
 
 void SkelSmallBow::release()
@@ -82,16 +85,16 @@ void SkelSmallBow::update(float const timeElapsed)
 				if (_attack.angle > 360) _attack.angle -= 360;
 
 				if (_attack.update(timeElapsed))
-				{
-					_shooting.createBullet(_position, _attack.angle);
+				{					
 					setState(ENEMY_STATE::ATTACK);
+					_attacking = true;
 				}
 			}
 		}
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			if (_weaponAni->getPlayIndex() == 3 && !_shooting.bullets.empty())
+			if (_weaponAni->getPlayIndex() == 3 && _attacking)
 			{
 				if (_weaponAni->isPlay())
 				{
@@ -100,10 +103,12 @@ void SkelSmallBow::update(float const timeElapsed)
 				if (_shooting.delayUpdate(timeElapsed))
 				{
 					_weaponAni->resume();
-					_shooting.fireBullet(_enemyManager);
+					_shooting.createBullet(_position, _attack.angle);
+					_shooting.fireBullet(_myEnemyType, _enemyManager);
+					_attacking = false;
 				}
 			}
-			if (!_weaponAni->isPlay() && _shooting.bullets.empty())
+			if (!_weaponAni->isPlay() && !_attacking)
 			{
 				setState(ENEMY_STATE::IDLE);
 			}

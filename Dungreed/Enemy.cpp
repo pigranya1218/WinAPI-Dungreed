@@ -2,12 +2,12 @@
 #include "Enemy.h"
 #include "EnemyManager.h"
 
-void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCount)
+void Enemy::tagShootingInfo::fireBullet(int enemyCode, EnemyManager * enemyManager, int fireCount)
 {
 	if (bullets.empty()) return;
 
 	int fireLoop = (fireCount == 0) ? (bullets.size()) : (fireCount);
-	string attackCode = /*to_string(_myEnemyType) +*/ to_string(TIME_MANAGER->getWorldTime());
+	string attackCode = to_string(enemyCode) + to_string(TIME_MANAGER->getWorldTime());
 	size_t attackId = TTYONE_UTIL::getHash(attackCode);
 
 	// 생성해놓은 총알을
@@ -18,10 +18,10 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 		{
 			AttackInfo* attackInfo = new AttackInfo;	
 			attackInfo->attackID = attackId;
-			attackInfo->minDamage = minDamage;
-			attackInfo->maxDamage = maxDamage;
-			attackInfo->trueDamage = trueDamage;
-			attackInfo->knockBack = knockBack;
+			attackInfo->minDamage = info.minDamage;
+			attackInfo->maxDamage = info.maxDamage;
+			attackInfo->trueDamage = info.trueDamage;
+			attackInfo->knockBack = info.knockBack;
 			attackInfo->team = OBJECT_TEAM::ENEMY;
 
 			enemyManager->fireEnemy(bullets[bullets.size() - 1], attackInfo);

@@ -22,6 +22,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 
 	// 공격 관련 변수 초기화
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(600, 600), _scale, 2, 1.5, true, false, false, false, true, false);
+	_shooting.attackInit(3, 5, 3);
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -37,6 +38,8 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_ICE);
 }
 
 void BatIce::release()
@@ -108,7 +111,7 @@ void BatIce::update(float const timeElapsed)
 		{
 			if (_ani->getPlayIndex() == 5)
 			{
-				_shooting.fireBullet(_enemyManager);
+				_shooting.fireBullet(_myEnemyType, _enemyManager);
 			}
 			if (!_ani->isPlay())
 			{

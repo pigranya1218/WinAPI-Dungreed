@@ -27,6 +27,7 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 
 	// 투사체 초기화
 	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.02f, 1.5f, false, true, true, false, true, false);
+	_shooting.attackInit(3, 5, 3);
 	
 	_isDetect = 0;
 	_detectRange = 300;
@@ -34,6 +35,8 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_GIANT_RED);
 }
 
 void BatGiantRed::release()
@@ -90,7 +93,7 @@ void BatGiantRed::update(float const timeElapsed)
 		{			
 			if (_ani->getPlayIndex() == 4)
 			{
-				_shooting.fireBullet(_enemyManager);
+				_shooting.fireBullet(_myEnemyType, _enemyManager);
 				_renderNum = -1;
 			}
 			if (!_ani->isPlay())
