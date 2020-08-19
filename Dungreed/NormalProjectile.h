@@ -12,6 +12,7 @@ private:
 	float		_count;				// 시간 계산용
 
 	Image*		_img;				// 투사체 이미지
+	Vector2		_renderSize;
 
 	bool		_useAni;			// 애니메이션 사용하는가
 	Animation*	_ani;				// 투사체 애니메이션

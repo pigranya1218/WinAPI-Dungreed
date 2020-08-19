@@ -3,7 +3,7 @@
 #include "ProjectileManager.h"
 #include "Player.h"
 
-void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
+void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_speed = speed;
@@ -54,20 +54,26 @@ void BoomerangProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	//Vector2 returnPos;
-	/*if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
+	// 타입에 따른 충돌 검사
+	if (_info->team == OBJECT_TEAM::PLAYER)
 	{
-		_ProjectileReturn = true;
-		if (getDistance(_startPos.x, _startPos.y, _position.x, _position.y) > _range)
+		// ENEMY와의 충돌 검사
+		if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
 		{
-			returnPos = _position;
+			//_active = false;
+			return;
 		}
-	}*/
+	}
+	else
+	{
+		// TODO: PLAYER와의 충돌 검사
+	}
 
 	_count += elapsedTime;
 	if (_count >= _maxTime)
 	{
 		_count = 0;
+		_info->attackID = TTYONE_UTIL::getHash(to_string(0x02262) + to_string(TIME_MANAGER->getWorldTime()));
 		_ProjectileReturn = true;
 	}
 
@@ -93,12 +99,6 @@ void BoomerangProjectile::update(float elapsedTime)
 		}
 		moveDir.x += cosf(angleValue) * _speed * elapsedTime;
 		moveDir.y += -sinf(angleValue) * _speed * elapsedTime;
-
-		/*if (_returnCount >= _maxTime)
-		{
-			_returnCount = 0;
-			_ProjectileReturn = false;
-		}*/
 	}
 	_position += moveDir;
 }
@@ -112,13 +112,11 @@ void BoomerangProjectile::render()
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
-		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _radius, D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
 		_img->render(CAMERA->getRelativeV2(_position), _size);
-		//D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _img->getFrameSize().x * 2, D2D1::ColorF::Enum::Red, 5);
 	}
 }
 

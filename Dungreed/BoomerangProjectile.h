@@ -28,7 +28,7 @@ private:
 	bool _ProjectileReturn;
 
 public:
-	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, string collisionEffect, Vector2 effectSize, float range, bool useRotate = 1);
+	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate = 1);
 	virtual void release();
 	virtual void update(float elapsedTime);
 	virtual void render();
