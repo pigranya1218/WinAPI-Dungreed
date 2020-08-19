@@ -16,12 +16,11 @@ void QuarterStaffBig::init()
 	_addStat.minDamage = 9;
 	_addStat.maxDamage = 11;
 	_addStat.defense = 5;
-	_addStat.attackSpeed = 5.5;
+	_addStat.attackSpeed = 0.2;
 	//보조옵션
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_baseAttackDelay = 0.1;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
@@ -140,7 +139,7 @@ void QuarterStaffBig::attack(Player* player)
 
 	Vector2 renderPosHand = pos;
 	_oneAttack = true;
-	_currAttackDelay = _baseAttackDelay;
+	_currAttackDelay = _addStat.attackSpeed;
 }
 
 void QuarterStaffBig::attack(FloatRect* rect, AttackInfo* info)
@@ -159,7 +158,11 @@ void QuarterStaffBig::getHit(Vector2 const position)
 {
 }
 
-PlayerStat QuarterStaffBig::equip()
+void QuarterStaffBig::equip(Player * player)
 {
-	return PlayerStat();
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }
+

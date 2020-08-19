@@ -231,7 +231,7 @@ void Player::init()
 	testAcc14->init();
 	_inventory[0] = testAcc14;
 
-	DaisyRing* testAcc15 = new DaisyRing;
+	BigPaintBlush* testAcc15 = new BigPaintBlush;
 	testAcc15->init();
 	_inventory[7] = testAcc15;
 
@@ -240,7 +240,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	ShortSpear* testWeapon2 = new ShortSpear;
+	MartialArtOfTiger* testWeapon2 = new MartialArtOfTiger;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
