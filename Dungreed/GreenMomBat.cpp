@@ -13,13 +13,12 @@ void GreenMomBat::init()
 
 	_batPos.x = WINSIZEX / 2;
 	_batPos.y = WINSIZEY / 2;
-	_baseAttackDelay = 0.4;
+	_baseAttackDelay = 2;
 	_currAttackDelay = 0;
 	_maxBullet = 1;
 	_currBullet = _maxBullet;
 	_baseReloadDelay = 0.15;
-	_currReloadDelay = 0;
-	_drawEffect = false;
+	_currReloadDelay = 0;	
 	_img = IMAGE_MANAGER->findImage("GreenMomBatF");
 	_ani = new Animation;
 	_ani->start();
@@ -118,18 +117,21 @@ void GreenMomBat::attack(Player * player)
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	projectile->setPosition(shootPos);
-	projectile->setSize(Vector2(170, 120));
+	projectile->setSize(Vector2(160, 90));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
+	
 
-	//projectile->init("BabyBatBulletAt", angleRadian, 800, true, true, 18, true, "BabyBatBulletFx", Vector2(170, 170), 1.5,false);
-
-	projectile->init("BabyBatBulletAt", "BabyBatBulletFX", Vector2(110, 110), Vector2(500, 500), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
+	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(110, 110), Vector2(850, 850), 2, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo->maxDamage = 5;
+	attackInfo->minDamage = 3;
 	player->attack(projectile, attackInfo);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임
-	_drawEffect = true; // 이펙트 그리기
+	
 }
 
 void GreenMomBat::attack(FloatRect * rect, AttackInfo * info)

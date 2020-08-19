@@ -25,19 +25,12 @@ void babyGreenBat::init()
 	_ani->setFPS(18);
 	_ani->setPlayFrame(0, _img->getMaxFrameX(), false, true);
 
-	_baseAttackDelay = 0.2;
+	_baseAttackDelay = 0.6;
 	_currAttackDelay = 0;
 	_maxBullet = 2;
 	_currBullet = _maxBullet;
 	_baseReloadDelay = 0.15;
 	_currReloadDelay = 0;
-	_drawEffect = false;
-
-
-	
-
-
-	
 }
 
 void babyGreenBat::release()
@@ -137,17 +130,17 @@ void babyGreenBat::attack(Player* player)
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	projectile->setPosition(shootPos);
-	projectile->setSize(Vector2(100, 100));
+	projectile->setSize(Vector2(75, 75));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(100, 100), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
+	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(75, 75), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
 
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;	
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode + "1");
-	attackInfo->maxDamage = 5;
-	attackInfo->minDamage = 4;
+	attackInfo->maxDamage = 1;
+	attackInfo->minDamage = 2;
 	player->attack(projectile, attackInfo);
 
 	NormalProjectile* projectile0 = new NormalProjectile;
@@ -156,15 +149,15 @@ void babyGreenBat::attack(Player* player)
 	shootPos0.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length0;
 	shootPos0.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length0;
 	projectile0->setPosition(Vector2(shootPos0.x, shootPos0.y-15));
-	projectile0->setSize(Vector2(100, 100));
+	projectile0->setSize(Vector2(75, 75));
 	projectile0->setTeam(OBJECT_TEAM::PLAYER);
-	projectile0->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(100, 100), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
+	projectile0->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(75, 75), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
 
 	AttackInfo* attackInfo0 = new AttackInfo;
 	attackInfo0->team = OBJECT_TEAM::PLAYER;
 	attackInfo0->attackID = TTYONE_UTIL::getHash(attackCode + "2");
-	attackInfo0->maxDamage = 5;
-	attackInfo0->minDamage = 4;
+	attackInfo0->maxDamage = 1;
+	attackInfo0->minDamage = 2;
 	player->attack(projectile0, attackInfo0);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
 }

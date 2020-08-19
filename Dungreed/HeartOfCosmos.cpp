@@ -1,5 +1,5 @@
 #include "HeartOfCosmos.h"
-#include "HeartOfCosmosProjectile.h"
+#include "AccProjectile.h"
 void HeartOfCosmos::init()
 {
 	_itemCode = 0x03307;
@@ -57,15 +57,18 @@ void HeartOfCosmos::getHit(Vector2 const position)
 void HeartOfCosmos::dash(Player * player)
 {
 
-	    HeartOfCosmosProjectile* projectile = new HeartOfCosmosProjectile;
-
-		projectile->setPosition(_renderPos);
-		projectile->setSize(Vector2(330, 300));
-		projectile->setTeam(OBJECT_TEAM::PLAYER);
-		projectile->init("HeartOfCosmos0", 0, 0, true, false, 15, false, "HeartOfCosmosF", Vector2(330, 300),10,false);		
-		AttackInfo* attackInfo = new AttackInfo;
-		attackInfo->team = OBJECT_TEAM::PLAYER;
-		player->attack(projectile, attackInfo);	
+	AccProjectile* projectile = new AccProjectile;
+	projectile->setPosition(_renderPos);
+	projectile->setSize(Vector2(330, 300));
+	projectile->setTeam(OBJECT_TEAM::PLAYER);
+	projectile->init("HeartOfCosmos0", _renderPos, 0, true, false, 13, false, "HeartOfCosmosF", Vector2(0, 0),10,false,false,false,false);
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());	
+	AttackInfo* attackInfo = new AttackInfo;
+	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo->maxDamage = 5;
+	attackInfo->minDamage = 3;
+	player->attack(projectile, attackInfo);	
 	
 
 }

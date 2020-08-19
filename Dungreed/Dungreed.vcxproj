@@ -204,7 +204,7 @@
     <ClInclude Include="GreenDadBat.h" />
     <ClInclude Include="GreenMomBat.h" />
     <ClInclude Include="HeartOfCosmos.h" />
-    <ClInclude Include="HeartOfCosmosProjectile.h" />
+    <ClInclude Include="AccProjectile.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -341,7 +341,7 @@
     <ClCompile Include="GreenDadBat.cpp" />
     <ClCompile Include="GreenMomBat.cpp" />
     <ClCompile Include="HeartOfCosmos.cpp" />
-    <ClCompile Include="HeartOfCosmosProjectile.cpp" />
+    <ClCompile Include="AccProjectile.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
