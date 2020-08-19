@@ -18,54 +18,20 @@ void MultiBullet::init()
 	_price = 3200;
 }
 
-void MultiBullet::release()
-{
-}
-
-void MultiBullet::update(Player * player, float const elapsedTime)
-{
-	
-}
-
-void MultiBullet::backRender(Player * player)
-{
-}
-
-void MultiBullet::frontRender(Player * player)
-{
-}
-
-void MultiBullet::displayInfo()
-{
-}
-
-void MultiBullet::attack(Player * player)
-{
-	
-}
-
-void MultiBullet::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void MultiBullet::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
 void MultiBullet::attack(Projectile * projectile, AttackInfo * info)
 {	
-	
-
+	if (info->madeByWeapon && info->usedItem.find(_itemCode) == info->usedItem.end())
+	{
+		info->usedItem.insert(_itemCode);
+		NormalProjectile* originProjectile = dynamic_cast<NormalProjectile*>(projectile);
+		for (int i = 0; i < 2; i++)
+		{
+			NormalProjectile* copyProjectile = new NormalProjectile(*originProjectile);
+			copyProjectile->setAngleRadian(originProjectile->getAngleRadian() + ((i == 0) ? (-0.2 * PI) : (0.2 * PI))); // 각도를 살짝 꺾은 뒤에
+			AttackInfo* copyInfo = new AttackInfo(*info);
+			
+			// TODO : 복사한 값 넣어줘야함
+		}
+	}
 }
 
-void MultiBullet::getHit(Vector2 const position)
-{
-}
-
-void MultiBullet::dash(Player * player)
-{
-}
-
-void MultiBullet::equip(Player * player)
-{
-}
