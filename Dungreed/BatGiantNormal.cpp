@@ -121,6 +121,11 @@ void BatGiantNormal::update(float const timeElapsed)
 	_shooting.aniUpdate(timeElapsed);
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void BatGiantNormal::render()
@@ -139,8 +144,6 @@ void BatGiantNormal::render()
 
 void BatGiantNormal::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -173,6 +176,8 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void BatGiantNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)

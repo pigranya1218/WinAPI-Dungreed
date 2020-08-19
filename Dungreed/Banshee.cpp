@@ -87,6 +87,11 @@ void Banshee::update(float const timeElapsed)
 	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
+
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void Banshee::render()
@@ -104,8 +109,6 @@ void Banshee::render()
 
 void Banshee::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -133,11 +136,13 @@ void Banshee::setState(ENEMY_STATE state)
 		}		
 		break;
 		case ENEMY_STATE::DIE:
-		{
+		{			
 			_active = false;
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void Banshee::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)

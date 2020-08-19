@@ -89,13 +89,22 @@ void BatBomb::update(float const timeElapsed)
 		{				
 			if (!_ani->isPlay())
 			{
-				setState(ENEMY_STATE::DIE);				
+				setState(ENEMY_STATE::SKILL);
+			}
+		}
+		break;
+		case ENEMY_STATE::SKILL:
+		{
+			if (!_ani->isPlay())
+			{
+				//setState(ENEMY_STATE::DIE);
+				_active = false;
 			}
 		}
 		break;
 		case ENEMY_STATE::DIE:
 		{
-			//EFFECT_MANAGER->play("Bat_Explosion", _position, Vector2(250, 250));
+			
 		}
 		break;
 	}
@@ -104,12 +113,33 @@ void BatBomb::update(float const timeElapsed)
 	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
+
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void BatBomb::render()
 {
 	_img->setScale(_scale);
-	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+
+	Vector2 drawPos = _position;
+
+	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
+	if (_state == ENEMY_STATE::SKILL)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			drawPos.x += cosf(PI / 4 * (1 + i * 2)) * 150;
+			drawPos.y -= sinf(PI / 4 * (1 + i * 2)) * 150;
+
+			_img->setScale(_scale);
+			_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani);
+
+			drawPos = _position;
+		}
+	}	
 
 	if (_curHp < _maxHp)
 	{
@@ -121,8 +151,6 @@ void BatBomb::render()
 
 void BatBomb::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -148,6 +176,18 @@ void BatBomb::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
 			_ani->start();
+		}		
+		break;
+		case ENEMY_STATE::SKILL:
+		{
+			_imageName = "Bat_Explosion";
+
+			_ani->stop();
+			_img = IMAGE_MANAGER->findImage(_imageName);
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setDefPlayFrame(false, false);
+			_ani->setFPS(15);
+			_ani->start();
 		}
 		break;
 		case ENEMY_STATE::DIE:
@@ -156,6 +196,8 @@ void BatBomb::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void BatBomb::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)

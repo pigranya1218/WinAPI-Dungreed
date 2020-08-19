@@ -18,23 +18,23 @@ void EnemyManager::release()
 
 void EnemyManager::update(float const timeElapsed)
 {
-	for (int i = 0; i < _enemies.size(); i++)
+	for (int i = 0; i < _enemies.size();)
 	{
 		_enemies[i]->update(timeElapsed);
-	}
-	/*for (int i = 0; i < _enemies.size();)
-	{
+
 		if (!_enemies[i]->getActive())
 		{
+			_enemies[i]->dieEffect();	// Á×´Â ÀÌÆåÆ® Àç»ı
+
 			_enemies[i]->release();
-			delete[] _enemies[i];
+			delete _enemies[i];
 			_enemies.erase(_enemies.begin() + i);
 		}
 		else
 		{
 			++i;
 		}
-	}*/
+	}
 }
 
 void EnemyManager::render()
