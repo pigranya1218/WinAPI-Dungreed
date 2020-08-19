@@ -84,8 +84,8 @@ void Belial::init(const Vector2 & pos)
 	_lHand._Rect = rectMakePivot(_lHand._Position,_lHand._size, PIVOT::CENTER);
 
 
-	_head._shooting.init("Belial/Bullet", "Belial/Bullet_Fx", _scale, 0.3f, 500, 500, false, true, true, true);
-	
+	//_head._shooting.init("Belial/Bullet", "Belial/Bullet_Fx", _scale, 0.3f, 500, 500, false, true, true, true);
+	_head._shooting.init("Belial/Bullet", "Belial/Bullet_FX", Vector2(500, 500), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
 
 
 	_force = Vector2(0,0);
@@ -124,6 +124,8 @@ void Belial::init(const Vector2 & pos)
 
 	}
 
+
+	_active = true;
 }
 
 void Belial::release()
@@ -256,7 +258,7 @@ void Belial::update(float const timeElapsed)
 				_head._shooting.createBullet(Vector2(_head._Position.x, _head._Position.y + (25 * _scale)), _head._shooting.angle + _angle);
 			}
 
-			_head._shooting.fireBullet(_enemyManager);
+			_head._shooting.fireBullet(static_cast<int>(ENEMY_TYPE::BELIAL), _enemyManager);
 		}
 	}
 	break;
