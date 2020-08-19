@@ -71,6 +71,7 @@ void Boomerang::update(Player * player, float const elapsedTime)
 				_effectCount++;
 				_projectile->setActive(false);
 				_projectile = nullptr;
+				_returnCount = 0;
 			}
 
 			else if (_returnCount > 2.5f)
@@ -106,6 +107,8 @@ void Boomerang::frontRender(Player * player)
 		_img->setAngle(_renderDegree);
 		_img->render(CAMERA->getRelativeV2(_gunPos), _isLeft);
 	}
+
+	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_pos.x), CAMERA->getRelativeY(_pos.y - 50), to_wstring(_returnCount), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 }
 
 void Boomerang::displayInfo()
