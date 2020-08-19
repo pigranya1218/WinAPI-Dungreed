@@ -18,21 +18,21 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 3;
+	_attack.delay = 3.f;
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3f;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.3f, 500, 500, false, true, true, true);
+	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 0), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
 
 	_isDetect = 0;
-	_detectRange = 300;
+	_detectRange = 300.f;
 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 100.f;
 }
 
 void BatGiantNormal::release()
@@ -121,6 +121,11 @@ void BatGiantNormal::update(float const timeElapsed)
 	_shooting.aniUpdate(timeElapsed);
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void BatGiantNormal::render()
@@ -139,8 +144,6 @@ void BatGiantNormal::render()
 
 void BatGiantNormal::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -173,13 +176,15 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void BatGiantNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

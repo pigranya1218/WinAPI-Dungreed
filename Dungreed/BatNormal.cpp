@@ -21,7 +21,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	// 사이즈 설정
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
@@ -87,7 +87,10 @@ void BatNormal::update(float const timeElapsed)
 
 	_ani->frameUpdate(timeElapsed);
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void BatNormal::render()
@@ -133,7 +136,7 @@ void BatNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const 
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

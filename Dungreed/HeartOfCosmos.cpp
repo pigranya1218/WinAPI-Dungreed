@@ -7,6 +7,7 @@ void HeartOfCosmos::init()
 	_itemName = L"우주의 심장";
 	_displayInfos.push_back(L"대쉬한 자리에 에너지체를 남김");
 	_displayText = L"\"우주를 정복할 수 있는 힘을 가질 수 있을까?' 라는 물음에서 시작된 결정체""\"";	
+	
 	_price = 4300;
 	
 }
@@ -61,10 +62,12 @@ void HeartOfCosmos::dash(Player * player)
 		projectile->setPosition(_renderPos);
 		projectile->setSize(Vector2(330, 300));
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
-		projectile->init("HeartOfCosmos0", 0, 0, true, false, 15, false, "HeartOfCosmosF", Vector2(330, 300),10,false);
+		projectile->init("HeartOfCosmos0", 0, 0, true, false, 15, false, "HeartOfCosmosF", Vector2(330, 300),10,false);		
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
-		player->attack(projectile, attackInfo);		
+		player->attack(projectile, attackInfo);	
+	
+
 }
 
 void HeartOfCosmos::equip(Player * player)

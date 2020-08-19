@@ -88,7 +88,6 @@ void UIManager::release()
 
 void UIManager::update(float const elaspedTime)
 {
-
 	// Damage UI update
 	for (int i = 0; i < _damageUI.size();)
 	{

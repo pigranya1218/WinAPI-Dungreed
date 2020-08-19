@@ -11,30 +11,29 @@ void EnemyManager::release()
 	for (int i = 0; i < _enemies.size(); i++)
 	{
 		_enemies[i]->release();
-
-		//SAFE_DELETE(_enemies[i]);
+		delete _enemies[i];
 	}
 }
 
 void EnemyManager::update(float const timeElapsed)
 {
-	for (int i = 0; i < _enemies.size(); i++)
+	for (int i = 0; i < _enemies.size();)
 	{
 		_enemies[i]->update(timeElapsed);
-	}
-	/*for (int i = 0; i < _enemies.size();)
-	{
+
 		if (!_enemies[i]->getActive())
 		{
+			_enemies[i]->dieEffect();	// Á×´Â ÀÌÆåÆ® Àç»ý
+
 			_enemies[i]->release();
-			delete[] _enemies[i];
+			delete _enemies[i];
 			_enemies.erase(_enemies.begin() + i);
 		}
 		else
 		{
 			++i;
 		}
-	}*/
+	}
 }
 
 void EnemyManager::render()
@@ -173,6 +172,7 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
 		}
+		break;
 		case ENEMY_TYPE::NIFLHEIM:
 		{
 			enemy = new Niflheim;
@@ -217,6 +217,16 @@ void EnemyManager::fireEnemy(Projectile * projectile, AttackInfo * attackInfo)
 Vector2 EnemyManager::getPlayerPos()
 {
 	return _stage->getPlayerPos();
+}
+
+void EnemyManager::attack(FloatRect * rc, AttackInfo * info)
+{
+	_stage->attack(rc, info);
+}
+
+void EnemyManager::attack(FloatCircle * circle, AttackInfo * info)
+{
+	_stage->attack(circle, info);
 }
 
 bool EnemyManager::isHit(FloatRect* rc, AttackInfo* info)

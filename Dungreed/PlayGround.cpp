@@ -198,12 +198,14 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/COSTUME/PICKAX", L"resources/images/gameScene/ui/boutique(costume)/costumeSample/pickax_sample.png");
 	// *** RESTAURANT(FOODS SHOP)
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE_LABEL", L"resources/images/gameScene/ui/restaurant/Label.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE", L"resources/images/gameScene/ui/restaurant/Base_0.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/BASE2", L"resources/images/gameScene/ui/restaurant/Base_3.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE_BACK", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBaseBack.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBase.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD", L"resources/images/gameScene/ui/restaurant/RestaurantMenu.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Selected.png");
-	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney.png");
-	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_Selected.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_RESIZE.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_Selected_RESIZE.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/THANKYOU_KR", L"resources/images/gameScene/ui/restaurant/ThankYouKorean.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/GOLD_ICON", L"resources/images/gameScene/ui/restaurant/GoldCoin0.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/SATIETY_ICON", L"resources/images/gameScene/ui/restaurant/SatietyRate.png");
@@ -522,9 +524,13 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack"		, L"resources/images/Enemy/Ovibos/attack.png"		, 6, 1);	// 물소 공격 
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격	
 
+	// * 에너미 이펙트
+	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png", 11, 1);	// 에너미 죽는 이펙트
+	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 20);	// 이펙트 등록
+
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Bat_Explosion", L"resources/images/Enemy/Bat/Bomb/explosion.png", 12, 1);
-	EFFECT_MANAGER->addEffect("Bat_Explosion", "Bat_Explosion", 15, 10);
+	//EFFECT_MANAGER->addEffect("Bat_Explosion", "Bat_Explosion", 15, 10);
 
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// 수녀 총알
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// 수녀 총알 삭제

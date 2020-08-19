@@ -168,6 +168,7 @@
     <ClInclude Include="BatRed.h" />
     <ClInclude Include="babyGreenBat.h" />
     <ClInclude Include="bombPouch.h" />
+    <ClInclude Include="BossRoom1.h" />
     <ClInclude Include="BoomerangProjectile.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraManager.h" />
@@ -185,13 +186,17 @@
     <ClInclude Include="DebugStage.h" />
     <ClInclude Include="BaseCos.h" />
     <ClInclude Include="DemonBoots.h" />
+    <ClInclude Include="DialogueUI.h" />
+    <ClInclude Include="DownStair1L.h" />
     <ClInclude Include="DungeonShopRoom.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="EggFriedFood.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="FloatCircle.h" />
     <ClInclude Include="FloatRect.h" />
+    <ClInclude Include="Food.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameNode.h" />
     <ClInclude Include="GameObject.h" />
@@ -219,6 +224,7 @@
     <ClInclude Include="MapToolScene.h" />
     <ClInclude Include="MartialArtOfTiger.h" />
     <ClInclude Include="MatchLockGun.h" />
+    <ClInclude Include="MetalBoots.h" />
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
@@ -304,6 +310,7 @@
     <ClCompile Include="BatRed.cpp" />
     <ClCompile Include="babyGreenBat.cpp" />
     <ClCompile Include="bombPouch.cpp" />
+    <ClCompile Include="BossRoom1.cpp" />
     <ClCompile Include="BoomerangProjectile.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraManager.cpp" />
@@ -321,13 +328,17 @@
     <ClCompile Include="DebugStage.cpp" />
     <ClCompile Include="BaseCos.cpp" />
     <ClCompile Include="DemonBoots.cpp" />
+    <ClCompile Include="DialogueUI.cpp" />
+    <ClCompile Include="DownStair1L.cpp" />
     <ClCompile Include="DungeonShopRoom.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="EggFriedFood.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="FloatCircle.cpp" />
     <ClCompile Include="FloatRect.cpp" />
+    <ClCompile Include="Food.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GatlingGun.cpp" />
@@ -352,6 +363,7 @@
     <ClCompile Include="MapToolScene.cpp" />
     <ClCompile Include="MartialArtOfTiger.cpp" />
     <ClCompile Include="MatchLockGun.cpp" />
+    <ClCompile Include="MetalBoots.cpp" />
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />

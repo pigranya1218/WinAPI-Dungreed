@@ -9,7 +9,6 @@ enum class ITEM_TYPE : int
 	WEAPON_TWO_HAND = 0x02000, // 양손 무기
 	ACC = 0x03000, // 악세사리
 	WEAPON_SUB = 0x04000, // 보조 무기
-	FOOD = 0x05000
 };
 
 enum class ITEM_RANK : int
@@ -22,10 +21,6 @@ enum class ITEM_RANK : int
 //한손 전설 - 0x014xx;
 //근거리 0x0xx00~
 //원거리 0x0xx60~
-
-
-
-
 
 
 class Item
@@ -45,8 +40,6 @@ protected:
 	int _price; // 가격
 	PlayerStat _addStat; // 아이템 스탯 옵션 (플레이어의 스탯에 더해지는 스탯)
 	PlayerStat _adjustStat; // 플레이어의 스탯이 반영된 무기 스탯 (현재는 attackSpeed, reloadSpeed만 신경씀)
-	
-	ProjectileManager* _projecttileMng;		//투사체 매니저
 
 public:
 	virtual void init() = 0;
@@ -82,5 +75,7 @@ public:
 	PlayerStat getAddStat() const noexcept { return _addStat; }
 	float getAttackSpeed() { return _adjustStat.attackSpeed; }
 	float getReloadSpeed() { return _adjustStat.reloadSpeed; }
+	float getMinDamage() { return _addStat.minDamage; }
+	float getMaxDamage() { return _addStat.maxDamage; }
 
 };

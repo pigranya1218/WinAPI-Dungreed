@@ -18,10 +18,9 @@ void MartialArtOfTiger::init()
 
 	_addStat.minDamage = 10;
 	_addStat.maxDamage = 22;
-	_addStat.attackSpeed = 3.03;
+	_addStat.attackSpeed = 0.3;
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_baseAttackDelay = 0.4;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
@@ -38,7 +37,7 @@ void MartialArtOfTiger::update(Player* player, float const elapsedTime)
 {
 	if (_currAttackDelay == 0) return;
 	
-	float ratio = elapsedTime / (_baseAttackDelay * 0.08);
+	float ratio = elapsedTime / (_addStat.attackSpeed * 0.08);
 	if (_reverseMove)
 	{
 		_attackMove.x = max(0, _attackMove.x - abs(cosf(_attackAngle) * 30 * ratio));
@@ -49,7 +48,7 @@ void MartialArtOfTiger::update(Player* player, float const elapsedTime)
 		_attackMove.x = min(abs(cosf(_attackAngle) * 30), _attackMove.x + abs(cosf(_attackAngle) * 30 * ratio));
 		_attackMove.y = min(abs(-sinf(_attackAngle) * 30), _attackMove.y + abs((-sinf(_attackAngle)) * 30 * ratio));
 
-		if (_currAttackDelay <= _baseAttackDelay * 0.88)
+		if (_currAttackDelay <= _addStat.attackSpeed * 0.88)
 		{
 			_reverseMove = true;
 			_drawEffect = true;
@@ -167,7 +166,7 @@ void MartialArtOfTiger::attack(Player* player)
 
 	_reverseMove = false;
 	_attackAngle = angle;
-	_currAttackDelay = _baseAttackDelay;
+	_currAttackDelay = _addStat.attackSpeed;
 }
 
 void MartialArtOfTiger::attack(FloatRect* rect, AttackInfo* info)
@@ -186,8 +185,12 @@ void MartialArtOfTiger::getHit(Vector2 const position)
 {
 }
 
-PlayerStat MartialArtOfTiger::equip()
+void MartialArtOfTiger::equip(Player * player)
 {
-	return PlayerStat();
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }
+
 

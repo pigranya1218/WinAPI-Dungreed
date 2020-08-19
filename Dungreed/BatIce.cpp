@@ -22,7 +22,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 
 	// 공격 관련 변수 초기화
 	//ZeroMemory(&_shooting, sizeof(_shooting));
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 1, 700, true, true, false, false);
+	//_shooting.init("IceBullet", "IceBullet_FX", _scale, 2, 1, 700, true, true, false, false);
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -31,7 +31,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	_isDetect = 0;
 
@@ -129,7 +129,10 @@ void BatIce::update(float const timeElapsed)
 
 	_ani->frameUpdate(timeElapsed);
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void BatIce::render()
@@ -147,8 +150,6 @@ void BatIce::render()
 
 void BatIce::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -182,13 +183,15 @@ void BatIce::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void BatIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

@@ -9,6 +9,8 @@ public:
 	//set<int> _usedItem; // 이것에 반영된 아이템 코드들
 
 	OBJECT_TEAM team; // 공격한 팀
+	bool madeByWeapon = false; // 무기에 의해 만들어졌는지 판단
+
 	float minDamage = 0; // 최소 대미지
 	float maxDamage = 0; // 최대 대미지
 	float trueDamage = 0; // 트루 대미지

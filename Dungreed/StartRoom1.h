@@ -8,5 +8,6 @@ public:
 	virtual void release();
 	virtual void update(float const elapsedTime);
 	virtual void render();
+
 };
 

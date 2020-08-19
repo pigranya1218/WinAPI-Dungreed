@@ -23,10 +23,11 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_moving, sizeof(_moving));
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", _scale, 0.02, 1, 500, false, true, true, true);
-
+	// 투사체 초기화
+	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 0), _scale, 0.02f, 1.5f, false, true, true, false, true, false);
+	
 	_isDetect = 0;
 	_detectRange = 300;
 	_renderNum = -1;
@@ -110,7 +111,10 @@ void BatGiantRed::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 	_shooting.aniUpdate(timeElapsed);
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void BatGiantRed::render()
@@ -135,8 +139,6 @@ void BatGiantRed::render()
 
 void BatGiantRed::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -169,13 +171,15 @@ void BatGiantRed::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void BatGiantRed::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

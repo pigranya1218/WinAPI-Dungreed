@@ -22,12 +22,12 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	// Åº¸· ÃÊ±âÈ­
-	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", _scale, 3, 2.2, 500, false, false, true, true);
+	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2.2, false, true, true, false, false, false);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	_active = true;
 
@@ -87,6 +87,11 @@ void Banshee::update(float const timeElapsed)
 	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
+
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void Banshee::render()
@@ -104,8 +109,6 @@ void Banshee::render()
 
 void Banshee::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -133,18 +136,20 @@ void Banshee::setState(ENEMY_STATE state)
 		}		
 		break;
 		case ENEMY_STATE::DIE:
-		{
+		{			
 			_active = false;
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void Banshee::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{

@@ -2,6 +2,8 @@
 #include "EnemyManager.h"
 #include "SkelBigNormal.h"
 
+#define DEFSPEED 150.0f
+
 void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 {
 	_ani = new Animation;
@@ -18,7 +20,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.force = Vector2(150, 0);
+	_moving.force = Vector2(DEFSPEED, 0.f);
 	_moving.gravity = Vector2(0, 4000);
 	_moving.delay = 0.2;
 
@@ -27,7 +29,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_attack.distance = 100;	
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3f;
+	_hit.delay = 0.3f;
 
 	_isDetect =  0;
 	_active = true;
@@ -138,7 +140,10 @@ void SkelBigNormal::update(float const timeElapsed)
 
 	_ani->frameUpdate(timeElapsed);
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void SkelBigNormal::render()
@@ -162,11 +167,11 @@ void SkelBigNormal::render()
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
 		// DEBUG TEST
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
@@ -226,7 +231,7 @@ void SkelBigNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, co
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -247,14 +252,12 @@ void SkelBigNormal::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, co
 				break;
 			}
 			_img = IMAGE_MANAGER->findImage(_imageName);
+			_moving.force.x = DEFSPEED;
 			_hit.isHit = false;
+			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
 		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
-
-		return;
-	}
-
-	_moving.force.x = 150;
+	}	
 }

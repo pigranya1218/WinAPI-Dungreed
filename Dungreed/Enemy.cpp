@@ -11,17 +11,32 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 	// 생성해놓은 총알을
 	for (int i = 0; i < fireLoop; i++)
 	{
-		AttackInfo* attackInfo = new AttackInfo;
-		attackInfo->team = OBJECT_TEAM::ENEMY;
-
 		// 발사한다.
 		if (!bullets.empty())
 		{
+			AttackInfo* attackInfo = new AttackInfo;			
+			attackInfo->minDamage = minDamage;
+			attackInfo->maxDamage = maxDamage;
+			attackInfo->trueDamage = trueDamage;
+			attackInfo->knockBack = knockBack;
+			attackInfo->team = OBJECT_TEAM::ENEMY;
+
 			enemyManager->fireEnemy(bullets[bullets.size() - 1], attackInfo);
-			// delete attackInfo;
+			//delete attackInfo;
 			//bullets[bullets.size() - 1]->release();
 			bullets.pop_back();
 		}		
+	}	
+}
+
+void Enemy::dieEffect()
+{
+	if (_state == ENEMY_STATE::DIE)
+	{
+		Vector2 drawSize = _img->getFrameSize() * _scale;
+		drawSize.x = max(drawSize.x, drawSize.y);
+		drawSize.y = max(drawSize.x, drawSize.y);
+		EFFECT_MANAGER->play("Enemy_Destroy", _position, drawSize);
 	}	
 }
 
@@ -138,7 +153,7 @@ bool Enemy::hitEffect(FloatCircle * circle, AttackInfo * info)
 {
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 
@@ -159,7 +174,7 @@ bool Enemy::hitEffect(Projectile * projectile)
 	AttackInfo* info = projectile->getAttackInfo();
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 

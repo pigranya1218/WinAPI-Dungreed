@@ -23,8 +23,6 @@ void OakBow::init()
 	_price = 360;
 
 	// private 변수 설정
-	_minDamage = 12;
-	_maxDamage = 18;
 	_baseAttackDelay = 0.1;
 	_currAttackDelay = 0;
 	_maxBullet = 1;
@@ -142,7 +140,10 @@ void OakBow::update(Player * player, float const elapsedTime)
 			projectile->setPosition(arrowPos);
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
+
+			//projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
+
+			projectile->init("Arrow00", "L_Effect_ArrowHit", effectImg->getFrameSize() * 4.f, Vector2(30 * 50, 0), 3, angleRadian, false, false, 10, true, false, true, false);
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;

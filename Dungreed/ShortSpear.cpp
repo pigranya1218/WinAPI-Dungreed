@@ -19,8 +19,6 @@ void ShortSpear::init()
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
-	_minDamage = 7;
-	_maxDamage = 10;
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;

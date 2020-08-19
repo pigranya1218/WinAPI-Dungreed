@@ -41,24 +41,33 @@ protected:
 	{
 		vector<NormalProjectile*> bullets;	// 한 번에 여러개 만들어 놓고 쏘기 위해
 
-		string				bulletName;	// 불렛 이미지 이름
-		string				effectName;	// 불렛 이펙트 이름
-		Vector2				effectSize;	// 불렛 이펙트 사이즈
+		string	bulletName;			// 불렛 이미지 이름
+		string	effectName;			// 불렛 이펙트 이름
 
-		float				delay;		// 딜레이
-		float				count;		// 카운트
-		float				angle;		// 각도
-		float				duration;	// 지속시간
-		float				speed;		// 스피드
+		Vector2	effectSize;			// 불렛 이펙트 사이즈
+		Vector2	force;				// 불렛 날아가는 힘
 
-		bool				isAni;		// 애니메이션 사용여부
-		bool				aniLoop;	// 애니메이션 루프여부
-		bool				isCollision;// 충돌 여부
-		bool				isRotate;	// 이미지 회전 여부
-		bool				isGravity;	// 중력 사용 여부
-		int					bulletNum;	// 생성할 총알 지정
+		float	delay;				// 딜레이
+		float	count;				// 카운트
+		float	angle;				// 각도
+		float	duration;			// 지속시간
 
-		void init(string bulletName, string effectName, float scale, float delay, float duration, float speed, bool isRotate, bool isCollision, bool isAni, bool aniLoop, bool isGravity = 0)
+		bool	collisionGround;	// 붉은 선 충돌여부
+		bool	collisionPlatForm;	// 푸른 선 충돌여부
+		bool	isAni;				// 애니메이션 사용여부
+		bool	aniLoop;			// 애니메이션 루프여부
+		bool	isRotate;			// 이미지 회전 여부
+		bool	isGravity;			// 중력 사용 여부
+
+		int		bulletNum;			// 생성할 총알 지정
+
+		float	minDamage;			// 최소 데미지
+		float	maxDamage;			// 최대 데미지
+		float	trueDamage;			// 고정 데미지
+		float	knockBack;			// 밀어내는 힘
+
+		// 총알 초기화 >> 불렛 이미지이름, 이펙트 이름, 투사체 날아가는 힘, 스케일, 투사체 발사주기, 투사체 지속시간, 이미지 회전여부, 프레임 사용여부, 프레임 루프여부, 중력 적용여부, 붉은 선 충돌여부, 푸른 선 충돌여부
+		void init(string bulletName, string effectName, Vector2 force, float scale, float delay, float duration, bool isRotate = 0, bool isAni = 1, bool aniLoop = 1, bool isGravity = 0, bool collisionGround = 1, bool collisionPlatForm = 1)
 		{
 			this->bulletName = bulletName;
 			this->effectName = effectName;	
@@ -75,13 +84,21 @@ protected:
 
 			this->delay = delay;
 			this->duration = duration;
-			this->speed = speed;
+			this->force = force;
 
 			this->isAni = isAni;
-			this->aniLoop = aniLoop;
-			this->isCollision = isCollision;
+			this->aniLoop = aniLoop;			
 			this->isRotate = isRotate;
 			this->isGravity = isGravity;
+			this->collisionGround = collisionGround;
+			this->collisionPlatForm = collisionPlatForm;
+		}		
+		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 0)
+		{
+			this->minDamage = minDamage;
+			this->maxDamage = maxDamage;
+			this->trueDamage = trueDamage;
+			this->knockBack = knockBack;
 		}
 		// 딜레이 업데이트
 		bool delayUpdate(float const timeElapsed)
@@ -101,12 +118,10 @@ protected:
 			this->angle = angle;
 
 			NormalProjectile* bullet = new NormalProjectile;
-
 			bullet->setPosition(pos);
 			bullet->setSize(effectSize);
-			bullet->setTeam(OBJECT_TEAM::ENEMY);
-
-			bullet->init(bulletName, angle, speed, isAni, aniLoop, 15, isCollision, effectName, effectSize, duration, isRotate, isGravity);
+			
+			bullet->init(bulletName, effectName, effectSize, force, duration, angle, isAni, aniLoop, 15, isRotate, isGravity, collisionGround, collisionPlatForm);
 
 			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);
@@ -181,19 +196,16 @@ protected:
 	{
 		bool isHit;
 
-		float hitDelay;
-		float hitCount;
+		float delay;
+		float count;
 
-		float knockDelay;
-		float knockCount;
-
-		bool hitUpdate(const float timeElapsed)
+		bool update(const float timeElapsed)
 		{
-			hitCount += timeElapsed;
+			count += timeElapsed;
 
-			if (hitCount >= hitDelay)
+			if (count >= delay)
 			{
-				hitCount = 0;
+				count = 0;
 				return true;
 			}
 			return false;
@@ -211,9 +223,13 @@ public:
 	virtual void update(float const timeElapsed) = 0;
 	virtual void render() = 0;
 
+	// 상태 변환
 	virtual void setState(ENEMY_STATE state) {};
 
+	// 피격 후 행동처리
 	virtual void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed) {}
+
+	virtual void dieEffect();
 
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
 

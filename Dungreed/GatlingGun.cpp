@@ -157,10 +157,20 @@ void GatlingGun::frontRender(Player * player)
 	if (_shootEffectAni->isPlay())
 	{
 		Vector2 shootEffectPos = renderPosHand;
+		
+		//shootEffectPos.x += renderPosHand.x + 70;
+		//shootEffectPos.y = renderPosHand.y + 25;
 
-		_shootEffectImg->setAngle(renderDegree);
+		float length = _iconImg->getWidth() * 1.00f * 4; // 무기 길이만큼
+		shootEffectPos.x += cosf(degree * (PI / 180)) * length;
+		shootEffectPos.y += -sinf(degree * (PI / 180)) * length;
+
+
+
+		_shootEffectImg->setAngle(degree);
+		//_shootEffectImg->setAnglePos(Vector2(0.0f, _shootEffectImg->getFrameSize().y * 0.5f));
 		_shootEffectImg->setScale(4);
-		_shootEffectImg->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _shootEffectAni);
+		_shootEffectImg->aniRender(CAMERA->getRelativeV2(shootEffectPos), _shootEffectAni);
 	}
 
 	// 재장전 중이라면 재장전 UI를 그린다.
@@ -220,7 +230,9 @@ void GatlingGun::attack(Player * player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(_bulletImg->getFrameSize().x * 4, _bulletImg->getFrameSize().y * 3.1f));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, true, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
+
+	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, true, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
+	projectile->init("GunBullet", "", Vector2(), Vector2(30 * 50, 30 * 50), 10, angleRadian, true, false, 10, true, false, true, false);	// 함수 인자가 많이 바뀌었어요 >> 확인해주세요.
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
