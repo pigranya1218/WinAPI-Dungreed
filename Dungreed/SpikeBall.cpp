@@ -41,8 +41,6 @@ void SpikeBall::update(Player* player, float const elapsedTime)
 		_attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 	}
 
-
-
 	_x = cosf(_angle) * 110;
 	_y = -sinf(_angle) * 110;
 	Vector2 playerPos = player->getPosition();

@@ -217,10 +217,10 @@ void Player::init()
 	//_inventory[7] = testAcc7;
 	//
 	//
-	//watCher* testAcc8 = new watCher;
-	//testAcc8->init();
-	//_inventory[8] = testAcc8;
-	//
+	watCher* testAcc8 = new watCher;
+	testAcc8->init();
+	_inventory[8] = testAcc8;
+	
 	
 	QuarterStaffBig* testAcc10 = new QuarterStaffBig;
 	testAcc10->init();
@@ -692,7 +692,19 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 bool Player::isHit(Projectile* projectile, bool isOnceCollision)
 {
 	// TODO : 먼저 악세사리들에 대해서 검사해준다.
-
+	for (int i = 0; i < 4; i++)
+	{
+		if (_equippedAcc[i] != nullptr)
+		{
+			if (isOnceCollision)
+			{
+				if (_equippedAcc[i]->isHit(projectile))
+				{
+					return true;
+				}
+			}
+		}
+	}
 	// 2가지 검사를 함
 	// 1. 이미 피격 처리를 한 공격인지에 대해 검사
 	// 2. 공격 호과 Enemy 렉트의 충돌 여부
@@ -725,7 +737,7 @@ bool Player::isHit(Projectile* projectile, bool isOnceCollision)
 	}
 	_attackedId.push_back(info->attackID); // 맨 뒤에 새로운 공격 ID 추가
 
-	return true; // 위 검사 결과 피격 처리가 되어야 함
+	return hitEffect(projectile); // 위 검사 결과 피격 처리가 되어야 함
 }
 
 bool Player::hitEffect(FloatRect* rc, AttackInfo* info)

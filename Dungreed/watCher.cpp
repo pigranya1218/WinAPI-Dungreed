@@ -83,35 +83,18 @@ void watCher::backRender(Player * player)
 	
 }
 
-void watCher::frontRender(Player * player)
-
+bool watCher::isHit(Projectile* projectile)
 {
-}
+	// 피격 판정 검사
+	FloatRect accRc = FloatRect(_renderPos, Vector2(40, 40), PIVOT::CENTER);
+	FloatRect attackRc = FloatRect(projectile->getPosition(), projectile->getSize(), PIVOT::CENTER);
 
-void watCher::displayInfo()
-{
-}
-
-void watCher::attack(Player * player)
-{
-}
-
-void watCher::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void watCher::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void watCher::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void watCher::getHit(Vector2 const position)
-{
-}
-
-void watCher::equip(Player* player)
-{
+	if (!FloatRect::intersect(accRc, attackRc)) // 사각형과 사각형의 충돌 검사 함수
+	{
+		return false; // 피격 판정이 아니므로 피격 처리 안함
+	}
+	else
+	{
+		return true; // 피격판정임
+	}
 }

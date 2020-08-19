@@ -57,6 +57,7 @@ public:
 	virtual void dash(Player* player) {}; // 플레이어가 대쉬했을 때
 	virtual void reload(Player* player) {}; // 플레이어가 재장전버튼을 눌렀을 때
 
+	virtual bool isHit(Projectile* projectile) { return false; };
 	virtual void getHit(Vector2 const position) {}; // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
 	virtual void equip(Player* player) {}; // 아이템을 장착했을 때 호출될 함수(플레이어 스탯에 비례하여 장비 스탯 변화, 장비 위치 변화 등)
