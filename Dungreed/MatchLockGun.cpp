@@ -183,7 +183,10 @@ void MatchLockGun::attack(Player* player)
 	float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
+
 	Image* _bulletImg = IMAGE_MANAGER->findImage("GunBullet");
+	Vector2 bulletSize = Vector2(_bulletImg->getFrameSize().x * 4, _bulletImg->getFrameSize().y * 4);
+	Vector2 bulletRect = Vector2(_bulletImg->getFrameSize().x, _bulletImg->getFrameSize().x);
 
 	projectile = new NormalProjectile;
 	projectile->setPosition(shootPos);
@@ -192,8 +195,7 @@ void MatchLockGun::attack(Player* player)
 
 
 	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("GunBullet", "", Vector2(50, 50), Vector2(50, 50), Vector2(30 * 50, 30 * 50), 3, angleRadian, true, false, 10, true, false, true, false);
-
+	projectile->init("GunBullet", "", bulletRect, bulletSize, Vector2(30 * 50, 30 * 50), 5, angleRadian, true, false, 10, true, false, true, false);
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 

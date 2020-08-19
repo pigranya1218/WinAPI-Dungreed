@@ -51,7 +51,7 @@ void NormalProjectile::release()
 		SAFE_DELETE(_ani);
 	}
 
-	EFFECT_MANAGER->play(_collisionEffect, _position, _drawSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
+	EFFECT_MANAGER->play(_collisionEffect, _position, _size, ((_useRotate) ? (_angleRadian) : (0.0f)));
 }
 
 void NormalProjectile::update(float elapsedTime)

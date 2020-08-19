@@ -262,30 +262,33 @@ void Player::init()
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
-	PickaxeRed* testWeapon4 = new PickaxeRed;
+	/*PickaxeRed* testWeapon4 = new PickaxeRed;
 	testWeapon4->init();
-	_inventory[13] = testWeapon4;
+	_inventory[13] = testWeapon4;*/
 
 	/*BigPaintBlush* testWeapon5 = new BigPaintBlush;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	FluteGreatSword* testWeapon5 = new FluteGreatSword;
-	testWeapon5->init();
-	_inventory[14] = testWeapon5;
-
-	/*MagicStick* testWeapon5 = new MagicStick;
+	/*FluteGreatSword* testWeapon5 = new FluteGreatSword;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	/*Boomerang* testWeapon5 = new Boomerang;
+	MagicStick* testWeapon5 = new MagicStick;
 	testWeapon5->init();
-	_inventory[14] = testWeapon5;*/
+	_inventory[13] = testWeapon5;
 
-	//MatchLockGun* testWeapon5 = new MatchLockGun;
-	//testWeapon5->init();
-	//_inventory[14] = testWeapon5;
+	/*Boomerang* testweapon5 = new Boomerang;
+	testweapon5->init();
+	_inventory[14] = testweapon5;*/
 
+	/*MatchLockGun* testWeapon6 = new MatchLockGun;
+	testWeapon6->init();
+	_inventory[14] = testWeapon6;*/
+
+	/*GatlingGun* testWeapon6 = new GatlingGun;
+	testWeapon6->init();
+	_inventory[14] = testWeapon6;*/
 
 	_hand = new Punch;
 	_hand->init();
