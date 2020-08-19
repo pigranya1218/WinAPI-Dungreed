@@ -7,6 +7,8 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 	if (bullets.empty()) return;
 
 	int fireLoop = (fireCount == 0) ? (bullets.size()) : (fireCount);
+	string attackCode = /*to_string(_myEnemyType) +*/ to_string(TIME_MANAGER->getWorldTime());
+	size_t attackId = TTYONE_UTIL::getHash(attackCode);
 
 	// 생성해놓은 총알을
 	for (int i = 0; i < fireLoop; i++)
@@ -14,7 +16,8 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 		// 발사한다.
 		if (!bullets.empty())
 		{
-			AttackInfo* attackInfo = new AttackInfo;			
+			AttackInfo* attackInfo = new AttackInfo;	
+			attackInfo->attackID = attackId;
 			attackInfo->minDamage = minDamage;
 			attackInfo->maxDamage = maxDamage;
 			attackInfo->trueDamage = trueDamage;
@@ -196,6 +199,7 @@ void Enemy::tagAttackInfo::attackCircle(int enemyCode, EnemyManager * enemyManag
 	AttackInfo* attackInfo = new AttackInfo;
 
 	circle->origin = pos;
+	circle->size = 200;
 	circle->startRadian = startRad;
 	circle->endRadian = endRad;
 

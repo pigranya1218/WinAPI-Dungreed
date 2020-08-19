@@ -646,10 +646,10 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 	if (alreadyAttacked) return false; // 이미 피격처리한 공격이라면 피격 처리 안함
 
 	// [2] 피격 판정이 이루어져야하는지 검사
-	FloatRect enemyRc = FloatRect(_position, _size, PIVOT::CENTER);
+	FloatRect playerRc = FloatRect(_position, _size, PIVOT::CENTER);
 	FloatCircle attackCircle = FloatCircle(circle->origin, circle->size, circle->startRadian, circle->endRadian);
 
-	if (!attackCircle.intersect(enemyRc)) // 호와 사각형의 충돌 검사 함수
+	if (!attackCircle.intersect(playerRc)) // 호와 사각형의 충돌 검사 함수
 	{
 		return false; // 피격 판정이 아니므로 피격 처리 안함
 	}
@@ -704,16 +704,23 @@ bool Player::isHit(Projectile* projectile, bool isOnceCollision)
 
 bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 {
-	return false;
+	DamageInfo damageInfo = info->getDamageInfo();
+	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+	return true;
 }
 
 bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
+	DamageInfo damageInfo = info->getDamageInfo();
+	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	return false;
 }
 
 bool Player::hitEffect(Projectile* projectile)
 {
+	AttackInfo* info = projectile->getAttackInfo();
+	DamageInfo damageInfo = info->getDamageInfo();
+	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	return true;
 }
 
