@@ -219,6 +219,7 @@
     <ClInclude Include="MapToolScene.h" />
     <ClInclude Include="MartialArtOfTiger.h" />
     <ClInclude Include="MatchLockGun.h" />
+    <ClInclude Include="MetalBoots.h" />
     <ClInclude Include="Minotaurs.h" />
     <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
@@ -352,6 +353,7 @@
     <ClCompile Include="MapToolScene.cpp" />
     <ClCompile Include="MartialArtOfTiger.cpp" />
     <ClCompile Include="MatchLockGun.cpp" />
+    <ClCompile Include="MetalBoots.cpp" />
     <ClCompile Include="Minotaurs.cpp" />
     <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
