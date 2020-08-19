@@ -18,6 +18,8 @@ private:
 	float _currElapsedTime;
 	int _currBodyLen;
 
+	bool _finishBody;
+
 public:
 	bool isActive() const noexcept { return _isActive; }
 	void setActive(bool active) { _isActive = active; }

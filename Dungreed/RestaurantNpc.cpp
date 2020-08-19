@@ -16,7 +16,8 @@ void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
 	_direction = direction;
 
 	_name = "호레리카";
-	_bodyDialogue = "";
+	_bodyDialogue = "가나다라마바사아자차카타파하";
+	_selectDialogues.push_back("식당");
 
 	_isActive = false;
 	_isClose = false;
@@ -46,10 +47,9 @@ void RestaurantNpc::update(float timeElapsed)
 	}
 	else
 	{
-
 	}
 
-	if (_isClose)
+	if (_isClose) // 플레이어랑 가까울 때
 	{
 		if(!_isActive && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::INTERACTION)))
 		{
