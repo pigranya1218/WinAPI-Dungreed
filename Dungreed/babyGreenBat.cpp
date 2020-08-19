@@ -139,16 +139,16 @@ void babyGreenBat::attack(Player* player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(100, 100));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-
-	//projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100,100), 0.9,false); 
 	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(100, 100), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
 
+
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;	
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode + "1");
+	attackInfo->maxDamage = 5;
+	attackInfo->minDamage = 4;
 	player->attack(projectile, attackInfo);
-	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
-	_currBullet -= 1; // 탄환 1 줄임
-	_drawEffect = true; // 이펙트 그리기
 
 	NormalProjectile* projectile0 = new NormalProjectile;
 	Vector2 shootPos0 = pos;
@@ -158,19 +158,15 @@ void babyGreenBat::attack(Player* player)
 	projectile0->setPosition(Vector2(shootPos0.x, shootPos0.y-15));
 	projectile0->setSize(Vector2(100, 100));
 	projectile0->setTeam(OBJECT_TEAM::PLAYER);
-
-	//projectile0->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(100, 100), 0.9, false);
-	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(100, 100), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
+	projectile0->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(100, 100), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
 
 	AttackInfo* attackInfo0 = new AttackInfo;
 	attackInfo0->team = OBJECT_TEAM::PLAYER;
+	attackInfo0->attackID = TTYONE_UTIL::getHash(attackCode + "2");
+	attackInfo0->maxDamage = 5;
+	attackInfo0->minDamage = 4;
 	player->attack(projectile0, attackInfo0);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
-	_currBullet -= 1; // 탄환 1 줄임
-	_drawEffect = true; // 이펙트 그리기
-	
-
-	
 }
 
 void babyGreenBat::attack(FloatRect * rect, AttackInfo * info)
