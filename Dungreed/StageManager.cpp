@@ -144,27 +144,27 @@ void StageManager::makeStage()
 
 	switch (_currStageType)
 	{
-	case STAGE_TYPE::VILLAGE:
-		_currStage = new VillageStage();
-		_currStage->setStageManager(this);
-		_currStage->init();
-		break;
-	case STAGE_TYPE::DUNGEON_NORMAL:
-		_currStage = new StartRoom1();
-		_currStage->setStageManager(this);
-		_currStage->init();
+	//case STAGE_TYPE::VILLAGE:
+	//	_currStage = new VillageStage();
+	//	_currStage->setStageManager(this);
+	//	_currStage->init();
+	//	break;
+	//case STAGE_TYPE::DUNGEON_NORMAL:
+	//	_currStage = new StartRoom1();
+	//	_currStage->setStageManager(this);
+	//	_currStage->init();
 
-		int indexX = RANDOM->getFromIntTo(4,6);
-		int indexY = RANDOM->getFromIntTo(4, 6);
+	//	int indexX = RANDOM->getFromIntTo(4,6);
+	//	int indexY = RANDOM->getFromIntTo(4, 6);
 
-		_vStage[indexX][indexY] = _currStage;
-		_vStage[indexX][indexY]->setStageManager(this);
-		_vStage[indexX][indexY]->init();
+	//	_vStage[indexX][indexY] = _currStage;
+	//	_vStage[indexX][indexY]->setStageManager(this);
+	//	_vStage[indexX][indexY]->init();
 
-		makeRoom(indexX, indexY, specialStage, isMadeStage);
-		break;
-	case STAGE_TYPE::DUNGEON_BOSS:
-		break;
+	//	makeRoom(indexX, indexY, specialStage, isMadeStage);
+	//	break;
+	//case STAGE_TYPE::DUNGEON_BOSS:
+	//	break;
 	case STAGE_TYPE::TEST:
 		_currStage = new DebugStage();
 		_currStage->setStageManager(this);

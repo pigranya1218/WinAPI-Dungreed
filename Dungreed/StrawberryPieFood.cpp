@@ -13,3 +13,4 @@ StrawberryPieFood::StrawberryPieFood()
 
 	_onceStat.currSatiety = RANDOM->getFromIntTo(40, 50);
 
+}
