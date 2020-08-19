@@ -32,12 +32,16 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
 
-	//_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 1.3, 850, true, true, false, false);
+	// ≈∫∏∑ √ ±‚»≠
+	_shooting.init("IceBullet", "IceBullet_FX", Vector2(850, 850), _scale, 0.2, 1.3, true, false, false, false, true, false);
+	_shooting.attackInit(3, 5, 3);
 
 	_isDetect = _attacking = 0;
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_MAGICIAN_ICE);
 }
 
 void SkelMagicianIce::release()
@@ -69,8 +73,12 @@ void SkelMagicianIce::update(float const timeElapsed)
 					_shooting.bulletNum = 6;
 					float angle = 0;
 					for (int i = 0; i < 6; i++)
-					{
-						_shooting.createBullet(playerPos, angle += PI / 4);
+					{					
+						Vector2 bulletPos = _attackPos;
+						angle += PI / 4;
+						bulletPos.x += cosf(angle) * 20;
+						bulletPos.y -= sinf(angle) * 20;
+						_shooting.createBullet(bulletPos, angle);
 						if (i == 2)angle += PI / 4;
 					}
 					setState(ENEMY_STATE::ATTACK);
@@ -101,7 +109,7 @@ void SkelMagicianIce::update(float const timeElapsed)
 
 			if (_shooting.delayUpdate(timeElapsed))
 			{
-				_shooting.fireBullet(_enemyManager);
+				_shooting.fireBullet(_myEnemyType, _enemyManager);
 				_attackAni->resume();
 			}
 			if (!_attackAni->isPlay() && _shooting.bullets.empty())
@@ -125,9 +133,6 @@ void SkelMagicianIce::update(float const timeElapsed)
 
 void SkelMagicianIce::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_attackPos, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 	_img->setScale(_scale);
 	_attackImg->setScale(_scale);
 

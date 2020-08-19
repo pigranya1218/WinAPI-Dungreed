@@ -30,6 +30,8 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::GHOST);
 }
 
 void Ghost::release()

@@ -37,13 +37,15 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
 
-	//_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 1, 700, true, true, false, false);
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(700, 700), _scale, 0.05f, 1, true, false, false, false, true, false);
+	_shooting.attackInit(3, 5, 3);
 
 	_isDetect = 0;
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_ICE);
 }
 
 void SkelBigIce::release()
@@ -148,7 +150,7 @@ void SkelBigIce::update(float const timeElapsed)
 					angle += RANDOM->getFromFloatTo(PI / 10 * -1, PI / 10);
 
 					_shooting.createBullet(_position, angle);
-					_shooting.fireBullet(_enemyManager);
+					_shooting.fireBullet(_myEnemyType, _enemyManager);
 				}
 			}
 			else if (!_ani->isPlay() && _shooting.bulletNum <= 0)

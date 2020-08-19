@@ -19,12 +19,6 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
 	_size = _size * _scale;
 
-	// 충돌 렉트 설정
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
-
-	// 공격 관련 변수 초기화
-	
-
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
@@ -36,12 +30,15 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 
 	// 총알 초기화
 	_shooting.init("SmallBullet", "SmallBullet_FX", Vector2(500, 500), _scale, 1, 1.5, false, true, true, false, true, false);
+	_shooting.attackInit(3, 5, 3);
 
 	_isDetect = 0;
 
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_RED);
 }
 
 void BatRed::release()
@@ -112,7 +109,7 @@ void BatRed::update(float const timeElapsed)
 			{
 				float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
 				_shooting.createBullet(_position, angle);
-				_shooting.fireBullet(_enemyManager);
+				_shooting.fireBullet(_myEnemyType, _enemyManager);
 			}
 			if (!_ani->isPlay())
 			{
