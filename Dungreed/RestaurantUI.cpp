@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "RestaurantUI.h"
+#include "Player.h"
 
 void RestaurantUI::init()
 {
