@@ -20,9 +20,20 @@ void MultiBullet::init()
 
 void MultiBullet::attack(Projectile * projectile, AttackInfo * info)
 {	
-	if (info->madeByWeapon && info->usedItem.find(_itemCode) == info->usedItem.end())
+	if (info->madeByWeapon)
 	{
-		info->usedItem.insert(_itemCode);
+		bool isAlreadyEffected = false;
+		for (int i = 0; i < info->usedItem.size(); i++)
+		{
+			if (info->usedItem[i] == _itemCode)
+			{
+				isAlreadyEffected = true;
+				break;
+			}
+		}
+		if (isAlreadyEffected) return;
+		info->usedItem.push_back(_itemCode);
+
 		NormalProjectile* originProjectile = dynamic_cast<NormalProjectile*>(projectile);
 		for (int i = 0; i < 2; i++)
 		{

@@ -47,7 +47,9 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 void SkelMagicianIce::release()
 {
 	_ani->release();
+	_attackAni->release();
 	delete _ani;
+	delete _attackAni;
 }
 
 void SkelMagicianIce::update(float const timeElapsed)

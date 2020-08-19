@@ -16,7 +16,7 @@ void SpikeBall::init()
 	_displayInfos.push_back(L"모험가 주위를 돌며 적을 공격");
 	_displayText = L"\"모험가의 주위를 돌면서 적들을 혼내준다.\"";
 	_x = _y = 0;
-	
+	_elapsedTime = 0;
 	//악세서리 가격
 	_price = 600;
 
@@ -30,12 +30,18 @@ void SpikeBall::release()
 void SpikeBall::update(Player* player, float const elapsedTime)
 {
 	_angle += 2.233f * elapsedTime;
-
-	if (_angle > PI2) // 한바퀴 돌때마다 공격판정 초기화
+	_elapsedTime += elapsedTime;
+	if (_angle > PI2) 
 	{
 		_angle -= PI2;
+	}
+	if (_elapsedTime > 0.4) // 0.4초마다 공격판정 초기화
+	{
+		_elapsedTime = 0;
 		_attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 	}
+
+
 
 	_x = cosf(_angle) * 110;
 	_y = -sinf(_angle) * 110;

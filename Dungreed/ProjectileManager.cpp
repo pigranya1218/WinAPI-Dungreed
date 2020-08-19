@@ -24,7 +24,7 @@ void ProjectileManager::update(float const elapsedTime)
 		if (!_projectiles[i]->getActive())
 		{
 			_projectiles[i]->release();
-			SAFE_DELETE(_projectiles[i]);
+			delete _projectiles[i];
 			_projectiles.erase(_projectiles.begin() + i);
 		}
 		else

@@ -10,6 +10,7 @@ private:
 	float _angle = PI / 2;
 
 	string _attackCode;
+	float _elapsedTime;
 
 public:
 	virtual void init();

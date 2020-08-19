@@ -27,7 +27,6 @@ void EnemyManager::update(float const timeElapsed)
 
 			_enemies[i]->release();
 			delete _enemies[i];
-
 			_enemies.erase(_enemies.begin() + i);
 		}
 		else
