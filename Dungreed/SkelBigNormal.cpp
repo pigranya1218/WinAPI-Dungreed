@@ -148,9 +148,6 @@ void SkelBigNormal::update(float const timeElapsed)
 
 void SkelBigNormal::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);	
-
 	Vector2 drawPos = _position;
 	if (_state == ENEMY_STATE::ATTACK)
 	{

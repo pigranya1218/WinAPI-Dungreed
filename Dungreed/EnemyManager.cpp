@@ -27,7 +27,7 @@ void EnemyManager::update(float const timeElapsed)
 			_enemies[i]->dieEffect();	// Á×´Â ÀÌÆåÆ® Àç»ý
 
 			_enemies[i]->release();
-			delete _enemies[i];
+			SAFE_DELETE(_enemies[i]);
 			_enemies.erase(_enemies.begin() + i);
 		}
 		else
