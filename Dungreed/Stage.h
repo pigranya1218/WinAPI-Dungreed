@@ -38,6 +38,8 @@ protected:
 	vector<DIRECTION>::iterator _viDirection;
 
 	bool _OpenDirection[4];
+	
+	bool _isMade;
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
@@ -64,5 +66,6 @@ public:
 	vector<DIRECTION>::iterator getVItageDirection() { return _viDirection; }
 
 	bool getOpenDirection(int num) { return _OpenDirection[num]; }
-	
+	bool getIsMade() { return _isMade; }
+	void setIsMade(bool ismade) { _isMade = ismade; }
 };

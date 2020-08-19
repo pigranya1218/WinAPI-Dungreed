@@ -40,6 +40,7 @@ private:
 	vector<DIRECTION>::iterator iter;
 
 	int rnd;
+	int makeNum=0;
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
 	void setPlayer(Player* player) { _player = player; }
@@ -75,6 +76,7 @@ public:
 	void setPlayerPos(int x, int y);
 
 	//·£´ý¸Ê¸¸µé±â
-	void makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<vector<bool>> isMadeRoom);
+	//void makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<vector<bool>> isMadeRoom);
+	void makeRoom(int x1, int y1);
 };
 

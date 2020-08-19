@@ -146,15 +146,19 @@ void StageManager::makeStage()
 		_currStage = new StartRoom1();
 		_currStage->setStageManager(this);
 		_currStage->init();
+		
 
-		int indexX = RANDOM->getFromIntTo(4,6);
-		int indexY = RANDOM->getFromIntTo(4, 6);
+		//int indexX = RANDOM->getFromIntTo(4,6);
+		//int indexY = RANDOM->getFromIntTo(4, 6);
 
-		_vStage[indexX][indexY] = _currStage;
-		_vStage[indexX][indexY]->setStageManager(this);
-		_vStage[indexX][indexY]->init();
+		_vStage[k][l] = _currStage;
+		makeRoom(k, l);
+		_vStage[_currIndexX][_currIndexY]->setStageManager(this);
+		_vStage[_currIndexX][_currIndexY]->init();
+		//_vStage[k][l]->setIsMade(true);
 
-		makeRoom(indexX, indexY, specialStage, isMadeStage);
+		//makeRoom(indexX, indexY, specialStage, isMadeStage);
+		
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
 		break;
@@ -188,10 +192,16 @@ void StageManager::setPlayerPos( int x, int y)
 	_player->setPosition(Vector2(x, y));
 }
 
-void StageManager::makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<vector<bool>> isMadeRoom)
+void StageManager::makeRoom(int x1, int y1)
 {
+	
+	if (makeNum > 5)return;
+	makeNum++;
+
+
 	if (_vStage[x1][y1]->getOpenDirection(0))
 	{
+		//if (_vStage[x1 - 1][y1]->getIsMade())return;
 		Stage* newStage;
 		if (rnd == 0)_stage2 = new Room20LTRB();
 		else if (rnd == 1)_stage2 = new Room2LTR();
@@ -201,22 +211,25 @@ void StageManager::makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<v
 		else _stage2 = new Room20LTRB();
 		_stage2->setStageManager(this);
 		_stage2->init();
+		//_stage2->setIsMade(true);
 
 		int makeIndexX=x1-1;
 		int makeIndexY=y1;
 		_vStage[makeIndexX][makeIndexY] = _stage2;
 		//_currStage = _stage;
-		//makeRoom();
+		makeRoom(makeIndexX, makeIndexY);
 
 	}
 	if (_vStage[x1][y1]->getOpenDirection(1))
 	{
+		//if (_vStage[x1][y1-1]->getIsMade())return;
 		if (rnd == 0)_stage2 = new Room20LTRB;
 		else if (rnd == 1)_stage2 = new Room22LTRB;
 		else if (rnd == 2)_stage2 = new Room2LTR;
 		else _stage2 = new Room20LTRB;
 		_stage2->setStageManager(this);
 		_stage2->init();
+		//_stage2->setIsMade(true);
 
 		int makeIndexX = x1 ;
 		int makeIndexY = y1-1;
@@ -225,11 +238,13 @@ void StageManager::makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<v
 	}
 	if (_vStage[x1][y1]->getOpenDirection(2))
 	{
+		//if (_vStage[x1+1][y1]->getIsMade())return;
 		if (_currIndexX + 1 == 9)
 		{
 			_stage = new Room8L;
 			_stage2->setStageManager(this);
 			_stage2->init();
+			_stage2->setIsMade(true);
 		}
 		else
 		{
@@ -241,27 +256,32 @@ void StageManager::makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<v
 			else _stage2 = new Room20LTRB();
 			_stage2->setStageManager(this);
 			_stage2->init();
+			//_stage2->setIsMade(true);
 		}
 		int makeIndexX = x1 + 1;
 		int makeIndexY=y1;
 		_vStage[makeIndexX][makeIndexY] = _stage2;
 
-		//makeRoom(makeIndexX, makeIndexY,);
+		makeRoom(makeIndexX, makeIndexY);
 		//_currStage = _stage;
 		
 	}
 
 	if (_vStage[x1][y1]->getOpenDirection(3))
 	{
+		//if (_vStage[x1][y1+1]->getIsMade())return;
 		if (rnd == 0)_stage2 = new Room20LTRB;
 		else if (rnd == 1)_stage2 = new Room22LTRB;
 		else if (rnd == 2)_stage2 = new Room2LTR;
 		else _stage2 = new Room20LTRB;
 		_stage2->setStageManager(this);
 		_stage2->init();
+		//_stage2->setIsMade(true);
 		int makeIndexX = x1;
 		int makeIndexY = y1+1;
 		_vStage[makeIndexX][makeIndexY] = _stage2;
+
+		makeRoom(makeIndexX, makeIndexY);
 		//_currStage = _stage;
 	}
 }

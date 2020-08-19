@@ -13,6 +13,7 @@ void Stage::init()
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
 
+	_isMade = false;
 }
 
 void Stage::release()
