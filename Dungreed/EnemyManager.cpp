@@ -173,6 +173,7 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTIO
 			enemy->init(pos, direction);
 			enemy->setEnemyManager(this);
 		}
+		break;
 		case ENEMY_TYPE::NIFLHEIM:
 		{
 			enemy = new Niflheim;

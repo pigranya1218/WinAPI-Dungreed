@@ -30,9 +30,9 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_moving, sizeof(_moving));
 	
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3f;
 
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 1.3, 850, true, true, false, false);
+	//_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.2, 1.3, 850, true, true, false, false);
 
 	_isDetect = _attacking = 0;
 	_active = true;
@@ -110,6 +110,7 @@ void SkelMagicianIce::update(float const timeElapsed)
 			}
 		}
 	}
+	hitReaction(playerPos, moveDir, timeElapsed);
 
 	_enemyManager->moveEnemy(this, moveDir);
 	
@@ -134,10 +135,10 @@ void SkelMagicianIce::render()
 		_attackImg->aniRender(CAMERA->getRelativeV2(_attackPos), _attackAni);
 	}
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
@@ -178,7 +179,8 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-			_active = false;
+			_attacking = _active = false;
+			_attackAni->stop();
 		}
 		break;
 	}
@@ -188,7 +190,7 @@ void SkelMagicianIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, 
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -205,11 +207,10 @@ void SkelMagicianIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, 
 			}
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
+			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
-		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
-
-		return;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
 	}
 }

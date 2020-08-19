@@ -2,6 +2,8 @@
 #include "EnemyManager.h"
 #include "SkelBigIce.h"
 
+#define DEFSPEED 200.0f
+
 void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 {
 	_ani = new Animation;
@@ -18,7 +20,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.force = Vector2(200, 0);
+	_moving.force = Vector2(DEFSPEED, 0.f);
 	_moving.gravity = Vector2(0, 4000);
 	_moving.delay = 0.2;
 
@@ -31,9 +33,9 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_skill.distance = 300;
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3f;
+	_hit.delay = 0.3f;
 
-	_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 1, 700, true, true, false, false);
+	//_shooting.init("IceBullet", "IceBullet_FX", _scale, 0.05, 1, 700, true, true, false, false);
 
 	_isDetect = 0;
 	_active = true;
@@ -47,11 +49,12 @@ void SkelBigIce::release()
 
 void SkelBigIce::update(float const timeElapsed)
 {
+	const Vector2 playerPos = _enemyManager->getPlayerPos();
+
 	if (!_isDetect)
 	{
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
-	}
-	const Vector2 playerPos = _enemyManager->getPlayerPos();
+	}	
 
 	Vector2 moveDir(0, 0);
 	// 상태에 따른 행동처리
@@ -72,7 +75,7 @@ void SkelBigIce::update(float const timeElapsed)
 				_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 			}
 
-			moveDir.x += timeElapsed * _moving.force.x * ((bool)(_direction) ? 1 : -1);
+			moveDir.x += timeElapsed * _moving.force.x * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
 			float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
 
@@ -161,14 +164,10 @@ void SkelBigIce::update(float const timeElapsed)
 	}
 
 	_ani->frameUpdate(timeElapsed);
-
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
 void SkelBigIce::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
 
 	Vector2 drawPos = _position;	
@@ -187,6 +186,13 @@ void SkelBigIce::render()
 		drawPos.y -= elapsePos.y / 2;
 	}	
 	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
+
+	if (_curHp < _maxHp)
+	{
+		Vector2 renderPos = _position;
+		renderPos.y += _size.y * 0.6f;
+		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
+	}
 }
 
 void SkelBigIce::setState(ENEMY_STATE state)
@@ -256,7 +262,7 @@ void SkelBigIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -282,14 +288,12 @@ void SkelBigIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const
 				break;
 			}
 			_img = IMAGE_MANAGER->findImage(_imageName);
+			_moving.force.x = DEFSPEED;
 			_hit.isHit = false;
+			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
-		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
-
-		return;
-	}
-
-	_moving.force.x = 200;
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+	}	
 }

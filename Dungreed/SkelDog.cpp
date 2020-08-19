@@ -2,6 +2,7 @@
 #include "EnemyManager.h"
 #include "SkelDog.h"
 
+#define DEFSPEED 400.0f
 #define MAXJUMP -1000.0f
 #define DEFJUMP -5.0f;
 
@@ -24,11 +25,14 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction)
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 0.2;
-	_moving.force = Vector2(400, 0);
+	_moving.force = Vector2(DEFSPEED, 0.f);
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
+
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.delay = 0.3f;
 
 	_active = true;
 
@@ -124,8 +128,6 @@ void SkelDog::update(float const timeElapsed)
 
 
 	_ani->frameUpdate(timeElapsed);
-
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
 void SkelDog::render()
@@ -133,11 +135,10 @@ void SkelDog::render()
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
-		// DEBUG TEST
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
@@ -184,31 +185,29 @@ void SkelDog::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const fl
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
 				case ENEMY_STATE::IDLE:
 				{
-					_imageName = "Skel/Big_Normal/Idle";
+					_imageName = "Skel/Dog/Idle";
 				}
 				break;
 				case ENEMY_STATE::MOVE:
 				case ENEMY_STATE::ATTACK:
 				{
-					_imageName = "Skel/Big_Normal/Move";
+					_imageName = "Skel/Dog/Move";
 				}
 				break;			
 			}
 			_img = IMAGE_MANAGER->findImage(_imageName);
+			_moving.force.x = DEFSPEED;
 			_hit.isHit = false;
+			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
 		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
-
-		return;
-	}
-
-	_moving.force.x = 150;
+	}	
 }

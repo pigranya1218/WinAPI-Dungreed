@@ -20,11 +20,11 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction)
 	_attacking.delay = 3;
 
 	ZeroMemory(&_moving, sizeof(_moving));	
-	_moving.force = Vector2(150, 0);
+	_moving.force = Vector2(100, 0);
 	_moving.delay = 0.5;
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3f;
+	_hit.delay = 0.3f;
 
 	_isDetect = 0;
 	_active = true;
@@ -111,7 +111,6 @@ void Ghost::render()
 
 	if (_curHp < _maxHp)
 	{
-		// DEBUG TEST
 		Vector2 renderPos = _position;
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
@@ -164,7 +163,7 @@ void Ghost::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const floa
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -182,7 +181,7 @@ void Ghost::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const floa
 			}
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
-			_moving.force.x = 150;
+			_moving.force.x = 100;
 			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;

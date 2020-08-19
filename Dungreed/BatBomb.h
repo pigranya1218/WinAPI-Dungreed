@@ -17,5 +17,6 @@ public:
 	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
 
 	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info);
+	virtual bool hitEffect(Projectile* projectile);
 };
 

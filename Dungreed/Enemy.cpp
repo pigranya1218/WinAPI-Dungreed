@@ -11,14 +11,15 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 	// 생성해놓은 총알을
 	for (int i = 0; i < fireLoop; i++)
 	{
-		AttackInfo* attackInfo = new AttackInfo;
-		attackInfo->team = OBJECT_TEAM::ENEMY;
-
 		// 발사한다.
 		if (!bullets.empty())
 		{
+			AttackInfo* attackInfo = new AttackInfo;
+			attackInfo->minDamage = 5;
+			attackInfo->maxDamage = 9;
+
 			enemyManager->fireEnemy(bullets[bullets.size() - 1], attackInfo);
-			// delete attackInfo;
+			//delete attackInfo;
 			//bullets[bullets.size() - 1]->release();
 			bullets.pop_back();
 		}		
@@ -138,7 +139,7 @@ bool Enemy::hitEffect(FloatCircle * circle, AttackInfo * info)
 {
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 
@@ -159,7 +160,7 @@ bool Enemy::hitEffect(Projectile * projectile)
 	AttackInfo* info = projectile->getAttackInfo();
 	_isDetect = true;
 	_hit.isHit = true;
-	_hit.hitCount = 0;
+	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 

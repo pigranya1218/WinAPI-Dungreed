@@ -32,11 +32,11 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 
 	// 돌진 관련 변수
 	ZeroMemory(&_skill, sizeof(_skill));
-	_skill.delay = 1;		// 돌진 딜레이 초기화
+	_skill.delay = 2;		// 돌진 딜레이 초기화
 	_skill.distance = 800;	// 돌진 시전 시 최대 거리
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 	
 	// 변수 초기화
 	_isDetect = 0;				// 플레이어 감지 플래그
@@ -123,10 +123,10 @@ void Minotaurs::update(float const timeElapsed)
 				if(_ani->isPlay()) _ani->pause();
 
 				// 돌진한다
-				_moving.force.x -= _moving.gravity.x;
+				_moving.force.x -= _moving.gravity.x * timeElapsed;
 				moveDir.x += (_moving.force.x) * timeElapsed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
-				EFFECT_MANAGER->play("Minotaurs/Effect", Vector2(_position.x, _position.y), IMAGE_MANAGER->findImage("Minotaurs/Effect")->getFrameSize() * _scale);
+				//EFFECT_MANAGER->play("Minotaurs/Effect", Vector2(_position.x, _position.y), IMAGE_MANAGER->findImage("Minotaurs/Effect")->getFrameSize() * _scale);
 
 				// 이전 X축과 현재 X축이 같으면 벽에 부딪힌 것
 				if (_lastPos.x == _currPos.x)
@@ -153,8 +153,6 @@ void Minotaurs::update(float const timeElapsed)
 			if (!_ani->isPlay() && _ani->getPlayIndex() != 4)
 			{
 				_moving.force.x = RUSHSPEED;
-
-				//_moving.gravity.x = 0;
 
 				// 플레이어와 거리 계산 후
 				float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
@@ -203,8 +201,6 @@ void Minotaurs::update(float const timeElapsed)
 	}
 
 	_ani->frameUpdate(timeElapsed);
-
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
 void Minotaurs::render()
@@ -232,11 +228,11 @@ void Minotaurs::render()
 	// 최종 렌더
 	_img->aniRender(CAMERA->getRelativeV2(drawPos), _ani, (_direction == DIRECTION::LEFT));
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
 		// DEBUG TEST
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
@@ -295,7 +291,7 @@ void Minotaurs::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const 
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -318,9 +314,9 @@ void Minotaurs::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const 
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
 		}
-		/*_moving.force.x -= _moving.gravity.x * timeElapsed;
+		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
-		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));*/
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
 	}
 }
 

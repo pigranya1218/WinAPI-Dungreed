@@ -24,14 +24,14 @@ void ProjectileManager::update(float const elapsedTime)
 		if (!_projectiles[i]->getActive())
 		{
 			_projectiles[i]->release();
-			delete _projectiles[i];
+			SAFE_DELETE(_projectiles[i]);
 			_projectiles.erase(_projectiles.begin() + i);
 		}
 		else
 		{
 			++i;
 		}
-	}
+	}	
 }
 
 void ProjectileManager::render()

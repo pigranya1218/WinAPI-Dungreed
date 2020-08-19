@@ -5,12 +5,7 @@
 class Ovibos : public Enemy
 {
 private:
-	tagMoveInfo _moving;
-	tagAttackInfo _attacking;
-
-	Vector2 _rushpos;
-
-	bool _break;
+	tagAttackInfo _attacking;	
 
 public:
 	void init(const Vector2& pos, DIRECTION direction);
@@ -22,6 +17,7 @@ public:
 
 	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
 
-	bool playerCollision(const Vector2& playerPos);
+	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info);
+	virtual bool hitEffect(Projectile* projectile);
 };
 

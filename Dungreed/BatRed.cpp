@@ -2,6 +2,8 @@
 #include "EnemyManager.h"
 #include "BatRed.h"
 
+#define DEFSPEED 250.0f
+
 void BatRed::init(const Vector2& pos, DIRECTION direction)
 {
 	_ani = new Animation;
@@ -26,14 +28,14 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
-	_moving.force = Vector2(250, 0);
+	_moving.force = Vector2(DEFSPEED, 0.0f);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 	
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.hitDelay = 0.3;
+	_hit.delay = 0.3;
 
 	// 총알 초기화
-	_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 1, 1, 500, false, true, true, true, false);
+	//_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 1, 1, 500, false, true, true, true, false);
 
 	_isDetect = 0;
 
@@ -138,11 +140,10 @@ void BatRed::render()
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
-		// DEBUG TEST
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
@@ -190,7 +191,7 @@ void BatRed::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -208,12 +209,11 @@ void BatRed::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 			}
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
+			_moving.force.x = DEFSPEED;
+			return;
 		}
 		_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
 		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
-
-		return;
-	}
-	_moving.force.x = 350;
+	}	
 }

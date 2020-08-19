@@ -2,24 +2,27 @@
 #include "EnemyManager.h"
 #include "Ovibos.h"
 
-#define RUSHSPEED 1200.0f
+#define RUSHSPEED 500.0f
+#define GRAVITYX 600.0f
 
 void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 {
-	_ani = new Animation;
-	_position = pos;
-	_direction = direction;
+	_ani = new Animation;	
+
 	setState(ENEMY_STATE::IDLE);
 
-	_detectRange = 50;
-
+	_position = pos;
+	_direction = direction;
 	_scale = 4;
 	_size = _img->getFrameSize() * _scale;
 	_rect = rectMakePivot(_position,_size,PIVOT::CENTER);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(RUSHSPEED, 0.0f);
-	_moving.gravity = Vector2(50, 4000);
+	_moving.gravity = Vector2(GRAVITYX, 4000.0f);
+
+	ZeroMemory(&_hit, sizeof(_hit));
+	_hit.delay = 0.3f;
 
 	_active = true;
 
@@ -34,12 +37,7 @@ void Ovibos::release()
 
 void Ovibos::update(float const timeElapsed)
 {
-	const Vector2 playerpos = _enemyManager->getPlayerPos();
-
-	if (!_isDetect)
-	{
-		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
-	}
+	const Vector2 playerpos = _enemyManager->getPlayerPos();	
 
 	Vector2 moveDir(0, 0);
 	switch (_state)
@@ -51,35 +49,30 @@ void Ovibos::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			switch (_direction)
+			if (_ani->getPlayIndex() == _img->getMaxFrameX() - 1)
 			{
-				case DIRECTION::LEFT:
+				switch (_direction)
 				{
-					if (_position.x < playerpos.x)
+					case DIRECTION::LEFT:
 					{
-						if (_ani->getPlayIndex() == _img->getMaxFrameX() - 1)
+						if (_position.x < playerpos.x)
 						{
 							if (_ani->isPlay()) _ani->pause();
-
-							_moving.force.x -= _moving.gravity.x;
+							_moving.force.x -= _moving.gravity.x * timeElapsed;
 						}
 					}
-				}
-				break;
-				case DIRECTION::RIGHT:
-				{
-					if (_position.x > playerpos.x)
+					break;
+					case DIRECTION::RIGHT:
 					{
-						if (_ani->getPlayIndex() == _img->getMaxFrameX() - 1)
+						if (_position.x > playerpos.x)
 						{
 							if (_ani->isPlay()) _ani->pause();
-
-							_moving.force.x -= _moving.gravity.x;
+							_moving.force.x -= _moving.gravity.x * timeElapsed;
 						}
 					}
+					break;
 				}
-				break;
-			}
+			}			
 
 			moveDir.x += timeElapsed * _moving.force.x * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
@@ -109,20 +102,17 @@ void Ovibos::update(float const timeElapsed)
 	}
 
 	_ani->frameUpdate(timeElapsed);
-
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
 
 void Ovibos::render()
 {
 	_img->setScale(_scale);
-	_img->aniRender(CAMERA->getRelativeV2(_position),_ani, (_direction == DIRECTION::LEFT));
+	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
-		// DEBUG TEST
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
 }
@@ -169,7 +159,7 @@ void Ovibos::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 {
 	if (_hit.isHit)
 	{
-		if (_hit.hitUpdate(timeElapsed))
+		if (_hit.update(timeElapsed))
 		{
 			switch (_state)
 			{
@@ -187,18 +177,63 @@ void Ovibos::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
 		}
-		_moving.force.x -= _moving.gravity.x * timeElapsed;
+		/*_moving.force.x -= _moving.gravity.x * timeElapsed;
 		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
-		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));*/
 	}
 }
 
-bool Ovibos::playerCollision(const Vector2 & playerPos)
+bool Ovibos::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
-	if (_rect.left <= playerPos.x && playerPos.x <= _rect.right )
+	if (_state == ENEMY_STATE::IDLE || !_ani->isPlay())
 	{
-		return true;
+		setState(ENEMY_STATE::ATTACK);
+		_moving.force.x = RUSHSPEED;
 	}
+
+	_hit.isHit = true;
+	_hit.count = 0;	
+
+	_moving.gravity.x = GRAVITYX + info->knockBack;
+
+	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
+
+	DamageInfo damageInfo = info->getDamageInfo();
+	Vector2 renderPos = _position;
+	renderPos.y -= _size.y * 0.25f;
+	renderPos.x += RANDOM->getFromFloatTo(-_size.x * 0.5f, _size.x * 0.5f);
+	_enemyManager->showDamage(damageInfo, renderPos);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));	
+
+	_direction = (_enemyManager->getPlayerPos().x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
+
+	return true;
+}
+
+bool Ovibos::hitEffect(Projectile* projectile)
+{
+	if (_state == ENEMY_STATE::IDLE || !_ani->isPlay())
+	{
+		setState(ENEMY_STATE::ATTACK);
+		_moving.force.x = RUSHSPEED;
+	}
+
+	AttackInfo* info = projectile->getAttackInfo();
+	_hit.isHit = true;
+	_hit.count = 0;
+
+	_moving.gravity.x = GRAVITYX + info->knockBack;
+
+	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
+
+	DamageInfo damageInfo = info->getDamageInfo();
+	Vector2 renderPos = _position;
+	renderPos.y -= _size.y * 0.25f;
+	renderPos.x += RANDOM->getFromFloatTo(-_size.x * 0.5f, _size.x * 0.5f);
+	_enemyManager->showDamage(damageInfo, renderPos);
+	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));	
+
+	_direction = (_enemyManager->getPlayerPos().x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 
 	return false;
 }

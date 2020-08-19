@@ -522,6 +522,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack"		, L"resources/images/Enemy/Ovibos/attack.png"		, 6, 1);	// 물소 공격 
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격	
 
+	// * 에너미 이펙트
+	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png", 11, 1);
+
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Bat_Explosion", L"resources/images/Enemy/Bat/Bomb/explosion.png", 12, 1);
 	EFFECT_MANAGER->addEffect("Bat_Explosion", "Bat_Explosion", 15, 10);
