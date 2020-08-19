@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "CosmosSword.h"
+#include "NormalProjectile.h"
 
 void CosmosSword::init()
 {
@@ -86,7 +87,7 @@ void CosmosSword::backRender(Player* player)
 		Vector2 renderPosHand = originPos;
 		renderPosHand.x += (_width * 0.1 * 4);
 		// 무기 위치
-		Vector2 renderPosWeapon = originPos;
+		renderPosWeapon = originPos;
 		renderPosWeapon.x += (isLeft)?(-_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4): (_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
 		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * _width * 0.15 * 4;
 
@@ -145,7 +146,7 @@ void CosmosSword::frontRender(Player* player)
 		Vector2 renderPosHand = originPos;
 		renderPosHand.x += (_width * 0.1 * 4);
 		// 무기 위치
-		Vector2 renderPosWeapon = originPos;
+		renderPosWeapon = originPos;
 		renderPosWeapon.x += (isLeft) ? (-_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4) : (_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
 		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * _width * 0.15 * 4;
 
@@ -171,6 +172,12 @@ void CosmosSword::frontRender(Player* player)
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
 			EFFECT_MANAGER->play("EFFECT_COSMOSSWING", effectPos, Vector2(250, 300), degree);
+
+
+			
+
+
+
 		}
 	}
 
@@ -225,7 +232,38 @@ void CosmosSword::attack(Player* player)
 	attackInfo->maxDamage= _addStat.maxDamage;
 	attackInfo->knockBack = 15;
 
+	//==========================================================
+	float radian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x))/* * (180 / PI)*/;
+	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	
+	Vector2 shootPos = renderPosWeapon;
+	float length = _img->getFrameSize().x * 0.6f * 4; // 무기 길이만큼
+	shootPos.x += cosf(radian) * length;
+	shootPos.y += -sinf(radian) * length;
+	
+	NormalProjectile* projectile;
+	projectile = new NormalProjectile;
+	projectile->setPosition(shootPos);	
+	projectile->setTeam(OBJECT_TEAM::PLAYER);
+
+
+	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
+	projectile->init("CosmosSwordFx", "", Vector2(50, 50), Vector2(250, 300), Vector2(30 * 50, 30 * 50), 3, radian, true, true, 10, true, false, false, false);
+
+	AttackInfo* attackInfo2 = new AttackInfo;
+	attackInfo2->team = OBJECT_TEAM::PLAYER;
+	attackInfo2->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo2->critical = 0;
+	attackInfo2->criticalDamage = 0;
+	attackInfo2->minDamage = _addStat.minDamage;
+	attackInfo2->maxDamage = _addStat.maxDamage;
+	attackInfo2->knockBack = 15;
+
+	//==============================================================================================================================================================
+
+
 	player->attack(attackCircle, attackInfo);
+	player->attack(projectile, attackInfo2);
 
 	delete attackCircle;
 	delete attackInfo;
