@@ -164,6 +164,11 @@ void SkelBigIce::update(float const timeElapsed)
 	}
 
 	_ani->frameUpdate(timeElapsed);
+
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void SkelBigIce::render()

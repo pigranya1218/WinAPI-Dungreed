@@ -129,7 +129,10 @@ void BatIce::update(float const timeElapsed)
 
 	_ani->frameUpdate(timeElapsed);
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void BatIce::render()
@@ -147,8 +150,6 @@ void BatIce::render()
 
 void BatIce::setState(ENEMY_STATE state)
 {
-	_state = state;
-
 	switch (state)
 	{
 		case ENEMY_STATE::IDLE:
@@ -182,6 +183,8 @@ void BatIce::setState(ENEMY_STATE state)
 		}
 		break;
 	}
+
+	_state = state;
 }
 
 void BatIce::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const float timeElapsed)

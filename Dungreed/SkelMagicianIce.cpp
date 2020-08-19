@@ -117,7 +117,10 @@ void SkelMagicianIce::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 	_attackAni->frameUpdate(timeElapsed);
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void SkelMagicianIce::render()

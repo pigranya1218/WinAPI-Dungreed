@@ -59,7 +59,12 @@ protected:
 		bool	isRotate;			// 이미지 회전 여부
 		bool	isGravity;			// 중력 사용 여부
 
-		int		bulletNum;	// 생성할 총알 지정
+		int		bulletNum;			// 생성할 총알 지정
+
+		float	minDamage;			// 최소 데미지
+		float	maxDamage;			// 최대 데미지
+		float	trueDamage;			// 고정 데미지
+		float	knockBack;			// 밀어내는 힘
 
 		// 총알 초기화 >> 불렛 이미지이름, 이펙트 이름, 투사체 날아가는 힘, 스케일, 투사체 발사주기, 투사체 지속시간, 이미지 회전여부, 프레임 사용여부, 프레임 루프여부, 중력 적용여부, 붉은 선 충돌여부, 푸른 선 충돌여부
 		void init(string bulletName, string effectName, Vector2 force, float scale, float delay, float duration, bool isRotate = 0, bool isAni = 1, bool aniLoop = 1, bool isGravity = 0, bool collisionGround = 1, bool collisionPlatForm = 1)
@@ -88,6 +93,13 @@ protected:
 			this->collisionGround = collisionGround;
 			this->collisionPlatForm = collisionPlatForm;
 		}		
+		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 0)
+		{
+			this->minDamage = minDamage;
+			this->maxDamage = maxDamage;
+			this->trueDamage = trueDamage;
+			this->knockBack = knockBack;
+		}
 		// 딜레이 업데이트
 		bool delayUpdate(float const timeElapsed)
 		{
@@ -211,9 +223,13 @@ public:
 	virtual void update(float const timeElapsed) = 0;
 	virtual void render() = 0;
 
+	// 상태 변환
 	virtual void setState(ENEMY_STATE state) {};
 
+	// 피격 후 행동처리
 	virtual void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed) {}
+
+	virtual void dieEffect();
 
 	void setEnemyManager(EnemyManager* enemyManager) { _enemyManager = enemyManager; }
 

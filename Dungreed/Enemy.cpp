@@ -14,15 +14,29 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 		// 발사한다.
 		if (!bullets.empty())
 		{
-			AttackInfo* attackInfo = new AttackInfo;
-			attackInfo->minDamage = 5;
-			attackInfo->maxDamage = 9;
+			AttackInfo* attackInfo = new AttackInfo;			
+			attackInfo->minDamage = minDamage;
+			attackInfo->maxDamage = maxDamage;
+			attackInfo->trueDamage = trueDamage;
+			attackInfo->knockBack = knockBack;
+			attackInfo->team = OBJECT_TEAM::ENEMY;
 
 			enemyManager->fireEnemy(bullets[bullets.size() - 1], attackInfo);
 			//delete attackInfo;
 			//bullets[bullets.size() - 1]->release();
 			bullets.pop_back();
 		}		
+	}	
+}
+
+void Enemy::dieEffect()
+{
+	if (_state == ENEMY_STATE::DIE)
+	{
+		Vector2 drawSize = _img->getFrameSize() * _scale;
+		drawSize.x = max(drawSize.x, drawSize.y);
+		drawSize.y = max(drawSize.x, drawSize.y);
+		EFFECT_MANAGER->play("Enemy_Destroy", _position, drawSize);
 	}	
 }
 
