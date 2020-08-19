@@ -31,7 +31,7 @@ public:
 
 	HRESULT init();
 	void release();
-	void processEvent();
+	void processEvent(float elapsedTime);
 	void pushShakeEvent(float power, float shakePerTime, float remainTime);
 
 	void setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT);

@@ -55,11 +55,14 @@ void BaseCos::update(float elaspedTime)
 	}
 }
 
-void BaseCos::render(Vector2 pos, DIRECTION dir)
+void BaseCos::render(Vector2 pos, DIRECTION dir, bool isAlpha)
 {
 	// 확대
 	_img->setScale(4);
-
+	if (isAlpha)
+	{
+		_img->setAlpha(0.4);
+	}
 	// 상태에 따른 애니메이션 사용 여부 
 	switch (_imgState)
 	{

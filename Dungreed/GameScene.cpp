@@ -52,8 +52,7 @@ void GameScene::update()
 	_stageMgr->update(elapsedTime);
 	_player->update(elapsedTime);
 	EFFECT_MANAGER->update(elapsedTime);
-	CAMERA->setXY(_player->getPosition());
-	
+	CAMERA->processEvent(elapsedTime);
 	_uiMgr->update(elapsedTime);
 }
 
@@ -62,7 +61,6 @@ void GameScene::render()
 	_stageMgr->render();
 	_player->render();
 	EFFECT_MANAGER->render();
-
 	_uiMgr->render();
 
 	if (_uiMgr->isActive())

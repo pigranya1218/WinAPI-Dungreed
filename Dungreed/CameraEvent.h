@@ -7,6 +7,6 @@ protected:
 
 public:
 	float getRemainTime() { return _remainTime; }
-	virtual void processEvent();
+	virtual void processEvent(float elapsedTime);
 };
 

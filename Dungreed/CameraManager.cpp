@@ -19,11 +19,11 @@ void CameraManager::release()
 {
 }
 
-void CameraManager::processEvent()
+void CameraManager::processEvent(float elapsedTime)
 {
 	if (_eventQueue.empty()) return;
 
-	_eventQueue.front()->processEvent();
+	_eventQueue.front()->processEvent(elapsedTime);
 	if (_eventQueue.front()->getRemainTime() <= 0)
 	{
 		delete _eventQueue.front();

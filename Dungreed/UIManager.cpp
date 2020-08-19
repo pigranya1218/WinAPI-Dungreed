@@ -263,7 +263,7 @@ void UIManager::render()
 		_hpUI.hpBgImg->render(_hpUI.hpBg.getCenter(), _hpUI.hpBg.getSize());
 		float hpRatio = (static_cast<float>(_player->getCurrHp()) / _player->getMaxHp());
 		float width = (_hpUI.hpBar.getSize().x) * hpRatio;
-		if (FLOAT_EQUAL(hpRatio, 1))
+		if (FLOAT_EQUAL(hpRatio, 1) || FLOAT_EQUAL(hpRatio, 0))
 		{
 			FloatRect hpBar = FloatRect(_hpUI.hpBar.left, _hpUI.hpBar.top, _hpUI.hpBar.left + width, _hpUI.hpBar.bottom);
 			_hpUI.hpBarImg->render(hpBar.getCenter(), hpBar.getSize());

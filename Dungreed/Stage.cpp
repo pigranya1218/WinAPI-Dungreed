@@ -36,7 +36,11 @@ void Stage::update(float const elaspedTime)
 	_objectMgr->update(elaspedTime);
 	_npcMgr->update(elaspedTime);
 	_enemyMgr->update(elaspedTime);
-	
+
+	int stageWidth = _tile[0].tileX * TILESIZE;
+	int stageHeight = _tile[0].tileY * TILESIZE;
+	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
+	CAMERA->setXY(_stageManager->getPlayerPos());
 }
 
 void Stage::render()
@@ -69,11 +73,6 @@ void Stage::render()
 	{
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
 	}
-
-	int stageWidth = _tile[0].tileX * TILESIZE;
-	int stageHeight = _tile[0].tileY * TILESIZE;
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
-	CAMERA->setXY(_stageManager->getPlayerPos());
 
 	_objectMgr->render();
 	_npcMgr->render();

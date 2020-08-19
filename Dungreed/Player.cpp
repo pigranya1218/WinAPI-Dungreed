@@ -575,7 +575,7 @@ void Player::render()
 	}
 
 	// 캐릭터 그리기
-	_costume->render(CAMERA->getRelativeV2(_position), _direction);
+	_costume->render(CAMERA->getRelativeV2(_position), _direction, (_currHitTime > 0));
 
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < 4; i++)
@@ -594,7 +594,6 @@ void Player::render()
 		_hand->frontRender(this);
 	}
 
-
 	if (_currHitTime > 0)
 	{
 		if (_currHitTime < 0.25)
@@ -605,6 +604,8 @@ void Player::render()
 		IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->render(Vector2(WINSIZEX * 0.25f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
 		IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->render(Vector2(WINSIZEX * 0.75f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
 	}
+
+
 	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }
 
@@ -724,6 +725,7 @@ bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	_currHitTime = 0.5;
+	CAMERA->pushShakeEvent(25, 0.05, 0.25);
 	return true;
 }
 
@@ -732,6 +734,7 @@ bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	_currHitTime = 0.5;
+	CAMERA->pushShakeEvent(25, 0.05, 0.25);
 	return false;
 }
 
@@ -741,6 +744,7 @@ bool Player::hitEffect(Projectile* projectile)
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	_currHitTime = 0.5;
+	CAMERA->pushShakeEvent(25, 0.05, 0.25);
 	return true;
 }
 
