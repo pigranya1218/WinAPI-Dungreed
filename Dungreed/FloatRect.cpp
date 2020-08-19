@@ -80,7 +80,7 @@ void FloatRect::move(const Vector2& moveValue)
 
 bool FloatRect::ptInRect(POINT pt) const
 {
-	if (left <= pt.x && pt.x <= right && top <= pt.y && pt.y <= bottom)
+	if (left < pt.x && pt.x < right && top < pt.y && pt.y < bottom)
 	{
 		return true;
 	}

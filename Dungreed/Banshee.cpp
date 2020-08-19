@@ -23,6 +23,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 
 	// ≈∫∏∑ √ ±‚»≠
 	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2.2, false, true, true, false, false, false);
+	_shooting.attackInit(5, 10, 3);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 
@@ -32,6 +33,8 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::BANSHEE);
 }
 
 void Banshee::release()
@@ -63,7 +66,7 @@ void Banshee::update(float const timeElapsed)
 						_shooting.angle += PI / 6;
 						_shooting.createBullet(_position, _shooting.angle);
 					}
-					_shooting.fireBullet(_enemyManager);
+					_shooting.fireBullet(_myEnemyType, _enemyManager);
 				}
 			}
 			break;

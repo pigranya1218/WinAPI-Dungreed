@@ -31,6 +31,8 @@ private:
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	
+	float	_currHitTime;			// 피격 타임
+	
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
@@ -67,7 +69,7 @@ public:
 	// 피격 체크를 위해 호출
 	bool isHit(FloatRect* rc, AttackInfo* info);
 	bool isHit(FloatCircle* circle, AttackInfo* info);
-	bool isHit(Projectile* projectile);
+	bool isHit(Projectile* projectile, bool isOnceCollision);
 
 	// 만약 피격되었다면 호출될 가상함수
 	bool hitEffect(FloatRect* rc, AttackInfo* info);

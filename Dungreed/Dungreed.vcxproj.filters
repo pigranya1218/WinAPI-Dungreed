@@ -112,9 +112,6 @@
     <Filter Include="Dungreed\GameScene\Item\Accessories">
       <UniqueIdentifier>{6cd4b808-2924-4835-ae3b-9c78ec86045a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2DGameFramework\CameraManager">
-      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
-    </Filter>
     <Filter Include="2DGameFramework\Manager\CameraManager">
       <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
     </Filter>
@@ -126,6 +123,12 @@
     </Filter>
     <Filter Include="Dungreed\GameScene\Player\Food">
       <UniqueIdentifier>{3fb4c7dc-3689-4f1c-bd49-e59d87934099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Food\Normal">
+      <UniqueIdentifier>{a3887282-0571-4bb3-a1a2-0d83fa793e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Food\Rare">
+      <UniqueIdentifier>{ad5c4d38-a59c-4b12-9419-dcb43177874c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -510,9 +513,6 @@
     <ClInclude Include="MultiBullet.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="HeartOfCosmosProjectile.h">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="PowerKatana.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
@@ -549,14 +549,44 @@
     <ClInclude Include="BossRoom1.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
-    <ClInclude Include="Food.h">
-      <Filter>Dungreed\GameScene\Player\Food</Filter>
+    <ClInclude Include="AccProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
-    <ClInclude Include="EggFriedFood.h">
+    <ClInclude Include="Food.h">
       <Filter>Dungreed\GameScene\Player\Food</Filter>
     </ClInclude>
     <ClInclude Include="DialogueUI.h">
       <Filter>Dungreed\GameScene\Stage\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Lumber.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="FluteGreatSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="BreadFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="EggFriedFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="GrilledMushroomFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="TomatoSoupFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="GriffinEggOmeletteFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="RaspberryCookieFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="SparklingWaterFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="StrawberryPieFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -905,9 +935,6 @@
     <ClCompile Include="MultiBullet.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="HeartOfCosmosProjectile.cpp">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\GameScene\Item</Filter>
     </ClCompile>
@@ -950,11 +977,41 @@
     <ClCompile Include="Food.cpp">
       <Filter>Dungreed\GameScene\Player\Food</Filter>
     </ClCompile>
-    <ClCompile Include="EggFriedFood.cpp">
-      <Filter>Dungreed\GameScene\Player\Food</Filter>
-    </ClCompile>
     <ClCompile Include="DialogueUI.cpp">
       <Filter>Dungreed\GameScene\Stage\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Lumber.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="FluteGreatSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="AccProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="BreadFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="EggFriedFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="GrilledMushroomFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoSoupFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="GriffinEggOmeletteFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="RaspberryCookieFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="SparklingWaterFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="StrawberryPieFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

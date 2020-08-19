@@ -26,7 +26,7 @@ void EnemyManager::update(float const timeElapsed)
 			_enemies[i]->dieEffect();	// 죽는 이펙트 재생
 
 			_enemies[i]->release();
-			delete _enemies[i];
+			SAFE_DELETE(_enemies[i]);
 			_enemies.erase(_enemies.begin() + i);
 		}
 		else
@@ -212,6 +212,31 @@ bool EnemyManager::detectPlayer(GameObject* object, const float distance)
 void EnemyManager::fireEnemy(Projectile * projectile, AttackInfo * attackInfo)
 {
 	return _stage->attack(projectile, attackInfo);
+}
+
+Vector2 EnemyManager::getEnemyPos(const Vector2 & pos)
+{
+	// 비어 있으면 그냥 기준좌표 반환
+	if (_enemies.empty()) return pos;
+
+	// 초기 세팅
+	Vector2 result = _enemies[0]->getPosition();
+	float distance = getDistance(pos.x, pos.y, result.x, result.y);
+
+	// 순회하여 찾음
+	for (int i = 1; i < _enemies.size(); i++)
+	{
+		// 다음 에너미와의 거리가 더작으면
+		if (distance > getDistance(pos.x, pos.y, _enemies[i]->getPosition().x, _enemies[i]->getPosition().y))
+		{
+			// 거리 갱신
+			distance = getDistance(pos.x, pos.y, _enemies[i]->getPosition().x, _enemies[i]->getPosition().y);
+			// 리턴값 갱신
+			result = _enemies[i]->getPosition();
+		}
+	}
+
+	return result;
 }
 
 Vector2 EnemyManager::getPlayerPos()

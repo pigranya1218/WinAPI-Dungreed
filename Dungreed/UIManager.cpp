@@ -65,6 +65,9 @@ void UIManager::init()
 	_weaponUI.moveSpeed = 80;
 	_weaponUI.viewIndex = 0;
 
+	// DIALOGUE UI
+	_dialogueUI.init();
+
 	// INVENTORY UI
 	_inventoryUI.init();
 
@@ -161,6 +164,18 @@ void UIManager::update(float const elaspedTime)
 		isClose = true;
 	}
 
+	if (_dialogueUI.isActive())
+	{
+		if (isClose)
+		{
+			_dialogueUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_dialogueUI.update(elaspedTime);
+		}
+	}
 	if (_inventoryUI.isActive())
 	{
 		if (isClose)
@@ -211,6 +226,7 @@ void UIManager::update(float const elaspedTime)
 	}
 
 	_isActive = false;
+	_isActive |= _dialogueUI.isActive();
 	_isActive |= _inventoryUI.isActive();
 	_isActive |= _statUI.isActive();
 	_isActive |= _costumeUI.isActive();
@@ -247,7 +263,7 @@ void UIManager::render()
 		_hpUI.hpBgImg->render(_hpUI.hpBg.getCenter(), _hpUI.hpBg.getSize());
 		float hpRatio = (static_cast<float>(_player->getCurrHp()) / _player->getMaxHp());
 		float width = (_hpUI.hpBar.getSize().x) * hpRatio;
-		if (FLOAT_EQUAL(hpRatio, 1))
+		if (FLOAT_EQUAL(hpRatio, 1) || FLOAT_EQUAL(hpRatio, 0))
 		{
 			FloatRect hpBar = FloatRect(_hpUI.hpBar.left, _hpUI.hpBar.top, _hpUI.hpBar.left + width, _hpUI.hpBar.bottom);
 			_hpUI.hpBarImg->render(hpBar.getCenter(), hpBar.getSize());
@@ -410,6 +426,11 @@ void UIManager::render()
 			}
 		}
 
+		// Dialogue UI
+		if (_dialogueUI.isActive())
+		{
+			_dialogueUI.render();
+		}
 
 		// Inventory UI 
 		if (_inventoryUI.isActive())
@@ -484,3 +505,4 @@ void UIManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 	hpUI.currHp = curHp;
 	_enemyHpUI.push_back(hpUI);
 }
+

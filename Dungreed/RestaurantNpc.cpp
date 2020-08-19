@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "RestaurantNpc.h"
 #include "NpcManager.h"
+#include "UIManager.h"
 
 void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
 {
@@ -13,6 +14,10 @@ void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
+
+	_name = "호레리카";
+	_bodyDialogue = "가나다라마바사아자차카타파하";
+	_selectDialogues.push_back("식당");
 
 	_isActive = false;
 	_isClose = false;
@@ -42,13 +47,13 @@ void RestaurantNpc::update(float timeElapsed)
 	}
 	else
 	{
-
 	}
 
-	if (_isClose)
+	if (_isClose) // 플레이어랑 가까울 때
 	{
-		if(KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::INTERACTION)))
+		if(!_isActive && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::INTERACTION)))
 		{
+			_uiMgr->setDialogue(this);
 			_isActive = true;
 		}
 	}

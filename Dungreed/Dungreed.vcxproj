@@ -170,6 +170,7 @@
     <ClInclude Include="bombPouch.h" />
     <ClInclude Include="BossRoom1.h" />
     <ClInclude Include="BoomerangProjectile.h" />
+    <ClInclude Include="BreadFood.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="CameraShakeEvent.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="FloatCircle.h" />
     <ClInclude Include="FloatRect.h" />
+    <ClInclude Include="FluteGreatSword.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameNode.h" />
@@ -206,8 +208,10 @@
     <ClInclude Include="GreenBat.h" />
     <ClInclude Include="GreenDadBat.h" />
     <ClInclude Include="GreenMomBat.h" />
+    <ClInclude Include="GriffinEggOmeletteFood.h" />
+    <ClInclude Include="GrilledMushroomFood.h" />
     <ClInclude Include="HeartOfCosmos.h" />
-    <ClInclude Include="HeartOfCosmosProjectile.h" />
+    <ClInclude Include="AccProjectile.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -217,6 +221,7 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
+    <ClInclude Include="Lumber.h" />
     <ClInclude Include="MagicStick.h" />
     <ClInclude Include="MagnifyingGlass.h" />
     <ClInclude Include="MainScene.h" />
@@ -249,6 +254,7 @@
     <ClInclude Include="Punch.h" />
     <ClInclude Include="QuarterStaffBig.h" />
     <ClInclude Include="randomFunction.h" />
+    <ClInclude Include="RaspberryCookieFood.h" />
     <ClInclude Include="RedLotusCos.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RestaurantNpc.h" />
@@ -275,6 +281,7 @@
     <ClInclude Include="SkelSmallDagger.h" />
     <ClInclude Include="SkelSmallGsword.h" />
     <ClInclude Include="SoundManager.h" />
+    <ClInclude Include="SparklingWaterFood.h" />
     <ClInclude Include="SpikeBall.h" />
     <ClInclude Include="Stage.h" />
     <ClInclude Include="StageManager.h" />
@@ -283,9 +290,11 @@
     <ClInclude Include="StatUI.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ShortSword.h" />
+    <ClInclude Include="StrawberryPieFood.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TomatoSoupFood.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
@@ -312,6 +321,7 @@
     <ClCompile Include="bombPouch.cpp" />
     <ClCompile Include="BossRoom1.cpp" />
     <ClCompile Include="BoomerangProjectile.cpp" />
+    <ClCompile Include="BreadFood.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="CameraShakeEvent.cpp" />
@@ -338,6 +348,7 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="FloatCircle.cpp" />
     <ClCompile Include="FloatRect.cpp" />
+    <ClCompile Include="FluteGreatSword.cpp" />
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -346,8 +357,10 @@
     <ClCompile Include="GreenBat.cpp" />
     <ClCompile Include="GreenDadBat.cpp" />
     <ClCompile Include="GreenMomBat.cpp" />
+    <ClCompile Include="GriffinEggOmeletteFood.cpp" />
+    <ClCompile Include="GrilledMushroomFood.cpp" />
     <ClCompile Include="HeartOfCosmos.cpp" />
-    <ClCompile Include="HeartOfCosmosProjectile.cpp" />
+    <ClCompile Include="AccProjectile.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
@@ -356,6 +369,7 @@
     <ClCompile Include="KeresScythe.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
+    <ClCompile Include="Lumber.cpp" />
     <ClCompile Include="MagicStick.cpp" />
     <ClCompile Include="MagnifyingGlass.cpp" />
     <ClCompile Include="MainScene.cpp" />
@@ -384,6 +398,7 @@
     <ClCompile Include="ProgressBar.cpp" />
     <ClCompile Include="Punch.cpp" />
     <ClCompile Include="QuarterStaffBig.cpp" />
+    <ClCompile Include="RaspberryCookieFood.cpp" />
     <ClCompile Include="RedLotusCos.cpp" />
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="RestaurantNpc.cpp" />
@@ -409,6 +424,7 @@
     <ClCompile Include="SkelSmallDagger.cpp" />
     <ClCompile Include="SkelSmallGsword.cpp" />
     <ClCompile Include="SoundManager.cpp" />
+    <ClCompile Include="SparklingWaterFood.cpp" />
     <ClCompile Include="SpikeBall.cpp" />
     <ClCompile Include="Stage.cpp" />
     <ClCompile Include="StageManager.cpp" />
@@ -417,8 +433,10 @@
     <ClCompile Include="StatUI.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="ShortSword.cpp" />
+    <ClCompile Include="StrawberryPieFood.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TomatoSoupFood.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />

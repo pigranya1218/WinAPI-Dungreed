@@ -22,11 +22,13 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(DEFSPEED, 0.f);
 	_moving.gravity = Vector2(0, 4000);
-	_moving.delay = 0.2;
+	_moving.delay = 0.8;
 
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 1.5f;
 	_attack.distance = 100;	
+	_attack.circleSize = 200;
+	_attack.attackInit(10, 15, 3);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -35,6 +37,8 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_NORMAL);
 }
 
 void SkelBigNormal::release()
@@ -104,12 +108,28 @@ void SkelBigNormal::update(float const timeElapsed)
 				if (_attack.update(timeElapsed))
 				{
 					setState(ENEMY_STATE::ATTACK);
+					_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
 				}
 			}
 			break;
 		}
 		case ENEMY_STATE::ATTACK:
 		{
+			if (_ani->getPlayIndex() == 2)
+			{
+				Vector2 attackPos = _position;
+				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
+				attackPos.y += _size.y * 0.5f;
+
+				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (0);
+				float endRad = startRad + PI / 2;
+
+				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
+			}
+			else
+			{
+				_attack.id.clear();
+			}
 			if (!_ani->isPlay())
 			{
 				setState(ENEMY_STATE::MOVE);
@@ -148,9 +168,6 @@ void SkelBigNormal::update(float const timeElapsed)
 
 void SkelBigNormal::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);	
-
 	Vector2 drawPos = _position;
 	if (_state == ENEMY_STATE::ATTACK)
 	{
@@ -174,6 +191,8 @@ void SkelBigNormal::render()
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
+
+	_attack.circleDebug.render(true);
 }
 
 void SkelBigNormal::setState(ENEMY_STATE state)

@@ -2,15 +2,18 @@
 #include "Npc.h"
 
 class Stage;
+class UIManager;
 
 class NpcManager
 {
 private:
 	Stage* _stage;
+	UIManager* _uiMgr;
 	vector<Npc*> _npcs;
 
 public:
 	void setStage(Stage* stage) { _stage = stage; }
+	void setUIManager(UIManager* uiMgr) { _uiMgr = uiMgr; }
 
 	void init();
 	void release();

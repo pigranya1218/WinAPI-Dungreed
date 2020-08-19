@@ -25,7 +25,8 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 0), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
+	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
+	_shooting.attackInit(3, 5, 3);
 
 	_isDetect = 0;
 	_detectRange = 300.f;
@@ -33,6 +34,8 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100.f;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_GIANT_NORMAL);
 }
 
 void BatGiantNormal::release()
@@ -78,7 +81,7 @@ void BatGiantNormal::update(float const timeElapsed)
 					{
 						if (_shooting.delayUpdate(timeElapsed))
 						{
-							_shooting.fireBullet(_enemyManager, 3);
+							_shooting.fireBullet(_myEnemyType, _enemyManager, 3);
 						}
 					}
 					if (_attack.update(timeElapsed))
@@ -99,7 +102,7 @@ void BatGiantNormal::update(float const timeElapsed)
 			{
 				if (_shooting.delayUpdate(timeElapsed))
 				{
-					_shooting.fireBullet(_enemyManager, 3);
+					_shooting.fireBullet(_myEnemyType, _enemyManager, 3);
 				}				
 			}
 			if (!_ani->isPlay())

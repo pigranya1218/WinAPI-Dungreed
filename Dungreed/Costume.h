@@ -39,7 +39,7 @@ public:
 	virtual void init() = 0;
 	virtual void release() = 0;
 	virtual void update(float elaspedTime) = 0;
-	virtual void render(Vector2 pos, DIRECTION dir) = 0;
+	virtual void render(Vector2 pos, DIRECTION dir, bool isAlpha) = 0;
 	virtual void setSprite(PLAYER_STATE state, bool isForced) = 0;	// 애니메이션을 재생시킬 함수
 	
 	PlayerStat const getBaseStat() { return _baseStat + _differStat; } // 코스튬의 기본 스탯을 반환

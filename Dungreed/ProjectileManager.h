@@ -26,6 +26,6 @@ public:
 	void addProjectile(Projectile* projectile) { projectile->setProjectileManager(this); _projectiles.push_back(projectile); }
 
 	bool checkEnemyCollision(Projectile* projectile, bool isOnceCollision); // isOnceCollision : ÇÑ ³à¼®ÀÌ ºÎµúÈ÷¸é »ç¶óÁü
-	bool checkPlayerCollision(Projectile* projectile);
+	bool checkPlayerCollision(Projectile* projectile, bool isOnceCollision);
 };
 

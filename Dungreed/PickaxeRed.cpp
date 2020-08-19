@@ -16,8 +16,7 @@ void PickaxeRed::init()
 
 	_addStat.minDamage = 5;
 	_addStat.maxDamage = 15;
-	_addStat.attackSpeed = 0.1;
-	//_addStat.attackSpeed = 5.56;
+	_addStat.attackSpeed = 0.12;
 	//보조옵션
 	_addStat.defense = -30;
 	_addStat.power = -30;
@@ -26,7 +25,7 @@ void PickaxeRed::init()
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
-	_oneAttack = true;
+	_oneAttack = false;
 	_angleOffset = 0;
 	_width =  _img->getWidth();
 	_height =  _img->getHeight();
@@ -39,11 +38,11 @@ void PickaxeRed::release()
 
 void PickaxeRed::update(Player* player, float const elapsedTime)
 {
-	float ratio = 180 / (1 / _addStat.attackSpeed / 2);
+	float ratio = 180 / (_adjustStat.attackSpeed * 0.4) / 2;
 
 	if (_oneAttack)
-	{	
-		_angleOffset = max(0, (_angleOffset) - (elapsedTime * ratio));
+	{
+		_angleOffset = max(-180, (_angleOffset) - (elapsedTime * ratio));
 		if (_angleOffset == -180)
 		{
 			_oneAttack = false;
@@ -56,7 +55,7 @@ void PickaxeRed::update(Player* player, float const elapsedTime)
 			_angleOffset = min(0, (_angleOffset) + (elapsedTime * ratio));
 		}
 	}
-	
+
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
@@ -205,7 +204,9 @@ void PickaxeRed::attack(Player* player)
 	// 손으로부터 마우스 에임까지의 각도
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_drawEffect = true;
-	_currAttackDelay = _addStat.attackSpeed;
+	_currAttackDelay = _adjustStat.attackSpeed;
+
+	
 }
 
 void PickaxeRed::attack(FloatRect* rect, AttackInfo* info)

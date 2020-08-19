@@ -1,4 +1,5 @@
 #include "Room1R.h"
+#include "StageManager.h"
 
 void Room1R::init()
 {

@@ -1,31 +1,19 @@
 #include "stdafx.h"
 #include "CameraShakeEvent.h"
 
-void CameraShakeEvent::processEvent()
+void CameraShakeEvent::processEvent(float elapsedTime)
 {
-	if (_direction == DIRECTION::LEFT)
-	{
-		// CAMERA_MANAGER->movePivot(0, _power);
-		_direction = DIRECTION::RIGHT;
-	}
-	else
-	{
-		_direction = DIRECTION::LEFT;
-	}
-
 	if (_elapsedTime < 0)
 	{
-		_elapsedTime = _shakePerTime;
-		if (_direction == DIRECTION::LEFT)
+		if (CONFIG_MANAGER->isCameraShake())
 		{
-			_direction = DIRECTION::RIGHT;
+
+			Vector2 moveForce = Vector2(RANDOM->getFromFloatTo(-_power, _power), RANDOM->getFromFloatTo(-_power, _power));
+			CAMERA->movePivot(moveForce);
 		}
-		else
-		{
-			_direction = DIRECTION::LEFT;
-		}
+		_elapsedTime = 0.05;
 	}
 
-	_elapsedTime -= TIME_MANAGER->getElapsedTime();
-	_remainTime -= TIME_MANAGER->getElapsedTime();
+	_elapsedTime -= elapsedTime;
+	_remainTime -= elapsedTime;
 }

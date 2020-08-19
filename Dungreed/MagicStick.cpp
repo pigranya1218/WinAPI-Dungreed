@@ -13,13 +13,13 @@ void MagicStick::init()
 	_addStat.minDamage = 13;
 	_addStat.maxDamage = 20;
 	_addStat.attackSpeed = 2;
+	_addStat.reloadSpeed = 1;
+
 
 	// private 변수 설정
-	_baseAttackDelay = 0;
 	_currAttackDelay = 0;
 	_maxBullet = 12;
 	_currBullet = _maxBullet;
-	_baseReloadDelay = 2;
 	_currReloadDelay = 0;
 
 	//재장전 애니메이션
@@ -125,7 +125,7 @@ void MagicStick::frontRender(Player * player)
 	// 재장전 중이라면 재장전 UI를 그린다.
 	if (_currReloadDelay > 0)
 	{
-		float ratio = _currReloadDelay / _baseReloadDelay;
+		float ratio = _currReloadDelay / _adjustStat.reloadSpeed;
 		FloatRect reloadBar = FloatRect(Vector2(pos.x, pos.y - 60), Vector2(92, 4), PIVOT::CENTER);
 		FloatRect reloadHandle = FloatRect(Vector2(reloadBar.right - ratio * reloadBar.getSize().x, reloadBar.getCenter().y), Vector2(8, 12), PIVOT::CENTER);
 		IMAGE_MANAGER->findImage("ReloadBar")->render(CAMERA->getRelativeV2(reloadBar.getCenter()), reloadBar.getSize());
@@ -150,7 +150,7 @@ void MagicStick::attack(Player * player)
 	{
 		if (_currReloadDelay == 0) // 재장전 중이 아니라면
 		{
-			_currReloadDelay = _baseReloadDelay; // 재장전 함
+			_currReloadDelay = _adjustStat.reloadSpeed; // 재장전 함
 		}
 		return;
 	}
@@ -177,17 +177,18 @@ void MagicStick::attack(Player * player)
 
 	projectile = new NormalProjectile;
 	projectile->setPosition(shootPos);
-	projectile->setSize(Vector2(_bulletImg->getFrameSize().x * 4, _bulletImg->getFrameSize().y * 4));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 
+	Vector2 bulletSize = Vector2(_bulletImg->getFrameSize().x * 4, _bulletImg->getFrameSize().y * 4);
+	Vector2 bulletRect = Vector2(_bulletImg->getFrameSize().x, _bulletImg->getFrameSize().x);
 
 	//projectile->init("lalaStickBullet", angleRadian, 30 * 1, true, false, 3, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("lalaStickBullet", "", Vector2(), Vector2(30 * 1, 30 * 1), 3, true, false, false, 10, true, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+	projectile->init("lalaStickBullet", "L_Effect_lalaStick", bulletRect, bulletSize, Vector2(30 * 10, 30 * 10), 3, angleRadian, true, true, 10, true, false, false, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);
-	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
+	_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임
 	_drawEffect = true; // 이펙트 그리기
 }
@@ -209,7 +210,7 @@ void MagicStick::reload(Player * player)
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currReloadDelay == 0) // 재장전 중이 아니라면
 	{
-		_currReloadDelay = _baseReloadDelay; // 재장전 함
+		_currReloadDelay = _adjustStat.reloadSpeed; // 재장전 함
 	}
 }
 
@@ -219,6 +220,11 @@ void MagicStick::getHit(Vector2 const position)
 
 void MagicStick::equip(Player * player)
 {
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
+	_adjustStat.reloadSpeed = _addStat.reloadSpeed * ((100 - stat.reloadSpeed) / 100);
 }
 
 wstring MagicStick::getBulletUI()
@@ -228,5 +234,5 @@ wstring MagicStick::getBulletUI()
 
 float MagicStick::getBulletRatio()
 {
-	return _currReloadDelay / _baseReloadDelay;
+	return _currReloadDelay / _adjustStat.reloadSpeed;
 }

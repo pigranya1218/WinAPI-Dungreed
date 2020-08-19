@@ -40,6 +40,7 @@ public:
 	void moveEnemy(GameObject* object, const Vector2 moveDir, bool collisionGround = 1, bool collisionPlatForm = 1);	// 에너미 이동
 	bool detectPlayer(GameObject* object, const float distance);														// 에너미 플레이어 감지
 	void fireEnemy(Projectile* projectile, AttackInfo* attackInfo);														// 에너미 불릿
+	Vector2 getEnemyPos(const Vector2& pos);
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();

@@ -8,6 +8,7 @@ void Stage::init()
 
 	_npcMgr = new NpcManager;
 	_npcMgr->setStage(this);
+	_npcMgr->setUIManager(_uiManager);
 
 	_enemyMgr = new EnemyManager;
 	_enemyMgr->setStage(this);
@@ -35,7 +36,11 @@ void Stage::update(float const elaspedTime)
 	_objectMgr->update(elaspedTime);
 	_npcMgr->update(elaspedTime);
 	_enemyMgr->update(elaspedTime);
-	
+
+	int stageWidth = _tile[0].tileX * TILESIZE;
+	int stageHeight = _tile[0].tileY * TILESIZE;
+	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
+	CAMERA->setXY(_stageManager->getPlayerPos());
 }
 
 void Stage::render()
@@ -68,11 +73,6 @@ void Stage::render()
 	{
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
 	}
-
-	int stageWidth = _tile[0].tileX * TILESIZE;
-	int stageHeight = _tile[0].tileY * TILESIZE;
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
-	CAMERA->setXY(_stageManager->getPlayerPos());
 
 	_objectMgr->render();
 	_npcMgr->render();
@@ -518,9 +518,9 @@ bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 	return _enemyMgr->isHit(circle, info);
 }
 
-bool Stage::isHitPlayer(Projectile * projectile)
+bool Stage::isHitPlayer(Projectile * projectile, bool isOnceCollision)
 {
-	if (_player->isHit(projectile))
+	if (_player->isHit(projectile, isOnceCollision))
 	{
 		return _player->hitEffect(projectile);
 	}
@@ -530,6 +530,11 @@ bool Stage::isHitPlayer(Projectile * projectile)
 Vector2 Stage::getPlayerPos()
 {
 	return _stageManager->getPlayerPos();
+}
+
+Vector2 Stage::getEnemyPos(const Vector2 & pos)
+{
+	return _enemyMgr->getEnemyPos(pos);
 }
 
 void Stage::showDamage(DamageInfo info, Vector2 pos)

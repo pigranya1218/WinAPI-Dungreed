@@ -26,12 +26,15 @@ private:
 	Stage* _currStage; // 현재 스테이지 
 	
 	Stage* _stage;
+	Stage* _stage2;
+
 	Stage* _downStair;
 	Stage* _restaurantRoom;
 	Stage* _shopRoom;
 
 	int _roomIndex;
 	int _currIndexX, _currIndexY;
+
 	int k;
 	int l;
 	
@@ -73,6 +76,9 @@ public:
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
 	void setPlayerPos(int x, int y);
+
+	//랜덤맵만들기
+	void makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<vector<bool>> isMadeRoom);
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);

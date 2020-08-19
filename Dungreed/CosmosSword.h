@@ -11,6 +11,7 @@ private:
 	Vector2 _attackMove;
 	float _baseAttackDelay; // 공격 쿨타임
 	float _currAttackDelay; // 남은 공격 쿨타임
+	Vector2 renderPosWeapon;
 	float _attackAngle;
 	float _angleOffset;
 	bool _reverseMove;
@@ -21,7 +22,7 @@ private:
 	Animation* _ani;
 	float _width;
 	float _height;
-
+	
 	FloatCircle _attackDebug;
 
 public:

@@ -16,6 +16,9 @@ class Stage
 {
 protected:
 	StageManager* _stageManager;
+	UIManager* _uiManager;
+	Player* _player;
+
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	
 	tagTileMap _tile[MAXTILEX*MAXTILEY];
@@ -32,7 +35,6 @@ protected:
 	
 	bool _isVisited; // 방문한 스테이지인가? (UI 지도에서 그리기 위함)
 
-	Player* _player;
 
 	vector<DIRECTION> _direction;
 	vector<DIRECTION>::iterator _viDirection;
@@ -41,6 +43,8 @@ protected:
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
+	void setUIManager(UIManager* uiManager) { _uiManager = uiManager; }
+	void setPlayer(Player* player) { _player = player; }
 	virtual void init();
 	virtual void release();
 	virtual void update(float const elaspedTime);
@@ -61,11 +65,12 @@ public:
 	bool isHitEnemy(FloatRect* rc, AttackInfo* info);
 	bool isHitEnemy(FloatCircle* circle, AttackInfo* info);
 
-	bool isHitPlayer(Projectile* projectile);
+	bool isHitPlayer(Projectile* projectile, bool isOnceCollision);
 
 	inline Stage* getConnectedStage( DIRECTION const direction ) const { return _connectedStage[static_cast<int> (direction)];}
 	bool isVisited() const { return _isVisited; }
 	Vector2 getPlayerPos();
+	Vector2 getEnemyPos(const Vector2& pos);
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);

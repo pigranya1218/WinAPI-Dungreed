@@ -2,11 +2,13 @@
 #include "Enemy.h"
 #include "EnemyManager.h"
 
-void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCount)
+void Enemy::tagShootingInfo::fireBullet(int enemyCode, EnemyManager * enemyManager, int fireCount)
 {
 	if (bullets.empty()) return;
 
 	int fireLoop = (fireCount == 0) ? (bullets.size()) : (fireCount);
+	string attackCode = to_string(enemyCode) + to_string(TIME_MANAGER->getWorldTime());
+	size_t attackId = TTYONE_UTIL::getHash(attackCode);
 
 	// 생성해놓은 총알을
 	for (int i = 0; i < fireLoop; i++)
@@ -14,11 +16,12 @@ void Enemy::tagShootingInfo::fireBullet(EnemyManager * enemyManager, int fireCou
 		// 발사한다.
 		if (!bullets.empty())
 		{
-			AttackInfo* attackInfo = new AttackInfo;			
-			attackInfo->minDamage = minDamage;
-			attackInfo->maxDamage = maxDamage;
-			attackInfo->trueDamage = trueDamage;
-			attackInfo->knockBack = knockBack;
+			AttackInfo* attackInfo = new AttackInfo;	
+			attackInfo->attackID = attackId;
+			attackInfo->minDamage = info.minDamage;
+			attackInfo->maxDamage = info.maxDamage;
+			attackInfo->trueDamage = info.trueDamage;
+			attackInfo->knockBack = info.knockBack;
 			attackInfo->team = OBJECT_TEAM::ENEMY;
 
 			enemyManager->fireEnemy(bullets[bullets.size() - 1], attackInfo);
@@ -188,4 +191,41 @@ bool Enemy::hitEffect(Projectile * projectile)
 	_curHp = max(0, _curHp - (damageInfo.damage + damageInfo.trueDamage));
 
 	return true;
+}
+
+void Enemy::tagAttackInfo::attackCircle(int enemyCode, EnemyManager * enemyManager, const Vector2& pos, const float startRad, const float endRad)
+{
+	FloatCircle* circle = new FloatCircle;
+	AttackInfo* attackInfo = new AttackInfo;
+
+	circle->origin = pos;
+	circle->size = 200;
+	circle->startRadian = startRad;
+	circle->endRadian = endRad;
+
+	attackInfo->team = OBJECT_TEAM::ENEMY;
+	attackInfo->minDamage = info.minDamage;
+	attackInfo->maxDamage = info.maxDamage;
+	attackInfo->knockBack = info.knockBack;
+	attackInfo->trueDamage = info.trueDamage;
+	attackInfo->critical = info.critical;
+	attackInfo->criticalDamage = info.criticalDamage;
+
+	if (id.empty())
+	{
+		id = to_string(enemyCode) + to_string(TIME_MANAGER->getWorldTime());
+	}
+	attackInfo->attackID = TTYONE_UTIL::getHash(id);
+
+	circleDebug = FloatCircle(pos, circleSize, startRad, endRad);
+
+	enemyManager->attack(circle, attackInfo);
+
+	SAFE_DELETE(circle);
+	SAFE_DELETE(attackInfo);
+}
+
+void Enemy::tagAttackInfo::attackRect()
+{
+
 }

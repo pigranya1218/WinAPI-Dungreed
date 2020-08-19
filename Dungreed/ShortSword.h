@@ -16,6 +16,7 @@ private:
 	bool _reverseMove;
 	bool _drawEffect;
 	bool _oneAttack;
+	
 	FloatRect _hand;
 	Vector2 _handSize;
 	

@@ -7,25 +7,28 @@ private:
 	int _minDamage;
 	int _maxDamage;
 
-	float _baseAttackDelay; // 공격 쿨타임
 	float _currAttackDelay; // 남은 공격 쿨타임
 	int _maxBullet; // 최대 총알 갯수
 	int _currBullet; // 현재 총알 갯수
-	float _baseReloadDelay; // 재장전 쿨타임
 	float _currReloadDelay; // 남은 재장전 쿨타임
 	bool _drawEffect; // 이번 render 함수에서 이펙트를 시작할 것인지 판단
 
 	bool _isAttack;
+	bool _isFrameUpdate;
+	float _frameTimeCount;
 	float _chargeDelay;
 	float _effectAngleRadianValue;
 	Image* _img;
 	Animation* _ani;
+	
+	int _effectCount;
+	int _frameCount;
+	int _timeCount;
+public:
 	Vector2 renderPosHand;
 	Vector2 renderPosWeapon;
 	Vector2 anglePos;
 	Vector2 subHandPos;
-	int effectCount;
-public:
 
 	virtual void init();
 	virtual void release();
@@ -42,4 +45,6 @@ public:
 	virtual void getHit(Vector2 const position); // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
 	virtual void equip(Player* player); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
+	//virtual wstring getBulletUI() override;
+	virtual float getBulletRatio() override;
 };

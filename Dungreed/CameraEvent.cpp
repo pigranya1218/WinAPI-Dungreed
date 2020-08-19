@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "CameraEvent.h"
 
-void CameraEvent::processEvent()
+void CameraEvent::processEvent(float elapsedTime)
 {
 }

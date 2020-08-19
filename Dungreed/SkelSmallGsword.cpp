@@ -31,6 +31,7 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 	_attack.distance = 100;
+	
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
@@ -40,6 +41,8 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_GSWORD);
 }
 
 void SkelSmallGsword::release()

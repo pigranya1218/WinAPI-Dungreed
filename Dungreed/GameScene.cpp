@@ -7,21 +7,23 @@ HRESULT GameScene::init()
 	CAMERA->setLT(Vector2(0, 0));
 
 	_timeSpeed = 1;
+	
 	_player = new Player;
-	_player->init();
 	_player->setGameScene(this);
-
-	_stageMgr = new StageManager;
-	_stageMgr->init();
-	_stageMgr->setGameScene(this);
-	_stageMgr->setPlayer(_player);
+	_player->init();
 
 	_uiMgr = new UIManager;
-	_uiMgr->init();
-	_uiMgr->setGameScene(this);
 	_uiMgr->setPlayer(_player);
-	_uiMgr->setStageManager(_stageMgr);
+	_uiMgr->setGameScene(this);
+	_uiMgr->init();
+	
+	_stageMgr = new StageManager;
 	_stageMgr->setUIManager(_uiMgr);
+	_stageMgr->setPlayer(_player);
+	_stageMgr->setGameScene(this);
+	_stageMgr->init();
+
+	_uiMgr->setStageManager(_stageMgr);
 
 
 	return S_OK;
@@ -50,8 +52,7 @@ void GameScene::update()
 	_stageMgr->update(elapsedTime);
 	_player->update(elapsedTime);
 	EFFECT_MANAGER->update(elapsedTime);
-	CAMERA->setXY(_player->getPosition());
-	
+	CAMERA->processEvent(elapsedTime);
 	_uiMgr->update(elapsedTime);
 }
 
@@ -60,7 +61,6 @@ void GameScene::render()
 	_stageMgr->render();
 	_player->render();
 	EFFECT_MANAGER->render();
-
 	_uiMgr->render();
 
 	if (_uiMgr->isActive())

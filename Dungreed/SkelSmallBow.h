@@ -11,6 +11,8 @@ private:
 
 	Image*			_handImg;		// 손 이미지
 
+	bool			_attacking;		// 공격 판단용
+
 public:
 	void init(const Vector2& pos, DIRECTION direction);
 	void release();

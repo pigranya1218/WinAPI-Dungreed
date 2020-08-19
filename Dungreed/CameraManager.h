@@ -5,7 +5,7 @@
 class CameraManager : public SingletonBase<CameraManager>
 {
 private:
-	queue<CameraEvent*> _eventQueue;
+	vector<CameraEvent*> _eventList;
 
 	float _offsetL, _offsetT; // 카메라 LEFT, TOP을 그리기 시작할 윈도우 위치 
 	
@@ -31,8 +31,8 @@ public:
 
 	HRESULT init();
 	void release();
-	void processEvent();
-	void pushShakeEvent(float power, float shakePerTime, float remainTime);
+	void processEvent(float elapsedTime);
+	void pushShakeEvent(float power, float remainTime);
 
 	void setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT);
 	void setConfigCenter(float x, float y, float width, float height, float minX, float minY, float maxX, float maxY);

@@ -5,6 +5,7 @@ class PowerKatana : public Item
 private:
 	// 공격 관련
 	Image* _img;
+	Image* _imgAttack;
 	Image*	_effect;
 	int	_minDamage;
 	int _maxDamage;

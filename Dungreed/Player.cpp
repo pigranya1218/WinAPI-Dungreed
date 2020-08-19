@@ -14,6 +14,8 @@
 #include "PowerKatana.h"
 #include "QuarterStaffBig.h"
 #include "BigPaintBlush.h"
+#include "Lumber.h"
+#include "FluteGreatSword.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -167,6 +169,7 @@ void Player::init()
 	_currHp = 40;
 	_currSatiety = 30;
 	_currGold = 1000;
+	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
 	// TEST ITEM
@@ -179,9 +182,9 @@ void Player::init()
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
-	GreenBat* testAcc2 = new GreenBat;
-	testAcc2->init();
-	_inventory[1] = testAcc2;
+	//GreenBat* testAcc2 = new GreenBat;
+	//testAcc2->init();
+	//_inventory[1] = testAcc2;
 
 
 	GreenDadBat* testAcc3 = new GreenDadBat;
@@ -199,9 +202,9 @@ void Player::init()
 	_inventory[8] = testAcc9;
 
 
-	//bombPouch* testAcc5 = new bombPouch;
-	//testAcc5->init();
-	//_inventory[5] = testAcc5;
+	bombPouch* testAcc5 = new bombPouch;
+	testAcc5->init();
+	_inventory[6] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
@@ -219,7 +222,7 @@ void Player::init()
 	//_inventory[8] = testAcc8;
 	//
 	
-	MagnifyingGlass* testAcc10 = new MagnifyingGlass;
+	QuarterStaffBig* testAcc10 = new QuarterStaffBig;
 	testAcc10->init();
 	_inventory[9] = testAcc10;
 
@@ -229,7 +232,7 @@ void Player::init()
 
 	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
 	testAcc12->init();
-	_inventory[6] = testAcc12;
+	_inventory[9] = testAcc12;
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
@@ -239,16 +242,25 @@ void Player::init()
 	testAcc14->init();
 	_inventory[0] = testAcc14;
 
+	Voluspa* testAcc16 = new Voluspa;
+	testAcc16->init();
+	_inventory[1] = testAcc16;
+
+
 	BigPaintBlush* testAcc15 = new BigPaintBlush;
 	testAcc15->init();
 	_inventory[7] = testAcc15;
 
+	/*OakBow* testAcc11 = new OakBow;
+	testAcc11->init();
+	_inventory[10] = testAcc11;
+*/
 	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
 	_inventory[11] = testWeapon1;
 	*/
 
-	MartialArtOfTiger* testWeapon2 = new MartialArtOfTiger;
+	PickaxeRed* testWeapon2 = new PickaxeRed;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
@@ -256,21 +268,33 @@ void Player::init()
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
-	PowerKatana* testWeapon4 = new PowerKatana;
+	/*PickaxeRed* testWeapon4 = new PickaxeRed;
 	testWeapon4->init();
-	_inventory[13] = testWeapon4;
+	_inventory[13] = testWeapon4;*/
 
 	/*BigPaintBlush* testWeapon5 = new BigPaintBlush;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	GatlingGun* testWeapon5 = new GatlingGun;
+	/*FluteGreatSword* testWeapon5 = new FluteGreatSword;
 	testWeapon5->init();
-	_inventory[14] = testWeapon5;
+	_inventory[14] = testWeapon5;*/
 
-	//MagicStick* testWeapon5 = new MagicStick;
-	//testWeapon5->init();
-	//_inventory[14] = testWeapon5;
+	MagicStick* testWeapon5 = new MagicStick;
+	testWeapon5->init();
+	_inventory[13] = testWeapon5;
+
+	/*Boomerang* testweapon5 = new Boomerang;
+	testweapon5->init();
+	_inventory[14] = testweapon5;*/
+
+	/*MatchLockGun* testWeapon6 = new MatchLockGun;
+	testWeapon6->init();
+	_inventory[14] = testWeapon6;*/
+
+	/*GatlingGun* testWeapon6 = new GatlingGun;
+	testWeapon6->init();
+	_inventory[14] = testWeapon6;*/
 
 	_hand = new Punch;
 	_hand->init();
@@ -530,6 +554,11 @@ void Player::update(float const elapsedTime)
 			_equippedAcc[i]->update(this, elapsedTime);
 		}
 	}
+
+	if (_currHitTime > 0)
+	{
+		_currHitTime = max(0, _currHitTime - elapsedTime);
+	}
 }
 
 void Player::render()
@@ -554,7 +583,7 @@ void Player::render()
 	}
 
 	// 캐릭터 그리기
-	_costume->render(CAMERA->getRelativeV2(_position), _direction);
+	_costume->render(CAMERA->getRelativeV2(_position), _direction, (_currHitTime > 0));
 
 	// 캐릭터 앞에 그리기
 	for (int i = 0; i < 4; i++)
@@ -572,6 +601,18 @@ void Player::render()
 	{
 		_hand->frontRender(this);
 	}
+
+	if (_currHitTime > 0)
+	{
+		if (_currHitTime < 0.25)
+		{
+			IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->setAlpha((_currHitTime / 0.25));
+			IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->setAlpha((_currHitTime / 0.25));
+		}
+		IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->render(Vector2(WINSIZEX * 0.25f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
+		IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->render(Vector2(WINSIZEX * 0.75f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
+	}
+
 
 	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }
@@ -631,10 +672,10 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 	if (alreadyAttacked) return false; // 이미 피격처리한 공격이라면 피격 처리 안함
 
 	// [2] 피격 판정이 이루어져야하는지 검사
-	FloatRect enemyRc = FloatRect(_position, _size, PIVOT::CENTER);
+	FloatRect playerRc = FloatRect(_position, _size, PIVOT::CENTER);
 	FloatCircle attackCircle = FloatCircle(circle->origin, circle->size, circle->startRadian, circle->endRadian);
 
-	if (!attackCircle.intersect(enemyRc)) // 호와 사각형의 충돌 검사 함수
+	if (!attackCircle.intersect(playerRc)) // 호와 사각형의 충돌 검사 함수
 	{
 		return false; // 피격 판정이 아니므로 피격 처리 안함
 	}
@@ -648,8 +689,10 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }
 
-bool Player::isHit(Projectile* projectile)
+bool Player::isHit(Projectile* projectile, bool isOnceCollision)
 {
+	// TODO : 먼저 악세사리들에 대해서 검사해준다.
+
 	// 2가지 검사를 함
 	// 1. 이미 피격 처리를 한 공격인지에 대해 검사
 	// 2. 공격 호과 Enemy 렉트의 충돌 여부
@@ -687,17 +730,30 @@ bool Player::isHit(Projectile* projectile)
 
 bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 {
-	return false;
+	DamageInfo damageInfo = info->getDamageInfo();
+	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+	_currHitTime = 0.5;
+	CAMERA->pushShakeEvent(25, 0.25);
+	return true;
 }
 
 bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
+	DamageInfo damageInfo = info->getDamageInfo();
+	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+	_currHitTime = 0.5;
+	CAMERA->pushShakeEvent(25, 0.25);
 	return false;
 }
 
 bool Player::hitEffect(Projectile* projectile)
 {
-	return false;
+	AttackInfo* info = projectile->getAttackInfo();
+	DamageInfo damageInfo = info->getDamageInfo();
+	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+	_currHitTime = 0.5;
+	CAMERA->pushShakeEvent(25, 0.25);
+	return true;
 }
 
 Image* Player::getWeaponImg(int index) const
