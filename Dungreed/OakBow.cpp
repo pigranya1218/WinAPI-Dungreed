@@ -11,21 +11,20 @@ void OakBow::init()
 	_displayText = L"\"단단해서 때리는 데 쓸 수도 있을 것 같습니다.\"";
 
 	// 기본 보조옵션
-	_addStat.attackSpeed = 3.03;
-	_addStat.minDamage = 20;
-	_addStat.maxDamage = 35;
+	
+	_addStat.attackSpeed = 1;
+	_addStat.reloadSpeed = 0.1;
 
 	_price = 360;
 
 	// private 변수 설정
-	_baseAttackDelay = 0.1;
 	_currAttackDelay = 0;
 	_maxBullet = 1;
 	_currBullet = _maxBullet;
-	_baseReloadDelay = 0.0001f;
 	_currReloadDelay = 0;
 	_drawEffect = false;
 	_isAttack = false;
+	_isFrameUpdate = false;
 	_effectCount = 0;
 	_frameCount = 0;
 	_timeCount = 0;
@@ -42,7 +41,7 @@ void OakBow::release()
 
 void OakBow::update(Player * player, float const elapsedTime)
 {
-
+	_frameTimeCount = elapsedTime;
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
@@ -101,6 +100,10 @@ void OakBow::update(Player * player, float const elapsedTime)
 
 	if (_isAttack)
 	{
+		//_ani->setFPS(1);
+		//_ani->setPlayFrame(0, 4, false);
+		//_ani->start();
+
 		//떼면 공격
 		if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 		{
@@ -109,7 +112,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 			{
 				if (_currReloadDelay == 0) // 재장전 중이 아니라면
 				{
-					_currReloadDelay = _baseReloadDelay; // 재장전 함
+					_currReloadDelay = _adjustStat.reloadSpeed; // 재장전 함
 				}
 				return;
 			}
@@ -151,25 +154,30 @@ void OakBow::update(Player * player, float const elapsedTime)
 			attackInfo->knockBack = 0;
 
 			player->attack(projectile, attackInfo);
-			_currAttackDelay = _baseAttackDelay;	// 공격 쿨타임 설정
+			_currAttackDelay = _adjustStat.attackSpeed;	// 공격 쿨타임 설정
 			_currBullet -= 1;						// 탄환 1 줄임
 
 			if (_isAttack)
 			{
 				_isAttack = false;
-				if (_frameCount >= 3)
-				{
-					_frameCount++;
-					if (_frameCount > 5)
-					{
-						_frameCount = 0;
-					}
-				}
+				_isFrameUpdate = true;
+				_frameCount = 0;
 			}
 		}
-
-		/**/
 	}
+
+	/*if (_isFrameUpdate)
+	{
+		if (_frameCount == 3)
+		{
+			_frameCount++;
+			if (_frameCount == 5)
+			{
+				_frameCount = 0;
+				_isFrameUpdate = false;
+			}
+		}
+	}*/
 }
 
 void OakBow::backRender(Player * player)
@@ -198,15 +206,20 @@ void OakBow::frontRender(Player * player)
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
 	_img->setAnglePos(anglePos);
-
-	if (_isAttack)
+	
+	if (!_ani->isPlay())
 	{
 		_img->frameRender(CAMERA->getRelativeV2(renderPosWeapon), _frameCount, 0, isLeft);
 	}
-	if (!_isAttack)
+
+	if (_ani->isPlay())
 	{
 		_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
 	}
+
+	/*if (!_isAttack)
+	{
+	}*/
 
 	//손 그리기 어케해야하누...음...
 	Vector2 renderSunHandPos = subHandPos;
@@ -222,9 +235,8 @@ void OakBow::frontRender(Player * player)
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
 
 	//이펙트
-	if (_drawEffect)
+	if (_effectCount == 1)
 	{
-		_drawEffect = false;
 		Vector2 effectPos01 = renderPosHand; // 손의 위치로부터
 
 		Vector2 effectSize01 = Vector2(50, 50);
@@ -242,21 +254,24 @@ void OakBow::displayInfo()
 
 void OakBow::attack(Player * player)
 {
-	if (!_isAttack)
-	{
-		_isAttack = true;
-	}
-
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currBullet == 0) // 총알이 없다면
 	{
 		if (_currReloadDelay == 0) // 재장전 중이 아니라면
 		{
-			_currReloadDelay = _baseReloadDelay; // 재장전 함
+			_currReloadDelay = _adjustStat.reloadSpeed; // 재장전 함
 		}
 		return;
 	}
-	
+
+	if (!_isAttack)
+	{
+		_isAttack = true;
+	}
+
+	_addStat.minDamage = 20;
+	_addStat.maxDamage = 25;
+
 	_timeCount++;
 	if (_timeCount == 10)
 	{
@@ -266,18 +281,11 @@ void OakBow::attack(Player * player)
 	if (_frameCount >= 3)
 	{
 		_frameCount = 3;
+		_effectCount++;
+
+		_addStat.minDamage = 30;
+		_addStat.maxDamage = 35;
 	}
-
-	//_ani->setFPS(1);
-	//_ani->setPlayFrame(0, 4, false);
-	//_ani->start();
-
-	//if (_frameCount >= 3)
-	//{
-	//	_drawEffect = true;						// 이펙트 그리기
-	//}
-
-	
 }
 
 void OakBow::attack(FloatRect * rect, AttackInfo * info)
@@ -298,4 +306,14 @@ void OakBow::getHit(Vector2 const position)
 
 void OakBow::equip(Player* player)
 {
+	PlayerStat stat = player->getCurrStat();
+	_adjustStat = _addStat;
+	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
+	_adjustStat.reloadSpeed = _addStat.reloadSpeed * ((100 - stat.reloadSpeed) / 100);
+}
+
+float OakBow::getBulletRatio()
+{
+	return _currReloadDelay / _adjustStat.reloadSpeed;
 }

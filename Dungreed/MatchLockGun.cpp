@@ -17,7 +17,6 @@ void MatchLockGun::init()
 	_displayText = L"\"비가 오면 사용할 수 없는 총\"";
 
 	// 기본 보조옵션
-	//_addStat.dashDamage = 20;
 	_addStat.minDamage = 30;
 	_addStat.maxDamage = 40;
 	_addStat.attackSpeed = 1;

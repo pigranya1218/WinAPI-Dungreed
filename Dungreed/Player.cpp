@@ -268,9 +268,9 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	MatchLockGun* testWeapon5 = new MatchLockGun;
-	testWeapon5->init();
-	_inventory[14] = testWeapon5;
+	//MatchLockGun* testWeapon5 = new MatchLockGun;
+	//testWeapon5->init();
+	//_inventory[14] = testWeapon5;
 
 
 	_hand = new Punch;
