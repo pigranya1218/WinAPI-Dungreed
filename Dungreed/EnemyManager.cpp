@@ -11,8 +11,7 @@ void EnemyManager::release()
 	for (int i = 0; i < _enemies.size(); i++)
 	{
 		_enemies[i]->release();
-
-		//SAFE_DELETE(_enemies[i]);
+		delete _enemies[i];
 	}
 }
 
@@ -218,6 +217,16 @@ void EnemyManager::fireEnemy(Projectile * projectile, AttackInfo * attackInfo)
 Vector2 EnemyManager::getPlayerPos()
 {
 	return _stage->getPlayerPos();
+}
+
+void EnemyManager::attack(FloatRect * rc, AttackInfo * info)
+{
+	_stage->attack(rc, info);
+}
+
+void EnemyManager::attack(FloatCircle * circle, AttackInfo * info)
+{
+	_stage->attack(circle, info)
 }
 
 bool EnemyManager::isHit(FloatRect* rc, AttackInfo* info)

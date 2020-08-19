@@ -66,7 +66,10 @@ void StageManager::attack(FloatRect* rect, AttackInfo* info)
 	}
 	else
 	{
-		_player->isHit(rect, info);
+		if (_player->isHit(rect, info))
+		{
+			_player->hitEffect(rect, info);
+		}
 	}
 }
 
@@ -78,7 +81,10 @@ void StageManager::attack(FloatCircle* circle, AttackInfo* info)
 	}
 	else
 	{
-		_player->isHit(circle, info);
+		if (_player->isHit(circle, info))
+		{
+			_player->hitEffect(circle, info);
+		}
 	}
 }
 

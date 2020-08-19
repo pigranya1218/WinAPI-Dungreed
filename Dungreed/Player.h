@@ -19,6 +19,7 @@ private:
 
 	// 현재 상태
 	Costume* _costume;				// 현재 장착한 코스튬
+	vector<size_t>		_attackedId; // 최근 공격받았던 공격들의 아이디 값들을 저장하는 벡터, 최대 10칸 정도 저장하면 적당할 듯
 
 	int		_level;					// 현재 레벨
 	int		_currHp;				// 현재 체력
@@ -64,12 +65,12 @@ public:
 	// 피격 체크를 위해 호출
 	bool isHit(FloatRect* rc, AttackInfo* info);
 	bool isHit(FloatCircle* circle, AttackInfo* info);
-	bool isHit(Projectile* projectile, AttackInfo* info);
+	bool isHit(Projectile* projectile);
 
 	// 만약 피격되었다면 호출될 가상함수
 	bool hitEffect(FloatRect* rc, AttackInfo* info);
 	bool hitEffect(FloatCircle* circle, AttackInfo* info);
-	bool hitEffect(Projectile* projectile, AttackInfo* info);
+	bool hitEffect(Projectile* projectile);
 
 	// GETTER & SETTER
 	int getLevel() const noexcept { return _level; }
