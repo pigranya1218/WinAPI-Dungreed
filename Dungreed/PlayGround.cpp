@@ -211,9 +211,6 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("UI/RESTAURANT/TABLE", L"resources/images/gameScene/ui/restaurant/RestaurantTable3Frame.png", 3, 1);
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/GAUGE_BASE", L"resources/images/gameScene/ui/restaurant/AltarGaugeBase.png");
 
-	// **** FOOD IMAGE
-	IMAGE_MANAGER->addImage("FOOD/EGG_FRIED", L"resources/images/gameScene/ui/restaurant/foods/02_FriedEgg.png");
-
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
 
@@ -526,11 +523,12 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// ¹°¼Ò °ø°Ý ÇÇ°Ý	
 
 	// * ¿¡³Ê¹Ì ÀÌÆåÆ®
-	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png", 11, 1);
+	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png", 11, 1);	// ¿¡³Ê¹Ì Á×´Â ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 20);	// ÀÌÆåÆ® µî·Ï
 
 	// * ¿¡³Ê¹Ì ºÒ¸´
 	IMAGE_MANAGER->addFrameImage("Bat_Explosion", L"resources/images/Enemy/Bat/Bomb/explosion.png", 12, 1);
-	EFFECT_MANAGER->addEffect("Bat_Explosion", "Bat_Explosion", 15, 10);
+	//EFFECT_MANAGER->addEffect("Bat_Explosion", "Bat_Explosion", 15, 10);
 
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// ¼ö³à ÃÑ¾Ë
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// ¼ö³à ÃÑ¾Ë »èÁ¦
