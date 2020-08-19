@@ -11,7 +11,7 @@ void CameraShakeEvent::processEvent(float elapsedTime)
 			Vector2 moveForce = Vector2(RANDOM->getFromFloatTo(-_power, _power), RANDOM->getFromFloatTo(-_power, _power));
 			CAMERA->movePivot(moveForce);
 		}
-		_elapsedTime = _shakePerTime;
+		_elapsedTime = 0.05;
 	}
 
 	_elapsedTime -= elapsedTime;

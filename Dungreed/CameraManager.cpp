@@ -21,20 +21,55 @@ void CameraManager::release()
 
 void CameraManager::processEvent(float elapsedTime)
 {
-	if (_eventQueue.empty()) return;
-
-	_eventQueue.front()->processEvent(elapsedTime);
-	if (_eventQueue.front()->getRemainTime() <= 0)
+	vector<bool> dupEvent(static_cast<int>(CAMERA_EVENT_TYPE::END), false);
+	for (int i = 0; i < _eventList.size();)
 	{
-		delete _eventQueue.front();
-		_eventQueue.pop();
+		if (dupEvent[static_cast<int>(_eventList[i]->getType())])
+		{
+			i++;
+		}
+		else
+		{
+			dupEvent[static_cast<int>(_eventList[i]->getType())] = true;
+
+			_eventList[i]->processEvent(elapsedTime);
+
+			if (_eventList[i]->getRemainTime() <= 0)
+			{
+				delete _eventList[i];
+				_eventList.erase(_eventList.begin() + i);
+			}
+			else
+			{
+				i++;
+			}
+		}
 	}
 }
 
-void CameraManager::pushShakeEvent(float power, float shakePerTime, float remainTime)
+void CameraManager::pushShakeEvent(float power, float remainTime)
 {
-	CameraShakeEvent* event = new CameraShakeEvent(power, shakePerTime, remainTime);
-	_eventQueue.push(event);
+	CameraShakeEvent* event = new CameraShakeEvent(power, remainTime);
+	
+	float currRemainTime = remainTime;
+
+	for (int i = 0; i < _eventList.size(); i++)
+	{
+		if (_eventList[i]->getType() != event->getType()) continue;
+		CameraShakeEvent* currEvent = dynamic_cast<CameraShakeEvent*>(_eventList[i]);
+		if (currEvent->getPower() < power)
+		{
+			currEvent->setPower(power);
+		}
+		currRemainTime -= currEvent->getRemainTime();
+	}
+
+	if (currRemainTime > 0)
+	{
+		event->setRemainTime(currRemainTime);
+		_eventList.push_back(event);
+	}
+	
 }
 
 void CameraManager::setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT)

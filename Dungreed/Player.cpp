@@ -733,7 +733,7 @@ bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	_currHitTime = 0.5;
-	CAMERA->pushShakeEvent(25, 0.05, 0.25);
+	CAMERA->pushShakeEvent(25, 0.25);
 	return true;
 }
 
@@ -742,7 +742,7 @@ bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	_currHitTime = 0.5;
-	CAMERA->pushShakeEvent(25, 0.05, 0.25);
+	CAMERA->pushShakeEvent(25, 0.25);
 	return false;
 }
 
@@ -752,7 +752,7 @@ bool Player::hitEffect(Projectile* projectile)
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
 	_currHitTime = 0.5;
-	CAMERA->pushShakeEvent(25, 0.05, 0.25);
+	CAMERA->pushShakeEvent(25, 0.25);
 	return true;
 }
 

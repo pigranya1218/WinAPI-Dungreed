@@ -6,17 +6,20 @@ class CameraShakeEvent :
 {
 private:
 	float _power;
-	float _shakePerTime;
 	float _elapsedTime;
 
 public:
-	CameraShakeEvent(float power, float shakePerTime, float remainTime)
-		: _power(power), _shakePerTime(shakePerTime)
+	CameraShakeEvent(float power, float remainTime)
+		: _power(power)
 	{
+		_type = CAMERA_EVENT_TYPE::SHAKE;
 		_remainTime = remainTime;
 		_elapsedTime = 0;
 	}
 
-	virtual void processEvent(float elapsedTime);
+	virtual void processEvent(float elapsedTime) override;
+
+	float getPower() { return _power; }
+	void setPower(float power) { _power = power; }
 };
 
