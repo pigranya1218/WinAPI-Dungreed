@@ -3,6 +3,7 @@
 #include "StatUI.h"
 #include "CostumeUI.h"
 #include "RestaurantUI.h"
+#include "DialogueUI.h"
 #include "DamageInfo.h"
 
 class GameScene;
@@ -96,7 +97,7 @@ private:
 	vector<tagDamageUI> _damageUI; // 대미지 표기 숫자 UI
 	vector<tagEnemyHpUI> _enemyHpUI; // 적 체력바 UI
 	
-	
+	DialogueUI _dialogueUI;
 	InventoryUI _inventoryUI;
 	StatUI _statUI;
 	CostumeUI _costumeUI;
@@ -116,5 +117,7 @@ public:
 
 	void showDamage(DamageInfo damage, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
+
+	void setDialogue(Npc* npc) { _dialogueUI.startDialogue(npc); }
 };
 

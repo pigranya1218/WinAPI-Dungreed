@@ -9,7 +9,6 @@ private:
 	int	_minDamage;
 	int _maxDamage;
 	Vector2 _attackMove;
-	float _baseAttackDelay; // 공격 쿨타임
 	float _currAttackDelay; // 남은 공격 쿨타임
 	float _attackAngle;
 	float _angleOffset;

@@ -8,6 +8,7 @@ void Stage::init()
 
 	_npcMgr = new NpcManager;
 	_npcMgr->setStage(this);
+	_npcMgr->setUIManager(_uiManager);
 
 	_enemyMgr = new EnemyManager;
 	_enemyMgr->setStage(this);

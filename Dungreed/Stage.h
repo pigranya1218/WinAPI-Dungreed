@@ -16,6 +16,7 @@ class Stage
 {
 protected:
 	StageManager* _stageManager;
+	UIManager* _uiManager;
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	
 	tagTileMap _tile[MAXTILEX*MAXTILEY];
@@ -41,6 +42,7 @@ protected:
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
+	void setUIManager(UIManager* uiManager) { _uiManager = uiManager; }
 	virtual void init();
 	virtual void release();
 	virtual void update(float const elaspedTime);

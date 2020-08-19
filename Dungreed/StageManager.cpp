@@ -330,6 +330,7 @@ void StageManager::makeStage()
 	case STAGE_TYPE::TEST:
 		_currStage = new DebugStage();
 		_currStage->setStageManager(this);
+		_currStage->setUIManager(_uiMgr);
 		_currStage->init();
 		break;
 	default:

@@ -7,21 +7,23 @@ HRESULT GameScene::init()
 	CAMERA->setLT(Vector2(0, 0));
 
 	_timeSpeed = 1;
+	
 	_player = new Player;
 	_player->init();
 	_player->setGameScene(this);
-
-	_stageMgr = new StageManager;
-	_stageMgr->init();
-	_stageMgr->setGameScene(this);
-	_stageMgr->setPlayer(_player);
 
 	_uiMgr = new UIManager;
 	_uiMgr->init();
 	_uiMgr->setGameScene(this);
 	_uiMgr->setPlayer(_player);
-	_uiMgr->setStageManager(_stageMgr);
+	
+	_stageMgr = new StageManager;
 	_stageMgr->setUIManager(_uiMgr);
+	_stageMgr->init();
+	_stageMgr->setGameScene(this);
+	_stageMgr->setPlayer(_player);
+
+	_uiMgr->setStageManager(_stageMgr);
 
 
 	return S_OK;

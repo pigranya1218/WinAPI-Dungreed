@@ -248,7 +248,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	MartialArtOfTiger* testWeapon2 = new MartialArtOfTiger;
+	PickaxeRed* testWeapon2 = new PickaxeRed;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 

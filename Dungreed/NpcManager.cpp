@@ -40,6 +40,7 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 		RestaurantNpc* npc = new RestaurantNpc;
 		npc->init(pos, direction);
 		npc->setNpcManager(this);
+		npc->setUIManager(_uiMgr);
 		_npcs.push_back(npc);
 	}
 	break;
