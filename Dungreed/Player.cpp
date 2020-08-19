@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "Costume.h"
 #include "Item.h"
+#include "Food.h"
 
 #include "ShortSpear.h"
 #include "Punch.h"
@@ -60,6 +61,11 @@ void Player::updateAdjustStat()
 		}
 	}
 
+	for (int i = 0; i < _ateFood.size(); i++)
+	{
+		_adjustStat = _adjustStat + _ateFood[i]->getAddStat();
+	}
+
 	if (_equippedWeapon[_currWeaponIndex] != nullptr)
 	{
 		_equippedWeapon[_currWeaponIndex]->equip(this);
@@ -68,6 +74,8 @@ void Player::updateAdjustStat()
 	{
 		_hand->equip(this);
 	}
+
+
 }
 
 void Player::swap(Item *& a, Item *& b)
@@ -837,6 +845,11 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			swap(_inventory[indexA - 6], _inventory[indexB - 6]);
 		}
 	}
+}
+
+bool Player::ateFood(Food * food)
+{
+	return false;
 }
 
 float Player::getAttackSpeed()

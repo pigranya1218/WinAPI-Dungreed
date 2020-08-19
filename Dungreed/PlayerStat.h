@@ -22,6 +22,8 @@ enum class STAT_TYPE : int
 	MAX_JUMP_COUNT,
 	MAX_DASH_COUNT,
 	MAX_SATIETY,
+	CURR_HP,
+	CURR_SATIETY,
 	END
 };
 
@@ -30,9 +32,11 @@ class PlayerStat
 public:
 	// 스탯 정보
 	int		maxHp;				// 최대 체력
+	int		currHp;				// 현재 체력 (현재 체력을 더해준다거나 할 때 사용)
 	int		maxJumpCount;		// 최대 점프 횟수
 	int		maxDashCount;		// 최대 대쉬 횟수
 	int		maxSatiety;			// 최대 포만감
+	int		currSatiety;		// 현재 포만감 (현재 포만감을 더해준다거나 할 때 사용)
 	float	dashCoolTime;		// 대쉬 쿨타임
 	float	power;				// 위력 (위력 수치 1당 피해량 1% 상승)
 	float	minDamage;			// 최소 무기 공격력 // 몬스터에게 들어가는 데미지 = (무기공격력 * (1+위력/100))

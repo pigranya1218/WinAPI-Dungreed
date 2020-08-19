@@ -226,7 +226,7 @@ void EnemyManager::attack(FloatRect * rc, AttackInfo * info)
 
 void EnemyManager::attack(FloatCircle * circle, AttackInfo * info)
 {
-	_stage->attack(circle, info)
+	_stage->attack(circle, info);
 }
 
 bool EnemyManager::isHit(FloatRect* rc, AttackInfo* info)

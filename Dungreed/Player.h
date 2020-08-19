@@ -5,6 +5,7 @@
 #include "AttackInfo.h"
 
 class Item;
+class Food;
 class GameScene;
 class Projectile;
 class Ability;
@@ -41,6 +42,7 @@ private:
 	int			  _currWeaponIndex;			// 현재 사용하는 무기 인덱스, 0 or 1
 	float		  _currWeaponChangeCoolTime;// 무기 교체 딜레이 쿨타임
 	vector<Item*> _equippedAcc;				// 장착된 악세사리
+	vector<Food*> _ateFood;					// 먹은 음식들
 
 private:
 	void updateAdjustStat();
@@ -94,6 +96,8 @@ public:
 	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함
 	void unequipAcc(int index);		// 악세사리 장착중이던 아이템을 해제함
 	void swapItem(int indexA, int indexB);
+
+	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
 	

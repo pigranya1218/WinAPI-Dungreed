@@ -211,6 +211,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("UI/RESTAURANT/TABLE", L"resources/images/gameScene/ui/restaurant/RestaurantTable3Frame.png", 3, 1);
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/GAUGE_BASE", L"resources/images/gameScene/ui/restaurant/AltarGaugeBase.png");
 
+	// **** FOOD IMAGE
+	IMAGE_MANAGER->addImage("FOOD/EGG_FRIED", L"resources/images/gameScene/ui/restaurant/foods/02_FriedEgg.png");
+
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
 
