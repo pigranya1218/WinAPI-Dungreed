@@ -18,10 +18,6 @@ ITEM_TYPE Item::getItemType() const noexcept
 	{
 		return ITEM_TYPE::WEAPON_SUB;
 	}
-	if ((_itemCode / 4096) == static_cast<int>(ITEM_TYPE::FOOD) / 4096)
-	{
-		return ITEM_TYPE::FOOD;
-	}
 }
 
 ITEM_RANK Item::getItemRank() const noexcept

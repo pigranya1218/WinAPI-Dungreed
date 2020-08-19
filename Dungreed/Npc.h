@@ -23,5 +23,7 @@ public:
 
 	virtual void init(Vector2 pos, DIRECTION direction) {};
 	bool isActive() { return _isActive; }
+	
+	virtual void clickMenu(int menuIndex) {}; // Dialogue 창에서 메뉴를 클릭함
 };
 

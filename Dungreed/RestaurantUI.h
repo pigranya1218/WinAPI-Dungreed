@@ -6,6 +6,7 @@ class RestaurantUI
 {
 private:
 	Player* _player;
+	Animation* _tableAni;
 
 	bool _isActive;
 
@@ -30,8 +31,16 @@ private:
 	Image* _satietyIcon = IMAGE_MANAGER->findImage("UI/RESTAURANT/SATIETY_ICON");
 	// ** 힐 아이콘
 	Image* _healIcon = IMAGE_MANAGER->findImage("UI/RESTAURANT/HEAL_ICON");
-	// ** 음식 목록 뷰 
-	//Image* _foodListView = IMAGE_MANAGER->findImage();
+	// ** 음식 목록 뷰 배경
+	Image* _foodListView = IMAGE_MANAGER->findImage("UI/RESTAURANT/BASE");
+	// ** 스크롤바 배경
+	Image* _scrollBarBg = IMAGE_MANAGER->findImage("SCROLL_BG");
+	// ** 스크롤바 헤더
+	Image* _scrollBarHeader = IMAGE_MANAGER->findImage("SCROLL_HEADER");
+	// ** 음식 이미지 뷰(대충 테이블에 음식 놓이는 이미지) 배경
+	Image* _foodTableViewBase = IMAGE_MANAGER->findImage("UI/RESTAURANT/BASE2");
+	// ** 테이블 프레임 이미지
+	Image* _foodTableFrameView = IMAGE_MANAGER->findImage("UI/RESTAURANT/TABLE");
 	// ** 창닫기
 	Image* _exitBtn = IMAGE_MANAGER->findImage("BUTTON_EXIT");
 	Image* _exitBtnSelected = IMAGE_MANAGER->findImage("BUTTON_EXIT_SELECTED");
@@ -43,6 +52,21 @@ private:
 	FloatRect _exitRc;
 	// 음식 목록창 렉트
 	FloatRect _foodListViewRc;
+	// 음식 이미지 창 렉트
+	FloatRect _foodTableViewRc;
+	// 포만감 게이지 렉트
+	FloatRect _satietyRc;
+	// 현재 체력 게이지 렉트
+	FloatRect _lifeGaugeRc;
+	// 현재 금액 렉트
+	FloatRect _goldBaseRc;
+	// 금액 적을 텍스트 렌더용 렉트
+	FloatRect _goldAmountRc;
+	// 골드 아이콘 렉트
+	FloatRect _goldIconRc;
+	// 스크롤 렉트
+	FloatRect _scrollBarBgRc;
+	FloatRect _scrollBarHeaderRc;
 	
 private:
 	//음식 목록

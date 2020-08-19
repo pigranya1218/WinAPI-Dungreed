@@ -54,5 +54,5 @@ bool ProjectileManager::checkEnemyCollision(Projectile* projectile, bool isOnceC
 
 bool ProjectileManager::checkPlayerCollision(Projectile* projectile)
 {
-	return false;
+	return _stage->isHitPlayer(projectile);
 }

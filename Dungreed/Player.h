@@ -5,6 +5,7 @@
 #include "AttackInfo.h"
 
 class Item;
+class Food;
 class GameScene;
 class Projectile;
 class Ability;
@@ -19,6 +20,7 @@ private:
 
 	// 현재 상태
 	Costume* _costume;				// 현재 장착한 코스튬
+	vector<size_t>		_attackedId; // 최근 공격받았던 공격들의 아이디 값들을 저장하는 벡터, 최대 10칸 정도 저장하면 적당할 듯
 
 	int		_level;					// 현재 레벨
 	int		_currHp;				// 현재 체력
@@ -40,6 +42,7 @@ private:
 	int			  _currWeaponIndex;			// 현재 사용하는 무기 인덱스, 0 or 1
 	float		  _currWeaponChangeCoolTime;// 무기 교체 딜레이 쿨타임
 	vector<Item*> _equippedAcc;				// 장착된 악세사리
+	vector<Food*> _ateFood;					// 먹은 음식들
 
 private:
 	void updateAdjustStat();
@@ -64,12 +67,12 @@ public:
 	// 피격 체크를 위해 호출
 	bool isHit(FloatRect* rc, AttackInfo* info);
 	bool isHit(FloatCircle* circle, AttackInfo* info);
-	bool isHit(Projectile* projectile, AttackInfo* info);
+	bool isHit(Projectile* projectile);
 
 	// 만약 피격되었다면 호출될 가상함수
 	bool hitEffect(FloatRect* rc, AttackInfo* info);
 	bool hitEffect(FloatCircle* circle, AttackInfo* info);
-	bool hitEffect(Projectile* projectile, AttackInfo* info);
+	bool hitEffect(Projectile* projectile);
 
 	// GETTER & SETTER
 	int getLevel() const noexcept { return _level; }
@@ -93,6 +96,8 @@ public:
 	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함
 	void unequipAcc(int index);		// 악세사리 장착중이던 아이템을 해제함
 	void swapItem(int indexA, int indexB);
+
+	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
 	

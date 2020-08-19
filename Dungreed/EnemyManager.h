@@ -44,6 +44,10 @@ public:
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
 
+	// 공격 관련 함수
+	void attack(FloatRect* rc, AttackInfo* info);
+	void attack(FloatCircle* circle, AttackInfo* info);
+
 	// 피격 체크 관련 함수
 	bool isHit(FloatRect* rc, AttackInfo* info);
 	bool isHit(FloatCircle* circle, AttackInfo* info);

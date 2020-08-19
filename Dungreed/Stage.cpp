@@ -498,6 +498,16 @@ void Stage::attack(Projectile* projectile, AttackInfo* info)
 	_projectileMgr->addProjectile(projectile);
 }
 
+void Stage::attack(FloatRect * rc, AttackInfo * info)
+{
+	_stageManager->attack(rc, info);
+}
+
+void Stage::attack(FloatCircle * circle, AttackInfo * info)
+{
+	_stageManager->attack(circle, info);
+}
+
 bool Stage::isHitEnemy(FloatRect* rc, AttackInfo* info)
 {
 	return _enemyMgr->isHit(rc, info);
@@ -506,6 +516,15 @@ bool Stage::isHitEnemy(FloatRect* rc, AttackInfo* info)
 bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 {
 	return _enemyMgr->isHit(circle, info);
+}
+
+bool Stage::isHitPlayer(Projectile * projectile)
+{
+	if (_player->isHit(projectile))
+	{
+		return _player->hitEffect(projectile);
+	}
+	return false;
 }
 
 Vector2 Stage::getPlayerPos()
