@@ -1,12 +1,35 @@
 #pragma once
+#include "Food.h"
 
 class Player;
+class PlayerStat;
 
 class RestaurantUI
 {
 private:
+	//음식 리스트의 항목 셀
+	struct tagFoodItems
+	{
+		FloatRect baseRc;
+		FloatRect detailsRc;
+		// ** 음식 항목 셀 배경
+		Image* _foodListItem = IMAGE_MANAGER->findImage("UI/RESTAURANT/MENU"); //배경
+		Image* _foodListItemSelected = IMAGE_MANAGER->findImage("UI/RESTAURANT/MENU_SELECTED"); //선택중 배경
+	};
+	struct tagScrollBar
+	{
+		float totalHeight;
+		float height;
+		float ratio;
+		FloatRect bgRc;
+		FloatRect scrollRc;
+	};
+private:
 	Player* _player;
 	Animation* _tableAni;
+
+	vector<Food*>		_foods;
+	Image* _foodImg;
 
 	bool _isActive;
 
@@ -48,14 +71,18 @@ private:
 	// * 사용되는 렉트
 	// 뒷배경 fillRectangle -> 색상RGB(34, 32, 52)
 	FloatRect _bgRc;
+	// 리스트 항목이 오바되는 걸 가려주기 위한 뒷배경
+	FloatRect _bgRc2;
 	// 창닫기 버튼 렉트
 	FloatRect _exitRc;
 	// 음식 목록창 렉트
 	FloatRect _foodListViewRc;
 	// 음식 이미지 창 렉트
 	FloatRect _foodTableViewRc;
-	// 포만감 게이지 렉트
+	// 포만률 게이지 렉트
 	FloatRect _satietyRc;
+	// 포만률 value를 표시할 렉트
+	FloatRect _satietyRateRc;
 	// 현재 체력 게이지 렉트
 	FloatRect _lifeGaugeRc;
 	// 현재 금액 렉트
@@ -68,20 +95,7 @@ private:
 	FloatRect _scrollBarBgRc;
 	FloatRect _scrollBarHeaderRc;
 	
-private:
-	//음식 목록
-	struct tagFoodsCell
-	{
-
-	};
-	struct tagScrollBar
-	{
-		float totalHeight;
-		float height;
-		float ratio;
-		FloatRect bgRc;
-		FloatRect scrollRc;
-	};
+	tagFoodItems _foodItems[5];
 
 public:
 	void setPlayer(Player* player) { _player = player; }

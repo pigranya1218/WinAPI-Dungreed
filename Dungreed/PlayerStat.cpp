@@ -61,6 +61,18 @@ float PlayerStat::getStat(STAT_TYPE type)
 		return minDamage;
 	case STAT_TYPE::MAX_DAMAGE:
 		return maxDamage;
+	case STAT_TYPE::MAX_HP:
+		return maxHp;
+	case STAT_TYPE::MAX_JUMP_COUNT:
+		return maxJumpCount;
+	case STAT_TYPE::MAX_DASH_COUNT:
+		return maxDashCount;
+	case STAT_TYPE::MAX_SATIETY:
+		return maxSatiety;
+	case STAT_TYPE::CURR_HP:
+		return currHp;
+	case STAT_TYPE::CURR_SATIETY:
+		return currSatiety;
 	}
 }
 
