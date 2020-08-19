@@ -663,8 +663,10 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }
 
-bool Player::isHit(Projectile* projectile)
+bool Player::isHit(Projectile* projectile, bool isOnceCollision)
 {
+	// TODO : 먼저 악세사리들에 대해서 검사해준다.
+
 	// 2가지 검사를 함
 	// 1. 이미 피격 처리를 한 공격인지에 대해 검사
 	// 2. 공격 호과 Enemy 렉트의 충돌 여부
@@ -712,7 +714,7 @@ bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
 
 bool Player::hitEffect(Projectile* projectile)
 {
-	return false;
+	return true;
 }
 
 Image* Player::getWeaponImg(int index) const

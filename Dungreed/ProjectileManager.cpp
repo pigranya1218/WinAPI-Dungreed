@@ -52,7 +52,7 @@ bool ProjectileManager::checkEnemyCollision(Projectile* projectile, bool isOnceC
 	return _enemyManager->isHit(projectile, isOnceCollision);
 }
 
-bool ProjectileManager::checkPlayerCollision(Projectile* projectile)
+bool ProjectileManager::checkPlayerCollision(Projectile* projectile, bool isOnceCollision)
 {
-	return _stage->isHitPlayer(projectile);
+	return _stage->isHitPlayer(projectile, isOnceCollision);
 }

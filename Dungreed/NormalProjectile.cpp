@@ -89,7 +89,12 @@ void NormalProjectile::update(float elapsedTime)
 	}
 	else
 	{
-		// TODO: PLAYER와의 충돌 검사 흐음
+		// TODO: PLAYER와의 충돌 검사
+		if (_projectileMgr->checkPlayerCollision(this, true))
+		{
+			_active = false;
+			return;
+		}
 
 	}	
 

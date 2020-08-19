@@ -331,6 +331,7 @@ void StageManager::makeStage()
 		_currStage = new DebugStage();
 		_currStage->setStageManager(this);
 		_currStage->setUIManager(_uiMgr);
+		_currStage->setPlayer(_player);
 		_currStage->init();
 		break;
 	default:

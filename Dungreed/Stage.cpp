@@ -519,9 +519,9 @@ bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 	return _enemyMgr->isHit(circle, info);
 }
 
-bool Stage::isHitPlayer(Projectile * projectile)
+bool Stage::isHitPlayer(Projectile * projectile, bool isOnceCollision)
 {
-	if (_player->isHit(projectile))
+	if (_player->isHit(projectile, isOnceCollision))
 	{
 		return _player->hitEffect(projectile);
 	}
