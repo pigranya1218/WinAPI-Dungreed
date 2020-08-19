@@ -157,10 +157,20 @@ void GatlingGun::frontRender(Player * player)
 	if (_shootEffectAni->isPlay())
 	{
 		Vector2 shootEffectPos = renderPosHand;
+		
+		//shootEffectPos.x += renderPosHand.x + 70;
+		//shootEffectPos.y = renderPosHand.y + 25;
 
-		_shootEffectImg->setAngle(renderDegree);
+		float length = _iconImg->getWidth() * 1.00f * 4; // 무기 길이만큼
+		shootEffectPos.x += cosf(degree * (PI / 180)) * length;
+		shootEffectPos.y += -sinf(degree * (PI / 180)) * length;
+
+
+
+		_shootEffectImg->setAngle(degree);
+		//_shootEffectImg->setAnglePos(Vector2(0.0f, _shootEffectImg->getFrameSize().y * 0.5f));
 		_shootEffectImg->setScale(4);
-		_shootEffectImg->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _shootEffectAni);
+		_shootEffectImg->aniRender(CAMERA->getRelativeV2(shootEffectPos), _shootEffectAni);
 	}
 
 	// 재장전 중이라면 재장전 UI를 그린다.

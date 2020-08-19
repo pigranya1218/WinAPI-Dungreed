@@ -23,8 +23,6 @@ void OakBow::init()
 	_price = 360;
 
 	// private 변수 설정
-	_minDamage = 12;
-	_maxDamage = 18;
 	_baseAttackDelay = 0.1;
 	_currAttackDelay = 0;
 	_maxBullet = 1;
