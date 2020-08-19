@@ -195,7 +195,7 @@ void MatchLockGun::attack(Player* player)
 
 
 	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("GunBullet", "", Vector2(), Vector2(30 * 50, 30 * 50), 3, angleRadian, true, false, 10, true, false, true, false);
+	projectile->init("GunBullet", "", Vector2(50, 50), Vector2(50, 50), Vector2(30 * 50, 30 * 50), 3, angleRadian, true, false, 10, true, false, true, false);
 
 
 	AttackInfo* attackInfo = new AttackInfo;

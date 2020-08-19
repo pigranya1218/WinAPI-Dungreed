@@ -35,7 +35,7 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	_hit.delay = 0.3;
 
 	// √—æÀ √ ±‚»≠
-	//_shooting.init("SmallBullet", "SmallBullet_FX", _scale, 1, 1, 500, false, true, true, true, false);
+	_shooting.init("SmallBullet", "SmallBullet_FX", Vector2(500, 500), _scale, 1, 1.5, false, true, true, false, true, false);
 
 	_isDetect = 0;
 

@@ -533,6 +533,11 @@ Vector2 Stage::getPlayerPos()
 	return _stageManager->getPlayerPos();
 }
 
+Vector2 Stage::getEnemyPos(const Vector2 & pos)
+{
+	return _enemyMgr->getEnemyPos(pos);
+}
+
 void Stage::showDamage(DamageInfo info, Vector2 pos)
 {
 	_stageManager->showDamage(info, pos);

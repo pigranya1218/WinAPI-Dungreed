@@ -2,7 +2,7 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& effectSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
+void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& collsionSize, const Vector2& drawSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
 {
 	float elapseXY;
 
@@ -32,7 +32,8 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 	_collisionPlatForm = collsionPlatForm;
 
 	_collisionEffect = collisionEffect;
-	_effectSize = effectSize;
+	_drawSize = drawSize;
+	_size = collsionSize;
 
 	
 	_gravity = Vector2(0, 4000);
@@ -50,7 +51,7 @@ void NormalProjectile::release()
 		SAFE_DELETE(_ani);
 	}
 
-	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
+	EFFECT_MANAGER->play(_collisionEffect, _position, _drawSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
 }
 
 void NormalProjectile::update(float elapsedTime)
@@ -114,12 +115,12 @@ void NormalProjectile::render()
 	}
 	if (_useAni)
 	{		
-		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);		
+		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);		
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
-		_img->render(CAMERA->getRelativeV2(_position), _size);
+		_img->render(CAMERA->getRelativeV2(_position), _drawSize);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		
 	}

@@ -74,7 +74,7 @@ void bombPouch::dash(Player * player)
 		projectile->setTeam(OBJECT_TEAM::PLAYER);
 
 		//projectile->init("BombPouch0", _angleY, 750, true, true, 20, false, "BombPouch2", Vector2(250, 250), 0.4, true);
-		projectile->init("BombPouch0", "BombPouch2", Vector2(250, 250), Vector2(750, 750), 0.4, _angleY, true, true, 20, false, false, true, false);
+		projectile->init("BombPouch0", "BombPouch2", Vector2(250, 250), Vector2(250, 250), Vector2(750, 750), 0.4, _angleY, true, true, 20, false, false, true, false);
 
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;

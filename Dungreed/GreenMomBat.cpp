@@ -123,7 +123,7 @@ void GreenMomBat::attack(Player * player)
 
 	//projectile->init("BabyBatBulletAt", angleRadian, 800, true, true, 18, true, "BabyBatBulletFx", Vector2(170, 170), 1.5,false);
 
-	projectile->init("BabyBatBulletAt", "BabyBatBulletFX", Vector2(110, 110), Vector2(500, 500), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
+	projectile->init("BabyBatBulletAt", "BabyBatBulletFX", Vector2(110, 110), Vector2(110, 110), Vector2(500, 500), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	player->attack(projectile, attackInfo);
