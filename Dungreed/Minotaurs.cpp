@@ -29,11 +29,14 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay =	2;		// 공격 딜레이 초기화
 	_attack.distance = 100;	// 공격 시전 가능 거리
+	_attack.circleSize = 150;
+	_attack.attackInit(3, 5, 1);
 
 	// 돌진 관련 변수
 	ZeroMemory(&_skill, sizeof(_skill));
 	_skill.delay = 2;		// 돌진 딜레이 초기화
 	_skill.distance = 800;	// 돌진 시전 시 최대 거리
+	_skill.attackInit(10, 20, 5, 0, 0, 40);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
@@ -108,6 +111,17 @@ void Minotaurs::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			// 공격 프레임
+			if (_ani->getPlayIndex() == 3)
+			{
+				Vector2 attackPos = _position;
+				attackPos.y += _size.y * 0.2f;
+
+				float startRad = (_direction == DIRECTION::LEFT) ? (1.22) : (-PI / 6);
+				float endRad = startRad + PI / 6 * 5;
+
+				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
+			}
 			// 공격이 끝나면
 			if (!_ani->isPlay())
 			{
@@ -129,6 +143,8 @@ void Minotaurs::update(float const timeElapsed)
 				moveDir.x += (_moving.force.x) * timeElapsed * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
 				//EFFECT_MANAGER->play("Minotaurs/Effect", Vector2(_position.x, _position.y), IMAGE_MANAGER->findImage("Minotaurs/Effect")->getFrameSize() * _scale);
+
+				_skill.attackRect(_myEnemyType, _enemyManager, rectMakePivot(_position, _size, PIVOT::CENTER));
 
 				// 이전 X축과 현재 X축이 같으면 벽에 부딪힌 것
 				if (_lastPos.x == _currPos.x)
@@ -212,10 +228,6 @@ void Minotaurs::update(float const timeElapsed)
 
 void Minotaurs::render()
 {
-	// 디버그
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);	// 인식거리
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));					// 피격 및 충돌 렉트
-
 	// 스케일 설정
 	_img->setScale(_scale);
 
@@ -242,6 +254,8 @@ void Minotaurs::render()
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
+
+	_attack.circleDebug.render(true);
 }
 
 void Minotaurs::setState(ENEMY_STATE state)
@@ -273,6 +287,8 @@ void Minotaurs::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
 			_ani->start();
+
+			_attack.id.clear();
 		}
 		break;
 		case ENEMY_STATE::SKILL:
@@ -284,6 +300,8 @@ void Minotaurs::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
 			_ani->start();
+
+			_skill.id.clear();
 		}
 		break;
 		case ENEMY_STATE::DIE:

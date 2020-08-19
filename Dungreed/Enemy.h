@@ -38,18 +38,19 @@ protected:
 
 	vector<size_t>		_attackedId; // 최근 공격받았던 공격들의 아이디 값들을 저장하는 벡터, 최대 10칸 정도 저장하면 적당할 듯
 
-	// 탄막 사용 시
+	// 탄막 공격 사용 시
 	struct tagShootingInfo
 	{
 		vector<NormalProjectile*> bullets;	// 한 번에 여러개 만들어 놓고 쏘기 위해
-		AttackInfo info;
+
+		AttackInfo info;			// 공격 정보 저장용
 
 		string	bulletName;			// 불렛 이미지 이름
 		string	effectName;			// 불렛 이펙트 이름
 
 		Vector2	effectSize;			// 불렛 이펙트 사이즈
-		Vector2 drawSize;
-		Vector2 collisionSize;
+		Vector2 drawSize;			// 그릴 사이즈
+		Vector2 collisionSize;		// 충돌 사이즈
 		Vector2	force;				// 불렛 날아가는 힘
 
 		float	delay;				// 딜레이
@@ -147,23 +148,22 @@ protected:
 		void fireBullet(int enemyCode, EnemyManager* enemyManager, int fireCount = 0);
 	};
 
-
-
-
-	// 공격에 관련된 것들
+	// 근접 공격에 관련된 것들
 	struct tagAttackInfo
 	{
-		float		delay;		// 딜레이
-		float		count;		// 카운트용
-		float		angle;		// 각도
-		float		distance;	// 거리
+		float		delay;			// 딜레이
+		float		count;			// 카운트용
+		float		angle;			// 각도
+		float		distance;		// 거리
 		float		circleSize;		// 공격 판정 사이즈(반지름)
 
 		FloatCircle circleDebug;	// 디버그용
+		FloatRect	rectDebug;		// 디버그?
 		AttackInfo	info;			// 공격정보
 
 		string id;	// 공격 ID 저장용
 
+		// 공격 쿨타임 업데이트용
 		bool update(float const timeElapsed)
 		{
 			count += timeElapsed;
@@ -175,7 +175,7 @@ protected:
 			}
 			return false;
 		}
-		
+		// 공격 정보 저장용
 		void attackInit(float minDamage, float maxDamage, float trueDamage, float critical = 0, float criDamage = 0, float knockBack = 0)
 		{
 			info.minDamage = minDamage;
@@ -187,20 +187,23 @@ protected:
 
 			id.clear();
 		}
+		// 공격 (원)
 		void attackCircle(int enemyCode, EnemyManager* enemyManager, const Vector2& pos, const float startRad, const float endRad);
-		void attackRect();
+		// 공격 (렉트)
+		void attackRect(int enemyCode, EnemyManager* enemyManager, FloatRect rc);
 	};
 
 	// 이동 관련 변수
 	struct tagMoveInfo
 	{
-		Vector2 force;
-		Vector2 gravity;
+		Vector2 force;		// 이동할 힘
+		Vector2 gravity;	// 이동 저항 변수
 
-		float angle;
-		float delay;
-		float count;
+		float angle;		// 삼각함수로 움직일 경우 사용
+		float delay;		// 딜레이
+		float count;		// 카운트
 
+		// 쿨타임 업데이트용
 		bool update(float const timeElapsed)
 		{
 			count += timeElapsed;
@@ -217,11 +220,12 @@ protected:
 	// 피격 관련
 	struct tagHitInfo
 	{
-		bool isHit;
+		bool isHit;		// 피격 판정중인지 확인용
 
 		float delay;
 		float count;
 
+		// 피격 판정 쿨타임용
 		bool update(const float timeElapsed)
 		{
 			count += timeElapsed;
@@ -235,8 +239,8 @@ protected:
 		}
 	};
 
-	tagHitInfo	_hit;
-	tagMoveInfo	_moving;
+	tagHitInfo	_hit;		// 피격 구조체는 모든 에너미가 사용함
+	tagMoveInfo	_moving;	// 이동 구조체도 모든 에너미가 사용함
 
 public:
 	virtual void init() {}

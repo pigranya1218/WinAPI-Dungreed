@@ -17,7 +17,7 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction)
 	_detectRange = 100;
 	_scale = 4;
 
-	_size = Vector2(_img->getFrameSize().x, _img->getFrameSize().y);
+	_size = Vector2(_img->getFrameSize().x - 4, _img->getFrameSize().y);
 	_size = _size * _scale;
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
@@ -30,6 +30,7 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction)
 
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
+	_attack.attackInit(3, 5, 1);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -82,6 +83,7 @@ void SkelDog::update(float const timeElapsed)
 			if (_attack.update(timeElapsed))
 			{
 				setState(ENEMY_STATE::ATTACK);
+				_direction = (_position.x > playerPos.x) ? (DIRECTION::LEFT) : (DIRECTION::RIGHT);
 			}
 		}
 		break;
@@ -103,7 +105,8 @@ void SkelDog::update(float const timeElapsed)
 						if (_moving.force.y < MAXJUMP) _moving.force.y = MAXJUMP;
 					}
 				}
-			}
+				_attack.attackRect(_myEnemyType, _enemyManager, rectMakePivot(_position, _size, PIVOT::CENTER));
+			}			
 		}
 		break;
 	}
@@ -146,7 +149,9 @@ void SkelDog::render()
 		Vector2 renderPos = _position;
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
-	}
+	}	
+
+	D2D_RENDERER->drawRectangle(rectMakePivot(CAMERA->getRelativeV2(_position), _size, PIVOT::CENTER));
 }
 
 void SkelDog::setState(ENEMY_STATE state)
@@ -165,6 +170,8 @@ void SkelDog::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
 			_ani->start();
+
+			_attack.id.clear();
 		}
 		break;
 		case ENEMY_STATE::MOVE:
@@ -176,7 +183,7 @@ void SkelDog::setState(ENEMY_STATE state)
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
-			_ani->start();
+			_ani->start();			
 		}
 		break;
 		case ENEMY_STATE::DIE:

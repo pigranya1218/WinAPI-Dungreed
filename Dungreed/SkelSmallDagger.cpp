@@ -29,8 +29,10 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction)
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 3.f;
+	_attack.delay = 2.0f;
 	_attack.distance = 100;
+	_attack.circleSize = 85;
+	_attack.attackInit(1, 5, 2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -100,6 +102,22 @@ void SkelSmallDagger::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+			// 공격 프레임
+			if (_weaponAni->getPlayIndex() == 7)
+			{
+				Vector2 attackPos = _position;
+				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
+				attackPos.y += _size.y * 0.3f;
+
+				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (0);
+				float endRad = startRad + PI / 2;
+
+				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
+			}
+			else
+			{
+				_attack.id.clear();
+			}
 			if (!_weaponAni->isPlay())
 			{
 				setState(ENEMY_STATE::IDLE);
@@ -158,12 +176,14 @@ void SkelSmallDagger::render()
 		_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
 	}
 
-	if (_curHp != _maxHp)
+	if (_curHp < _maxHp)
 	{
 		Vector2 renderPos = _position;
-		renderPos.y += 50;
+		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
+
+	_attack.circleDebug.render(true);
 }
 
 void SkelSmallDagger::setState(ENEMY_STATE state)

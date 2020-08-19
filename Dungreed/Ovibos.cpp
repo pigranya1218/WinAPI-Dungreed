@@ -15,7 +15,9 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 	_direction = direction;
 	_scale = 4;
 	_size = _img->getFrameSize() * _scale;
-	_rect = rectMakePivot(_position,_size,PIVOT::CENTER);
+
+	ZeroMemory(&_attacking, sizeof(_attacking));
+	_attacking.attackInit(3, 5, 1);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(RUSHSPEED, 0.0f);
@@ -74,14 +76,18 @@ void Ovibos::update(float const timeElapsed)
 					}
 					break;
 				}
-			}			
+			}
+			if (_ani->isPlay())
+			{
+				_attacking.attackRect(_myEnemyType, _enemyManager, rectMakePivot(_position, _size, PIVOT::CENTER));
+			}
 
 			moveDir.x += timeElapsed * _moving.force.x * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
 
 			if (_moving.force.x < 0)
 			{
 				_moving.force.x = 0;
-				setState(ENEMY_STATE::IDLE);
+				setState(ENEMY_STATE::IDLE);			
 			}
 		}
 		break;
@@ -152,6 +158,8 @@ void Ovibos::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
 			_ani->start();
+
+			_attacking.id.clear();
 		}
 		break;
 		case ENEMY_STATE::DIE:
