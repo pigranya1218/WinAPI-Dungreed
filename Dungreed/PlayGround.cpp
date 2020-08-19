@@ -218,6 +218,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/HEAL_ICON", L"resources/images/gameScene/ui/restaurant/HealRate.png");
 	IMAGE_MANAGER->addFrameImage("UI/RESTAURANT/TABLE", L"resources/images/gameScene/ui/restaurant/RestaurantTable3Frame.png", 3, 1);
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/GAUGE_BASE", L"resources/images/gameScene/ui/restaurant/AltarGaugeBase.png");
+	// **** FOODS
+	IMAGE_MANAGER->addImage("FOOD/BREAD", L"resources/images/gameScene/ui/restaurant/foods/01_Bread.png");
+	IMAGE_MANAGER->addImage("FOOD/EGG_FRIED", L"resources/images/gameScene/ui/restaurant/foods/02_FriedEgg.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);

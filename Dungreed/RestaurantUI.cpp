@@ -90,14 +90,19 @@ void RestaurantUI::render()
 	{
 		_exitBtn->render(_exitRc.getCenter(), _exitRc.getSize());
 	}
+	//테이블 음식 이미지 창
+	_foodTableFrameView->aniRender(_foodTableViewRc.getCenter(), _foodTableViewRc.getSize(), _tableAni);
+	_foodTableViewBase->render(_foodTableViewRc.getCenter(), _foodTableViewRc.getSize());
 	//음식 리스트의 항목
 	for (int i = 0; i < 5; i++)
 	{
 		if (_foodItems[i].baseRc.ptInRect(_ptMouse))
 		{
 			_foodItems[i]._foodListItemSelected->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
-			//_foodImg = _foods[i]->getImage();
-			//_foodImg->render(_foodTableViewRc.getCenter());
+			_foodImg = _foods[i]->getImage();
+			_foodImg->setScale(4);
+			_foodImg->setAlpha(0.7);
+			_foodImg->render(_foodTableViewRc.getCenter());
 		}
 		else
 		{
@@ -142,9 +147,7 @@ void RestaurantUI::render()
 	D2D_RENDERER->renderTextField(_satietyRateRc.left, _satietyRateRc.top, to_wstring(_player->getCurrStat().currSatiety) + L" / " + to_wstring(_player->getCurrStat().maxSatiety), 
 		RGB(255, 255, 255), 30, _satietyRateRc.getWidth(), _satietyRateRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0);
 	//D2D_RENDERER->renderTextField(_satietyRc.left + 130, _satietyRc.getCenter().y + 2, to_wstring(/*스탯->현재 포만률 / 최대 포만률*/)) ....
-	//우측 음식 이미지 창
-	_foodTableFrameView->aniRender(_foodTableViewRc.getCenter(), _foodTableViewRc.getSize(), _tableAni);
-	_foodTableViewBase->render(_foodTableViewRc.getCenter(), _foodTableViewRc.getSize());
+	
 	//현재 체력 게이지 창
 	_lifeBaseBack->render(_lifeGaugeRc.getCenter(), _lifeGaugeRc.getSize());
 	_lifeBase->render(_lifeGaugeRc.getCenter(), _lifeGaugeRc.getSize());

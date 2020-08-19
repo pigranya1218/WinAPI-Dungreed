@@ -67,9 +67,9 @@ private:
 	// ** 창닫기
 	Image* _exitBtn = IMAGE_MANAGER->findImage("BUTTON_EXIT");
 	Image* _exitBtnSelected = IMAGE_MANAGER->findImage("BUTTON_EXIT_SELECTED");
-	// ** 스크롤
-	Image* _scrollBarBg = IMAGE_MANAGER->findImage("SCROLL_BG");
-	Image* _scrollBarHeader = IMAGE_MANAGER->findImage("SCROLL_HEADER");
+	//// ** 스크롤
+	//Image* _scrollBarBg = IMAGE_MANAGER->findImage("SCROLL_BG");
+	//Image* _scrollBarHeader = IMAGE_MANAGER->findImage("SCROLL_HEADER");
 
 	// * 사용되는 렉트
 	// 뒷배경 fillRectangle -> 색상RGB(34, 32, 52)
