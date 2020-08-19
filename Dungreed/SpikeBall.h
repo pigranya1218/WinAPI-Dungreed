@@ -8,7 +8,7 @@ private:
 	FloatRect _crash;
 	int _x, _y;
 	float _angle = PI / 2;
-
+	FloatCircle _attackDebug;
 public:
 	virtual void init();
 	virtual void release();

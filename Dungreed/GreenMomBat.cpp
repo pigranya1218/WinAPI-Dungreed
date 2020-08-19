@@ -116,13 +116,9 @@ void GreenMomBat::attack(Player * player)
 	float length = _img->getWidth() * 0.1f; // 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
-	projectile->setPosition(shootPos);
-	projectile->setSize(Vector2(160, 90));
+	projectile->setPosition(shootPos);	
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	
-
-	projectile->init("BabyBatBulletAt", "BabyBatBulletFX", Vector2(110, 110), Vector2(110, 110), Vector2(500, 500), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
-	//projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(110, 110), Vector2(850, 850), 2, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
+	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(70, 20), Vector2(130, 80), Vector2(750, 750), 1, angleRadian, true, true, 20, false, false, true, false);	
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
