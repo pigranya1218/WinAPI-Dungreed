@@ -13,6 +13,7 @@ void StartRoom1::init()
 	_OpenDirection[1] = false;
 	_OpenDirection[2] = true;
 	_OpenDirection[3] = true;
+	
 }
 
 void StartRoom1::release()
@@ -29,7 +30,12 @@ void StartRoom1::update(float const elapsedTime)
 		_stageManager->setPlayerPos(200, 900);
 		
 		_stageManager->moveRoom();
-		_stageManager->makeStage();
+		
+	}
+	if (KEY_MANAGER->isOnceKeyDown(VK_F8))
+	{
+		_stageManager->moveRoom();
+		
 	}
 
 }
