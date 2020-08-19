@@ -15,6 +15,7 @@ void Boomerang::init()
 	_price = 550;
 
 	_isAttack = false;
+	_effectCount = 0;
 
 	// private 변수 설정
 	_currAttackDelay = 0;
@@ -67,6 +68,7 @@ void Boomerang::update(Player * player, float const elapsedTime)
 			FloatRect playerRc = FloatRect(player->getPosition(), player->getSize(), PIVOT::CENTER);
 			if (FloatRect::intersect(projectileRc, playerRc))
 			{
+				_effectCount++;
 				_projectile->setActive(false);
 				_projectile = nullptr;
 			}
@@ -87,6 +89,14 @@ void Boomerang::backRender(Player * player)
 
 void Boomerang::frontRender(Player * player)
 {
+	if (_effectCount == 1)
+	{
+		Image* effectImg = IMAGE_MANAGER->findImage("BoomerangEffect");
+		Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+		EFFECT_MANAGER->play("L_Effect_Boomerang", _pos, effectSize, _isLeft);
+		_effectCount = 0;
+	}
+
 	if (_projectile == nullptr)
 	{
 		Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
@@ -131,7 +141,7 @@ void Boomerang::attack(Player * player)
 
 	player->attack(_projectile, attackInfo);
 	_currBullet -= 1;						// 탄환 1 줄임
-	
+	_effectCount = 0;
 }
 
 void Boomerang::attack(FloatRect * rect, AttackInfo * info)

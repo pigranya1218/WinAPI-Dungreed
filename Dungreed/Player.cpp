@@ -264,9 +264,9 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	/*Boomerang* testWeapon5 = new Boomerang;
+	Boomerang* testWeapon5 = new Boomerang;
 	testWeapon5->init();
-	_inventory[14] = testWeapon5;*/
+	_inventory[14] = testWeapon5;
 
 	//MatchLockGun* testWeapon5 = new MatchLockGun;
 	//testWeapon5->init();

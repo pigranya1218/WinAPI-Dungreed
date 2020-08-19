@@ -3,8 +3,7 @@
 #include "NormalProjectile.h"
 #include "BoomerangProjectile.h"
 
-class Boomerang :
-	public Item
+class Boomerang : public Item
 {
 private:
 	Animation* _ani;
@@ -21,12 +20,14 @@ private:
 	float _attackDegree;
 	float _returnCount;
 	bool _isLeft;
+	bool _isAttack;
+	bool _activeEffect;
 	Vector2 _pos;
 	Vector2 _gunPos;
 	Vector2 _attackPos;
-	bool _isAttack;
 	FloatRect _attackRect;
 	int _timeCount;
+	int _effectCount;
 
 	float _baseAttackDelay; // 공격 쿨타임
 	float _currAttackDelay; // 남은 공격 쿨타임

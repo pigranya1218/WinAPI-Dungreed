@@ -117,14 +117,23 @@ void NormalProjectile::render()
 	if (_useAni)
 	{		
 		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
+
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		
 	}
 	else
 	{
 		_img->render(CAMERA->getRelativeV2(_position), _size);
+
+		/*Vector2 resize;
+		if (_size.x > _size.y)
+		{
+			resize = Vector2(_size.x / 10, _size.x / 10);
+		}*/
+
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
-		
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, resize, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+
 	}
 }
 
