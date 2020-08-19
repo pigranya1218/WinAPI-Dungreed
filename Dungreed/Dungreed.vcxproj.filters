@@ -510,9 +510,6 @@
     <ClInclude Include="MultiBullet.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="HeartOfCosmosProjectile.h">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClInclude>
     <ClInclude Include="PowerKatana.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
@@ -548,6 +545,9 @@
     </ClInclude>
     <ClInclude Include="BossRoom1.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="AccProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
     <ClInclude Include="Food.h">
       <Filter>Dungreed\GameScene\Player\Food</Filter>
@@ -911,9 +911,6 @@
     <ClCompile Include="MultiBullet.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="HeartOfCosmosProjectile.cpp">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Dungreed\GameScene\Item</Filter>
     </ClCompile>
@@ -967,6 +964,9 @@
     </ClCompile>
     <ClCompile Include="FluteGreatSword.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="AccProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -401,6 +401,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("GreenDadBat", L"resources/images/Accessories/GreenDadBat.png");                   // 아빠그린박쥐
 	IMAGE_MANAGER->addFrameImage("BabyBatBulletAt", L"resources/images/Accessories/BabyBatBullet0.png", 5, 1); // 아기 그린박쥐 공격 프레임이미지
 	IMAGE_MANAGER->addFrameImage("BabyBatBulletFx", L"resources/images/Accessories/BabyBatBulletFX.png", 7, 1);// 아기 그린박쥐 공격 충돌 프레임이미지
+	IMAGE_MANAGER->addFrameImage("DadBatBulletFX", L"resources/images/Accessories/DadBatBulletFX.png", 11, 1); // 아빠 그린박쥐 공격 충돌 프레임이미지
 	IMAGE_MANAGER->addFrameImage("babyGreenBatF", L"resources/images/Accessories/GreenBat0.png", 6, 1);        // 아기 그린박쥐 프레임이미지
 	IMAGE_MANAGER->addFrameImage("GreenBatF", L"resources/images/Accessories/GreenBat3.png", 6, 1);            // 그린박쥐 프레임이미지
 	IMAGE_MANAGER->addFrameImage("GreenDadBatF", L"resources/images/Accessories/GreenDadBat1.png", 7, 1);      // 아빠 그린박쥐 프레임이미지
@@ -562,6 +563,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("BombPouch2", "BombPouch2", 15, 50);
 	EFFECT_MANAGER->addEffect("HeartOfCosmosF", "HeartOfCosmosF", 15, 50);
 	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
+	EFFECT_MANAGER->addEffect("DadBatBulletFX", "DadBatBulletFX", 15, 50);
 
 	//** Boss
 	// * Belial

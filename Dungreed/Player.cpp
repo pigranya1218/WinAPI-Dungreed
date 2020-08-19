@@ -201,9 +201,9 @@ void Player::init()
 	_inventory[8] = testAcc9;
 
 
-	//bombPouch* testAcc5 = new bombPouch;
-	//testAcc5->init();
-	//_inventory[5] = testAcc5;
+	bombPouch* testAcc5 = new bombPouch;
+	testAcc5->init();
+	_inventory[6] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
@@ -231,7 +231,7 @@ void Player::init()
 
 	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
 	testAcc12->init();
-	_inventory[6] = testAcc12;
+	_inventory[9] = testAcc12;
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
@@ -244,6 +244,10 @@ void Player::init()
 	BigPaintBlush* testAcc15 = new BigPaintBlush;
 	testAcc15->init();
 	_inventory[7] = testAcc15;
+
+	OakBow* testAcc11 = new OakBow;
+	testAcc11->init();
+	_inventory[10] = testAcc11;
 
 	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
