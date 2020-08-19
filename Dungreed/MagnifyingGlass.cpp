@@ -12,7 +12,7 @@ void MagnifyingGlass::init()
 	_displayText = L"\"보는 대상을 실제로 더 크게 만들어 줍니다.\"";
 	//악세서리 옵션
 	_addStat.power = 17;
-	_addStat.attackSpeed = -30;
+	_addStat.attackSpeed = -0.7;
 	
 	//악세서리 가격
 	_price = 2400;
