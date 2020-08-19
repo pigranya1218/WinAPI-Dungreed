@@ -1,5 +1,6 @@
 #pragma once
 #include "DamageInfo.h"
+#include "PlayerStat.h"
 //#include <set>
 
 class AttackInfo
@@ -9,7 +10,7 @@ public:
 	//set<int> _usedItem; // 이것에 반영된 아이템 코드들
 
 	OBJECT_TEAM team; // 공격한 팀
-	bool madeByWeapon = false; // 무기에 의해 만들어졌는지 판단
+	bool madeByWeapon = false; // 무기에 의해 만들어졌는지 판단 (투사체 판단에 도움)
 
 	float minDamage = 0; // 최소 대미지
 	float maxDamage = 0; // 최대 대미지
@@ -21,5 +22,6 @@ public:
 public:
 	//~AttackInfo() {/* if (!_usedItem.empty()) { _usedItem.clear(); } */}
 	DamageInfo getDamageInfo();
+	DamageInfo getDamageInfo(PlayerStat stat);
 };
 

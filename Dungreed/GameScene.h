@@ -35,7 +35,7 @@ public:
 
 	// UI 관련 함수
 	bool isUIActive();
-
+	void showDamage(DamageInfo info, Vector2 pos);
 
 };
 

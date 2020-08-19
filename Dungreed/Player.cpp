@@ -730,29 +730,53 @@ bool Player::isHit(Projectile* projectile, bool isOnceCollision)
 
 bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 {
-	DamageInfo damageInfo = info->getDamageInfo();
-	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
-	_currHitTime = 0.5;
-	CAMERA->pushShakeEvent(25, 0.25);
+	DamageInfo damageInfo = info->getDamageInfo(_adjustStat);
+	if (damageInfo.damage > 0 || damageInfo.trueDamage > 0)
+	{
+		_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+		_currHitTime = 0.5;
+		CAMERA->pushShakeEvent(info->knockBack, 0.25);
+	}
+	Vector2 renderPos;
+	renderPos.x = RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x);
+	renderPos.y = RANDOM->getFromFloatTo(_position.y - _size.y, _position.y);
+	_gameScene->showDamage(damageInfo, renderPos);
+
 	return true;
 }
 
 bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
-	DamageInfo damageInfo = info->getDamageInfo();
-	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
-	_currHitTime = 0.5;
-	CAMERA->pushShakeEvent(25, 0.25);
+	DamageInfo damageInfo = info->getDamageInfo(_adjustStat);
+	if (damageInfo.damage > 0 || damageInfo.trueDamage > 0)
+	{
+		_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+		_currHitTime = 0.5;
+		CAMERA->pushShakeEvent(info->knockBack, 0.25);
+	}
+	Vector2 renderPos;
+	renderPos.x = RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x);
+	renderPos.y = RANDOM->getFromFloatTo(_position.y - _size.y, _position.y);
+	_gameScene->showDamage(damageInfo, renderPos);
+
 	return false;
 }
 
 bool Player::hitEffect(Projectile* projectile)
 {
 	AttackInfo* info = projectile->getAttackInfo();
-	DamageInfo damageInfo = info->getDamageInfo();
-	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
-	_currHitTime = 0.5;
-	CAMERA->pushShakeEvent(25, 0.25);
+	DamageInfo damageInfo = info->getDamageInfo(_adjustStat);
+	if (damageInfo.damage > 0 || damageInfo.trueDamage > 0)
+	{
+		_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+		_currHitTime = 0.5;
+		CAMERA->pushShakeEvent(info->knockBack, 0.25);
+	}
+	Vector2 renderPos;
+	renderPos.x = RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x);
+	renderPos.y = RANDOM->getFromFloatTo(_position.y - _size.y, _position.y);
+	_gameScene->showDamage(damageInfo, renderPos);
+
 	return true;
 }
 
