@@ -14,6 +14,8 @@
 #include "PowerKatana.h"
 #include "QuarterStaffBig.h"
 #include "BigPaintBlush.h"
+#include "Lumber.h"
+#include "FluteGreatSword.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -256,7 +258,7 @@ void Player::init()
 	testWeapon3->init();
 	_inventory[12] = testWeapon3;
 
-	PowerKatana* testWeapon4 = new PowerKatana;
+	PickaxeRed* testWeapon4 = new PickaxeRed;
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;
 
@@ -264,7 +266,7 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	GatlingGun* testWeapon5 = new GatlingGun;
+	FluteGreatSword* testWeapon5 = new FluteGreatSword;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
 

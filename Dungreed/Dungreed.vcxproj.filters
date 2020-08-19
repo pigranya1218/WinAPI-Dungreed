@@ -558,6 +558,12 @@
     <ClInclude Include="DialogueUI.h">
       <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Lumber.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="FluteGreatSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -955,6 +961,12 @@
     </ClCompile>
     <ClCompile Include="DialogueUI.cpp">
       <Filter>Dungreed\GameScene\Stage\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Lumber.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="FluteGreatSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,7 @@ void PowerKatana::init()
 {
 	_iconImg = IMAGE_MANAGER->findImage("PowerKatana");
 	_img = IMAGE_MANAGER->findImage("PowerKatanaHUD");
+	_imgAttack = IMAGE_MANAGER->findImage("KatanaWhite");
 	_price = 600;
 	_itemName = L"육도 '가이'";
 	_displayText = L"\"봉인이 되어 있군요. 여덟 개의 문을 열 수 있게 되어 있지만, 네 개 이상은 저희의 힘으론.. -로젠-\"";
@@ -23,7 +24,7 @@ void PowerKatana::init()
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
-	_oneAttack = true;
+	_oneAttack = false;
 	_angleOffset = 0;
 	_width = _img->getWidth();
 	_height = _img->getHeight();
@@ -37,7 +38,19 @@ void PowerKatana::release()
 void PowerKatana::update(Player* player, float const elapsedTime)
 {
 	float ratio = 180 / (1 / _addStat.attackSpeed / 2);
-
+	float ratio2 = elapsedTime / (_addStat.attackSpeed * 0.08);
+	if (_oneAttack)
+	{
+	
+	}
+	else
+	{
+		_imgAttack->setAlpha(0.7);
+		if (_currAttackDelay <= _addStat.attackSpeed * 0.88)
+		{
+			_oneAttack = true;
+		}
+	}
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
@@ -78,11 +91,27 @@ void PowerKatana::frontRender(Player* player)
 	(isLeft) ? (renderPosWeapon.x -= -0.2*_width * 4) : (renderPosWeapon.x += -0.2*_width * 4);
 	//renderPosWeapon.x += (isLeft) ? (-width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4) : (width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4);
 	//renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * width * 0.15 * 4;
+	if (_oneAttack)
+	{
+		_img->setScale(4); // 이미지 크기 
+		_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
+		_img->setAnglePos(Vector2(0.7f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
+		
+	}
+	else
+	{
+	
+	_imgAttack->setScale(4); // 이미지 크기 
+	_imgAttack->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
+	_imgAttack->setAnglePos(Vector2(0.7f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
+	_imgAttack->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
+	
+	}
 
-	_img->setScale(4); // 이미지 크기 
-	_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
-	_img->setAnglePos(Vector2(0.7f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
-	_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
+
+
+
 	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
@@ -130,7 +159,7 @@ void PowerKatana::attack(Player* player)
 	Vector2 pos = player->getPosition();
 
 	Vector2 renderPosHand = pos;
-	
+	_oneAttack = false;
 	// 손으로부터 마우스 에임까지의 각도
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_drawEffect = true;
