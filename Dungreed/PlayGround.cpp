@@ -141,6 +141,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/DASH_INSIDE", L"resources/images/gameScene/ui/DashBase.png");
 	IMAGE_MANAGER->addImage("UI/DASH_GAUGE", L"resources/images/gameScene/ui/DashCount.png");
 	IMAGE_MANAGER->addImage("UI/WEAPON_BG", L"resources/images/gameScene/ui/EquippedWeaponBase.png");
+
+	IMAGE_MANAGER->addImage("UI/WARNING_LEFT", L"resources/images/gameScene/ui/RedWarningOnHit_0.png");
+	IMAGE_MANAGER->addImage("UI/WARNING_RIGHT", L"resources/images/gameScene/ui/RedWarningOnHit_1.png");
 	// *** DIALOGUE
 	IMAGE_MANAGER->addImage("UI/DIALOGUE/BASE", L"resources/images/gameScene/ui/dialogue/dialogue_body.png");
 	IMAGE_MANAGER->addImage("UI/DIALOGUE/SELECT", L"resources/images/gameScene/ui/dialogue/dialogue_select.png");

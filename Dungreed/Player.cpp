@@ -169,6 +169,7 @@ void Player::init()
 	_currHp = 40;
 	_currSatiety = 30;
 	_currGold = 1000;
+	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
 	// TEST ITEM
@@ -545,6 +546,11 @@ void Player::update(float const elapsedTime)
 			_equippedAcc[i]->update(this, elapsedTime);
 		}
 	}
+
+	if (_currHitTime > 0)
+	{
+		_currHitTime = max(0, _currHitTime - elapsedTime);
+	}
 }
 
 void Player::render()
@@ -588,6 +594,17 @@ void Player::render()
 		_hand->frontRender(this);
 	}
 
+
+	if (_currHitTime > 0)
+	{
+		if (_currHitTime < 0.25)
+		{
+			IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->setAlpha((_currHitTime / 0.25));
+			IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->setAlpha((_currHitTime / 0.25));
+		}
+		IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->render(Vector2(WINSIZEX * 0.25f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
+		IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->render(Vector2(WINSIZEX * 0.75f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
+	}
 	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }
 
@@ -706,6 +723,7 @@ bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 {
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+	_currHitTime = 0.5;
 	return true;
 }
 
@@ -713,6 +731,7 @@ bool Player::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+	_currHitTime = 0.5;
 	return false;
 }
 
@@ -721,6 +740,7 @@ bool Player::hitEffect(Projectile* projectile)
 	AttackInfo* info = projectile->getAttackInfo();
 	DamageInfo damageInfo = info->getDamageInfo();
 	_currHp = max(0, _currHp - (damageInfo.damage + damageInfo.trueDamage));
+	_currHitTime = 0.5;
 	return true;
 }
 

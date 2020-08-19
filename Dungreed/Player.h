@@ -31,6 +31,8 @@ private:
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	
+	float	_currHitTime;			// 피격 타임
+	
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
