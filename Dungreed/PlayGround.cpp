@@ -570,13 +570,22 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack", L"resources/images/boss/Belial/attack.png", 10, 1);							//벨리알 머리 공격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot", L"resources/images/boss/Belial/getHeadDamage_Idle.png", 10, 1);			//벨리알 머리 대기 피격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Head/IdAttackle_Shot", L"resources/images/boss/Belial/getHeadDamage_attack.png", 10, 1);	//벨리알 머리 공격 피격 상태
-
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle", L"resources/images/boss/Belial/HandIdle.png", 10, 1);							//벨리알 손 대기 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack", L"resources/images/boss/Belial/Handattack.png", 18, 1);						//벨리알 손 공격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle_Shot", L"resources/images/boss/Belial/getHandDamage_Idle.png", 10, 1);			//벨리알 손 대기 피격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/IdAttackle_Shot", L"resources/images/boss/Belial/getHandDamage_attack.png", 18, 1);	//벨리알 손 공격 피격 상태
-
 	IMAGE_MANAGER->addFrameImage("Belial/Back", L"resources/images/boss/Belial/back.png", 10, 1);									//벨리알 후광 구
+	IMAGE_MANAGER->addFrameImage("Belial/particle", L"resources/images/boss/Belial/particle.png", 9, 1);							//벨리알 구 주변 이팩트
+	IMAGE_MANAGER->addFrameImage("Belial/Bullet", L"resources/images/boss/Belial/bullet.png", 2, 1);								//벨리알 총알
+	IMAGE_MANAGER->addFrameImage("Belial/Bullet_Fx", L"resources/images/boss/Belial/bullet_Fx.png", 8, 1);							//벨리알 타격 이팩트
+
+	IMAGE_MANAGER->addFrameImage("Belial/Laser", L"resources/images/boss/Belial/laser.png", 8, 1);									//벨리알 레이저
+	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/laser_head.png", 8, 1);						//벨리알 레이저 앞부분
+
+	IMAGE_MANAGER->addImage("Belial/Sword", L"resources/images/boss/Belial/BossSword.png");										    //벨리알 검
+
+	EFFECT_MANAGER->addEffect("Belial/Bullet_Fx","Belial/Bullet_Fx",10,50);															//벨리알 벽붇 이팩트
+
 
 	// * 니플헤임
 	IMAGE_MANAGER->addFrameImage("Niflheim/Idle"	, L"resources/images/boss/Niflheim/idle.png"	,  6, 1);	// 니플헤임 기본

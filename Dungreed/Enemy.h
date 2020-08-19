@@ -147,6 +147,9 @@ protected:
 		void fireBullet(int enemyCode, EnemyManager* enemyManager, int fireCount = 0);
 	};
 
+
+
+
 	// 공격에 관련된 것들
 	struct tagAttackInfo
 	{
