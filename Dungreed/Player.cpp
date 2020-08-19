@@ -256,13 +256,22 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	GatlingGun* testWeapon5 = new GatlingGun;
+	/*GatlingGun* testWeapon5 = new GatlingGun;
+	testWeapon5->init();
+	_inventory[14] = testWeapon5;*/
+
+	/*MagicStick* testWeapon5 = new MagicStick;
+	testWeapon5->init();
+	_inventory[14] = testWeapon5;*/
+
+	/*Boomerang* testWeapon5 = new Boomerang;
+	testWeapon5->init();
+	_inventory[14] = testWeapon5;*/
+
+	MatchLockGun* testWeapon5 = new MatchLockGun;
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
 
-	//MagicStick* testWeapon5 = new MagicStick;
-	//testWeapon5->init();
-	//_inventory[14] = testWeapon5;
 
 	_hand = new Punch;
 	_hand->init();

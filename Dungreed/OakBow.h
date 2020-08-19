@@ -20,12 +20,15 @@ private:
 	float _effectAngleRadianValue;
 	Image* _img;
 	Animation* _ani;
+	
+	int _effectCount;
+	int _frameCount;
+	int _timeCount;
+public:
 	Vector2 renderPosHand;
 	Vector2 renderPosWeapon;
 	Vector2 anglePos;
 	Vector2 subHandPos;
-	int effectCount;
-public:
 
 	virtual void init();
 	virtual void release();

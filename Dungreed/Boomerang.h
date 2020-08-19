@@ -37,6 +37,8 @@ private:
 	bool _drawEffect; // 이번 render 함수에서 이펙트를 시작할 것인지 판단
 
 	BoomerangProjectile* _projectile;
+
+	AttackInfo* attackInfo02;
 public:
 	virtual void init();
 	virtual void release();

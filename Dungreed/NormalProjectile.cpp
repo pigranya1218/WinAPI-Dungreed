@@ -116,7 +116,7 @@ void NormalProjectile::render()
 	}
 	if (_useAni)
 	{		
-		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);		
+		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		
 	}

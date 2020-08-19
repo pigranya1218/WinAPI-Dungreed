@@ -3,19 +3,14 @@
 
 void OakBow::init()
 {
-	//_type = ITEM_TYPE::WEAPON_TWO_HAND;
-	//_rank = ITEM_RANK::NORMAL;
 	_iconImg = IMAGE_MANAGER->findImage("OakBow");
 	_img = IMAGE_MANAGER->findImage("OakBowAni");
 
-	_itemName = L"떡갈나무 활";
 	_itemCode = 0x02161;
-
-	//_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
+	_itemName = L"떡갈나무 활";
 	_displayText = L"\"단단해서 때리는 데 쓸 수도 있을 것 같습니다.\"";
 
 	// 기본 보조옵션
-	//_addStat.dashDamage = 20;
 	_addStat.attackSpeed = 3.03;
 	_addStat.minDamage = 20;
 	_addStat.maxDamage = 35;
@@ -31,7 +26,9 @@ void OakBow::init()
 	_currReloadDelay = 0;
 	_drawEffect = false;
 	_isAttack = false;
-	effectCount = 0;
+	_effectCount = 0;
+	_frameCount = 0;
+	_timeCount = 0;
 
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
@@ -67,18 +64,18 @@ void OakBow::update(Player * player, float const elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	if (_ani->getPlayIndex() == 3)
-	{
-		effectCount++;
-		if (effectCount == 20)
-		{
-			_drawEffect = true;						// 이펙트 그리기
-		}
-		else
-		{
-			_drawEffect = false;
-		}
-	}
+	//if (_ani->getPlayIndex() == 3)
+	//{
+	//	_effectCount++;
+	//	if (_effectCount == 20)
+	//	{
+	//		_drawEffect = true;						// 이펙트 그리기
+	//	}
+	//	else
+	//	{
+	//		_drawEffect = false;
+	//	}
+	//}
 
 	renderPosHand = pos;
 	renderPosHand.x += ((isLeft) ? (_img->getFrameSize().x * 0.1f * 4) : -(_img->getFrameSize().y * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
@@ -116,10 +113,10 @@ void OakBow::update(Player * player, float const elapsedTime)
 				}
 				return;
 			}
+			
+			_effectCount = 0;
 
-			effectCount = 0;
-
-			_ani->setFPS(6);
+			_ani->setFPS(10);
 			_ani->setPlayFrame(4, 6, false);
 			_ani->start();
 
@@ -142,8 +139,17 @@ void OakBow::update(Player * player, float const elapsedTime)
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
 			projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
 
+			string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
+			attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+			attackInfo->critical = 0;
+			attackInfo->criticalDamage = 0;
+			attackInfo->minDamage = _addStat.minDamage;
+			attackInfo->maxDamage = _addStat.maxDamage;
+			attackInfo->knockBack = 0;
+
 			player->attack(projectile, attackInfo);
 			_currAttackDelay = _baseAttackDelay;	// 공격 쿨타임 설정
 			_currBullet -= 1;						// 탄환 1 줄임
@@ -151,8 +157,18 @@ void OakBow::update(Player * player, float const elapsedTime)
 			if (_isAttack)
 			{
 				_isAttack = false;
+				if (_frameCount >= 3)
+				{
+					_frameCount++;
+					if (_frameCount > 5)
+					{
+						_frameCount = 0;
+					}
+				}
 			}
 		}
+
+		/**/
 	}
 }
 
@@ -182,7 +198,15 @@ void OakBow::frontRender(Player * player)
 	_img->setScale(4);
 	_img->setAngle(renderDegree);
 	_img->setAnglePos(anglePos);
-	_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
+
+	if (_isAttack)
+	{
+		_img->frameRender(CAMERA->getRelativeV2(renderPosWeapon), _frameCount, 0, isLeft);
+	}
+	if (!_isAttack)
+	{
+		_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);
+	}
 
 	//손 그리기 어케해야하누...음...
 	Vector2 renderSunHandPos = subHandPos;
@@ -218,6 +242,11 @@ void OakBow::displayInfo()
 
 void OakBow::attack(Player * player)
 {
+	if (!_isAttack)
+	{
+		_isAttack = true;
+	}
+
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currBullet == 0) // 총알이 없다면
 	{
@@ -227,20 +256,28 @@ void OakBow::attack(Player * player)
 		}
 		return;
 	}
-
-	_ani->setFPS(6);
-	_ani->setPlayFrame(0, 4, false);
-	_ani->start();
-
-	if (_ani->getPlayIndex() >= 3)
+	
+	_timeCount++;
+	if (_timeCount == 10)
 	{
-		_drawEffect = true;						// 이펙트 그리기
+		_timeCount = 0;
+		_frameCount++;
+	}
+	if (_frameCount >= 3)
+	{
+		_frameCount = 3;
 	}
 
-	if (!_isAttack)
-	{
-		_isAttack = true;
-	}
+	//_ani->setFPS(1);
+	//_ani->setPlayFrame(0, 4, false);
+	//_ani->start();
+
+	//if (_frameCount >= 3)
+	//{
+	//	_drawEffect = true;						// 이펙트 그리기
+	//}
+
+	
 }
 
 void OakBow::attack(FloatRect * rect, AttackInfo * info)
