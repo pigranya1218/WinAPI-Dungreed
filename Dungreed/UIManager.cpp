@@ -482,58 +482,72 @@ void UIManager::render()
 
 void UIManager::showDamage(DamageInfo damage, Vector2 pos)
 {
-	tagDamageUI damageUI;
-	damageUI.pos = pos;
-	damageUI.alpha = 1;
-	damageUI.remainTimes = 1;
+	
 	if (damage.isEvade)
 	{
-		damageUI.type = 1;
+		tagDamageUI damageUI;
+		damageUI.pos = pos;
+		damageUI.alpha = 1;
+		damageUI.remainTimes = 1; damageUI.type = 1;
 		damageUI.fontSize = 35;
 		damageUI.textColor = RGB(0, 154, 1);
+		_damageUI.push_back(damageUI);
+
 	}
 	else if (damage.isBlock)
 	{
-		damageUI.type = 2;
+		tagDamageUI damageUI;
+		damageUI.pos = pos;
+		damageUI.alpha = 1;
+		damageUI.remainTimes = 1; damageUI.type = 2;
 		damageUI.fontSize = 35;
 		damageUI.textColor = RGB(0, 0, 0);
+		_damageUI.push_back(damageUI);
+
 	}
 	else
 	{
-		damageUI.type = 0;
-		damageUI.fontSize = 30;
-		damageUI.value = damage.damage;
-		if (damage.isCritical)
+		if (damage.damage >= 0)
 		{
-			damageUI.fontSize = 35;
-			damageUI.textColor = RGB(243, 152, 0);
-		}
-		else if (damage.damage < 20)
-		{
-			damageUI.fontSize = 30;
-			damageUI.textColor = RGB(255, 255, 255);
-		}
-		else
-		{
-			damageUI.fontSize = 30;
-			damageUI.textColor = RGB(255, 212, 0);
+			tagDamageUI damageUI;
+			damageUI.pos = pos;
+			damageUI.alpha = 1;
+			damageUI.remainTimes = 1; 
+			damageUI.type = 0;
+			damageUI.value = damage.damage;
+			if (damage.isCritical)
+			{
+				damageUI.fontSize = 35;
+				damageUI.textColor = RGB(243, 152, 0);
+			}
+			else if (damage.damage < 20)
+			{
+				damageUI.fontSize = 30;
+				damageUI.textColor = RGB(222, 222, 0);
+			}
+			else
+			{
+				damageUI.fontSize = 30;
+				damageUI.textColor = RGB(255, 212, 0);
+			}
+			_damageUI.push_back(damageUI);
 		}
 
-		if (damage.trueDamage != 0)
+		if (damage.trueDamage > 0)
 		{
 			tagDamageUI trueDamageUI;
 			trueDamageUI.type = 0;
 			trueDamageUI.value = damage.trueDamage;
 			trueDamageUI.pos = pos;
-			trueDamageUI.pos.x += 10;
-			trueDamageUI.pos.y += 10;
+			trueDamageUI.pos.x += RANDOM->getFromIntTo(-20, 20);
+			trueDamageUI.pos.y += RANDOM->getFromIntTo(-10, 10);
 			trueDamageUI.remainTimes = 1;
 			trueDamageUI.textColor = RGB(255, 255, 255);
+			trueDamageUI.fontSize = 30;
 			trueDamageUI.alpha = 1;
 			_damageUI.push_back(trueDamageUI);
 		}
 	}
-	_damageUI.push_back(damageUI);
 
 }
 

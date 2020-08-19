@@ -40,7 +40,7 @@ DamageInfo AttackInfo::getDamageInfo(PlayerStat stat)
 		}
 		result.damage *= (100 / (100 + stat.defense)); // 방어력 계산
 		result.damage = max(0, result.damage - stat.toughness); // 강인함 계산
-		result.trueDamage = trueDamage; // 트루대미지는 크리티컬 영향을 받지 않음
+		result.trueDamage = trueDamage; // 트루대미지
 	}
 
 	return result;
