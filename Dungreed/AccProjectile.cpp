@@ -77,21 +77,7 @@ void AccProjectile::update(float elapsedTime)
 	}
 
 
-	if (_collsionGround)
-	{
-		if (!_ani->isPlay()) {
-			if (_info->team == OBJECT_TEAM::PLAYER)
-			{
-				// ENEMY와의 충돌 검사
-				if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
-				{
-					return;
-				}
-			}
-		}
-	}
-	else
-	{
+	
 		if (_info->team == OBJECT_TEAM::PLAYER)
 		{
 			// ENEMY와의 충돌 검사
@@ -100,7 +86,7 @@ void AccProjectile::update(float elapsedTime)
 				return;
 			}
 		}
-	}
+	
 
 	
 	// 지속시간을 넘어가면

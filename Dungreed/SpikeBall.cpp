@@ -28,7 +28,29 @@ void SpikeBall::release()
 
 void SpikeBall::update(Player* player, float const elapsedTime)
 {
+	Vector2 renderPos = player->getPosition();
 	_angle += 2.233f*elapsedTime;
+
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+
+	FloatCircle* attackCircle = new FloatCircle;
+	attackCircle->origin = renderPos;
+	attackCircle->size = 240;
+	attackCircle->startRadian = _angle - PI * 0.28;
+	attackCircle->endRadian = _angle + PI * 0.28;
+
+	_attackDebug = FloatCircle(renderPos, 240, _angle - PI * 0.28, _angle + PI * 0.28); // forDEBUG
+
+	AttackInfo* attackInfo = new AttackInfo;
+	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo->critical = 0;
+	attackInfo->criticalDamage = 0;
+	attackInfo->minDamage = _addStat.minDamage;
+	attackInfo->maxDamage = _addStat.maxDamage;
+	attackInfo->knockBack = 15;
+
+	player->attack(attackCircle, attackInfo);
 }
 
 void SpikeBall::frontRender(Player* player)
@@ -37,6 +59,7 @@ void SpikeBall::frontRender(Player* player)
 
 void SpikeBall::backRender(Player* player)
 {
+	
 	_x = cosf(_angle) * 110;
 	_y = -sinf(_angle) * 110;
 

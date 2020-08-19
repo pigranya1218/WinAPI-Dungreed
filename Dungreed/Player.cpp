@@ -181,9 +181,9 @@ void Player::init()
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
-	GreenBat* testAcc2 = new GreenBat;
-	testAcc2->init();
-	_inventory[1] = testAcc2;
+	//GreenBat* testAcc2 = new GreenBat;
+	//testAcc2->init();
+	//_inventory[1] = testAcc2;
 
 
 	GreenDadBat* testAcc3 = new GreenDadBat;
@@ -240,6 +240,11 @@ void Player::init()
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
 	_inventory[0] = testAcc14;
+
+	Voluspa* testAcc16 = new Voluspa;
+	testAcc16->init();
+	_inventory[1] = testAcc16;
+
 
 	BigPaintBlush* testAcc15 = new BigPaintBlush;
 	testAcc15->init();
