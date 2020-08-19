@@ -130,6 +130,7 @@ void GreenDadBat::attack(Player * player)
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->madeByWeapon = false; 
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
 	attackInfo->maxDamage = 5;
 	attackInfo->minDamage = 3;

@@ -5,8 +5,6 @@
 class NormalProjectile : public Projectile
 {
 private:
-	float		_angleRadian;		// 투사체 날아가는 각도
-	Vector2		_force;				// 투사체 날아가는 힘
 
 	float		_maxTime;			// 투사체 지속시간
 	float		_count;				// 시간 계산용

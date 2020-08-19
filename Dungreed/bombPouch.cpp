@@ -75,6 +75,7 @@ void bombPouch::dash(Player * player)
 		string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
+		attackInfo->madeByWeapon = false; 
 		attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
 		attackInfo->maxDamage = 5;
 		attackInfo->minDamage = 3;

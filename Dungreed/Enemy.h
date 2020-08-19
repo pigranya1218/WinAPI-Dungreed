@@ -243,6 +243,8 @@ protected:
 	tagMoveInfo	_moving;	// 이동 구조체도 모든 에너미가 사용함
 
 public:
+	
+	virtual ~Enemy() {}
 	virtual void init() {}
 	virtual void init(const Vector2& pos) {}
 	virtual void init(const Vector2& pos, DIRECTION direction) {}

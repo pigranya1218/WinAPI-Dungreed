@@ -107,3 +107,8 @@ bool GameScene::isUIActive()
 {
 	return _uiMgr->isActive();
 }
+
+void GameScene::showDamage(DamageInfo info, Vector2 pos)
+{
+	_uiMgr->showDamage(info, pos);
+}

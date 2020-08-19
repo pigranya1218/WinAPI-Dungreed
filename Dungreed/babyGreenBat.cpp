@@ -138,6 +138,7 @@ void babyGreenBat::attack(Player* player)
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;	
+	attackInfo->madeByWeapon = false;
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode + "1");
 	attackInfo->maxDamage = 1;
 	attackInfo->minDamage = 2;
@@ -155,6 +156,7 @@ void babyGreenBat::attack(Player* player)
 
 	AttackInfo* attackInfo0 = new AttackInfo;
 	attackInfo0->team = OBJECT_TEAM::PLAYER;
+	attackInfo0->madeByWeapon = false; 
 	attackInfo0->attackID = TTYONE_UTIL::getHash(attackCode + "2");
 	attackInfo0->maxDamage = 1;
 	attackInfo0->minDamage = 2;

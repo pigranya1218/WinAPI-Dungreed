@@ -104,7 +104,7 @@ void UIManager::update(float const elaspedTime)
 			}
 			else
 			{
-				_damageUI[i].alpha = max(0, _damageUI[i].alpha - elaspedTime * 2);
+				_damageUI[i].alpha = max(0, _damageUI[i].alpha - elaspedTime * 2.5);
 			}
 		}
 		else
@@ -243,9 +243,31 @@ void UIManager::render()
 		// DAMAGE UI
 		for (int i = 0; i < _damageUI.size(); i++)
 		{
-			D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 50), CAMERA->getRelativeY(_damageUI[i].pos.y), 
-				to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, _damageUI[i].fontSize,
-				100, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+			switch (_damageUI[i].type)
+			{
+			case 0: // 대미지 입음
+			{
+				D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 50), CAMERA->getRelativeY(_damageUI[i].pos.y),
+					to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, _damageUI[i].fontSize,
+					100, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+			}
+			break;
+			case 1: // 회피
+			{
+				D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 100), CAMERA->getRelativeY(_damageUI[i].pos.y),
+					L"EVADE", _damageUI[i].textColor, _damageUI[i].fontSize,
+					200, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+			}
+			break;
+			case 2: // 블록
+			{
+				D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 100), CAMERA->getRelativeY(_damageUI[i].pos.y),
+					L"BLOCK", _damageUI[i].textColor, _damageUI[i].fontSize,
+					200, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+			}
+			break;
+			}
+			
 		}
 
 		// ENEMY HP UI
@@ -460,41 +482,73 @@ void UIManager::render()
 
 void UIManager::showDamage(DamageInfo damage, Vector2 pos)
 {
-	tagDamageUI damageUI;
-	damageUI.value = damage.damage;
-	damageUI.pos = pos;
-	damageUI.remainTimes = 1;
-	damageUI.fontSize = 30;
-	if (damage.isCritical)
+	
+	if (damage.isEvade)
 	{
+		tagDamageUI damageUI;
+		damageUI.pos = pos;
+		damageUI.alpha = 1;
+		damageUI.remainTimes = 1; damageUI.type = 1;
 		damageUI.fontSize = 35;
-		damageUI.textColor = RGB(243, 152, 0);
+		damageUI.textColor = RGB(0, 154, 1);
+		_damageUI.push_back(damageUI);
+
 	}
-	else if (damage.damage < 20)
+	else if (damage.isBlock)
 	{
-		damageUI.fontSize = 30;
-		damageUI.textColor = RGB(255, 255, 255);
+		tagDamageUI damageUI;
+		damageUI.pos = pos;
+		damageUI.alpha = 1;
+		damageUI.remainTimes = 1; damageUI.type = 2;
+		damageUI.fontSize = 35;
+		damageUI.textColor = RGB(0, 0, 0);
+		_damageUI.push_back(damageUI);
+
 	}
 	else
 	{
-		damageUI.fontSize = 30; 
-		damageUI.textColor = RGB(255, 212, 0);
-	}
-	damageUI.alpha = 1;
-	_damageUI.push_back(damageUI);
+		if (damage.damage >= 0)
+		{
+			tagDamageUI damageUI;
+			damageUI.pos = pos;
+			damageUI.alpha = 1;
+			damageUI.remainTimes = 1; 
+			damageUI.type = 0;
+			damageUI.value = damage.damage;
+			if (damage.isCritical)
+			{
+				damageUI.fontSize = 35;
+				damageUI.textColor = RGB(243, 152, 0);
+			}
+			else if (damage.damage < 20)
+			{
+				damageUI.fontSize = 30;
+				damageUI.textColor = RGB(222, 222, 0);
+			}
+			else
+			{
+				damageUI.fontSize = 30;
+				damageUI.textColor = RGB(255, 212, 0);
+			}
+			_damageUI.push_back(damageUI);
+		}
 
-	if (damage.trueDamage != 0)
-	{
-		tagDamageUI trueDamageUI;
-		trueDamageUI.value = damage.trueDamage;
-		trueDamageUI.pos = pos;
-		trueDamageUI.pos.x += 10;
-		trueDamageUI.pos.y += 10;
-		trueDamageUI.remainTimes = 1;
-		trueDamageUI.textColor = RGB(255, 255, 255);
-		trueDamageUI.alpha = 1;
-		_damageUI.push_back(trueDamageUI);
+		if (damage.trueDamage > 0)
+		{
+			tagDamageUI trueDamageUI;
+			trueDamageUI.type = 0;
+			trueDamageUI.value = damage.trueDamage;
+			trueDamageUI.pos = pos;
+			trueDamageUI.pos.x += RANDOM->getFromIntTo(-20, 20);
+			trueDamageUI.pos.y += RANDOM->getFromIntTo(-10, 10);
+			trueDamageUI.remainTimes = 1;
+			trueDamageUI.textColor = RGB(255, 255, 255);
+			trueDamageUI.fontSize = 30;
+			trueDamageUI.alpha = 1;
+			_damageUI.push_back(trueDamageUI);
+		}
 	}
+
 }
 
 void UIManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)

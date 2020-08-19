@@ -8,7 +8,7 @@ void DaisyRing::init()
 	_iconImg = IMAGE_MANAGER->findImage("DaisyRing");
 	_itemCode = 0x0340F;	
 	_itemName = L"데이지 반지";	
-	_displayText = L"\"희망을 드리겠어요.""\"";
+	_displayText = L"\"희망을 드리겠어요.\"";
 	_count = 0;
 	
 	

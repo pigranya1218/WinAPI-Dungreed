@@ -63,6 +63,7 @@ private:
 
 	struct tagDamageUI // 대미지에 따른 숫자 표기
 	{
+		int type; // 0 = damage, 1 = EVADE, 2 = BLOCK
 		float value; // 대미지 값
 		COLORREF textColor;
 		float remainTimes; // 사라지기까지 남은 시간

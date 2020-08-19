@@ -72,7 +72,7 @@ void NormalProjectile::update(float elapsedTime)
 	_projectileMgr->moveTo(this, moveDir, _collsionGround, _collisionPlatForm);
 	Vector2 currDir = _position;
 
-	if (lastDir.x == currDir.x || lastDir.y == currDir.y)
+	if (lastDir + moveDir != currDir)
 	{
 		_active = false;
 	}

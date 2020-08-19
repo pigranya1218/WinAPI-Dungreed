@@ -520,11 +520,7 @@ bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 
 bool Stage::isHitPlayer(Projectile * projectile, bool isOnceCollision)
 {
-	if (_player->isHit(projectile, isOnceCollision))
-	{
-		return _player->hitEffect(projectile);
-	}
-	return false;
+	return _player->isHit(projectile, isOnceCollision);
 }
 
 Vector2 Stage::getPlayerPos()
