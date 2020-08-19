@@ -39,6 +39,7 @@
 #include "DemonBoots.h"
 #include "MultiBullet.h"
 #include "DaisyRing.h"
+#include "Wingboots.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -186,9 +187,9 @@ void Player::init()
 	//_inventory[1] = testAcc2;
 
 
-	GreenDadBat* testAcc3 = new GreenDadBat;
-	testAcc3->init();
-	_inventory[2] = testAcc3;
+	//GreenDadBat* testAcc3 = new GreenDadBat;
+	//testAcc3->init();
+	//_inventory[2] = testAcc3;
 
 	
 	GreenMomBat* testAcc4 = new GreenMomBat;
@@ -244,6 +245,10 @@ void Player::init()
 	Voluspa* testAcc16 = new Voluspa;
 	testAcc16->init();
 	_inventory[1] = testAcc16;
+
+	Wingboots* testAcc17 = new Wingboots;
+	testAcc17->init();
+	_inventory[2] = testAcc17;
 
 
 	BigPaintBlush* testAcc15 = new BigPaintBlush;

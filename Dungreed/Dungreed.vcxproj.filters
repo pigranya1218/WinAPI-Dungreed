@@ -564,6 +564,9 @@
     <ClInclude Include="FluteGreatSword.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
+    <ClInclude Include="Wingboots.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -967,6 +970,9 @@
     </ClCompile>
     <ClCompile Include="AccProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Wingboots.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
