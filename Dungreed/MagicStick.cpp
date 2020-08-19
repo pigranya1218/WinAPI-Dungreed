@@ -182,7 +182,7 @@ void MagicStick::attack(Player * player)
 
 
 	//projectile->init("lalaStickBullet", angleRadian, 30 * 1, true, false, 3, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("lalaStickBullet", "", Vector2(), Vector2(30 * 1, 30 * 1), 3, true, false, false, 10, true, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+	projectile->init("lalaStickBullet", "", Vector2(50, 50), Vector2(50, 50), Vector2(30 * 1, 30 * 1), 3, true, false, false, 10, true, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;

@@ -189,3 +189,39 @@ bool Enemy::hitEffect(Projectile * projectile)
 
 	return true;
 }
+
+void Enemy::tagAttackInfo::attackCircle(int enemyCode, EnemyManager * enemyManager, const Vector2& pos, const float startRad, const float endRad)
+{
+	FloatCircle* circle = new FloatCircle;
+	AttackInfo* attackInfo = new AttackInfo;
+
+	circle->origin = pos;
+	circle->startRadian = startRad;
+	circle->endRadian = endRad;
+
+	attackInfo->team = OBJECT_TEAM::ENEMY;
+	attackInfo->minDamage = info.minDamage;
+	attackInfo->maxDamage = info.maxDamage;
+	attackInfo->knockBack = info.knockBack;
+	attackInfo->trueDamage = info.trueDamage;
+	attackInfo->critical = info.critical;
+	attackInfo->criticalDamage = info.criticalDamage;
+
+	if (id.empty())
+	{
+		id = to_string(enemyCode) + to_string(TIME_MANAGER->getWorldTime());
+	}
+	attackInfo->attackID = TTYONE_UTIL::getHash(id);
+
+	circleDebug = FloatCircle(pos, circleSize, startRad, endRad);
+
+	enemyManager->attack(circle, attackInfo);
+
+	SAFE_DELETE(circle);
+	SAFE_DELETE(attackInfo);
+}
+
+void Enemy::tagAttackInfo::attackRect()
+{
+
+}

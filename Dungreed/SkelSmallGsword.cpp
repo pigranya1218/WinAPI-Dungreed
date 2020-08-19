@@ -31,6 +31,7 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
 	_attack.distance = 100;
+	
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;

@@ -219,7 +219,7 @@ void Player::init()
 	//_inventory[8] = testAcc8;
 	//
 	
-	MagnifyingGlass* testAcc10 = new MagnifyingGlass;
+	QuarterStaffBig* testAcc10 = new QuarterStaffBig;
 	testAcc10->init();
 	_inventory[9] = testAcc10;
 

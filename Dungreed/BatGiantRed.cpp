@@ -26,7 +26,7 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	_hit.delay = 0.3;
 
 	// 투사체 초기화
-	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 0), _scale, 0.02f, 1.5f, false, true, true, false, true, false);
+	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.02f, 1.5f, false, true, true, false, true, false);
 	
 	_isDetect = 0;
 	_detectRange = 300;
@@ -119,8 +119,6 @@ void BatGiantRed::update(float const timeElapsed)
 
 void BatGiantRed::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rect));
-	D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _detectRange);
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
