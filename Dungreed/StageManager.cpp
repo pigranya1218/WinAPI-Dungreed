@@ -111,6 +111,7 @@ void StageManager::nextStage()
 void StageManager::moveRoom()
 {
 	_currIndexX += 1;
+	//_currIndexY += 1;
 	//_roomIndex += 1;
 }
 
@@ -141,12 +142,54 @@ void StageManager::makeStage()
 		_vStage[_currIndexX][_currIndexY]->setStageManager(this);
 		_vStage[_currIndexX][_currIndexY]->init();
 
+		if (_currStage->getOpenDirection(0))
+		{
+			//_stage = new Room4LR();
+			if (rnd == 0)_stage = new Room20LTRB();
+			else if (rnd == 1)_stage = new Room2LTR();
+			else if (rnd == 2)_stage = new Room4LR();
+			else if (rnd == 3)_stage = new Room21LR();
+			else if (rnd == 4)_stage = new Room22LTRB();
+			else _stage = new Room20LTRB();
+
+
+			_vStage[k - 1][l] = _stage;
+		}
+		if (_currStage->getOpenDirection(1))
+		{
+			if (rnd == 0)_stage = new Room20LTRB;
+			else if (rnd == 1)_stage = new Room22LTRB;
+			else if (rnd == 2)_stage = new Room2LTR;
+			else _stage = new Room20LTRB;
+
+
+			_vStage[k][l - 1] = _stage;
+		}
 		if (_currStage->getOpenDirection(2))
 		{
-			_stage = new Room4LR();
-			_vStage[k + 1][l] = _stage;
+			//_stage = new Room4LR();
+			if (rnd == 0)_stage = new Room20LTRB();
+			else if (rnd == 1)_stage = new Room2LTR();
+			else if (rnd == 2)_stage = new Room4LR();
+			else if (rnd == 3)_stage = new Room21LR();
+			else if (rnd == 4)_stage = new Room22LTRB();
+			else _stage = new Room20LTRB();
+
 			
+			_vStage[k + 1][l] = _stage;
 		}
+
+		if (_currStage->getOpenDirection(3))
+		{
+			if (rnd == 0)_stage = new Room20LTRB;
+			else if (rnd == 1)_stage = new Room22LTRB;
+			else if (rnd == 2)_stage = new Room2LTR;
+			else _stage = new Room20LTRB;
+
+
+			_vStage[k][l+1] = _stage;
+		}
+		
 
 		/*_vStage[_currIndexX][_currIndexY]->setStageManager(this);
 		_vStage[_currIndexX][_currIndexY]->init();*/

@@ -12,7 +12,7 @@ void StartRoom1::init()
 	_OpenDirection[0] = false;
 	_OpenDirection[1] = false;
 	_OpenDirection[2] = true;
-	_OpenDirection[3] = false;
+	_OpenDirection[3] = true;
 }
 
 void StartRoom1::release()
