@@ -543,6 +543,12 @@
     <ClInclude Include="MetalBoots.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="DownStair1L.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRoom1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -925,6 +931,12 @@
     </ClCompile>
     <ClCompile Include="MetalBoots.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair1L.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoom1.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

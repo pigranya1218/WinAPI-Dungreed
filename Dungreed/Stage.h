@@ -36,6 +36,9 @@ protected:
 
 	vector<DIRECTION> _direction;
 	vector<DIRECTION>::iterator _viDirection;
+
+	bool _OpenDirection[4];
+
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
 	virtual void init();
@@ -62,4 +65,7 @@ public:
 	
 	vector<DIRECTION> getStageDirection() {return _direction ; }
 	vector<DIRECTION>::iterator getVItageDirection() { return _viDirection; }
+
+	bool getOpenDirection(int num) { return _OpenDirection[num]; }
+	
 };

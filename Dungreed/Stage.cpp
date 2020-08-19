@@ -5,7 +5,7 @@
 void Stage::init()
 {
 	_objectMgr = new ObjectManager;
-	
+
 	_npcMgr = new NpcManager;
 	_npcMgr->setStage(this);
 
