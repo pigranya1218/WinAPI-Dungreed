@@ -204,8 +204,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/LIFE_BASE", L"resources/images/gameScene/ui/restaurant/RestaurantLifeBase.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD", L"resources/images/gameScene/ui/restaurant/RestaurantMenu.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_GOLD_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Selected.png");
-	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney.png");
-	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_Selected.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_RESIZE.png");
+	IMAGE_MANAGER->addImage("UI/RESTAURANT/MENU_SELECTED", L"resources/images/gameScene/ui/restaurant/RestaurantMenu_Withoutmoney_Selected_RESIZE.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/THANKYOU_KR", L"resources/images/gameScene/ui/restaurant/ThankYouKorean.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/GOLD_ICON", L"resources/images/gameScene/ui/restaurant/GoldCoin0.png");
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/SATIETY_ICON", L"resources/images/gameScene/ui/restaurant/SatietyRate.png");
