@@ -329,6 +329,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("KeresScythe", L"resources/images/MeleeWeapon/KeresScythe.png"); // 케레스(칼,창)
 	IMAGE_MANAGER->addImage("PickaxeRed", L"resources/images/MeleeWeapon/PickaxeRed.png"); // 붉은 곡괭이
 	IMAGE_MANAGER->addImage("PowerKatanaHUD", L"resources/images/MeleeWeapon/PowerKatanaHUD.png"); // 육도가이(카타나)
+	IMAGE_MANAGER->addImage("KatanaWhite", L"resources/images/MeleeWeapon/KatanaWhite.png"); // 육도가이 흰색(카타나)
 	
 	//***MeleeWeaponIcon
 	IMAGE_MANAGER->addImage("CosmosSwordIcon", L"resources/images/MeleeWeapon/CosmosSwordIcon.png"); // 우주검 아이콘
