@@ -636,6 +636,9 @@
     <ClInclude Include="CosmosSwordProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="GuidedProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1104,6 +1107,9 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="CosmosSwordProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
   </ItemGroup>

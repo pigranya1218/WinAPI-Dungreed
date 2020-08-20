@@ -212,6 +212,7 @@
     <ClInclude Include="GreenMomBat.h" />
     <ClInclude Include="GriffinEggOmeletteFood.h" />
     <ClInclude Include="GrilledMushroomFood.h" />
+    <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="HeartOfCosmos.h" />
     <ClInclude Include="AccProjectile.h" />
     <ClInclude Include="IceBall.h" />
@@ -376,6 +377,7 @@
     <ClCompile Include="GreenMomBat.cpp" />
     <ClCompile Include="GriffinEggOmeletteFood.cpp" />
     <ClCompile Include="GrilledMushroomFood.cpp" />
+    <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="HeartOfCosmos.cpp" />
     <ClCompile Include="AccProjectile.cpp" />
     <ClCompile Include="IceBall.cpp" />
