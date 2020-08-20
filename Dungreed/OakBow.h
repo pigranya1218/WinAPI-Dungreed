@@ -42,7 +42,6 @@ public:
 	virtual void attack(Player* player, FloatCircle* circle, AttackInfo* info) override; // 공격 써클을 변경시키는 함수
 	virtual void attack(Player* player, Projectile* projectile, AttackInfo* info) override; // 탄환을 변경시키는 함수
 
-	virtual void reload(Player* player) override; // 재장전 버튼을 누를때 호출될 함수
 	virtual void getHit(Vector2 const position) override; // 플레이어가 피격되었을 때 호출될 함수(피격과 상관없는 아이템이라면 빈 함수로 구현)
 
 	virtual void equip(Player* player) override; // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환

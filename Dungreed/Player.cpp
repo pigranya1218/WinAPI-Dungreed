@@ -96,7 +96,7 @@ void Player::attack(FloatRect* rect, AttackInfo* info)
 	{
 		if (_equippedAcc[i] != nullptr)
 		{
-			_equippedAcc[i]->attack(rect, info);
+			_equippedAcc[i]->attack(this, rect, info);
 		}
 	}
 
@@ -117,7 +117,7 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 	{
 		if (_equippedAcc[i] != nullptr)
 		{
-			_equippedAcc[i]->attack(circle, info);
+			_equippedAcc[i]->attack(this, circle, info);
 		}
 	}
 
@@ -138,7 +138,7 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 	{
 		if (_equippedAcc[i] != nullptr)
 		{
-			_equippedAcc[i]->attack(projectile, info);
+			_equippedAcc[i]->attack(this, projectile, info);
 		}
 	}
 
