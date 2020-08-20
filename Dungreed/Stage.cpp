@@ -1,6 +1,7 @@
 #include "StageManager.h"
 #include "Stage.h"
 #include "Player.h"
+#include "UIManager.h"
 
 void Stage::init()
 {
@@ -18,6 +19,11 @@ void Stage::init()
 	_projectileMgr->setEnemyManager(_enemyMgr);
 
 	_isMade = false;
+}
+
+void Stage::enter()
+{
+	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms);
 }
 
 void Stage::release()

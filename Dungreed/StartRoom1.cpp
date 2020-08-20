@@ -29,12 +29,12 @@ void StartRoom1::update(float const elapsedTime)
 	{
 		_stageManager->setPlayerPos(200, 900);
 		
-		_stageManager->moveRoom();
+		//_stageManager->moveRoom();
 		
 	}
 	if (KEY_MANAGER->isOnceKeyDown(VK_F8))
 	{
-		_stageManager->moveRoom();
+		//_stageManager->moveRoom();
 		
 	}
 

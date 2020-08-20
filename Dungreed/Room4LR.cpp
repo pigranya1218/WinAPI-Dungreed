@@ -22,7 +22,7 @@ void Room4LR::update(float const elapsedTime)
 	Stage::update(elapsedTime);
 	if (KEY_MANAGER->isOnceKeyDown(VK_F8))
 	{
-		_stageManager->moveRoom();
+		//_stageManager->moveRoom();
 		_stageManager->makeStage();
 	}
 }

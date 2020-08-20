@@ -21,33 +21,31 @@ private:
 	GameScene* _gameScene;
 	Player* _player;
 	UIManager* _uiMgr;
+	
 	STAGE_TYPE _currStageType; // 현재 스테이지 타입
-	vector<Stage*> _stages; // 현재 스테이지들
+	vector<vector<Stage*>> _stageMap;
 	Stage* _currStage; // 현재 스테이지 
 	
-	Stage* _stage;
-	Stage* _stage2;
+	int _currIndexX, _currIndexY; // 현재 스테이지 인덱스
+	int _mapSize; // 전체 맵의 크기
 
-	Stage* _downStair;
-	Stage* _restaurantRoom;
-	Stage* _shopRoom;
+private:
+	struct tagRoomInfo
+	{
+		bool isVisited;
 
-	int _roomIndex;
-	int _currIndexX, _currIndexY;
+		int roomType; // 방의 타입 , -1 : 사용하지 않는 방, 0 : 일반방, 1 : 시작방, 2: 끝방 , 3 : 식당방, 4 : 상점방 
+		bool isWall[4]; // 방의 벽, (L T R B) 순서
+	};
 
-	int k;
-	int l;
-	
-	vector<vector<Stage*>> _vStage;
-	vector<DIRECTION>::iterator iter;
-
-	int rnd;
-	int makeNum=0;
-
-	Stage* resultRoom;
+private:
+	vector<vector<tagRoomInfo>> _roomInfo;
+	//랜덤 스테이지 만들기
+	void makeDungeon();
+	void makeRoom(int x, int y);
+	bool makeSpecialRoom();
+	void releaseStage();
 	Stage* getStage(int stageType, bool isWall[]);
-
-
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
@@ -72,22 +70,20 @@ public:
 	void nextStage();
 
 	// 스테이지 이동 
-	void moveRoom();
+	void moveRoom(Vector2 moveDir);
 
 	// 스테이지 타입에 따른 맵 만들기
 	void makeStage();
 
 	// 스테이지 해제
-	void releaseStage();
+	// void releaseStage();
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();
 	void setPlayerPos(int x, int y);
 
-	////랜덤맵만들기
-	//void makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<vector<bool>> isMadeRoom);
+	
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 };
-
