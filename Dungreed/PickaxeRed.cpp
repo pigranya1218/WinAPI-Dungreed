@@ -31,10 +31,6 @@ void PickaxeRed::init()
 	_height =  _img->getHeight();
 }
 
-void PickaxeRed::release()
-{
-
-}
 
 void PickaxeRed::update(Player* player, float const elapsedTime)
 {
@@ -59,10 +55,7 @@ void PickaxeRed::update(Player* player, float const elapsedTime)
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
-void PickaxeRed::backRender(Player* player)
-{
 
-}
 
 void PickaxeRed::frontRender(Player* player)
 {
@@ -188,9 +181,6 @@ void PickaxeRed::frontRender(Player* player)
 	
 }
 
-void PickaxeRed::displayInfo()
-{
-}
 
 void PickaxeRed::attack(Player* player)
 {
@@ -207,22 +197,6 @@ void PickaxeRed::attack(Player* player)
 	_currAttackDelay = _adjustStat.attackSpeed;
 
 	
-}
-
-void PickaxeRed::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void PickaxeRed::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void PickaxeRed::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void PickaxeRed::getHit(Vector2 const position)
-{
 }
 
 void PickaxeRed::equip(Player* player)

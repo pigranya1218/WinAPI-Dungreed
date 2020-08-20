@@ -30,10 +30,7 @@ void PowerKatana::init()
 	_height = _img->getHeight();
 }
 
-void PowerKatana::release()
-{
 
-}
 
 void PowerKatana::update(Player* player, float const elapsedTime)
 {
@@ -54,10 +51,6 @@ void PowerKatana::update(Player* player, float const elapsedTime)
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
-void PowerKatana::backRender(Player* player)
-{
-
-}
 
 void PowerKatana::frontRender(Player* player)
 {
@@ -147,9 +140,6 @@ void PowerKatana::frontRender(Player* player)
 
 }
 
-void PowerKatana::displayInfo()
-{
-}
 
 void PowerKatana::attack(Player* player)
 {
@@ -166,21 +156,6 @@ void PowerKatana::attack(Player* player)
 	_currAttackDelay = _addStat.attackSpeed;
 }
 
-void PowerKatana::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void PowerKatana::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void PowerKatana::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void PowerKatana::getHit(Vector2 const position)
-{
-}
 
 void PowerKatana::equip(Player * player)
 {

@@ -33,10 +33,6 @@ void KeresScythe::init()
 
 }
 
-void KeresScythe::release()
-{
-
-}
 
 void KeresScythe::update(Player* player, float const elapsedTime)
 {
@@ -190,9 +186,7 @@ void KeresScythe::frontRender(Player* player)
 
 }
 
-void KeresScythe::displayInfo()
-{
-}
+
 
 void KeresScythe::attack(Player* player)
 {
@@ -207,22 +201,6 @@ void KeresScythe::attack(Player* player)
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_reverseMove = false;
 	_currAttackDelay = _addStat.attackSpeed;
-}
-
-void KeresScythe::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void KeresScythe::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void KeresScythe::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void KeresScythe::getHit(Vector2 const position)
-{
 }
 
 void KeresScythe::equip(Player * player)

@@ -28,10 +28,7 @@ void MartialArtOfTiger::init()
 
 }
 
-void MartialArtOfTiger::release()
-{
 
-}
 
 void MartialArtOfTiger::update(Player* player, float const elapsedTime)
 {
@@ -143,9 +140,6 @@ void MartialArtOfTiger::frontRender(Player* player)
 	}
 }
 
-void MartialArtOfTiger::displayInfo()
-{
-}
 
 void MartialArtOfTiger::attack(Player* player)
 {
@@ -169,21 +163,7 @@ void MartialArtOfTiger::attack(Player* player)
 	_currAttackDelay = _addStat.attackSpeed;
 }
 
-void MartialArtOfTiger::attack(FloatRect* rect, AttackInfo* info)
-{
-}
 
-void MartialArtOfTiger::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void MartialArtOfTiger::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void MartialArtOfTiger::getHit(Vector2 const position)
-{
-}
 
 void MartialArtOfTiger::equip(Player * player)
 {

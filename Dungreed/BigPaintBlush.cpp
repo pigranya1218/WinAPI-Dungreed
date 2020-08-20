@@ -39,10 +39,7 @@ void BigPaintBlush::init()
 	_angleOffset = 15;
 }
 
-void BigPaintBlush::release()
-{
 
-}
 
 void BigPaintBlush::update(Player* player, float const elapsedTime)
 {

@@ -29,10 +29,6 @@ void ShortSword::init()
 
 }
 
-void ShortSword::release()
-{
-
-}
 
 void ShortSword::update(Player* player, float const elapsedTime)
 {
@@ -288,9 +284,6 @@ void ShortSword::frontRender(Player* player)
 	}
 }
 
-void ShortSword::displayInfo()
-{
-}
 
 void ShortSword::attack(Player* player)
 {
@@ -307,21 +300,7 @@ void ShortSword::attack(Player* player)
 	_currAttackDelay = _addStat.attackSpeed;
 }
 
-void ShortSword::attack(FloatRect* rect, AttackInfo* info)
-{
-}
 
-void ShortSword::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void ShortSword::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void ShortSword::getHit(Vector2 const position)
-{
-}
 
 void ShortSword::equip(Player* player)
 {

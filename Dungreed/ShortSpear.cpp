@@ -24,9 +24,7 @@ void ShortSpear::init()
 	_drawEffect = false;
 }
 
-void ShortSpear::release()
-{
-}
+
 
 void ShortSpear::update(Player* player, float const elapsedTime)
 {
@@ -125,9 +123,6 @@ void ShortSpear::frontRender(Player* player)
 	}
 }
 
-void ShortSpear::displayInfo()
-{
-}
 
 void ShortSpear::attack(Player* player)
 {
@@ -176,21 +171,7 @@ void ShortSpear::attack(Player* player)
 	_attackInfo->knockBack = 5;
 }
 
-void ShortSpear::attack(FloatRect * rect, AttackInfo* info)
-{
-}
 
-void ShortSpear::attack(FloatCircle * circle, AttackInfo* info)
-{
-}
-
-void ShortSpear::attack(Projectile * projectile, AttackInfo* info)
-{
-}
-
-void ShortSpear::getHit(Vector2 const position)
-{
-}
 
 void ShortSpear::equip(Player* player)
 {

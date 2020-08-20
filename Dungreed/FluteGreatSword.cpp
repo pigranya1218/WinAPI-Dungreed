@@ -32,10 +32,7 @@ void FluteGreatSword::init()
 	_height = _img->getHeight();
 }
 
-void FluteGreatSword::release()
-{
 
-}
 
 void FluteGreatSword::update(Player* player, float const elapsedTime)
 {
@@ -177,9 +174,7 @@ void FluteGreatSword::frontRender(Player* player)
 	//_attackDebug.render(true);
 }
 
-void FluteGreatSword::displayInfo()
-{
-}
+
 
 void FluteGreatSword::attack(Player* player)
 {
@@ -229,22 +224,6 @@ void FluteGreatSword::attack(Player* player)
 
 	//delete attackCircle;
 	//delete attackInfo;
-}
-
-void FluteGreatSword::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void FluteGreatSword::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void FluteGreatSword::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void FluteGreatSword::getHit(Vector2 const position)
-{
 }
 
 void FluteGreatSword::equip(Player* player)

@@ -31,10 +31,6 @@ void QuarterStaffBig::init()
 	_height = _img->getHeight();
 }
 
-void QuarterStaffBig::release()
-{
-
-}   
 
 void QuarterStaffBig::update(Player* player, float const elapsedTime)
 {
@@ -58,10 +54,7 @@ void QuarterStaffBig::update(Player* player, float const elapsedTime)
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
 
-void QuarterStaffBig::backRender(Player* player)
-{
 
-}
 
 void QuarterStaffBig::frontRender(Player* player)
 {
@@ -142,21 +135,7 @@ void QuarterStaffBig::attack(Player* player)
 	_currAttackDelay = _addStat.attackSpeed;
 }
 
-void QuarterStaffBig::attack(FloatRect* rect, AttackInfo* info)
-{
-}
 
-void QuarterStaffBig::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void QuarterStaffBig::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void QuarterStaffBig::getHit(Vector2 const position)
-{
-}
 
 void QuarterStaffBig::equip(Player * player)
 {

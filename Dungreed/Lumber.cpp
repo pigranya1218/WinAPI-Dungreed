@@ -41,10 +41,6 @@ void Lumber::init()
 	
 }
 
-void Lumber::release()
-{
-
-}
 
 void Lumber::update(Player* player, float const elapsedTime)
 {
@@ -318,9 +314,7 @@ void Lumber::frontRender(Player* player)
 	}
 }
 
-void Lumber::displayInfo()
-{
-}
+
 
 void Lumber::attack(Player* player)
 {
@@ -337,21 +331,6 @@ void Lumber::attack(Player* player)
 	_currAttackDelay = _addStat.attackSpeed;
 }
 
-void Lumber::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void Lumber::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void Lumber::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void Lumber::getHit(Vector2 const position)
-{
-}
 
 void Lumber::equip(Player* player)
 {

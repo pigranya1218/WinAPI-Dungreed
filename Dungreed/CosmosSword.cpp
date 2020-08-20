@@ -184,9 +184,7 @@ void CosmosSword::frontRender(Player* player)
 	_attackDebug.render(true);
 }
 
-void CosmosSword::displayInfo()
-{
-}
+
 
 void CosmosSword::attack(Player* player)
 {
@@ -269,21 +267,7 @@ void CosmosSword::attack(Player* player)
 	delete attackInfo;
 }
 
-void CosmosSword::attack(FloatRect* rect, AttackInfo* info)
-{
-}
 
-void CosmosSword::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void CosmosSword::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void CosmosSword::getHit(Vector2 const position)
-{
-}
 
 void CosmosSword::equip(Player* player)
 {
