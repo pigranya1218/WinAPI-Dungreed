@@ -219,8 +219,16 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("UI/RESTAURANT/TABLE", L"resources/images/gameScene/ui/restaurant/RestaurantTable3Frame.png", 3, 1);
 	IMAGE_MANAGER->addImage("UI/RESTAURANT/GAUGE_BASE", L"resources/images/gameScene/ui/restaurant/AltarGaugeBase.png");
 	// **** FOODS
+	// ***** NORMAL
 	IMAGE_MANAGER->addImage("FOOD/BREAD", L"resources/images/gameScene/ui/restaurant/foods/01_Bread.png");
 	IMAGE_MANAGER->addImage("FOOD/EGG_FRIED", L"resources/images/gameScene/ui/restaurant/foods/02_FriedEgg.png");
+	IMAGE_MANAGER->addImage("FOOD/GRILLED_MUSHROOM", L"resources/images/gameScene/ui/restaurant/foods/03_GrilledMushroom.png");
+	IMAGE_MANAGER->addImage("FOOD/TOMATO_SOUP", L"resources/images/gameScene/ui/restaurant/foods/04_TamatoSoup.png");
+	// ***** RARE
+	IMAGE_MANAGER->addImage("FOOD/GRIFFIN_EGG_OMELETTE", L"resources/images/gameScene/ui/restaurant/foods/13_GriffonEggOmelette.png");
+	IMAGE_MANAGER->addImage("FOOD/RASPBERRY_COOKIE", L"resources/images/gameScene/ui/restaurant/foods/12_RaspberryCookie.png");
+	IMAGE_MANAGER->addImage("FOOD/SPARKLING_WATER", L"resources/images/gameScene/ui/restaurant/foods/26_SparklingWater.png");
+	IMAGE_MANAGER->addImage("FOOD/STRAWBERRY_PIE", L"resources/images/gameScene/ui/restaurant/foods/18_StrawberryPie.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);

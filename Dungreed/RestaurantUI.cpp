@@ -1,16 +1,29 @@
 #include "stdafx.h"
 #include "RestaurantUI.h"
+#include "BreadFood.h"
 #include "EggFriedFood.h"
+#include "GrilledMushroomFood.h"
+#include "TomatoSoupFood.h"
+#include "GriffinEggOmeletteFood.h"
+#include "RaspberryCookieFood.h"
+#include "SparklingWaterFood.h"
+#include "StrawberryPieFood.h"
 #include "Player.h"
 #include "PlayerStat.h"
 
 void RestaurantUI::init()
 {
-
-	for (int i = 0; i < 5; i++)
+	//FOODS 리스트 벡터에 FOOD* 클래스 삽입
+	/*for (int i = 0; i < 5; i++)
 	{
 		_foods.push_back(new EggFriedFood);
-	}
+	}*/
+	_foods.push_back(new BreadFood);
+	_foods.push_back(new GriffinEggOmeletteFood);
+	_foods.push_back(new EggFriedFood);
+	_foods.push_back(new GrilledMushroomFood);
+	_foods.push_back(new TomatoSoupFood);
+	
 
 	_isActive = false;
 	//전체 뒷배경
@@ -53,6 +66,13 @@ void RestaurantUI::init()
 	_tableAni->setFPS(10);
 	_tableAni->start();
 
+	//HP게이지 웨이브 애니메이션
+	_currHpAni = new Animation;
+	_currHpAni->init(_currLifeGaugeWave->getWidth(), _currLifeGaugeWave->getHeight(), _currLifeGaugeWave->getMaxFrameX(), _currLifeGaugeWave->getMaxFrameY());
+	_currHpAni->setFPS(15);
+	_currHpAni->setDefPlayFrame(false, true);
+	_currHpAni->start();
+
 	//_foodImg = _foods[0]->getImage();
 }
 
@@ -65,6 +85,8 @@ void RestaurantUI::release()
 void RestaurantUI::update(float elapsedTime)
 {
 	_tableAni->frameUpdate(elapsedTime);
+	_currHpAni->frameUpdate(elapsedTime);
+
 	if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
 		//창닫기
@@ -96,39 +118,73 @@ void RestaurantUI::render()
 	//음식 리스트의 항목
 	for (int i = 0; i < 5; i++)
 	{
-		if (_foodItems[i].baseRc.ptInRect(_ptMouse))
+		if (_foodItems[i].baseRc.ptInRect(_ptMouse) && _foodListViewRc.bottom > _ptMouse.y)
 		{
 			_foodItems[i]._foodListItemSelected->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
 			_foodImg = _foods[i]->getImage();
-			_foodImg->setScale(4);
+			_foodImg->setScale(4.5);
 			_foodImg->setAlpha(0.7);
-			_foodImg->render(_foodTableViewRc.getCenter());
+			_foodImg->render(Vector2(_foodTableViewRc.getCenter().x, _foodTableViewRc.getCenter().y + 30));
 		}
 		else
 		{
 			_foodItems[i]._foodListItem->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
 		}
 		//아이템에 따른 변화되는 스탯 받아오는 작업
-		PlayerStat foodStat = _foods[i]->getAddStat();
+		PlayerStat foodAddStat = _foods[i]->getAddStat();
+		PlayerStat foodOneceStat = _foods[i]->getOnceStat();
 		//food 벡터에 있는 아이템들을 리스트 foodItems에 표시
 		D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 10, _foodItems[i].baseRc.top, TTYONE_UTIL::stringTOwsting(_foods[i]->getName()),
-			RGB(255, 178, 144), 40, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0);
-		int count = 0;
+			RGB(255, 178, 144), 40, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+		int addStatCount = 0;
+		int oneceStatCount = 0;
 		for (int j = 0; j < static_cast<int>(STAT_TYPE::END); j++)
 		{
 			STAT_TYPE statType = static_cast<STAT_TYPE>(j);
-			int statValue = foodStat.getStat(statType);
-			string statString = foodStat.getStatString(statType, false);
-			if (statValue != 0)
+			//영구적으로 변화되는 스탯
+			int addStatValue = foodAddStat.getStat(statType);
+			string addStatString = foodAddStat.getStatString(statType, false);
+			if (addStatValue != 0)
 			{
-				count++;
-				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 15, _foodItems[i].baseRc.top + 40 * count, L"▶",
-					RGB(255, 255, 255), 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0);
-				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 50, _foodItems[i].baseRc.top + 40 * count, ((statValue >= 0) ? (L"+"):(L"")) + to_wstring(statValue), (statValue >= 0) ? RGB(0, 255, 0) : RGB(255, 0, 0)
-					, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0);
-				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 100, _foodItems[i].baseRc.top + 40 * count, TTYONE_UTIL::stringTOwsting(statString), RGB(255, 255, 255)
-					, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0);
+				addStatCount++;
+				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 15, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), L"▶",
+					RGB(255, 255, 255), 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 50, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), ((addStatValue >= 0) ? (L"+"):(L"")) + to_wstring(addStatValue), (addStatValue >= 0) ? RGB(0, 255, 0) : RGB(255, 0, 0)
+					, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 100, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), TTYONE_UTIL::stringTOwsting(addStatString), RGB(255, 255, 255)
+					, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 			}
+			//렉트 만들기
+			FloatRect value[3];	// 회복률, 포만률, 가격의 수치들을 입력할 렉트
+			FloatRect icon[3];	// 회복, 포만, 골드 아이콘을 배치할 렉트
+			for (int k = 0; k < 3; k++)
+			{
+				icon[k] = FloatRect(_foodItems[i].baseRc.right - 40, _foodItems[i].baseRc.top + 100 + (k*30), _foodItems[i].baseRc.right - 10, _foodItems[i].baseRc.top + 130 + (k * 30));
+				//D2D_RENDERER->drawRectangle(icon[k], D2D1::ColorF::Magenta, 1, 1);
+				value[k] = FloatRect(icon[k].left - 80, icon[k].top, icon[k].left, icon[k].bottom);
+				//D2D_RENDERER->drawRectangle(value[k], D2D1::ColorF::Magenta, 1, 1);
+			}
+
+			//한번만 변화되는 스탯(체력 회복, 포만률, 소지금액(가격))
+			int oneceStatCurrHp = foodOneceStat.currHp;
+			float oneceStatCurrSatiety = foodOneceStat.currSatiety;
+			int price = _foods[i]->getPrice();
+			if (oneceStatCurrHp > 0)
+			{
+				D2D_RENDERER->renderTextField(value[0].left, value[0].top, to_wstring(oneceStatCurrHp) + L"%", D2D1::ColorF::White, 25,
+					value[0].getWidth(), value[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
+			}
+			D2D_RENDERER->renderTextField(value[1].left, value[1].top, to_wstring(static_cast<int>(oneceStatCurrSatiety)), D2D1::ColorF::White, 25,
+				value[1].getWidth(), value[1].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
+			D2D_RENDERER->renderTextField(value[2].left, value[2].top, to_wstring(price), D2D1::ColorF::White, 25,
+				value[2].getWidth(), value[2].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
+			//아이콘 렌더
+			_healIcon->setScale(2);
+			_satietyIcon->setScale(2);
+			_goldIcon->setScale(3);
+			if(oneceStatCurrHp > 0) _healIcon->render(icon[0].getCenter());
+			_satietyIcon->render(icon[1].getCenter());
+			_goldIcon->render(icon[2].getCenter());
 		}
 
 	}
@@ -150,6 +206,23 @@ void RestaurantUI::render()
 	
 	//현재 체력 게이지 창
 	_lifeBaseBack->render(_lifeGaugeRc.getCenter(), _lifeGaugeRc.getSize());
+	float hpRatio = (static_cast<float>(_player->getCurrHp()) / _player->getMaxHp());	 // 체력비율 (현재 체력 / 전체 체력)
+	float width = (_lifeGaugeRc.getSize().x) * hpRatio;	// 현재 남은 체력게이지의 x축 길이 계산
+	if (FLOAT_EQUAL(hpRatio, 1) || FLOAT_EQUAL(hpRatio, 0))
+	{
+		FloatRect currHpGauge = FloatRect(_lifeGaugeRc.left+5, _lifeGaugeRc.top, _lifeGaugeRc.left + width, _lifeGaugeRc.bottom);
+		_currLifeGauge->render(currHpGauge.getCenter(), currHpGauge.getSize());
+		D2D_RENDERER->drawRectangle(currHpGauge, D2D1::ColorF::Magenta, 1, 1);
+	}
+	else
+	{ 
+		FloatRect currHpGauge = FloatRect(_lifeGaugeRc.left+5, _lifeGaugeRc.top, max(_lifeGaugeRc.left + 1, _lifeGaugeRc.left + width - 14), _lifeGaugeRc.bottom);
+		_currLifeGauge->render(currHpGauge.getCenter(), currHpGauge.getSize());
+		FloatRect currHpWave = FloatRect(currHpGauge.right - 1, currHpGauge.top, currHpGauge.right + 14, currHpGauge.bottom);
+		_currLifeGaugeWave->aniRender(currHpWave.getCenter(), currHpWave.getSize(), _currHpAni);
+		//D2D_RENDERER->drawRectangle(currHpGauge, D2D1::ColorF::White, 1, 1);
+		//D2D_RENDERER->drawRectangle(currHpWave, D2D1::ColorF::Magenta, 1, 1);
+	}
 	_lifeBase->render(_lifeGaugeRc.getCenter(), _lifeGaugeRc.getSize());
 	D2D_RENDERER->renderTextField(_lifeGaugeRc.left, _lifeGaugeRc.top, to_wstring(_player->getCurrHp()) + L" / " + to_wstring(_player->getMaxHp()), D2D1::ColorF::White, 40,
 		_lifeGaugeRc.getWidth(), _lifeGaugeRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0);
