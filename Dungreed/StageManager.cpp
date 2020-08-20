@@ -252,7 +252,7 @@ void StageManager::makeStage()
 		_currStage->setUIManager(_uiMgr);
 		_currStage->setPlayer(_player);
 		_currStage->init();
-		_currStage->enter();
+		_currStage->enter(0);
 		break;
 	default:
 		break;
@@ -279,6 +279,7 @@ void StageManager::makeDungeon()
 					_roomInfo[x][y].isWall[dir] = true;
 				}
 				_roomInfo[x][y].isVisited = false;
+				_roomInfo[x][y].roomType = 0;
 			}
 		}
 		int startX = RANDOM->getInt(_mapSize);
