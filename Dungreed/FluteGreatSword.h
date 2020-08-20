@@ -3,6 +3,18 @@
 class FluteGreatSword : public Item
 {
 private:
+	struct tagAttack
+	{
+		FloatCircle* _attackCircle;
+		AttackInfo* _attackInfo;
+		float _hitDelay;
+		int _count;
+	};
+
+private:
+
+	vector<tagAttack> _VtagAttack;
+
 	// 공격 관련
 	Image*	_effect;
 	Image* _img;

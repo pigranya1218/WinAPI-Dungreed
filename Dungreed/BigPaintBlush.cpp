@@ -28,7 +28,6 @@ void BigPaintBlush::init()
 
 	_handSize = Vector2(5, 5);
 
-
 	
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
