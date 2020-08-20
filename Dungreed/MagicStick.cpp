@@ -173,6 +173,7 @@ void MagicStick::attack(Player * player)
 	float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
 	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
+	//Image* _bulletImg = IMAGE_MANAGER->findImage("lalaStickEffect");
 	Image* _bulletImg = IMAGE_MANAGER->findImage("lalaStickBullet");
 
 	projectile = new NormalProjectile;
