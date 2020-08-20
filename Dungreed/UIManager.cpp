@@ -535,7 +535,7 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 	for (int i = 0; i < groundLine.size(); i++) // ´ë°¢¼± ¶¥
 	{
 		LinearFunc line = groundLine[i];
-		for (int x = line.getRangeX().x; x <= line.getRangeX().y; x += 64)
+		for (int x = line.getRangeX().x; x < line.getRangeX().y; x += 64)
 		{
 			FloatRect miniMapRc = FloatRect(Vector2(x + 32, int(line.getY(x + 32))), Vector2(64, 64), PIVOT::CENTER);
 			miniMapRc.left /= 16;

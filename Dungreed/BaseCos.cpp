@@ -21,12 +21,12 @@ void BaseCos::init()
 	_baseStat.maxDashCount = 5;
 	_baseStat.dashCoolTime = 1.5f;
 	_baseStat.maxSatiety = 100;
-	_baseStat.power = 5;
+	_baseStat.power = 0;
 	_baseStat.minDamage = 0; //0 ~ 4
 	_baseStat.maxDamage = 0; //0 ~ 4
 	_baseStat.trueDamage = 0;
-	_baseStat.criticalChance = 2;
-	_baseStat.criticalDamage = 1; // + 100%
+	_baseStat.criticalChance = 10;
+	_baseStat.criticalDamage = 100; // + 100%
 	_baseStat.toughness = 0;
 	_baseStat.defense = 0;
 	_baseStat.block = 0;
@@ -34,11 +34,11 @@ void BaseCos::init()
 	_baseStat.attackSpeed = 0;
 	_baseStat.reloadSpeed = 0; // --
 	_baseStat.moveSpeed = 350;
-	_baseStat.dashXPower = 1600;
-	_baseStat.dashYPower = 1400;
-	_baseStat.jumpPower = 1400;
-	_baseStat.xGravity = 4000;
-	_baseStat.yGravity = 4000;
+	_baseStat.dashXPower = 1350;
+	_baseStat.dashYPower = 950;
+	_baseStat.jumpPower = 1200;
+	_baseStat.xGravity = 3000;
+	_baseStat.yGravity = 3000;
 }
 
 void BaseCos::release()
