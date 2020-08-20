@@ -57,33 +57,25 @@ void PowerKatana::frontRender(Player* player)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 originPos = player->getPosition();
 	Vector2 pos = player->getPosition();
-
 	// 회전축 중점
 	originPos.x += ((isLeft) ? 15 : -15); // 바라보는 방향의 어깨
 	originPos.y += 25;
-
 	// 회전축으로부터 마우스까지의 각도값
 	float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
-
 	float handDegree = degree;
-
 	// 좌우 대칭을 위한 계산
 	float weaponDegree = handDegree;
 	if (isLeft)
 	{
 		weaponDegree = 180 - weaponDegree;
 	}
-
 	// 손의 위치 
 	Vector2 renderPosHand = originPos;
 	renderPosHand.x += (_width * 0.1 * 4);
 	renderPosHand.y += (isLeft) ? ( -4) : ( 4);
-	
 	// 무기 위치
 	Vector2 renderPosWeapon = originPos;
 	(isLeft) ? (renderPosWeapon.x -= -0.2*_width * 4) : (renderPosWeapon.x += -0.2*_width * 4);
-	//renderPosWeapon.x += (isLeft) ? (-width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4) : (width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * width * 0.15 * 4);
-	//renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * width * 0.15 * 4;
 	if (_oneAttack)
 	{
 		_img->setScale(4); // 이미지 크기 
@@ -94,17 +86,12 @@ void PowerKatana::frontRender(Player* player)
 	}
 	else
 	{
-	
 	_imgAttack->setScale(4); // 이미지 크기 
 	_imgAttack->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
 	_imgAttack->setAnglePos(Vector2(0.7f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 	_imgAttack->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
 	
 	}
-
-
-
-
 	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
@@ -113,7 +100,6 @@ void PowerKatana::frontRender(Player* player)
 	FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
 	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
-
 
 	if (_drawEffect) // 이펙트를 그린다
 	{
@@ -135,19 +121,14 @@ void PowerKatana::frontRender(Player* player)
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
 			EFFECT_MANAGER->play("EFFECT_EXKATANAFX", effectPos, Vector2(250, 300), -degree+ 180 , isLeft);
 		}
-
 	}
-
 }
-
 
 void PowerKatana::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
-
 	Vector2 renderPosHand = pos;
 	_oneAttack = false;
 	// 손으로부터 마우스 에임까지의 각도
@@ -155,7 +136,6 @@ void PowerKatana::attack(Player* player)
 	_drawEffect = true;
 	_currAttackDelay = _addStat.attackSpeed;
 }
-
 
 void PowerKatana::equip(Player * player)
 {

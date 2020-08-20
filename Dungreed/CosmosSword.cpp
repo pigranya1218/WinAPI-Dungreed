@@ -172,12 +172,6 @@ void CosmosSword::frontRender(Player* player)
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
 			EFFECT_MANAGER->play("EFFECT_COSMOSSWING", effectPos, Vector2(250, 300), degree);
-
-
-			
-
-
-
 		}
 	}
 
@@ -243,9 +237,6 @@ void CosmosSword::attack(Player* player)
 	projectile = new NormalProjectile;
 	projectile->setPosition(shootPos);	
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-
-
-	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
 	projectile->init("CosmosSwordFx", "", Vector2(50, 50), Vector2(250, 300), Vector2(30 * 50, 30 * 50), 3, radian, true, true, 10, true, false, false, false);
 
 	AttackInfo* attackInfo2 = new AttackInfo;
@@ -256,10 +247,7 @@ void CosmosSword::attack(Player* player)
 	attackInfo2->minDamage = _addStat.minDamage;
 	attackInfo2->maxDamage = _addStat.maxDamage;
 	attackInfo2->knockBack = 15;
-
 	//==============================================================================================================================================================
-
-
 	player->attack(attackCircle, attackInfo);
 	player->attack(projectile, attackInfo2);
 

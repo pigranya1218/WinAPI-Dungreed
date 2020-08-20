@@ -18,7 +18,7 @@ void BigPaintBlush::init()
 	_displayText = L"\"아름답게 글자를 쓰는 것이 귀족들 사이에서 유행이라고 한다\"";
 	_itemCode = 0x01103; // 한손 일반
 
-	_price = 600;
+	_price = 2000;
 
 	// 기본 보조옵션
 	
@@ -59,9 +59,6 @@ void BigPaintBlush::update(Player* player, float const elapsedTime)
 		effectPos.x += cosf(degree * (PI / 180)) * length;
 		effectPos.y += -sinf(degree * (PI / 180)) * length;
 		EFFECT_MANAGER->play("EFFECT_PAINTSWING", effectPos, Vector2(180, 250), degree);
-		
-
-
 	}
 
 	if (_currAttackDelay == 0) return;
@@ -71,15 +68,6 @@ void BigPaintBlush::update(Player* player, float const elapsedTime)
 
 		if (_oneAttack)
 		{
-			
-			
-			
-
-			
-			
-			
-			
-			
 			_angleOffset += 155;
 			_oneAttack = false;
 
@@ -89,9 +77,6 @@ void BigPaintBlush::update(Player* player, float const elapsedTime)
 			_angleOffset -= 155;
 			_oneAttack = true;
 		}
-
-
-
 	}
 	float ratio = elapsedTime / (_addStat.attackSpeed * 0.15);
 	if (_reverseMove)
@@ -124,7 +109,6 @@ void BigPaintBlush::backRender(Player* player)
 
 		// 손으로부터 마우스 에임까지의 각도
 
-			//float degree = atan2f(-(_ptMouse.y - Pos.y), (_ptMouse.x - Pos.x)) * (180 / PI) +90;
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x - pos.x))) * (180 / PI);
 		float degreeOffsetangle = degree + 90;
 
@@ -230,14 +214,10 @@ void BigPaintBlush::frontRender(Player* player)
 		// 플레이어 중점
 		originPos.x += ((isLeft) ? -40 : 20);
 
-
-
 		// 손으로부터 마우스 에임까지의 각도
 
-		//float degree = atan2f(-(_ptMouse.y - Pos.y), (_ptMouse.x - Pos.x)) * (180 / PI) + 90;
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - pos.x)) * (180 / PI);
 		float degreeOffsetangle = degree + 90;
-
 
 		if (degree > 360)
 		{
@@ -303,15 +283,7 @@ void BigPaintBlush::frontRender(Player* player)
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
 			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
 		}
-		//if (_drawEffect) // 이펙트를 그린다
-		//{
-		//	_drawEffect = false;
-		//	Vector2 effectPos = pos; // 손의 위치로부터
-		//	float length = _img->getWidth() * 4 * 1.0; // 무기 길이만큼
-		//	effectPos.x += cosf(degree * (PI / 180)) * length;
-		//	effectPos.y += -sinf(degree * (PI / 180)) * length;
-		//	EFFECT_MANAGER->play("EFFECT_PAINTSWING", effectPos, Vector2(180, 250), degree);
-		//}
+		
 	}
 }
 
