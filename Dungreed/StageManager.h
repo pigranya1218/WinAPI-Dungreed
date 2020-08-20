@@ -42,6 +42,7 @@ private:
 	vector<DIRECTION>::iterator iter;
 
 	int rnd;
+	int makeNum=0;
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
 	void setPlayer(Player* player) { _player = player; }
