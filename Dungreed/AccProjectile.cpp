@@ -83,6 +83,7 @@ void AccProjectile::update(float elapsedTime)
 			// ENEMY와의 충돌 검사
 			if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
 			{
+				
 				return;
 			}
 		}
