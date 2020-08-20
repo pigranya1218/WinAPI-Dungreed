@@ -11,10 +11,10 @@ void QuarterStaffBig::init()
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 	_handSize = Vector2(5, 5);
-	_addStat.minDamage = 9;
-	_addStat.maxDamage = 11;
+	_addStat.minDamage = 4;
+	_addStat.maxDamage = 6;
 	_addStat.defense = 5;
-	_addStat.attackSpeed = 0.2;
+	_addStat.attackSpeed = 0.1;
 	//보조옵션
 
 	// private 변수 설정
@@ -31,16 +31,21 @@ void QuarterStaffBig::init()
 
 void QuarterStaffBig::update(Player* player, float const elapsedTime)
 {
-	float ratio = 180 / (1 / _addStat.attackSpeed /2);
+	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	float ratio = 180 / ((0.3 * 0.4));
 	if (_oneAttack)
 	{
-		_angleOffset = max(-360, ((_angleOffset)  - (elapsedTime * ratio)));
+		
+		
+			_angleOffset = max(-360, ((_angleOffset)-(elapsedTime * ratio)));
 		if (_angleOffset == -360)
 		{
-			_angleOffset = 0;
+			_angleOffset = 360;
 			_oneAttack = false;
 		}
 		
+		
+
 	}
 	else
 	{
@@ -56,8 +61,8 @@ void QuarterStaffBig::frontRender(Player* player)
 	Vector2 pos = player->getPosition();
 
 	// 회전축 중점
-	originPos.x += ((isLeft) ? 0 :0 ); // 바라보는 방향의 어깨
-	originPos.y += 0;
+	//originPos.x += ((isLeft) ? 0 :0 ); // 바라보는 방향의 어깨
+	//originPos.y += 0;
 
 	// 회전축으로부터 마우스까지의 각도값
 	float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
@@ -67,42 +72,73 @@ void QuarterStaffBig::frontRender(Player* player)
 	// 좌우 대칭을 위한 계산
 	float weaponDegree = handDegree;
 	
-	if (isLeft)
-	{
-		weaponDegree = 180 - weaponDegree;
-	}
+	
 	// 손의 위치 
 	Vector2 renderPosHand = originPos;
-	renderPosHand.x += 0;
+	
 	//renderPosHand.x += (_width * 0.1 * 4);
 	
-	renderPosHand.y +=  -sinf(weaponDegree * (PI / 180)* 0.91 * 4) - 10;
+	renderPosHand.y +=  -sinf(weaponDegree * (PI / 180)* 1.4 * 4) - 10;
 
 	// 무기 위치
 	Vector2 renderPosWeapon = originPos;
 	if (_oneAttack)
 	{
+		if (!isLeft)
+		{
 		_img->setAngle(_angleOffset); // 이미지 각도 
+		}
+		else
+		{
+			_img->setAngle(-_angleOffset); // 이미지 각도 
+		}
 		_img->setScale(4); // 이미지 크기 
 		_img->setAnglePos(Vector2(0.5f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
+
+		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (_angleOffset), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, ( _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+		Vector2 renderPosHand2 = renderPosHand;
+		renderPosHand2.y += 20;
+		FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, ( _angleOffset), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, ( _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+
+
+
 	}
 	else
 	{
-		_img->setAngle(weaponDegree + _angleOffset); // 이미지 각도 
+		if (!isLeft)
+		{
+			_img->setAngle(weaponDegree - _angleOffset); // 이미지 각도 
+		}
+		else
+		{
+			_img->setAngle(-weaponDegree + _angleOffset); // 이미지 각도 
+		}
 		_img->setScale(4); // 이미지 크기 
 		_img->setAnglePos(Vector2(0.5f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);// 그린다
+
+
+
+		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+		Vector2 renderPosHand2 = renderPosHand;
+		renderPosHand2.y += 20;
+		FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+
+
 	}
 	
-	_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
-	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree+ _angleOffset), CAMERA->getRelativeV2(originPos));
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree+ _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
-	Vector2 renderPosHand2 = renderPosHand;
-	renderPosHand2.y += 20;
-	FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
-	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree+ _angleOffset), CAMERA->getRelativeV2(originPos));
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree+ _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+	
+	
+	
 	
 	_attackDebug.render(true);
 }
@@ -133,10 +169,10 @@ void QuarterStaffBig::attack(Player* player)
 	FloatCircle* attackCircle = new FloatCircle;
 	attackCircle->origin = originPos;
 	attackCircle->size = 120;
-	attackCircle->startRadian = attackRadian - PI * 0.28;
-	attackCircle->endRadian = attackRadian + PI * 0.28;
+	attackCircle->startRadian = 0.01  ;
+	attackCircle->endRadian = PI2 ;
 
-	_attackDebug = FloatCircle(originPos, 120, attackRadian - PI * 0.28, attackRadian + PI * 0.28); // forDEBUG
+	_attackDebug = FloatCircle(originPos, 120, 0.01 , PI2); // forDEBUG
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
@@ -145,7 +181,7 @@ void QuarterStaffBig::attack(Player* player)
 	attackInfo->criticalDamage = 0;
 	attackInfo->minDamage = _addStat.minDamage;
 	attackInfo->maxDamage = _addStat.maxDamage;
-	attackInfo->knockBack = 15;
+	attackInfo->knockBack = 0.1;
 	player->attack(attackCircle, attackInfo);
 	delete attackCircle;
 	delete attackInfo;

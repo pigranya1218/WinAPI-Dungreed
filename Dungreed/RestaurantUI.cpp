@@ -34,8 +34,10 @@ void RestaurantUI::init()
 	_exitRc = FloatRect(WINSIZEX - 150, 40, WINSIZEX - 30, 130);
 	//음식 목록 창
 	_foodListViewRc = FloatRect(20, 180, 500, 780);
-	//포만감 게이지
+	//포만감 게이지 배경
 	_satietyRc = FloatRect(15, 800, 515, 880);
+	//포만률 게이지 색칠할 렉트
+	//_currSatietyRateFillRc = FloatRect(140, 800, 141, 880);
 	//포만률 값을 표시할 렉트
 	_satietyRateRc = FloatRect(140, 800, 515, 880);
 	//음식 이미지 창(테이블)
@@ -80,6 +82,9 @@ void RestaurantUI::init()
 	_scrollBar.ratio = 0;
 	_scrollBar.bgRc = FloatRect(510, 180, 540, 780);
 	_scrollBar.scrollRc = FloatRect(510.0, 180.0, 540.0, (_scrollBar.height / _scrollBar.totalHeight)*(_scrollBar.bgRc.bottom - _scrollBar.bgRc.top));
+
+	//float offsetY = -100; // 스크롤을 아래로 땡긴 만큼 어떠한 값이 될 것
+	// 맨 처음 스크롤이 맨 위에 있을 땐 0
 }
 
 void RestaurantUI::release()
@@ -108,7 +113,10 @@ void RestaurantUI::update(float elapsedTime)
 		{
 			if (_foodItems[i].baseRc.ptInRect(_ptMouse) && _foodListViewRc.top < _ptMouse.y && _foodListViewRc.bottom > _ptMouse.y)
 			{
-				_foodItems[i].isSoldOut = true;
+				if (_player->ateFood(_foods[i]))
+				{
+					_foodItems[i].isSoldOut = true;
+				}
 			}
 		}
 	}
@@ -135,6 +143,9 @@ void RestaurantUI::render()
 	//음식 리스트의 항목
 	for (int i = 0; i < _foods.size(); i++)
 	{
+		//FloatRect relativeRc = _foodItems[i].baseRc;
+		//relativeRc.top += offsetY;
+		//relativeRc.bottom += offsetY;
 		if (_foodItems[i].baseRc.ptInRect(_ptMouse) && _foodListViewRc.bottom > _ptMouse.y && _foodListViewRc.top < _ptMouse.y)
 		{
 			if(!_foodItems[i].isSoldOut) _foodListItemSelected->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
@@ -192,7 +203,7 @@ void RestaurantUI::render()
 				int price = _foods[i]->getPrice();
 				if (oneceStatCurrHp > 0)
 				{
-					D2D_RENDERER->renderTextField(value[0].left, value[0].top, to_wstring(oneceStatCurrHp) + L"%", D2D1::ColorF::White, 25,
+					D2D_RENDERER->renderTextField(value[0].left, value[0].top, to_wstring(oneceStatCurrHp), D2D1::ColorF::White, 25,
 						value[0].getWidth(), value[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
 				}
 				D2D_RENDERER->renderTextField(value[1].left, value[1].top, to_wstring(static_cast<int>(oneceStatCurrSatiety)), D2D1::ColorF::White, 25,
@@ -226,10 +237,14 @@ void RestaurantUI::render()
 
 	//포만감 게이지 창
 	_satietyBaseBack->render(_satietyRc.getCenter(), _satietyRc.getSize());
+	//포만률 색 채우기
+	_currSatietyRateFillRc = FloatRect(140.0, 800.0, 140 + (static_cast<float>(_player->getSatiety()) / _player->getCurrStat().maxSatiety) * _satietyRateRc.getSize().x, 880.0);
+	D2D_RENDERER->fillRectangle(_currSatietyRateFillRc, 247, 183, 61, 1);
+	//포만률 게이지 프레임 및 아이콘 텍스트 표시
 	_satietyBase->render(_satietyRc.getCenter(), _satietyRc.getSize());
 	_satietyIcon->render(Vector2(_satietyRc.left + 71, _satietyRc.getCenter().y+2), Vector2(_satietyIcon->getSize().x * 4, _satietyIcon->getSize().y * 3.7));
 	//D2D_RENDERER->drawRectangle(_satietyRateRc, D2D1::ColorF::Magenta, 1, 1);
-	D2D_RENDERER->renderTextField(_satietyRateRc.left, _satietyRateRc.top, to_wstring(_player->getCurrStat().currSatiety) + L" / " + to_wstring(_player->getCurrStat().maxSatiety), 
+	D2D_RENDERER->renderTextField(_satietyRateRc.left, _satietyRateRc.top, to_wstring(_player->getSatiety()) + L" / " + to_wstring(_player->getCurrStat().maxSatiety), 
 		RGB(255, 255, 255), 30, _satietyRateRc.getWidth(), _satietyRateRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0);
 	//D2D_RENDERER->renderTextField(_satietyRc.left + 130, _satietyRc.getCenter().y + 2, to_wstring(/*스탯->현재 포만률 / 최대 포만률*/)) ....
 	

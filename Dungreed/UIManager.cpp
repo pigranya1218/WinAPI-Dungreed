@@ -454,13 +454,14 @@ void UIManager::render()
 
 			int offsetX = 1400;
 			int offsetY = 90;
+			
 			int rectOffsetX = offsetX - playerPos.x;
 			int rectOffsetY = offsetY - playerPos.y;
-				
-			for (int i = 0; i < _mapUI.collisionGroundRect.size(); i++)
+			for (int i = 0; i < _mapUI.collisionRect.size(); i++)
 			{
-				Vector2 center = _mapUI.collisionGroundRect[i].getCenter();
-				FloatRect drawRc = _mapUI.collisionGroundRect[i];
+				Vector2 center = _mapUI.collisionRect[i].getCenter();
+				FloatRect drawRc = _mapUI.collisionRect[i];
+			
 				drawRc.left += rectOffsetX;
 				drawRc.right += rectOffsetX;
 				drawRc.top += rectOffsetY;
@@ -468,16 +469,20 @@ void UIManager::render()
 
 				D2D_RENDERER->fillRectangle(drawRc, 192, 193, 195, 1);
 			}
-			/*for (int i = 0; i < _mapUI.collisionGroundLine.size(); i++)
+		
+			// ENEMY
+			vector<Vector2> enemies = _mapUI.enemyMgr->getAllEnemyPos();
+			for (int i = 0; i < enemies.size(); i++)
 			{
-				D2D_RENDERER->fillRectangle(_mapUI.collisionGroundLine[i], 192, 193, 195, 1);
+				Vector2 renderPos;
+				Vector2 enemyPos = enemies[i] / 16;
+				renderPos.x = offsetX + (enemyPos.x - playerPos.x);
+				renderPos.y = offsetY + (enemyPos.y - playerPos.y);
+				D2D_RENDERER->fillRectangle(FloatRect(renderPos, Vector2(4, 4), PIVOT::CENTER), 255, 97, 82, 1);
+				D2D_RENDERER->drawRectangle(FloatRect(renderPos, Vector2(7, 7), PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1, 3);
 			}
-			for (int i = 0; i < _mapUI.collisionGroundRect.size(); i++)
-			{
-				D2D_RENDERER->fillRectangle(_mapUI.collisionGroundRect[i], 192, 193, 195, 1);
-			}*/
-			
-			
+
+			// PLAYER			
 			D2D_RENDERER->fillRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(4, 4), PIVOT::CENTER), 84, 144, 255, 1);
 			D2D_RENDERER->drawRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(7, 7), PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1, 3);
 
@@ -516,7 +521,7 @@ void UIManager::render()
 	}
 }
 
-void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine)
+void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager)
 {
 	for (int i = 0; i < groundRect.size(); i++)
 	{
@@ -525,10 +530,50 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 		miniMapRc.top /= 16;
 		miniMapRc.right /= 16;
 		miniMapRc.bottom /= 16;
-		_mapUI.collisionGroundRect.push_back(miniMapRc);
+		_mapUI.collisionRect.push_back(miniMapRc);
 	}
-	_mapUI.collisionGroundLine = groundLine;
-	_mapUI.collisionPlatformLine = platformLine;
+	for (int i = 0; i < groundLine.size(); i++) // 대각선 땅
+	{
+		LinearFunc line = groundLine[i];
+		for (int x = line.getRangeX().x; x <= line.getRangeX().y; x += 64)
+		{
+			FloatRect miniMapRc = FloatRect(Vector2(x + 32, int(line.getY(x + 32))), Vector2(64, 64), PIVOT::CENTER);
+			miniMapRc.left /= 16;
+			miniMapRc.top /= 16;
+			miniMapRc.right /= 16;
+			miniMapRc.bottom /= 16;
+			_mapUI.collisionRect.push_back(miniMapRc);
+		}
+	}
+	for (int i = 0; i < platformLine.size(); i++) // 대각선 땅
+	{
+		LinearFunc line = platformLine[i];
+		if (line.a == 0) // 수평 선
+		{
+			FloatRect miniMapRc = FloatRect(line.getRangeX().x, line.getY(line.getRangeX().x), line.getRangeX().y, line.getY(line.getRangeX().x) + 64);
+			miniMapRc.left /= 16;
+			miniMapRc.top /= 16;
+			miniMapRc.right /= 16;
+			miniMapRc.bottom /= 16;
+			_mapUI.collisionRect.push_back(miniMapRc);
+		}
+		else // 대각선
+		{
+			for (int x = line.getRangeX().x; x < line.getRangeX().y; x += 64)
+			{
+				FloatRect miniMapRc = FloatRect(Vector2(x + 32, int(line.getY(x + 32))), Vector2(64, 64), PIVOT::CENTER);
+				miniMapRc.left /= 16;
+				miniMapRc.top /= 16;
+				miniMapRc.right /= 16;
+				miniMapRc.bottom /= 16;
+				_mapUI.collisionRect.push_back(miniMapRc);
+			}
+		}
+	}
+
+	_mapUI.enemyMgr = enemyManager;
+	_mapUI.npcMgr = npcManager;
+	_mapUI.objectMgr = objectManager;
 }
 
 void UIManager::showDamage(DamageInfo damage, Vector2 pos)

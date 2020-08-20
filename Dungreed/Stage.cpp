@@ -21,7 +21,7 @@ void Stage::init()
 
 void Stage::enter(int enterType)
 {
-	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms);
+	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms, _enemyMgr, _npcMgr, _objectMgr);
 }
 
 void Stage::release()
@@ -130,7 +130,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 	{
 	case DRAW_LINE_POSITION::BLOCK:
 	{
-		if ((currX < maxSizeX - 1) && (_tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BLOCK) && (startY == currY)) // 아직 세로 확장을 안했을 때만
+		if ((currX < maxSizeX - 1) && (_tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BLOCK) && (startY == currY) && !isVisited[currX + 1][currY]) // 아직 세로 확장을 안했을 때만
 		{
 			makeMapToLine(startX, startY, currX + 1, currY, isVisited);
 		}

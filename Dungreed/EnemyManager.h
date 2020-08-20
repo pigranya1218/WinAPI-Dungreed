@@ -41,6 +41,7 @@ public:
 	bool detectPlayer(GameObject* object, const float distance);														// 에너미 플레이어 감지
 	void fireEnemy(Projectile* projectile, AttackInfo* attackInfo);														// 에너미 불릿
 	Vector2 getEnemyPos(const Vector2& pos);
+	vector<Vector2> getAllEnemyPos();
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();

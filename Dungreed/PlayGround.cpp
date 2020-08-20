@@ -576,26 +576,33 @@ HRESULT playGround::init()
 
 	//** Boss
 	// * Belial
-	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle"		, L"resources/images/boss/Belial/idle.png"		, 10, 1);	//머리 기본
-	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot", L"resources/images/boss/Belial/idle_Shot.png"	, 10, 1);	//머리 기본 피격
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle"			, L"resources/images/boss/Belial/Head/idle.png"			, 10, 1);	// 머리 기본
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot"	, L"resources/images/boss/Belial/Head/idle_Shot.png"	, 10, 1);	// 머리 기본 피격
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack"		, L"resources/images/boss/Belial/Head/attack.png"		, 10, 1);	// 머리 공격
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack_Shot"	, L"resources/images/boss/Belial/Head/attack_shot.png"	, 10, 1);	// 머리 공겨 피격
+	IMAGE_MANAGER->addFrameImage("Belial/Back"				, L"resources/images/boss/Belial/Back/idle.png"			, 10, 1);	// 후광 구
 
+	IMAGE_MANAGER->addImage("Belial/Sword"					, L"resources/images/boss/Belial/Sword/default.png"				);	// 검 이미지
+	IMAGE_MANAGER->addImage("Belial/Sword_Shoot"			, L"resources/images/boss/Belial/Sword/shoot.png"				);	// 검 이미지
+	IMAGE_MANAGER->addFrameImage("Belial/Sword_Charge"		, L"resources/images/boss/Belial/Sword/charge.png"		,  1, 8);	// 검 이펙트
 
-	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack", L"resources/images/boss/Belial/attack.png", 10, 1);							//벨리알 머리 공격 상태
-	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot", L"resources/images/boss/Belial/getHeadDamage_Idle.png", 10, 1);			//벨리알 머리 대기 피격 상태
-	IMAGE_MANAGER->addFrameImage("Belial/Head/IdAttackle_Shot", L"resources/images/boss/Belial/getHeadDamage_attack.png", 10, 1);	//벨리알 머리 공격 피격 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Bullet"			, L"resources/images/boss/Belial/bullet.png"			,  2, 1);	// 투사체	
+	
+	EFFECT_MANAGER->addEffect("Belial/Sword_Charge", "Belial/Sword_Charge", 15, 6);
+
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle", L"resources/images/boss/Belial/HandIdle.png", 10, 1);							//벨리알 손 대기 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack", L"resources/images/boss/Belial/Handattack.png", 18, 1);						//벨리알 손 공격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle_Shot", L"resources/images/boss/Belial/getHandDamage_Idle.png", 10, 1);			//벨리알 손 대기 피격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/IdAttackle_Shot", L"resources/images/boss/Belial/getHandDamage_attack.png", 18, 1);	//벨리알 손 공격 피격 상태
-	IMAGE_MANAGER->addFrameImage("Belial/Back", L"resources/images/boss/Belial/back.png", 10, 1);									//벨리알 후광 구
+	
 	IMAGE_MANAGER->addFrameImage("Belial/particle", L"resources/images/boss/Belial/particle.png", 9, 1);							//벨리알 구 주변 이팩트
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet", L"resources/images/boss/Belial/bullet.png", 2, 1);								//벨리알 총알
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet_Fx", L"resources/images/boss/Belial/bullet_Fx.png", 8, 1);							//벨리알 타격 이팩트
 
-	IMAGE_MANAGER->addFrameImage("Belial/Laser", L"resources/images/boss/Belial/laser.png", 8, 1);									//벨리알 레이저
-	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/laser_head.png", 8, 1);						//벨리알 레이저 앞부분
+	IMAGE_MANAGER->addFrameImage("Belial/Laser", L"resources/images/boss/Belial/laser.png", 7, 1);									//벨리알 레이저
+	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/laser_head.png", 7, 1);						//벨리알 레이저 앞부분
 
-	IMAGE_MANAGER->addImage("Belial/Sword", L"resources/images/boss/Belial/BossSword.png");										    //벨리알 검
+	//IMAGE_MANAGER->addImage("Belial/Sword", L"resources/images/boss/Belial/BossSword.png");										    //벨리알 검
 
 	EFFECT_MANAGER->addEffect("Belial/Bullet_Fx","Belial/Bullet_Fx",10,50);															//벨리알 벽붇 이팩트
 
