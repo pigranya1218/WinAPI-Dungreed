@@ -285,6 +285,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_2", L"resources/images/object/broken/OakDrumParticle0_2.png");
 	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_3", L"resources/images/object/broken/OakDrumParticle0_3.png");
 	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_4", L"resources/images/object/broken/OakDrumParticle0_4.png");
+	// *** GOLD
+	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/COIN", L"resources/images/object/gold/goldCoin.png", 8, 1);
+	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/BULLION", L"resources/images/object/gold/goldBullion.png", 7, 1);
 
 	// ** COSTUME
 	// *** BASE

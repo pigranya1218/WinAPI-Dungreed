@@ -94,6 +94,7 @@ void ObjectManager::spawnObject(int objectCode, Vector2 pos)
 {
 	switch (objectCode)
 	{
+	// BROKEN OBJECT
 	case 0x0000: // 드럼
 	case 0x0001: // 박스
 	case 0x0002: // 큰 박스

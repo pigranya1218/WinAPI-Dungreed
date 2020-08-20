@@ -4,6 +4,7 @@
 
 void ParticleObject::init(Image* img, Vector2 pos, float power, float radian)
 {
+	_objectCode = 0x0010;
 	_img = img;
 	_position = pos;
 	_size = Vector2(10, 10);

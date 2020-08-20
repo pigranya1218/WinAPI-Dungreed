@@ -82,6 +82,7 @@ public:
 	int getCurrHp() const noexcept { return _currHp; }
 
 	int getGold() const noexcept { return _currGold; }
+	void setGold(int gold) { _currGold = gold; }
 	int getMaxSatiety() const noexcept { return _adjustStat.maxSatiety; }
 	int getSatiety() const noexcept { return _currSatiety; }
 

@@ -7,6 +7,7 @@ void Stage::init()
 {
 	_objectMgr = new ObjectManager;
 	_objectMgr->setStage(this);
+	_objectMgr->setPlayer(_player);
 
 	_npcMgr = new NpcManager;
 	_npcMgr->setStage(this);

@@ -20,7 +20,6 @@ private:
 
 public:
 	void init(int ObjectCode, Vector2 pos);
-	virtual void release() override;
 	virtual void update(float elapsedTime) override;
 	virtual void render() override;
 

@@ -2,6 +2,7 @@
 #include "BrokenObject.h"
 #include "ObjectManager.h"
 #include "ParticleObject.h"
+#include "GoldObject.h"
 
 Image* BrokenObject::getImage()
 {
@@ -75,18 +76,40 @@ void BrokenObject::respawnParticle()
 	{
 		Image* particleImage = IMAGE_MANAGER->findImage("OBJECT/PARTICLE/" + _fileName + "_" + to_string(i));
 		Vector2 pos = Vector2(RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x), RANDOM->getFromFloatTo(_position.y, _position.y - _size.y));
-		float power = RANDOM->getFromFloatTo(400, 800);
+		float power = RANDOM->getFromFloatTo(700, 1300);
 		float radian = RANDOM->getFromFloatTo(0.2 * PI, 0.8 * PI);
 
 		ParticleObject* object = new ParticleObject;
-		object->init(particleImage, pos, power, radian);
 		object->setObjectManager(_objectMgr);
+		object->init(particleImage, pos, power, radian);
 		_objectMgr->pushObject(object);
 	}
 }
 
 void BrokenObject::respawnGold()
 {
+	for (int i = 0; i < 5; i++)
+	{
+		Vector2 pos = Vector2(RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x), RANDOM->getFromFloatTo(_position.y, _position.y - _size.y));
+		float power = RANDOM->getFromFloatTo(600, 800);
+		float radian = RANDOM->getFromFloatTo(0.2 * PI, 0.8 * PI);
+
+		GoldObject* object = new GoldObject;
+		object->setObjectManager(_objectMgr);
+		object->init(10, pos, power, radian);
+		_objectMgr->pushObject(object);
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		Vector2 pos = Vector2(RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x), RANDOM->getFromFloatTo(_position.y, _position.y - _size.y));
+		float power = RANDOM->getFromFloatTo(600, 800);
+		float radian = RANDOM->getFromFloatTo(0.2 * PI, 0.8 * PI);
+
+		GoldObject* object = new GoldObject;
+		object->setObjectManager(_objectMgr);
+		object->init(100, pos, power, radian);
+		_objectMgr->pushObject(object);
+	}
 }
 
 void BrokenObject::respawnHpFairy()
@@ -101,10 +124,6 @@ void BrokenObject::init(int objectCode, Vector2 pos)
 	_img = getImage();
 	_position = pos;
 	_size = getObjectSize();
-}
-
-void BrokenObject::release()
-{
 }
 
 void BrokenObject::update(float elapsedTime)
@@ -128,6 +147,7 @@ bool BrokenObject::hitEffect(FloatRect* rect, AttackInfo* info)
 {
 	_active = false;
 	respawnParticle();
+	respawnGold();
 	return true;
 }
 
@@ -135,6 +155,7 @@ bool BrokenObject::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
 	_active = false;
 	respawnParticle();
+	respawnGold();
 	return true;
 }
 
@@ -142,5 +163,6 @@ bool BrokenObject::hitEffect(Projectile* projectile)
 {
 	_active = false;
 	respawnParticle();
+	respawnGold();
 	return true;
 }
