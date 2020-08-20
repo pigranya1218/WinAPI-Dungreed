@@ -284,6 +284,7 @@
     <ClInclude Include="Room9B.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ShortSpear.h" />
+    <ClInclude Include="SilverBullet.h" />
     <ClInclude Include="SingletonBase.h" />
     <ClInclude Include="SkelBigIce.h" />
     <ClInclude Include="SkelBigNormal.h" />
@@ -440,6 +441,7 @@
     <ClCompile Include="Room9B.cpp" />
     <ClCompile Include="RestaurantUI.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SilverBullet.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />
     <ClCompile Include="SkelBigNormal.cpp" />

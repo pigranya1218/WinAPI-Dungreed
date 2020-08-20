@@ -8,6 +8,10 @@ private:
 	Vector2 _location;
 	bool _Opposition;
 	float _currAttackDelay;
+	float _currStopDelay;
+	string _attackCode;
+	float _elapsedTime;
+
 public:
 	virtual void init();
 	virtual void release();

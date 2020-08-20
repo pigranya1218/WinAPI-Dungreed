@@ -49,5 +49,6 @@ void MagnifyingGlass::attack(Player* player, Projectile * projectile, AttackInfo
 		info->maxDamage *= 1.3;
 	}
 	
+	
 }
 

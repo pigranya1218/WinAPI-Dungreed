@@ -13,12 +13,8 @@ void Wingboots::init()
 	_displayText = L"\"발걸음이 아주 가벼워집니다.\"";
 
 	
-	_addStat.jumpPower = 500;
-	_addStat.dashYPower = 300;
-	_addStat.dashXPower = 300;
-	
-
-
+	_addStat.yGravity = -1800;
+	_addStat.xGravity = -1000;
 
 	//악세서리 가격
 	_price = 1200;

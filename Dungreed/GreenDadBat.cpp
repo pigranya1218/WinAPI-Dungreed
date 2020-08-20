@@ -122,7 +122,7 @@ void GreenDadBat::attack(Player * player)
 	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.2) : (0.2))) * length;
 	projectile->setPosition(shootPos);	
 	projectile->setTeam(OBJECT_TEAM::PLAYER);		
-	projectile->init("BabyBatBulletAt", "DadBatBulletFX", Vector2(190, 190), Vector2(70, 70), Vector2(190, 190), Vector2(500, 500), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
+	projectile->init("BabyBatBulletAt", "DadBatBulletFX", Vector2(190, 190), Vector2(70, 70), Vector2(190, 190), Vector2(900, 900), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 
