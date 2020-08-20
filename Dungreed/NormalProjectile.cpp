@@ -2,7 +2,7 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& collsionRectSize, const Vector2& drawSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
+void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& drawSize, const Vector2& collsionRectSize, const Vector2& effectSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
 {
 	float elapseXY;
 
@@ -12,7 +12,8 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 	_maxTime = maxTime;
 	_count = 0;
 
-	_img = IMAGE_MANAGER->findImage(imgKey);	
+	_img = IMAGE_MANAGER->findImage(imgKey);
+
 	if (useAni)
 	{
 		elapseXY = fabsf(_img->getFrameSize().x - _img->getFrameSize().y);
@@ -34,12 +35,16 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 	_collisionEffect = collisionEffect;
 	_drawSize = drawSize;
 	_size = collsionRectSize;
-
-	if (_collisionEffect != "")
-	{
-		_effectImg = IMAGE_MANAGER->findImage(_collisionEffect);
-		_effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
-	}
+	_effectSize = effectSize;
+	//if (_collisionEffect != "")
+	//{
+	//	//_effectImg = EFFECT_MANAGER->
+	//	//_effectImg = IMAGE_MANAGER->findImage(_collisionEffect);
+	//	if (_effectImg != nullptr)
+	//	{
+	//		_effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
+	//	}
+	//}
 
 	_gravity = Vector2(0, 4000);
 
