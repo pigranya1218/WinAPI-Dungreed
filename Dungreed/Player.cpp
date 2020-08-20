@@ -257,9 +257,9 @@ void Player::init()
 	testAcc15->init();
 	_inventory[7] = testAcc15;
 
-	OakBow* testAcc11 = new OakBow;
+	/*OakBow* testAcc11 = new OakBow;
 	testAcc11->init();
-	_inventory[4] = testAcc11;
+	_inventory[4] = testAcc11;*/
 
 	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
