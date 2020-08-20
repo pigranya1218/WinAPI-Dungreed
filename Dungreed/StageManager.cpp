@@ -12,7 +12,7 @@
 
 Stage * StageManager::getStage(int stageType, bool isWall[])
 {
-	
+	Stage* resultRoom = nullptr;
 	switch (stageType)
 	{
 	case 0: // ÀÏ¹Ý ¹æ
@@ -20,8 +20,8 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		if (!isWall[0] && !isWall[1] && !isWall[2] && !isWall[3]) // ÁÂ,»ó,¿ì,ÇÏ°¡ ¶Õ¸° °æ¿ì
 		{
 			int rand = RANDOM->getInt(2);
-			if(rand==0)resultRoom = new Room20LTRB;
-			else if(rand==1)resultRoom = new Room22LTRB;
+			if(rand==0) resultRoom = new Room20LTRB;
+			else if(rand==1) resultRoom = new Room22LTRB;
 		}
 		else if (!isWall[0] && !isWall[1] && !isWall[2] && isWall[3])//ÁÂ,»ó,¿ì  ¶Õ¸° °æ¿ì
 		{
@@ -61,7 +61,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		{
 			resultRoom = new Room7_RB;
 		}
-		if (!isWall[0] && isWall[1] && isWall[2] && isWall[3])//ÁÂ ¶Õ¸° °æ¿ì
+		else if (!isWall[0] && isWall[1] && isWall[2] && isWall[3])//ÁÂ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new Room8L;
 		}
@@ -304,6 +304,7 @@ void StageManager::makeDungeon()
 void StageManager::makeRoom(int x, int y)
 {
 	if (_roomInfo[x][y].isVisited) return;
+	_roomInfo[x][y].isVisited = true;
 
 	int move[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} }; // L T R B
 	bool checkDir[4] = { false, false, false, false };

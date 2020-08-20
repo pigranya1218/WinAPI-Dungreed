@@ -45,7 +45,7 @@ private:
 	void makeRoom(int x, int y);
 	bool makeSpecialRoom();
 	void releaseStage();
-	Stage* getStage(int stageType, bool isWall[]) { return nullptr; }
+	Stage* getStage(int stageType, bool isWall[]);
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }

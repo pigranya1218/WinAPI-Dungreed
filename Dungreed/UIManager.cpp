@@ -450,19 +450,22 @@ void UIManager::render()
 
 		// Minimap UI
 		{
+			Vector2 playerPos = _player->getPosition() / 16;
+
 			int offsetX = 1400;
-			int offsetY = 70;
-			Vector2 playerPos = _player->getPosition();
+			int offsetY = 90;
+			int rectOffsetX = offsetX - playerPos.x;
+			int rectOffsetY = offsetY - playerPos.y;
 				
 			for (int i = 0; i < _mapUI.collisionGroundRect.size(); i++)
 			{
-				int rectOffsetX = offsetX;
-				int rectOffsetY = offsetY;
+				Vector2 center = _mapUI.collisionGroundRect[i].getCenter();
 				FloatRect drawRc = _mapUI.collisionGroundRect[i];
 				drawRc.left += rectOffsetX;
 				drawRc.right += rectOffsetX;
 				drawRc.top += rectOffsetY;
 				drawRc.bottom += rectOffsetY;
+
 				D2D_RENDERER->fillRectangle(drawRc, 192, 193, 195, 1);
 			}
 			/*for (int i = 0; i < _mapUI.collisionGroundLine.size(); i++)
