@@ -180,6 +180,22 @@ void StageManager::release()
 
 void StageManager::update(float const elapsedTime)
 {
+	/*if (KEY_MANAGER->isOnceKeyDown('A'))
+	{
+		moveRoom(Vector2(-1, 0));
+	}
+	else if (KEY_MANAGER->isOnceKeyDown('D'))
+	{
+		moveRoom(Vector2(1, 0));
+	}
+	else if (KEY_MANAGER->isOnceKeyDown('W'))
+	{
+		moveRoom(Vector2(0, -1));
+	}
+	else if (KEY_MANAGER->isOnceKeyDown('S'))
+	{
+		moveRoom(Vector2(0, 1));
+	}*/
 	_currStage->update(elapsedTime);
 }
 
@@ -242,6 +258,7 @@ void StageManager::moveRoom(Vector2 moveDir)
 	_currIndexY += moveDir.y;
 
 	_currStage = _stageMap[_currIndexX][_currIndexY];
+	_currStage->enter(0);
 }
 
 void StageManager::makeStage()

@@ -5,8 +5,6 @@ void StartRoom2::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/StartRoom2_RB.map");
-
-	
 }
 
 void StartRoom2::release()
