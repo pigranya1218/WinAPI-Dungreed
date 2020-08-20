@@ -93,6 +93,8 @@ private:
 	FloatRect _foodTableViewRc;
 	// 포만률 게이지 렉트
 	FloatRect _satietyRc;
+	// 현재 포만률을 색칠할 렉트
+	FloatRect _currSatietyRateFillRc;
 	// 포만률 value를 표시할 렉트
 	FloatRect _satietyRateRc;
 	// 현재 체력 게이지 렉트
@@ -103,9 +105,6 @@ private:
 	FloatRect _goldAmountRc;
 	// 골드 아이콘 렉트
 	FloatRect _goldIconRc;
-	// 스크롤 렉트
-	//FloatRect _scrollBarBgRc;
-	//FloatRect _scrollBarHeaderRc;
 	
 	tagFoodItems _foodItems[5];
 	tagScrollBar _scrollBar;
