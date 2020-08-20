@@ -7,6 +7,6 @@ private:
 public:
 	virtual void init();
 
-	virtual void attack(Projectile* projectile, AttackInfo* info); // 탄환을 변경시키는 함수
+	virtual void attack(Player* player, Projectile* projectile, AttackInfo* info)override; // 탄환을 변경시키는 함수
 };
 

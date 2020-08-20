@@ -89,30 +89,4 @@ void Voluspa::frontRender(Player * player)
 {
 }
 
-void Voluspa::displayInfo()
-{
-}
 
-void Voluspa::attack(Player * player)
-{
-}
-
-void Voluspa::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void Voluspa::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void Voluspa::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void Voluspa::getHit(Vector2 const position)
-{
-}
-
-void Voluspa::equip(Player* player)
-{
-}

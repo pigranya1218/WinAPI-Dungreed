@@ -40,30 +40,3 @@ void Wingboots::frontRender(Player * player)
 {
 }
 
-void Wingboots::displayInfo()
-{
-}
-
-void Wingboots::attack(Player * player)
-{
-}
-
-void Wingboots::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void Wingboots::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void Wingboots::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void Wingboots::getHit(Vector2 const position)
-{
-}
-
-void Wingboots::equip(Player * player)
-{
-}

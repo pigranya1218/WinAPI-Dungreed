@@ -89,36 +89,3 @@ void DemonBoots::frontRender(Player * player)
 {
 }
 
-void DemonBoots::displayInfo()
-{
-}
-
-void DemonBoots::attack(Player * player)
-{
-}
-
-void DemonBoots::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void DemonBoots::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void DemonBoots::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void DemonBoots::getHit(Vector2 const position)
-{
-}
-
-void DemonBoots::dash(Player * player)
-{
-	
-}
-
-void DemonBoots::equip(Player * player)
-{
-	
-}

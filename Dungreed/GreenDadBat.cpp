@@ -91,9 +91,7 @@ void GreenDadBat::frontRender(Player * player)
 {
 }
 
-void GreenDadBat::displayInfo()
-{
-}
+
 
 void GreenDadBat::attack(Player * player)
 {
@@ -138,24 +136,4 @@ void GreenDadBat::attack(Player * player)
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임
 	
-}
-
-void GreenDadBat::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void GreenDadBat::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void GreenDadBat::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void GreenDadBat::getHit(Vector2 const position)
-{
-}
-
-void GreenDadBat::equip(Player* player)
-{
 }

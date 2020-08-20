@@ -97,10 +97,6 @@ void babyGreenBat::backRender(Player* player)
 }
 
 
-void babyGreenBat::displayInfo()
-{
-	
-}
 
 void babyGreenBat::attack(Player* player)
 {
@@ -162,26 +158,4 @@ void babyGreenBat::attack(Player* player)
 	attackInfo0->minDamage = 2;
 	player->attack(projectile0, attackInfo0);
 	_currAttackDelay = _baseAttackDelay; // 공격 쿨타임 설정
-}
-
-void babyGreenBat::attack(FloatRect * rect, AttackInfo * info)
-{
-	
-}
-
-void babyGreenBat::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void babyGreenBat::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void babyGreenBat::getHit(Vector2 const position)
-{
-}
-
-void babyGreenBat::equip(Player* player)
-{
-	
 }

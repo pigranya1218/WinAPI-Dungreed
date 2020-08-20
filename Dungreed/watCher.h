@@ -19,6 +19,6 @@ public:
 	virtual void update(Player* player, float const elapsedTime);
 	virtual void backRender(Player* player);
 
-	virtual bool isHit(Projectile* projectile) override;
+	virtual bool isHit(Projectile* projectile) ;
 };
 

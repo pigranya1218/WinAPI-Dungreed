@@ -37,23 +37,8 @@ void MagnifyingGlass::frontRender(Player * player)
 {
 }
 
-void MagnifyingGlass::displayInfo()
-{
-}
 
-void MagnifyingGlass::attack(Player * player)
-{
-}
-
-void MagnifyingGlass::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void MagnifyingGlass::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void MagnifyingGlass::attack(Projectile * projectile, AttackInfo * info)
+void MagnifyingGlass::attack(Player* player, Projectile * projectile, AttackInfo * info)
 {
 	if (info->madeByWeapon)
 	{
@@ -66,12 +51,3 @@ void MagnifyingGlass::attack(Projectile * projectile, AttackInfo * info)
 	
 }
 
-void MagnifyingGlass::getHit(Vector2 const position)
-{
-}
-
-void MagnifyingGlass::equip(Player* player)
-{
-	
-
-}

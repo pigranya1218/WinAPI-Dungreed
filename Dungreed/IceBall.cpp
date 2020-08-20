@@ -102,30 +102,4 @@ void IceBall::frontRender(Player * player)
 {
 }
 
-void IceBall::displayInfo()
-{
-}
 
-void IceBall::attack(Player * player)
-{
-}
-
-void IceBall::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void IceBall::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void IceBall::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void IceBall::getHit(Vector2 const position)
-{
-}
-
-void IceBall::equip(Player* player)
-{
-}

@@ -39,29 +39,6 @@ void bombPouch::backRender(Player* player)
 
 }
 
-void bombPouch::displayInfo()
-{
-}
-
-void bombPouch::attack(Player* player)
-{
-}
-
-void bombPouch::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void bombPouch::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void bombPouch::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void bombPouch::getHit(Vector2 const position)
-{
-}
 
 void bombPouch::dash(Player * player)
 {
@@ -83,8 +60,5 @@ void bombPouch::dash(Player * player)
 	
 }
 
-void bombPouch::equip(Player* player)
-{
 
-}
 

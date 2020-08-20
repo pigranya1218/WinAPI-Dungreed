@@ -85,9 +85,6 @@ void GreenMomBat::frontRender(Player * player)
 {
 }
 
-void GreenMomBat::displayInfo()
-{
-}
 
 void GreenMomBat::attack(Player * player)
 {
@@ -132,22 +129,3 @@ void GreenMomBat::attack(Player * player)
 	
 }
 
-void GreenMomBat::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void GreenMomBat::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void GreenMomBat::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void GreenMomBat::getHit(Vector2 const position)
-{
-}
-
-void GreenMomBat::equip(Player* player)
-{
-}

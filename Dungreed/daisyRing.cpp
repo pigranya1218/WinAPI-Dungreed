@@ -75,31 +75,3 @@ void DaisyRing::frontRender(Player * player)
 {
 }
 
-void DaisyRing::displayInfo()
-{
-}
-
-void DaisyRing::attack(Player * player)
-{
-}
-
-void DaisyRing::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void DaisyRing::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void DaisyRing::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void DaisyRing::getHit(Vector2 const position)
-{
-}
-
-void DaisyRing::equip(Player* player)
-{
-	
-}

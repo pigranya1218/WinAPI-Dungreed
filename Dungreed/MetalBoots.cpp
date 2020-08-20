@@ -34,30 +34,5 @@ void MetalBoots::frontRender(Player * player)
 {
 }
 
-void MetalBoots::displayInfo()
-{
-}
 
-void MetalBoots::attack(Player * player)
-{
-}
 
-void MetalBoots::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void MetalBoots::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void MetalBoots::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void MetalBoots::getHit(Vector2 const position)
-{
-}
-
-void MetalBoots::equip(Player * player)
-{
-}
