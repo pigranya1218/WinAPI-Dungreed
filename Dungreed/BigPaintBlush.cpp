@@ -39,6 +39,13 @@ void BigPaintBlush::init()
 	_angleOffset = 15;
 }
 
+void BigPaintBlush::release()
+{
+
+	
+
+}
+
 
 
 void BigPaintBlush::update(Player* player, float const elapsedTime)
@@ -58,7 +65,7 @@ void BigPaintBlush::update(Player* player, float const elapsedTime)
 		float length = _img->getWidth() * 4 * 1.0; // 무기 길이만큼
 		effectPos.x += cosf(degree * (PI / 180)) * length;
 		effectPos.y += -sinf(degree * (PI / 180)) * length;
-		EFFECT_MANAGER->play("EFFECT_PAINTSWING", effectPos, Vector2(180, 250), degree);
+		EFFECT_MANAGER->play("EFFECT_PAINTSWING", effectPos, Vector2(130, 200), degree);
 	}
 
 	if (_currAttackDelay == 0) return;
@@ -184,7 +191,7 @@ void BigPaintBlush::backRender(Player* player)
 	}
 
 
-
+	_attackDebug.render(true);
 
 }
 
@@ -285,6 +292,7 @@ void BigPaintBlush::frontRender(Player* player)
 		}
 		
 	}
+	_attackDebug.render(true);
 }
 
 
@@ -301,6 +309,38 @@ void BigPaintBlush::attack(Player* player)
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_reverseMove = false;
 	_currAttackDelay = _addStat.attackSpeed;
+	//==========================================================================
+
+	Vector2 originPos = player->getPosition();
+	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15); // 바라보는 방향의 어깨
+	originPos.y += 10;
+	float attackRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x));
+	if (attackRadian < 0)
+	{
+		attackRadian += PI2;
+	}
+
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+	
+	FloatCircle* attackCircle = new FloatCircle;
+	attackCircle->origin = originPos;
+	attackCircle->size = 150;
+	attackCircle->startRadian = attackRadian - PI * 0.28;
+	attackCircle->endRadian = attackRadian + PI * 0.28;
+	
+	_attackDebug = FloatCircle(originPos, 150, attackRadian - PI * 0.37, attackRadian + PI * 0.37); // forDEBUG
+	AttackInfo* attackInfo = new AttackInfo;
+	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo->critical = 0;
+	attackInfo->criticalDamage = 0;
+	attackInfo->minDamage = _addStat.minDamage;
+	attackInfo->maxDamage = _addStat.maxDamage;
+	attackInfo->knockBack = 15;
+	player->attack(attackCircle, attackInfo);
+	delete attackCircle;
+	delete attackInfo;
+
 }
 
 void BigPaintBlush::equip(Player* player)

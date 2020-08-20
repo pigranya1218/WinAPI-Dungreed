@@ -51,13 +51,14 @@ void FluteGreatSword::update(Player* player, float const elapsedTime)
 	{
 		//abs(_angleOffset += -(elapsedTime * ratio));
 		
-		if (_angleOffset <-180)
-		{
-			_oneAttack = false;
-		}
+		//if (_angleOffset == 0)
+		//{
+		//	_oneAttack = false;
+		//}
 	}
 	else
 	{
+		//_oneAttack = true;
 	}
 	if (_twoAttack)
 	{
@@ -107,7 +108,7 @@ void FluteGreatSword::backRender(Player* player)
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
 		}
 
-	
+		_attackDebug.render(true);
 }
 
 void FluteGreatSword::frontRender(Player* player)
@@ -116,35 +117,29 @@ void FluteGreatSword::frontRender(Player* player)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 originPos = player->getPosition();
 	Vector2 pos = player->getPosition();
-
-	
-		// 회전축 중점
-		originPos.x += ((isLeft) ? -15 : 15); // 바라보는 방향의 어깨
-		originPos.y += 0;
-
-		// 회전축으로부터 마우스까지의 각도값
-		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
-		degree += -180;
-		float handDegree = degree +((isLeft) ? (-110 - _angleOffset) : (110 + _angleOffset));
-
-		// 좌우 대칭을 위한 계산
-		float weaponDegree = handDegree;
-		if (isLeft)
-		{
-			weaponDegree = 180 - weaponDegree;
-		}
-
-		// 손의 위치 
-		Vector2 renderPosHand = originPos;
-		renderPosHand.x += (_width * 0.1 * 4);
-		// 무기 위치
-		Vector2 renderPosWeapon = originPos;
-		renderPosWeapon.x += (isLeft) ? (_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4) : (-_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
-		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * -_width * 0.15 * 4;
-		if (_oneAttack)
-		{
+	// 회전축 중점
+	originPos.x += ((isLeft) ? -15 : 15); // 바라보는 방향의 어깨
+	originPos.y += 5;
+	// 회전축으로부터 마우스까지의 각도값
+	float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
+	float handDegree = degree + ((isLeft) ? -110 : 110);
+	// 좌우 대칭을 위한 계산
+	float weaponDegree = handDegree;
+	if (isLeft)
+	{
+		weaponDegree = 180 - weaponDegree;
+	}
+	// 손의 위치 
+	Vector2 renderPosHand = originPos;
+	renderPosHand.x += (_width * 0.1 * 4);
+	// 무기 위치
+	Vector2 renderPosWeapon = originPos;
+	renderPosWeapon.x += (isLeft) ? (_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4) : (-_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
+	renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * _width * 0.15 * 4;
+	if (_oneAttack)
+	{
 		_img->setScale(4); // 이미지 크기 
-		_img->setAngle(-weaponDegree + _angleOffset); // 이미지 각도 
+		_img->setAngle(-(weaponDegree + _angleOffset)); // 이미지 각도 
 		_img->setAnglePos(Vector2(0.15f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
 		_img->render(CAMERA->getRelativeV2(renderPosWeapon), !isLeft); // 그린다
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
@@ -155,8 +150,8 @@ void FluteGreatSword::frontRender(Player* player)
 		FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
-
-		}
+	}
+	_attackDebug.render(true);
 }
 
 
@@ -171,7 +166,36 @@ void FluteGreatSword::attack(Player* player)
 	Vector2 originPos = player->getPosition();
 	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15); // 바라보는 방향의 어깨
 	originPos.y += 10;
+	//==========================================================================
 
+	
+	float attackRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x));
+	if (attackRadian < 0)
+	{
+		attackRadian += PI2;
+	}
+
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+
+	FloatCircle* attackCircle = new FloatCircle;
+	attackCircle->origin = originPos;
+	attackCircle->size = 120;
+	attackCircle->startRadian = attackRadian - PI * 0.28;
+	attackCircle->endRadian = attackRadian + PI * 0.28;
+
+	_attackDebug = FloatCircle(originPos, 120, attackRadian - PI * 0.28, attackRadian + PI * 0.28); // forDEBUG
+
+	AttackInfo* attackInfo = new AttackInfo;
+	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo->critical = 0;
+	attackInfo->criticalDamage = 0;
+	attackInfo->minDamage = _addStat.minDamage;
+	attackInfo->maxDamage = _addStat.maxDamage;
+	attackInfo->knockBack = 15;
+	player->attack(attackCircle, attackInfo);
+	delete attackCircle;
+	delete attackInfo;
 }
 
 void FluteGreatSword::equip(Player* player)

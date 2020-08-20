@@ -24,6 +24,7 @@ private:
 	float _width;
 	float _height;
 
+	FloatCircle _attackDebug;
 public:
 	virtual void init();
 	virtual void update(Player* player, float const elapsedTime);

@@ -352,11 +352,6 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Lumber1", L"resources/images/MeleeWeapon/Lumber1.png"); // ºÎ¼­Áø °¢¸ñ ¾ÆÀÌÄÜ°â ÀÌ¹ÌÁö
 	IMAGE_MANAGER->addImage("FluteGreatSword", L"resources/images/MeleeWeapon/FluteGreatSword.png"); // ÈæÀå¹ÌÄ® ¾ÆÀÌÄÜ°â ÀÌ¹ÌÁö
 
-
-
-
-
-
 	//***MeleeWeaponEffect
 	IMAGE_MANAGER->addFrameImage("SwingFX", L"resources/images/MeleeWeapon/SwingFX.png", 3, 1);
 	IMAGE_MANAGER->addFrameImage("StabFX", L"resources/images/MeleeWeapon/StabFX.png", 4, 1);
@@ -365,7 +360,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("TigerPunch", L"resources/images/MeleeWeapon/TigerPunch.png",10,1);
 	IMAGE_MANAGER->addFrameImage("RedPickaxeSwing", L"resources/images/MeleeWeapon/RedPickaxeSwing.png",12,1);
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
-	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",4,1);
+	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
 
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // ¿ìÁÖ°Ë ÀÌÆåÆ®
@@ -373,16 +368,16 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // ³´ ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_SWING", "SwingFX", 15, 10); // ÀÏ¹Ý ÈÖµÎ¸£±â ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_STAB", "StabFX", 15, 10);	  // ÀÏ¹Ý Âî¸£±â ÀÌÆåÆ®
-	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 30, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_TIGERPUNCH", "TigerPunch", 20, 10);	  // Å¸ÀÌ°ÅÆÝÄ¡ ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_REDPICKAXESWING", "RedPickaxeSwing", 30, 10);	  // ºÓÀº°î±ªÀÌ ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_POWERKATANA", "PowerKatanaEf", 30, 10);	  // À°µµ°¡ÀÌ(Ä«Å¸³ª) ÀÌÆåÆ®
-	EFFECT_MANAGER->addEffect("EFFECT_PAINTSWING", "PaintSwing", 30, 10);	  // ¼­¿¹¿ë º× ÀÌÆåÆ®
+	EFFECT_MANAGER->addEffect("EFFECT_PAINTSWING", "PaintSwing", 15, 10);	  // ¼­¿¹¿ë º× ÀÌÆåÆ®
 	//**** Å©¸®Æ¼ÄÃ ÀÌÆåÆ®
 	IMAGE_MANAGER->addFrameImage("EXPowerKatanaSwingFX", L"resources/images/MeleeWeapon/EXPowerKatanaSwingFX.png",10,1); // Ä«Å¸³ª Å©¸®Æ¼ÄÃ
 	EFFECT_MANAGER->addEffect("EFFECT_EXKATANAFX", "EXPowerKatanaSwingFX", 30, 10);	  // Ä«Å¸³ª Å©¸®Æ¼ÄÃ ÀÌÆåÆ®
 
 
-
+	
 
 	// *Accessories
 	IMAGE_MANAGER->addImage("SpikeBall", L"resources/images/Accessories/SpikeBall.png");                       // »ÏÁ·°ø	
