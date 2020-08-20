@@ -289,17 +289,17 @@ void Player::init()
 	//testWeapon5->init();
 	//_inventory[13] = testWeapon5;
 
-	/*Boomerang* testweapon5 = new Boomerang;
+	Boomerang* testweapon5 = new Boomerang;
 	testweapon5->init();
-	_inventory[14] = testweapon5;*/
+	_inventory[14] = testweapon5;
 
 	/*MatchLockGun* testWeapon6 = new MatchLockGun;
 	testWeapon6->init();
 	_inventory[14] = testWeapon6;*/
 
-	GatlingGun* testWeapon6 = new GatlingGun;
+	/*GatlingGun* testWeapon6 = new GatlingGun;
 	testWeapon6->init();
-	_inventory[14] = testWeapon6;
+	_inventory[14] = testWeapon6;*/
 
 	_hand = new Punch;
 	_hand->init();

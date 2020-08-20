@@ -41,6 +41,8 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 	_gravity = Vector2(0, 4000);
 
 	_active = true;
+
+	_length = _img->getFrameSize().x * 1.0f;
 }
 
 void NormalProjectile::release()
@@ -74,10 +76,14 @@ void NormalProjectile::update(float elapsedTime)
 	_projectileMgr->moveTo(this, moveDir, _collsionGround, _collisionPlatForm);
 	Vector2 currDir = _position;
 
+	Vector2 effectPos = _position;
+	effectPos.x += cosf(_angleRadian) * _length;
+	effectPos.y += -sinf(_angleRadian) * _length;
+
 	if (lastDir + moveDir != currDir)
 	{
 		float angleDegree = _angleRadian * (180.0f / PI);
-		EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
 		_active = false;
 	}
 
@@ -88,7 +94,7 @@ void NormalProjectile::update(float elapsedTime)
 		if (_projectileMgr->checkEnemyCollision(this, _useCollsionEnemy)) // 적과 충돌했다면
 		{
 			float angleDegree = _angleRadian * (180.0f / PI);
-			EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
 			
 			if (_useCollsionEnemy)
 			{
