@@ -130,7 +130,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		{
 			resultRoom = new RestaurantRoom;
 		}
-		else if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
+		else if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new RestaurantRoom2LR;
 		}
@@ -161,12 +161,13 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	resultRoom->init();
 	resultRoom->setPlayer(_player);
 	resultRoom->setStageManager(this);
+	resultRoom->setUIManager(_uiMgr);
 	return resultRoom;
 }
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
 	_mapSize = 4;
 	makeStage();
 }
@@ -327,6 +328,7 @@ void StageManager::makeDungeon()
 	}
 		
 	_currStage = _stageMap[_currIndexX][_currIndexY];
+	_currStage->enter(0);
 }
 
 void StageManager::makeRoom(int x, int y)
