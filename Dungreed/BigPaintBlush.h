@@ -6,15 +6,15 @@ private:
 	struct tagAttack
 	{
 		FloatCircle* _attackCircle;
-		FloatCircle* _attackCircle2;
 		AttackInfo* _attackInfo;
 		float _hitDelay;
+		int _count;
 	};
 
 private:
 	
-	vector<tagAttack*> _VtagAttack;
-	vector<tagAttack*>::iterator _VItagAttack;
+	vector<tagAttack> _VtagAttack;
+	vector<tagAttack>::iterator _VItagAttack;
 	// 공격 관련
 	Image*	_effect;
 	Image* _img;
