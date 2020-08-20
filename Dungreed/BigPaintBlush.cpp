@@ -318,9 +318,6 @@ void BigPaintBlush::frontRender(Player* player)
 	}
 }
 
-void BigPaintBlush::displayInfo()
-{
-}
 
 void BigPaintBlush::attack(Player* player)
 {
@@ -335,22 +332,6 @@ void BigPaintBlush::attack(Player* player)
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_reverseMove = false;
 	_currAttackDelay = _addStat.attackSpeed;
-}
-
-void BigPaintBlush::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void BigPaintBlush::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void BigPaintBlush::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void BigPaintBlush::getHit(Vector2 const position)
-{
 }
 
 void BigPaintBlush::equip(Player* player)
