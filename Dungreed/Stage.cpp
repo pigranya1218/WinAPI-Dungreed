@@ -112,9 +112,9 @@ void Stage::loadMap(string mapName)
 		int indexY = i / maxSizeX;
 		if (isVisited[indexX][indexY]) continue; // 이미 방문한 타일은 패스
 		makeMapToLine(indexX, indexY, indexX, indexY, isVisited); // 현재 타일을 시작으로 선분 만들기 시작
-
-		
 	}
+
+
 }
 
 void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<vector<bool>>& isVisited)
@@ -128,189 +128,43 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 	
 	switch (_tile[currIndex].linePos)
 	{
-	case DRAW_LINE_POSITION::TOP:
+	case DRAW_LINE_POSITION::BLOCK:
 	{
-		if (currX < maxSizeX - 1 && (_tile[currIndex + 1].linePos == DRAW_LINE_POSITION::TOP || _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::LEFT_TOP || _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::RIGHT_TOP))
+		if ((currX < maxSizeX - 1) && (_tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BLOCK) && (startY == currY)) // 아직 세로 확장을 안했을 때만
 		{
 			makeMapToLine(startX, startY, currX + 1, currY, isVisited);
 		}
-		else
+		else // 세로로 확장할 수 있는지 검사하기
 		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
-		}
-	}
-	break;
-	case DRAW_LINE_POSITION::BOTTOM:
-	{
-		if (currX < maxSizeX - 1 && (_tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BOTTOM || _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::LEFT_BOTTOM || _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::RIGHT_BOTTOM))
-		{
-			makeMapToLine(startX, startY, currX + 1, currY, isVisited);
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
-		}
-	}
-	break;
-	case DRAW_LINE_POSITION::LEFT:
-	{
-		if (currY < maxSizeY - 1 && (_tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::LEFT || _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::LEFT_TOP || _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::LEFT_BOTTOM))
-		{
-			makeMapToLine(startX, startY, currX, currY + 1, isVisited);
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
-		}
-	}
-	break;
-	case DRAW_LINE_POSITION::RIGHT:
-	{
-		if (currY < maxSizeY - 1 && (_tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::RIGHT || _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::RIGHT_TOP || _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::RIGHT_BOTTOM))
-		{
-			makeMapToLine(startX, startY, currX, currY + 1, isVisited);
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
-		}
-	}
-	break;
-	case DRAW_LINE_POSITION::LEFT_TOP:
-	{
-		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::TOP)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::TOP)
+			bool canAppendDown = true;
+			if (currY >= maxSizeY - 1) // 세로 확장 불가능한 경우
 			{
-				makeMapToLine(startX, startY, currX + 1, currY, isVisited);
+				canAppendDown = false;
 			}
 			else
 			{
-				makeMapToLine(currX, currY, currX + 1, currY, isVisited);
+				for (int x = startX; x <= currX; x++)
+				{
+					if (_tile[x + maxSizeX * (currY + 1)].linePos != DRAW_LINE_POSITION::BLOCK)
+					{
+						canAppendDown = false;
+						break;
+					}
+				}
 			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
-		}
-		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::LEFT)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::LEFT)
+			
+			if (canAppendDown) // 아래로 확장할 수 있는 경우
 			{
+				for (int x = startX; x < currX; x++)
+				{
+					isVisited[x][currY + 1] = true;
+				}
 				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
 			}
-			else
+			else // 확장이 끝나서 충돌 렉트를 만듦
 			{
-				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
+				_collisionGroundRects.push_back(FloatRect(_tile[startIndex].rc.left, _tile[startIndex].rc.top, _tile[currIndex].rc.right, _tile[currIndex].rc.bottom));
 			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
-		}
-		
-	}
-	break;
-	case DRAW_LINE_POSITION::LEFT_BOTTOM:
-	{
-		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::LEFT)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::LEFT)
-			{
-				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
-			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
-		}
-		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BOTTOM)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::BOTTOM)
-			{
-				makeMapToLine(startX, startY, currX + 1, currY, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX + 1, currY, isVisited);
-			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
-		}
-	}
-	break;
-	case DRAW_LINE_POSITION::RIGHT_TOP:
-	{
-		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::TOP)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::TOP)
-			{
-				makeMapToLine(startX, startY, currX + 1, currY, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX + 1, currY, isVisited);
-			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
-		}
-		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::RIGHT)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::RIGHT)
-			{
-				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
-			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE * (currY - startY + 1)), PIVOT::LEFT_TOP));
-		}
-		
-	}
-	break;
-	case DRAW_LINE_POSITION::RIGHT_BOTTOM:
-	{
-		if (currY < maxSizeY - 1 && _tile[currIndex + maxSizeX].linePos == DRAW_LINE_POSITION::RIGHT)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::RIGHT)
-			{
-				makeMapToLine(startX, startY, currX, currY + 1, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX, currY + 1, isVisited);
-			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE, TILESIZE* (currY - startY + 1)), PIVOT::LEFT_TOP));
-		}
-		if (currX < maxSizeX - 1 && _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::BOTTOM)
-		{
-			if (_tile[startIndex].linePos == DRAW_LINE_POSITION::BOTTOM)
-			{
-				makeMapToLine(startX, startY, currX + 1, currY, isVisited);
-			}
-			else
-			{
-				makeMapToLine(currX, currY, currX + 1, currY, isVisited);
-			}
-		}
-		else
-		{
-			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
 	}
 	break;

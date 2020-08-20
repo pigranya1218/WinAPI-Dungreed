@@ -83,6 +83,11 @@ void GameScene::loadInfo(tagLoadInfo const info)
 	
 }
 
+Vector2 GameScene::getEnemyPos(Vector2 pos)
+{
+	return _stageMgr->getEnemyPos(pos);
+}
+
 void GameScene::moveTo(GameObject * object, Vector2 moveDir)
 {
 	_stageMgr->moveTo(object, moveDir);

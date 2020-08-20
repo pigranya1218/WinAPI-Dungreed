@@ -443,20 +443,6 @@ void MapTool::setSelectTile()
 	}
 }
 
-void MapTool::setLinePos(int frameX, int frameY)
-{
-	if (frameX == 2 && frameY == 8)_drawLinePos=DRAW_LINE_POSITION::TOP;
-	if(frameX==2 && frameY==6)_drawLinePos = DRAW_LINE_POSITION::BOTTOM;
-	if(frameX==1 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::RIGHT;
-	if(frameX==3 && frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT;
-	if ((frameX >=1&&frameX<5)&&frameY==5 )_drawLinePos = DRAW_LINE_POSITION::PLATFORM_TOP;
-	if ((frameX >= 6 && frameX < 9) && frameY == 5)_drawLinePos = DRAW_LINE_POSITION::PLATFORM_TOP;
-	else _drawLinePos = DRAW_LINE_POSITION::NOLINE;
-	/*if((frameX==6||frameX==8)&&frameY==7)_drawLinePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
-	if ((frameX == 7 || frameX == 9) && frameY == 7)_drawLinePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
-	*/
-}
-
 void MapTool::setTileSize()
 {
 		if(_increaseTileX.ptInRect(_ptMouse))

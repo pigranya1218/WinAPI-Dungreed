@@ -147,7 +147,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
+	_currStageType = STAGE_TYPE::TEST;
 	_mapSize = 4;
 	makeStage();
 }
@@ -499,6 +499,11 @@ void StageManager::setPlayerPos( int x, int y)
 {
 	
 	_player->setPosition(Vector2(x, y));
+}
+
+Vector2 StageManager::getEnemyPos(Vector2 pos)
+{
+	return _currStage->getEnemyPos(pos);
 }
 
 void StageManager::showDamage(DamageInfo info, Vector2 pos)
