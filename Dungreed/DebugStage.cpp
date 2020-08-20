@@ -5,12 +5,12 @@ void DebugStage::init()
 {
 	int stageWidth = _tile[0].tileX*TILESIZE;
 	int stageHeight = _tile[0].tileY*TILESIZE;
-	_stageManager->setPlayerPos(600, 600);
+	_stageManager->setPlayerPos(1600, 1600);
 
 	Stage::init();
 	// 맵 불러오기
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/Stage5_LR.map");
+	loadMap("room/Stage20_LTRB.map");
 
 	// 에너미 테스트입니다.
 	/*
