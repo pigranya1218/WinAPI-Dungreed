@@ -4,7 +4,7 @@ void DownStair1L::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("DownStair1L.map");
+	loadMap("room/DownStair1_L.map");
 }
 
 void DownStair1L::release()
