@@ -17,11 +17,9 @@ void Stage::init()
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
 	_projectileMgr->setEnemyManager(_enemyMgr);
-
-	_isMade = false;
 }
 
-void Stage::enter()
+void Stage::enter(int enterType)
 {
 	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms);
 }
