@@ -5,7 +5,7 @@ void DebugStage::init()
 {
 	int stageWidth = _tile[0].tileX*TILESIZE;
 	int stageHeight = _tile[0].tileY*TILESIZE;
-	_stageManager->setPlayerPos(1000, 1300);
+	_stageManager->setPlayerPos(1200, 1300);
 
 	Stage::init();
 	// ¸Ê ºÒ·¯¿À±â

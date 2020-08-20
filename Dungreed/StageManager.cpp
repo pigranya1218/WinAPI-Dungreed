@@ -32,11 +32,11 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		{
 			resultRoom = new Room12LRB;
 		}
-		else if (!isWall[0] && !isWall[1] && !isWall[2] && !isWall[3])//ÁÂ, »ó, ÇÏ  ¶Õ¸° °æ¿ì
+		else if (!isWall[0] && !isWall[1] && isWall[2] && !isWall[3])//ÁÂ, »ó, ÇÏ  ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new Room13LTB;
+			resultRoom = new Room13LTB;    
 		}
-		else if (!isWall[0] && isWall[1] && !isWall[2] && !isWall[3])// ¿ì, »ó, ÇÏ  ¶Õ¸° °æ¿ì
+		else if (isWall[0] && !isWall[1] && !isWall[2] && !isWall[3])// ¿ì, »ó, ÇÏ  ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new Room14TRB;
 		}
