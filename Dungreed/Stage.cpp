@@ -373,12 +373,12 @@ void Stage::attack(FloatCircle * circle, AttackInfo * info)
 
 bool Stage::isHitEnemy(FloatRect* rc, AttackInfo* info)
 {
-	return _enemyMgr->isHit(rc, info);
+	return (_enemyMgr->isHit(rc, info) || _objectMgr->isHit(rc, info));
 }
 
 bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 {
-	return _enemyMgr->isHit(circle, info);
+	return (_enemyMgr->isHit(circle, info) || _objectMgr->isHit(circle, info));
 }
 
 bool Stage::isHitPlayer(Projectile * projectile, bool isOnceCollision)

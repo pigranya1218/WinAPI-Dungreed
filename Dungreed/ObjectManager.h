@@ -25,6 +25,6 @@ public:
 
 
 	void spawnObject(int objectCode, Vector2 pos);
-
+	void pushObject(Object* object);
 };
 

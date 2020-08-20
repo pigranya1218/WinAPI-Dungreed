@@ -167,7 +167,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
+	_currStageType = STAGE_TYPE::TEST;
 	_mapSize = 4;
 	makeStage();
 }

@@ -261,6 +261,31 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
 
+	// ** OBJECT
+	// *** BROKEN
+	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BOX", L"resources/images/object/broken/Box0.png");
+	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BIG_BOX", L"resources/images/object/broken/BigBox0.png");
+	IMAGE_MANAGER->addImage("OBJECT/BROKEN/DRUM", L"resources/images/object/broken/OakDrum0.png");
+	// *** PARTICLE
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_0", L"resources/images/object/broken/BoxParticle0_0.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_1", L"resources/images/object/broken/BoxParticle0_1.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_2", L"resources/images/object/broken/BoxParticle0_2.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_3", L"resources/images/object/broken/BoxParticle0_3.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_4", L"resources/images/object/broken/BoxParticle0_4.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_5", L"resources/images/object/broken/BoxParticle0_5.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_6", L"resources/images/object/broken/BoxParticle0_6.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_0", L"resources/images/object/broken/BigBoxParticle0_0.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_1", L"resources/images/object/broken/BigBoxParticle0_1.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_2", L"resources/images/object/broken/BigBoxParticle0_2.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_3", L"resources/images/object/broken/BigBoxParticle0_4.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_4", L"resources/images/object/broken/BigBoxParticle0_5.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_5", L"resources/images/object/broken/BigBoxParticle0_6.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_0", L"resources/images/object/broken/OakDrumParticle0_0.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_1", L"resources/images/object/broken/OakDrumParticle0_1.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_2", L"resources/images/object/broken/OakDrumParticle0_2.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_3", L"resources/images/object/broken/OakDrumParticle0_3.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_4", L"resources/images/object/broken/OakDrumParticle0_4.png");
+
 	// ** COSTUME
 	// *** BASE
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/IDLE", L"resources/images/costumes/base/player_idle.png", 5, 1);

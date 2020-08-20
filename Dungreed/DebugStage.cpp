@@ -62,6 +62,10 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 
 	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(220, 210), DIRECTION::RIGHT);
+
+	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
+	_objectMgr->spawnObject(0x0001, Vector2(750, 200));
+	_objectMgr->spawnObject(0x0002, Vector2(900, 200));
 }
 
 void DebugStage::release()

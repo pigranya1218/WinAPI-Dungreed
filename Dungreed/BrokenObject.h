@@ -6,15 +6,17 @@ class BrokenObject :
     public Object
 {
 private:
-	string fileName; // drum, box
-
+	string _fileName;
 	Image* _img;
 
 	Vector2 _force; // 받고 있는 힘
 
 private:
 	Image* getImage();
-	int getParticleObjectCode();
+	Vector2 getObjectSize();
+	void respawnParticle();
+	void respawnGold();
+	void respawnHpFairy();
 
 public:
 	void init(int ObjectCode, Vector2 pos);

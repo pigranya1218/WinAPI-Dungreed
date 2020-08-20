@@ -9,6 +9,7 @@ class Object : public GameObject
 {
 protected:
 	ObjectManager* _objectMgr;
+	vector<size_t> _attackedId;
 	int _objectCode;
 
 public:
@@ -22,7 +23,7 @@ public:
 	bool isHit(FloatCircle* circle, AttackInfo* info);
 	bool isHit(Projectile* projectile);
 
-	virtual bool hitEffect(FloatRect* rect, AttackInfo* info) {}
-	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info) {}
-	virtual bool hitEffect(Projectile* projectile) {}
+	virtual bool hitEffect(FloatRect* rect, AttackInfo* info) { return false; }
+	virtual bool hitEffect(FloatCircle* circle, AttackInfo* info) { return false; }
+	virtual bool hitEffect(Projectile* projectile) { return false; }
 };

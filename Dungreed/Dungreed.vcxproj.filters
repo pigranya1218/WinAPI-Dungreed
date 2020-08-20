@@ -1211,11 +1211,11 @@
     <ClCompile Include="GoldObject.cpp">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
     </ClCompile>
-    <ClCompile Include="Object.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="BrokenObject.cpp">
       <Filter>Dungreed\GameScene\Object\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
