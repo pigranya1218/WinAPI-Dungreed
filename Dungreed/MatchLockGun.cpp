@@ -214,15 +214,15 @@ void MatchLockGun::attack(Player* player)
 	_drawEffect = true; // 이펙트 그리기
 }
 
-void MatchLockGun::attack(FloatRect * rect, AttackInfo* info)
+void MatchLockGun::attack(Player* player, FloatRect * rect, AttackInfo* info)
 {
 }
 
-void MatchLockGun::attack(FloatCircle * circle, AttackInfo* info)
+void MatchLockGun::attack(Player* player, FloatCircle * circle, AttackInfo* info)
 {
 }
 
-void MatchLockGun::attack(Projectile * projectile, AttackInfo* info)
+void MatchLockGun::attack(Player* player, Projectile * projectile, AttackInfo* info)
 {
 }
 

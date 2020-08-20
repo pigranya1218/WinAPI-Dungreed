@@ -194,15 +194,15 @@ void MagicStick::attack(Player * player)
 	_drawEffect = true; // 이펙트 그리기
 }
 
-void MagicStick::attack(FloatRect * rect, AttackInfo * info)
+void MagicStick::attack(Player* player, FloatRect * rect, AttackInfo * info)
 {
 }
 
-void MagicStick::attack(FloatCircle * circle, AttackInfo * info)
+void MagicStick::attack(Player* player, FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void MagicStick::attack(Projectile * projectile, AttackInfo * info)
+void MagicStick::attack(Player* player, Projectile * projectile, AttackInfo * info)
 {
 }
 

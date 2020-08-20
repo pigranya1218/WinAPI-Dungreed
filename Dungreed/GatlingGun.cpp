@@ -257,15 +257,15 @@ void GatlingGun::attack(Player * player)
 	_shootEffectAni->start();
 }
 
-void GatlingGun::attack(FloatRect * rect, AttackInfo * info)
+void GatlingGun::attack(Player* player, FloatRect * rect, AttackInfo * info)
 {
 }
 
-void GatlingGun::attack(FloatCircle * circle, AttackInfo * info)
+void GatlingGun::attack(Player* player, FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void GatlingGun::attack(Projectile * projectile, AttackInfo * info)
+void GatlingGun::attack(Player* player, Projectile * projectile, AttackInfo * info)
 {
 }
 
