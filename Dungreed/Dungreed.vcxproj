@@ -266,6 +266,8 @@
     <ClInclude Include="Room11LT.h" />
     <ClInclude Include="Room11_LB.h" />
     <ClInclude Include="Room12LRB.h" />
+    <ClInclude Include="Room13LTB.h" />
+    <ClInclude Include="Room14TRB.h" />
     <ClInclude Include="Room1R.h" />
     <ClInclude Include="Room21LR.h" />
     <ClInclude Include="Room20LTRB.h" />
@@ -419,6 +421,8 @@
     <ClCompile Include="Room11LT.cpp" />
     <ClCompile Include="Room11_LB.cpp" />
     <ClCompile Include="Room12LRB.cpp" />
+    <ClCompile Include="Room13LTB.cpp" />
+    <ClCompile Include="Room14TRB.cpp" />
     <ClCompile Include="Room1R.cpp" />
     <ClCompile Include="Room21LR.cpp" />
     <ClCompile Include="Room20LTRB.cpp" />
