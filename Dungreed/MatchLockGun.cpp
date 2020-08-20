@@ -195,7 +195,7 @@ void MatchLockGun::attack(Player* player)
 
 
 	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("GunBullet", "", bulletRect, bulletSize, Vector2(0,0), Vector2(30 * 50, 30 * 50), 5, angleRadian, true, false, 10, true, false, true, false);
+	projectile->init("GunBullet", "", bulletSize, bulletRect, Vector2(0,0), Vector2(30 * 50, 30 * 50), 5, angleRadian, true, false, 10, true, false, true, false);
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
