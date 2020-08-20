@@ -289,9 +289,9 @@ void Player::init()
 	//testWeapon5->init();
 	//_inventory[13] = testWeapon5;
 
-	Boomerang* testweapon5 = new Boomerang;
+	/*Boomerang* testweapon5 = new Boomerang;
 	testweapon5->init();
-	_inventory[14] = testweapon5;
+	_inventory[14] = testweapon5;*/
 
 	/*MatchLockGun* testWeapon6 = new MatchLockGun;
 	testWeapon6->init();
@@ -300,6 +300,10 @@ void Player::init()
 	/*GatlingGun* testWeapon6 = new GatlingGun;
 	testWeapon6->init();
 	_inventory[14] = testWeapon6;*/
+
+	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
+	testAcc18->init();
+	_inventory[14] = testAcc18;
 
 	_hand = new Punch;
 	_hand->init();

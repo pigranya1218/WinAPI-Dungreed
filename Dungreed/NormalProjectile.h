@@ -40,5 +40,7 @@ public:
 
 	// 애니메이션 업데이트 하려고 만듬 
 	virtual void aniUpdate(float const elapsedTime);
+	bool getUseEnemyCollision() { return _useCollsionEnemy; }
+	void setUseEnemyCollision(bool useCollision) { _useCollsionEnemy = useCollision; };
 };
 
