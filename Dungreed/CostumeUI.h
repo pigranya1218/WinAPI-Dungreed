@@ -36,6 +36,7 @@ private:
 
 	bool _mouseMove;
 	bool _isScroll;
+	float _scrollOffset;
 
 	POINT _lastPtMouse;
 

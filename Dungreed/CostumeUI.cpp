@@ -13,6 +13,7 @@ void CostumeUI::init()
 	_isActive = false;
 	_mouseMove = false;
 	_isScroll = false;
+	_scrollOffset = 0;
 
 	_lastPtMouse = _ptMouse;
 
@@ -75,7 +76,10 @@ void CostumeUI::update(float elapsedTime)
 		//코스튬 선택
 		for (int i = 0; i < 5; i++)
 		{
-			if (_costumeCell[i].cellRect.ptInRect(_ptMouse))
+			FloatRect relativeCell = _costumeCell[i].cellRect;
+			relativeCell.left += _scrollOffset;
+			relativeCell.right += _scrollOffset;
+			if (relativeCell.ptInRect(_ptMouse))
 			{
 				_cosType = COSTUME_TYPE(i);
 				_player->setCurrCostume(DATA_MANAGER->getCostume(_cosType));
@@ -87,11 +91,6 @@ void CostumeUI::update(float elapsedTime)
 			_isScroll = true;
 		}
 	}
-
-	/*if (KEY_MANAGER->isStayKeyDown(VK_LBUTTON))
-	{
-		CAMERA->setConfig(360 * static_cast<int>(COSTUME_TYPE::END), 0, _scrollBar.width, WINSIZEY - 364, 0, 0, _scrollBar.totalWidth - _scrollBar.width, 0);
-	}*/
 	if (_isScroll)
 	{
 		Vector2 currCenter = _scrollBar.scrollRc.getCenter();
@@ -102,7 +101,6 @@ void CostumeUI::update(float elapsedTime)
 		_scrollBar.scrollRc = FloatRect(currCenter, _scrollBar.scrollRc.getSize(), PIVOT::CENTER);
 		_scrollBar.ratio = (currCenter.x - (_scrollBar.bgRc.left + (_scrollBar.scrollRc.getSize().x / 2)))
 			/ ((_scrollBar.bgRc.right - (_scrollBar.scrollRc.getSize().x / 2)) - (_scrollBar.bgRc.left + (_scrollBar.scrollRc.getSize().x / 2)));
-		CAMERA->setL((_scrollBar.totalWidth - _scrollBar.width) * _scrollBar.ratio);
 	}
 
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
@@ -111,6 +109,7 @@ void CostumeUI::update(float elapsedTime)
 	}
 
 	_lastPtMouse = _ptMouse;
+	_scrollOffset = -_scrollBar.ratio * (_scrollBar.totalWidth - _scrollBar.width);
 }
 
 void CostumeUI::render()
@@ -133,29 +132,32 @@ void CostumeUI::render()
 	{
 		//셀 뒷배경
 		//_costumeCell[i].costumeBackImg->render(_costumeCell[i].cellRect.getCenter(), _costumeCell[i].cellRect.getSize(), false);
-		_costumeCell[i].costumeBackImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x ), _costumeCell[i].cellRect.getCenter().y), 
-			_costumeCell[i].cellRect.getSize(), false);
+		FloatRect relativeCell = _costumeCell[i].cellRect;
+		relativeCell.left += _scrollOffset;
+		relativeCell.right += _scrollOffset;
+		_costumeCell[i].costumeBackImg->render(Vector2((relativeCell.getCenter().x ), relativeCell.getCenter().y),
+			relativeCell.getSize(), false);
 		//락/언락 배경
 		if (i != static_cast<int>(_cosType))
 		{
 			//_costumeCell[i].costumeUnlockedImg->setScale(5.2);
 			_costumeCell[i].costumeUnlockedImg->setSize(Vector2(300, 500));
 			//_costumeCell[i].costumeUnlockedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
-			_costumeCell[i].costumeUnlockedImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 10), false);
+			_costumeCell[i].costumeUnlockedImg->render(Vector2((relativeCell.getCenter().x), relativeCell.getCenter().y + 10), false);
 		}
 		//현재 장착중인 코스튬
 		else 
 		{
 			_costumeCell[i].costumeEquippedImg->setSize(Vector2(300, 500));
 			//_costumeCell[i].costumeEquippedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
-			_costumeCell[i].costumeEquippedImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 10), false);
+			_costumeCell[i].costumeEquippedImg->render(Vector2((relativeCell.getCenter().x), relativeCell.getCenter().y + 10), false);
 		}
 		//현재 선택한 코스튬
 		if (_costumeCell[i].cellRect.ptInRect(_ptMouse))
 		{
 			_costumeCell[i].costumeSelectedImg->setSize(Vector2(300, 500));
 			//_costumeCell[i].costumeSelectedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
-			_costumeCell[i].costumeSelectedImg->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 10), false);
+			_costumeCell[i].costumeSelectedImg->render(Vector2((relativeCell.getCenter().x), relativeCell.getCenter().y + 10), false);
 
 			//코스튬 이름
 			D2D_RENDERER->renderTextField(20, WINSIZEY - 140, _costumeCell[i].cosTitle, RGB(255,246,18), 45,
@@ -344,7 +346,7 @@ void CostumeUI::render()
 		if (i >= static_cast<int>(COSTUME_TYPE::END)) continue;
 		_costumeCell[i].costumeSample->setScale(5);
 		//_costumeCell[i].costumeSample->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 131), false); 
-		_costumeCell[i].costumeSample->render(Vector2(CAMERA->getRelativeX(_costumeCell[i].cellRect.getCenter().x), _costumeCell[i].cellRect.getCenter().y + 131), false);
+		_costumeCell[i].costumeSample->render(Vector2(CAMERA->getRelativeX(relativeCell.getCenter().x), relativeCell.getCenter().y + 131), false);
 
 		//_costumeCell[i].costumeSample->render(_costumeCell[i].cellRect.getCenter(), false);
 		/*D2D_RENDERER->drawRectangle(_costumeCell[i].cellRect, D2D1::ColorF::Enum::Red, 1.0f, 3.0f);
