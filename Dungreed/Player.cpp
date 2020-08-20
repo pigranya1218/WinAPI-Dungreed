@@ -955,7 +955,24 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 
 bool Player::ateFood(Food * food)
 {
-	return false;
+	// 플레이어의 현재 골드와 포만감을 비교하여 먹을 수 있다면
+	// 먹고, TRUE 반환 (골드 빼주고, 포만감 더해주고)
+	PlayerStat foodOneceStat = food->getOnceStat();
+	if (_currGold >= food->getPrice() && (getMaxSatiety() - _currSatiety) >= foodOneceStat.currSatiety)
+	{
+		_currGold -= food->getPrice();
+		_currSatiety += foodOneceStat.currSatiety;
+		_currHp += foodOneceStat.currHp;
+		_ateFood.push_back(food);
+		updateAdjustStat();
+		return true;
+	}
+	// 못먹으면 FALSE 반한
+	else
+	{
+		return false;
+	}
+	
 }
 
 float Player::getAttackSpeed()
