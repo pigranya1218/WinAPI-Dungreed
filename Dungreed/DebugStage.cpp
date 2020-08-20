@@ -10,7 +10,7 @@ void DebugStage::init()
 	Stage::init();
 	// 맵 불러오기
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("LineTest.map");
+	loadMap("room/Stage2_LR.map");
 
 	// 에너미 테스트입니다.
 	/*
@@ -61,7 +61,7 @@ void DebugStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	
-	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(220, 210), DIRECTION::RIGHT);
+	//_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(220, 210), DIRECTION::RIGHT);
 }
 
 void DebugStage::release()
