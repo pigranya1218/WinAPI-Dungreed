@@ -588,6 +588,9 @@
     <ClInclude Include="StrawberryPieFood.h">
       <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
     </ClInclude>
+    <ClInclude Include="Wingboots.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1012,6 +1015,9 @@
     </ClCompile>
     <ClCompile Include="StrawberryPieFood.cpp">
       <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="Wingboots.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

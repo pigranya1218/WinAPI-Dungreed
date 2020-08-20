@@ -302,6 +302,7 @@
     <ClInclude Include="Voluspa.h" />
     <ClInclude Include="watCher.h" />
     <ClInclude Include="windowsAPI.h" />
+    <ClInclude Include="Wingboots.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AliceCos.cpp" />
@@ -444,6 +445,7 @@
     <ClCompile Include="Voluspa.cpp" />
     <ClCompile Include="watCher.cpp" />
     <ClCompile Include="windowsAPI.cpp" />
+    <ClCompile Include="Wingboots.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dungreed.rc" />
