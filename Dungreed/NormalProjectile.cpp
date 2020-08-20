@@ -85,6 +85,7 @@ void NormalProjectile::update(float elapsedTime)
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
 		_active = false;
+		return;
 	}
 
 	// 타입에 따른 충돌 검사
