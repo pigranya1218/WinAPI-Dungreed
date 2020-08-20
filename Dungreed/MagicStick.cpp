@@ -184,7 +184,7 @@ void MagicStick::attack(Player * player)
 	Vector2 bulletRect = Vector2(_bulletImg->getFrameSize().x, _bulletImg->getFrameSize().x);
 
 	//projectile->init("lalaStickBullet", angleRadian, 30 * 1, true, false, 3, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("lalaStickBullet", "L_Effect_lalaStick", bulletRect, bulletSize, Vector2(30 * 10, 30 * 10), 3, angleRadian, true, true, 10, true, false, false, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+	projectile->init("lalaStickBullet", "L_Effect_lalaStick", bulletRect, bulletSize, Vector2(0,0), Vector2(30 * 10, 30 * 10), 3, angleRadian, true, true, 10, true, false, false, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
