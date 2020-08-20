@@ -119,7 +119,7 @@ void GreenBat::attack(Player * player)
 	// projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(110, 110), Vector2(500, 500), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
 	
 	// projectile->init("BabyBatBulletAt", angleRadian, 500, true, true, 20, true, "BabyBatBulletFx", Vector2(110, 110), 1,false);
-	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(40, 40), Vector2(110, 110), Vector2(500, 500), 1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
+	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(40, 40), Vector2(110, 110), Vector2(110, 110), Vector2(500, 500),  1, angleRadian, true, true, 20, false, false, true, false);	// 함수 인수가 바뀌었어요 >> 확인해주세요
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 	AttackInfo* attackInfo = new AttackInfo;

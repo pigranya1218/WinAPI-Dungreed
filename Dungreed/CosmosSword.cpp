@@ -237,7 +237,7 @@ void CosmosSword::attack(Player* player)
 	projectile = new NormalProjectile;
 	projectile->setPosition(shootPos);	
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("CosmosSwordFx", "", Vector2(50, 50), Vector2(250, 300), Vector2(30 * 50, 30 * 50), 3, radian, true, true, 10, true, false, false, false);
+	projectile->init("CosmosSwordFx", "", Vector2(50, 50), Vector2(250, 300), Vector2(50, 50), Vector2(30 * 50, 30 * 50), 3, radian, true, true, 10, true, false, false, false);
 
 	AttackInfo* attackInfo2 = new AttackInfo;
 	attackInfo2->team = OBJECT_TEAM::PLAYER;
