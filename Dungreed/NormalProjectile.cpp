@@ -2,7 +2,7 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& collsionSize, const Vector2& drawSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
+void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& collsionRectSize, const Vector2& drawSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
 {
 	float elapseXY;
 
@@ -33,9 +33,14 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 
 	_collisionEffect = collisionEffect;
 	_drawSize = drawSize;
-	_size = collsionSize;
+	_size = collsionRectSize;
 
-	
+	if (_collisionEffect != "")
+	{
+		_effectImg = IMAGE_MANAGER->findImage(_collisionEffect);
+		_effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
+	}
+
 	_gravity = Vector2(0, 4000);
 
 	_active = true;
@@ -51,7 +56,7 @@ void NormalProjectile::release()
 		SAFE_DELETE(_ani);
 	}
 
-	EFFECT_MANAGER->play(_collisionEffect, _position, _drawSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
+	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
 }
 
 void NormalProjectile::update(float elapsedTime)
