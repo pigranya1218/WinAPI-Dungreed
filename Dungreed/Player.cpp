@@ -290,9 +290,9 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	//MagicStick* testWeapon5 = new MagicStick;
-	//testWeapon5->init();
-	//_inventory[13] = testWeapon5;
+	MagicStick* testWeapon5 = new MagicStick;
+	testWeapon5->init();
+	_inventory[13] = testWeapon5;
 
 	/*Boomerang* testweapon5 = new Boomerang;
 	testweapon5->init();
