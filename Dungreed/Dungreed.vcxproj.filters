@@ -633,6 +633,9 @@
     <ClInclude Include="SilverBullet.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="CosmosSwordProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1099,6 +1102,9 @@
     </ClCompile>
     <ClCompile Include="SilverBullet.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="CosmosSwordProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

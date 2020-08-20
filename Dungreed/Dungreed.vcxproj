@@ -176,6 +176,7 @@
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="CosmosSword.h" />
+    <ClInclude Include="CosmosSwordProjectile.h" />
     <ClInclude Include="Costume.h" />
     <ClInclude Include="CostumeManager.h" />
     <ClInclude Include="CostumeUI.h" />
@@ -341,6 +342,7 @@
     <ClCompile Include="CameraShakeEvent.cpp" />
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="CosmosSword.cpp" />
+    <ClCompile Include="CosmosSwordProjectile.cpp" />
     <ClCompile Include="CostumeManager.cpp" />
     <ClCompile Include="CostumeUI.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
