@@ -248,9 +248,13 @@ void Player::init()
 	testAcc16->init();
 	_inventory[1] = testAcc16;
 
-	Wingboots* testAcc17 = new Wingboots;
-	testAcc17->init();
-	_inventory[2] = testAcc17;
+	//Wingboots* testAcc17 = new Wingboots;
+	//testAcc17->init();
+	//_inventory[2] = testAcc17;
+
+	Voluspa* testAcc20 = new Voluspa;
+	testAcc20->init();
+	_inventory[2] = testAcc20;
 	
 
 	BigPaintBlush* testAcc15 = new BigPaintBlush;
