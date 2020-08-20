@@ -60,6 +60,7 @@ void NormalProjectile::release()
 
 void NormalProjectile::update(float elapsedTime)
 {
+	
 	Vector2 moveDir(0, 0);
 
 	// 중력 적용

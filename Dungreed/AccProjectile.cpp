@@ -91,7 +91,7 @@ void AccProjectile::update(float elapsedTime)
 		if (_info->team == OBJECT_TEAM::PLAYER)
 		{
 			// ENEMY와의 충돌 검사
-			if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
+			if (_projectileMgr->checkEnemyCollision(this, false)) // 적과 충돌했다면
 			{
 				_active = true;
 				return;
