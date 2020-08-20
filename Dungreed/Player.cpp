@@ -40,6 +40,7 @@
 #include "MultiBullet.h"
 #include "DaisyRing.h"
 #include "Wingboots.h"
+#include "SilverBullet.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -246,10 +247,7 @@ void Player::init()
 	Wingboots* testAcc17 = new Wingboots;
 	testAcc17->init();
 	_inventory[2] = testAcc17;
-
-	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
-	testAcc18->init();
-	_inventory[6] = testAcc18;
+	
 
 	BigPaintBlush* testAcc15 = new BigPaintBlush;
 	testAcc15->init();
@@ -300,9 +298,13 @@ void Player::init()
 	testWeapon6->init();
 	_inventory[3] = testWeapon6;
 
-	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
-	testAcc18->init();
-	_inventory[14] = testAcc18;
+	SilverBullet* testAcc19 = new SilverBullet;
+	testAcc19->init();
+	_inventory[0] = testAcc19;
+
+	//MagnifyingGlass* testAcc18 = new MagnifyingGlass;
+	//testAcc18->init();
+	//_inventory[0] = testAcc19;
 
 	_hand = new Punch;
 	_hand->init();

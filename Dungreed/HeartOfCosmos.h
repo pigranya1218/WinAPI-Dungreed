@@ -7,7 +7,7 @@ private:
 	Image* _img;	
 	Vector2 _renderPos;
 	int _x, _y;
-	AccProjectile* projectile;
+	
 		
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 

@@ -26,7 +26,7 @@ private:
 	Vector2		_gravity;			// 중력값
 
 	bool		_useRotate;			// 투사체를 돌릴 것인가
-	bool		_useCollsionEnemy;	// 투사체를 에너미와 충돌시킬 것인가
+	
 
 	float		_length;			// 이펙트 길이 조절용 이미지 길이
 
@@ -40,7 +40,6 @@ public:
 
 	// 애니메이션 업데이트 하려고 만듬 
 	virtual void aniUpdate(float const elapsedTime);
-	bool getUseEnemyCollision() { return _useCollsionEnemy; }
-	void setUseEnemyCollision(bool useCollision) { _useCollsionEnemy = useCollision; };
+	
 };
 

@@ -603,6 +603,9 @@
     <ClInclude Include="Room6TB.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
+    <ClInclude Include="SilverBullet.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1039,6 +1042,9 @@
     </ClCompile>
     <ClCompile Include="Room6TB.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="SilverBullet.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

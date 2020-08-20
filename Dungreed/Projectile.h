@@ -13,6 +13,7 @@ protected:
 	Vector2 _renderSize;
 	Vector2		_force;				// 투사체 날아가는 힘
 	float		_angleRadian;		// 투사체 날아가는 각도
+	bool		_useCollsionEnemy;	// 투사체를 에너미와 충돌시킬 것인가
 
 
 public:
@@ -32,4 +33,7 @@ public:
 
 	float getAngleRadian() { return _angleRadian; }
 	void setAngleRadian(float angleRadian) { _angleRadian = angleRadian; }
+
+	bool getUseEnemyCollision() { return _useCollsionEnemy; }
+	void setUseEnemyCollision(bool useCollision) { _useCollsionEnemy = useCollision; };
 };
