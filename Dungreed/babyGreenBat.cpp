@@ -128,7 +128,7 @@ void babyGreenBat::attack(Player* player)
 	projectile->setPosition(shootPos);
 	projectile->setSize(Vector2(75, 75));
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(100, 100), Vector2(100, 100), Vector2(100, 100), Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
+	projectile->init("BabyBatBulletAt", "BabyBatBulletFx", Vector2(100, 100), Vector2(100, 100), Vector2(100, 100),Vector2(500, 500), 0.9, angleRadian, true, true, 20, false, false, true, false);
 
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());

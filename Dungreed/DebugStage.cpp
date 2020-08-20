@@ -3,10 +3,14 @@
 
 void DebugStage::init()
 {
+	int stageWidth = _tile[0].tileX*TILESIZE;
+	int stageHeight = _tile[0].tileY*TILESIZE;
+	_stageManager->setPlayerPos(1000, 1300);
+
 	Stage::init();
 	// 맵 불러오기
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("testStage.map");
+	loadMap("Stage20LTRB.map");
 
 	// 에너미 테스트입니다.
 	/*

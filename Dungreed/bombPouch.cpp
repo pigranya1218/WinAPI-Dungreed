@@ -46,9 +46,10 @@ void bombPouch::dash(Player * player)
 		
 		_renderPos.x = _renderPos.x + 100;		
 		projectile->setPosition(_renderPos);
-		projectile->setSize(Vector2(200, 200));
-		projectile->setTeam(OBJECT_TEAM::PLAYER);		 
-		projectile->init("BombPouch0", _renderPos, 0.2, true, false, 13, false, "BombPouch2", Vector2(300, 300), 10, true, true, false, true);
+		
+		projectile->setTeam(OBJECT_TEAM::PLAYER);		 		
+		projectile->init("BombPouch0", "BombPouch2", Vector2(100, 100), Vector2(300, 300), Vector2(500, 500), 500, PI/2, true, true, 15, false, true, true, false);
+		
 		string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;

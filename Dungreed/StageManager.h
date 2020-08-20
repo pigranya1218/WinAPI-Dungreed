@@ -42,6 +42,7 @@ private:
 	vector<DIRECTION>::iterator iter;
 
 	int rnd;
+	int makeNum=0;
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
 	void setPlayer(Player* player) { _player = player; }
@@ -77,8 +78,8 @@ public:
 	Vector2 getPlayerPos();
 	void setPlayerPos(int x, int y);
 
-	//·£´ý¸Ê¸¸µé±â
-	void makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<vector<bool>> isMadeRoom);
+	////·£´ý¸Ê¸¸µé±â
+	//void makeRoom(int x1, int y1, vector<bool> isMadeSpecial, vector<vector<bool>> isMadeRoom);
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
