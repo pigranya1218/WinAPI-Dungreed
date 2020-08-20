@@ -103,7 +103,10 @@ void QuarterStaffBig::frontRender(Player* player)
 	FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
 	D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree+ _angleOffset), CAMERA->getRelativeV2(originPos));
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree+ _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+	
+	_attackDebug.render(true);
 }
+
 void QuarterStaffBig::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
@@ -114,6 +117,38 @@ void QuarterStaffBig::attack(Player* player)
 	Vector2 renderPosHand = pos;
 	_oneAttack = true;
 	_currAttackDelay = _addStat.attackSpeed;
+	//==========================================================================
+
+	Vector2 originPos = player->getPosition();
+	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15); // 바라보는 방향의 어깨
+	originPos.y += 10;
+	float attackRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x));
+	if (attackRadian < 0)
+	{
+		attackRadian += PI2;
+	}
+
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+
+	FloatCircle* attackCircle = new FloatCircle;
+	attackCircle->origin = originPos;
+	attackCircle->size = 120;
+	attackCircle->startRadian = attackRadian - PI * 0.28;
+	attackCircle->endRadian = attackRadian + PI * 0.28;
+
+	_attackDebug = FloatCircle(originPos, 120, attackRadian - PI * 0.28, attackRadian + PI * 0.28); // forDEBUG
+
+	AttackInfo* attackInfo = new AttackInfo;
+	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+	attackInfo->critical = 0;
+	attackInfo->criticalDamage = 0;
+	attackInfo->minDamage = _addStat.minDamage;
+	attackInfo->maxDamage = _addStat.maxDamage;
+	attackInfo->knockBack = 15;
+	player->attack(attackCircle, attackInfo);
+	delete attackCircle;
+	delete attackInfo;
 }
 void QuarterStaffBig::equip(Player * player)
 {

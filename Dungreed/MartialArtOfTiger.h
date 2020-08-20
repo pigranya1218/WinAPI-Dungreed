@@ -24,7 +24,7 @@ private:
 	FloatRect _rightHand;	// 오른손
 	Vector2 _handSize;		// 손의 크기
 	
-
+	FloatCircle _attackDebug;
 
 public:
 	virtual void init();

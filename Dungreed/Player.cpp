@@ -180,10 +180,10 @@ void Player::init()
 	_inventory.resize(15);
 
 
-	//babyGreenBat* testAcc1 = new babyGreenBat;
-	//testAcc1->init();
-	//_inventory[4] = testAcc1;
-	//
+	ShortSpear* testAcc1 = new ShortSpear;
+	testAcc1->init();
+	_inventory[4] = testAcc1;
+
 	//GreenBat* testAcc2 = new GreenBat;
 	//testAcc2->init();
 	//_inventory[6] = testAcc2;
@@ -194,19 +194,19 @@ void Player::init()
 	//_inventory[3] = testAcc3;
 
 	
-	//GreenMomBat* testAcc4 = new GreenMomBat;
-	//testAcc4->init();
-	//_inventory[3] = testAcc4;
-	//
-
-	//SpikeBall* testAcc9 = new SpikeBall;
-	//testAcc9->init();
-	//_inventory[6] = testAcc9;
+	ShortSword* testAcc4 = new ShortSword;
+	testAcc4->init();
+	_inventory[3] = testAcc4;
 
 
-	//bombPouch* testAcc5 = new bombPouch;
-	//testAcc5->init();
-	//_inventory[6] = testAcc5;
+	MartialArtOfTiger* testAcc9 = new MartialArtOfTiger;
+	testAcc9->init();
+	_inventory[8] = testAcc9;
+
+
+	PowerKatana* testAcc5 = new PowerKatana;
+	testAcc5->init();
+	_inventory[6] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
@@ -219,14 +219,18 @@ void Player::init()
 	//_inventory[7] = testAcc7;
 	//
 	//
-	watCher* testAcc8 = new watCher;
+	QuarterStaffBig* testAcc8 = new QuarterStaffBig;
 	testAcc8->init();
 	_inventory[8] = testAcc8;
 	
 	
-	QuarterStaffBig* testAcc10 = new QuarterStaffBig;
+	BigPaintBlush* testAcc10 = new BigPaintBlush;
 	testAcc10->init();
 	_inventory[9] = testAcc10;
+
+	Lumber* testAcc11 = new Lumber;
+	testAcc11->init();
+	_inventory[10] = testAcc11;
 
 	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
 	testAcc12->init();
@@ -240,7 +244,7 @@ void Player::init()
 	testAcc14->init();
 	_inventory[10] = testAcc14;
 
-	Voluspa* testAcc16 = new Voluspa;
+	MartialArtOfTiger* testAcc16 = new MartialArtOfTiger;
 	testAcc16->init();
 	_inventory[1] = testAcc16;
 

@@ -3,6 +3,18 @@
 class BigPaintBlush : public Item
 {
 private:
+	struct tagAttack
+	{
+		FloatCircle* _attackCircle;
+		FloatCircle* _attackCircle2;
+		AttackInfo* _attackInfo;
+		float _hitDelay;
+	};
+
+private:
+	
+	vector<tagAttack*> _VtagAttack;
+	vector<tagAttack*>::iterator _VItagAttack;
 	// 공격 관련
 	Image*	_effect;
 	Image* _img;
@@ -21,8 +33,11 @@ private:
 	Animation* _ani;
 	float _width;
 	float _height;
+
+	FloatCircle _attackDebug;
 public:
 	virtual void init();
+	virtual void release() override;
 	virtual void update(Player* player, float const elapsedTime);
 	virtual void backRender(Player* player);
 	virtual void frontRender(Player* player);
