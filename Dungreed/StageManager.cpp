@@ -176,7 +176,7 @@ void StageManager::makeStage()
 		_vStage[k][l] = _currStage;
 		for (int i = 0; i < _vStage.size(); i++)
 		{
-			makeRoom(k+i, l+i);
+			// makeRoom(k+i, l+i);
 		}
 		/*makeRoom(k, l);
 		makeRoom(k+1, l+1);*/
@@ -226,108 +226,108 @@ void StageManager::setPlayerPos( int x, int y)
 	_player->setPosition(Vector2(x, y));
 }
 
-void StageManager::makeRoom(int x1, int y1)
-{
-	
-	if (makeNum > 5)return;
-	makeNum++;
-
-
-	//if (_vStage[x1][y1]->getOpenDirection(0))
-	//{
-	//	//if (_vStage[x1 - 1][y1]->getIsMade())return;
-	//	Stage* newStage;
-	//	if (rnd == 0)_stage2 = new Room20LTRB();
-	//	else if (rnd == 1)_stage2 = new Room2LTR();
-	//	else if (rnd == 2)_stage2 = new Room4LR();
-	//	else if (rnd == 3)_stage2 = new Room21LR();
-	//	else if (rnd == 4)_stage2 = new Room22LTRB();
-	//	else _stage2 = new Room20LTRB();
-	//	_stage2->setStageManager(this);
-	//	_stage2->init();
-	//	//_stage2->setIsMade(true);
-
-	//	int makeIndexX=x1-1;
-	//	int makeIndexY=y1;
-	//	_vStage[makeIndexX][makeIndexY] = _stage2;
-	//	//_currStage = _stage;
-	//	makeRoom(makeIndexX, makeIndexY);
-
-	//}
-	//if (_vStage[x1][y1]->getOpenDirection(1))
-	//{
-	//	//if (_vStage[x1][y1-1]->getIsMade())return;
-	//	if (rnd == 0)_stage2 = new Room20LTRB;
-	//	else if (rnd == 1)_stage2 = new Room22LTRB;
-	//	else if (rnd == 2)_stage2 = new Room2LTR;
-	//	else _stage2 = new Room20LTRB;
-	//	_stage2->setStageManager(this);
-	//	_stage2->init();
-	//	//_stage2->setIsMade(true);
-
-	//	int makeIndexX = x1 ;
-	//	int makeIndexY = y1-1;
-	//	_vStage[makeIndexX][makeIndexY] = _stage2;
-	//	//_currStage = _stage;
-	//}
-	
-		//if (_vStage[x1+1][y1]->getIsMade())return;
-		if (_currIndexX + 1 == 9)
-		{
-			_stage = new Room8L;
-			_stage2->setStageManager(this);
-			_stage2->init();
-			//_stage2->setIsMade(true);
-		}
-		else
-		{
-			if (rnd == 0)_stage2 = new Room20LTRB();
-			else if (rnd == 1)_stage2 = new Room2LTR();
-			else if (rnd == 2)_stage2 = new Room4LR();
-			else if (rnd == 3)_stage2 = new Room21LR();
-			else if (rnd == 4)_stage2 = new Room22LTRB();
-			else _stage2 = new Room20LTRB();
-			_stage2->setStageManager(this);
-			_stage2->init();
-			//_stage2->setIsMade(true);
-		}
-		int makeIndexX = x1 + 1;
-		int makeIndexY=y1;
-		_vStage[x1 + 1][y1] = _stage2;
-
-		//makeRoom(makeIndexX, makeIndexY);
-		//_currStage = _stage;
-		
-	
-
-	//if (_vStage[x1][y1]->getOpenDirection(3))
-	//{
-	//	//if (_vStage[x1][y1+1]->getIsMade())return;
-	//	if (rnd == 0)_stage2 = new Room20LTRB;
-	//	else if (rnd == 1)_stage2 = new Room22LTRB;
-	//	else if (rnd == 2)_stage2 = new Room2LTR;
-	//	else _stage2 = new Room20LTRB;
-	//	_stage2->setStageManager(this);
-	//	_stage2->init();
-	//	//_stage2->setIsMade(true);
-	//	int makeIndexX = x1;
-	//	int makeIndexY = y1+1;
-	//	_vStage[makeIndexX][makeIndexY] = _stage2;
-
-	if (_vStage[x1][y1]->getOpenDirection(3))
-	{
-		if (rnd == 0)_stage2 = new Room20LTRB;
-		else if (rnd == 1)_stage2 = new Room22LTRB;
-		else if (rnd == 2)_stage2 = new Room2LTR;
-		else _stage2 = new Room20LTRB;
-		_stage2->setStageManager(this);
-		_stage2->init();
-		int makeIndexX = x1;
-		int makeIndexY = y1+1;
-		_vStage[makeIndexX][makeIndexY] = _stage2;
-		//_currStage = _stage;
-	}
-}
+//void StageManager::makeRoom(int x1, int y1)
+//{
+//	
+//	if (makeNum > 5)return;
+//	makeNum++;
+//
+//
+//	//if (_vStage[x1][y1]->getOpenDirection(0))
+//	//{
+//	//	//if (_vStage[x1 - 1][y1]->getIsMade())return;
+//	//	Stage* newStage;
+//	//	if (rnd == 0)_stage2 = new Room20LTRB();
+//	//	else if (rnd == 1)_stage2 = new Room2LTR();
+//	//	else if (rnd == 2)_stage2 = new Room4LR();
+//	//	else if (rnd == 3)_stage2 = new Room21LR();
+//	//	else if (rnd == 4)_stage2 = new Room22LTRB();
+//	//	else _stage2 = new Room20LTRB();
+//	//	_stage2->setStageManager(this);
+//	//	_stage2->init();
+//	//	//_stage2->setIsMade(true);
+//
+//	//	int makeIndexX=x1-1;
+//	//	int makeIndexY=y1;
+//	//	_vStage[makeIndexX][makeIndexY] = _stage2;
+//	//	//_currStage = _stage;
+//	//	makeRoom(makeIndexX, makeIndexY);
+//
+//	//}
+//	//if (_vStage[x1][y1]->getOpenDirection(1))
+//	//{
+//	//	//if (_vStage[x1][y1-1]->getIsMade())return;
+//	//	if (rnd == 0)_stage2 = new Room20LTRB;
+//	//	else if (rnd == 1)_stage2 = new Room22LTRB;
+//	//	else if (rnd == 2)_stage2 = new Room2LTR;
+//	//	else _stage2 = new Room20LTRB;
+//	//	_stage2->setStageManager(this);
+//	//	_stage2->init();
+//	//	//_stage2->setIsMade(true);
+//
+//	//	int makeIndexX = x1 ;
+//	//	int makeIndexY = y1-1;
+//	//	_vStage[makeIndexX][makeIndexY] = _stage2;
+//	//	//_currStage = _stage;
+//	//}
+//	
+//		//if (_vStage[x1+1][y1]->getIsMade())return;
+//		if (_currIndexX + 1 == 9)
+//		{
+//			_stage = new Room8L;
+//			_stage2->setStageManager(this);
+//			_stage2->init();
+//			//_stage2->setIsMade(true);
+//		}
+//		else
+//		{
+//			if (rnd == 0)_stage2 = new Room20LTRB();
+//			else if (rnd == 1)_stage2 = new Room2LTR();
+//			else if (rnd == 2)_stage2 = new Room4LR();
+//			else if (rnd == 3)_stage2 = new Room21LR();
+//			else if (rnd == 4)_stage2 = new Room22LTRB();
+//			else _stage2 = new Room20LTRB();
+//			_stage2->setStageManager(this);
+//			_stage2->init();
+//			//_stage2->setIsMade(true);
+//		}
+//		int makeIndexX = x1 + 1;
+//		int makeIndexY=y1;
+//		_vStage[x1 + 1][y1] = _stage2;
+//
+//		//makeRoom(makeIndexX, makeIndexY);
+//		//_currStage = _stage;
+//		
+//	
+//
+//	//if (_vStage[x1][y1]->getOpenDirection(3))
+//	//{
+//	//	//if (_vStage[x1][y1+1]->getIsMade())return;
+//	//	if (rnd == 0)_stage2 = new Room20LTRB;
+//	//	else if (rnd == 1)_stage2 = new Room22LTRB;
+//	//	else if (rnd == 2)_stage2 = new Room2LTR;
+//	//	else _stage2 = new Room20LTRB;
+//	//	_stage2->setStageManager(this);
+//	//	_stage2->init();
+//	//	//_stage2->setIsMade(true);
+//	//	int makeIndexX = x1;
+//	//	int makeIndexY = y1+1;
+//	//	_vStage[makeIndexX][makeIndexY] = _stage2;
+//
+//	if (_vStage[x1][y1]->getOpenDirection(3))
+//	{
+//		if (rnd == 0)_stage2 = new Room20LTRB;
+//		else if (rnd == 1)_stage2 = new Room22LTRB;
+//		else if (rnd == 2)_stage2 = new Room2LTR;
+//		else _stage2 = new Room20LTRB;
+//		_stage2->setStageManager(this);
+//		_stage2->init();
+//		int makeIndexX = x1;
+//		int makeIndexY = y1+1;
+//		_vStage[makeIndexX][makeIndexY] = _stage2;
+//		//_currStage = _stage;
+//	}
+//}
 
 void StageManager::showDamage(DamageInfo info, Vector2 pos)
 {
