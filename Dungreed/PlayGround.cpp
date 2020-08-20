@@ -288,6 +288,9 @@ HRESULT playGround::init()
 	// *** GOLD
 	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/COIN", L"resources/images/object/gold/goldCoin.png", 8, 1);
 	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/BULLION", L"resources/images/object/gold/goldBullion.png", 7, 1);
+	// *** HP FAIRY
+	IMAGE_MANAGER->addFrameImage("OBJECT/HP_FAIRY/MID", L"resources/images/object/hpFairy/midFairy.png", 16, 1);
+
 
 	// ** COSTUME
 	// *** BASE

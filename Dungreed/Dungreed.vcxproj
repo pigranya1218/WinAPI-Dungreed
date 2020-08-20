@@ -221,6 +221,7 @@
     <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="HeartOfCosmos.h" />
     <ClInclude Include="AccProjectile.h" />
+    <ClInclude Include="HpFairyObject.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -399,6 +400,7 @@
     <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="HeartOfCosmos.cpp" />
     <ClCompile Include="AccProjectile.cpp" />
+    <ClCompile Include="HpFairyObject.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />

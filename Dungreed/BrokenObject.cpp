@@ -3,6 +3,7 @@
 #include "ObjectManager.h"
 #include "ParticleObject.h"
 #include "GoldObject.h"
+#include "HpFairyObject.h"
 
 Image* BrokenObject::getImage()
 {
@@ -114,6 +115,12 @@ void BrokenObject::respawnGold()
 
 void BrokenObject::respawnHpFairy()
 {
+	Vector2 pos = Vector2(_position.x, _position.y - _size.y);
+
+	HpFairyObject* object = new HpFairyObject;
+	object->setObjectManager(_objectMgr);
+	object->init(10, pos);
+	_objectMgr->pushObject(object);
 }
 
 void BrokenObject::init(int objectCode, Vector2 pos)
@@ -148,6 +155,7 @@ bool BrokenObject::hitEffect(FloatRect* rect, AttackInfo* info)
 	_active = false;
 	respawnParticle();
 	respawnGold();
+	respawnHpFairy();
 	return true;
 }
 
@@ -156,6 +164,7 @@ bool BrokenObject::hitEffect(FloatCircle* circle, AttackInfo* info)
 	_active = false;
 	respawnParticle();
 	respawnGold();
+	respawnHpFairy();
 	return true;
 }
 
@@ -164,5 +173,6 @@ bool BrokenObject::hitEffect(Projectile* projectile)
 	_active = false;
 	respawnParticle();
 	respawnGold();
+	respawnHpFairy();
 	return true;
 }
