@@ -59,7 +59,7 @@ void GuidedProjectile::release()
 
 void GuidedProjectile::update(float elapsedTime)
 {
-	_enemyPos = _projectileMgr->getEnemyPos(Vector2());
+	_enemyPos = _projectileMgr->getEnemyPos(_position);
 
 	Vector2 moveDir(0, 0);
 
@@ -86,25 +86,45 @@ void GuidedProjectile::update(float elapsedTime)
 
 	if (_timeCount > 0.3f)
 	{
-		/*float gapRadian = abs(_angleRadian - guidedAngleRadian);
-		float gapRadian02;
-		if (gapRadian > PI)
+		if (_angleRadian <= guidedAngleRadian)
 		{
-			_angleRadian 
-		}*/
-
-
-		if (_angleRadian != guidedAngleRadian)
-		{
-			if (_angleRadian > guidedAngleRadian)
+			if ((guidedAngleRadian - _angleRadian) > (_angleRadian + (PI2 - guidedAngleRadian)))
 			{
+				//_angleRadian -= 2.f * elapsedTime;
+				if (_angleRadian < 0.f)
+				{
+					_angleRadian = PI2;
+				}
 				_angleRadian -= 3.f * elapsedTime;
+				//_angleRadian -= 0.1f;
 			}
-			if (_angleRadian < guidedAngleRadian)
+			else
 			{
+				_angleRadian += 3.f * elapsedTime;
+				//_angleRadian += 2.f * elapsedTime;
+				//_angleRadian += 0.1f;
+			}
+		}
+		else
+		{
+			if ((_angleRadian - guidedAngleRadian) < ((PI2 - _angleRadian) + guidedAngleRadian))
+			{
+				//_angleRadian -= 2.f * elapsedTime;
+				_angleRadian -= 3.f * elapsedTime;
+				//_angleRadian -= 0.1f;
+			}
+			else
+			{
+				//_angleRadian += 2.f * elapsedTime;
+				if (_angleRadian >= PI2)
+				{
+					_angleRadian = 0;
+				}
+				//_angleRadian += 0.1f;
 				_angleRadian += 3.f * elapsedTime;
 			}
 		}
+
 		// 이동
 		moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
 		moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
@@ -156,6 +176,9 @@ void GuidedProjectile::update(float elapsedTime)
 	_count += elapsedTime;
 	if (_count >= _maxTime)
 	{
+		float angleDegree = _angleRadian * (180.0f / PI);
+		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+
 		_active = false;
 	}
 
@@ -182,6 +205,8 @@ void GuidedProjectile::render()
 		_img->render(CAMERA->getRelativeV2(_position), _drawSize);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
+
+	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 10), to_wstring(_angleRadian), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.f);
 }
 
 void GuidedProjectile::aniUpdate(float const elapsedTime)
