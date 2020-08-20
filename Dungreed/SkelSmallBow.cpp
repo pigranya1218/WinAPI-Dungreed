@@ -30,7 +30,6 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	// 충돌 사이즈 및 렉트 초기화
 	_size = Vector2(_img->getFrameSize().x, _img->getFrameSize().y);
 	_size = _size * _scale;
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	// 공격 관련 초기화
 	ZeroMemory(&_attack, sizeof(_attack));

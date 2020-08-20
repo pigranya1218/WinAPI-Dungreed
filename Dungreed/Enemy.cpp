@@ -34,13 +34,9 @@ void Enemy::tagShootingInfo::fireBullet(int enemyCode, EnemyManager * enemyManag
 
 void Enemy::dieEffect()
 {
-	if (_state == ENEMY_STATE::DIE)
-	{
-		Vector2 drawSize = _img->getFrameSize() * _scale;
-		drawSize.x = max(drawSize.x, drawSize.y);
-		drawSize.y = max(drawSize.x, drawSize.y);
-		EFFECT_MANAGER->play("Enemy_Destroy", _position, drawSize);
-	}	
+	Vector2 drawSize = _img->getFrameSize() * _scale;
+	drawSize.x = drawSize.y = max(drawSize.x, drawSize.y);
+	EFFECT_MANAGER->play("Enemy_Destroy", _position, drawSize);
 }
 
 bool Enemy::isHit(FloatRect* rc, AttackInfo* info)
@@ -195,13 +191,51 @@ bool Enemy::hitEffect(Projectile * projectile)
 
 void Enemy::tagAttackInfo::attackCircle(int enemyCode, EnemyManager * enemyManager, const Vector2& pos, const float startRad, const float endRad)
 {
+	// 미리 할당
 	FloatCircle* circle = new FloatCircle;
 	AttackInfo* attackInfo = new AttackInfo;
 
+	// 공격 원 설정
 	circle->origin = pos;
-	circle->size = 200;
+	circle->size = circleSize;
 	circle->startRadian = startRad;
 	circle->endRadian = endRad;
+
+	// 공격 정보 설정
+	attackInfo->team = OBJECT_TEAM::ENEMY;
+	attackInfo->minDamage = info.minDamage;
+	attackInfo->maxDamage = info.maxDamage;
+	attackInfo->knockBack = info.knockBack;
+	attackInfo->trueDamage = info.trueDamage;
+	attackInfo->critical = info.critical;
+	attackInfo->criticalDamage = info.criticalDamage;
+
+	// 공격 아이디 중복 방지용
+	if (id.empty())
+	{
+		// 공격 아이디 설정
+		id = to_string(enemyCode) + to_string(TIME_MANAGER->getWorldTime());
+	}
+	// 해시설정
+	attackInfo->attackID = TTYONE_UTIL::getHash(id);
+
+	// 공격 원 디버그
+	circleDebug = FloatCircle(pos, circleSize, startRad, endRad);
+
+	// 공격 전달
+	enemyManager->attack(circle, attackInfo);
+
+	// 메모리 해제
+	SAFE_DELETE(circle);
+	SAFE_DELETE(attackInfo);
+}
+
+void Enemy::tagAttackInfo::attackRect(int enemyCode, EnemyManager* enemyManager, FloatRect rc)
+{
+	FloatRect* attackRc = new FloatRect;
+	AttackInfo* attackInfo = new AttackInfo;
+
+	*attackRc = rectMakePivot(rc.getCenter(), rc.getSize(), PIVOT::CENTER);
 
 	attackInfo->team = OBJECT_TEAM::ENEMY;
 	attackInfo->minDamage = info.minDamage;
@@ -217,15 +251,10 @@ void Enemy::tagAttackInfo::attackCircle(int enemyCode, EnemyManager * enemyManag
 	}
 	attackInfo->attackID = TTYONE_UTIL::getHash(id);
 
-	circleDebug = FloatCircle(pos, circleSize, startRad, endRad);
+	rectDebug = FloatRect(rc.getCenter(), rc.getSize(), PIVOT::CENTER);
 
-	enemyManager->attack(circle, attackInfo);
+	enemyManager->attack(attackRc, attackInfo);
 
-	SAFE_DELETE(circle);
+	SAFE_DELETE(attackRc);
 	SAFE_DELETE(attackInfo);
-}
-
-void Enemy::tagAttackInfo::attackRect()
-{
-
 }
