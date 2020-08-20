@@ -17,7 +17,6 @@ void Lumber::init()
 	_itemName = L"각목";
 	_displayText = L"\"직육면체로 가공한 건축 자재\"";
 	_itemCode = 0x01104; // 한손 일반
-
 	_price = 600;
 
 	// 기본 보조옵션
@@ -25,10 +24,7 @@ void Lumber::init()
 	_addStat.minDamage = 95;
 	_addStat.maxDamage = 100;
 	_addStat.attackSpeed = 1.0;
-
 	_handSize = Vector2(5, 5);
-
-
 
 	// private 변수 설정
 	_attackMove = Vector2(0, 0);
@@ -38,24 +34,15 @@ void Lumber::init()
 	_oneAttack = true;
 	_isBroken = false;
 	_angleOffset = 15;
-	
 }
 
-void Lumber::release()
-{
-
-}
 
 void Lumber::update(Player* player, float const elapsedTime)
 {
-		
-
 	if (_currAttackDelay == 0) return;
 
 	if (FLOAT_EQUAL(_currAttackDelay, _addStat.attackSpeed))
 	{
-
-
 		if (_oneAttack)
 		{
 			_angleOffset += 155;
@@ -67,9 +54,6 @@ void Lumber::update(Player* player, float const elapsedTime)
 			_angleOffset -= 155;
 			_oneAttack = true;
 		}
-
-
-
 	}
 	float ratio = elapsedTime / (_addStat.attackSpeed * 0.15);
 	if (_reverseMove)
@@ -98,9 +82,6 @@ void Lumber::update(Player* player, float const elapsedTime)
 			_addStat.attackSpeed = 0.33;
 		}
 	}
-
-
-
 	// 공격 딜레이 계산
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
@@ -114,17 +95,9 @@ void Lumber::backRender(Player* player)
 	{
 		// 플레이어 중점
 		originPos.x += ((isLeft) ? -20 : 20);
-
-
-
 		// 손으로부터 마우스 에임까지의 각도
-
-			//float degree = atan2f(-(_ptMouse.y - Pos.y), (_ptMouse.x - Pos.x)) * (180 / PI) +90;
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x - pos.x))) * (180 / PI);
 		float degreeOffsetangle = degree + 90;
-
-
-
 		if (degree > 360)
 		{
 			degree -= 360;
@@ -201,10 +174,6 @@ void Lumber::backRender(Player* player)
 			EFFECT_MANAGER->play("EFFECT_SWING", effectPos, Vector2(120, 180), degree);
 		}
 	}
-
-
-
-
 }
 
 void Lumber::frontRender(Player* player)
@@ -232,16 +201,9 @@ void Lumber::frontRender(Player* player)
 	{
 		// 플레이어 중점
 		originPos.x += ((isLeft) ? -40 : 20);
-
-
-
 		// 손으로부터 마우스 에임까지의 각도
-
-		//float degree = atan2f(-(_ptMouse.y - Pos.y), (_ptMouse.x - Pos.x)) * (180 / PI) + 90;
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - pos.x)) * (180 / PI);
 		float degreeOffsetangle = degree + 90;
-
-
 		if (degree > 360)
 		{
 			degree -= 360;
@@ -318,9 +280,7 @@ void Lumber::frontRender(Player* player)
 	}
 }
 
-void Lumber::displayInfo()
-{
-}
+
 
 void Lumber::attack(Player* player)
 {
@@ -337,21 +297,6 @@ void Lumber::attack(Player* player)
 	_currAttackDelay = _addStat.attackSpeed;
 }
 
-void Lumber::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void Lumber::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void Lumber::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void Lumber::getHit(Vector2 const position)
-{
-}
 
 void Lumber::equip(Player* player)
 {

@@ -6,16 +6,12 @@ void MartialArtOfTiger::init()
 	_effect = IMAGE_MANAGER->findImage("EFFECT_TIGERPUNCH");
 	_iconImg =IMAGE_MANAGER->findImage("TigerPunchIcon");
 	_price = 600;
-
-
 	_itemName = L"호랑이 권법";
 	_displayText = L"\"토끼를 춤추게 하고 여우를 바이올린 켜게 하는 짐승에게 전수받은 권법\"";
 	_itemCode = 0x01300; //한손 에픽 00
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
-
 	_handSize = Vector2(5, 5);
-
 	_addStat.minDamage = 10;
 	_addStat.maxDamage = 22;
 	_addStat.attackSpeed = 0.6;
@@ -24,14 +20,9 @@ void MartialArtOfTiger::init()
 	_currAttackDelay = 0;
 	_reverseMove = false;
 	_drawEffect = false;
-	
-
 }
 
-void MartialArtOfTiger::release()
-{
 
-}
 
 void MartialArtOfTiger::update(Player* player, float const elapsedTime)
 {
@@ -54,10 +45,6 @@ void MartialArtOfTiger::update(Player* player, float const elapsedTime)
 			_drawEffect = true;
 		}
 	}
-
-	
-
-
 	// 공격 딜레이 계산
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 
@@ -135,25 +122,18 @@ void MartialArtOfTiger::frontRender(Player* player)
 			float length = _iconImg->getWidth() * 4 * 1; // 무기 길이만큼
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
-			
-			
 			EFFECT_MANAGER->play("EFFECT_TIGERPUNCH", effectPos, Vector2(200, 200), 0);
 		}
 
 	}
 }
 
-void MartialArtOfTiger::displayInfo()
-{
-}
 
 void MartialArtOfTiger::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
-
 	Vector2 renderPosHand = pos; // 손의 위치
 	renderPosHand.x += ((isLeft) ? (-20) : (20));
 	renderPosHand.y += 20;
@@ -163,27 +143,12 @@ void MartialArtOfTiger::attack(Player* player)
 	{
 		angle -= PI2;
 	}
-
 	_reverseMove = false;
 	_attackAngle = angle;
 	_currAttackDelay = _addStat.attackSpeed;
 }
 
-void MartialArtOfTiger::attack(FloatRect* rect, AttackInfo* info)
-{
-}
 
-void MartialArtOfTiger::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void MartialArtOfTiger::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void MartialArtOfTiger::getHit(Vector2 const position)
-{
-}
 
 void MartialArtOfTiger::equip(Player * player)
 {

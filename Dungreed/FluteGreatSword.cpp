@@ -8,7 +8,7 @@ void FluteGreatSword::init()
 	_price = 3600;
 	_itemName = L"흑장미칼";
 	_displayText = L"\"주방의 필수품이 다시 돌아왔습니다.\"";
-	_itemCode = 0x02203; //양손 고급 01;
+	_itemCode = 0x02202; //양손 고급 01;
 	// 기본 보조옵션
 	_addStat.dashDamage = 20;
 
@@ -17,7 +17,6 @@ void FluteGreatSword::init()
 	_addStat.minDamage = 5;
 	_addStat.maxDamage = 8;
 	_addStat.attackSpeed = 0.5;
-	//_addStat.attackSpeed = 5.56;
 	//보조옵션
 
 	// private 변수 설정
@@ -32,41 +31,33 @@ void FluteGreatSword::init()
 	_height = _img->getHeight();
 }
 
-void FluteGreatSword::release()
-{
 
-}
 
 void FluteGreatSword::update(Player* player, float const elapsedTime)
 {
 	float ratio = 180 / (_adjustStat.attackSpeed * 0.4) / 2;
+	if (_angleOffset > 360)
+	{
+		_angleOffset = 0;
+	}
+	if (_angleOffset < -360)
+	{
+		_angleOffset = 0;
+	}
+
+
 
 	if (_oneAttack)
 	{
-
-
-
 		abs(_angleOffset += -(elapsedTime * ratio));
-
 		
 		if (_angleOffset <-180)
 		{
 			_oneAttack = false;
 		}
-		//if (_angleOffset = max(-180, (_angleOffset)-(elapsedTime * ratio)))
-		//{
-		//	_angleOffset = max(0, (_angleOffset)-(elapsedTime * ratio));
-		//
-		//}
 	}
 	else
 	{
-		//_img->setAngle(+180);
-		//if (_angleOffset < 0)
-		//{
-		//	_angleOffset = min(180, (_angleOffset)+(elapsedTime * ratio));
-		//}
-		//_oneAttack = true;
 	}
 	if (_twoAttack)
 	{
@@ -81,24 +72,18 @@ void FluteGreatSword::backRender(Player* player)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 originPos = player->getPosition();
 	Vector2 pos = player->getPosition();
-
-	
 		// 회전축 중점
 		originPos.x += ((isLeft) ? -15 : 15); // 바라보는 방향의 어깨
 		originPos.y += 5;
-
 		// 회전축으로부터 마우스까지의 각도값
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
-
 		float handDegree = degree + ((isLeft) ? -110 : 110);
-
 		// 좌우 대칭을 위한 계산
 		float weaponDegree = handDegree;
 		if (isLeft)
 		{
 			weaponDegree = 180 - weaponDegree;
 		}
-
 		// 손의 위치 
 		Vector2 renderPosHand = originPos;
 		renderPosHand.x += (_width * 0.1 * 4);
@@ -172,28 +157,13 @@ void FluteGreatSword::frontRender(Player* player)
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
 
 		}
-	
-
-	//_attackDebug.render(true);
 }
 
-void FluteGreatSword::displayInfo()
-{
-}
+
 
 void FluteGreatSword::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-
-	//if (_oneAttack)
-	//{
-	//	_angleOffset += 95;
-	//}
-	//else
-	//{
-	//	_angleOffset -= 95;
-	//}
-	//_oneAttack = !_oneAttack;
 	_oneAttack = true;
 	_drawEffect = true;
 	_currAttackDelay = _addStat.attackSpeed;
@@ -201,50 +171,7 @@ void FluteGreatSword::attack(Player* player)
 	Vector2 originPos = player->getPosition();
 	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15); // 바라보는 방향의 어깨
 	originPos.y += 10;
-	//float attackRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x));
-	//if (attackRadian < 0)
-	//{
-	//	attackRadian += PI2;
-	//}
-	//string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
-	//FloatCircle* attackCircle = new FloatCircle;
-	//attackCircle->origin = originPos;
-	//attackCircle->size = 240;
-	//attackCircle->startRadian = attackRadian - PI * 0.28;
-	//attackCircle->endRadian = attackRadian + PI * 0.28;
-
-	////_attackDebug = FloatCircle(originPos, 240, attackRadian - PI * 0.28, attackRadian + PI * 0.28); // forDEBUG
-
-	//AttackInfo* attackInfo = new AttackInfo;
-	//attackInfo->team = OBJECT_TEAM::PLAYER;
-	//attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
-	//attackInfo->critical = 0;
-	//attackInfo->criticalDamage = 0;
-	//attackInfo->minDamage = _addStat.minDamage;
-	//attackInfo->maxDamage = _addStat.maxDamage;
-	//attackInfo->knockBack = 15;
-
-	//player->attack(attackCircle, attackInfo);
-
-	//delete attackCircle;
-	//delete attackInfo;
-}
-
-void FluteGreatSword::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void FluteGreatSword::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void FluteGreatSword::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void FluteGreatSword::getHit(Vector2 const position)
-{
 }
 
 void FluteGreatSword::equip(Player* player)

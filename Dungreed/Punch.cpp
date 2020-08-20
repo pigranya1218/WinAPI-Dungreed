@@ -21,9 +21,6 @@ void Punch::init()
 
 }
 
-void Punch::release()
-{
-}
 
 void Punch::update(Player* player, float const elapsedTime)
 {
@@ -117,10 +114,7 @@ void Punch::frontRender(Player* player)
 	}
 }
 
-void Punch::displayInfo()
-{
-	//장비를 착용하지 않음
-}
+
 
 void Punch::attack(Player* player)
 {
@@ -169,21 +163,7 @@ void Punch::attack(Player* player)
 	_attackInfo->knockBack = 5;
 }
 
-void Punch::attack(FloatRect * rect, AttackInfo * info)
-{
-}
 
-void Punch::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void Punch::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void Punch::getHit(Vector2 const position)
-{
-}
 
 void Punch::equip(Player * player)
 {

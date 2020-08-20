@@ -8,8 +8,6 @@ void KeresScythe::init()
 	_effect = IMAGE_MANAGER->findImage("KeresScytheSwingFX");
 	_price = 600;
 
-
-
 	_itemName = L"케레스";
 	_displayText = L"\"죽기를 갈망하며 쓰러지면 큰 발톱으로 움켜잡고 타르타로스로 데려간다\"";
 	_itemCode = 0x02401;  //양손 전설 01
@@ -33,10 +31,6 @@ void KeresScythe::init()
 
 }
 
-void KeresScythe::release()
-{
-
-}
 
 void KeresScythe::update(Player* player, float const elapsedTime)
 {
@@ -45,11 +39,6 @@ void KeresScythe::update(Player* player, float const elapsedTime)
 
 	if (FLOAT_EQUAL(_currAttackDelay, _addStat.attackSpeed))
 	{
-
-
-		
-
-
 
 	}
 	float ratio = elapsedTime / (_addStat.attackSpeed * 0.15);
@@ -70,7 +59,6 @@ void KeresScythe::update(Player* player, float const elapsedTime)
 			_drawEffect = true;
 		}
 	}
-
 	// 공격 딜레이 계산
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 }
@@ -80,9 +68,6 @@ void KeresScythe::backRender(Player* player)
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 originPos = player->getPosition();
 	Vector2 pos = player->getPosition();
-	
-
-
 }
 
 void KeresScythe::frontRender(Player* player)
@@ -94,17 +79,9 @@ void KeresScythe::frontRender(Player* player)
 	{
 		// 플레이어 중점
 		originPos.x += ((isLeft) ? -20 : 20);
-
-
-
 		// 손으로부터 마우스 에임까지의 각도
-
-
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x - pos.x))) * (180 / PI);
 		float degreeOffsetangle = degree + 90;
-
-
-
 		if (degree > 360)
 		{
 			degree -= 360;
@@ -139,7 +116,6 @@ void KeresScythe::frontRender(Player* player)
 			renderDegree = 360 - degreeOffsetangle;
 			if (renderDegree < 0) renderDegree += 360;
 		}
-
 		renderPosWeapon.x += ((isLeft) ? (-_attackMove.x) : (_attackMove.x));		 // 무기의 x좌표
 		renderPosWeapon.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y)); // 무기의 y좌표
 		renderPosHand.x += ((isLeft) ? (_attackMove.x) : (-_attackMove.x));			 // 손의 x좌표
@@ -147,11 +123,7 @@ void KeresScythe::frontRender(Player* player)
 
 		_img->setScale(4); // 이미지 크기 
 		 // 이미지 각도 
-
 		_img->setAngle(renderDegree + _angleOffset);
-
-
-
 		if (isLeft) // 왼쪽을 보고 있음
 		{
 			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); // 이미지 회전시킬 중점
@@ -190,39 +162,18 @@ void KeresScythe::frontRender(Player* player)
 
 }
 
-void KeresScythe::displayInfo()
-{
-}
+
 
 void KeresScythe::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
-
 	Vector2 renderPosHand = pos;
-
 	// 손으로부터 마우스 에임까지의 각도
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_reverseMove = false;
 	_currAttackDelay = _addStat.attackSpeed;
-}
-
-void KeresScythe::attack(FloatRect* rect, AttackInfo* info)
-{
-}
-
-void KeresScythe::attack(FloatCircle* circle, AttackInfo* info)
-{
-}
-
-void KeresScythe::attack(Projectile* projectile, AttackInfo* info)
-{
-}
-
-void KeresScythe::getHit(Vector2 const position)
-{
 }
 
 void KeresScythe::equip(Player * player)
