@@ -263,7 +263,7 @@ void Belial::setState(ENEMY_STATE state)
 		case ENEMY_STATE::ATTACK:
 		{
 			int pattern = RANDOM->getFromIntTo(0, 2);
-			pattern = 1;
+			//pattern = 1;
 
 			switch (pattern)
 			{
