@@ -245,6 +245,8 @@
     <ClInclude Include="Room2LTR.h" />
     <ClInclude Include="Room3LR.h" />
     <ClInclude Include="Room4LR.h" />
+    <ClInclude Include="Room5LR.h" />
+    <ClInclude Include="Room6TB.h" />
     <ClInclude Include="Room8L.h" />
     <ClInclude Include="Room9B.h" />
     <ClInclude Include="SceneManager.h" />
@@ -360,6 +362,8 @@
     <ClCompile Include="Room2LTR.cpp" />
     <ClCompile Include="Room3LR.cpp" />
     <ClCompile Include="Room4LR.cpp" />
+    <ClCompile Include="Room5LR.cpp" />
+    <ClCompile Include="Room6TB.cpp" />
     <ClCompile Include="Room8L.cpp" />
     <ClCompile Include="Room9B.cpp" />
     <ClCompile Include="SceneManager.cpp" />
