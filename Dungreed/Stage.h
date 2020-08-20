@@ -35,20 +35,15 @@ protected:
 	
 	bool _isVisited; // 방문한 스테이지인가? (UI 지도에서 그리기 위함)
 
-
-	vector<DIRECTION> _direction;
-	vector<DIRECTION>::iterator _viDirection;
-
 	bool _OpenDirection[4];
-	
-	bool _isMade;
+	vector<Vector2> _respawnPosition; // 플레이어가 리스폰될 위치
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
 	void setUIManager(UIManager* uiManager) { _uiManager = uiManager; }
 	void setPlayer(Player* player) { _player = player; }
 	virtual void init();
-	virtual void enter();
+	virtual void enter(int enterType); // enterType 0 ~ 3 : L T R B, 4 : DOOR
 	virtual void release();
 	virtual void update(float const elaspedTime);
 	virtual void render();
@@ -78,10 +73,5 @@ public:
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 	
-	vector<DIRECTION> getStageDirection() {return _direction ; }
-	vector<DIRECTION>::iterator getVItageDirection() { return _viDirection; }
-
 	bool getOpenDirection(int num) { return _OpenDirection[num]; }
-	bool getIsMade() { return _isMade; }
-	void setIsMade(bool ismade) { _isMade = ismade; }
 };

@@ -65,7 +65,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		{
 			resultRoom = new Room7RT;
 		}
-		else if (!isWall[0] && isWall[1] && !isWall[2] && !isWall[3])//¿ì, ÇÏ ¶Õ¸° °æ¿ì
+		else if (isWall[0] && isWall[1] && !isWall[2] && !isWall[3])//¿ì, ÇÏ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new Room7_RB;
 		}
@@ -115,11 +115,11 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	break;
 	case 3: // ½Ä´ç¹æ
 	{
-		if (!isWall[0] && isWall[1] && !isWall[2] && isWall) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
+		if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new RestaurantRoom;
 		}
-		else if (!isWall[0] && isWall[1] && isWall[2] && isWall) // ÁÂ°¡ ¶Õ¸° °æ¿ì
+		else if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new RestaurantRoom;
 		}
@@ -127,11 +127,11 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	break;
 	case 4: // »óÁ¡¹æ
 	{
-		if (!isWall[0] && isWall[1] && !isWall[2] && isWall) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
+		if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new DungeonShopRoom;
 		}
-		else if (!isWall[0] && !isWall[1] && !isWall[2] && isWall) // ÁÂ, »ó, ¿ì°¡ ¶Õ¸° °æ¿ì
+		else if (!isWall[0] && !isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, »ó, ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new DungeonShopRoom2;
 		}
@@ -147,7 +147,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
 	_mapSize = 4;
 	makeStage();
 }
