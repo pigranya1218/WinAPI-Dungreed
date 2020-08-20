@@ -13,6 +13,10 @@ private:
 	int _radius;
 	int _fspeed;
 
+	string _attackCode;
+	float _elapsedTime;
+
+
 public:
 	virtual void init();
 	virtual void release();

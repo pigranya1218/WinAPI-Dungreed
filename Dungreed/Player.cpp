@@ -179,38 +179,38 @@ void Player::init()
 	_inventory.resize(15);
 
 
-	babyGreenBat* testAcc1 = new babyGreenBat;
-	testAcc1->init();
-	_inventory[4] = testAcc1;
-
+	//babyGreenBat* testAcc1 = new babyGreenBat;
+	//testAcc1->init();
+	//_inventory[4] = testAcc1;
+	//
 	//GreenBat* testAcc2 = new GreenBat;
 	//testAcc2->init();
-	//_inventory[1] = testAcc2;
-
+	//_inventory[6] = testAcc2;
+	//
 
 	//GreenDadBat* testAcc3 = new GreenDadBat;
 	//testAcc3->init();
-	//_inventory[2] = testAcc3;
+	//_inventory[3] = testAcc3;
 
 	
-	GreenMomBat* testAcc4 = new GreenMomBat;
-	testAcc4->init();
-	_inventory[3] = testAcc4;
+	//GreenMomBat* testAcc4 = new GreenMomBat;
+	//testAcc4->init();
+	//_inventory[3] = testAcc4;
+	//
+
+	//SpikeBall* testAcc9 = new SpikeBall;
+	//testAcc9->init();
+	//_inventory[6] = testAcc9;
 
 
-	SpikeBall* testAcc9 = new SpikeBall;
-	testAcc9->init();
-	_inventory[8] = testAcc9;
-
-
-	bombPouch* testAcc5 = new bombPouch;
-	testAcc5->init();
-	_inventory[6] = testAcc5;
+	//bombPouch* testAcc5 = new bombPouch;
+	//testAcc5->init();
+	//_inventory[6] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
 	//testAcc6->init();
-	//_inventory[6] = testAcc6;
+	//_inventory[3] = testAcc6;
 	//
 	//
 	//miniEarth* testAcc7 = new miniEarth;
@@ -227,10 +227,6 @@ void Player::init()
 	testAcc10->init();
 	_inventory[9] = testAcc10;
 
-	OakBow* testAcc11 = new OakBow;
-	testAcc11->init();
-	_inventory[10] = testAcc11;
-
 	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
 	testAcc12->init();
 	_inventory[9] = testAcc12;
@@ -241,7 +237,7 @@ void Player::init()
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
-	_inventory[0] = testAcc14;
+	_inventory[10] = testAcc14;
 
 	Voluspa* testAcc16 = new Voluspa;
 	testAcc16->init();
@@ -251,15 +247,18 @@ void Player::init()
 	testAcc17->init();
 	_inventory[2] = testAcc17;
 
+	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
+	testAcc18->init();
+	_inventory[6] = testAcc18;
 
 	BigPaintBlush* testAcc15 = new BigPaintBlush;
 	testAcc15->init();
 	_inventory[7] = testAcc15;
 
-	/*OakBow* testAcc11 = new OakBow;
+	OakBow* testAcc11 = new OakBow;
 	testAcc11->init();
-	_inventory[10] = testAcc11;
-*/
+	_inventory[4] = testAcc11;
+
 	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
 	_inventory[11] = testWeapon1;
@@ -297,9 +296,9 @@ void Player::init()
 	testWeapon6->init();
 	_inventory[14] = testWeapon6;*/
 
-	/*GatlingGun* testWeapon6 = new GatlingGun;
+	GatlingGun* testWeapon6 = new GatlingGun;
 	testWeapon6->init();
-	_inventory[14] = testWeapon6;*/
+	_inventory[3] = testWeapon6;
 
 	_hand = new Punch;
 	_hand->init();
