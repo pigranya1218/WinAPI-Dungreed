@@ -23,6 +23,8 @@ private:
 
 	};
 
+	
+
 	tagHandInfo _handR;
 	tagHandInfo _handL;
 

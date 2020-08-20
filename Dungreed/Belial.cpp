@@ -14,8 +14,8 @@ void Belial::init(const Vector2 & pos)
 	_size = _img->getFrameSize() * _scale;
 
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.force = Vector2(0, 200);
-	_moving.delay = 0.1;
+	_moving.force = Vector2(0, 150);
+	_moving.delay = 0.4;
 
 	_active = true;
 
