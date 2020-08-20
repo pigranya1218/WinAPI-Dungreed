@@ -579,8 +579,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet", L"resources/images/boss/Belial/bullet.png", 2, 1);								//벨리알 총알
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet_Fx", L"resources/images/boss/Belial/bullet_Fx.png", 8, 1);							//벨리알 타격 이팩트
 
-	IMAGE_MANAGER->addFrameImage("Belial/Laser", L"resources/images/boss/Belial/laser.png", 8, 1);									//벨리알 레이저
-	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/laser_head.png", 8, 1);						//벨리알 레이저 앞부분
+	IMAGE_MANAGER->addFrameImage("Belial/Laser", L"resources/images/boss/Belial/laser.png", 7, 1);									//벨리알 레이저
+	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/laser_head.png", 7, 1);						//벨리알 레이저 앞부분
 
 	IMAGE_MANAGER->addImage("Belial/Sword", L"resources/images/boss/Belial/BossSword.png");										    //벨리알 검
 

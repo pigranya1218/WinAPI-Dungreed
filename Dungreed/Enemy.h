@@ -25,8 +25,12 @@ protected:
 	ENEMY_STATE		_state;			// 현재 상태
 	DIRECTION		_direction;		// 행동
 	Image*			_img;			// 이미지
+	Image*			_img1;			// 이미지
 	Animation*		_ani;			// 애니메이션
 	string			_imageName;		// 이미지 이름
+	string			_imageName1;
+
+
 	bool			_isDetect;		// 플레이어를 감지하였는가
 	float			_scale;			// 렉트와 출력에 사용할 스케일
 	float			_detectRange;	// 플레이어 감지 거리	
