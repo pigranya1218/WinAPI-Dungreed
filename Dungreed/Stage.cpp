@@ -128,7 +128,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 	
 	switch (_tile[currIndex].linePos)
 	{
-	case DRAW_LINE_POSITION::TOP:
+	/*case DRAW_LINE_POSITION::TOP:
 	{
 		if (currX < maxSizeX - 1 && (_tile[currIndex + 1].linePos == DRAW_LINE_POSITION::TOP || _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::LEFT_TOP || _tile[currIndex + 1].linePos == DRAW_LINE_POSITION::RIGHT_TOP))
 		{
@@ -313,7 +313,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 			_collisionGroundRects.push_back(rectMakePivot(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top), Vector2(TILESIZE * (currX - startX + 1), TILESIZE), PIVOT::LEFT_TOP));
 		}
 	}
-	break;
+	break;*/
 	case DRAW_LINE_POSITION::LEFT_DIAGONAL:
 	{
 		if (currY < maxSizeY - 1 && currX > 0 && _tile[currIndex + maxSizeX - 1].linePos == DRAW_LINE_POSITION::LEFT_DIAGONAL)
