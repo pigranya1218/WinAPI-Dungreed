@@ -78,29 +78,36 @@ void GuidedProjectile::update(float elapsedTime)
 
 	_timeCount += elapsedTime;
 
-	if (_timeCount <= 0.5f)
+	if (_timeCount <= 0.3f)
 	{
 		moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
 		moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
 	}
 
-	if (_timeCount > 0.5f)
+	if (_timeCount > 0.3f)
 	{
-		float chaseRadian = guidedAngleRadian;
+		/*float gapRadian = abs(_angleRadian - guidedAngleRadian);
+		float gapRadian02;
+		if (gapRadian > PI)
+		{
+			_angleRadian 
+		}*/
+
+
 		if (_angleRadian != guidedAngleRadian)
 		{
 			if (_angleRadian > guidedAngleRadian)
 			{
-				chaseRadian += 0.05f;
+				_angleRadian -= 3.f * elapsedTime;
 			}
 			if (_angleRadian < guidedAngleRadian)
 			{
-				chaseRadian -= 0.05f;
+				_angleRadian += 3.f * elapsedTime;
 			}
 		}
 		// ÀÌµ¿
-		moveDir.x += cosf(chaseRadian) * _force.x * elapsedTime;
-		moveDir.y -= sinf(chaseRadian) * _force.y * elapsedTime;
+		moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
+		moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
 	}
 
 	Vector2 lastDir = _position;
