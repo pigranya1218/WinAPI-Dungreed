@@ -2,7 +2,7 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
-void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& drawSize, const Vector2& collsionRectSize, const Vector2& effectSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
+void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& drawSize, const Vector2& collsionRectSize, const Vector2& effectSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm, bool collsionEnemy)
 {
 	float elapseXY;
 
@@ -31,21 +31,12 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 
 	_collsionGround = collsionGround;
 	_collisionPlatForm = collsionPlatForm;
-
 	_collisionEffect = collisionEffect;
+	_useCollsionEnemy = collsionEnemy;
 
 	_drawSize = drawSize;
 	_size = collsionRectSize;
 	_effectSize = effectSize;
-	//if (_collisionEffect != "")
-	//{
-	//	//_effectImg = EFFECT_MANAGER->
-	//	//_effectImg = IMAGE_MANAGER->findImage(_collisionEffect);
-	//	if (_effectImg != nullptr)
-	//	{
-	//		_effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
-	//	}
-	//}
 
 	_gravity = Vector2(0, 4000);
 
@@ -61,8 +52,8 @@ void NormalProjectile::release()
 		_ani->release();
 		SAFE_DELETE(_ani);
 	}
-
-	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
+	/*float angleDegree = _angleRadian * (180.0f / PI);
+	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));*/
 }
 
 void NormalProjectile::update(float elapsedTime)
@@ -85,6 +76,8 @@ void NormalProjectile::update(float elapsedTime)
 
 	if (lastDir + moveDir != currDir)
 	{
+		float angleDegree = _angleRadian * (180.0f / PI);
+		EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
 		_active = false;
 	}
 
@@ -92,9 +85,15 @@ void NormalProjectile::update(float elapsedTime)
 	if (_info->team == OBJECT_TEAM::PLAYER)
 	{
 		// ENEMY와의 충돌 검사
-		if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
+		if (_projectileMgr->checkEnemyCollision(this, _useCollsionEnemy)) // 적과 충돌했다면
 		{
-			_active = false;
+			float angleDegree = _angleRadian * (180.0f / PI);
+			EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+			
+			if (_useCollsionEnemy)
+			{
+				_active = false;
+			}
 			return;
 		}
 	}

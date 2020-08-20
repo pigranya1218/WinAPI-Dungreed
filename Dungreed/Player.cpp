@@ -281,9 +281,9 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	FluteGreatSword* testWeapon5 = new FluteGreatSword;
+	/*FluteGreatSword* testWeapon5 = new FluteGreatSword;
 	testWeapon5->init();
-	_inventory[14] = testWeapon5;
+	_inventory[14] = testWeapon5;*/
 
 	//MagicStick* testWeapon5 = new MagicStick;
 	//testWeapon5->init();
@@ -297,9 +297,9 @@ void Player::init()
 	testWeapon6->init();
 	_inventory[14] = testWeapon6;*/
 
-	/*GatlingGun* testWeapon6 = new GatlingGun;
+	GatlingGun* testWeapon6 = new GatlingGun;
 	testWeapon6->init();
-	_inventory[14] = testWeapon6;*/
+	_inventory[14] = testWeapon6;
 
 	_hand = new Punch;
 	_hand->init();
