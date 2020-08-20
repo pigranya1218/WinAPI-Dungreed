@@ -56,3 +56,8 @@ bool ProjectileManager::checkPlayerCollision(Projectile* projectile, bool isOnce
 {
 	return _stage->isHitPlayer(projectile, isOnceCollision);
 }
+
+Vector2 ProjectileManager::getEnemyPos(Vector2 pos)
+{
+	return _enemyManager->getEnemyPos(pos);
+}

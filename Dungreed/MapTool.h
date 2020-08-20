@@ -15,8 +15,6 @@ enum class DRAW_LINE_POSITION
 	LEFT_DIAGONAL, // /이런 모양
 	RIGHT_DIAGONAL, // \이런 모양
 	
-	
-	
 	//프랫폼형태인가?
 	PLATFORM_TOP,
 	PLATFORM_LEFT_DIAGONAL, // /이런 모양
@@ -112,8 +110,6 @@ public:
 	void paletteChange();
 	void mapLoad();
 	void setSelectTile();
-
-	void setLinePos(int frameX,int frameY) ;
 
 	void setTileSize();
 

@@ -155,7 +155,7 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 void Player::init()
 {
 	setSize(Vector2(40, 80));
-	setPosition(Vector2(500, WINSIZEY - 250));
+	setPosition(Vector2(200, 200));
 	_direction = DIRECTION::RIGHT;
 	
 	//ÃÖÃÊ¿¡ ÀåÂøÇÏ´Â ÄÚ½ºÆ¬
@@ -995,4 +995,9 @@ float Player::getMaxDamage()
 	{
 		return _equippedWeapon[_currWeaponIndex]->getMaxDamage();
 	}
+}
+
+Vector2 Player::getEnemyPos(Vector2 pos)
+{
+	return _gameScene->getEnemyPos(pos);
 }

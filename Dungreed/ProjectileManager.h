@@ -27,5 +27,7 @@ public:
 
 	bool checkEnemyCollision(Projectile* projectile, bool isOnceCollision); // isOnceCollision : ÇÑ ³à¼®ÀÌ ºÎµúÈ÷¸é »ç¶óÁü
 	bool checkPlayerCollision(Projectile* projectile, bool isOnceCollision);
+
+	Vector2 getEnemyPos(Vector2 pos);
 };
 

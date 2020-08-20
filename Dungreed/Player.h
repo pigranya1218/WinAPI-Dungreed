@@ -109,5 +109,7 @@ public:
 	float getReloadSpeed();
 	float getMinDamage();
 	float getMaxDamage();
+
+	Vector2 getEnemyPos(Vector2 pos);
 };
 
