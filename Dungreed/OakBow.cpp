@@ -302,15 +302,15 @@ void OakBow::attack(Player * player)
 	}
 }
 
-void OakBow::attack(FloatRect * rect, AttackInfo * info)
+void OakBow::attack(Player* player, FloatRect * rect, AttackInfo * info)
 {
 }
 
-void OakBow::attack(FloatCircle * circle, AttackInfo * info)
+void OakBow::attack(Player* player, FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void OakBow::attack(Projectile * projectile, AttackInfo * info)
+void OakBow::attack(Player* player, Projectile * projectile, AttackInfo * info)
 {
 }
 

@@ -147,15 +147,15 @@ void Boomerang::attack(Player * player)
 	_effectCount = 0;
 }
 
-void Boomerang::attack(FloatRect * rect, AttackInfo * info)
+void Boomerang::attack(Player* player, FloatRect * rect, AttackInfo * info)
 {
 }
 
-void Boomerang::attack(FloatCircle * circle, AttackInfo * info)
+void Boomerang::attack(Player* player, FloatCircle * circle, AttackInfo * info)
 {
 }
 
-void Boomerang::attack(Projectile * projectile, AttackInfo * info)
+void Boomerang::attack(Player* player, Projectile * projectile, AttackInfo * info)
 {
 }
 
