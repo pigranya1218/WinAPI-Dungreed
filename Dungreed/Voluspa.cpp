@@ -16,13 +16,14 @@ void Voluspa::init()
 	_displayText = L"\"그대 아직도 깨달음을 원하는가? 그리고 무엇을 알려는가?\"";
 	//악세서리 가격
 	_price = 4300;
-	_currAttackDelay = 1.7f;
-	_currStopDelay = 1.7f;
+	_currAttackDelay = 0.f;
+	_currStopDelay =0.f;
 	_location.x = 0;
 	_location.y = 0;
 	
-	_renderPos.x = -300;
-	_renderPos.y = WINSIZEY/2;
+	_renderPos.x = 500;
+	_renderPos.y = 500;
+	
 	_Opposition = false;
 	_attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 }
@@ -33,32 +34,34 @@ void Voluspa::release()
 
 void Voluspa::update(Player * player, float const elapsedTime)
 {	
+	_playerPos = player->getPosition();	
 	Vector2 enemypos = player->getEnemyPos(Vector2());
 	_elapsedTime += elapsedTime;
 	_location.x = 2500* elapsedTime;
-
+	
 		
-	if (_renderPos.x > WINSIZEX+300 )
+	if (_renderPos.x > _playerPos.x+300 )
 	{
 		if (_currStopDelay > 0) // 공격 딜레이 대기 중
 		{
 			_currStopDelay = max(0, _currStopDelay - elapsedTime);		}
 		
 		if (_currStopDelay == 0 ) {
-			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);			
+					
+			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
 			_currAttackDelay = 1.7f;
 			_Opposition = true;
 		}
 	}
-	if (_renderPos.x < -300 )
+	if (_renderPos.x < _playerPos.x-300 )
 	{
 		if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 		{
 			_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 		}
 		
-		if (_currAttackDelay == 0 ) {
-			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);			
+		if (_currAttackDelay == 0 ) {			
+			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
 			_currStopDelay = 1.7f;
 			_Opposition = false;
 		}
@@ -116,11 +119,15 @@ void Voluspa::backRender(Player * player)
 		_img->render(CAMERA->getRelativeV2(_renderPos), false);
 	}
 
-	
+
 }
 
 void Voluspa::frontRender(Player * player)
 {
+
+	
 }
+
+
 
 
