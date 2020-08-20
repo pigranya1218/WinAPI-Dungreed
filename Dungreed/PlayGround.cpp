@@ -4,6 +4,7 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "MapToolScene.h"
+#include "MazeScene.h"
 #include "Player.h"
 
 #include <string>
@@ -610,8 +611,9 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
+	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("GAME");	
+	SCENE_MANAGER->changeScene("STAGE_MAKE");	
 
 	
 	return S_OK;

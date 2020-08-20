@@ -130,6 +130,9 @@
     <Filter Include="Dungreed\GameScene\Player\Food\Rare">
       <UniqueIdentifier>{ad5c4d38-a59c-4b12-9419-dcb43177874c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\StageMakeTestScene">
+      <UniqueIdentifier>{790f18f4-50d7-4d44-bdd0-81e354776cf4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -592,7 +595,7 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
     <ClInclude Include="MazeScene.h">
-      <Filter>Dungreed\MainScene</Filter>
+      <Filter>Dungreed\StageMakeTestScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1023,7 +1026,7 @@
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="MazeScene.cpp">
-      <Filter>Dungreed\MainScene</Filter>
+      <Filter>Dungreed\StageMakeTestScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
