@@ -48,6 +48,7 @@ public:
 	void setUIManager(UIManager* uiManager) { _uiManager = uiManager; }
 	void setPlayer(Player* player) { _player = player; }
 	virtual void init();
+	virtual void enter();
 	virtual void release();
 	virtual void update(float const elaspedTime);
 	virtual void render();

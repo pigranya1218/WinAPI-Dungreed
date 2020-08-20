@@ -45,7 +45,7 @@ private:
 	void makeRoom(int x, int y);
 	bool makeSpecialRoom();
 	void releaseStage();
-	Stage* getStage(int stageType, bool isWall[]);
+	Stage* getStage(int stageType, bool isWall[]) { return nullptr; }
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
@@ -76,7 +76,7 @@ public:
 	void makeStage();
 
 	// 스테이지 해제
-	void releaseStage();
+	// void releaseStage();
 
 	// 플레이어 관련 함수
 	Vector2 getPlayerPos();

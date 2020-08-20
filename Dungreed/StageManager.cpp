@@ -117,6 +117,7 @@ void StageManager::makeStage()
 		_currStage->setUIManager(_uiMgr);
 		_currStage->setPlayer(_player);
 		_currStage->init();
+		_currStage->enter();
 		break;
 	default:
 		break;
@@ -341,8 +342,11 @@ void StageManager::releaseStage()
 	{
 		for (int j = 0; j < _stageMap[i].size(); j++)
 		{
-			_stageMap[i][j]->release();
-			delete _stageMap[i][j];
+			if (_stageMap[i][j] != nullptr)
+			{
+				_stageMap[i][j]->release();
+				delete _stageMap[i][j];
+			}
 		}
 		_stageMap[i].clear();
 	}

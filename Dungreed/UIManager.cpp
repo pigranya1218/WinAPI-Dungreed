@@ -448,6 +448,39 @@ void UIManager::render()
 			}
 		}
 
+		// Minimap UI
+		{
+			int offsetX = 1400;
+			int offsetY = 70;
+			Vector2 playerPos = _player->getPosition();
+				
+			for (int i = 0; i < _mapUI.collisionGroundRect.size(); i++)
+			{
+				int rectOffsetX = offsetX;
+				int rectOffsetY = offsetY;
+				FloatRect drawRc = _mapUI.collisionGroundRect[i];
+				drawRc.left += rectOffsetX;
+				drawRc.right += rectOffsetX;
+				drawRc.top += rectOffsetY;
+				drawRc.bottom += rectOffsetY;
+				D2D_RENDERER->fillRectangle(drawRc, 192, 193, 195, 1);
+			}
+			/*for (int i = 0; i < _mapUI.collisionGroundLine.size(); i++)
+			{
+				D2D_RENDERER->fillRectangle(_mapUI.collisionGroundLine[i], 192, 193, 195, 1);
+			}
+			for (int i = 0; i < _mapUI.collisionGroundRect.size(); i++)
+			{
+				D2D_RENDERER->fillRectangle(_mapUI.collisionGroundRect[i], 192, 193, 195, 1);
+			}*/
+			
+			
+			D2D_RENDERER->fillRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(4, 4), PIVOT::CENTER), 84, 144, 255, 1);
+			D2D_RENDERER->drawRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(7, 7), PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1, 3);
+
+		}
+		
+
 		// Dialogue UI
 		if (_dialogueUI.isActive())
 		{
@@ -478,6 +511,21 @@ void UIManager::render()
 			_restaurantUI.render();
 		}
 	}
+}
+
+void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine)
+{
+	for (int i = 0; i < groundRect.size(); i++)
+	{
+		FloatRect miniMapRc = groundRect[i];
+		miniMapRc.left /= 16;
+		miniMapRc.top /= 16;
+		miniMapRc.right /= 16;
+		miniMapRc.bottom /= 16;
+		_mapUI.collisionGroundRect.push_back(miniMapRc);
+	}
+	_mapUI.collisionGroundLine = groundLine;
+	_mapUI.collisionPlatformLine = platformLine;
 }
 
 void UIManager::showDamage(DamageInfo damage, Vector2 pos)

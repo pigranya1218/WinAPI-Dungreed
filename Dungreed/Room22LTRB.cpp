@@ -25,7 +25,7 @@ void Room22LTRB::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(VK_F8))
 	{
 		
-		_stageManager->moveRoom();
+		//_stageManager->moveRoom();
 		
 		
 	}
