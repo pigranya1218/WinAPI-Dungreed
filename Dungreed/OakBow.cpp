@@ -147,7 +147,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 
 			//projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
 			Image* bulletImg = IMAGE_MANAGER->findImage("Arrow00");
-			Image* effectImg = IMAGE_MANAGER->findImage("ArrowHitEffect");
+			//Image* effectImg = IMAGE_MANAGER->findImage("ArrowHitEffect");
 
 			Vector2 bulletSize = bulletImg->getSize();
 			bulletSize.x *= 4;

@@ -4,6 +4,7 @@
 #include "MainScene.h"
 #include "GameScene.h"
 #include "MapToolScene.h"
+#include "MazeScene.h"
 #include "Player.h"
 
 #include <string>
@@ -569,7 +570,10 @@ HRESULT playGround::init()
 
 	//** Boss
 	// * Belial
-	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle", L"resources/images/boss/Belial/idle.png", 10, 1);								//벨리알 머리 대기 상태
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle"		, L"resources/images/boss/Belial/idle.png"		, 10, 1);	//머리 기본
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot", L"resources/images/boss/Belial/idle_Shot.png"	, 10, 1);	//머리 기본 피격
+
+
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack", L"resources/images/boss/Belial/attack.png", 10, 1);							//벨리알 머리 공격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot", L"resources/images/boss/Belial/getHeadDamage_Idle.png", 10, 1);			//벨리알 머리 대기 피격 상태
 	IMAGE_MANAGER->addFrameImage("Belial/Head/IdAttackle_Shot", L"resources/images/boss/Belial/getHeadDamage_attack.png", 10, 1);	//벨리알 머리 공격 피격 상태
@@ -610,6 +614,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
 	SCENE_MANAGER->addScene("GAME", new GameScene);
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
+	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
 	SCENE_MANAGER->changeScene("GAME");	
 

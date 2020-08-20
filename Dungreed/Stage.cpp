@@ -16,6 +16,8 @@ void Stage::init()
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
 	_projectileMgr->setEnemyManager(_enemyMgr);
+
+	_isMade = false;
 }
 
 void Stage::release()

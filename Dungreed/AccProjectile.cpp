@@ -2,20 +2,21 @@
 #include "ProjectileManager.h"
 #include "stdafx.h"
 
-void AccProjectile::init(string imgKey, Vector2 pos, float speed, bool useAni, bool isAniLoop, int aniFps, bool isCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate, bool collsionGround, bool collsionPlatForm, bool useGravity)
+void AccProjectile::init(const string imgKey, const string collisionEffect, const Vector2 & collisionSize, const Vector2 & drawSize, const Vector2 & force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
 {
-	_pos = pos;
-	_speed = speed;
+	float elapseXY;
+
+	_angleRadian = angleRadian;
+	_force = force;
+
 	_maxTime = maxTime;
-	_useGravity = useGravity;
 	_count = 0;
 
-
-
 	_img = IMAGE_MANAGER->findImage(imgKey);
-	_useAni = useAni;
-	if (_useAni)
+	if (useAni)
 	{
+		elapseXY = fabsf(_img->getFrameSize().x - _img->getFrameSize().y);
+
 		_ani = new Animation;
 		_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 		_ani->setFPS(aniFps);
@@ -23,41 +24,57 @@ void AccProjectile::init(string imgKey, Vector2 pos, float speed, bool useAni, b
 		_ani->start();
 	}
 
-	_checkCollision = isCollision;
-	_collisionEffect = collisionEffect;
-	_collisionPlatForm = collsionPlatForm;
-	_effectSize = effectSize;
-	_collsionGround = collsionGround;
+	_useAni = useAni;
 	_useRotate = useRotate;
+	_useGravity = useGravity;
+
+	_collsionGround = collsionGround;
+	_collisionPlatForm = collsionPlatForm;
+
+	_collisionEffect = collisionEffect;
+	_drawSize = drawSize;
+	_size = collisionSize;
+
+	if (_collisionEffect != "")
+	{
+		_effectImg = IMAGE_MANAGER->findImage(_collisionEffect);
+		_effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
+	}
+
 	_gravity = Vector2(0, 4000);
+
 	_active = true;
 }
 
 void AccProjectile::release()
 {
+	
 	Projectile::release();
+	
+
 	if (_useAni)
 	{
 		_ani->release();
-		delete _ani;
+		SAFE_DELETE(_ani);
 	}
 
-	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? ( (PI)) : (0.0f)));
+	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
 }
 
 void AccProjectile::update(float elapsedTime)
 {
-	Vector2 moveDir = Vector2(0, 0);
-	//moveDir.x += _speed * elapsedTime;
-	moveDir.y += _speed * elapsedTime;
+	Vector2 moveDir(0, 0);
 
 	// 중력 적용
 	if (_useGravity)
 	{
-		moveDir.y += _gravity.y *_speed* elapsedTime ;
+		_force.y += _gravity.y * elapsedTime * ((_angleRadian > PI) ? (1) : (-1));
 	}
 
-	
+	// 이동
+	moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
+	moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
+
 	Vector2 lastDir = _position;
 	_projectileMgr->moveTo(this, moveDir, _collsionGround, _collisionPlatForm);
 	Vector2 currDir = _position;
@@ -65,12 +82,39 @@ void AccProjectile::update(float elapsedTime)
 	if (lastDir + moveDir != currDir)
 	{
 		_active = false;
-	}	
-	else // 스테이지와 충돌 검사 안함
-	{
-		_position += moveDir;
 	}
 
+	if (_ani->isPlay()) {
+		// 타입에 따른 충돌 검사
+		if (_info->team == OBJECT_TEAM::PLAYER)
+		{
+			// ENEMY와의 충돌 검사
+			if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
+			{
+				_active = true;
+				return;
+			}
+		}
+		else
+		{
+			// TODO: PLAYER와의 충돌 검사
+			if (_projectileMgr->checkPlayerCollision(this, true))
+			{
+				_active = false;
+				return;
+			}
+
+		}
+	}
+
+	// 지속시간을 넘어가면
+	_count += elapsedTime;
+	if (_count >= _maxTime)
+	{
+		_active = false;
+	}
+
+	// 애니메이션 사용 시 프레임 재생
 	if (_useAni)
 	{
 		_ani->frameUpdate(elapsedTime);
@@ -78,46 +122,32 @@ void AccProjectile::update(float elapsedTime)
 
 
 	
-		if (_info->team == OBJECT_TEAM::PLAYER)
-		{
-			// ENEMY와의 충돌 검사
-			if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
-			{
-				
-				return;
-			}
-		}
-	
-
-	
-	// 지속시간을 넘어가면
-	_count += elapsedTime;
-	if (_count >= _maxTime ||! _ani->isPlay())
-	{
-		_active = false;
-	}	
-	
 }
 
 void AccProjectile::render()
 {
+
 	if (_useRotate)
 	{
-		_img->setAngle(-PI*30);
+		_img->setAngle(_angleRadian * (180 / PI));
 	}
 	if (_useAni)
 	{
-		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		if (_ani->isPlay()) {
+			_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		}
 	}
 	else
 	{
-		_img->render(CAMERA->getRelativeV2(_position), _size);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		if (_ani->isPlay()) {
+			_img->render(CAMERA->getRelativeV2(_position), _drawSize);
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+			//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, resize, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		}
 
 	}
-
-
+	
 }
 
 void AccProjectile::aniUpdate(float const elapsedTime)

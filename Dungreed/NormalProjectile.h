@@ -11,7 +11,7 @@ private:
 
 	Image*		_img;				// 투사체 이미지
 	Image*		_effectImg;			// 이펙트 이미지
-	Vector2		_effectSize;
+	Vector2		_effectSize;        // 이펙트 사이즈
 
 	bool		_useAni;			// 애니메이션 사용하는가
 	Animation*	_ani;				// 투사체 애니메이션
