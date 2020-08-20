@@ -591,6 +591,9 @@
     <ClInclude Include="Wingboots.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="MazeScene.h">
+      <Filter>Dungreed\MainScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1018,6 +1021,9 @@
     </ClCompile>
     <ClCompile Include="Wingboots.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeScene.cpp">
+      <Filter>Dungreed\MainScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
