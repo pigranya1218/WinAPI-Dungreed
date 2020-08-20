@@ -5,7 +5,7 @@ void DungeonShopRoom::init()
 	Stage::init();
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("DungeonShopRoom1.map");
+	loadMap("room/DungeonShopRoom1_L.map");
 }
 
 void DungeonShopRoom::release()

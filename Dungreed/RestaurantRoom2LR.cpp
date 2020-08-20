@@ -4,7 +4,7 @@ void RestaurantRoom2LR::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("RestaurantRoom2LR.map");
+	loadMap("room/RestaurantRoom1_LR.map");
 }
 
 void RestaurantRoom2LR::release()

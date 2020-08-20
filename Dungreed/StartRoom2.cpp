@@ -4,12 +4,9 @@ void StartRoom2::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("StartRoom2.map");
+	loadMap("room/StartRoom2_RB.map");
 
-	_OpenDirection[0] = false;
-	_OpenDirection[1] = false;
-	_OpenDirection[2] = true;
-	_OpenDirection[3] = true;
+	
 }
 
 void StartRoom2::release()
