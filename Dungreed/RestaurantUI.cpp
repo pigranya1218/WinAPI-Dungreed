@@ -134,8 +134,10 @@ void RestaurantUI::render()
 		PlayerStat foodAddStat = _foods[i]->getAddStat();
 		PlayerStat foodOneceStat = _foods[i]->getOnceStat();
 		//food 벡터에 있는 아이템들을 리스트 foodItems에 표시
-		D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 10, _foodItems[i].baseRc.top, TTYONE_UTIL::stringTOwsting(_foods[i]->getName()),
-			RGB(255, 178, 144), 40, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+		FOOD_RANK foodRank = _foods[i]->getRank();
+		//int foodRankInt = static_cast<int>(foodRank);
+		D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 20, _foodItems[i].baseRc.top, TTYONE_UTIL::stringTOwsting(_foods[i]->getName()),
+			((foodRank == FOOD_RANK::RARE)? RGB(169, 251, 150) : RGB(255, 178, 144)), 40, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 		int addStatCount = 0;
 		int oneceStatCount = 0;
 		for (int j = 0; j < static_cast<int>(STAT_TYPE::END); j++)
