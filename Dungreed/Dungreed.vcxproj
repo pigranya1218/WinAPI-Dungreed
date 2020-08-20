@@ -190,6 +190,7 @@
     <ClInclude Include="DemonBoots.h" />
     <ClInclude Include="DialogueUI.h" />
     <ClInclude Include="DownStair1L.h" />
+    <ClInclude Include="BrokenObject.h" />
     <ClInclude Include="DungeonShopRoom.h" />
     <ClInclude Include="DungeonShopRoom2.h" />
     <ClInclude Include="Effect.h" />
@@ -207,6 +208,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GatlingGun.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="GoldObject.h" />
     <ClInclude Include="GreenBat.h" />
     <ClInclude Include="GreenDadBat.h" />
     <ClInclude Include="GreenMomBat.h" />
@@ -246,6 +248,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Ovibos.h" />
+    <ClInclude Include="ParticleObject.h" />
     <ClInclude Include="PickaxCos.h" />
     <ClInclude Include="PickaxeRed.h" />
     <ClInclude Include="Player.h" />
@@ -357,6 +360,7 @@
     <ClCompile Include="DemonBoots.cpp" />
     <ClCompile Include="DialogueUI.cpp" />
     <ClCompile Include="DownStair1L.cpp" />
+    <ClCompile Include="BrokenObject.cpp" />
     <ClCompile Include="DungeonShopRoom.cpp" />
     <ClCompile Include="DungeonShopRoom2.cpp" />
     <ClCompile Include="Effect.cpp" />
@@ -372,6 +376,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GatlingGun.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="GoldObject.cpp" />
     <ClCompile Include="GreenBat.cpp" />
     <ClCompile Include="GreenDadBat.cpp" />
     <ClCompile Include="GreenMomBat.cpp" />
@@ -407,8 +412,10 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="OakBow.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ovibos.cpp" />
+    <ClCompile Include="ParticleObject.cpp" />
     <ClCompile Include="PickaxCos.cpp" />
     <ClCompile Include="PickaxeRed.cpp" />
     <ClCompile Include="Player.cpp" />

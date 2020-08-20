@@ -133,6 +133,15 @@
     <Filter Include="Dungreed\StageMakeTestScene">
       <UniqueIdentifier>{790f18f4-50d7-4d44-bdd0-81e354776cf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Obstacle">
+      <UniqueIdentifier>{5c160c15-d798-4324-bab0-ca617a7bcca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Drops">
+      <UniqueIdentifier>{11d9e7d4-19b1-4e5d-9622-ee0f79674e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Particle">
+      <UniqueIdentifier>{fa3be956-0718-4875-8345-bde7fe9c47ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -639,6 +648,15 @@
     <ClInclude Include="GuidedProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleObject.h">
+      <Filter>Dungreed\GameScene\Object\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldObject.h">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="BrokenObject.h">
+      <Filter>Dungreed\GameScene\Object\Obstacle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1111,6 +1129,18 @@
     </ClCompile>
     <ClCompile Include="GuidedProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="BrokenObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Obstacle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

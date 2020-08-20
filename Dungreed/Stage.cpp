@@ -6,6 +6,7 @@
 void Stage::init()
 {
 	_objectMgr = new ObjectManager;
+	_objectMgr->setStage(this);
 
 	_npcMgr = new NpcManager;
 	_npcMgr->setStage(this);
@@ -17,6 +18,7 @@ void Stage::init()
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
 	_projectileMgr->setEnemyManager(_enemyMgr);
+	_projectileMgr->setObjectManager(_objectMgr);
 }
 
 void Stage::enter(int enterType)

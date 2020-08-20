@@ -52,17 +52,18 @@ public:
 	void makeMapToLine(int startX, int startY, int currX, int currY, vector<vector<bool>>& isVisited);
 	void moveTo(GameObject* object, Vector2 const moveDir, bool checkCollisionGround = true, bool checkCollisionPlatform = true); // GameObject를 moveDir 방향으로 충돌판정을 계산해서 이동시키는 함수
 
-	// 몬스터와 플레이어 공동 사용
+	// 적과 플레이어 공동 사용
 	void attack(Projectile* projectile, AttackInfo* info);
 
-	// 몬스터의 공격 체크를 위해 호출
+	// 적의 공격 체크를 위해 호출
 	void attack(FloatRect* rc, AttackInfo* info);
 	void attack(FloatCircle* circle, AttackInfo* info);
 
-	// 피격 체크를 위해 호출
+	// 적의 피격 체크를 위해 호출
 	bool isHitEnemy(FloatRect* rc, AttackInfo* info);
 	bool isHitEnemy(FloatCircle* circle, AttackInfo* info);
 
+	// 플레이어의 피격 체크를 위해 호출
 	bool isHitPlayer(Projectile* projectile, bool isOnceCollision);
 
 	inline Stage* getConnectedStage( DIRECTION const direction ) const { return _connectedStage[static_cast<int> (direction)];}
