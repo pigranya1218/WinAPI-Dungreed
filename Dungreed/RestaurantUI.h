@@ -12,9 +12,8 @@ private:
 	{
 		FloatRect baseRc;
 		FloatRect detailsRc;
-		// ** 음식 항목 셀 배경
-		Image* _foodListItem = IMAGE_MANAGER->findImage("UI/RESTAURANT/MENU"); //배경
-		Image* _foodListItemSelected = IMAGE_MANAGER->findImage("UI/RESTAURANT/MENU_SELECTED"); //선택중 배경
+		
+		bool isSoldOut;	//구매 여부
 	};
 	struct tagScrollBar
 	{
@@ -33,6 +32,7 @@ private:
 	Image* _foodImg;
 
 	bool _isActive;
+	
 
 	// *사용되는 이미지
 	// ** 상단 npc아이콘 띠
@@ -75,6 +75,10 @@ private:
 	//// ** 스크롤
 	//Image* _scrollBarBg = IMAGE_MANAGER->findImage("SCROLL_BG");
 	//Image* _scrollBarHeader = IMAGE_MANAGER->findImage("SCROLL_HEADER");
+	// ** 음식 항목 셀 배경
+	Image* _foodListItem = IMAGE_MANAGER->findImage("UI/RESTAURANT/MENU"); //배경
+	Image* _foodListItemSelected = IMAGE_MANAGER->findImage("UI/RESTAURANT/MENU_SELECTED"); //선택중 배경
+	Image* _foodListItemSoldOut = IMAGE_MANAGER->findImage("UI/RESTAURANT/THANKYOU_KR");
 
 	// * 사용되는 렉트
 	// 뒷배경 fillRectangle -> 색상RGB(34, 32, 52)
@@ -100,11 +104,11 @@ private:
 	// 골드 아이콘 렉트
 	FloatRect _goldIconRc;
 	// 스크롤 렉트
-	FloatRect _scrollBarBgRc;
-	FloatRect _scrollBarHeaderRc;
+	//FloatRect _scrollBarBgRc;
+	//FloatRect _scrollBarHeaderRc;
 	
 	tagFoodItems _foodItems[5];
-	
+	tagScrollBar _scrollBar;
 	
 
 public:

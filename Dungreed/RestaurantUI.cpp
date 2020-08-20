@@ -43,7 +43,7 @@ void RestaurantUI::init()
 	//체력 게이지 창
 	_lifeGaugeRc = FloatRect(570, 200, 870, 300);
 	//스크롤
-	_scrollBarBgRc = FloatRect(510, 180, 540, 780);
+	//_scrollBarBgRc = FloatRect(510, 180, 540, 780);
 	//금액 창
 	_goldBaseRc = FloatRect(1400, 800, WINSIZEX - 20, 880);
 	//금액 텍스트 렌더용 렉트
@@ -54,6 +54,7 @@ void RestaurantUI::init()
 	//음식 리스트 항목 창
 	for (int i = 0; i < 5; i++)
 	{
+		_foodItems[i].isSoldOut = false;
 		//가로 440, 세로 200
 		if(i == 0) _foodItems[i].baseRc = FloatRect(_foodListViewRc.left + 20, _foodListViewRc.top + 20, _foodListViewRc.right - 20, _foodListViewRc.top + 220);
 		else _foodItems[i].baseRc = FloatRect(_foodItems[i - 1].baseRc.left, _foodItems[i - 1].baseRc.bottom + 5, _foodItems[i - 1].baseRc.right, _foodItems[i-1].baseRc.bottom + 205);
@@ -73,7 +74,12 @@ void RestaurantUI::init()
 	_currHpAni->setDefPlayFrame(false, true);
 	_currHpAni->start();
 
-	//_foodImg = _foods[0]->getImage();
+	//스크롤 바
+	_scrollBar.totalHeight = _foodItems[0].baseRc.getHeight() * _foods.size();
+	_scrollBar.height = _foodListViewRc.getHeight();
+	_scrollBar.ratio = 0;
+	_scrollBar.bgRc = FloatRect(510, 180, 540, 780);
+	_scrollBar.scrollRc = FloatRect(510.0, 180.0, 540.0, (_scrollBar.height / _scrollBar.totalHeight)*(_scrollBar.bgRc.bottom - _scrollBar.bgRc.top));
 }
 
 void RestaurantUI::release()
@@ -93,6 +99,17 @@ void RestaurantUI::update(float elapsedTime)
 		if (_exitRc.ptInRect(_ptMouse))
 		{
 			_isActive = false;
+		}
+	}
+	if (KEY_MANAGER->isOnceKeyDown(VK_RBUTTON))
+	{
+		//음식 구매
+		for (int i = 0; i < _foods.size(); i++)
+		{
+			if (_foodItems[i].baseRc.ptInRect(_ptMouse) && _foodListViewRc.top < _ptMouse.y && _foodListViewRc.bottom > _ptMouse.y)
+			{
+				_foodItems[i].isSoldOut = true;
+			}
 		}
 	}
 }
@@ -116,11 +133,11 @@ void RestaurantUI::render()
 	_foodTableFrameView->aniRender(_foodTableViewRc.getCenter(), _foodTableViewRc.getSize(), _tableAni);
 	_foodTableViewBase->render(_foodTableViewRc.getCenter(), _foodTableViewRc.getSize());
 	//음식 리스트의 항목
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < _foods.size(); i++)
 	{
-		if (_foodItems[i].baseRc.ptInRect(_ptMouse) && _foodListViewRc.bottom > _ptMouse.y)
+		if (_foodItems[i].baseRc.ptInRect(_ptMouse) && _foodListViewRc.bottom > _ptMouse.y && _foodListViewRc.top < _ptMouse.y)
 		{
-			_foodItems[i]._foodListItemSelected->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
+			if(!_foodItems[i].isSoldOut) _foodListItemSelected->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
 			_foodImg = _foods[i]->getImage();
 			_foodImg->setScale(4.5);
 			_foodImg->setAlpha(0.7);
@@ -128,75 +145,85 @@ void RestaurantUI::render()
 		}
 		else
 		{
-			_foodItems[i]._foodListItem->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
+			_foodListItem->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
 		}
-		//아이템에 따른 변화되는 스탯 받아오는 작업
-		PlayerStat foodAddStat = _foods[i]->getAddStat();
-		PlayerStat foodOneceStat = _foods[i]->getOnceStat();
-		//food 벡터에 있는 아이템들을 리스트 foodItems에 표시
-		FOOD_RANK foodRank = _foods[i]->getRank();
-		//int foodRankInt = static_cast<int>(foodRank);
-		D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 20, _foodItems[i].baseRc.top, TTYONE_UTIL::stringTOwsting(_foods[i]->getName()),
-			((foodRank == FOOD_RANK::RARE)? RGB(169, 251, 150) : RGB(255, 178, 144)), 40, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
-		int addStatCount = 0;
-		int oneceStatCount = 0;
-		for (int j = 0; j < static_cast<int>(STAT_TYPE::END); j++)
+		if(!_foodItems[i].isSoldOut)
+		{ 
+			//아이템에 따른 변화되는 스탯 받아오는 작업
+			PlayerStat foodAddStat = _foods[i]->getAddStat();
+			PlayerStat foodOneceStat = _foods[i]->getOnceStat();
+			//food 벡터에 있는 아이템들을 리스트 foodItems에 표시
+			FOOD_RANK foodRank = _foods[i]->getRank();
+			//int foodRankInt = static_cast<int>(foodRank);
+			D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 20, _foodItems[i].baseRc.top, TTYONE_UTIL::stringTOwsting(_foods[i]->getName()),
+				((foodRank == FOOD_RANK::RARE) ? RGB(169, 251, 150) : RGB(255, 178, 144)), 40, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+			int addStatCount = 0;
+			int oneceStatCount = 0;
+			for (int j = 0; j < static_cast<int>(STAT_TYPE::END); j++)
+			{
+				STAT_TYPE statType = static_cast<STAT_TYPE>(j);
+				//영구적으로 변화되는 스탯
+				int addStatValue = foodAddStat.getStat(statType);
+				string addStatString = foodAddStat.getStatString(statType, false);
+				if (addStatValue != 0)
+				{
+					addStatCount++;
+					D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 15, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), L"▶",
+						RGB(255, 255, 255), 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+					D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 50, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), ((addStatValue >= 0) ? (L"+") : (L"")) + to_wstring(addStatValue), (addStatValue >= 0) ? RGB(0, 255, 0) : RGB(255, 0, 0)
+						, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+					D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 100, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), TTYONE_UTIL::stringTOwsting(addStatString), RGB(255, 255, 255)
+						, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+				}
+				//렉트 만들기
+				FloatRect value[3];	// 회복률, 포만률, 가격의 수치들을 입력할 렉트
+				FloatRect icon[3];	// 회복, 포만, 골드 아이콘을 배치할 렉트
+				for (int k = 0; k < 3; k++)
+				{
+					icon[k] = FloatRect(_foodItems[i].baseRc.right - 40, _foodItems[i].baseRc.top + 100 + (k * 30), _foodItems[i].baseRc.right - 10, _foodItems[i].baseRc.top + 130 + (k * 30));
+					//D2D_RENDERER->drawRectangle(icon[k], D2D1::ColorF::Magenta, 1, 1);
+					value[k] = FloatRect(icon[k].left - 80, icon[k].top, icon[k].left, icon[k].bottom);
+					//D2D_RENDERER->drawRectangle(value[k], D2D1::ColorF::Magenta, 1, 1);
+				}
+
+				//일시적으로 변화되는 스탯(체력 회복, 포만률, 소지금액(가격))
+				int oneceStatCurrHp = foodOneceStat.currHp;
+				float oneceStatCurrSatiety = foodOneceStat.currSatiety;
+				int price = _foods[i]->getPrice();
+				if (oneceStatCurrHp > 0)
+				{
+					D2D_RENDERER->renderTextField(value[0].left, value[0].top, to_wstring(oneceStatCurrHp) + L"%", D2D1::ColorF::White, 25,
+						value[0].getWidth(), value[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
+				}
+				D2D_RENDERER->renderTextField(value[1].left, value[1].top, to_wstring(static_cast<int>(oneceStatCurrSatiety)), D2D1::ColorF::White, 25,
+					value[1].getWidth(), value[1].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
+				D2D_RENDERER->renderTextField(value[2].left, value[2].top, to_wstring(price), D2D1::ColorF::White, 25,
+					value[2].getWidth(), value[2].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
+				//아이콘 렌더
+				_healIcon->setScale(2);
+				_satietyIcon->setScale(2);
+				_goldIcon->setScale(3);
+				if (oneceStatCurrHp > 0) _healIcon->render(icon[0].getCenter());
+				_satietyIcon->render(icon[1].getCenter());
+				_goldIcon->render(icon[2].getCenter());
+			}
+		}
+		else //판매완료
 		{
-			STAT_TYPE statType = static_cast<STAT_TYPE>(j);
-			//영구적으로 변화되는 스탯
-			int addStatValue = foodAddStat.getStat(statType);
-			string addStatString = foodAddStat.getStatString(statType, false);
-			if (addStatValue != 0)
-			{
-				addStatCount++;
-				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 15, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), L"▶",
-					RGB(255, 255, 255), 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
-				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 50, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), ((addStatValue >= 0) ? (L"+"):(L"")) + to_wstring(addStatValue), (addStatValue >= 0) ? RGB(0, 255, 0) : RGB(255, 0, 0)
-					, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
-				D2D_RENDERER->renderTextField(_foodItems[i].baseRc.left + 100, _foodItems[i].baseRc.top + 10 + (40 * addStatCount), TTYONE_UTIL::stringTOwsting(addStatString), RGB(255, 255, 255)
-					, 30, _foodItems[i].baseRc.getWidth(), _foodItems[i].baseRc.getHeight() - 150, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
-			}
-			//렉트 만들기
-			FloatRect value[3];	// 회복률, 포만률, 가격의 수치들을 입력할 렉트
-			FloatRect icon[3];	// 회복, 포만, 골드 아이콘을 배치할 렉트
-			for (int k = 0; k < 3; k++)
-			{
-				icon[k] = FloatRect(_foodItems[i].baseRc.right - 40, _foodItems[i].baseRc.top + 100 + (k*30), _foodItems[i].baseRc.right - 10, _foodItems[i].baseRc.top + 130 + (k * 30));
-				//D2D_RENDERER->drawRectangle(icon[k], D2D1::ColorF::Magenta, 1, 1);
-				value[k] = FloatRect(icon[k].left - 80, icon[k].top, icon[k].left, icon[k].bottom);
-				//D2D_RENDERER->drawRectangle(value[k], D2D1::ColorF::Magenta, 1, 1);
-			}
-
-			//한번만 변화되는 스탯(체력 회복, 포만률, 소지금액(가격))
-			int oneceStatCurrHp = foodOneceStat.currHp;
-			float oneceStatCurrSatiety = foodOneceStat.currSatiety;
-			int price = _foods[i]->getPrice();
-			if (oneceStatCurrHp > 0)
-			{
-				D2D_RENDERER->renderTextField(value[0].left, value[0].top, to_wstring(oneceStatCurrHp) + L"%", D2D1::ColorF::White, 25,
-					value[0].getWidth(), value[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
-			}
-			D2D_RENDERER->renderTextField(value[1].left, value[1].top, to_wstring(static_cast<int>(oneceStatCurrSatiety)), D2D1::ColorF::White, 25,
-				value[1].getWidth(), value[1].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
-			D2D_RENDERER->renderTextField(value[2].left, value[2].top, to_wstring(price), D2D1::ColorF::White, 25,
-				value[2].getWidth(), value[2].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
-			//아이콘 렌더
-			_healIcon->setScale(2);
-			_satietyIcon->setScale(2);
-			_goldIcon->setScale(3);
-			if(oneceStatCurrHp > 0) _healIcon->render(icon[0].getCenter());
-			_satietyIcon->render(icon[1].getCenter());
-			_goldIcon->render(icon[2].getCenter());
+			_foodListItemSoldOut->render(_foodItems[i].baseRc.getCenter(), _foodItems[i].baseRc.getSize());
 		}
-
 	}
+
 	//음식 리스트 창
 	//D2D_RENDERER->drawRectangle(_foodListViewRc, D2D1::ColorF::White, 1, 1);
 	_foodListView->render(_foodListViewRc.getCenter(), _foodListViewRc.getSize());
 	//뒷배경2
 	D2D_RENDERER->fillRectangle(_bgRc2, 34, 32, 52, 1);
 	//스크롤
-	_scrollBarBg->render(_scrollBarBgRc.getCenter(), _scrollBarBgRc.getSize());
+	//_scrollBarBg->render(_scrollBarBgRc.getCenter(), _scrollBarBgRc.getSize());
+	_scrollBarBg->render(_scrollBar.bgRc.getCenter(), _scrollBar.bgRc.getSize());
+	_scrollBarHeader->render(_scrollBar.scrollRc.getCenter(), _scrollBar.scrollRc.getSize());
+
 	//포만감 게이지 창
 	_satietyBaseBack->render(_satietyRc.getCenter(), _satietyRc.getSize());
 	_satietyBase->render(_satietyRc.getCenter(), _satietyRc.getSize());
