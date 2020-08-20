@@ -11,6 +11,7 @@ protected:
 	AttackInfo* _info;
 
 	Vector2 _renderSize;
+	Vector2 _effectSize;
 	Vector2		_force;				// 투사체 날아가는 힘
 	float		_angleRadian;		// 투사체 날아가는 각도
 	bool		_useCollsionEnemy;	// 투사체를 에너미와 충돌시킬 것인가
@@ -27,6 +28,8 @@ public:
 
 	Vector2 getRenderSize() { return _renderSize; }
 	void setRenderSize(Vector2 renderSize) { _renderSize = renderSize; }
+	Vector2 getEffectSize() { return _effectSize; }
+	void setEffectSize(Vector2 effectSize) { _effectSize = effectSize; }
 
 	Vector2 getForce() { return _force; }
 	void setForce(Vector2 force) { _force = force; }
