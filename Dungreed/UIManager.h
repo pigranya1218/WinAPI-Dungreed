@@ -10,6 +10,9 @@
 class GameScene;
 class Player;
 class StageManager;
+class EnemyManager;
+class NpcManager;
+class ObjectManager;
 
 class UIManager
 {
@@ -82,9 +85,10 @@ private:
 
 	struct tagMiniMap // ¹Ì´Ï¸Ê
 	{
-		vector<FloatRect> collisionGroundRect; // »ç°¢Çü ¶¥
-		vector<LinearFunc> collisionGroundLine; // ´ë°¢¼± ¶¥
-		vector<LinearFunc> collisionPlatformLine; // ÇÃ·§Æû ¶¥
+		vector<FloatRect> collisionRect; // ¹Ì´Ï¸Ê¿¡ ±×·ÁÁú ¶¥
+		EnemyManager* enemyMgr;
+		NpcManager* npcMgr;
+		ObjectManager* objectMgr;
 	};
 private:
 	GameScene* _gameScene;
@@ -119,7 +123,7 @@ public:
 	void update(float const elaspedTime);
 	void render();
 
-	void setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine);
+	void setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager);
 
 	bool isActive() const noexcept { return _isActive; }
 

@@ -21,7 +21,7 @@ void Stage::init()
 
 void Stage::enter(int enterType)
 {
-	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms);
+	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms, _enemyMgr, _npcMgr, _objectMgr);
 }
 
 void Stage::release()

@@ -239,6 +239,16 @@ Vector2 EnemyManager::getEnemyPos(const Vector2 & pos)
 	return result;
 }
 
+vector<Vector2> EnemyManager::getAllEnemyPos()
+{
+	vector<Vector2> result;
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		result.push_back(_enemies[i]->getPosition());
+	}
+	return result;
+}
+
 Vector2 EnemyManager::getPlayerPos()
 {
 	return _stage->getPlayerPos();
