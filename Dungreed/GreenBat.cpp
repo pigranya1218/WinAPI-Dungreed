@@ -86,10 +86,6 @@ void GreenBat::frontRender(Player * player)
 {
 }
 
-void GreenBat::displayInfo()
-{
-}
-
 void GreenBat::attack(Player * player)
 {
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
@@ -138,23 +134,3 @@ void GreenBat::attack(Player * player)
 	
 }
 
-void GreenBat::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void GreenBat::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void GreenBat::attack(Projectile * projectile, AttackInfo * info)
-{
-	
-}
-
-void GreenBat::getHit(Vector2 const position)
-{
-}
-
-void GreenBat::equip(Player* player)
-{
-}

@@ -55,30 +55,4 @@ void miniEarth::frontRender(Player * player)
 	_img->aniRender(CAMERA->getRelativeV2(_renderPos), _ani, false);
 }
 
-void miniEarth::displayInfo()
-{
-}
 
-void miniEarth::attack(Player * player)
-{
-}
-
-void miniEarth::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void miniEarth::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void miniEarth::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void miniEarth::getHit(Vector2 const position)
-{
-}
-
-void miniEarth::equip(Player* player)
-{
-}

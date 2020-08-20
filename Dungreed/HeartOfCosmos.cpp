@@ -30,29 +30,6 @@ void HeartOfCosmos::frontRender(Player * player)
 {
 }
 
-void HeartOfCosmos::displayInfo()
-{
-}
-
-void HeartOfCosmos::attack(Player * player)
-{
-}
-
-void HeartOfCosmos::attack(FloatRect * rect, AttackInfo * info)
-{
-}
-
-void HeartOfCosmos::attack(FloatCircle * circle, AttackInfo * info)
-{
-}
-
-void HeartOfCosmos::attack(Projectile * projectile, AttackInfo * info)
-{
-}
-
-void HeartOfCosmos::getHit(Vector2 const position)
-{
-}
 
 void HeartOfCosmos::dash(Player * player)
 {
@@ -74,6 +51,4 @@ void HeartOfCosmos::dash(Player * player)
 
 }
 
-void HeartOfCosmos::equip(Player * player)
-{
-}
+

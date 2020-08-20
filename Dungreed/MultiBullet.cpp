@@ -18,7 +18,7 @@ void MultiBullet::init()
 	_price = 3200;
 }
 
-void MultiBullet::attack(Projectile * projectile, AttackInfo * info)
+void MultiBullet::attack(Player* player, Projectile * projectile, AttackInfo * info)
 {	
 	if (info->madeByWeapon)
 	{
