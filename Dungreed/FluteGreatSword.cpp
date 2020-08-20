@@ -36,20 +36,20 @@ void FluteGreatSword::init()
 void FluteGreatSword::update(Player* player, float const elapsedTime)
 {
 	float ratio = 180 / (_adjustStat.attackSpeed * 0.4) / 2;
-	if (_angleOffset > 360)
-	{
-		_angleOffset = 0;
-	}
-	if (_angleOffset < -360)
-	{
-		_angleOffset = 0;
-	}
+	//if (_angleOffset > 360)
+	//{
+	//	_angleOffset = 0;
+	//}
+	//if (_angleOffset < -360)
+	//{
+	//	_angleOffset = 0;
+	//}
 
 
 
 	if (_oneAttack)
 	{
-		abs(_angleOffset += -(elapsedTime * ratio));
+		//abs(_angleOffset += -(elapsedTime * ratio));
 		
 		if (_angleOffset <-180)
 		{
@@ -91,7 +91,7 @@ void FluteGreatSword::backRender(Player* player)
 		Vector2 renderPosWeapon = originPos;
 		renderPosWeapon.x += (isLeft) ? (-_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4) : (_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
 		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * _width * 0.15 * 4;
-		if (_oneAttack)
+		if (!_oneAttack)
 		{
 		_img->setScale(4); // 이미지 크기 
 		_img->setAngle(weaponDegree+ _angleOffset); // 이미지 각도 
@@ -120,12 +120,12 @@ void FluteGreatSword::frontRender(Player* player)
 	
 		// 회전축 중점
 		originPos.x += ((isLeft) ? -15 : 15); // 바라보는 방향의 어깨
-		originPos.y += 10;
+		originPos.y += 0;
 
 		// 회전축으로부터 마우스까지의 각도값
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
-
-		float handDegree = degree + ((isLeft) ? (-110 - _angleOffset) : (110 + _angleOffset));
+		degree += -180;
+		float handDegree = degree +((isLeft) ? (-110 - _angleOffset) : (110 + _angleOffset));
 
 		// 좌우 대칭을 위한 계산
 		float weaponDegree = handDegree;
@@ -139,14 +139,14 @@ void FluteGreatSword::frontRender(Player* player)
 		renderPosHand.x += (_width * 0.1 * 4);
 		// 무기 위치
 		Vector2 renderPosWeapon = originPos;
-		renderPosWeapon.x += (isLeft) ? (-_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4) : (_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
-		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * _width * 0.15 * 4;
-		if (!_oneAttack)
+		renderPosWeapon.x += (isLeft) ? (_width * 0.35 * 4 - cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4) : (-_width * 0.35 * 4 + cosf(weaponDegree * (PI / 180)) * _width * 0.15 * 4);
+		renderPosWeapon.y += -sinf(weaponDegree * (PI / 180)) * -_width * 0.15 * 4;
+		if (_oneAttack)
 		{
 		_img->setScale(4); // 이미지 크기 
-		_img->setAngle(weaponDegree +_angleOffset); // 이미지 각도 
+		_img->setAngle(-weaponDegree + _angleOffset); // 이미지 각도 
 		_img->setAnglePos(Vector2(0.15f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
-		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft); // 그린다
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), !isLeft); // 그린다
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
