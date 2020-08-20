@@ -14,6 +14,8 @@
 
 #include "Room2LTR.h"
 #include "Room12LRB.h"
+#include "Room13LTB.h"
+#include "Room14TRB.h"
 
 #include "Room4LR.h"
 #include "Room5LR.h"
@@ -23,6 +25,7 @@
 
 #include "Room11LT.h"
 #include "Room11_LB.h"
+
 
 #include "Room20LTRB.h"
 #include "Room21LR.h"
