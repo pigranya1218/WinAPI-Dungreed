@@ -147,14 +147,17 @@ void OakBow::update(Player * player, float const elapsedTime)
 
 			//projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
 			Image* bulletImg = IMAGE_MANAGER->findImage("Arrow00");
+			Image* effectImg = IMAGE_MANAGER->findImage("ArrowHitEffect");
 
-			Vector2 ssize = bulletImg->getSize();
-			ssize.x *= 4;
-			ssize.y *= 4;
+			Vector2 bulletSize = bulletImg->getSize();
+			bulletSize.x *= 4;
+			bulletSize.y *= 4;
 
-			Vector2 sizeVec = Vector2(10, 10);
+			Vector2 bulletRect = Vector2(10, 10);
 
-			projectile->init("Arrow00", "L_Effect_ArrowHit", sizeVec, ssize, Vector2(30 * 50, 30 * 50), 3, angleRadian, false, false, 10, true, false, true, false);
+			Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+
+			projectile->init("Arrow00", "L_Effect_ArrowHit", bulletSize, bulletRect, effectSize, Vector2(30 * 50, 30 * 50), 3, angleRadian, false, false, 10, true, false, true, false);
 
 			string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
