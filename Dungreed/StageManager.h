@@ -43,6 +43,12 @@ private:
 
 	int rnd;
 	int makeNum=0;
+
+	Stage* resultRoom;
+	Stage* getStage(int stageType, bool isWall[]);
+
+
+
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
 	void setPlayer(Player* player) { _player = player; }

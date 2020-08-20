@@ -10,6 +10,133 @@
 #include "AllRoom.h"
 
 
+Stage * StageManager::getStage(int stageType, bool isWall[])
+{
+	
+	switch (stageType)
+	{
+	case 0: // ÀÏ¹Ý ¹æ
+	{
+		if (!isWall[0] && !isWall[1] && !isWall[2] && !isWall[3]) // ÁÂ,»ó,¿ì,ÇÏ°¡ ¶Õ¸° °æ¿ì
+		{
+			int rand = RANDOM->getInt(2);
+			if(rand==0)resultRoom = new Room20LTRB;
+			else if(rand==1)resultRoom = new Room22LTRB;
+		}
+		else if (!isWall[0] && !isWall[1] && !isWall[2] && isWall[3])//ÁÂ,»ó,¿ì  ¶Õ¸° °æ¿ì
+		{
+			int rand = RANDOM->getInt(2);
+			resultRoom = new Room2LTR;
+		}
+		else if (!isWall[0] && isWall[1] && !isWall[2] && !isWall[3])//ÁÂ, ¿ì, ÇÏ  ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room12LRB;
+		}
+		else if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3])//ÁÂ, ¿ì ¶Õ¸° °æ¿ì
+		{
+			int rand = RANDOM->getInt(3);
+			if(rand==0)resultRoom = new Room21LR;
+			else if(rand==1)resultRoom = new Room4LR;
+			else if(rand==2)resultRoom = new Room5LR;
+			else resultRoom = new Room21LR;
+		}
+		else if (isWall[0] && !isWall[1] && isWall[2] && !isWall[3])//»ó, ÇÏ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room6TB;
+			//resultRoom = new room
+		}
+		else if (!isWall[0] && !isWall[1] && isWall[2] && isWall[3])//ÁÂ, »ó ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room11LT;
+		}
+		else if (!isWall[0] && isWall[1] && isWall[2] && !isWall[3])//ÁÂ, ÇÏ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room11_LB;
+		}
+		else if (isWall[0] && !isWall[1] && !isWall[2] && isWall[3])//»ó, ¿ì ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room7RT;
+		}
+		else if (!isWall[0] && isWall[1] && !isWall[2] && !isWall[3])//¿ì, ÇÏ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room7_RB;
+		}
+		if (!isWall[0] && isWall[1] && isWall[2] && isWall[3])//ÁÂ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room8L;
+		}
+		else if (isWall[0] && isWall[1] && !isWall[2] && isWall[3])//¿ì ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room1R;
+		}
+		else if (isWall[0] && !isWall[1] && isWall[2] && isWall[3])//»ó ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room10T;
+		}
+		else if (isWall[0] && isWall[1] && isWall[2] && !isWall[3])//ÇÏ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new Room9B;
+		}
+	} 
+	break;
+	case 1: // ½ÃÀÛ¹æ
+	{
+		if (isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ¿ì ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new StartRoom1;
+		}
+		else if (isWall[0] && isWall[1] && !isWall[2] && !isWall[3]) //¿ì, ÇÏ ²Ý¸° °æ¿ì
+		{
+			resultRoom = new StartRoom2;
+
+		}
+	}
+	break;
+	case 2: // ³¡¹æ
+	{
+		if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new DownStair1L;
+		}
+		/*else if (isWall[0] && isWall[1] && !isWall[2] && !isWall[3]) 
+		{
+			
+
+		}*/
+	}
+	break;
+	case 3: // ½Ä´ç¹æ
+	{
+		if (!isWall[0] && isWall[1] && !isWall[2] && isWall) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new RestaurantRoom;
+		}
+		else if (!isWall[0] && isWall[1] && isWall[2] && isWall) // ÁÂ°¡ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new RestaurantRoom;
+		}
+	}
+	break;
+	case 4: // »óÁ¡¹æ
+	{
+		if (!isWall[0] && isWall[1] && !isWall[2] && isWall) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new DungeonShopRoom;
+		}
+		else if (!isWall[0] && !isWall[1] && !isWall[2] && isWall) // ÁÂ, »ó, ¿ì°¡ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new DungeonShopRoom2;
+		}
+	}
+	break;
+	}
+
+	resultRoom->init();
+	resultRoom->setPlayer(_player);
+	resultRoom->setStageManager(this);
+	return resultRoom;
+}
+
 void StageManager::init()
 {
 	_currStageType = STAGE_TYPE::TEST;
