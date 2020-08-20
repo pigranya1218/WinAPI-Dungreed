@@ -249,21 +249,21 @@ void UIManager::render()
 			{
 				D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 50), CAMERA->getRelativeY(_damageUI[i].pos.y),
 					to_wstring(static_cast<int>(_damageUI[i].value)), _damageUI[i].textColor, _damageUI[i].fontSize,
-					100, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+					100, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 			}
 			break;
 			case 1: // 회피
 			{
 				D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 100), CAMERA->getRelativeY(_damageUI[i].pos.y),
 					L"EVADE", _damageUI[i].textColor, _damageUI[i].fontSize,
-					200, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+					200, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 			}
 			break;
 			case 2: // 블록
 			{
 				D2D_RENDERER->renderTextField(CAMERA->getRelativeX(_damageUI[i].pos.x - 100), CAMERA->getRelativeY(_damageUI[i].pos.y),
 					L"BLOCK", _damageUI[i].textColor, _damageUI[i].fontSize,
-					200, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+					200, _damageUI[i].fontSize, _damageUI[i].alpha, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 			}
 			break;
 			}
@@ -300,9 +300,9 @@ void UIManager::render()
 				
 		_hpUI.hpFrameImg->render(_hpUI.hpBg.getCenter(), _hpUI.hpBg.getSize());
 		D2D_RENDERER->renderTextField(_hpUI.hpLevel.left, _hpUI.hpLevel.top, to_wstring(_player->getLevel()), RGB(255, 255, 255), 
-			45, _hpUI.hpLevel.getSize().x, _hpUI.hpLevel.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+			45, _hpUI.hpLevel.getSize().x, _hpUI.hpLevel.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 		D2D_RENDERER->renderTextField(_hpUI.hpBar.left, _hpUI.hpBar.top, (to_wstring(_player->getCurrHp()) + L"/" + to_wstring(_player->getMaxHp())), RGB(255, 255, 255),
-			40, _hpUI.hpBar.getSize().x, _hpUI.hpBar.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+			40, _hpUI.hpBar.getSize().x, _hpUI.hpBar.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 
 		for (int i = 0; i < _player->getMaxDash(); i++)
 		{
@@ -354,12 +354,12 @@ void UIManager::render()
 		// PLAYER GOLD
 		_goldUI.img->aniRender(_goldUI.imgRc.getCenter(), _goldUI.imgRc.getSize(), _goldUI.ani);
 		D2D_RENDERER->renderTextField(_goldUI.textRc.left, _goldUI.textRc.top, to_wstring(_player->getGold()) + L"G", RGB(255, 255, 255),
-			_goldUI.fontSize, _goldUI.textRc.getSize().x, _goldUI.textRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+			_goldUI.fontSize, _goldUI.textRc.getSize().x, _goldUI.textRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 
 		// PLAYER SATIETY
 		_satietyUI.img->render(_satietyUI.imgRc.getCenter(), _satietyUI.imgRc.getSize());
 		D2D_RENDERER->renderTextField(_satietyUI.textRc.left, _satietyUI.textRc.top, to_wstring(_player->getSatiety()) + L" / " + to_wstring(_player->getMaxSatiety()), RGB(255, 255, 255),
-			_satietyUI.fontSize, _satietyUI.textRc.getSize().x, _satietyUI.textRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+			_satietyUI.fontSize, _satietyUI.textRc.getSize().x, _satietyUI.textRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 		D2D_RENDERER->fillRectangle(_satietyProgress.progressRc, 34, 32, 52, 1);
 		FloatRect satietyGauge = _satietyProgress.progressRc;
 		satietyGauge.right = satietyGauge.left + (static_cast<float>(_player->getSatiety()) / _player->getMaxSatiety()) * satietyGauge.getSize().x;
@@ -387,7 +387,7 @@ void UIManager::render()
 				{
 					FloatRect bulletRc = FloatRect(_weaponUI.frontBaseCenter + _weaponUI.move + _weaponUI.frontBulletRc.getCenter(), _weaponUI.frontBulletRc.getSize(), PIVOT::CENTER);
 					D2D_RENDERER->renderTextField(bulletRc.left, bulletRc.top, _player->getWeapon(_weaponUI.viewIndex)->getBulletUI(), RGB(255, 255, 255),
-						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 				}
 			}
 
@@ -435,7 +435,7 @@ void UIManager::render()
 				{
 					FloatRect bulletRc = FloatRect(_weaponUI.frontBaseCenter + _weaponUI.move + _weaponUI.frontBulletRc.getCenter(), _weaponUI.frontBulletRc.getSize(), PIVOT::CENTER);
 					D2D_RENDERER->renderTextField(bulletRc.left, bulletRc.top, _player->getWeapon(_player->getWeaponIndex())->getBulletUI(), RGB(255, 255, 255),
-						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+						bulletRc.getHeight(), bulletRc.getWidth(), bulletRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 				}
 			}
 

@@ -159,17 +159,17 @@ void CostumeUI::render()
 
 			//코스튬 이름
 			D2D_RENDERER->renderTextField(20, WINSIZEY - 140, _costumeCell[i].cosTitle, RGB(255,246,18), 45,
-				500, 0, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0.f);
+				500, 0, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아", 0.f);
 			//코스튬 개요
 			D2D_RENDERER->renderTextField(30, WINSIZEY - 80, _costumeCell[i].cosSummary, RGB(255, 255, 255), 25,
-				500, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+				500, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 			//코스튬 상세내용
 			if (_costumeCell[i].cosDetails != L"")
 			{
 				D2D_RENDERER->renderTextField(530, WINSIZEY - 140, L"▶", D2D1::ColorF::White, 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 				D2D_RENDERER->renderTextField(560, WINSIZEY - 140, _costumeCell[i].cosDetails, RGB(65,255,58), 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 			}
 			//변동스탯
 			wstring statValue1, statValue2, statValue3;
@@ -313,25 +313,25 @@ void CostumeUI::render()
 					statName3 = TTYONE_UTIL::stringTOwsting(_costumeCell[i].differStat->getStatString(STAT_TYPE::CRITICAL, false));
 
 					D2D_RENDERER->renderTextField(530, WINSIZEY - 50, L"▶", RGB(255,255,255), 25,
-						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 					D2D_RENDERER->renderTextField(560, WINSIZEY - 50, statValue3, RGB(r3,g3,b3), 25,
-						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 					D2D_RENDERER->renderTextField(605, WINSIZEY - 50, statName3, RGB(255, 255, 255), 25,
-						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+						WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 				}
 				D2D_RENDERER->renderTextField(530, WINSIZEY - 110, L"▶", RGB(255, 255, 255), 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 				D2D_RENDERER->renderTextField(560, WINSIZEY - 110, statValue1, RGB(r1, g1, b1), 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 				D2D_RENDERER->renderTextField(605, WINSIZEY - 110, statName1, RGB(255, 255, 255), 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 
 				D2D_RENDERER->renderTextField(530, WINSIZEY - 80, L"▶", RGB(255, 255, 255), 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 				D2D_RENDERER->renderTextField(560, WINSIZEY - 80, statValue2, RGB(r2, g2, b2), 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 				D2D_RENDERER->renderTextField(605, WINSIZEY - 80, statName2, RGB(255, 255, 255), 25,
-					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard", 0.f);
+					WINSIZEX, 0, 1.0f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 			}
 		}
 		//스크롤바
