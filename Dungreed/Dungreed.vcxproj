@@ -261,6 +261,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="RestaurantNpc.h" />
     <ClInclude Include="RestaurantRoom.h" />
+    <ClInclude Include="RestaurantRoom2LR.h" />
     <ClInclude Include="RestaurantUI.h" />
     <ClInclude Include="Room10T.h" />
     <ClInclude Include="Room11LT.h" />
@@ -417,6 +418,7 @@
     <ClCompile Include="ProjectileManager.cpp" />
     <ClCompile Include="RestaurantNpc.cpp" />
     <ClCompile Include="RestaurantRoom.cpp" />
+    <ClCompile Include="RestaurantRoom2LR.cpp" />
     <ClCompile Include="Room10T.cpp" />
     <ClCompile Include="Room11LT.cpp" />
     <ClCompile Include="Room11_LB.cpp" />

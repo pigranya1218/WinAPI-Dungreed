@@ -289,46 +289,29 @@ void MapTool::setMap()
 								switch (_paletteNum)
 								{
 								case 1:
-									if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
-									else if (_tile[index].tileFrameX[_layer] == 0 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
-									else if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::BOTTOM;
-									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT;
-									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT;
-									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_TOP;
-									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_TOP;
-									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_BOTTOM;
-									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_BOTTOM;
-									else if ((_tile[index].tileFrameX[_layer] == 6) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+									
+									if ((_tile[index].tileFrameX[_layer] == 6) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
 									else if (( _tile[index].tileFrameX[_layer] == 8) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_LEFT_DIAGONAL;
 									else if ((_tile[index].tileFrameX[_layer] == 7) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
 									else if ((_tile[index].tileFrameX[_layer] == 9) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_RIGHT_DIAGONAL;
 									else if ((_tile[index].tileFrameX[_layer] >= 0 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_TOP;
 									else if ((_tile[index].tileFrameX[_layer] >= 5 && _tile[index].tileFrameX[_layer] < 8) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_TOP;
-									else _tile[index].linePos = DRAW_LINE_POSITION::NOLINE;
+									else _tile[index].linePos = DRAW_LINE_POSITION::BLOCK;
 									break;
 								case 2:
-									if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
-									else if (_tile[index].tileFrameX[_layer] == 0 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
-									else if (_tile[index].tileFrameX[_layer] == 2 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::BOTTOM;
-									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT;
-									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT;
-									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_TOP;
-									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_TOP;
-									else if (_tile[index].tileFrameX[_layer] == 1 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_BOTTOM;
-									else if (_tile[index].tileFrameX[_layer] == 3 && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_BOTTOM;
-									else if ((_tile[index].tileFrameX[_layer] == 6 || _tile[index].tileFrameX[_layer] == 8) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
+									
+									 if ((_tile[index].tileFrameX[_layer] == 6 || _tile[index].tileFrameX[_layer] == 8) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::LEFT_DIAGONAL;
 									else if ((_tile[index].tileFrameX[_layer] == 7 || _tile[index].tileFrameX[_layer] == 9) && _tile[index].tileFrameY[_layer] == 7)_tile[index].linePos = DRAW_LINE_POSITION::RIGHT_DIAGONAL;
 									else if ((_tile[index].tileFrameX[_layer] >= 1 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_TOP;
 									
-									else _tile[index].linePos = DRAW_LINE_POSITION::NOLINE;
+									else _tile[index].linePos = DRAW_LINE_POSITION::BLOCK;
 									break;
 									
 								case 3:
-									if ((_tile[index].tileFrameX[_layer] >= 1&&_tile[index].tileFrameX[_layer]<9) && _tile[index].tileFrameY[_layer] == 8)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
-									else if((_tile[index].tileFrameX[_layer] >= 2 && _tile[index].tileFrameX[_layer] < 7) && _tile[index].tileFrameY[_layer] == 6)_tile[index].linePos = DRAW_LINE_POSITION::TOP;
-									else if ((_tile[index].tileFrameX[_layer] >= 0 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_TOP;
+									
+									if ((_tile[index].tileFrameX[_layer] >= 0 && _tile[index].tileFrameX[_layer] < 4) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_TOP;
 									else if ((_tile[index].tileFrameX[_layer] >= 5 && _tile[index].tileFrameX[_layer] < 8) && _tile[index].tileFrameY[_layer] == 5)_tile[index].linePos = DRAW_LINE_POSITION::PLATFORM_TOP;
-									else _tile[index].linePos = DRAW_LINE_POSITION::NOLINE;
+									else _tile[index].linePos = DRAW_LINE_POSITION::BLOCK;
 									break;
 
 								

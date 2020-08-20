@@ -115,13 +115,13 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	break;
 	case 3: // ½Ä´ç¹æ
 	{
-		if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
+		if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new RestaurantRoom;
 		}
 		else if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ°¡ ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new RestaurantRoom;
+			resultRoom = new RestaurantRoom2LR;
 		}
 	}
 	break;

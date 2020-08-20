@@ -4,6 +4,9 @@
 #include "StartRoom2.h"
 
 #include "RestaurantRoom.h"
+#include "RestaurantRoom2LR.h"
+
+
 #include "DungeonShopRoom.h"
 #include "DungeonShopRoom2.h"
 
