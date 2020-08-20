@@ -33,6 +33,7 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 	_collisionPlatForm = collsionPlatForm;
 
 	_collisionEffect = collisionEffect;
+
 	_drawSize = drawSize;
 	_size = collsionRectSize;
 	_effectSize = effectSize;
