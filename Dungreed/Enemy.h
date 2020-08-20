@@ -122,7 +122,7 @@ protected:
 			bullet->setPosition(pos);
 			//bullet->setSize(effectSize);
 			
-			bullet->init(bulletName, effectName, collisionSize, drawSize, force, duration, angle, isAni, aniLoop, 15, isRotate, isGravity, collisionGround, collisionPlatForm);
+			bullet->init(bulletName, effectName, drawSize, collisionSize, drawSize, force, duration, angle, isAni, aniLoop, 15, isRotate, isGravity, collisionGround, collisionPlatForm);
 
 			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);
