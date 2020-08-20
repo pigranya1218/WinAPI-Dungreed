@@ -616,7 +616,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("GAME");	
+	SCENE_MANAGER->changeScene("MapTool");	
 
 	
 	return S_OK;

@@ -190,6 +190,7 @@
     <ClInclude Include="DialogueUI.h" />
     <ClInclude Include="DownStair1L.h" />
     <ClInclude Include="DungeonShopRoom.h" />
+    <ClInclude Include="DungeonShopRoom2.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="EggFriedFood.h" />
@@ -262,6 +263,9 @@
     <ClInclude Include="RestaurantRoom.h" />
     <ClInclude Include="RestaurantUI.h" />
     <ClInclude Include="Room10T.h" />
+    <ClInclude Include="Room11LT.h" />
+    <ClInclude Include="Room11_LB.h" />
+    <ClInclude Include="Room12LRB.h" />
     <ClInclude Include="Room1R.h" />
     <ClInclude Include="Room21LR.h" />
     <ClInclude Include="Room20LTRB.h" />
@@ -271,6 +275,8 @@
     <ClInclude Include="Room4LR.h" />
     <ClInclude Include="Room5LR.h" />
     <ClInclude Include="Room6TB.h" />
+    <ClInclude Include="Room7RT.h" />
+    <ClInclude Include="Room7_RB.h" />
     <ClInclude Include="Room8L.h" />
     <ClInclude Include="Room9B.h" />
     <ClInclude Include="SceneManager.h" />
@@ -345,6 +351,7 @@
     <ClCompile Include="DialogueUI.cpp" />
     <ClCompile Include="DownStair1L.cpp" />
     <ClCompile Include="DungeonShopRoom.cpp" />
+    <ClCompile Include="DungeonShopRoom2.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EggFriedFood.cpp" />
@@ -409,6 +416,9 @@
     <ClCompile Include="RestaurantNpc.cpp" />
     <ClCompile Include="RestaurantRoom.cpp" />
     <ClCompile Include="Room10T.cpp" />
+    <ClCompile Include="Room11LT.cpp" />
+    <ClCompile Include="Room11_LB.cpp" />
+    <ClCompile Include="Room12LRB.cpp" />
     <ClCompile Include="Room1R.cpp" />
     <ClCompile Include="Room21LR.cpp" />
     <ClCompile Include="Room20LTRB.cpp" />
@@ -418,6 +428,8 @@
     <ClCompile Include="Room4LR.cpp" />
     <ClCompile Include="Room5LR.cpp" />
     <ClCompile Include="Room6TB.cpp" />
+    <ClCompile Include="Room7RT.cpp" />
+    <ClCompile Include="Room7_RB.cpp" />
     <ClCompile Include="Room8L.cpp" />
     <ClCompile Include="Room9B.cpp" />
     <ClCompile Include="RestaurantUI.cpp" />
