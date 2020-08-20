@@ -13,19 +13,8 @@
 void StageManager::init()
 {
 	_currStageType = STAGE_TYPE::TEST;
-	//_currStageType = STAGE_TYPE::VILLAGE;
-	
+	_mapSize = 4;
 	makeStage();
-
-	_roomIndex = 0;
-
-
-	rnd = RANDOM->getFromIntTo(0, 5);
-	k = RANDOM->getFromIntTo(4, 6);
-	l = RANDOM->getFromIntTo(4, 6);
-	_currIndexX = k;
-	_currIndexY = l;
-	makeNum = 0;
 }
 
 void StageManager::release()
@@ -36,27 +25,12 @@ void StageManager::release()
 
 void StageManager::update(float const elapsedTime)
 {
-	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
-	{
-		/*if (_roomIndex >= _stages.size())return;
-			
-		_stages[_roomIndex]->update(elapsedTime);*/
-		_vStage[_currIndexX][_currIndexY]->update(elapsedTime);
-
-	}
-
-	else	_currStage->update(elapsedTime);
+	_currStage->update(elapsedTime);
 }
 
 void StageManager::render()
 {
-	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
-	{
-		/*if (_roomIndex >= _stages.size())return;
-		_stages[_roomIndex]->render();*/
-		_vStage[_currIndexX][_currIndexY]->render();
-	}
-	else _currStage->render();
+	_currStage->render();
 }
 
 void StageManager::attack(FloatRect* rect, AttackInfo* info)
@@ -97,16 +71,7 @@ void StageManager::attack(Projectile* projectile, AttackInfo* info)
 
 void StageManager::moveTo(GameObject* object, Vector2 moveDir)
 {
-	if (_currStageType == STAGE_TYPE::DUNGEON_NORMAL)
-	{
-		/*if (_roomIndex >= _stages.size())return;
-		_stages[_roomIndex]->moveTo(object, moveDir);*/
-		_vStage[_currIndexX][_currIndexY]->moveTo(object, moveDir);
-	}
-	else _currStage->moveTo(object, moveDir);
-
-
-	
+	_currStage->moveTo(object, moveDir);
 }
 
 void StageManager::nextStage()
@@ -116,31 +81,22 @@ void StageManager::nextStage()
 	makeStage();
 }
 
-void StageManager::moveRoom()
+void StageManager::moveRoom(Vector2 moveDir)
 {
-	_currIndexX += 1;
-	
-	_vStage[_currIndexX][_currIndexY]->setStageManager(this);
-	_vStage[_currIndexX][_currIndexY]->init();
+	_currIndexX += moveDir.x;
+	_currIndexY += moveDir.y;
 
-
-	//_currIndexY += 1;
-	//_roomIndex += 1;
+	_currStage = _stageMap[_currIndexX][_currIndexY];
 }
 
 void StageManager::makeStage()
 {
-	ZeroMemory(&_stage, sizeof(_stage));
-	ZeroMemory(&_vStage, sizeof(_vStage));
-	SAFE_DELETE(_stage)
-	
-	_vStage.resize(10);
-	vector<vector<bool>> isMadeStage (10, vector<bool>(10, false));
-	for (int i = 0; i < 10; i++)
+	releaseStage();
+	_stageMap.resize(_mapSize);
+	for (int i = 0; i < _mapSize; i++)
 	{
-		_vStage[i].resize(10);
+		_stageMap[i].resize(_mapSize);
 	}
-	vector<bool> specialStage (3, false);
 
 	switch (_currStageType)
 	{
@@ -150,50 +106,11 @@ void StageManager::makeStage()
 		_currStage->init();
 		break;
 	case STAGE_TYPE::DUNGEON_NORMAL:
-		_currStage = new StartRoom1();
-		_currStage->setStageManager(this);
-		_currStage->init();
-		
-	//case STAGE_TYPE::VILLAGE:
-	//	_currStage = new VillageStage();
-	//	_currStage->setStageManager(this);
-	//	_currStage->init();
-	//	break;
-	//case STAGE_TYPE::DUNGEON_NORMAL:
-	//	_currStage = new StartRoom1();
-	//	_currStage->setStageManager(this);
-	//	_currStage->init();
-
-	//	int indexX = RANDOM->getFromIntTo(4,6);
-	//	int indexY = RANDOM->getFromIntTo(4, 6);
-
-		//int indexX = RANDOM->getFromIntTo(4,6);
-		//int indexY = RANDOM->getFromIntTo(4, 6);
-	//	_vStage[indexX][indexY] = _currStage;
-	//	_vStage[indexX][indexY]->setStageManager(this);
-	//	_vStage[indexX][indexY]->init();
-
-		_vStage[k][l] = _currStage;
-		for (int i = 0; i < _vStage.size(); i++)
-		{
-			// makeRoom(k+i, l+i);
-		}
-		/*makeRoom(k, l);
-		makeRoom(k+1, l+1);*/
-
-		_vStage[_currIndexX][_currIndexY]->setStageManager(this);
-		_vStage[_currIndexX][_currIndexY]->init();
-		//_vStage[k][l]->setIsMade(true);
-
-		//makeRoom(indexX, indexY, specialStage, isMadeStage);
-		
+		makeDungeon();
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
+		makeDungeon();
 		break;
-	//	makeRoom(indexX, indexY, specialStage, isMadeStage);
-	//	break;
-	//case STAGE_TYPE::DUNGEON_BOSS:
-	//	break;
 	case STAGE_TYPE::TEST:
 		_currStage = new DebugStage();
 		_currStage->setStageManager(this);
@@ -206,13 +123,230 @@ void StageManager::makeStage()
 	}
 }
 
+void StageManager::makeDungeon()
+{
+	_roomInfo.resize(_mapSize);
+	for (int i = 0; i < _mapSize; i++)
+	{
+		_roomInfo[i].resize(_mapSize);
+	}
+
+	while (true)
+	{
+		// 맵 정보 초기화
+		for (int x = 0; x < _mapSize; x++)
+		{
+			for (int y = 0; y < _mapSize; y++)
+			{
+				for (int dir = 0; dir < 4; dir++)
+				{
+					_roomInfo[x][y].isWall[dir] = true;
+				}
+				_roomInfo[x][y].isVisited = false;
+			}
+		}
+		int startX = RANDOM->getInt(_mapSize);
+		int startY = RANDOM->getInt(_mapSize);
+		makeRoom(startX, startY);
+
+		if (makeSpecialRoom()) // 시작방, 끝방, 식당방, 상점방을 만들 수 있는 맵이라면 멈춤
+		{
+			break;
+		}
+	}
+
+	// 생성한 지도에 맞는 방 만들기
+	for (int x = 0; x < _mapSize; x++)
+	{
+		for (int y = 0; y < _mapSize; y++)
+		{
+			if (_roomInfo[x][y].roomType == -1) continue;
+			if (_roomInfo[x][y].roomType == 1)
+			{
+				_currIndexX = x;
+				_currIndexY = y;
+			}
+			_stageMap[x][y] = getStage(_roomInfo[x][y].roomType, _roomInfo[x][y].isWall);
+		}
+	}
+		
+	_currStage = _stageMap[_currIndexX][_currIndexY];
+}
+
+void StageManager::makeRoom(int x, int y)
+{
+	if (_roomInfo[x][y].isVisited) return;
+
+	int move[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} }; // L T R B
+	bool checkDir[4] = { false, false, false, false };
+	while(true)
+	{
+		if (checkDir[0] && checkDir[1] && checkDir[2] && checkDir[3]) break;
+
+		int randomDir = RANDOM->getInt(4);
+		if (checkDir[randomDir]) continue;
+		checkDir[randomDir] = true;
+
+		int newX = x + move[randomDir][0];
+		int newY = y + move[randomDir][1];
+
+		if (newX < 0 || newX >= _mapSize || newY < 0 || newY >= _mapSize) continue;
+		if (_roomInfo[newX][newY].isVisited) continue;
+
+		_roomInfo[x][y].isWall[randomDir] = false;
+		_roomInfo[newX][newY].isWall[(randomDir + 2) % 4] = false;
+		makeRoom(newX, newY);
+	}
+}
+
+bool StageManager::makeSpecialRoom()
+{
+	// 시작점 만들기
+	vector<Vector2> candidate;
+	Vector2 start;
+	Vector2 end;
+	Vector2 restaurant;
+	Vector2 shop;
+
+	for (int x = 0; x < _mapSize; x++)
+	{
+		for (int y = 0; y < _mapSize; y++)
+		{
+			if (_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && !_roomInfo[x][y].isWall[3]) // 우 하
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // 우
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+		}
+	}
+
+	if (candidate.size() == 0) return false;
+	int random = RANDOM->getInt(candidate.size());
+	start = candidate[random];
+	_roomInfo[start.x][start.y].roomType = 1;
+
+	// 끝점 만들기
+	candidate.clear();
+	for (int x = 0; x < _mapSize; x++)
+	{
+		for (int y = 0; y < _mapSize; y++)
+		{
+			if (start.x == x && start.y == y) continue;
+			if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // 좌
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+		}
+	}
+
+	if (candidate.size() == 0) return false;
+	random = RANDOM->getInt(candidate.size());
+	end = candidate[random];
+	_roomInfo[end.x][end.y].roomType = 2;
+
+	// 식당 만들기
+	candidate.clear();
+	for (int x = 0; x < _mapSize; x++)
+	{
+		for (int y = 0; y < _mapSize; y++)
+		{
+			if (start.x == x && start.y == y) continue;
+			if (end.x == x && end.y == y) continue;
+			if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // 좌 우
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+		}
+	}
+
+	if (candidate.size() == 0) return false;
+	random = RANDOM->getInt(candidate.size());
+	restaurant = candidate[random];
+	_roomInfo[restaurant.x][restaurant.y].roomType = 3;
+
+	// 상점 만들기
+	candidate.clear();
+	for (int x = 0; x < _mapSize; x++)
+	{
+		for (int y = 0; y < _mapSize; y++)
+		{
+			if (start.x == x && start.y == y) continue;
+			if (end.x == x && end.y == y) continue;
+			if (restaurant.x == x && restaurant.y == y) continue;
+			if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // 좌 우
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+		}
+	}
+
+	if (candidate.size() == 0) return false;
+	random = RANDOM->getInt(candidate.size());
+	shop = candidate[random];
+	_roomInfo[shop.x][shop.y].roomType = 4;
+
+	// 랜덤으로 끝방들 몇 개 지우기
+	candidate.clear();
+	for (int x = 0; x < _mapSize; x++)
+	{
+		for (int y = 0; y < _mapSize; y++)
+		{
+			if (start.x == x && start.y == y) continue;
+			if (end.x == x && end.y == y) continue;
+			if (restaurant.x == x && restaurant.y == y) continue;
+			if (shop.x == x && shop.y == y) continue;
+			if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // 좌
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (_roomInfo[x][y].isWall[0] && !_roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) //  상
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) //  우
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && !_roomInfo[x][y].isWall[3]) //  하
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+		}
+	}
+
+	int move[4][2] = { {-1, 0}, {0, -1}, {1, 0}, {0, 1} }; // L T R B
+	for (int i = 0; i < candidate.size(); i++)
+	{
+		_roomInfo[candidate[i].x][candidate[i].y].roomType = -1;
+		for (int dir = 0; dir < 4; dir++)
+		{
+			if (!_roomInfo[candidate[i].x][candidate[i].y].isWall[dir])
+			{
+				int newX = candidate[i].x + move[dir][0];
+				int newY = candidate[i].y + move[dir][1];
+				_roomInfo[newX][newY].isWall[(dir + 2) % 4] = true; // 없애는 방으로 향하는 길 막아주기
+			}
+		}
+	}
+
+	return true;
+}
+
 void StageManager::releaseStage()
 {
-	for (int i = 0; i < _stages.size(); i++)
+	for (int i = 0; i < _stageMap.size(); i++)
 	{
-		_stages[i]->release();
-		delete _stages[i];
+		for (int j = 0; j < _stageMap[i].size(); j++)
+		{
+			_stageMap[i][j]->release();
+			delete _stageMap[i][j];
+		}
+		_stageMap[i].clear();
 	}
+	_stageMap.clear();
 }
 
 Vector2 StageManager::getPlayerPos()
@@ -226,109 +360,6 @@ void StageManager::setPlayerPos( int x, int y)
 	_player->setPosition(Vector2(x, y));
 }
 
-//void StageManager::makeRoom(int x1, int y1)
-//{
-//	
-//	if (makeNum > 5)return;
-//	makeNum++;
-//
-//
-//	//if (_vStage[x1][y1]->getOpenDirection(0))
-//	//{
-//	//	//if (_vStage[x1 - 1][y1]->getIsMade())return;
-//	//	Stage* newStage;
-//	//	if (rnd == 0)_stage2 = new Room20LTRB();
-//	//	else if (rnd == 1)_stage2 = new Room2LTR();
-//	//	else if (rnd == 2)_stage2 = new Room4LR();
-//	//	else if (rnd == 3)_stage2 = new Room21LR();
-//	//	else if (rnd == 4)_stage2 = new Room22LTRB();
-//	//	else _stage2 = new Room20LTRB();
-//	//	_stage2->setStageManager(this);
-//	//	_stage2->init();
-//	//	//_stage2->setIsMade(true);
-//
-//	//	int makeIndexX=x1-1;
-//	//	int makeIndexY=y1;
-//	//	_vStage[makeIndexX][makeIndexY] = _stage2;
-//	//	//_currStage = _stage;
-//	//	makeRoom(makeIndexX, makeIndexY);
-//
-//	//}
-//	//if (_vStage[x1][y1]->getOpenDirection(1))
-//	//{
-//	//	//if (_vStage[x1][y1-1]->getIsMade())return;
-//	//	if (rnd == 0)_stage2 = new Room20LTRB;
-//	//	else if (rnd == 1)_stage2 = new Room22LTRB;
-//	//	else if (rnd == 2)_stage2 = new Room2LTR;
-//	//	else _stage2 = new Room20LTRB;
-//	//	_stage2->setStageManager(this);
-//	//	_stage2->init();
-//	//	//_stage2->setIsMade(true);
-//
-//	//	int makeIndexX = x1 ;
-//	//	int makeIndexY = y1-1;
-//	//	_vStage[makeIndexX][makeIndexY] = _stage2;
-//	//	//_currStage = _stage;
-//	//}
-//	
-//		//if (_vStage[x1+1][y1]->getIsMade())return;
-//		if (_currIndexX + 1 == 9)
-//		{
-//			_stage = new Room8L;
-//			_stage2->setStageManager(this);
-//			_stage2->init();
-//			//_stage2->setIsMade(true);
-//		}
-//		else
-//		{
-//			if (rnd == 0)_stage2 = new Room20LTRB();
-//			else if (rnd == 1)_stage2 = new Room2LTR();
-//			else if (rnd == 2)_stage2 = new Room4LR();
-//			else if (rnd == 3)_stage2 = new Room21LR();
-//			else if (rnd == 4)_stage2 = new Room22LTRB();
-//			else _stage2 = new Room20LTRB();
-//			_stage2->setStageManager(this);
-//			_stage2->init();
-//			//_stage2->setIsMade(true);
-//		}
-//		int makeIndexX = x1 + 1;
-//		int makeIndexY=y1;
-//		_vStage[x1 + 1][y1] = _stage2;
-//
-//		//makeRoom(makeIndexX, makeIndexY);
-//		//_currStage = _stage;
-//		
-//	
-//
-//	//if (_vStage[x1][y1]->getOpenDirection(3))
-//	//{
-//	//	//if (_vStage[x1][y1+1]->getIsMade())return;
-//	//	if (rnd == 0)_stage2 = new Room20LTRB;
-//	//	else if (rnd == 1)_stage2 = new Room22LTRB;
-//	//	else if (rnd == 2)_stage2 = new Room2LTR;
-//	//	else _stage2 = new Room20LTRB;
-//	//	_stage2->setStageManager(this);
-//	//	_stage2->init();
-//	//	//_stage2->setIsMade(true);
-//	//	int makeIndexX = x1;
-//	//	int makeIndexY = y1+1;
-//	//	_vStage[makeIndexX][makeIndexY] = _stage2;
-//
-//	if (_vStage[x1][y1]->getOpenDirection(3))
-//	{
-//		if (rnd == 0)_stage2 = new Room20LTRB;
-//		else if (rnd == 1)_stage2 = new Room22LTRB;
-//		else if (rnd == 2)_stage2 = new Room2LTR;
-//		else _stage2 = new Room20LTRB;
-//		_stage2->setStageManager(this);
-//		_stage2->init();
-//		int makeIndexX = x1;
-//		int makeIndexY = y1+1;
-//		_vStage[makeIndexX][makeIndexY] = _stage2;
-//		//_currStage = _stage;
-//	}
-//}
-
 void StageManager::showDamage(DamageInfo info, Vector2 pos)
 {
 	_uiMgr->showDamage(info, pos);
@@ -337,9 +368,6 @@ void StageManager::showDamage(DamageInfo info, Vector2 pos)
 void StageManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 {
 	_uiMgr->showEnemyHp(maxHp, curHp, pos);
-	//	makeRoom(makeIndexX, makeIndexY);
-	//	//_currStage = _stage;
-	//}
 }
 
 
