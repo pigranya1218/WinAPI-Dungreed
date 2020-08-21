@@ -167,6 +167,16 @@ bool FloatCircle::isIntersectRadian(Vector2 rangeRadian)
 	return false;
 }
 
+bool FloatCircle::ptInCircle(POINT pt) const
+{
+	float distanceX = origin.x - pt.x;	//x축 변위
+	float distanceY = origin.y - pt.y;	//y축 변위
+	float length = sqrt(distanceX * distanceX + distanceY * distanceY);
+
+	if (length <= size) return true;
+	else return false;
+}
+
 void FloatCircle::render(bool useCamera)
 {
 	Vector2 renderOrigin = origin;

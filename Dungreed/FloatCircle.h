@@ -18,6 +18,7 @@ public:
 	bool isInsideRadian(float radian);
 	bool isInsideRadian(float radian, Vector2 radianRange);
 	bool isIntersectRadian(Vector2 rangeRadian);
+	bool ptInCircle(POINT pt) const;
 
 	void render(bool useCamera);
 };

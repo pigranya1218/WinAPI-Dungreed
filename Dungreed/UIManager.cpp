@@ -11,6 +11,7 @@ void UIManager::setPlayer(Player * player)
 	_statUI.setPlayer(player);
 	_costumeUI.setPlayer(player);
 	_restaurantUI.setPlayer(player);
+	_abilityUI.setPlayer(player);
 }
 
 void UIManager::init()
@@ -79,6 +80,9 @@ void UIManager::init()
 
 	// RESTAURANT UI
 	_restaurantUI.init();
+
+	// ABILITY UI
+	_abilityUI.init();
 }
 
 void UIManager::release()
@@ -87,6 +91,7 @@ void UIManager::release()
 	_statUI.release();
 	_costumeUI.release();
 	_restaurantUI.release();
+	_abilityUI.release();
 }
 
 void UIManager::update(float const elaspedTime)
@@ -156,7 +161,11 @@ void UIManager::update(float const elaspedTime)
 	{
 		_restaurantUI.setActive(!_restaurantUI.isActive());
 	}
-	
+	// TrainingHouse(Ability) Open
+	if (KEY_MANAGER->isOnceKeyDown(VK_F3))
+	{
+		_abilityUI.setActive(!_abilityUI.isActive());
+	}
 
 	bool isClose = false;
 	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
@@ -224,6 +233,18 @@ void UIManager::update(float const elaspedTime)
 			_restaurantUI.update(elaspedTime);
 		}
 	}
+	if (_abilityUI.isActive())
+	{
+		if (isClose)
+		{
+			_abilityUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_abilityUI.update(elaspedTime);
+		}
+	}
 
 	_isActive = false;
 	_isActive |= _dialogueUI.isActive();
@@ -231,6 +252,7 @@ void UIManager::update(float const elaspedTime)
 	_isActive |= _statUI.isActive();
 	_isActive |= _costumeUI.isActive();
 	_isActive |= _restaurantUI.isActive();
+	_isActive |= _abilityUI.isActive();
 }
 
 void UIManager::render()
@@ -517,6 +539,12 @@ void UIManager::render()
 		if (_restaurantUI.isActive())
 		{
 			_restaurantUI.render();
+		}
+
+		// AbilityUI
+		if (_abilityUI.isActive())
+		{
+			_abilityUI.render();
 		}
 	}
 }

@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbilityUI.h" />
     <ClInclude Include="AliceCos.h" />
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="AllRoom.h" />
@@ -334,6 +335,7 @@
     <ClInclude Include="Wingboots.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbilityUI.cpp" />
     <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />

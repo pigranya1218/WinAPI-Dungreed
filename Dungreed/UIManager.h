@@ -4,6 +4,7 @@
 #include "CostumeUI.h"
 #include "RestaurantUI.h"
 #include "DialogueUI.h"
+#include "AbilityUI.h"
 #include "DamageInfo.h"
 #include "LinearFunc.h"
 
@@ -112,6 +113,7 @@ private:
 	StatUI _statUI;
 	CostumeUI _costumeUI;
 	RestaurantUI _restaurantUI;
+	AbilityUI _abilityUI;
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }

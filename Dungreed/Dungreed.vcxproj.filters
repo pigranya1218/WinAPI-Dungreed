@@ -705,6 +705,9 @@
     <ClInclude Include="HpFairyObject.h">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
     </ClInclude>
+    <ClInclude Include="AbilityUI.h">
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1222,6 +1225,9 @@
     </ClCompile>
     <ClCompile Include="HpFairyObject.cpp">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityUI.cpp">
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
