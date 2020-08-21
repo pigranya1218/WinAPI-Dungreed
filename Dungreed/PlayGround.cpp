@@ -290,6 +290,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/BULLION", L"resources/images/object/gold/goldBullion.png", 7, 1);
 	// *** HP FAIRY
 	IMAGE_MANAGER->addFrameImage("OBJECT/HP_FAIRY/MID", L"resources/images/object/hpFairy/midFairy.png", 16, 1);
+	// *** DOOR
+	IMAGE_MANAGER->addFrameImage("OBJECT/DOOR", L"resources/images/object/door/door.png", 23, 1);
+	IMAGE_MANAGER->addImage("OBJECT/DOOR_OPEN_EFFECT", L"resources/images/object/door/openEffect.png");
 
 
 	// ** COSTUME

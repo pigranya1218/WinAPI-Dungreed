@@ -157,6 +157,9 @@
     <Filter Include="Dungreed\GameScene\Object\Particle">
       <UniqueIdentifier>{fa3be956-0718-4875-8345-bde7fe9c47ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Door">
+      <UniqueIdentifier>{0184043f-15af-42e9-bb8f-e8ea6549a681}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -708,6 +711,9 @@
     <ClInclude Include="Seeri.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
+    <ClInclude Include="DoorObject.h">
+      <Filter>Dungreed\GameScene\Object\Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1228,6 +1234,9 @@
     </ClCompile>
     <ClCompile Include="Seeri.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

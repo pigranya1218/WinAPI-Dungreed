@@ -59,8 +59,8 @@ public:
 	void render();
 
 	// 스테이지 내 공격 판정
-	void attack(FloatRect* rect, AttackInfo* info);
-	void attack(FloatCircle* circle, AttackInfo* info);
+	bool attack(FloatRect* rect, AttackInfo* info);
+	bool attack(FloatCircle* circle, AttackInfo* info);
 	void attack(Projectile* projectile, AttackInfo* info);
 
 	// 스테이지 내 충돌 처리 및 이동

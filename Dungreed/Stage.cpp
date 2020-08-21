@@ -20,6 +20,8 @@ void Stage::init()
 	_projectileMgr->setStage(this);
 	_projectileMgr->setEnemyManager(_enemyMgr);
 	_projectileMgr->setObjectManager(_objectMgr);
+
+	_doors.resize(4);
 }
 
 void Stage::enter(int enterType)
@@ -318,6 +320,25 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir, bool checkCollisio
 		}
 	}
 
+	// 문 사각형 검사
+	for (int i = 0; i < 4; i++)
+	{
+		if (_doors[i] != nullptr)
+		{
+			if (!_doors[i]->isOpen())
+			{
+				FloatRect doorRect = FloatRect(_doors[i]->getPosition(), _doors[i]->getSize(), PIVOT::CENTER);
+				if (doorRect.intersectEffect(newRc))
+				{
+					if (newRc.bottom == doorRect.top)
+					{
+						object->setIsStand(true);
+					}
+				}
+			}
+		}
+	}
+
 	// 땅 대각 선분 검사
 	for (int i = 0; i < _collisionGroundLines.size(); i++)
 	{
@@ -405,6 +426,15 @@ void Stage::showDamage(DamageInfo info, Vector2 pos)
 void Stage::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 {
 	_stageManager->showEnemyHp(maxHp, curHp, pos);
+}
+
+void Stage::makeDoor(Vector2 pos, DIRECTION direction)
+{
+	DoorObject* door = new DoorObject;
+	door->setObjectManager(_objectMgr);
+	door->init(pos, direction);
+	_objectMgr->pushObject(door);
+	_doors[static_cast<int>(direction)] = door;
 }
 
 

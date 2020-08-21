@@ -2,6 +2,7 @@
 
 #include "EnemyManager.h"
 #include "ObjectManager.h"
+#include "DoorObject.h"
 #include "ProjectileManager.h"
 #include "NpcManager.h"
 #include "AllEnums.h"
@@ -37,6 +38,7 @@ protected:
 
 	bool _OpenDirection[4];
 	vector<Vector2> _respawnPosition; // 플레이어가 리스폰될 위치
+	vector<DoorObject*> _doors;
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
@@ -76,4 +78,6 @@ public:
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 	
 	bool getOpenDirection(int num) { return _OpenDirection[num]; }
+
+	void makeDoor(Vector2 pos, DIRECTION direction);
 };

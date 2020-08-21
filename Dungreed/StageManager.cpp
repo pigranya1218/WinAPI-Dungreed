@@ -158,16 +158,16 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	break;
 	}
 
-	resultRoom->init();
 	resultRoom->setPlayer(_player);
 	resultRoom->setStageManager(this);
 	resultRoom->setUIManager(_uiMgr);
+	resultRoom->init();
 	return resultRoom;
 }
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
 	_mapSize = 4;
 	makeStage();
 }
@@ -204,34 +204,36 @@ void StageManager::render()
 	_currStage->render();
 }
 
-void StageManager::attack(FloatRect* rect, AttackInfo* info)
+bool StageManager::attack(FloatRect* rect, AttackInfo* info)
 {
 	if (info->team == OBJECT_TEAM::PLAYER)
 	{
-		_currStage->isHitEnemy(rect, info);
+		return _currStage->isHitEnemy(rect, info);
 	}
 	else
 	{
 		if (_player->isHit(rect, info))
 		{
-			_player->hitEffect(rect, info);
+			return _player->hitEffect(rect, info);
 		}
 	}
+	return false;
 }
 
-void StageManager::attack(FloatCircle* circle, AttackInfo* info)
+bool StageManager::attack(FloatCircle* circle, AttackInfo* info)
 {
 	if (info->team == OBJECT_TEAM::PLAYER)
 	{
-		_currStage->isHitEnemy(circle, info);
+		return _currStage->isHitEnemy(circle, info);
 	}
 	else
 	{
 		if (_player->isHit(circle, info))
 		{
-			_player->hitEffect(circle, info);
+			return _player->hitEffect(circle, info);
 		}
 	}
+	return false;
 }
 
 void StageManager::attack(Projectile* projectile, AttackInfo* info)
@@ -396,6 +398,10 @@ bool StageManager::makeSpecialRoom()
 			{
 				candidate.push_back(Vector2(x, y));
 			}
+			else if (_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && !_roomInfo[x][y].isWall[3]) // го
+			{
+				candidate.push_back(Vector2(x, y));
+			}
 		}
 	}
 
@@ -412,6 +418,14 @@ bool StageManager::makeSpecialRoom()
 		{
 			if (start.x == x && start.y == y) continue;
 			if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // аб
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (_roomInfo[x][y].isWall[0] && !_roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // ╩С
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (!_roomInfo[x][y].isWall[0] && !_roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // аб, ╩С
 			{
 				candidate.push_back(Vector2(x, y));
 			}
@@ -435,6 +449,14 @@ bool StageManager::makeSpecialRoom()
 			{
 				candidate.push_back(Vector2(x, y));
 			}
+			else if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // аб
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // ©Л
+			{
+				candidate.push_back(Vector2(x, y));
+			}
 		}
 	}
 
@@ -453,6 +475,14 @@ bool StageManager::makeSpecialRoom()
 			if (end.x == x && end.y == y) continue;
 			if (restaurant.x == x && restaurant.y == y) continue;
 			if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // аб ©Л
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (!_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && _roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // аб
+			{
+				candidate.push_back(Vector2(x, y));
+			}
+			else if (_roomInfo[x][y].isWall[0] && _roomInfo[x][y].isWall[1] && !_roomInfo[x][y].isWall[2] && _roomInfo[x][y].isWall[3]) // ©Л
 			{
 				candidate.push_back(Vector2(x, y));
 			}

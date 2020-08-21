@@ -91,7 +91,7 @@ void Player::swap(Item *& a, Item *& b)
 	updateAdjustStat();
 }
 
-void Player::attack(FloatRect* rect, AttackInfo* info)
+bool Player::attack(FloatRect* rect, AttackInfo* info)
 {
 	// 아이템 효과 적용
 	for (int i = 0; i < _equippedAcc.size(); i++)
@@ -109,10 +109,10 @@ void Player::attack(FloatRect* rect, AttackInfo* info)
 	info->criticalDamage += _adjustStat.criticalDamage;
 	info->trueDamage += _adjustStat.trueDamage;
 
-	_gameScene->attack(rect, info);
+	return _gameScene->attack(rect, info);
 }
 
-void Player::attack(FloatCircle* circle, AttackInfo* info)
+bool Player::attack(FloatCircle* circle, AttackInfo* info)
 {
 	// 아이템 효과 적용
 	for (int i = 0; i < _equippedAcc.size(); i++)
@@ -130,7 +130,7 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 	info->criticalDamage += _adjustStat.criticalDamage;
 	info->trueDamage += _adjustStat.trueDamage;
 
-	_gameScene->attack(circle, info);
+	return _gameScene->attack(circle, info);
 }
 
 void Player::attack(Projectile* projectile, AttackInfo* info)

@@ -38,8 +38,8 @@ enum class ENEMY_TYPE : unsigned int
 enum class DIRECTION : unsigned int
 {
 	LEFT = 0,
-	RIGHT,
 	UP,
+	RIGHT,
 	DOWN,
 	END
 };
