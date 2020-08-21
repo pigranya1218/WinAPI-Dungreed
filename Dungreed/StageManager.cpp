@@ -60,7 +60,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		}
 		else if (!isWall[0] && isWall[1] && isWall[2] && !isWall[3])//ÁÂ, ÇÏ ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new Room11_RB;
+			resultRoom = new Room12LB;
 		}
 		else if (isWall[0] && !isWall[1] && !isWall[2] && isWall[3])//»ó, ¿ì ¶Õ¸° °æ¿ì
 		{
@@ -68,7 +68,10 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		}
 		else if (isWall[0] && isWall[1] && !isWall[2] && !isWall[3])//¿ì, ÇÏ ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new Room7_RB;
+			int rand = RANDOM->getInt(2);
+			if(rand==0)resultRoom = new Room7_RB;
+			else if(rand==1)resultRoom = new Room11_RB;
+			else resultRoom = new Room7_RB;
 		}
 		else if (!isWall[0] && isWall[1] && isWall[2] && isWall[3])//ÁÂ ¶Õ¸° °æ¿ì
 		{
