@@ -47,3 +47,14 @@ void StartRoom3::render()
 	_img->setScale(4);
 	_img->aniRender(CAMERA->getRelativeV2(Vector2(640, 320)), _ani);
 }
+
+
+vector<tagShowNpc> StartRoom3::getNpcInfos()
+{
+	vector<tagShowNpc> result = Stage::getNpcInfos();
+	tagShowNpc start;
+	start.icon = IMAGE_MANAGER->findImage("UI/MAP/ICON_START");
+	start.type = NPC_TYPE::END;
+	result.insert(result.begin(), start);
+	return result;
+}

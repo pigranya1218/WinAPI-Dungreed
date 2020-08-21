@@ -9,6 +9,7 @@ enum class NPC_TYPE : int
 	RESTAURANT, // 식당
 	SHOP, // 상점
 	GATE, // 게이트
+	END
 };
 
 class Npc : public GameObject

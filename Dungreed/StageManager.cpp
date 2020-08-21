@@ -307,6 +307,16 @@ void StageManager::moveRoom(Vector2 moveDir)
 	_currStage->enter(moveType);
 }
 
+void StageManager::moveRoomIndex(Vector2 index)
+{
+	_currIndexX = index.x;
+	_currIndexY = index.y;
+	_currStage = _stageMap[_currIndexX][_currIndexY];
+
+	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
+	_currStage->enter(4);
+}
+
 void StageManager::makeStage()
 {
 	releaseStage();

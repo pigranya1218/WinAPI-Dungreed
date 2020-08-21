@@ -28,5 +28,8 @@ public:
 	void moveTo(GameObject* gameObject, Vector2 moveDir);
 
 	vector<tagShowNpc> getNpcInfos();
+	
+	void moveRoom(Vector2 pos); // for gate..
+	Vector2 getGatePos();
 };
 

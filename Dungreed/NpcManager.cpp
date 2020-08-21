@@ -95,3 +95,20 @@ vector<tagShowNpc> NpcManager::getNpcInfos()
 	}
 	return result;
 }
+
+void NpcManager::moveRoom(Vector2 pos)
+{
+	_stage->moveToIndex(pos);
+}
+
+Vector2 NpcManager::getGatePos()
+{
+	for(int i = 0 ; i < _npcs.size(); i++)
+	{
+		if (_npcs[i]->getType() == NPC_TYPE::GATE)
+		{
+			return _npcs[i]->getPosition();
+		}
+	}
+	return Vector2(0, 0);
+}

@@ -177,6 +177,7 @@ void UIManager::update(float const elapsedTime)
 		_mapUI.offset = Vector2(0, 0);
 		_mapUI.isDrag = false;
 		_mapUI.twinkleDelay = 0;
+		_mapUI.gate = nullptr;
 	}
 
 	if(_mapUI.isShow)
@@ -187,12 +188,47 @@ void UIManager::update(float const elapsedTime)
 			_mapUI.twinkleDelay = 0;
 			_mapUI.fillCurrRoom = !_mapUI.fillCurrRoom;
 		}
-		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+		if (_mapUI.gate != nullptr && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+		{
+			int centerX = WINSIZEX / 2 + _mapUI.offset.x;
+			int centerY = 450 + _mapUI.offset.y;
+
+			// 방 및 아이콘 그리기
+			for (int x = 0; x < 4; x++)
+			{
+				for (int y = 0; y < 4; y++)
+				{
+					if (_mapUI.currIndex.x == x && _mapUI.currIndex.y == y) continue;
+					if (_mapUI.uiMap[x][y].exist)
+					{
+						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
+						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
+						for (int i = 0; i < _mapUI.uiMap[x][y].npcs.size(); i++)
+						{
+							FloatRect relativeRc = FloatRect(Vector2(centerX + offsetX + _mapUI.uiMap[x][y].npcs[i].center.x, centerY + offsetY + _mapUI.uiMap[x][y].npcs[i].center.y), Vector2(34, 28), PIVOT::CENTER);
+							if (_mapUI.uiMap[x][y].npcs[i].type == NPC_TYPE::GATE && relativeRc.ptInRect(_ptMouse))
+							{
+								_mapUI.gate->move(Vector2(x, y));
+								_mapUI.isShow = false;
+								_mapUI.offset = Vector2(0, 0);
+								_mapUI.isDrag = false;
+								_mapUI.twinkleDelay = 0;
+								_mapUI.gate = nullptr;
+								return;
+							}
+						}
+					}
+				}
+			}
+		}
+		else if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 		{
 			_mapUI.offset.x += _ptMouse.x - _mapUI.lastMoustpt.x;
 			_mapUI.offset.y += _ptMouse.y - _mapUI.lastMoustpt.y;
 		}
 		_mapUI.lastMoustpt = _ptMouse;
+
+		
 	}
 
 	// Inventory Open
@@ -582,7 +618,6 @@ void UIManager::render()
 			// PLAYER			
 			D2D_RENDERER->fillRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(4, 4), PIVOT::CENTER), 84, 144, 255, 1);
 			D2D_RENDERER->drawRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(7, 7), PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1, 3);
-
 		}
 		
 		// Map UI
@@ -599,7 +634,10 @@ void UIManager::render()
 				D2D_RENDERER->drawRectangle(FloatRect(Vector2(centerX, centerY), Vector2(109, 109), PIVOT::CENTER), 84, 144, 255, 1, 5);
 			}
 
-			// 방 그리기
+			int selectGateX = -1;
+			int selectGateY = -1;
+			Vector2 selectCenter;
+			// 방 및 아이콘 그리기
 			for (int x = 0; x < 4; x++)
 			{
 				for (int y = 0; y < 4; y++)
@@ -609,6 +647,22 @@ void UIManager::render()
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
 						_mapUI.roomImg->render(Vector2(centerX + offsetX, centerY + offsetY), Vector2(114, 114));
+
+						for (int i = 0; i < _mapUI.uiMap[x][y].npcs.size(); i++)
+						{
+							FloatRect relativeRc = FloatRect(Vector2(centerX + offsetX + _mapUI.uiMap[x][y].npcs[i].center.x, centerY + offsetY + _mapUI.uiMap[x][y].npcs[i].center.y), Vector2(34, 28), PIVOT::CENTER);
+							if (_mapUI.uiMap[x][y].npcs[i].type == NPC_TYPE::GATE && relativeRc.ptInRect(_ptMouse))
+							{
+								IMAGE_MANAGER->findImage("UI/MAP/ICON_WORM_SELECTED")->render(relativeRc.getCenter(), relativeRc.getSize());
+								selectGateX = x;
+								selectGateY = y;
+								selectCenter = relativeRc.getCenter();
+							}
+							else
+							{
+								_mapUI.uiMap[x][y].npcs[i].img->render(relativeRc.getCenter(), relativeRc.getSize());
+							}
+						}
 					}
 				}
 			}
@@ -635,7 +689,23 @@ void UIManager::render()
 					}
 				}
 			}
-			
+		
+			// 게이트 사이의 퍼런 선분을 연결해야할 때
+			if (selectGateX != -1 && (selectGateX != _mapUI.currIndex.x || selectGateY != _mapUI.currIndex.y) && _mapUI.gate != nullptr)
+			{
+				// 현재의 방
+				for (int i = 0; i < _mapUI.uiMap[_mapUI.currIndex.x][_mapUI.currIndex.y].npcs.size(); i++)
+				{
+					if (_mapUI.uiMap[_mapUI.currIndex.x][_mapUI.currIndex.y].npcs[i].type == NPC_TYPE::GATE)
+					{
+						D2D_RENDERER->drawLine(Vector2(centerX + _mapUI.uiMap[_mapUI.currIndex.x][_mapUI.currIndex.y].npcs[i].center.x, centerY + _mapUI.uiMap[_mapUI.currIndex.x][_mapUI.currIndex.y].npcs[i].center.y), 
+							selectCenter, 45, 255, 244, 1, 6);
+						break;
+					}
+				}
+			}
+
+
 			D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, 190), 33, 31, 50, 1);
 			D2D_RENDERER->fillRectangle(FloatRect(0, 850, WINSIZEX, 900), 33, 31, 50, 1);
 			D2D_RENDERER->fillRectangle(FloatRect(0, 0, 165, WINSIZEY), 33, 31, 50, 1);
@@ -798,6 +868,23 @@ void UIManager::setMap(vector<vector<Stage*>> stageMap, string stageName)
 				for (int dir = 0; dir < 4; dir++)
 				{
 					_mapUI.uiMap[x][y].isConnect[dir] = !isWall[dir];
+				}
+
+				vector<tagShowNpc> npcInfos = stageMap[x][y]->getNpcInfos();
+				for (int i = 0; i < npcInfos.size(); i++)
+				{
+					tagNpcIcon npcIcon;
+					npcIcon.img = npcInfos[i].icon;
+					if (npcInfos.size() == 1)
+					{
+						npcIcon.center = Vector2(0, 0);
+					}
+					else // 2일 때
+					{
+						npcIcon.center = Vector2(-18 + 36 * i, 0);
+					}
+					npcIcon.type = npcInfos[i].type;
+					_mapUI.uiMap[x][y].npcs.push_back(npcIcon);
 				}
 			}
 		}

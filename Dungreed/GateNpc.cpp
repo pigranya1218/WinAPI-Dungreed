@@ -1,5 +1,6 @@
 #include "GateNpc.h"
 #include "UIManager.h"
+#include "NpcManager.h"
 
 void GateNpc::init(Vector2 pos, DIRECTION direction)
 {
@@ -10,7 +11,7 @@ void GateNpc::init(Vector2 pos, DIRECTION direction)
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setDefPlayFrame(false, true);
-	_ani->setFPS(10);
+	_ani->setFPS(20);
 	_ani->start();
 
 	_position = pos;
@@ -20,6 +21,7 @@ void GateNpc::init(Vector2 pos, DIRECTION direction)
 
 	_isActiveInteraction = false;
 	_isClose = false;
+	_move = false;
 }
 
 void GateNpc::release()
@@ -30,6 +32,18 @@ void GateNpc::release()
 
 void GateNpc::update(float timeElapsed)
 {
+	if (_move && !_ani->isPlay())
+	{
+		// 플레이어 이동시키기
+		_npcMgr->moveRoom(_roomIndex);
+
+		// 초기화
+		_img = IMAGE_MANAGER->findImage("NPC_GATE_IDLE");
+		_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+		_ani->setDefPlayFrame(false, true); 
+		_move = false;
+		return;
+	}
 	Npc::update(timeElapsed);
 
 	_ani->frameUpdate(timeElapsed);
@@ -37,7 +51,7 @@ void GateNpc::update(float timeElapsed)
 
 void GateNpc::interaction()
 {
-	_uiMgr->showMap(true);
+	_uiMgr->showMap(this, true);
 }
 
 void GateNpc::render()
@@ -46,4 +60,14 @@ void GateNpc::render()
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
 	Npc::render();
+}
+
+void GateNpc::move(Vector2 roomIndex)
+{
+	_move = true;
+	_roomIndex = roomIndex;
+	_img = IMAGE_MANAGER->findImage("NPC_GATE_EAT");;
+	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setDefPlayFrame(false, false);
+	_ani->start();
 }

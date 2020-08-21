@@ -91,5 +91,7 @@ public:
 
 	bool isPlayerVisit() { return _isVisited; }
 
-	vector<tagShowNpc> getNpcInfos();
+	virtual vector<tagShowNpc> getNpcInfos();
+
+	void moveToIndex(Vector2 index);
 };
