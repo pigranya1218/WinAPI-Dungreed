@@ -254,7 +254,7 @@ void GatlingGun::attack(Player * player)
 	player->attack(projectile, attackInfo);
 
 	SOUND_MANAGER->stop("GatlingFire");
-	SOUND_MANAGER->play("GatlingFire", 1.f);
+	SOUND_MANAGER->play("GatlingFire", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	
 	_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임

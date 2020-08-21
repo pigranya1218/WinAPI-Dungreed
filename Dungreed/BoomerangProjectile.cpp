@@ -3,6 +3,43 @@
 #include "ProjectileManager.h"
 #include "Player.h"
 
+BoomerangProjectile::BoomerangProjectile(const BoomerangProjectile & source)
+{
+	_position = source._position;
+	_size = source._size;
+	_active = source._active;
+	_team = source._team;
+
+	_info = nullptr;
+	_projectileMgr = nullptr;
+	_renderSize = source._renderSize;
+	_force = source._force;
+	_angleRadian = source._angleRadian;
+	_useCollsionEnemy = source._useCollsionEnemy;
+
+	_maxTime = source._maxTime;
+	_count = source._count;
+
+	_img = source._img;
+	_effectImg = source._effectImg;
+	_effectSize = source._effectSize;
+
+	_useAni = source._useAni;
+	_ani = new Animation(*(source._ani));
+
+	_collsionGround = source._collsionGround;
+	_collisionPlatForm = source._collisionPlatForm;
+
+	_collisionEffect = source._collisionEffect;
+	_renderSize = source._renderSize;
+
+	_useGravity = source._useGravity;
+	_gravity = source._gravity;
+
+	_useRotate = source._useRotate;
+	_length = source._length;
+}
+
 void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
 {
 	_angleRadian = angleRadian;

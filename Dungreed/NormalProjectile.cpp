@@ -24,7 +24,15 @@ NormalProjectile::NormalProjectile(const NormalProjectile & source)
 	_effectSize = source._effectSize;
 
 	_useAni = source._useAni;
-	_ani = new Animation(*(source._ani));
+	if (source._ani != nullptr)
+	{
+		_ani = new Animation(*(source._ani));
+	}
+	if (source._ani == nullptr && _useAni)
+	{
+		_ani = new Animation;
+		_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+	}
 
 	_collsionGround = source._collsionGround;
 	_collisionPlatForm = source._collisionPlatForm;
@@ -37,9 +45,6 @@ NormalProjectile::NormalProjectile(const NormalProjectile & source)
 	
 	_useRotate = source._useRotate;
 	_length = source._length;
-
-
-
 }
 
 void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& drawSize, const Vector2& collsionRectSize, const Vector2& effectSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm, bool collsionEnemy)
