@@ -8,7 +8,7 @@ void Room2LR::init()
 	loadMap("room/Stage2_LR.map");
 
 	_respawnPosition[0] = Vector2(100, 450);
-	_respawnPosition[2] = Vector2(1100, 450);
+	_respawnPosition[2] = Vector2(1250, 450);
 }
 
 void Room2LR::release()

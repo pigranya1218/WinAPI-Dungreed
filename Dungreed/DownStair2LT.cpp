@@ -7,7 +7,7 @@ void DownStair2LT::init()
 	loadMap("room/DownStair2_LT.map");
 
 	_respawnPosition[0] = Vector2(120, 480);
-	_respawnPosition[1] = Vector2(630, 300);
+	_respawnPosition[1] = Vector2(650, 300);
 }
 
 void DownStair2LT::release()

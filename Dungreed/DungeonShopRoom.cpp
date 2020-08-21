@@ -6,6 +6,8 @@ void DungeonShopRoom::init()
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/DungeonShopRoom1_L.map");
+
+	_respawnPosition[0] = Vector2(300, 500);
 }
 
 void DungeonShopRoom::release()
@@ -23,5 +25,5 @@ void DungeonShopRoom::render()
 	Stage::render();
 
 	IMAGE_MANAGER->findImage("InDungeonShop")->setScale(5);
-	CAMERA->render(IMAGE_MANAGER->findImage("InDungeonShop"), Vector2(600, 700));
+	CAMERA->render(IMAGE_MANAGER->findImage("InDungeonShop"), Vector2(900, 700));
 }

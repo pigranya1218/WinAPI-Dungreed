@@ -22,4 +22,9 @@ void RestaurantRoom1R::update(float const elapsedTime)
 void RestaurantRoom1R::render()
 {
 	Stage::render();
+
+	int stageWidth = _tile[0].tileX * TILESIZE;
+	int stageHeight = _tile[0].tileY * TILESIZE;
+	IMAGE_MANAGER->findImage("Tavern")->setScale(5);
+	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 760));
 }

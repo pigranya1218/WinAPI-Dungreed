@@ -7,7 +7,7 @@ void DungeonShopRoom3::init()
 	loadMap("room/DungeonShopRoom1_LR.map");
 
 	_respawnPosition[0] = Vector2(240, 500);
-	_respawnPosition[2] = Vector2(1600, 500);
+	_respawnPosition[2] = Vector2(1700, 500);
 }
 
 void DungeonShopRoom3::release()

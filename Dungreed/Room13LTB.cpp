@@ -10,7 +10,7 @@ void Room13LTB::init()
 	_respawnPosition[1] = Vector2(640, 300);
 	_respawnPosition[3] = Vector2(450, 800);
 	
-	makeDoor(Vector2(400, 900), DIRECTION::DOWN);
+	makeDoor(Vector2(300, 1100), DIRECTION::DOWN);
 }
 
 void Room13LTB::release()
