@@ -522,12 +522,19 @@ void Player::update(float const elapsedTime)
 	}
 	moveDir.y += _force.y * elapsedTime;
 
+	Vector2 lastPos = _position;
 	_gameScene->moveTo(this, moveDir);
-	//馒瘤
+	Vector2 currPos = _position;
+	// 馒瘤
 	if (_isStand)
 	{
 		_force.y = 0;
 		_currJumpCount = _adjustStat.maxJumpCount;
+	}
+	// 赣府 何碟塞
+	if (moveDir.y < 0 && lastPos.y == currPos.y)
+	{
+		_force.y = 0;
 	}
 
 	// 痢橇 贸府
