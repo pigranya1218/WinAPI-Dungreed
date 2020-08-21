@@ -103,6 +103,7 @@ void BatGiantNormal::update(float const timeElapsed)
 				if (_shooting.delayUpdate(timeElapsed))
 				{
 					_shooting.fireBullet(_myEnemyType, _enemyManager, 3);
+					SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				}				
 			}
 			if (!_ani->isPlay())

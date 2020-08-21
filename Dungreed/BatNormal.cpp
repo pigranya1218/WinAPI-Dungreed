@@ -89,6 +89,7 @@ void BatNormal::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		setState(ENEMY_STATE::DIE);
 	}
 }

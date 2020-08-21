@@ -88,6 +88,7 @@ void BatRed::update(float const timeElapsed)
 			{
 				if (_shooting.delayUpdate(timeElapsed))
 				{
+					SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					setState(ENEMY_STATE::ATTACK);
 					_shooting.bulletNum = 1;
 				}
@@ -131,6 +132,7 @@ void BatRed::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		setState(ENEMY_STATE::DIE);
 	}
 }

@@ -66,6 +66,7 @@ void Banshee::update(float const timeElapsed)
 						_shooting.angle += PI / 6;
 						_shooting.createBullet(_position, _shooting.angle);
 					}
+					SOUND_MANAGER->play("Banshee/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_shooting.fireBullet(_myEnemyType, _enemyManager);
 				}
 			}

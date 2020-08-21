@@ -650,6 +650,25 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Niflheim/Spear"	, L"resources/images/boss/Niflheim/spear.png"	, 13, 1);	// 니플헤임 얼음창
 
 
+	//사운드
+	//** ENEMY
+	SOUND_MANAGER->addSound("Enemy/Die", "resources/sound/enemy/public/MonsterDie.wav", false, false);			//사망(공용)
+	SOUND_MANAGER->addSound("Enemy/GetHit", "resources/sound/enemy/public/Hit_Monster.wav", false, false);		//피격(공용)
+	//* 박쥐
+	SOUND_MANAGER->addSound("Bat/Attack", "resources/sound/enemy/bat/monster-sound2_bat.wav", false, false);	//작은 박쥐 공격
+	SOUND_MANAGER->addSound("Bat/Die", "resources/sound/enemy/bat/monster-sound8_bat.wav", false, false);		//작은 박쥐 사망
+	SOUND_MANAGER->addSound("GiantBat/Attack", "resources/sound/enemy/bat/Bat2.wav", false, false);				//거대 박쥐 공격
+	//*	수녀
+	SOUND_MANAGER->addSound("Banshee/Attack", "resources/sound/enemy/banshee/high_pitch_scream_gverb.wav", false, false);	//거대 박쥐 공격
+	//* 해골들
+	SOUND_MANAGER->addSound("IceSkell/Magic/Attack", "resources/sound/enemy/skells/ice.wav", false, false);				//아이스 해골 마법사 공격
+	SOUND_MANAGER->addSound("Skell/Small/Attack", "resources/sound/enemy/skells/swish-1.wav", false, false);			//작은   해골 단검   공격
+	//*	벨리알
+
+	//*	니플헤임
+
+
+
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
 	TIME_MANAGER->update();

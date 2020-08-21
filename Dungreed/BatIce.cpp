@@ -38,7 +38,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
-
+	_PlayCount = 0;
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_ICE);
 }
 
@@ -109,13 +109,20 @@ void BatIce::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+
 			if (_ani->getPlayIndex() == 5)
 			{
+				_PlayCount++;
+				if (_PlayCount == 1)
+				{
+					SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 				_shooting.fireBullet(_myEnemyType, _enemyManager);
 			}
 			if (!_ani->isPlay())
 			{
 				// 공격 완료 후 IDLE 상태로 변경
+				_PlayCount = 0;
 				setState(ENEMY_STATE::IDLE);
 			}
 		}
@@ -133,6 +140,7 @@ void BatIce::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		setState(ENEMY_STATE::DIE);
 	}
 }
