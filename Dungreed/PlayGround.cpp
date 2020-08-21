@@ -356,6 +356,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("ShootEffect01", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect01.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("ShootEffect02", L"resources/images/weapon/longDistanceWeapon/effect/ShootEffect02.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("lalaStickEffect", L"resources/images/weapon/longDistanceWeapon/effect/lalaStickEffect.png", 7, 1);
+	IMAGE_MANAGER->addFrameImage("GatlingGunEffect", L"resources/images/weapon/longDistanceWeapon/effect/GatlingGunEffect.png", 7, 1);
 
 	EFFECT_MANAGER->addEffect("L_Effect_ArrowHit", "ArrowHitEffect", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Boomerang", "BoomerangEffect", 30, 10);
@@ -366,6 +367,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("L_Effect_Shoot02", "ShootEffect02", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_lalaStick", "lalaStickEffect", 30, 10);
 	EFFECT_MANAGER->addEffect("L_Effect_Reload", "ReloadFinish", 30, 10);
+	EFFECT_MANAGER->addEffect("L_Effect_GatlingGunBullet", "GatlingGunEffect", 30, 10);
 
 	// **** L_test
 	IMAGE_MANAGER->addFrameImage("test_OakBowAni", L"resources/images/weapon/longDistanceWeapon/test_OakBowAni.png", 6, 1);
@@ -649,6 +651,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Niflheim/Icicle"	, L"resources/images/boss/Niflheim/icicle.png"	, 10, 1);	// 니플헤임 고드름
 	IMAGE_MANAGER->addFrameImage("Niflheim/Spear"	, L"resources/images/boss/Niflheim/spear.png"	, 13, 1);	// 니플헤임 얼음창
 
+
+	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

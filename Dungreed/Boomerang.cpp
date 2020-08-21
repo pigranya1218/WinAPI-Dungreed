@@ -86,6 +86,15 @@ void Boomerang::update(Player * player, float const elapsedTime)
 
 void Boomerang::backRender(Player * player)
 {
+	if (_projectile == nullptr)
+	{
+		Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
+		_img->setScale(4);
+		_img->setAnglePos(_centerPos);
+
+		_img->setAngle(_renderDegree);
+		_img->render(CAMERA->getRelativeV2(_gunPos), _isLeft);
+	}
 }
 
 void Boomerang::frontRender(Player * player)
@@ -98,15 +107,7 @@ void Boomerang::frontRender(Player * player)
 		_effectCount = 0;
 	}
 
-	if (_projectile == nullptr)
-	{
-		Vector2 _centerPos = Vector2(_img->getSize().x / 2, _img->getSize().y / 2);
-		_img->setScale(4);
-		_img->setAnglePos(_centerPos);
-
-		_img->setAngle(_renderDegree);
-		_img->render(CAMERA->getRelativeV2(_gunPos), _isLeft);
-	}
+	
 
 	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_pos.x), CAMERA->getRelativeY(_pos.y - 50), to_wstring(_returnCount), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 }

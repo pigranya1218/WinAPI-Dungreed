@@ -233,8 +233,11 @@ void GatlingGun::attack(Player * player)
 	Vector2 bulletSize = Vector2(bulletImg->getFrameSize().x * 4, bulletImg->getFrameSize().y * 4);
 	Vector2 bulletRect = Vector2(bulletImg->getFrameSize().x, bulletImg->getFrameSize().x);
 
+	Image* effectImg = IMAGE_MANAGER->findImage("GatlingGunEffect");
+	Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+
 	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, true, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("GunBullet", "", bulletSize, bulletRect, Vector2(0,0), Vector2(30 * 50, 30 * 50), 0.6f, angleRadian, true, false, 10, true, false, true, false);	// 함수 인자가 많이 바뀌었어요 >> 확인해주세요.
+	projectile->init("GunBullet", "L_Effect_GatlingGunBullet", bulletSize, bulletRect, effectSize, Vector2(30 * 50, 30 * 50), 0.6f, angleRadian, true, false, 10, true, false, true, false);	// 함수 인자가 많이 바뀌었어요 >> 확인해주세요.
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
@@ -249,6 +252,9 @@ void GatlingGun::attack(Player * player)
 	attackInfo->knockBack = 30;
 
 	player->attack(projectile, attackInfo);
+
+	SOUND_MANAGER->stop("GatlingFire");
+	SOUND_MANAGER->play("GatlingFire", 1.f);
 	
 	_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임

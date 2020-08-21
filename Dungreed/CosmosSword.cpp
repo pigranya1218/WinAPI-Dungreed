@@ -76,6 +76,7 @@ void CosmosSword::backRender(Player* player)
 
 		float handDegree = degree + ((isLeft) ? -110 : 110);
 
+
 		// 좌우 대칭을 위한 계산
 		float weaponDegree = handDegree;
 		if (isLeft)
