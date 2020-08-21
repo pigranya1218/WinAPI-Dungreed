@@ -6,9 +6,9 @@ void Room23LR::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage23_LR.map");
 
-	_respawnPosition[0] = Vector2(200, 200);
+	//_respawnPosition[0] = Vector2(200, 200);
 	
-	_respawnPosition[2] = Vector2(600, 200);
+	//_respawnPosition[2] = Vector2(600, 200);
 	
 	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
