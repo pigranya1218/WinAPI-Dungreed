@@ -6,6 +6,7 @@
 #include "DialogueUI.h"
 #include "DamageInfo.h"
 #include "LinearFunc.h"
+#include "DoorObject.h"
 
 class GameScene;
 class Player;
@@ -86,6 +87,7 @@ private:
 	struct tagMiniMap // ¹Ì´Ï¸Ê
 	{
 		vector<FloatRect> collisionRect; // ¹Ì´Ï¸Ê¿¡ ±×·ÁÁú ¶¥
+		vector<FloatRect> doorRect; // ¹Ì´Ï¸Ê¿¡ ±×·ÁÁú ¹®
 		EnemyManager* enemyMgr;
 		NpcManager* npcMgr;
 		ObjectManager* objectMgr;
@@ -123,7 +125,7 @@ public:
 	void update(float const elaspedTime);
 	void render();
 
-	void setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager);
+	void setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager);
 
 	bool isActive() const noexcept { return _isActive; }
 

@@ -20,11 +20,13 @@ void Stage::init()
 	_projectileMgr->setStage(this);
 	_projectileMgr->setEnemyManager(_enemyMgr);
 	_projectileMgr->setObjectManager(_objectMgr);
+
+	_doors.resize(4);
 }
 
 void Stage::enter(int enterType)
 {
-	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms, _enemyMgr, _npcMgr, _objectMgr);
+	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms, _doors, _enemyMgr, _npcMgr, _objectMgr);
 	_stageManager->setPlayerPos(400, 400);
 }
 
@@ -51,6 +53,17 @@ void Stage::update(float const elaspedTime)
 	int stageHeight = _tile[0].tileY * TILESIZE;
 	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
 	CAMERA->setXY(_stageManager->getPlayerPos());
+
+	if (KEY_MANAGER->isOnceKeyDown('L'))
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(!_doors[i]->isOpen());
+			}
+		}
+	}
 }
 
 void Stage::render()
@@ -118,6 +131,7 @@ void Stage::loadMap(string mapName)
 		makeMapToLine(indexX, indexY, indexX, indexY, isVisited); // 현재 타일을 시작으로 선분 만들기 시작
 	}
 
+	makeDoorAuto();
 
 }
 
@@ -318,6 +332,25 @@ void Stage::moveTo(GameObject* object, Vector2 const moveDir, bool checkCollisio
 		}
 	}
 
+	// 문 사각형 검사
+	for (int i = 0; i < 4; i++)
+	{
+		if (_doors[i] != nullptr)
+		{
+			if (!_doors[i]->isOpen())
+			{
+				FloatRect doorRect = FloatRect(_doors[i]->getPosition(), _doors[i]->getSize(), PIVOT::CENTER);
+				if (doorRect.intersectEffect(newRc))
+				{
+					if (newRc.bottom == doorRect.top)
+					{
+						object->setIsStand(true);
+					}
+				}
+			}
+		}
+	}
+
 	// 땅 대각 선분 검사
 	for (int i = 0; i < _collisionGroundLines.size(); i++)
 	{
@@ -405,6 +438,129 @@ void Stage::showDamage(DamageInfo info, Vector2 pos)
 void Stage::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 {
 	_stageManager->showEnemyHp(maxHp, curHp, pos);
+}
+
+void Stage::makeDoor(Vector2 pos, DIRECTION direction)
+{
+	DoorObject* door = new DoorObject;
+	door->setObjectManager(_objectMgr);
+	door->init(pos, direction);
+	_objectMgr->pushObject(door);
+	_doors[static_cast<int>(direction)] = door;
+}
+
+void Stage::makeDoorAuto()
+{
+	int maxSizeX = _tile[0].tileX;
+	int maxSizeY = _tile[0].tileY;
+	
+	// UP CASE
+	int count = 0;
+	bool isMake = false;
+	for (int y = 0; y <= 0 && !isMake; y++)
+	{
+		for (int x = 0; x <= maxSizeX; x++)
+		{
+			int index = y * maxSizeX + x;
+			if (_tile[index].linePos == DRAW_LINE_POSITION::NOLINE)
+			{
+				count++;
+			}
+			else
+			{
+				if (count == 4)
+				{
+					int centerIndex = index - 2;
+					makeDoor(Vector2(_tile[centerIndex].rc.left, _tile[centerIndex].rc.getCenter().y), DIRECTION::UP);
+					isMake = true;
+					break;
+				}
+				count = 0;
+			}
+		}
+		count = 0;
+	}
+
+	// DOWN CASE
+	count = 0;
+	isMake = false; 
+	for (int y = maxSizeY - 1; y >= maxSizeY - 1 && !isMake; y--)
+	{
+		for (int x = 0; x <= maxSizeX; x++)
+		{
+			int index = y * maxSizeX + x;
+			if (_tile[index].linePos == DRAW_LINE_POSITION::NOLINE)
+			{
+				count++;
+			}
+			else
+			{
+				if (count == 4)
+				{
+					int centerIndex = index - 2;
+					makeDoor(Vector2(_tile[centerIndex].rc.left, _tile[centerIndex].rc.getCenter().y), DIRECTION::DOWN);
+					isMake = true;
+					break;
+				}
+				count = 0;
+			}
+		}
+		count = 0;
+	}
+
+	// LEFT CASE
+	count = 0;
+	isMake = false; 
+	for (int x = 0; x <= 0 && !isMake; x++)
+	{
+		for (int y = 0; y <= maxSizeY; y++)
+		{
+			int index = y * maxSizeX + x;
+			if (_tile[index].linePos == DRAW_LINE_POSITION::NOLINE)
+			{
+				count++;
+			}
+			else
+			{
+				if (count == 4)
+				{
+					int centerIndex = index - 2 * maxSizeX;
+					makeDoor(Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.top), DIRECTION::LEFT);
+					isMake = true;
+					break;
+				}
+				count = 0;
+			}
+		}
+		count = 0;
+	}
+
+	// RIGHT CASE
+	count = 0;
+	isMake = false; 
+	for (int x = maxSizeX - 1; x >= maxSizeX - 1 && !isMake; x--)
+	{
+		for (int y = 0; y <= maxSizeY; y++)
+		{
+			int index = y * maxSizeX + x;
+			if (_tile[index].linePos == DRAW_LINE_POSITION::NOLINE)
+			{
+				count++;
+			}
+			else
+			{
+				if (count == 4)
+				{
+					int centerIndex = index - 2 * maxSizeX;
+					makeDoor(Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.top), DIRECTION::RIGHT);
+					isMake = true;
+					break;
+				}
+				count = 0;
+			}
+		}
+		count = 0;
+	}
 }
 
 

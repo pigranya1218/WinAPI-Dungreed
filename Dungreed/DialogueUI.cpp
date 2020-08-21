@@ -87,10 +87,10 @@ void DialogueUI::render()
 	IMAGE_MANAGER->findImage("UI/DIALOGUE/BASE")->render(Vector2(WINSIZEX * 0.5, WINSIZEY - 150));
 
 	D2D_RENDERER->renderTextField(_nameRc.left, _nameRc.top, TTYONE_UTIL::stringTOwsting(_nameDialogue), RGB(255, 178, 144), _nameRc.getHeight(), _nameRc.getWidth(), _nameRc.getHeight(),
-		1, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴");
+		1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 	D2D_RENDERER->renderTextField(_bodyRc.left, _bodyRc.top, TTYONE_UTIL::stringTOwsting(_bodyDialogue.substr(0, _currBodyLen)) + ((_currBodyLen >= _bodyDialogue.size())?L".":L""), 
 		RGB(255, 255, 255), 35, _bodyRc.getWidth(), _bodyRc.getHeight(),
-		1, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴");
+		1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 
 	if (_finishBody)
 	{
@@ -108,7 +108,7 @@ void DialogueUI::render()
 		{
 			D2D_RENDERER->renderTextField(_selectRc[i].left, _selectRc[i].top, TTYONE_UTIL::stringTOwsting(_selectDialogue[i]),
 				RGB(255, 255, 255), 35, _selectRc[i].getWidth(), _selectRc[i].getHeight(),
-				1, DWRITE_TEXT_ALIGNMENT_CENTER, L"둥근모꼴");
+				1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 		}
 
 

@@ -22,12 +22,11 @@ void BigPaintBlush::init()
 
 	// 기본 보조옵션
 	
-	_addStat.minDamage = 12;
-	_addStat.maxDamage = 15;
+	_addStat.minDamage = 2;
+	_addStat.maxDamage = 5;
 	_addStat.attackSpeed = 0.4;
 
 	_handSize = Vector2(5, 5);
-
 
 	
 	// private 변수 설정
@@ -50,6 +49,40 @@ void BigPaintBlush::release()
 
 void BigPaintBlush::update(Player* player, float const elapsedTime)
 {
+	for (int i = 0; i < _VtagAttack.size();)
+	{
+		_VtagAttack[i]._hitDelay += elapsedTime;
+		if (_VtagAttack[i]._hitDelay >= 0.4)
+		{
+			_VtagAttack[i]._hitDelay = 0;
+			_VtagAttack[i]._count++;
+
+			delete _VtagAttack[i]._attackInfo;
+			string attackCode = to_string(_itemCode) + to_string(_VtagAttack[i]._count) + to_string(TIME_MANAGER->getWorldTime());
+			AttackInfo* attackInfo = new AttackInfo;
+			attackInfo->team = OBJECT_TEAM::PLAYER;
+			attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+			attackInfo->critical = 0;
+			attackInfo->criticalDamage = 0;
+			attackInfo->minDamage = _addStat.minDamage;
+			attackInfo->maxDamage = _addStat.maxDamage;
+			attackInfo->knockBack = 15;
+
+			_VtagAttack[i]._attackInfo = attackInfo;
+		}
+		if (_VtagAttack[i]._count >= 5)
+		{
+			delete _VtagAttack[i]._attackCircle;
+			delete _VtagAttack[i]._attackInfo;
+			_VtagAttack.erase(_VtagAttack.begin() + i);
+		}
+		else
+		{
+			player->attack(_VtagAttack[i]._attackCircle, _VtagAttack[i]._attackInfo);
+			i++;
+		}
+	}
+
 	Vector2 pos = player->getPosition();
 	float time = elapsedTime-1;
 	float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - pos.x)) * (180 / PI);
@@ -100,6 +133,8 @@ void BigPaintBlush::update(Player* player, float const elapsedTime)
 
 	// 공격 딜레이 계산
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
+
+	
 }
 
 void BigPaintBlush::backRender(Player* player)
@@ -327,7 +362,7 @@ void BigPaintBlush::attack(Player* player)
 	attackCircle->size = 150;
 	attackCircle->startRadian = attackRadian - PI * 0.28;
 	attackCircle->endRadian = attackRadian + PI * 0.28;
-	
+
 	_attackDebug = FloatCircle(originPos, 150, attackRadian - PI * 0.37, attackRadian + PI * 0.37); // forDEBUG
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
@@ -337,9 +372,16 @@ void BigPaintBlush::attack(Player* player)
 	attackInfo->minDamage = _addStat.minDamage;
 	attackInfo->maxDamage = _addStat.maxDamage;
 	attackInfo->knockBack = 15;
-	player->attack(attackCircle, attackInfo);
-	delete attackCircle;
-	delete attackInfo;
+	
+	tagAttack attack;
+	attack._attackCircle = attackCircle;
+	attack._attackInfo = attackInfo;
+	attack._hitDelay = 0;
+	attack._count = 0;
+	_VtagAttack.push_back(attack);
+
+	// player->attack(attackCircle, attackInfo);
+
 
 }
 
