@@ -10,7 +10,7 @@ void DebugStage::init()
 	Stage::init();
 	// 맵 불러오기
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/Stage11_RB.map");
+	loadMap("room/BossRoom.map");
 
 	// 에너미 테스트입니다.
 	/*
@@ -57,7 +57,7 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::OVIBOS, Vector2(WINSIZEX / 2 + 100, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2, WINSIZEY / 2 + 800));
+	_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2, WINSIZEY / 2 + 300));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 

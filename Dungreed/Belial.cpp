@@ -8,46 +8,69 @@ void Belial::init(const Vector2 & pos)
 	_ani = new Animation;
 	_backAni = new Animation;
 
-	// 검 이미지 세팅
-	_swordImg = IMAGE_MANAGER->findImage("Belial/Sword");
-
 	// 후광구 초기화
 	_backImg = IMAGE_MANAGER->findImage("Belial/Back/Circle");
 	_backAni->init(_backImg->getWidth(), _backImg->getHeight(), _backImg->getMaxFrameX(), _backImg->getMaxFrameY());
 	_backAni->setDefPlayFrame(false, true);
 	_backAni->setFPS(15);
-	_backAni->start();
+	_backAni->start();	
 
 	// 처음 상태는 기본
 	setState(ENEMY_STATE::IDLE);
 
+	// 변수들 초기화
 	_position = pos;
 	_direction = DIRECTION::DOWN;
 	_scale = 4;
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y);
 	_size = _size * _scale;
 
+	// 후광 파티클 초기화
+	_particle.img = IMAGE_MANAGER->findImage("Belial/Back/Particle");
+	for (int i = 0; i < 5; i++)
+	{
+		_particle.ani[i] = new Animation;
+		_particle.ani[i]->init(_particle.img->getWidth(), _particle.img->getHeight(), _particle.img->getMaxFrameX(), _particle.img->getMaxFrameY());
+		_particle.ani[i]->setDefPlayFrame(false, false);
+		_particle.ani[i]->setFPS(10 + i);
+
+		_particle.pos[i] = Vector2(RANDOM->getFromFloatTo((_position.x + 30) - 120, (_position.x + 30) + 120), RANDOM->getFromFloatTo((_position.y + 60) - 50, (_position.y + 60) + 100));
+		_particle.ani[i]->start();
+	}	
+
+	// 이동 수정
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(0, 150);
 	_moving.delay = 0.4;
 
-	_shooting.init("Belial/Bullet", "Belial/Bullet_FX", Vector2(300, 300), _scale, 0.15, 3, false, true, true, false, false, false);
+	// 벨리알 탄막 패턴
+	_shooting.init("Belial/Bullet", "Belial/Bullet_FX", Vector2(500, 500), _scale, 0.1, 3, false, true, true, false, true, false);
 	_shooting.attackInit(3, 5, 1);
 	_shooting.angle = 0;
 
-	_swordBullet.init("Belial/Sword_Shoot", "Belial/Sword_Charge", Vector2(1500, 1500), _scale, 0.3, 3, true, false, false, false, false, false);
-	_swordBullet.attackInit(3, 5, 1);
+	// 검 패턴
+	ZeroMemory(&_swordAtk, sizeof(_swordAtk));
+	_swordAtk.attackInit(3, 5, 0);
+	_swordAtk.delay = 0.2;
+	_swordAtk.circleSize = 130;
 
+	// 공격 주기 설정
 	ZeroMemory(&_attackCycle, sizeof(&_attackCycle));
-	_attackCycle.delay = 2;
+	_attackCycle.delay = 3;
 
+	ZeroMemory(&_dieEffect, sizeof(_dieEffect));
+	_dieEffect.delay = 0.17;
+	_effectNum = 0;
+
+	// 피격 이펙트 주기 설정
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
 
+	// 액티브 = 1, 레이저변수 초기화
 	_active = true;
-	_laserNum = 0;
+	_laserNum = _backMove = 0;
 
-	_curHp = _maxHp = 300;
+	_curHp = _maxHp = 100;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BELIAL);
 
@@ -67,6 +90,11 @@ void Belial::init(const Vector2 & pos)
 			FloatRect headRc(Vector2(_handR.laserRect[i - 1].left - size.x * 0.5f, _handR.position.y), size, PIVOT::CENTER);
 			_handR.laserRect.push_back(headRc);
 		}
+		_handR.atkRect = rectMakePivot(
+			Vector2(_handR.laserRect[_handR.laserRect.size() - 1].left, _handR.laserRect[_handR.laserRect.size() - 1].top),
+			Vector2(_handR.laserRect[0].right - _handR.laserRect[_handR.laserRect.size() - 1].left, size.y), 
+			PIVOT::LEFT_TOP
+		);
 	}
 
 	// 왼쪽 레이저 초기화
@@ -80,6 +108,11 @@ void Belial::init(const Vector2 & pos)
 			FloatRect headRc(Vector2(_handL.laserRect[i - 1].right + size.x * 0.5f, _handL.position.y), size, PIVOT::CENTER);
 			_handL.laserRect.push_back(headRc);
 		}
+		_handL.atkRect = rectMakePivot(
+			Vector2(_handL.laserRect[0].left, _handL.laserRect[0].top),
+			Vector2(_handL.laserRect[_handL.laserRect.size() - 1].right - _handL.laserRect[0].left, size.y),
+			PIVOT::LEFT_TOP
+		);
 	}
 
 }
@@ -94,43 +127,24 @@ void Belial::release()
 
 	_handL.release();
 	_handR.release();
+
+	for (int i = 0; i < 5; i++)
+	{
+		_particle.ani[i]->release();
+		SAFE_DELETE(_particle.ani[i]);
+	}
 }
 
 void Belial::update(float const timeElapsed)
 {
 	_playerPos = _enemyManager->getPlayerPos();
 
-	Vector2 moveDir(0, 0);
+	Vector2 moveDir(0, 0);	
 	switch (_state)
 	{
 		case ENEMY_STATE::IDLE:
 		{
-			// 현재 디렉션 따라서
-			switch (_direction)
-			{
-				case DIRECTION::UP:
-				{
-					// 위로 간다
-					_position.y -= _moving.force.y * timeElapsed;
-					// 딜레이 완료 시 아래로
-					if (_moving.update(timeElapsed))
-					{
-						_direction = DIRECTION::DOWN;
-					}
-				}
-				break;
-				case DIRECTION::DOWN:
-				{
-					// 아래로 간다
-					_position.y += _moving.force.y * timeElapsed;
-					// 딜레이 완료 시 위로
-					if (_moving.update(timeElapsed))
-					{
-						_direction = DIRECTION::UP;
-					}
-				}
-				break;
-			}
+			headMove(timeElapsed);
 			// 공격 주기 체크
 			if (_attackCycle.update(timeElapsed))
 			{
@@ -144,6 +158,10 @@ void Belial::update(float const timeElapsed)
 			{
 				case BELIAL_PHASE::SHOOTING_READY:
 				{
+					if (_ani->getPlayIndex() >= 3)
+					{
+						_backMove = true;
+					}
 					// 공격 준비 모션이 끝나면
 					if (!_ani->isPlay())
 					{
@@ -160,7 +178,7 @@ void Belial::update(float const timeElapsed)
 						// 총알 발사 위치
 						Vector2 bulletPos = _position;
 						bulletPos.x += 30;
-						bulletPos.y += 60;
+						bulletPos.y += 110;
 
 						// 총알 4개씩 발사
 						for (int i = 0; i < 4; i++)
@@ -171,7 +189,7 @@ void Belial::update(float const timeElapsed)
 						_shooting.angle += timeElapsed * 8.0f;
 					}
 					// 공격 시간이 끝나면
-					if (_attackCycle.update(timeElapsed * 0.2f))
+					if (_attackCycle.update(timeElapsed))
 					{
 						setPhase(BELIAL_PHASE::SHOOTING_FINAL);
 					}
@@ -179,6 +197,10 @@ void Belial::update(float const timeElapsed)
 				break;
 				case BELIAL_PHASE::SHOOTING_FINAL:
 				{
+					if (_ani->getPlayIndex() > 6)
+					{
+						_backMove = false;
+					}
 					// 입을 모두 닫았으면
 					if (!_ani->isPlay())
 					{
@@ -186,63 +208,105 @@ void Belial::update(float const timeElapsed)
 					}
 				}
 				break;
+				// 검 소환
 				case BELIAL_PHASE::SWORD_READY:
 				{
-					// 딜레이마다 검을 만들어냄
-					if (_swordBullet.delayUpdate(timeElapsed))
-					{
-						tagSwordPosAngle sword;
-						ZeroMemory(&sword, sizeof(sword));
+					headMove(timeElapsed);
 
-						sword.pos = _swordPosAngle[_swordPosAngle.size() - 1].pos;
-						sword.pos.x += 200;
-
-						_swordPosAngle.push_back(sword);
-					}
-					// 검을 모두 만들었으면
-					if(_swordPosAngle.size() >= 6)
+					if (_swordAtk.update(timeElapsed) && _sword.size() < 6)
 					{
-						// 검을 발사한다
+						tagSwordInfo* sword = new tagSwordInfo;
+
+						sword->img = IMAGE_MANAGER->findImage("Belial/Sword");
+						sword->setPosition(Vector2((_position.x - 80 * _scale) + _swordNum * 150, _position.y - 50 * _scale));
+						sword->setSize(Vector2(50, 50));
+						sword->setActive(true);
+						sword->chargeEffect.delay = 0.5;
+
+						EFFECT_MANAGER->play("Enemy_Destroy", sword->getPosition(), Vector2(sword->img->getSize().x * _scale, sword->img->getSize().x * _scale));
+
+						_sword.push_back(sword);
+						_swordNum++;
+					}					
+					if (_sword.size() == 6 && _swordAtk.update(timeElapsed * 5.5))
+					{
 						setPhase(BELIAL_PHASE::SWORD_START);
-					}
-					// 각도는 계속 업데이트한다
-					for (int i = 0; i < _swordPosAngle.size(); i++)
-					{
-						_swordPosAngle[i].angle = getAngle(_swordPosAngle[i].pos.x, _swordPosAngle[i].pos.y, _playerPos.x, _playerPos.y);
-					}
+						_swordNum = 0;
+					}					
 				}
 				break;
+				// 검 던지기
 				case BELIAL_PHASE::SWORD_START:
 				{
-					for (int i = 0; i < _swordPosAngle.size(); i++)
-					{
-						_swordPosAngle[i].angle = getAngle(_swordPosAngle[i].pos.x, _swordPosAngle[i].pos.y, _playerPos.x, _playerPos.y);
-					}
+					headMove(timeElapsed);
 
-					if (_swordBullet.delayUpdate(timeElapsed * 0.5f) && !_swordPosAngle.empty())
+					// 검 공격 이미지 변경
+					if (_sword[_swordNum]->getActive())
 					{
-						_swordBullet.createBullet(_swordPosAngle[0].pos, _swordPosAngle[0].angle);
-						_swordBullet.fireBullet(_myEnemyType, _enemyManager);
-						_swordPosAngle.erase(_swordPosAngle.begin());
-					}
-					if(_swordPosAngle.empty())
-					{
-						setPhase(BELIAL_PHASE::SWORD_FINAL);
-					}
+						_sword[_swordNum]->img = IMAGE_MANAGER->findImage("Belial/Sword_Shoot");
+					}					
+					_sword[_swordNum]->setActive(false);
+
+					Vector2 moveSword(0, 0);
+
+					moveSword.x += cosf(_sword[_swordNum]->angle) * 2500 * timeElapsed;
+					moveSword.y -= sinf(_sword[_swordNum]->angle) * 2500 * timeElapsed;
+
+					Vector2 lastDir = _sword[_swordNum]->getPosition();
+					_enemyManager->moveEnemy(_sword[_swordNum], moveSword, true, false);
+					Vector2 currDir = _sword[_swordNum]->getPosition();
+
+					// 공격 판정
+					float startRad = _sword[_swordNum]->angle - PI / 15;
+					float endRad = _sword[_swordNum]->angle + PI / 15;
+					_swordAtk.attackCircle(_myEnemyType, _enemyManager, _sword[_swordNum]->getPosition(), startRad, endRad);
+
+					// 붉은 선에 닿으면
+					if (lastDir + moveSword != currDir)
+					{						
+						EFFECT_MANAGER->play("Belial/Sword_Hit", _sword[_swordNum]->getPosition(), IMAGE_MANAGER->findImage("Belial/Sword_Hit")->getFrameSize() * _scale, _sword[_swordNum]->angle * (180 / PI));
+						// 이미지 원래대로
+						_sword[_swordNum]->img = IMAGE_MANAGER->findImage("Belial/Sword");
+						// 다음 검 날린다
+						_swordNum++;
+						// 공격 ID 초기화
+						_swordAtk.id.clear();
+						// 모든 검을 사용했으면
+						if (_swordNum > _sword.size() - 1)
+						{
+							_swordNum = 0;
+							// 검 삭제 페이즈로 변경
+							setPhase(BELIAL_PHASE::SWORD_FINAL);
+						}
+					}					
 				}
 				break;
+				// 검 삭제
 				case BELIAL_PHASE::SWORD_FINAL:
 				{
-					setState(ENEMY_STATE::IDLE);
+					headMove(timeElapsed);
+
+					if (_swordAtk.update(timeElapsed))
+					{
+						EFFECT_MANAGER->play("Enemy_Destroy", _sword[0]->getPosition(), Vector2(_sword[0]->img->getSize().x * _scale, _sword[0]->img->getSize().x * _scale));
+						_sword.erase(_sword.begin());						
+					}
+					if (_sword.empty())
+					{
+						setState(ENEMY_STATE::IDLE);
+					}
 				}
 				break;
 				// 레이저 오른쪽 발사
 				case BELIAL_PHASE::LASER_R:
 				{
+					headMove(timeElapsed);
+
 					if (_laserNum > 0)
 					{
 						if (_handR.state == HAND_STATE::ATTACK_FINAL)
 						{
+							
 							setPhase(BELIAL_PHASE::LASER_L);
 						}
 					}
@@ -258,6 +322,8 @@ void Belial::update(float const timeElapsed)
 				// 레이저 왼쪽 발사
 				case BELIAL_PHASE::LASER_L:
 				{
+					headMove(timeElapsed);
+
 					if (_laserNum > 0)
 					{
 						if (_handL.state == HAND_STATE::ATTACK_FINAL)
@@ -279,33 +345,93 @@ void Belial::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-
+			if (_dieEffect.update(timeElapsed))
+			{
+				_effectNum++;
+				for (int i = 0; i < 5; i++)
+				{
+					EFFECT_MANAGER->play(
+						"Enemy_Destroy",
+						Vector2(RANDOM->getFromFloatTo(_position.x - 200, _position.x + 200), RANDOM->getFromFloatTo(_position.y - 200, _position.y + 200)),
+						Vector2(150, 150)
+					);
+				}				
+			}
+			if (_effectNum > 50)
+			{
+				_active = false;
+			}
 		}
 		break;
 	}
 	hitReaction(_playerPos, moveDir, timeElapsed);
 
-	_ani->frameUpdate(timeElapsed);
-	_backAni->frameUpdate(timeElapsed);
+	// 검 패턴 각도 설정 및 이펙트 재생
+	for (int i = 0; i < _sword.size(); i++)
+	{
+		if (!_sword[i]->getActive()) continue;
+		_sword[i]->angle = getAngle(_sword[i]->getPosition().x, _sword[i]->getPosition().y, _playerPos.x, _playerPos.y);
 
-	_handL.update(timeElapsed);
-	_handR.update(timeElapsed);
+		if (_sword[i]->chargeEffect.update(timeElapsed))
+		{
+			EFFECT_MANAGER->play(
+				"Belial/Sword_Charge",
+				_sword[i]->getPosition(),
+				IMAGE_MANAGER->findImage("Belial/Sword_Charge")->getFrameSize() * _scale,
+				(_sword[i]->angle) * (180 / PI)
+			);
+		}
+	}
+
+	_ani->frameUpdate(timeElapsed);
+
+	_backAni->frameUpdate(timeElapsed);
+	for (int i = 0; i < 5; i++)
+	{
+		_particle.ani[i]->frameUpdate(timeElapsed);
+	}
+
+	_handL.update(timeElapsed, _myEnemyType, _enemyManager);
+	_handR.update(timeElapsed, _myEnemyType, _enemyManager);
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
+	for (int i = 0; i < 5; i++)
+	{
+		if (!_particle.ani[i]->isPlay())
+		{
+			_particle.pos[i] = Vector2(RANDOM->getFromFloatTo((_position.x + 30) - 120, (_position.x + 30) + 120), RANDOM->getFromFloatTo((_position.y + 60) - 50, (_position.y + 60) + 100));
+			_particle.ani[i]->start();
+		}
+	}
+
+	if (_curHp <= 0 && _state != ENEMY_STATE::DIE)
+	{
+		setState(ENEMY_STATE::DIE);
+	}
 }
 
 void Belial::render()
 {
 	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 
+	for (int i = 0; i < 5; i++)
+	{
+		_particle.img->setScale(_scale);
+		_particle.img->aniRender(CAMERA->getRelativeV2(_particle.pos[i]), _particle.ani[i]);
+	}
+
 	// 후광구 출력
 	Vector2 backPos = _position;
+	// 기본 상태 위치
 	backPos.x += 30;
 	backPos.y += 60;
-	/*if (_phase == BELIAL_PHASE::SHOOTING && _ani->getPlayIndex() >= 6)
+	// 공격 상태 위치
+	if (_backMove)
 	{
-		backPos.y += 20 * _ani->getPlayIndex();
-	}*/
+		// 입을 벌린 상태임
+		backPos.y += 50;
+	}
 	_backImg->setScale(_scale);
 	_backImg->aniRender(CAMERA->getRelativeV2(backPos), _backAni);
 	
@@ -313,15 +439,43 @@ void Belial::render()
 	_img->setScale(_scale);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani);
 
-	for (int i = 0; i < _swordPosAngle.size(); i++)
-	{
-		_swordImg->setAngle(_swordPosAngle[i].angle * (180 / PI));
-		_swordImg->setScale(_scale);
-		_swordImg->render(CAMERA->getRelativeV2(_swordPosAngle[i].pos));
-	}
-
 	_handL.render(_scale);
 	_handR.render(_scale, true);
+
+	// 검 출력
+	for (int i = 0; i < _sword.size(); i++)
+	{
+		_sword[i]->img->setScale(_scale);
+		_sword[i]->img->setAngle((_sword[i]->angle) * (180 / PI));
+		_sword[i]->img->render(CAMERA->getRelativeV2(_sword[i]->getPosition()));
+	}
+
+	_swordAtk.circleDebug.render(true);
+
+	// 좌측 레이저 출력
+	if (_handL.laserBodyAni->isPlay() && _handL.laserHeadAni->isPlay())
+	{
+		_handL.laserHeadImg->setScale(_scale);
+		_handL.laserHeadImg->aniRender(CAMERA->getRelativeV2(_handL.laserRect[0].getCenter()), _handL.laserHeadAni);
+
+		for (int i = 1; i < _handL.laserRect.size(); i++)
+		{
+			_handL.laserBodyImg->setScale(_scale);
+			_handL.laserBodyImg->aniRender(CAMERA->getRelativeV2(_handL.laserRect[i].getCenter()), _handL.laserBodyAni);
+		}
+	}
+	// 우측 레이저 출력
+	if (_handR.laserBodyAni->isPlay() && _handR.laserHeadAni->isPlay())
+	{
+		_handR.laserHeadImg->setScale(_scale);
+		_handR.laserHeadImg->aniRender(CAMERA->getRelativeV2(_handR.laserRect[0].getCenter()), _handR.laserHeadAni, true);
+
+		for (int i = 1; i < _handR.laserRect.size(); i++)
+		{
+			_handR.laserBodyImg->setScale(_scale);
+			_handR.laserBodyImg->aniRender(CAMERA->getRelativeV2(_handR.laserRect[i].getCenter()), _handR.laserBodyAni, true);
+		}
+	}
 }
 
 void Belial::setState(ENEMY_STATE state)
@@ -345,7 +499,6 @@ void Belial::setState(ENEMY_STATE state)
 		case ENEMY_STATE::ATTACK:
 		{
 			unsigned pattern = RANDOM->getFromIntTo(0, 3);
-			pattern = 2;
 
 			switch (pattern)
 			{
@@ -416,7 +569,7 @@ void Belial::setPhase(BELIAL_PHASE phase)
 			_ani->stop();
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
-			_ani->setDefPlayFrame(false, false);
+			_ani->setPlayFrame(0, 6, false, false);
 			_ani->setFPS(15);
 			_ani->start();
 		}
@@ -437,13 +590,7 @@ void Belial::setPhase(BELIAL_PHASE phase)
 		break;
 		case BELIAL_PHASE::SWORD_READY:
 		{
-			tagSwordPosAngle sword;
-			ZeroMemory(&sword, sizeof(sword));
-
-			sword.pos = _position;
-			sword.pos.x -= 400;
-
-			_swordPosAngle.push_back(sword);
+			
 		}
 		break;
 		case BELIAL_PHASE::SWORD_START:
@@ -514,6 +661,36 @@ void Belial::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 	}
 }
 
+void Belial::headMove(const float timeElapsed)
+{
+	// 현재 디렉션 따라서
+	switch (_direction)
+	{
+	case DIRECTION::UP:
+	{
+		// 위로 간다
+		_position.y -= _moving.force.y * timeElapsed;
+		// 딜레이 완료 시 아래로
+		if (_moving.update(timeElapsed))
+		{
+			_direction = DIRECTION::DOWN;
+		}
+	}
+	break;
+	case DIRECTION::DOWN:
+	{
+		// 아래로 간다
+		_position.y += _moving.force.y * timeElapsed;
+		// 딜레이 완료 시 위로
+		if (_moving.update(timeElapsed))
+		{
+			_direction = DIRECTION::UP;
+		}
+	}
+	break;
+	}
+}
+
 void Belial::tagHandInfo::init(const Vector2& pos)
 {
 	// 손 애니메이션 할당
@@ -540,9 +717,12 @@ void Belial::tagHandInfo::init(const Vector2& pos)
 	// 움직인다.
 	ZeroMemory(&moving, sizeof(moving));
 	moving.force = Vector2(0, 800);
+
+	// 레이저 공격정보 초기화
+	laserAtk.attackInit(3, 5, 0);
 }
 
-void Belial::tagHandInfo::update(const float timeElapsed)
+void Belial::tagHandInfo::update(const float timeElapsed, int enemyType, EnemyManager* enemyManager)
 {
 	switch (state)
 	{
@@ -551,28 +731,40 @@ void Belial::tagHandInfo::update(const float timeElapsed)
 
 		}
 		break;
+		// 플레이어 좌표 추적
 		case HAND_STATE::MOVE:
 		{
-			if (fabsf(movePos.y - position.y) > moving.force.y * timeElapsed * 5)
+			// 플레이어 좌표와의 거리가 스피드 값보다 크면
+			if (fabsf(movePos.y - position.y) > moving.force.y * timeElapsed)
 			{
+				// 이동
 				position.y += moving.force.y * timeElapsed * ((movePos.y > position.y) ? (1) : (-1));				
 			}
+			// 이동을 완료한 경우
 			else
 			{
+				// 포지션 조정
 				position.y = movePos.y;
+				// 레이저 렉트 모두 조정
 				for (int i = 0; i < laserRect.size(); i++)
 				{
-					laserRect[i] = FloatRect(Vector2(laserRect[i].getCenter().x, position.y + 20), laserRect[i].getSize(), PIVOT::CENTER);
-					//laserRect[i] = rectMakePivot(Vector2(laserRect[i].getCenter().x, position.y), laserRect[i].getSize(), PIVOT::CENTER);
+					laserRect[i] = FloatRect(Vector2(laserRect[i].getCenter().x, position.y), laserRect[i].getSize(), PIVOT::CENTER);
 				}
+				// 공격렉트 설정
+				atkRect = rectMakePivot(Vector2(atkRect.getCenter().x, position.y), atkRect.getSize(), PIVOT::CENTER);
+
+				// 공격 준비로 변경
 				setState(HAND_STATE::ATTACK_READY);
 			}
 		}
 		break;
+		// 공격 준비
 		case HAND_STATE::ATTACK_READY:
 		{
+			// 손 프레임이 레이저 발사 프레임과 일치하면
 			if (ani->getPlayIndex() == 8 && !laserHeadAni->isPlay() && !laserBodyAni->isPlay())
 			{
+				// 레이저 발사 및 공격
 				setState(HAND_STATE::ATTACK_START);
 			}			
 		}
@@ -580,16 +772,24 @@ void Belial::tagHandInfo::update(const float timeElapsed)
 		// 여기서 공격판정
 		case HAND_STATE::ATTACK_START:
 		{
+			// 공격
+			laserAtk.attackRect(enemyType, enemyManager, atkRect);
+
 			if (!ani->isPlay())
 			{
 				setState(HAND_STATE::ATTACK_FINAL);
+				// 공격 ID 초기화
+				laserAtk.id.clear();
 			}
 		}
 		break;
+		// 레이저 종료 중
 		case HAND_STATE::ATTACK_FINAL:
 		{
+			// 레이저가 완전히 종료되면
 			if (!laserHeadAni->isPlay() && !laserBodyAni->isPlay())
 			{
+				// 기본 상태로 변경
 				setState(HAND_STATE::IDLE);
 			}
 		}
@@ -606,18 +806,6 @@ void Belial::tagHandInfo::render(const float scale, bool bisymmetry)
 {
 	img->setScale(scale);
 	img->aniRender(CAMERA->getRelativeV2(position), ani, bisymmetry);
-
-	if (laserBodyAni->isPlay() && laserHeadAni->isPlay())
-	{
-		laserHeadImg->setScale(scale);
-		laserHeadImg->aniRender(CAMERA->getRelativeV2(laserRect[0].getCenter()), laserHeadAni, bisymmetry);
-
-		for (int i = 1; i < laserRect.size(); i++)
-		{
-			laserBodyImg->setScale(scale);
-			laserBodyImg->aniRender(CAMERA->getRelativeV2(laserRect[i].getCenter()), laserBodyAni, bisymmetry);
-		}
-	}
 }
 
 void Belial::tagHandInfo::setState(HAND_STATE state, const Vector2& movePos)
