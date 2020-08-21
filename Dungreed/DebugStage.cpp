@@ -10,7 +10,7 @@ void DebugStage::init()
 	Stage::init();
 	// 맵 불러오기
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/Stage11_RB.map");
+	loadMap("room/StartRoom3_B.map");
 
 	// 에너미 테스트입니다.
 	/*

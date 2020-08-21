@@ -253,6 +253,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Tree0", L"resources/images/Map/Tree0.png");
 	IMAGE_MANAGER->addImage("Tree1", L"resources/images/Map/Tree1.png");
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
+	IMAGE_MANAGER->addFrameImage("DungeonEat", L"resources/images/Villiage/DungeonEat.png", 28, 1);
 
 	// ** DUNGEON
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");

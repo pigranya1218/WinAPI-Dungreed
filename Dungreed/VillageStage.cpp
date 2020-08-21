@@ -5,6 +5,8 @@
 
 void VillageStage::init()
 {
+	_stageManager->setPlayerPos(400, 400);
+
 	Stage::init();
 
 	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950), Vector2(0,2005),Vector2(500,2000)));
@@ -29,13 +31,20 @@ void VillageStage::init()
 	_BG1 = IMAGE_MANAGER->findImage("Town_BG");
 	_BG2 = IMAGE_MANAGER->findImage("Town_BG2");
 	_floor = IMAGE_MANAGER->findImage("Town_Floor");
-
+	
+	_dungeonEat = IMAGE_MANAGER->findImage("DungeonEat");
+	_eatAni = new Animation;
+	_eatAni->init(_dungeonEat->getWidth(), _dungeonEat->getHeight(), _dungeonEat->getMaxFrameX(), _dungeonEat->getMaxFrameY());
+	_eatAni->setDefPlayFrame(false, false);
+	_eatAni->setFPS(12);
 	
 
 	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 9000, 500);
 	
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile3");
-	loadMap("Town3.map");
+	loadMap("Town.map");
+
+	_enter = false;
 
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
 }
@@ -51,16 +60,28 @@ void VillageStage::update(float const elapsedTime)
 	int stageHeight = _tile[0].tileY * TILESIZE;
 	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);*/
 
+	
+
 	Stage::update(elapsedTime);
+	
+	
 
 	if (_stageManager->getPlayerPos().x >= 4000 && _stageManager->getPlayerPos().x <= 5800 && _stageManager->getPlayerPos().y >= 1600)
 	{
-		//_stageManager->nextStage();
-		_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
-		
-		_stageManager->setPlayerPos(200, 400);
-		_stageManager->makeStage();
+		if(!_enter)
+		enterDungeon();
 	}
+		//_stageManager->nextStage();
+	if (!_eatAni->isPlay()&& _enter)
+	{
+			_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
+
+			_stageManager->setPlayerPos(200, 400);
+			_stageManager->makeStage();
+	}
+	
+	
+	_eatAni->frameUpdate(elapsedTime);
 }
 
 void VillageStage::render()
@@ -113,11 +134,24 @@ void VillageStage::render()
 	IMAGE_MANAGER->findImage("Tree0")->setScale(5);
 	CAMERA->render(IMAGE_MANAGER->findImage("Tree0"), Vector2(2150, 1520));
 
-
+	//CAMERA->aniRender()
+	if (_enter)
+	{
+		_dungeonEat->setScale(4);
+		_dungeonEat->aniRender(CAMERA->getRelativeV2(_eatPos), _eatAni);
+	}
 	Stage::render();
 
 	IMAGE_MANAGER->findImage("TempleFront")->setScale(5);
 	CAMERA->render(IMAGE_MANAGER->findImage("TempleFront"), Vector2(4730, 1047 - IMAGE_MANAGER->findImage("TempleFront")->getHeight() * 2));
+}
+
+void VillageStage::enterDungeon()
+{
+	_eatPos.x = _stageManager->getPlayerPos().x;
+	_eatPos.y= _stageManager->getPlayerPos().y-_dungeonEat->getHeight()-35;
+	_enter = true;
+	_eatAni->start();
 }
 
 

@@ -386,12 +386,14 @@ void MapTool::load()
 	HANDLE stageFile;
 	DWORD read;
 
+	
+
 	stageFile = CreateFile(ofn.lpstrFile, GENERIC_READ, NULL, NULL,
 		OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
 
 	ReadFile(stageFile, _tile, sizeof(tagTileMap) * _tileX * _tileY, &read, NULL);
 	
-
+	
 	
 	
 	CloseHandle(stageFile);
