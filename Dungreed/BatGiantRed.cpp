@@ -5,7 +5,7 @@
 void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 {
 	_ani = new Animation;
-
+	_countPlay = 0;
 	setState(ENEMY_STATE::IDLE);
 
 	_position = pos;
@@ -93,11 +93,19 @@ void BatGiantRed::update(float const timeElapsed)
 		{			
 			if (_ani->getPlayIndex() == 4)
 			{
+				_countPlay++;
+				if (_countPlay == 1)
+				{
+					SOUND_MANAGER->stop("GiantBat/Attack");
+					SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 				_shooting.fireBullet(_myEnemyType, _enemyManager);
 				_renderNum = -1;
 			}
 			if (!_ani->isPlay())
 			{
+				_countPlay = 0;
+				SOUND_MANAGER->stop("GiantBat/Attack");
 				setState(ENEMY_STATE::IDLE);
 			}
 		}

@@ -34,6 +34,7 @@ void Enemy::tagShootingInfo::fireBullet(int enemyCode, EnemyManager * enemyManag
 
 void Enemy::dieEffect()
 {
+	SOUND_MANAGER->play("Enemy/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	Vector2 drawSize = _img->getFrameSize() * _scale;
 	drawSize.x = drawSize.y = max(drawSize.x, drawSize.y);
 	EFFECT_MANAGER->play("Enemy_Destroy", _position, drawSize);
@@ -176,6 +177,7 @@ bool Enemy::hitEffect(Projectile * projectile)
 	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
+	SOUND_MANAGER->play("Enemy/GetHit", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
 

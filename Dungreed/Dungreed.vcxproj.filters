@@ -160,6 +160,9 @@
     <Filter Include="Dungreed\GameScene\Object\Door">
       <UniqueIdentifier>{0184043f-15af-42e9-bb8f-e8ea6549a681}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Enemy\Mob">
+      <UniqueIdentifier>{759bebd3-6ec7-4b7f-b645-334b4baa4677}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -282,9 +285,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyManager.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Dungreed\GameScene\Object</Filter>
     </ClInclude>
@@ -315,15 +315,6 @@
     <ClInclude Include="Item.h">
       <Filter>Dungreed\Item</Filter>
     </ClInclude>
-    <ClInclude Include="Banshee.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="BatRed.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="SkelBigIce.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="TimeManager.h">
       <Filter>2DGameFramework\Manager</Filter>
     </ClInclude>
@@ -332,21 +323,6 @@
     </ClInclude>
     <ClInclude Include="ShortSpear.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
-    </ClInclude>
-    <ClInclude Include="SkelBigNormal.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="SkelMagicianIce.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="BatNormal.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="BatIce.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="SkelSmallBow.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Punch.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
@@ -377,15 +353,6 @@
     </ClInclude>
     <ClInclude Include="DebugStage.h">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClInclude>
-    <ClInclude Include="BatGiantRed.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Ovibos.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="Minotaurs.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="IceBall.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
@@ -432,9 +399,6 @@
     <ClInclude Include="AttackInfo.h">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClInclude>
-    <ClInclude Include="Ghost.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="Voluspa.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
@@ -461,12 +425,6 @@
     </ClInclude>
     <ClInclude Include="PickaxeRed.h">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
-    </ClInclude>
-    <ClInclude Include="BatGiantNormal.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="SkelDog.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="Niflheim.h">
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
@@ -512,15 +470,6 @@
     </ClInclude>
     <ClInclude Include="Belial.h">
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="SkelSmallDagger.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="SkelSmallGsword.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="BatBomb.h">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="BoomerangProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
@@ -714,14 +663,59 @@
     <ClInclude Include="Seeri.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="DoorObject.h">
-      <Filter>Dungreed\GameScene\Object\Door</Filter>
+    <ClInclude Include="Banshee.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
     </ClInclude>
-    <ClInclude Include="Room2LR.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    <ClInclude Include="BatBomb.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
     </ClInclude>
-    <ClInclude Include="SeeriProjectile.h">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
+    <ClInclude Include="BatGiantNormal.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatGiantRed.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatIce.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatNormal.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatRed.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Minotaurs.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Ovibos.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelBigIce.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelBigNormal.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelDog.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelMagicianIce.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallBow.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallDagger.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallGsword.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -824,9 +818,6 @@
     <ClCompile Include="ProjectileManager.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyManager.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="FloatCircle.cpp">
       <Filter>2DGameFramework\Utils</Filter>
     </ClCompile>
@@ -845,35 +836,11 @@
     <ClCompile Include="MapTool.cpp">
       <Filter>Dungreed\MapToolScene\MapTool</Filter>
     </ClCompile>
-    <ClCompile Include="Banshee.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="BatRed.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="SkelBigIce.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerStat.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
     </ClCompile>
     <ClCompile Include="ShortSpear.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
-    </ClCompile>
-    <ClCompile Include="SkelBigNormal.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="SkelMagicianIce.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="BatNormal.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="BatIce.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="SkelSmallBow.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="Punch.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
@@ -905,15 +872,6 @@
     <ClCompile Include="DebugStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClCompile>
-    <ClCompile Include="BatGiantRed.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Ovibos.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="Minotaurs.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="miniEarth.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
@@ -943,9 +901,6 @@
     </ClCompile>
     <ClCompile Include="AttackInfo.cpp">
       <Filter>Dungreed\GameScene\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Ghost.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="IceBall.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
@@ -992,12 +947,6 @@
     <ClCompile Include="PickaxeRed.cpp">
       <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
-    <ClCompile Include="BatGiantNormal.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="SkelDog.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Niflheim.cpp">
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
     </ClCompile>
@@ -1039,15 +988,6 @@
     </ClCompile>
     <ClCompile Include="Belial.cpp">
       <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="SkelSmallDagger.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="SkelSmallGsword.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="BatBomb.cpp">
-      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="BoomerangProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
@@ -1244,17 +1184,59 @@
     <ClCompile Include="Seeri.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="DoorObject.cpp">
-      <Filter>Dungreed\GameScene\Object\Door</Filter>
+    <ClCompile Include="Banshee.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
     </ClCompile>
-    <ClCompile Include="Room12LB.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    <ClCompile Include="BatBomb.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
     </ClCompile>
-    <ClCompile Include="Room2LR.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    <ClCompile Include="BatGiantNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
     </ClCompile>
-    <ClCompile Include="SeeriProjectile.cpp">
-      <Filter>Dungreed\GameScene\Projectile</Filter>
+    <ClCompile Include="BatGiantRed.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatRed.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Minotaurs.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Ovibos.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelDog.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelMagicianIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallBow.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallDagger.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallGsword.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -83,6 +83,9 @@ void SkelMagicianIce::update(float const timeElapsed)
 						_shooting.createBullet(bulletPos, angle);
 						if (i == 2)angle += PI / 4;
 					}
+					SOUND_MANAGER->stop("IceSkell/Magic/Attack");
+					SOUND_MANAGER->play("IceSkell/Magic/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 					setState(ENEMY_STATE::ATTACK);
 					_attacking = true;
 				}

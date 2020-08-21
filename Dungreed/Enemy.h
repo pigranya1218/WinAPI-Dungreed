@@ -25,11 +25,10 @@ protected:
 	ENEMY_STATE		_state;			// 현재 상태
 	DIRECTION		_direction;		// 행동
 	Image*			_img;			// 이미지
-	Image*			_img1;			// 이미지
+	Sound*			_sound;			// 사운드
 	Animation*		_ani;			// 애니메이션
 	string			_imageName;		// 이미지 이름
-	string			_imageName1;
-
+	string			_soundName;		// 사운드 이름	
 
 	bool			_isDetect;		// 플레이어를 감지하였는가
 	float			_scale;			// 렉트와 출력에 사용할 스케일
@@ -98,7 +97,7 @@ protected:
 			this->collisionGround = collisionGround;
 			this->collisionPlatForm = collisionPlatForm;
 		}		
-		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 0)
+		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 15)
 		{
 			info.minDamage = minDamage;
 			info.maxDamage = maxDamage;
@@ -180,7 +179,7 @@ protected:
 			return false;
 		}
 		// 공격 정보 저장용
-		void attackInit(float minDamage, float maxDamage, float trueDamage, float critical = 0, float criDamage = 0, float knockBack = 0)
+		void attackInit(float minDamage, float maxDamage, float trueDamage, float critical = 0, float criDamage = 0, float knockBack = 15)
 		{
 			info.minDamage = minDamage;
 			info.maxDamage = maxDamage;
