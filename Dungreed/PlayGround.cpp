@@ -469,6 +469,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Wing", L"resources/images/Accessories/Wing.png");                                 // 날개
 	IMAGE_MANAGER->addImage("Wing0", L"resources/images/Accessories/Wing0.png");                               // 날개 장착 이미지
 	IMAGE_MANAGER->addImage("Wingboots", L"resources/images/Accessories/Wingboots.png");                       // 윙부츠
+	IMAGE_MANAGER->addImage("Seeri", L"resources/images/Accessories/Seeri.png");                               // 자동공격 인형 아이콘
+	IMAGE_MANAGER->addFrameImage("Seeri0", L"resources/images/Accessories/Seeri0.png", 9, 1);                  // 자동공격 인형 프레임 이미지
+	IMAGE_MANAGER->addImage("selected", L"resources/images/Accessories/selected.png");                         // 자동공격 인형 조준점
+	IMAGE_MANAGER->addImage("SeeriBullet", L"resources/images/Accessories/SeeriBullet.png");                   // 자동공격 인형 탄
 
 	// ** ENEMY
 	// * 수녀

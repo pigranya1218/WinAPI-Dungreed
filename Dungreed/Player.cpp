@@ -41,6 +41,7 @@
 #include "DaisyRing.h"
 #include "Wingboots.h"
 #include "SilverBullet.h"
+#include "Seeri.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -232,9 +233,13 @@ void Player::init()
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
-	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
-	testAcc12->init();
-	_inventory[9] = testAcc12;
+	//HeartOfCosmos* testAcc12 = new HeartOfCosmos;
+	//testAcc12->init();
+	//_inventory[0] = testAcc12;
+
+	Seeri* testAcc21 = new Seeri;
+	testAcc21->init();
+	_inventory[0] = testAcc21;
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
