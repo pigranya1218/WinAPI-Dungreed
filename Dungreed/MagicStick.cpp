@@ -156,6 +156,16 @@ void MagicStick::attack(Player * player)
 		return;
 	}
 
+	if (_oneAttack)
+	{
+		_angleOffset += 95;
+	}
+	else
+	{
+		_angleOffset -= 95;
+	}
+	_oneAttack = !_oneAttack;
+
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 
