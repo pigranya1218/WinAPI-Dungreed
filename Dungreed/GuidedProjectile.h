@@ -34,6 +34,7 @@ private:
 	int			_afterCount;
 	//vector<Image*> _afterImg;
 	Image*		_afterImg[10];
+	float		_collisionCount;
 public:
 	GuidedProjectile() {}
 	GuidedProjectile(const GuidedProjectile& source);

@@ -276,7 +276,7 @@ void MagicStick::attack(Player * player)
 	Vector2 effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
 
 	//projectile->init("lalaStickBullet", angleRadian, 30 * 1, true, false, 3, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("lalaStickBullet", "L_Effect_lalaStick", bulletSize, bulletRect, effectSize, Vector2(30 * 10, 30 * 10), 3, angleRadian, true, true, 10, true, false, false, false, true, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+	projectile->init("lalaStickBullet", "L_Effect_lalaStick", bulletSize, bulletRect, effectSize, Vector2(30 * 10, 30 * 10), 8, angleRadian, true, true, 10, true, false, false, false, true, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
