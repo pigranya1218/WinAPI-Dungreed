@@ -6,10 +6,10 @@ void Room4LRB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage4_LRB.map");
 
-	_respawnPosition[0] = Vector2(100,600);
+	_respawnPosition[0] = Vector2(150,1300);
 	
-	_respawnPosition[2] = Vector2(900,600);
-	_respawnPosition[3] = Vector2(450, 800);
+	_respawnPosition[2] = Vector2(1600,1300);
+	_respawnPosition[3] = Vector2(750, 1300);
 }
 
 void Room4LRB::release()

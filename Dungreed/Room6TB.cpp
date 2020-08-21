@@ -7,8 +7,11 @@ void Room6TB::init()
 	loadMap("room/Stage6_TB.map");
 	
 
-	_respawnPosition[1] = Vector2(600, 200);
-	_respawnPosition[3] = Vector2(600, 800);
+	_respawnPosition[1] = Vector2(560, 200);
+	_respawnPosition[3] = Vector2(560, 800);
+
+	/*makeDoor(Vector2(340, 70), DIRECTION::UP);
+	makeDoor(Vector2(340, 920), DIRECTION::DOWN);*/
 }
 
 void Room6TB::release()

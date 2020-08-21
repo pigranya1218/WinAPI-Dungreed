@@ -6,9 +6,9 @@ void Room14TRB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage14_TRB.map");
 
-	_respawnPosition[1] = Vector2(500, 300);
-	_respawnPosition[2] = Vector2(900, 600);
-	_respawnPosition[3] = Vector2(450, 800);
+	_respawnPosition[1] = Vector2(600, 400);
+	_respawnPosition[2] = Vector2(1000, 900);
+	_respawnPosition[3] = Vector2(850, 900);
 }
 
 void Room14TRB::release()

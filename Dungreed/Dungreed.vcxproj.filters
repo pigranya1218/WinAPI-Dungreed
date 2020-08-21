@@ -495,9 +495,6 @@
     <ClInclude Include="Room1R.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
-    <ClInclude Include="Room2LTR.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
     <ClInclude Include="Room3LR.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
@@ -716,6 +713,9 @@
     </ClInclude>
     <ClInclude Include="DoorObject.h">
       <Filter>Dungreed\GameScene\Object\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1016,9 +1016,6 @@
     <ClCompile Include="Room1R.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
-    <ClCompile Include="Room2LTR.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
     <ClCompile Include="Room3LR.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
@@ -1242,6 +1239,9 @@
       <Filter>Dungreed\GameScene\Object\Door</Filter>
     </ClCompile>
     <ClCompile Include="Room12LB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2LR.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>

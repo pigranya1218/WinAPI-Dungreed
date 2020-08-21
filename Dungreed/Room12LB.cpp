@@ -6,10 +6,10 @@ void Room12LB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage12_LB.map");
 
-	_respawnPosition[0] = Vector2(200, 600);
+	_respawnPosition[0] = Vector2(230, 980);
 
 	
-	_respawnPosition[3] = Vector2(450, 800);
+	_respawnPosition[3] = Vector2(630, 980);
 }
 
 void Room12LB::release()
