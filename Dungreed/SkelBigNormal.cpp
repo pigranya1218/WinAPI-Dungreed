@@ -36,7 +36,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect =  0;
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = (MAXHP*2);
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_NORMAL);
 }

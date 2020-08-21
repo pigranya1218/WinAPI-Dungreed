@@ -32,7 +32,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction)
 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = MAXHP;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BANSHEE);
 }

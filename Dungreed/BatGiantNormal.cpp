@@ -33,7 +33,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 
 	_active = true;
 
-	_curHp = _maxHp = 100.f;
+	_curHp = _maxHp = (MAXHP*2);
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_GIANT_NORMAL);
 }

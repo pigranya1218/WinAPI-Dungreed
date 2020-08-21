@@ -38,7 +38,7 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	// 체력 초기화
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = MAXHP;
 
 	// 에너미 타입변수 초기화
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::GHOST);
