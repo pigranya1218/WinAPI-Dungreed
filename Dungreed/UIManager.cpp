@@ -166,21 +166,29 @@ void UIManager::update(float const elapsedTime)
 	}
 
 	// Map Open
-	_mapUI.isShow = false;
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MAP)))
 	{
-		if (!_mapUI.isShow)
-		{
-			_mapUI.isShow = true;
-			_mapUI.offset = Vector2(0, 0);
-			_mapUI.isDrag = false;
-		}
+		_mapUI.isShow = true;
 		_mapUI.twinkleDelay += elapsedTime;
 		if (_mapUI.twinkleDelay > 0.5)
 		{
 			_mapUI.twinkleDelay = 0;
 			_mapUI.fillCurrRoom = !_mapUI.fillCurrRoom;
 		}
+		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+		{
+			_mapUI.offset.x += _ptMouse.x - _mapUI.lastMoustpt.x;
+			_mapUI.offset.y += _ptMouse.y - _mapUI.lastMoustpt.y;
+		}
+		_mapUI.lastMoustpt = _ptMouse;
+
+	}
+	else
+	{
+		_mapUI.isShow = false;
+		_mapUI.offset = Vector2(0, 0);
+		_mapUI.isDrag = false;
+		_mapUI.twinkleDelay = 0;
 	}
 
 	// Inventory Open
@@ -290,6 +298,7 @@ void UIManager::update(float const elapsedTime)
 	}
 
 	_isActive = false;
+	_isActive |= _mapUI.isShow;
 	_isActive |= _dialogueUI.isActive();
 	_isActive |= _inventoryUI.isActive();
 	_isActive |= _statUI.isActive();
@@ -569,7 +578,7 @@ void UIManager::render()
 			D2D_RENDERER->fillRectangle(FloatRect(Vector2(0, 0), Vector2(WINSIZEX, WINSIZEY), PIVOT::LEFT_TOP), 33, 31, 50, 1);
 			
 			int centerX = WINSIZEX / 2 + _mapUI.offset.x;
-			int centerY = 450 + _mapUI.offset.x;
+			int centerY = 450 + _mapUI.offset.y;
 
 			// ÇöÀç ¹æ ±ôºýÀÌ±â
 			if (_mapUI.fillCurrRoom)
@@ -616,6 +625,8 @@ void UIManager::render()
 			
 			D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, 190), 33, 31, 50, 1);
 			D2D_RENDERER->fillRectangle(FloatRect(0, 850, WINSIZEX, 900), 33, 31, 50, 1);
+			D2D_RENDERER->fillRectangle(FloatRect(0, 0, 165, WINSIZEY), 33, 31, 50, 1);
+			D2D_RENDERER->fillRectangle(FloatRect(1435, 0, WINSIZEX, WINSIZEY), 33, 31, 50, 1);
 
 			_mapUI.headerImg->render(Vector2(WINSIZEX / 2, 90), Vector2(WINSIZEX, 160));
 			_mapUI.bodyImg->render(Vector2(WINSIZEX / 2, WINSIZEY / 2 + 70), Vector2(1300, 660));
