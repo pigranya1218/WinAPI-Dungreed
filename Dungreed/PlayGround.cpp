@@ -715,7 +715,7 @@ HRESULT playGround::init()
 
 	// * 후광
 	IMAGE_MANAGER->addFrameImage("Belial/Back/Circle"	, L"resources/images/boss/Belial/Back/circle.png"	, 10, 1);	// 후광 구
-	IMAGE_MANAGER->addFrameImage("Belial/Back/Particle"	, L"resources/images/boss/Belial/Back/particle.png"	, 10, 1);	// 이펙트 이미지
+	IMAGE_MANAGER->addFrameImage("Belial/Back/Particle"	, L"resources/images/boss/Belial/Back/particle.png"	,  8, 1);	// 이펙트 이미지
 
 	// * Sword
 	IMAGE_MANAGER->addImage("Belial/Sword"		, L"resources/images/boss/Belial/Sword/default.png"	);					// 검 이미지
@@ -726,7 +726,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet"			, L"resources/images/boss/Belial/bullet.png"	, 2, 1);	// 투사체
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet_FX"			, L"resources/images/boss/Belial/bullet_FX.png"	, 8, 1);	// 투사체 이펙트
 	
-	EFFECT_MANAGER->addEffect("Belial/Sword_Charge", "Belial/Sword_Charge", 15, 6);
+	EFFECT_MANAGER->addEffect("Belial/Sword_Charge"	, "Belial/Sword_Charge"	, 15, 10);
+	EFFECT_MANAGER->addEffect("Belial/Sword_Hit"	, "Belial/Sword_Hit"	, 15, 10);
+	EFFECT_MANAGER->addEffect("Belial/Bullet_FX"	, "Belial/Bullet_FX"	, 15, 50);
 
 	// * 니플헤임
 	IMAGE_MANAGER->addFrameImage("Niflheim/Idle"	, L"resources/images/boss/Niflheim/idle.png"	,  6, 1);	// 니플헤임 기본

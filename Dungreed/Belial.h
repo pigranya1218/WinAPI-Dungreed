@@ -42,10 +42,13 @@ private:
 		Animation*	laserBodyAni;	// 레이저 중간 애니메이션
 
 		tagMoveInfo moving;	// 이동
+		tagAttackInfo	laserAtk;		// 레이저 공격
 
 		HAND_STATE	state;	// 현재 손 상태
 
-		vector<FloatRect> laserRect;	// 레이저 출력 및 공격 판정용
+		vector<FloatRect> laserRect;	// 레이저 출력 벡터
+
+		FloatRect			atkRect;	// 레이저 공격렉트
 
 		// 초기화
 		void init(const Vector2& pos);
@@ -61,7 +64,7 @@ private:
 			SAFE_DELETE(laserBodyAni);
 		}
 		// 손 업데이트
-		void update(const float timeElapsed);
+		void update(const float timeElapsed, int enemyType, EnemyManager* enemyManager);
 		// 출력
 		void render(const float scale, bool bisymmetry = 0);
 
@@ -86,32 +89,50 @@ private:
 		}
 	};
 
-	struct tagSwordPosAngle
+	// 검은 따로 구현
+	class tagSwordInfo : public GameObject
 	{		
-		Vector2 pos;	// 포지션
-		float angle;	// 앵글
+	public:
+		Image*	img;	// 출력할 이미지
+		float	angle;	// 앵글	
+
+		tagTimeInfo chargeEffect;
 	};
+
+	struct tagParticleInfo
+	{
+		Image*		img;
+		Animation*	ani[5];
+		Vector2		pos[5];
+	};
+
+	tagParticleInfo _particle;
 
 	Vector2			_playerPos;
 
-	tagMoveInfo		_moving;		// 이동
-	tagShootingInfo _shooting;		// 탄막용
-	tagShootingInfo _swordBullet;	// 검 던지기 패턴
+	tagMoveInfo		_moving;	// 이동
+	tagShootingInfo _shooting;	// 탄막용
 
-	Image*						_swordImg;		// 검 이미지
-	vector<tagSwordPosAngle>	_swordPosAngle;	// 검 출력용
+	vector<tagSwordInfo*>	_sword;		// 검을 담을 벡터
+	unsigned int			_swordNum;	// 현재 검 넘버
+	tagAttackInfo			_swordAtk;	// 검 공격 판정용
 
-	Image*		_backImg;		// 후광구 이미지
-	Animation*	_backAni;		// 후광구 애니메이션
+	Image*		_backImg;	// 후광구 이미지
+	Animation*	_backAni;	// 후광구 애니메이션
+	bool	_backMove;		// 후광구 좌표 이동 플래그
 
-	tagHandInfo _handR;			// 오른손
-	tagHandInfo _handL;			// 왼손
+	tagHandInfo _handR;		// 오른손
+	tagHandInfo _handL;		// 왼손
+	int			_laserNum;	// 레이저 발사 횟수 지정
 
 	tagTimeInfo _attackCycle;	// 공격 주기 저장용
 
-	BELIAL_PHASE _phase;		// 공격 패턴
+	tagTimeInfo _dieEffect;
+	int			_effectNum;
 
-	int _laserNum;	// 레이저 발사 횟수 지정
+	BELIAL_PHASE _phase;	// 공격 패턴
+
+
 
 public:
 	void init(const Vector2& pos);
@@ -123,6 +144,8 @@ public:
 	void setPhase(BELIAL_PHASE phase);
 
 	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
+
+	void headMove(const float timeElapsed);
 };
 
 
