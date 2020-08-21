@@ -18,6 +18,7 @@ void Room1R::init()
 	_objectMgr->spawnObject(0x0002, Vector2(400, 600));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BASIC, Vector2(400, 600), DIRECTION::LEFT);
 }
 
 void Room1R::release()

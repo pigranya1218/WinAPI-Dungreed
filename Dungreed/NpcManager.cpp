@@ -4,6 +4,7 @@
 #include "RestaurantNpc.h"
 #include "ShopNpc.h"
 #include "GateNpc.h"
+#include "ChestNpc.h"
 
 void NpcManager::init()
 {
@@ -61,6 +62,34 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	case NPC_TYPE::GATE:
 	{
 		npc = new GateNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_BASIC:
+	{
+		ChestNpc * chestNpc = new ChestNpc;
+		chestNpc->setRank(0);
+		npc = chestNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_BLUE:
+	{
+		ChestNpc* chestNpc = new ChestNpc;
+		chestNpc->setRank(1);
+		npc = chestNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_YELLOW:
+	{
+		ChestNpc* chestNpc = new ChestNpc;
+		chestNpc->setRank(2);
+		npc = chestNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_BOSS:
+	{
+		ChestNpc* chestNpc = new ChestNpc;
+		chestNpc->setRank(3);
+		npc = chestNpc;
 	}
 	break;
 	}

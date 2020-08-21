@@ -626,11 +626,11 @@ void UIManager::render()
 				Image* icon = npcs[i]->getMiniMapIcon();
 				if (icon != nullptr)
 				{
+					float height = npcs[i]->getSize().y;
 					Vector2 renderPos;
 					Vector2 npcPos = npcs[i]->getPosition() / 16;
 					renderPos.x = offsetX + (npcPos.x - playerPos.x);
-					renderPos.y = offsetY + (npcPos.y - playerPos.y) - 8;
-					icon->setScale(2);
+					renderPos.y = offsetY + (npcPos.y - playerPos.y);
 					icon->render(renderPos);
 				}
 			}

@@ -10,6 +10,8 @@ void Room2LR::init()
 	//_respawnPosition[0] = Vector2(100, 450);
 	//_respawnPosition[2] = Vector2(1100, 450);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(880, 350), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BLUE, Vector2(400, 350), DIRECTION::LEFT);
+
 }
 
 void Room2LR::release()

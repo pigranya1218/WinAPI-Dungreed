@@ -732,6 +732,9 @@
     <ClInclude Include="ShopNpc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
+    <ClInclude Include="ChestNpc.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1272,6 +1275,9 @@
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
     <ClCompile Include="ShopNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="ChestNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
   </ItemGroup>

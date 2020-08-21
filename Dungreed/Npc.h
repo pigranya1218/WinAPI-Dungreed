@@ -9,6 +9,10 @@ enum class NPC_TYPE : int
 	RESTAURANT, // 식당
 	SHOP, // 상점
 	GATE, // 게이트
+	CHEST_BASIC, // 일반적인 상자 (일반)
+	CHEST_BLUE, // 일반적인 상자  (일반 ~ 고급)
+	CHEST_YELLOW, // 일반적인 상자 (고급 ~ 희귀)
+	CHEST_BOSS, // 보스 상자 (희귀 ~ 전설)
 	END
 };
 
