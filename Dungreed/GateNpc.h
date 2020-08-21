@@ -11,6 +11,7 @@ public:
 	virtual void init(Vector2 pos, DIRECTION direction);
 	virtual void release();
 	virtual void update(float timeElapsed);
+	virtual void interaction();
 	virtual void render();
 };
 

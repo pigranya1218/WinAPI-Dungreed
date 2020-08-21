@@ -1,8 +1,10 @@
 #include "GateNpc.h"
+#include "UIManager.h"
 
 void GateNpc::init(Vector2 pos, DIRECTION direction)
 {
 	_type = NPC_TYPE::GATE;
+	_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_WORM");
 
 	_img = IMAGE_MANAGER->findImage("NPC_GATE_IDLE");
 	_ani = new Animation;
@@ -31,6 +33,11 @@ void GateNpc::update(float timeElapsed)
 	Npc::update(timeElapsed);
 
 	_ani->frameUpdate(timeElapsed);
+}
+
+void GateNpc::interaction()
+{
+	_uiMgr->showMap(true);
 }
 
 void GateNpc::render()

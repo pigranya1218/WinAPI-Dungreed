@@ -166,9 +166,21 @@ void UIManager::update(float const elapsedTime)
 	}
 
 	// Map Open
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MAP)))
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MAP)))
 	{
-		_mapUI.isShow = true;
+		_mapUI.isShow = !_mapUI.isShow;
+	}
+
+	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::MAP)))
+	{
+		_mapUI.isShow = false;
+		_mapUI.offset = Vector2(0, 0);
+		_mapUI.isDrag = false;
+		_mapUI.twinkleDelay = 0;
+	}
+
+	if(_mapUI.isShow)
+	{
 		_mapUI.twinkleDelay += elapsedTime;
 		if (_mapUI.twinkleDelay > 0.5)
 		{
@@ -181,14 +193,6 @@ void UIManager::update(float const elapsedTime)
 			_mapUI.offset.y += _ptMouse.y - _mapUI.lastMoustpt.y;
 		}
 		_mapUI.lastMoustpt = _ptMouse;
-
-	}
-	else
-	{
-		_mapUI.isShow = false;
-		_mapUI.offset = Vector2(0, 0);
-		_mapUI.isDrag = false;
-		_mapUI.twinkleDelay = 0;
 	}
 
 	// Inventory Open
@@ -222,6 +226,15 @@ void UIManager::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
 	{
 		isClose = true;
+	}
+
+	if (_mapUI.isShow)
+	{
+		if (isClose)
+		{
+			_mapUI.isShow = false;
+			isClose = false;
+		}
 	}
 
 	if (_dialogueUI.isActive())

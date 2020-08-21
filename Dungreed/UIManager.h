@@ -172,5 +172,6 @@ public:
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 
 	void setDialogue(Npc* npc) { _dialogueUI.startDialogue(npc); }
+	void showMap(bool isShow) { _mapUI.isShow = isShow; }
 };
 

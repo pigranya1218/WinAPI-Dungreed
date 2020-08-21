@@ -79,3 +79,19 @@ void NpcManager::moveTo(GameObject* gameObject, Vector2 moveDir)
 {
 	_stage->moveTo(gameObject, moveDir);
 }
+
+vector<tagShowNpc> NpcManager::getNpcInfos()
+{
+	vector<tagShowNpc> result;
+	for (int i = 0; i < _npcs.size(); i++)
+	{
+		if (_npcs[i]->getMapIcon() != nullptr)
+		{
+			tagShowNpc info;
+			info.icon = _npcs[i]->getMapIcon();
+			info.type = _npcs[i]->getType();
+			result.push_back(info);
+		}
+	}
+	return result;
+}

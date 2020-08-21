@@ -569,5 +569,10 @@ void Stage::makeDoorAuto()
 	}
 }
 
+vector<tagShowNpc> Stage::getNpcInfos()
+{
+	return _npcMgr->getNpcInfos();
+}
+
 
 

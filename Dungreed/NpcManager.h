@@ -3,6 +3,7 @@
 
 class Stage;
 class UIManager;
+struct tagShowNpc;
 
 class NpcManager
 {
@@ -25,5 +26,7 @@ public:
 	Vector2 getPlayerPos();
 
 	void moveTo(GameObject* gameObject, Vector2 moveDir);
+
+	vector<tagShowNpc> getNpcInfos();
 };
 
