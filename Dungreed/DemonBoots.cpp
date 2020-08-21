@@ -21,10 +21,10 @@ void DemonBoots::release()
 
 void DemonBoots::update(Player * player, float const elapsedTime)
 {
-	_random = RANDOM->getFromIntTo(0, 65);
+	_random = RANDOM->getFromIntTo(0, 90);
 	_renderPos = player->getPosition();	
-	_renderPos.y = _renderPos.y +22;
-	_renderPos.x = _renderPos.x - 30;
+	_renderPos.y = _renderPos.y +40;
+	_renderPos.x = _renderPos.x - 50;
 	if (player->getIsStand()) {
 		if (_Delay > 0)
 		{
@@ -42,7 +42,7 @@ void DemonBoots::update(Player * player, float const elapsedTime)
 			AccProjectile* projectile = new AccProjectile;
 			projectile->setPosition(_renderPos);			
 			projectile->setTeam(OBJECT_TEAM::PLAYER);			
-			projectile->init("DemonBoots0", "DemonBoots0", Vector2(50, 70), Vector2(50, 130), Vector2(0, 0), 5, 0, true, false, 15, false, false, false, false);
+			projectile->init("DemonBoots0", "DemonBoots0", 1, Vector2(40, 70), Vector2(70, 190), Vector2(0, 0), 5, 0, true, false, 15, false, false, false, false);
 			string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
@@ -60,7 +60,7 @@ void DemonBoots::update(Player * player, float const elapsedTime)
 			AccProjectile* projectile = new AccProjectile;
 			projectile->setPosition(_renderPos);			
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
-			projectile->init("DemonBoots0", "DemonBoots0", Vector2(50, 70), Vector2(50, 130), Vector2(0, 0), 5, 0, true, false, 15, false, false, false, false);
+			projectile->init("DemonBoots0", "DemonBoots0", 1, Vector2(40, 70), Vector2(70, 190), Vector2(0, 0), 5, 0, true, false, 15, false, false, false, false);
 			string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;

@@ -6,13 +6,9 @@ void StartRoom1::init()
 	
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("StartRoom1.map");
+	loadMap("room/StartRoom1_r.map");
 	//_direction.push_back(DIRECTION::RIGHT);
 	
-	_OpenDirection[0] = false;
-	_OpenDirection[1] = false;
-	_OpenDirection[2] = true;
-	_OpenDirection[3] = true;
 	
 }
 
@@ -29,12 +25,12 @@ void StartRoom1::update(float const elapsedTime)
 	{
 		_stageManager->setPlayerPos(200, 900);
 		
-		_stageManager->moveRoom();
+		//_stageManager->moveRoom();
 		
 	}
 	if (KEY_MANAGER->isOnceKeyDown(VK_F8))
 	{
-		_stageManager->moveRoom();
+		//_stageManager->moveRoom();
 		
 	}
 

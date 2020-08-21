@@ -5,12 +5,12 @@ void DebugStage::init()
 {
 	int stageWidth = _tile[0].tileX*TILESIZE;
 	int stageHeight = _tile[0].tileY*TILESIZE;
-	_stageManager->setPlayerPos(500, 500);
+	_stageManager->setPlayerPos(400, 400);
 
 	Stage::init();
 	// 맵 불러오기
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("testStage.map");
+	loadMap("room/Stage11_RB.map");
 
 	// 에너미 테스트입니다.
 	/*
@@ -58,6 +58,10 @@ void DebugStage::init()
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	*/
 	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(220, 210), DIRECTION::RIGHT);
+
+	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
+	_objectMgr->spawnObject(0x0001, Vector2(750, 200));
+	_objectMgr->spawnObject(0x0002, Vector2(900, 200));
 }
 
 void DebugStage::release()

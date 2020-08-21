@@ -25,7 +25,7 @@ public:
 	void loadInfo(tagLoadInfo const info);
 
 	// 플레이어 관련 함수
-
+	Vector2 getEnemyPos(Vector2 pos);
 
 	// 스테이지 관련 함수
 	void moveTo(GameObject* object, Vector2 moveDir);

@@ -12,7 +12,7 @@ void Belial::init(const Vector2 & pos)
 	_swordImg = IMAGE_MANAGER->findImage("Belial/Sword");
 
 	// 후광구 초기화
-	_backImg = IMAGE_MANAGER->findImage("Belial/Back");
+	_backImg = IMAGE_MANAGER->findImage("Belial/Back/Circle");
 	_backAni->init(_backImg->getWidth(), _backImg->getHeight(), _backImg->getMaxFrameX(), _backImg->getMaxFrameY());
 	_backAni->setDefPlayFrame(false, true);
 	_backAni->setFPS(15);
@@ -39,25 +39,66 @@ void Belial::init(const Vector2 & pos)
 	_swordBullet.attackInit(3, 5, 1,50);
 
 	ZeroMemory(&_attackCycle, sizeof(&_attackCycle));
-	_attackCycle.delay = 1;
+	_attackCycle.delay = 2;
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
 
 	_active = true;
+	_laserNum = 0;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 300;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BELIAL);
+
+	// 손 초기화
+	_handL.init(Vector2(_position.x - 130 * _scale, _position.y + 50 * _scale));
+	_handR.init(Vector2(_position.x + 130 * _scale, _position.y + 50 * _scale));
+
+	
+	// 오른쪽 레이저 초기화
+	{
+		Vector2 size = _handR.laserHeadImg->getFrameSize() * _scale;
+		FloatRect headRc(Vector2(_handR.position.x - size.x * 0.7f, _handR.position.y), size, PIVOT::CENTER);
+		_handR.laserRect.push_back(headRc);		
+		for (int i = 1; i < 50; i++)
+		{
+			size = _handR.laserBodyImg->getFrameSize() * _scale;
+			FloatRect headRc(Vector2(_handR.laserRect[i - 1].left - size.x * 0.5f, _handR.position.y), size, PIVOT::CENTER);
+			_handR.laserRect.push_back(headRc);
+		}
+	}
+
+	// 왼쪽 레이저 초기화
+	{
+		Vector2 size = _handR.laserHeadImg->getFrameSize() * _scale;
+		FloatRect headRc(Vector2(_handL.position.x + size.x * 0.7f, _handL.position.y), size, PIVOT::CENTER);
+		_handL.laserRect.push_back(headRc);
+		for (int i = 1; i < 50; i++)
+		{
+			size = _handR.laserBodyImg->getFrameSize() * _scale;
+			FloatRect headRc(Vector2(_handL.laserRect[i - 1].right + size.x * 0.5f, _handL.position.y), size, PIVOT::CENTER);
+			_handL.laserRect.push_back(headRc);
+		}
+	}
+
 }
 
 void Belial::release()
 {
+	_ani->release();
+	_backAni->release();
+
+	SAFE_DELETE(_ani);
+	SAFE_DELETE(_backAni);
+
+	_handL.release();
+	_handR.release();
 }
 
 void Belial::update(float const timeElapsed)
 {
-	const Vector2 playerPos = _enemyManager->getPlayerPos();
+	_playerPos = _enemyManager->getPlayerPos();
 
 	Vector2 moveDir(0, 0);
 	switch (_state)
@@ -107,12 +148,11 @@ void Belial::update(float const timeElapsed)
 					if (!_ani->isPlay())
 					{
 						// 실제 공격으로 넘어감
-						setPhase(BELIAL_PHASE::SHOOTING);
-						//_shooting.count = _shooting.delay;
+						setPhase(BELIAL_PHASE::SHOOTING_START);
 					}
 				}
 				break;
-				case BELIAL_PHASE::SHOOTING:
+				case BELIAL_PHASE::SHOOTING_START:
 				{
 					// 총알 발사 주기
 					if (_shooting.delayUpdate(timeElapsed))
@@ -163,20 +203,20 @@ void Belial::update(float const timeElapsed)
 					if(_swordPosAngle.size() >= 6)
 					{
 						// 검을 발사한다
-						setPhase(BELIAL_PHASE::SWORD);
+						setPhase(BELIAL_PHASE::SWORD_START);
 					}
 					// 각도는 계속 업데이트한다
 					for (int i = 0; i < _swordPosAngle.size(); i++)
 					{
-						_swordPosAngle[i].angle = getAngle(_swordPosAngle[i].pos.x, _swordPosAngle[i].pos.y, playerPos.x, playerPos.y);
+						_swordPosAngle[i].angle = getAngle(_swordPosAngle[i].pos.x, _swordPosAngle[i].pos.y, _playerPos.x, _playerPos.y);
 					}
 				}
 				break;
-				case BELIAL_PHASE::SWORD:
+				case BELIAL_PHASE::SWORD_START:
 				{
 					for (int i = 0; i < _swordPosAngle.size(); i++)
 					{
-						_swordPosAngle[i].angle = getAngle(_swordPosAngle[i].pos.x, _swordPosAngle[i].pos.y, playerPos.x, playerPos.y);
+						_swordPosAngle[i].angle = getAngle(_swordPosAngle[i].pos.x, _swordPosAngle[i].pos.y, _playerPos.x, _playerPos.y);
 					}
 
 					if (_swordBullet.delayUpdate(timeElapsed * 0.5f) && !_swordPosAngle.empty())
@@ -196,8 +236,44 @@ void Belial::update(float const timeElapsed)
 					setState(ENEMY_STATE::IDLE);
 				}
 				break;
-				case BELIAL_PHASE::LASER:
+				// 레이저 오른쪽 발사
+				case BELIAL_PHASE::LASER_R:
+				{
+					if (_laserNum > 0)
+					{
+						if (_handR.state == HAND_STATE::ATTACK_FINAL)
+						{
+							setPhase(BELIAL_PHASE::LASER_L);
+						}
+					}
+					else
+					{
+						if (_handL.state == HAND_STATE::IDLE)
+						{
+							setState(ENEMY_STATE::IDLE);
+						}
+					}					
+				}
 				break;
+				// 레이저 왼쪽 발사
+				case BELIAL_PHASE::LASER_L:
+				{
+					if (_laserNum > 0)
+					{
+						if (_handL.state == HAND_STATE::ATTACK_FINAL)
+						{
+							setPhase(BELIAL_PHASE::LASER_R);
+						}
+					}
+					else
+					{
+						if (_handL.state == HAND_STATE::IDLE)
+						{
+							setState(ENEMY_STATE::IDLE);
+						}
+					}					
+				}
+				break;				
 			}
 		}
 		break;
@@ -207,10 +283,13 @@ void Belial::update(float const timeElapsed)
 		}
 		break;
 	}
-	hitReaction(playerPos, moveDir, timeElapsed);
+	hitReaction(_playerPos, moveDir, timeElapsed);
 
 	_ani->frameUpdate(timeElapsed);
 	_backAni->frameUpdate(timeElapsed);
+
+	_handL.update(timeElapsed);
+	_handR.update(timeElapsed);
 
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 }
@@ -240,6 +319,9 @@ void Belial::render()
 		_swordImg->setScale(_scale);
 		_swordImg->render(CAMERA->getRelativeV2(_swordPosAngle[i].pos));
 	}
+
+	_handL.render(_scale);
+	_handR.render(_scale, true);
 }
 
 void Belial::setState(ENEMY_STATE state)
@@ -262,19 +344,52 @@ void Belial::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			int pattern = RANDOM->getFromIntTo(0, 2);
-			//pattern = 1;
+			unsigned pattern = RANDOM->getFromIntTo(0, 3);
+			pattern = 2;
 
 			switch (pattern)
 			{
+				// 탄막
 				case 0:
 				{
 					setPhase(BELIAL_PHASE::SHOOTING_READY);
 				}
 				break;
+				// 검
 				case 1:
 				{
 					setPhase(BELIAL_PHASE::SWORD_READY);
+				}
+				break;
+				// 레이저
+				case 2:
+				{
+					unsigned laserPattern = RANDOM->getFromIntTo(0, 3);
+
+					switch (laserPattern)
+					{
+						// 레이저 좌측 발사
+						case 0: 
+						{
+							_laserNum = 0;
+							setPhase(BELIAL_PHASE::LASER_R);
+						}
+						break;
+						// 레이저 우측 발사
+						case 1: 
+						{
+							_laserNum = 0;
+							setPhase(BELIAL_PHASE::LASER_L);
+						}
+						break;
+						// 레이저 번갈아서 발사
+						case 2:
+						{
+							_laserNum = 3;
+							setPhase(BELIAL_PHASE::LASER_R);							
+						}
+						break;
+					}
 				}
 				break;
 			}
@@ -306,7 +421,7 @@ void Belial::setPhase(BELIAL_PHASE phase)
 			_ani->start();
 		}
 		break;
-		case BELIAL_PHASE::SHOOTING:
+		case BELIAL_PHASE::SHOOTING_START:
 		{
 			_ani->stop();
 			_ani->setPlayFrame(6, 9, false, true);
@@ -331,7 +446,7 @@ void Belial::setPhase(BELIAL_PHASE phase)
 			_swordPosAngle.push_back(sword);
 		}
 		break;
-		case BELIAL_PHASE::SWORD:
+		case BELIAL_PHASE::SWORD_START:
 		{
 
 		}
@@ -341,9 +456,17 @@ void Belial::setPhase(BELIAL_PHASE phase)
 
 		}
 		break;
-	case BELIAL_PHASE::LASER:
+		case BELIAL_PHASE::LASER_R:
+		{
+			_handR.setState(HAND_STATE::MOVE, _playerPos);
+			_laserNum--;
+		}
 		break;
-	default:
+		case BELIAL_PHASE::LASER_L:
+		{
+			_handL.setState(HAND_STATE::MOVE, _playerPos);
+			_laserNum--;
+		}
 		break;
 	}
 }
@@ -366,14 +489,17 @@ void Belial::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 					switch (_phase)
 					{
 						case BELIAL_PHASE::SHOOTING_READY:
-						case BELIAL_PHASE::SHOOTING:
+						case BELIAL_PHASE::SHOOTING_START:
 						case BELIAL_PHASE::SHOOTING_FINAL:
 						{
 							_imageName = "Belial/Head/Attack";
 						}
 						break;
-						case BELIAL_PHASE::SWORD:
-						case BELIAL_PHASE::LASER:
+						case BELIAL_PHASE::SWORD_READY:
+						case BELIAL_PHASE::SWORD_START:
+						case BELIAL_PHASE::SWORD_FINAL:
+						case BELIAL_PHASE::LASER_R:
+						case BELIAL_PHASE::LASER_L:
 						{
 							_imageName = "Belial/Head/Idle";
 						}
@@ -385,5 +511,186 @@ void Belial::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const flo
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
 		}
+	}
+}
+
+void Belial::tagHandInfo::init(const Vector2& pos)
+{
+	// 손 애니메이션 할당
+	ani = new Animation;
+
+	// 레이저 애니메이션 할당
+	laserHeadAni = new Animation;
+	laserBodyAni = new Animation;
+
+	// 포지션 설정
+	position = pos;
+
+	// 기본 상태로 설정
+	setState(HAND_STATE::IDLE);
+
+	// 레이저 이미지 저장
+	laserHeadImg = IMAGE_MANAGER->findImage("Belial/Laser/Head");
+	laserBodyImg = IMAGE_MANAGER->findImage("Belial/Laser/Body");
+
+	// 레이저 애니메이션 초기화
+	laserHeadAni->init(laserHeadImg->getWidth(), laserHeadImg->getHeight(), laserHeadImg->getMaxFrameX(), laserHeadImg->getMaxFrameY());
+	laserBodyAni->init(laserBodyImg->getWidth(), laserBodyImg->getHeight(), laserBodyImg->getMaxFrameX(), laserBodyImg->getMaxFrameY());
+	
+	// 움직인다.
+	ZeroMemory(&moving, sizeof(moving));
+	moving.force = Vector2(0, 800);
+}
+
+void Belial::tagHandInfo::update(const float timeElapsed)
+{
+	switch (state)
+	{
+		case HAND_STATE::IDLE:
+		{
+
+		}
+		break;
+		case HAND_STATE::MOVE:
+		{
+			if (fabsf(movePos.y - position.y) > moving.force.y * timeElapsed * 5)
+			{
+				position.y += moving.force.y * timeElapsed * ((movePos.y > position.y) ? (1) : (-1));				
+			}
+			else
+			{
+				position.y = movePos.y;
+				for (int i = 0; i < laserRect.size(); i++)
+				{
+					laserRect[i] = FloatRect(Vector2(laserRect[i].getCenter().x, position.y + 20), laserRect[i].getSize(), PIVOT::CENTER);
+					//laserRect[i] = rectMakePivot(Vector2(laserRect[i].getCenter().x, position.y), laserRect[i].getSize(), PIVOT::CENTER);
+				}
+				setState(HAND_STATE::ATTACK_READY);
+			}
+		}
+		break;
+		case HAND_STATE::ATTACK_READY:
+		{
+			if (ani->getPlayIndex() == 8 && !laserHeadAni->isPlay() && !laserBodyAni->isPlay())
+			{
+				setState(HAND_STATE::ATTACK_START);
+			}			
+		}
+		break;
+		// 여기서 공격판정
+		case HAND_STATE::ATTACK_START:
+		{
+			if (!ani->isPlay())
+			{
+				setState(HAND_STATE::ATTACK_FINAL);
+			}
+		}
+		break;
+		case HAND_STATE::ATTACK_FINAL:
+		{
+			if (!laserHeadAni->isPlay() && !laserBodyAni->isPlay())
+			{
+				setState(HAND_STATE::IDLE);
+			}
+		}
+		break;
+	}
+
+	ani->frameUpdate(timeElapsed);
+
+	laserHeadAni->frameUpdate(timeElapsed);
+	laserBodyAni->frameUpdate(timeElapsed);
+}
+
+void Belial::tagHandInfo::render(const float scale, bool bisymmetry)
+{
+	img->setScale(scale);
+	img->aniRender(CAMERA->getRelativeV2(position), ani, bisymmetry);
+
+	if (laserBodyAni->isPlay() && laserHeadAni->isPlay())
+	{
+		laserHeadImg->setScale(scale);
+		laserHeadImg->aniRender(CAMERA->getRelativeV2(laserRect[0].getCenter()), laserHeadAni, bisymmetry);
+
+		for (int i = 1; i < laserRect.size(); i++)
+		{
+			laserBodyImg->setScale(scale);
+			laserBodyImg->aniRender(CAMERA->getRelativeV2(laserRect[i].getCenter()), laserBodyAni, bisymmetry);
+		}
+	}
+}
+
+void Belial::tagHandInfo::setState(HAND_STATE state, const Vector2& movePos)
+{
+	this->state = state;
+
+	switch (state)
+	{
+		case HAND_STATE::IDLE:
+		{
+			img = IMAGE_MANAGER->findImage("Belial/Hand/Idle");
+
+			ani->stop();
+			ani->init(img->getWidth(), img->getHeight(), img->getMaxFrameX(), img->getMaxFrameY());
+			ani->setDefPlayFrame(false, true);
+			ani->setFPS(15);
+			ani->start();
+		}
+		break;
+		case HAND_STATE::MOVE:
+		{
+			img = IMAGE_MANAGER->findImage("Belial/Hand/Idle");
+
+			ani->stop();
+			ani->init(img->getWidth(), img->getHeight(), img->getMaxFrameX(), img->getMaxFrameY());
+			ani->setDefPlayFrame(false, true);
+			ani->setFPS(15);
+			ani->start();
+
+			this->movePos = movePos;
+		}
+		break;
+		case HAND_STATE::ATTACK_READY:
+		{
+			img = IMAGE_MANAGER->findImage("Belial/Hand/Attack");
+
+			ani->stop();
+			ani->init(img->getWidth(), img->getHeight(), img->getMaxFrameX(), img->getMaxFrameY());
+			ani->setDefPlayFrame(false, false);
+			ani->setFPS(15);
+			ani->start();
+
+			laserHeadAni->stop();
+			laserBodyAni->stop();
+			laserHeadAni->setPlayFrame(0, 2, false, true);
+			laserBodyAni->setPlayFrame(0, 2, false, true);
+			laserHeadAni->setFPS(15);
+			laserBodyAni->setFPS(15);	
+		}
+		break;
+		case HAND_STATE::ATTACK_START:
+		{
+			laserHeadAni->start();
+			laserBodyAni->start();
+		}
+		break;
+		case HAND_STATE::ATTACK_FINAL:
+		{
+			img = IMAGE_MANAGER->findImage("Belial/Hand/Idle");
+
+			ani->stop();
+			ani->init(img->getWidth(), img->getHeight(), img->getMaxFrameX(), img->getMaxFrameY());
+			ani->setDefPlayFrame(false, true);
+			ani->setFPS(15);
+			ani->start();
+
+			laserHeadAni->stop();
+			laserBodyAni->stop();
+			laserHeadAni->setDefPlayFrame(false, false);
+			laserBodyAni->setDefPlayFrame(false, false);
+			laserHeadAni->start();
+			laserBodyAni->start();
+		}
+		break;
 	}
 }

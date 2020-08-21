@@ -6,7 +6,7 @@ void Room21LR::init()
 
     Stage:: init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("Stage21LR.map");
+	loadMap("room/Stage21_LR.map");
 	_OpenDirection[0] = true;
 	_OpenDirection[1] = false;
 	_OpenDirection[2] = true;
@@ -25,7 +25,7 @@ void Room21LR::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(VK_F8))
 	{
 		
-		_stageManager->moveRoom();
+		//_stageManager->moveRoom();
 		
 	}
 }

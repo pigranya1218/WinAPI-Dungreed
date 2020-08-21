@@ -11,18 +11,9 @@
 enum class DRAW_LINE_POSITION
 {
 	NOLINE,
-	LEFT,
-	TOP,
-	RIGHT,
-	BOTTOM,
+	BLOCK,
 	LEFT_DIAGONAL, // /이런 모양
 	RIGHT_DIAGONAL, // \이런 모양
-	
-	//두변 이상 그려질 경우
-	LEFT_TOP,
-	RIGHT_TOP,
-	LEFT_BOTTOM,
-	RIGHT_BOTTOM,
 	
 	//프랫폼형태인가?
 	PLATFORM_TOP,
@@ -30,12 +21,7 @@ enum class DRAW_LINE_POSITION
 	PLATFORM_RIGHT_DIAGONAL // \이런 모양
 };
 
-//struct tagTileMap
-//{
-//	int maxTileX;
-//	int maxTileY;
-//	tagTile 
-//};
+
 
 struct tagTileMap
 {
@@ -124,8 +110,6 @@ public:
 	void paletteChange();
 	void mapLoad();
 	void setSelectTile();
-
-	void setLinePos(int frameX,int frameY) ;
 
 	void setTileSize();
 

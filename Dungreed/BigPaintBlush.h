@@ -3,6 +3,18 @@
 class BigPaintBlush : public Item
 {
 private:
+	struct tagAttack
+	{
+		FloatCircle* _attackCircle;
+		AttackInfo* _attackInfo;
+		float _hitDelay;
+		int _count;
+	};
+
+private:
+	
+	vector<tagAttack> _VtagAttack;
+	vector<tagAttack>::iterator _VItagAttack;
 	// 공격 관련
 	Image*	_effect;
 	Image* _img;
@@ -21,15 +33,16 @@ private:
 	Animation* _ani;
 	float _width;
 	float _height;
+
+	FloatCircle _attackDebug;
 public:
 	virtual void init();
+	virtual void release() override;
 	virtual void update(Player* player, float const elapsedTime);
 	virtual void backRender(Player* player);
 	virtual void frontRender(Player* player);
 
 	virtual void attack(Player* player); // 플레이어가 공격버튼을 누를때 호출될 함수(공격과 상관없는 아이템이라면 빈 함수로 구현)
-
-
 	virtual void equip(Player* player); // 아이템을 장착했을 때 호출될 함수, 스탯이 어떻게 바뀌어야하는지 반환
 
 };

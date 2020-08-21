@@ -3,11 +3,11 @@
 
 FOOD_RANK Food::getRank()
 {
-	if (_foodCode & static_cast<int>(FOOD_RANK::NORMAL) == static_cast<int>(FOOD_RANK::NORMAL))
+	if (_foodCode / 256 == static_cast<int>(FOOD_RANK::NORMAL) / 256)
 	{
 		return FOOD_RANK::NORMAL;
 	}
-	if (_foodCode & static_cast<int>(FOOD_RANK::RARE) == static_cast<int>(FOOD_RANK::RARE))
+	if (_foodCode / 256 == static_cast<int>(FOOD_RANK::RARE) / 256)
 	{
 		return FOOD_RANK::RARE;
 	}

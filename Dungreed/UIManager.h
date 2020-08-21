@@ -5,10 +5,14 @@
 #include "RestaurantUI.h"
 #include "DialogueUI.h"
 #include "DamageInfo.h"
+#include "LinearFunc.h"
 
 class GameScene;
 class Player;
 class StageManager;
+class EnemyManager;
+class NpcManager;
+class ObjectManager;
 
 class UIManager
 {
@@ -81,7 +85,10 @@ private:
 
 	struct tagMiniMap // 미니맵
 	{
-		FloatRect miniMapRc;
+		vector<FloatRect> collisionRect; // 미니맵에 그려질 땅
+		EnemyManager* enemyMgr;
+		NpcManager* npcMgr;
+		ObjectManager* objectMgr;
 	};
 private:
 	GameScene* _gameScene;
@@ -95,9 +102,11 @@ private:
 	tagLabelUI	_satietyUI; // 플레이어 포만감 라벨
 	tagProgressUI	_satietyProgress; // 플레이어 포만감 프로그레스바
 	tagWeaponUI	_weaponUI; // 무기 UI
+	tagMiniMap _mapUI; // 미니맵 UI
+
 	vector<tagDamageUI> _damageUI; // 대미지 표기 숫자 UI
 	vector<tagEnemyHpUI> _enemyHpUI; // 적 체력바 UI
-	
+
 	DialogueUI _dialogueUI;
 	InventoryUI _inventoryUI;
 	StatUI _statUI;
@@ -113,6 +122,8 @@ public:
 	void release();
 	void update(float const elaspedTime);
 	void render();
+
+	void setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager);
 
 	bool isActive() const noexcept { return _isActive; }
 

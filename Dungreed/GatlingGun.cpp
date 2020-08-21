@@ -240,6 +240,7 @@ void GatlingGun::attack(Player * player)
 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
+	attackInfo->madeByWeapon = true;
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
 	attackInfo->critical = 0;
 	attackInfo->criticalDamage = 0;

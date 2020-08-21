@@ -133,6 +133,30 @@
     <Filter Include="Dungreed\StageMakeTestScene">
       <UniqueIdentifier>{790f18f4-50d7-4d44-bdd0-81e354776cf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\Shop">
+      <UniqueIdentifier>{983bec92-4207-4ee4-9daf-a9eeed75781b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\Restaurant">
+      <UniqueIdentifier>{5b9e44c9-01e1-4bb9-961b-b9c910dd0b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\start">
+      <UniqueIdentifier>{ca375f5a-a300-47c0-ba7f-57152a6fb369}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\endRoom">
+      <UniqueIdentifier>{ef1ec331-af5f-410d-826f-957a1a0ce73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\Boss">
+      <UniqueIdentifier>{4179b7f2-54ab-4559-a24e-f33c7a8a7ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Obstacle">
+      <UniqueIdentifier>{5c160c15-d798-4324-bab0-ca617a7bcca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Drops">
+      <UniqueIdentifier>{11d9e7d4-19b1-4e5d-9622-ee0f79674e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Particle">
+      <UniqueIdentifier>{fa3be956-0718-4875-8345-bde7fe9c47ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -453,19 +477,7 @@
     <ClInclude Include="DemonBoots.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="RestaurantRoom.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
     <ClInclude Include="AllRoom.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
-    <ClInclude Include="DungeonShopRoom.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
-    <ClInclude Include="StartRoom1.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
-    <ClInclude Include="StartRoom2.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
     <ClInclude Include="Room21LR.h">
@@ -546,12 +558,6 @@
     <ClInclude Include="MetalBoots.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="DownStair1L.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
-    <ClInclude Include="BossRoom1.h">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClInclude>
     <ClInclude Include="AccProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
@@ -602,6 +608,105 @@
     </ClInclude>
     <ClInclude Include="Room6TB.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room11LT.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room7RT.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room12LRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room7_RB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room13LTB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room14TRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonShopRoom3.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonShopRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonShopRoom2.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantRoom2LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="StartRoom2.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClInclude>
+    <ClInclude Include="StartRoom1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClInclude>
+    <ClInclude Include="DownStair1L.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRoom1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRoomBef1R.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="DownStair2T.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="DownStair2LT.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantRoom1R.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LTRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LTR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room11_RB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room23LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="StartRoom3.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClInclude>
+    <ClInclude Include="SilverBullet.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="CosmosSwordProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleObject.h">
+      <Filter>Dungreed\GameScene\Object\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldObject.h">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="BrokenObject.h">
+      <Filter>Dungreed\GameScene\Object\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="HpFairyObject.h">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="Seeri.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -890,18 +995,6 @@
     <ClCompile Include="DemonBoots.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="RestaurantRoom.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
-    <ClCompile Include="DungeonShopRoom.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
-    <ClCompile Include="StartRoom1.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
-    <ClCompile Include="StartRoom2.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
     <ClCompile Include="Room21LR.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
@@ -983,12 +1076,6 @@
     <ClCompile Include="MetalBoots.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="DownStair1L.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
-    <ClCompile Include="BossRoom1.cpp">
-      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
-    </ClCompile>
     <ClCompile Include="Food.cpp">
       <Filter>Dungreed\GameScene\Player\Food</Filter>
     </ClCompile>
@@ -1039,6 +1126,108 @@
     </ClCompile>
     <ClCompile Include="Room6TB.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room11LT.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room7RT.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room12LRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room7_RB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room13LTB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room14TRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonShopRoom3.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonShopRoom.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonShopRoom2.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantRoom.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantRoom2LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClCompile>
+    <ClCompile Include="StartRoom1.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClCompile>
+    <ClCompile Include="StartRoom2.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair1L.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoom1.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoomBef1R.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair2T.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair2LT.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantRoom1R.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LTRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LTR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room11_RB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room23LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="StartRoom3.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClCompile>
+    <ClCompile Include="SilverBullet.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="CosmosSwordProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="BrokenObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HpFairyObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="Seeri.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

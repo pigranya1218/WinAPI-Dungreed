@@ -2,13 +2,13 @@
 #include "ProjectileManager.h"
 #include "stdafx.h"
 
-void AccProjectile::init(const string imgKey, const string collisionEffect, const Vector2 & collisionSize, const Vector2 & drawSize, const Vector2 & force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
+void AccProjectile::init(const string imgKey,  const string collisionEffect, float sizeUp, const Vector2 & collisionSize, const Vector2 & drawSize, const Vector2 & force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm)
 {
 	float elapseXY;
 
 	_angleRadian = angleRadian;
 	_force = force;
-
+	_sizeUp = sizeUp;
 	_maxTime = maxTime;
 	_count = 0;
 
@@ -34,11 +34,13 @@ void AccProjectile::init(const string imgKey, const string collisionEffect, cons
 	_collisionEffect = collisionEffect;
 	_drawSize = drawSize;
 	_size = collisionSize;
+	
 
 	if (_collisionEffect != "")
 	{
 		_effectImg = IMAGE_MANAGER->findImage(_collisionEffect);
-		_effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
+		_effectSize = Vector2(_effectImg->getFrameSize().x * 4* _sizeUp, _effectImg->getFrameSize().y * 4* _sizeUp);
+		
 	}
 
 	_gravity = Vector2(0, 4000);
@@ -58,7 +60,7 @@ void AccProjectile::release()
 		SAFE_DELETE(_ani);
 	}
 
-	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
+	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize*_sizeUp, ((_useRotate) ? (_angleRadian) : (0.0f)));
 }
 
 void AccProjectile::update(float elapsedTime)
@@ -83,28 +85,18 @@ void AccProjectile::update(float elapsedTime)
 	{
 		_active = false;
 	}
-
+	
 	if (_ani->isPlay()) {
 		// 타입에 따른 충돌 검사
 		if (_info->team == OBJECT_TEAM::PLAYER)
 		{
 			// ENEMY와의 충돌 검사
-			if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
+			if (_projectileMgr->checkEnemyCollision(this, false)) // 적과 충돌했다면
 			{
 				_active = true;
 				return;
 			}
-		}
-		else
-		{
-			// TODO: PLAYER와의 충돌 검사
-			if (_projectileMgr->checkPlayerCollision(this, true))
-			{
-				_active = false;
-				return;
-			}
-
-		}
+		}		
 	}
 
 	// 지속시간을 넘어가면

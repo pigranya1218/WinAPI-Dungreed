@@ -163,6 +163,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 
 			AttackInfo* attackInfo = new AttackInfo;
 			attackInfo->team = OBJECT_TEAM::PLAYER;
+			attackInfo->madeByWeapon = true;
 			attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
 			attackInfo->critical = 0;
 			attackInfo->criticalDamage = 0;
@@ -263,6 +264,8 @@ void OakBow::frontRender(Player * player)
 
 		EFFECT_MANAGER->play("L_Effect_Charge", effectPos01, effectSize01, _effectAngleRadianValue);
 	}
+
+	D2D_RENDERER->renderText(CAMERA->getRelativeX(player->getPosition().x), CAMERA->getRelativeY(player->getPosition().y - 50), to_wstring(_effectAngleRadianValue), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 }
 
 void OakBow::displayInfo()

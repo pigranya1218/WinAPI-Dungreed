@@ -20,7 +20,7 @@ private:
 	FloatRect _hand;
 	Vector2 _handSize;
 	
-
+	FloatCircle _attackDebug;
 public:
 	virtual void init();
 	virtual void update(Player* player, float const elapsedTime);

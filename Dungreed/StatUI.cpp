@@ -75,9 +75,9 @@ void StatUI::render()
 	
 	// STATUS, FOOD 제목
 	D2D_RENDERER->renderTextField(_statBaseRc.left, _statBaseRc.top - 5, L"STATUS", RGB(255, 255, 255), 
-		42, _statBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0);
+		45, _statBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아", 0);
 	D2D_RENDERER->renderTextField(_foodBaseRc.left, _foodBaseRc.top - 5, L"FOODS", RGB(255, 255, 255),
-		42, _foodBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard", 0);
+		45, _foodBaseRc.getWidth(), 70, 1.f, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아", 0);
 	
 	// 스탯
 	PlayerStat stat = _player->getCurrStat();
@@ -93,23 +93,23 @@ void StatUI::render()
 		}
 		if (static_cast<STAT_TYPE>(i) == STAT_TYPE::POW)
 		{
-			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(_player->getMinDamage())) + L" ~ " + to_wstring(static_cast<int>(_player->getMaxDamage())) + L" (" + to_wstring(static_cast<int>(stat.getStat(STAT_TYPE::POW))) + L")", RGB(255, 255, 255), 35, 300, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(_player->getMinDamage())) + L" ~ " + to_wstring(static_cast<int>(_player->getMaxDamage())) + L" (" + to_wstring(static_cast<int>(stat.getStat(STAT_TYPE::POW))) + L")", RGB(255, 255, 255), 35, 300, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 		}
 		else if (static_cast<STAT_TYPE>(i) == STAT_TYPE::ATTACK_SPEED)
 		{
 			stringstream stream;
 			stream << fixed << setprecision(2) << _player->getAttackSpeed();
-			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 		}
 		else if (static_cast<STAT_TYPE>(i) == STAT_TYPE::RELOAD)
 		{
 			stringstream stream;
 			stream << fixed << setprecision(2) << _player->getReloadSpeed();
-			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, TTYONE_UTIL::stringTOwsting(stream.str()), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 		}
 		else
 		{
-			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(stat.getStat(static_cast<STAT_TYPE>(i)))), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+			D2D_RENDERER->renderTextField(_statEntity[i].iconRc.right + 20, _statEntity[i].iconRc.top, to_wstring(static_cast<int>(stat.getStat(static_cast<STAT_TYPE>(i)))), RGB(255, 255, 255), 35, 100, 50, 1.f, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 		}
 	}
 

@@ -40,6 +40,8 @@
 #include "MultiBullet.h"
 #include "DaisyRing.h"
 #include "Wingboots.h"
+#include "SilverBullet.h"
+#include "Seeri.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -155,7 +157,7 @@ void Player::attack(Projectile* projectile, AttackInfo* info)
 void Player::init()
 {
 	setSize(Vector2(40, 80));
-	setPosition(Vector2(500, WINSIZEY - 250));
+	setPosition(Vector2(200, 200));
 	_direction = DIRECTION::RIGHT;
 	
 	//최초에 장착하는 코스튬
@@ -179,38 +181,38 @@ void Player::init()
 	_inventory.resize(15);
 
 
-	babyGreenBat* testAcc1 = new babyGreenBat;
+	ShortSpear* testAcc1 = new ShortSpear;
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
 	//GreenBat* testAcc2 = new GreenBat;
 	//testAcc2->init();
-	//_inventory[1] = testAcc2;
-
+	//_inventory[6] = testAcc2;
+	//
 
 	//GreenDadBat* testAcc3 = new GreenDadBat;
 	//testAcc3->init();
-	//_inventory[2] = testAcc3;
+	//_inventory[3] = testAcc3;
 
 	
-	GreenMomBat* testAcc4 = new GreenMomBat;
+	ShortSword* testAcc4 = new ShortSword;
 	testAcc4->init();
 	_inventory[3] = testAcc4;
 
 
-	SpikeBall* testAcc9 = new SpikeBall;
+	MartialArtOfTiger* testAcc9 = new MartialArtOfTiger;
 	testAcc9->init();
 	_inventory[8] = testAcc9;
 
 
-	bombPouch* testAcc5 = new bombPouch;
+	PowerKatana* testAcc5 = new PowerKatana;
 	testAcc5->init();
 	_inventory[6] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
 	//testAcc6->init();
-	//_inventory[6] = testAcc6;
+	//_inventory[3] = testAcc6;
 	//
 	//
 	//miniEarth* testAcc7 = new miniEarth;
@@ -218,22 +220,26 @@ void Player::init()
 	//_inventory[7] = testAcc7;
 	//
 	//
-	watCher* testAcc8 = new watCher;
+	QuarterStaffBig* testAcc8 = new QuarterStaffBig;
 	testAcc8->init();
 	_inventory[8] = testAcc8;
 	
 	
-	QuarterStaffBig* testAcc10 = new QuarterStaffBig;
+	BigPaintBlush* testAcc10 = new BigPaintBlush;
 	testAcc10->init();
 	_inventory[9] = testAcc10;
 
-	OakBow* testAcc11 = new OakBow;
+	Lumber* testAcc11 = new Lumber;
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
-	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
-	testAcc12->init();
-	_inventory[9] = testAcc12;
+	//HeartOfCosmos* testAcc12 = new HeartOfCosmos;
+	//testAcc12->init();
+	//_inventory[0] = testAcc12;
+
+	Seeri* testAcc21 = new Seeri;
+	testAcc21->init();
+	_inventory[0] = testAcc21;
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
@@ -241,16 +247,20 @@ void Player::init()
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
-	_inventory[0] = testAcc14;
+	_inventory[10] = testAcc14;
 
-	Voluspa* testAcc16 = new Voluspa;
+	MartialArtOfTiger* testAcc16 = new MartialArtOfTiger;
 	testAcc16->init();
 	_inventory[1] = testAcc16;
 
-	Wingboots* testAcc17 = new Wingboots;
-	testAcc17->init();
-	_inventory[2] = testAcc17;
+	//Wingboots* testAcc17 = new Wingboots;
+	//testAcc17->init();
+	//_inventory[2] = testAcc17;
 
+	MultiBullet* testAcc20 = new MultiBullet;
+	testAcc20->init();
+	_inventory[2] = testAcc20;
+	
 
 	BigPaintBlush* testAcc15 = new BigPaintBlush;
 	testAcc15->init();
@@ -258,8 +268,8 @@ void Player::init()
 
 	/*OakBow* testAcc11 = new OakBow;
 	testAcc11->init();
-	_inventory[10] = testAcc11;
-*/
+	_inventory[4] = testAcc11;*/
+
 	/*KeresScythe* testWeapon1 = new KeresScythe;
 	testWeapon1->init();
 	_inventory[11] = testWeapon1;
@@ -281,13 +291,13 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	FluteGreatSword* testWeapon5 = new FluteGreatSword;
+	/*FluteGreatSword* testWeapon5 = new FluteGreatSword;
 	testWeapon5->init();
-	_inventory[14] = testWeapon5;
+	_inventory[14] = testWeapon5;*/
 
-	//MagicStick* testWeapon5 = new MagicStick;
-	//testWeapon5->init();
-	//_inventory[13] = testWeapon5;
+	MagicStick* testWeapon5 = new MagicStick;
+	testWeapon5->init();
+	_inventory[13] = testWeapon5;
 
 	/*Boomerang* testweapon5 = new Boomerang;
 	testweapon5->init();
@@ -297,9 +307,17 @@ void Player::init()
 	testWeapon6->init();
 	_inventory[14] = testWeapon6;*/
 
-	/*GatlingGun* testWeapon6 = new GatlingGun;
+	GatlingGun* testWeapon6 = new GatlingGun;
 	testWeapon6->init();
-	_inventory[14] = testWeapon6;*/
+	_inventory[3] = testWeapon6;
+
+	/*SilverBullet* testAcc19 = new SilverBullet;
+	testAcc19->init();
+	_inventory[0] = testAcc19;*/
+
+	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
+	testAcc18->init();
+	_inventory[0] = testAcc18;
 
 	_hand = new Punch;
 	_hand->init();
@@ -946,7 +964,24 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 
 bool Player::ateFood(Food * food)
 {
-	return false;
+	// 플레이어의 현재 골드와 포만감을 비교하여 먹을 수 있다면
+	// 먹고, TRUE 반환 (골드 빼주고, 포만감 더해주고)
+	PlayerStat foodOneceStat = food->getOnceStat();
+	if (_currGold >= food->getPrice() && (getMaxSatiety() - _currSatiety) >= foodOneceStat.currSatiety)
+	{
+		_currGold -= food->getPrice();
+		_currSatiety += foodOneceStat.currSatiety;
+		_currHp += foodOneceStat.currHp;
+		_ateFood.push_back(food);
+		updateAdjustStat();
+		return true;
+	}
+	// 못먹으면 FALSE 반한
+	else
+	{
+		return false;
+	}
+	
 }
 
 float Player::getAttackSpeed()
@@ -995,4 +1030,9 @@ float Player::getMaxDamage()
 	{
 		return _equippedWeapon[_currWeaponIndex]->getMaxDamage();
 	}
+}
+
+Vector2 Player::getEnemyPos(Vector2 pos)
+{
+	return _gameScene->getEnemyPos(pos);
 }
