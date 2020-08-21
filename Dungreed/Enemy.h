@@ -98,7 +98,7 @@ protected:
 			this->collisionGround = collisionGround;
 			this->collisionPlatForm = collisionPlatForm;
 		}		
-		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 0)
+		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 15)
 		{
 			info.minDamage = minDamage;
 			info.maxDamage = maxDamage;
@@ -180,7 +180,7 @@ protected:
 			return false;
 		}
 		// 공격 정보 저장용
-		void attackInit(float minDamage, float maxDamage, float trueDamage, float critical = 0, float criDamage = 0, float knockBack = 0)
+		void attackInit(float minDamage, float maxDamage, float trueDamage, float critical = 0, float criDamage = 0, float knockBack = 15)
 		{
 			info.minDamage = minDamage;
 			info.maxDamage = maxDamage;

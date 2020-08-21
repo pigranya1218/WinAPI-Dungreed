@@ -32,11 +32,11 @@ void Belial::init(const Vector2 & pos)
 	_moving.delay = 0.4;
 
 	_shooting.init("Belial/Bullet", "Belial/Bullet_FX", Vector2(300, 300), _scale, 0.15, 3, false, true, true, false, false, false);
-	_shooting.attackInit(3, 5, 1);
+	_shooting.attackInit(3, 5, 1,25);
 	_shooting.angle = 0;
 
 	_swordBullet.init("Belial/Sword_Shoot", "Belial/Sword_Charge", Vector2(1500, 1500), _scale, 0.3, 3, true, false, false, false, false, false);
-	_swordBullet.attackInit(3, 5, 1);
+	_swordBullet.attackInit(3, 5, 1,50);
 
 	ZeroMemory(&_attackCycle, sizeof(&_attackCycle));
 	_attackCycle.delay = 1;
