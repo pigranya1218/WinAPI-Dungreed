@@ -25,7 +25,7 @@ void GoldObject::init(float value, Vector2 pos, float power, float radian)
 	_objectCode = 0x0020;
 	_value = value;
 	_position = pos;
-	_size = Vector2(20, 20);
+	_size = Vector2(20, 30);
 	_power = power;
 	_radian = radian;
 	_force = Vector2(0, 0);
