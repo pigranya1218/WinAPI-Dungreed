@@ -189,7 +189,7 @@ string StageManager::getStageTitle()
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
 	_mapSize = 4;
 	makeStage();
 	_uiMgr->setMap(_stageMap, getStageTitle());
@@ -323,7 +323,6 @@ void StageManager::makeStage()
 		_currStage->setPlayer(_player);
 		_currStage->init();
 		_currStage->enter(0);
-
 		break;
 	case STAGE_TYPE::DUNGEON_NORMAL:
 		makeDungeon();

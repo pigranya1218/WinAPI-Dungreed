@@ -3,9 +3,6 @@
 
 HRESULT GameScene::init()
 {
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 0, 0);
-	CAMERA->setLT(Vector2(0, 0));
-
 	_timeSpeed = 1;
 	
 	_player = new Player;
@@ -25,6 +22,7 @@ HRESULT GameScene::init()
 
 	_uiMgr->setStageManager(_stageMgr);
 
+	TIME_MANAGER->update();
 
 	return S_OK;
 }
