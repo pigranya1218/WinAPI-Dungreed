@@ -167,7 +167,8 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	//_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::VILLAGE;
 	_mapSize = 4;
 	makeStage();
 }
@@ -275,7 +276,11 @@ void StageManager::makeStage()
 	case STAGE_TYPE::VILLAGE:
 		_currStage = new VillageStage();
 		_currStage->setStageManager(this);
+		_currStage->setUIManager(_uiMgr);
+		_currStage->setPlayer(_player);
 		_currStage->init();
+		_currStage->enter(0);
+
 		break;
 	case STAGE_TYPE::DUNGEON_NORMAL:
 		makeDungeon();
