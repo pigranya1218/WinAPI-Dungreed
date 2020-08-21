@@ -170,6 +170,7 @@
     <ClInclude Include="bombPouch.h" />
     <ClInclude Include="BossRoom1.h" />
     <ClInclude Include="BoomerangProjectile.h" />
+    <ClInclude Include="BossRoomBef1R.h" />
     <ClInclude Include="BreadFood.h" />
     <ClInclude Include="CameraEvent.h" />
     <ClInclude Include="CameraManager.h" />
@@ -190,8 +191,12 @@
     <ClInclude Include="DemonBoots.h" />
     <ClInclude Include="DialogueUI.h" />
     <ClInclude Include="DownStair1L.h" />
+    <ClInclude Include="BrokenObject.h" />
+    <ClInclude Include="DownStair2LT.h" />
+    <ClInclude Include="DownStair2T.h" />
     <ClInclude Include="DungeonShopRoom.h" />
     <ClInclude Include="DungeonShopRoom2.h" />
+    <ClInclude Include="DungeonShopRoom3.h" />
     <ClInclude Include="Effect.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="EggFriedFood.h" />
@@ -207,6 +212,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GatlingGun.h" />
     <ClInclude Include="Ghost.h" />
+    <ClInclude Include="GoldObject.h" />
     <ClInclude Include="GreenBat.h" />
     <ClInclude Include="GreenDadBat.h" />
     <ClInclude Include="GreenMomBat.h" />
@@ -215,6 +221,7 @@
     <ClInclude Include="GuidedProjectile.h" />
     <ClInclude Include="HeartOfCosmos.h" />
     <ClInclude Include="AccProjectile.h" />
+    <ClInclude Include="HpFairyObject.h" />
     <ClInclude Include="IceBall.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="ImageManager.h" />
@@ -246,6 +253,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Ovibos.h" />
+    <ClInclude Include="ParticleObject.h" />
     <ClInclude Include="PickaxCos.h" />
     <ClInclude Include="PickaxeRed.h" />
     <ClInclude Include="Player.h" />
@@ -265,9 +273,10 @@
     <ClInclude Include="RestaurantRoom.h" />
     <ClInclude Include="RestaurantRoom2LR.h" />
     <ClInclude Include="RestaurantUI.h" />
+    <ClInclude Include="RestaurantRoom1R.h" />
     <ClInclude Include="Room10T.h" />
     <ClInclude Include="Room11LT.h" />
-    <ClInclude Include="Room11_LB.h" />
+    <ClInclude Include="Room11_RB.h" />
     <ClInclude Include="Room12LRB.h" />
     <ClInclude Include="Room13LTB.h" />
     <ClInclude Include="Room14TRB.h" />
@@ -275,9 +284,13 @@
     <ClInclude Include="Room21LR.h" />
     <ClInclude Include="Room20LTRB.h" />
     <ClInclude Include="Room22LTRB.h" />
+    <ClInclude Include="Room23LR.h" />
     <ClInclude Include="Room2LTR.h" />
     <ClInclude Include="Room3LR.h" />
     <ClInclude Include="Room4LR.h" />
+    <ClInclude Include="Room4LRB.h" />
+    <ClInclude Include="Room4LTR.h" />
+    <ClInclude Include="Room4LTRB.h" />
     <ClInclude Include="Room5LR.h" />
     <ClInclude Include="Room6TB.h" />
     <ClInclude Include="Room7RT.h" />
@@ -302,6 +315,7 @@
     <ClInclude Include="StageManager.h" />
     <ClInclude Include="StartRoom1.h" />
     <ClInclude Include="StartRoom2.h" />
+    <ClInclude Include="StartRoom3.h" />
     <ClInclude Include="StatUI.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="ShortSword.h" />
@@ -337,6 +351,7 @@
     <ClCompile Include="bombPouch.cpp" />
     <ClCompile Include="BossRoom1.cpp" />
     <ClCompile Include="BoomerangProjectile.cpp" />
+    <ClCompile Include="BossRoomBef1R.cpp" />
     <ClCompile Include="BreadFood.cpp" />
     <ClCompile Include="CameraEvent.cpp" />
     <ClCompile Include="CameraManager.cpp" />
@@ -357,8 +372,12 @@
     <ClCompile Include="DemonBoots.cpp" />
     <ClCompile Include="DialogueUI.cpp" />
     <ClCompile Include="DownStair1L.cpp" />
+    <ClCompile Include="BrokenObject.cpp" />
+    <ClCompile Include="DownStair2LT.cpp" />
+    <ClCompile Include="DownStair2T.cpp" />
     <ClCompile Include="DungeonShopRoom.cpp" />
     <ClCompile Include="DungeonShopRoom2.cpp" />
+    <ClCompile Include="DungeonShopRoom3.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EggFriedFood.cpp" />
@@ -372,6 +391,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GatlingGun.cpp" />
     <ClCompile Include="Ghost.cpp" />
+    <ClCompile Include="GoldObject.cpp" />
     <ClCompile Include="GreenBat.cpp" />
     <ClCompile Include="GreenDadBat.cpp" />
     <ClCompile Include="GreenMomBat.cpp" />
@@ -380,6 +400,7 @@
     <ClCompile Include="GuidedProjectile.cpp" />
     <ClCompile Include="HeartOfCosmos.cpp" />
     <ClCompile Include="AccProjectile.cpp" />
+    <ClCompile Include="HpFairyObject.cpp" />
     <ClCompile Include="IceBall.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="ImageManager.cpp" />
@@ -407,8 +428,10 @@
     <ClCompile Include="Npc.cpp" />
     <ClCompile Include="NpcManager.cpp" />
     <ClCompile Include="OakBow.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Ovibos.cpp" />
+    <ClCompile Include="ParticleObject.cpp" />
     <ClCompile Include="PickaxCos.cpp" />
     <ClCompile Include="PickaxeRed.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -424,9 +447,10 @@
     <ClCompile Include="RestaurantNpc.cpp" />
     <ClCompile Include="RestaurantRoom.cpp" />
     <ClCompile Include="RestaurantRoom2LR.cpp" />
+    <ClCompile Include="RestaurantRoom1R.cpp" />
     <ClCompile Include="Room10T.cpp" />
     <ClCompile Include="Room11LT.cpp" />
-    <ClCompile Include="Room11_LB.cpp" />
+    <ClCompile Include="Room11_RB.cpp" />
     <ClCompile Include="Room12LRB.cpp" />
     <ClCompile Include="Room13LTB.cpp" />
     <ClCompile Include="Room14TRB.cpp" />
@@ -434,9 +458,13 @@
     <ClCompile Include="Room21LR.cpp" />
     <ClCompile Include="Room20LTRB.cpp" />
     <ClCompile Include="Room22LTRB.cpp" />
+    <ClCompile Include="Room23LR.cpp" />
     <ClCompile Include="Room2LTR.cpp" />
     <ClCompile Include="Room3LR.cpp" />
     <ClCompile Include="Room4LR.cpp" />
+    <ClCompile Include="Room4LRB.cpp" />
+    <ClCompile Include="Room4LTR.cpp" />
+    <ClCompile Include="Room4LTRB.cpp" />
     <ClCompile Include="Room5LR.cpp" />
     <ClCompile Include="Room6TB.cpp" />
     <ClCompile Include="Room7RT.cpp" />
@@ -461,6 +489,7 @@
     <ClCompile Include="StageManager.cpp" />
     <ClCompile Include="StartRoom1.cpp" />
     <ClCompile Include="StartRoom2.cpp" />
+    <ClCompile Include="StartRoom3.cpp" />
     <ClCompile Include="StatUI.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="ShortSword.cpp" />

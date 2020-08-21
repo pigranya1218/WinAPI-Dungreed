@@ -252,7 +252,7 @@ void Player::init()
 	//testAcc17->init();
 	//_inventory[2] = testAcc17;
 
-	Voluspa* testAcc20 = new Voluspa;
+	MultiBullet* testAcc20 = new MultiBullet;
 	testAcc20->init();
 	_inventory[2] = testAcc20;
 	
@@ -306,13 +306,13 @@ void Player::init()
 	testWeapon6->init();
 	_inventory[3] = testWeapon6;
 
-	SilverBullet* testAcc19 = new SilverBullet;
+	/*SilverBullet* testAcc19 = new SilverBullet;
 	testAcc19->init();
-	_inventory[0] = testAcc19;
+	_inventory[0] = testAcc19;*/
 
-	//MagnifyingGlass* testAcc18 = new MagnifyingGlass;
-	//testAcc18->init();
-	//_inventory[0] = testAcc19;
+	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
+	testAcc18->init();
+	_inventory[0] = testAcc18;
 
 	_hand = new Punch;
 	_hand->init();

@@ -6,6 +6,8 @@
 void Stage::init()
 {
 	_objectMgr = new ObjectManager;
+	_objectMgr->setStage(this);
+	_objectMgr->setPlayer(_player);
 
 	_npcMgr = new NpcManager;
 	_npcMgr->setStage(this);
@@ -17,11 +19,13 @@ void Stage::init()
 	_projectileMgr = new ProjectileManager;
 	_projectileMgr->setStage(this);
 	_projectileMgr->setEnemyManager(_enemyMgr);
+	_projectileMgr->setObjectManager(_objectMgr);
 }
 
 void Stage::enter(int enterType)
 {
 	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms, _enemyMgr, _npcMgr, _objectMgr);
+	_stageManager->setPlayerPos(400, 400);
 }
 
 void Stage::release()
@@ -370,12 +374,12 @@ void Stage::attack(FloatCircle * circle, AttackInfo * info)
 
 bool Stage::isHitEnemy(FloatRect* rc, AttackInfo* info)
 {
-	return _enemyMgr->isHit(rc, info);
+	return (_enemyMgr->isHit(rc, info) || _objectMgr->isHit(rc, info));
 }
 
 bool Stage::isHitEnemy(FloatCircle* circle, AttackInfo* info)
 {
-	return _enemyMgr->isHit(circle, info);
+	return (_enemyMgr->isHit(circle, info) || _objectMgr->isHit(circle, info));
 }
 
 bool Stage::isHitPlayer(Projectile * projectile, bool isOnceCollision)

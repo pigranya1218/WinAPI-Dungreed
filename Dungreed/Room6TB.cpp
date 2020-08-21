@@ -4,7 +4,7 @@ void Room6TB::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("Stage6TB.map");
+	loadMap("room/Stage6_TB.map");
 	_OpenDirection[0] = false;
 	_OpenDirection[1] = true;
 	_OpenDirection[2] = false;

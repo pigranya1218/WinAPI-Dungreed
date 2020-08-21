@@ -5,7 +5,7 @@ void Room2LTR::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("Stage2LTR.map");
+	loadMap("room/Stage2_LR.map");
 	_OpenDirection[0] = true;
 	_OpenDirection[1] = true;
 	_OpenDirection[2] = true;

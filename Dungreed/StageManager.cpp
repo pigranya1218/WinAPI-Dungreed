@@ -42,10 +42,11 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		}
 		else if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3])//ÁÂ, ¿ì ¶Õ¸° °æ¿ì
 		{
-			int rand = RANDOM->getInt(3);
+			int rand = RANDOM->getInt(4);
 			if(rand==0)resultRoom = new Room21LR;
 			else if(rand==1)resultRoom = new Room4LR;
 			else if(rand==2)resultRoom = new Room5LR;
+			else if (rand == 3)resultRoom = new Room3LR;
 			else resultRoom = new Room21LR;
 		}
 		else if (isWall[0] && !isWall[1] && isWall[2] && !isWall[3])//»ó, ÇÏ ¶Õ¸° °æ¿ì
@@ -59,7 +60,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		}
 		else if (!isWall[0] && isWall[1] && isWall[2] && !isWall[3])//ÁÂ, ÇÏ ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new Room11_LB;
+			resultRoom = new Room11_RB;
 		}
 		else if (isWall[0] && !isWall[1] && !isWall[2] && isWall[3])//»ó, ¿ì ¶Õ¸° °æ¿ì
 		{
@@ -98,6 +99,11 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 			resultRoom = new StartRoom2;
 
 		}
+		else if (isWall[0] && isWall[1] && isWall[2] && !isWall[3]) // ÇÏ ²İ¸° °æ¿ì
+		{
+			resultRoom = new StartRoom3;
+
+		}
 	}
 	break;
 	case 2: // ³¡¹æ
@@ -106,22 +112,31 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		{
 			resultRoom = new DownStair1L;
 		}
-		/*else if (isWall[0] && isWall[1] && !isWall[2] && !isWall[3]) 
+		else if (!isWall[0] && !isWall[1] && isWall[2] && isWall[3]) //ÁÂ, »ó
 		{
-			
+			resultRoom = new DownStair2LT;
 
-		}*/
+		}
+		else if (isWall[0] && !isWall[1] && isWall[2] && isWall[3]) //»ó
+		{
+			resultRoom = new DownStair2T;
+
+		}
 	}
 	break;
 	case 3: // ½Ä´ç¹æ
 	{
-		if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
+		if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new RestaurantRoom;
 		}
-		else if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ°¡ ¶Õ¸° °æ¿ì
+		else if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new RestaurantRoom2LR;
+		}
+		else if (isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ¿ì°¡ ¶Õ¸° °æ¿ì
+		{
+			resultRoom = new RestaurantRoom1R;
 		}
 	}
 	break;
@@ -129,9 +144,13 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	{
 		if (!isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
+			resultRoom = new DungeonShopRoom3;
+		}
+		else if (!isWall[0] && isWall[1] && isWall[2] && isWall[3]) // ÁÂ°¡ ¶Õ¸° °æ¿ì
+		{
 			resultRoom = new DungeonShopRoom;
 		}
-		else if (!isWall[0] && !isWall[1] && !isWall[2] && isWall[3]) // ÁÂ, »ó, ¿ì°¡ ¶Õ¸° °æ¿ì
+		else if (isWall[0] && isWall[1] && !isWall[2] && isWall[3]) // ¿ì°¡ ¶Õ¸° °æ¿ì
 		{
 			resultRoom = new DungeonShopRoom2;
 		}
@@ -142,6 +161,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	resultRoom->init();
 	resultRoom->setPlayer(_player);
 	resultRoom->setStageManager(this);
+	resultRoom->setUIManager(_uiMgr);
 	return resultRoom;
 }
 
@@ -160,6 +180,22 @@ void StageManager::release()
 
 void StageManager::update(float const elapsedTime)
 {
+	/*if (KEY_MANAGER->isOnceKeyDown('A'))
+	{
+		moveRoom(Vector2(-1, 0));
+	}
+	else if (KEY_MANAGER->isOnceKeyDown('D'))
+	{
+		moveRoom(Vector2(1, 0));
+	}
+	else if (KEY_MANAGER->isOnceKeyDown('W'))
+	{
+		moveRoom(Vector2(0, -1));
+	}
+	else if (KEY_MANAGER->isOnceKeyDown('S'))
+	{
+		moveRoom(Vector2(0, 1));
+	}*/
 	_currStage->update(elapsedTime);
 }
 
@@ -222,6 +258,7 @@ void StageManager::moveRoom(Vector2 moveDir)
 	_currIndexY += moveDir.y;
 
 	_currStage = _stageMap[_currIndexX][_currIndexY];
+	_currStage->enter(0);
 }
 
 void StageManager::makeStage()
@@ -308,6 +345,7 @@ void StageManager::makeDungeon()
 	}
 		
 	_currStage = _stageMap[_currIndexX][_currIndexY];
+	_currStage->enter(0);
 }
 
 void StageManager::makeRoom(int x, int y)

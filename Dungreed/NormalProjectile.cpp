@@ -2,6 +2,46 @@
 #include "NormalProjectile.h"
 #include "ProjectileManager.h"
 
+NormalProjectile::NormalProjectile(const NormalProjectile & source)
+{
+	_position = source._position;
+	_size = source._size;
+	_active = source._active;
+	_team = source._team;
+
+	_info = nullptr;
+	_projectileMgr = nullptr;
+	_renderSize = source._renderSize;
+	_force = source._force;
+	_angleRadian = source._angleRadian;
+	_useCollsionEnemy = source._useCollsionEnemy;
+	
+	_maxTime = source._maxTime;
+	_count = source._count;
+
+	_img = source._img;
+	_effectImg = source._effectImg;
+	_effectSize = source._effectSize;
+
+	_useAni = source._useAni;
+	_ani = new Animation(*(source._ani));
+
+	_collsionGround = source._collsionGround;
+	_collisionPlatForm = source._collisionPlatForm;
+
+	_collisionEffect = source._collisionEffect;
+	_renderSize = source._renderSize;
+
+	_useGravity = source._useGravity;
+	_gravity = source._gravity;
+	
+	_useRotate = source._useRotate;
+	_length = source._length;
+
+
+
+}
+
 void NormalProjectile::init(const string imgKey, const string collisionEffect, const Vector2& drawSize, const Vector2& collsionRectSize, const Vector2& effectSize, const Vector2& force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm, bool collsionEnemy)
 {
 	float elapseXY;
@@ -34,7 +74,7 @@ void NormalProjectile::init(const string imgKey, const string collisionEffect, c
 	_collisionEffect = collisionEffect;
 	_useCollsionEnemy = collsionEnemy;
 
-	_drawSize = drawSize;
+	_renderSize = drawSize;
 	_size = collsionRectSize;
 	_effectSize = effectSize;
 
@@ -138,12 +178,12 @@ void NormalProjectile::render()
 	}
 	if (_useAni)
 	{		
-		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);		
+		_img->aniRender(CAMERA->getRelativeV2(_position), _renderSize, _ani);		
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
-		_img->render(CAMERA->getRelativeV2(_position), _drawSize);
+		_img->render(CAMERA->getRelativeV2(_position), _renderSize);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, resize, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 
