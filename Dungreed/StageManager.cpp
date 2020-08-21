@@ -263,7 +263,24 @@ void StageManager::moveRoom(Vector2 moveDir)
 	_currIndexY += moveDir.y;
 
 	_currStage = _stageMap[_currIndexX][_currIndexY];
-	_currStage->enter(0);
+	int moveType = 0;
+	if (moveDir.x == -1)
+	{
+		moveType = 2;
+	}
+	else if (moveDir.x == 1)
+	{
+		moveType = 0;
+	}
+	else if (moveDir.y == -1)
+	{
+		moveType = 3;
+	}
+	else if (moveDir.y == 1)
+	{
+		moveType = 1;
+	}
+	_currStage->enter(moveType);
 }
 
 void StageManager::makeStage()
