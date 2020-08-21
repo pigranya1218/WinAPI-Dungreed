@@ -8,6 +8,7 @@ void DungeonShopRoom::init()
 	loadMap("room/DungeonShopRoom1_L.map");
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 150), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::SHOP, Vector2(800, 450), DIRECTION::LEFT);
 }
 
 void DungeonShopRoom::release()

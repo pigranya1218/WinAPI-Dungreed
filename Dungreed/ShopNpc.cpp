@@ -1,15 +1,14 @@
 #include "stdafx.h"
-#include "RestaurantNpc.h"
-#include "NpcManager.h"
+#include "ShopNpc.h"
 #include "UIManager.h"
 
-void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
+void ShopNpc::init(Vector2 pos, DIRECTION direction)
 {
-	_type = NPC_TYPE::RESTAURANT;
-	_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_FOOD");
+	_type = NPC_TYPE::SHOP;
+	_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_SHOP");
 	_miniMapIcon = nullptr;
 
-	_img = IMAGE_MANAGER->findImage("NPC_RESTAURANT");
+	_img = IMAGE_MANAGER->findImage("NPC_SHOP");
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setDefPlayFrame(false, true);
@@ -18,37 +17,37 @@ void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_size = Vector2(50, 90);
+	_size = Vector2(50, 190);
 	_active = true;
 
-	_name = "호레리카";
+	_name = "크록";
 	_bodyDialogue = "가나다라마바사아자차카타파하";
-	_selectDialogues.push_back("식당");
+	_selectDialogues.push_back("상점");
 
 	_isActiveInteraction = false;
 	_isClose = false;
 }
 
-void RestaurantNpc::release()
+void ShopNpc::release()
 {
 	_ani->release();
 	delete _ani;
 }
 
-void RestaurantNpc::update(float timeElapsed)
+void ShopNpc::update(float timeElapsed)
 {
 	Npc::update(timeElapsed);
 
 	_ani->frameUpdate(timeElapsed);
 }
 
-void RestaurantNpc::interaction()
+void ShopNpc::interaction()
 {
 	_uiMgr->setDialogue(this);
 	_isActiveInteraction = true;
 }
 
-void RestaurantNpc::render()
+void ShopNpc::render()
 {
 	_img->setScale(4);
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));

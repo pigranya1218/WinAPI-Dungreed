@@ -2,6 +2,7 @@
 #include "Stage.h"
 #include "NpcManager.h"
 #include "RestaurantNpc.h"
+#include "ShopNpc.h"
 #include "GateNpc.h"
 
 void NpcManager::init()
@@ -50,12 +51,11 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	case NPC_TYPE::RESTAURANT:
 	{
 		npc = new RestaurantNpc;
-		
 	}
 	break;
 	case NPC_TYPE::SHOP:
 	{
-
+		npc = new ShopNpc;
 	}
 	break;
 	case NPC_TYPE::GATE:
