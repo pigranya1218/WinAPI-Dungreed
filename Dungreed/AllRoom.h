@@ -35,6 +35,7 @@
 #include "Room12LB.h"
 #include "Room13LTB.h"
 #include "Room14TRB.h"
+#include "Room15TB.h"
 
 #include "Room20LTRB.h"
 #include "Room21LR.h"

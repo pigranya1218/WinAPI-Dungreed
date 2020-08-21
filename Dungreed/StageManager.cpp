@@ -53,8 +53,10 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		}
 		else if (isWall[0] && !isWall[1] && isWall[2] && !isWall[3])//»ó, ÇÏ ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new Room6TB;
-			//resultRoom = new room
+			int rand = RANDOM->getInt(2);
+		    if(rand==0) resultRoom = new Room6TB;
+			else if(rand==1) resultRoom = new Room15TB;
+			else resultRoom = new Room15TB;
 		}
 		else if (!isWall[0] && !isWall[1] && isWall[2] && isWall[3])//ÁÂ, »ó ¶Õ¸° °æ¿ì
 		{
