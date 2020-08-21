@@ -13,8 +13,8 @@ void MagicStick::init()
 
 	_addStat.minDamage = 13;
 	_addStat.maxDamage = 20;
-	_addStat.attackSpeed = 2;
-	_addStat.reloadSpeed = 1;
+	_addStat.attackSpeed = 1;
+	_addStat.reloadSpeed = 0.1;
 
 
 	// private 변수 설정
@@ -22,6 +22,7 @@ void MagicStick::init()
 	_maxBullet = 12;
 	_currBullet = _maxBullet;
 	_currReloadDelay = 0;
+	_oneAttack = true;
 
 	//재장전 애니메이션
 	_reloadEffect = IMAGE_MANAGER->findImage("ReloadFinish");
@@ -56,72 +57,150 @@ void MagicStick::update(Player * player, float const elapsedTime)
 
 void MagicStick::backRender(Player * player)
 {
+	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+	Vector2 originPos = player->getPosition();
+	Vector2 pos = player->getPosition();
+
+	if (!_oneAttack)
+	{
+		// 회전축 중점
+		originPos.x += ((isLeft) ? -25 : 25); // 바라보는 방향의 어깨
+		originPos.y += 10;
+
+		// 회전축으로부터 마우스까지의 각도값
+		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
+
+		float handDegree = degree + ((isLeft) ? (-90 - _angleOffset) : (90 + _angleOffset));
+
+		// 좌우 대칭을 위한 계산
+		float weaponDegree = handDegree;
+		if (isLeft)
+		{
+			weaponDegree = 180 - weaponDegree;
+		}
+
+		// 손의 위치 
+		Vector2 renderPosHand = originPos;
+		renderPosHand.x += (_width * 0.1 * 4);
+		// 무기 위치
+		renderPosWeapon = originPos;
+		renderPosWeapon.x += ((isLeft) ? -(_img->getWidth() * 0.2f * 4) : (_img->getWidth() * 0.2f * 4));
+		renderPosWeapon.y += _img->getHeight() * 0.1f * 4;
+
+		_img->setScale(4); // 이미지 크기 
+		_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
+		_img->setAnglePos(Vector2(0.15f * _width, 0.5f * _height)); // 이미지 회전시킬 중점
+		//_img->aniRender(CAMERA->getRelativeV2(renderPosWeapon), _ani, isLeft);// 그린다
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);
+
+		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+		Vector2 renderPosHand2 = renderPosHand;
+		renderPosHand2.x += _width * 0.06f * 4;
+		FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+
+		if (_drawEffect) // 발사 이펙트를 그린다
+		{
+			_drawEffect = false;
+			Vector2 effectPos = renderPosHand; // 손의 위치로부터
+			effectPos.x += 5;
+			//effectPos.y = renderPosHand.y + 15;
+
+			Image* effectImg = IMAGE_MANAGER->findImage("lalaStickEffect");
+			Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+
+			float length = _img->getWidth() * 0.6f * 7; // 무기 길이만큼
+			effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+			effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+
+			EFFECT_MANAGER->play("L_Effect_lalaStick", effectPos, effectSize, degree);
+		}
+	}
+
+	// 재장전 중이라면 재장전 UI를 그린다.
+	if (_currReloadDelay > 0)
+	{
+		float ratio = _currReloadDelay / _adjustStat.reloadSpeed;
+		FloatRect reloadBar = FloatRect(Vector2(pos.x, pos.y - 60), Vector2(92, 4), PIVOT::CENTER);
+		FloatRect reloadHandle = FloatRect(Vector2(reloadBar.right - ratio * reloadBar.getSize().x, reloadBar.getCenter().y), Vector2(8, 12), PIVOT::CENTER);
+		IMAGE_MANAGER->findImage("ReloadBar")->render(CAMERA->getRelativeV2(reloadBar.getCenter()), reloadBar.getSize());
+		IMAGE_MANAGER->findImage("ReloadHandle")->render(CAMERA->getRelativeV2(reloadHandle.getCenter()), reloadHandle.getSize());
+	}
+	if (_reloadAni->isPlay())
+	{
+		_reloadEffect->setScale(4);
+		_reloadEffect->aniRender(CAMERA->getRelativeV2(Vector2(pos.x, pos.y - 60)), _reloadAni);
+	}
 }
 
 void MagicStick::frontRender(Player * player)
 {
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
+	Vector2 originPos = player->getPosition();
 
-	Vector2 renderPosHand = pos;
-	renderPosHand.x += ((isLeft) ? (_iconImg->getWidth() * 0.1f * 4) : -(_iconImg->getWidth() * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
-	renderPosHand.y += 15; // 플레이어의 중점으로부터 무기를 들고 있는 높이
-
-	// 손으로부터 마우스 에임까지의 각도
-	float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) * (180 / PI) + 360;
-	if (degree > 360)
+	if (_oneAttack)
 	{
-		degree -= 360;
+		// 회전축 중점
+		originPos.x += ((isLeft) ? -25 : 25); // 바라보는 방향의 어깨
+		originPos.y += 5;
+
+		// 회전축으로부터 마우스까지의 각도값
+		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x)) * (180 / PI);
+
+		float handDegree = degree + ((isLeft) ? 10 : -10);
+
+
+		// 좌우 대칭을 위한 계산
+		float weaponDegree = handDegree;
+		if (isLeft)
+		{
+			weaponDegree = 180 - weaponDegree;
+		}
+
+		// 손의 위치 
+		Vector2 renderPosHand = originPos;
+		renderPosHand.x += (_width * 0.1 * 4);
+		// 무기 위치
+		renderPosWeapon = originPos;
+		renderPosWeapon.x += ((isLeft) ? -(_img->getWidth() * 0.2f * 4) : (_img->getWidth() * 0.2f * 4));
+		renderPosWeapon.y += _img->getHeight() * 0.1f * 4;
+
+		_img->setScale(4); // 이미지 크기 
+		_img->setAngle(weaponDegree /*+ _angleOffset*/); // 이미지 각도 
+		_img->setAnglePos(Vector2(0.3f * _img->getWidth(), 0.6f * _img->getHeight())); // 이미지 회전시킬 중점
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);
+
+		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+		Vector2 renderPosHand2 = renderPosHand;
+		renderPosHand2.x += _width * 0.06f * 4;
+		FloatRect hand2 = FloatRect(renderPosHand2, _handSize, PIVOT::CENTER);
+		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree), CAMERA->getRelativeV2(originPos));
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
+
+		if (_drawEffect) // 발사 이펙트를 그린다
+		{
+			_drawEffect = false;
+			Vector2 effectPos = renderPosHand; // 손의 위치로부터
+			effectPos.x += 5;
+
+			Image* effectImg = IMAGE_MANAGER->findImage("lalaStickEffect");
+			Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+
+			float length = _img->getWidth() * 0.6f * 7; // 무기 길이만큼
+			effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+			effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
+
+			EFFECT_MANAGER->play("L_Effect_lalaStick", effectPos, effectSize, degree);
+		}
 	}
 
-	Vector2 renderPosWeapon = renderPosHand;
-	renderPosWeapon.x += ((isLeft) ? -(_img->getWidth() * 0.2f * 4) : (_img->getWidth() * 0.2f * 4));
-	renderPosWeapon.y -= _img->getHeight() * 0.1f * 4;
-	float renderDegree = degree;
-	if (isLeft) // 왼쪽을 보고 있음
-	{
-		renderDegree = 180 - degree;
-		if (renderDegree < 0) renderDegree += 360;
-	}
-
-	_img->setScale(4);
-	_img->setAngle(renderDegree);
-	_img->setAnglePos(Vector2(0.3f * _img->getWidth(), 0.6f * _img->getHeight()));
-	_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);
-
-	Vector2 subHandPos = renderPosHand; // 보조 손 (양손무기)
-	subHandPos.x += _img->getWidth() * 0.4 * 4;
-	subHandPos.y += (isLeft) ? (_img->getHeight() * 0.2 * 4) : (_img->getHeight() * -0.2 * 4);
-	FloatRect subhandRc = rectMakePivot(subHandPos, Vector2(5, 5), PIVOT::CENTER);
-
-	//D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(subhandRc), 210, 188, 181, 1.f, degree, CAMERA->getRelativeV2(renderPosHand));
-	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(subhandRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
-
-	FloatRect handRc = rectMakePivot(renderPosHand, Vector2(5, 5), PIVOT::CENTER);
-
-	//D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(handRc), 210, 188, 181, 1.f, degree, CAMERA->getRelativeV2(renderPosHand));
-	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
-
-	Vector2 renderPosHand02 = pos;
-	renderPosHand02.x += ((isLeft) ? (_img->getWidth() * 0.1f * 4) : -(_img->getWidth() * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
-	renderPosHand02.y += 30; // 플레이어의 중점으로부터 무기를 들고 있는 높이
-
-	if (_drawEffect) // 발사 이펙트를 그린다
-	{
-		_drawEffect = false;
-		Vector2 effectPos = renderPosHand; // 손의 위치로부터
-		effectPos.x += 5;
-		//effectPos.y = renderPosHand.y + 15;
-
-		Image* effectImg = IMAGE_MANAGER->findImage("lalaStickEffect");
-		Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
-
-		float length = _img->getWidth() * 0.6f * 7; // 무기 길이만큼
-		effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-
-		EFFECT_MANAGER->play("L_Effect_lalaStick", effectPos, effectSize, degree);
-	}
+	
 
 	// 재장전 중이라면 재장전 UI를 그린다.
 	if (_currReloadDelay > 0)
@@ -158,11 +237,11 @@ void MagicStick::attack(Player * player)
 
 	if (_oneAttack)
 	{
-		_angleOffset += 95;
+		_angleOffset += 115;
 	}
 	else
 	{
-		_angleOffset -= 95;
+		_angleOffset -= 115;
 	}
 	_oneAttack = !_oneAttack;
 
@@ -197,7 +276,7 @@ void MagicStick::attack(Player * player)
 	Vector2 effectSize = Vector2(_effectImg->getFrameSize().x * 4, _effectImg->getFrameSize().y * 4);
 
 	//projectile->init("lalaStickBullet", angleRadian, 30 * 1, true, false, 3, false, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("lalaStickBullet", "L_Effect_lalaStick", bulletSize, bulletRect, effectSize, Vector2(30 * 10, 30 * 10), 3, angleRadian, true, true, 10, true, false, false, false, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+	projectile->init("lalaStickBullet", "L_Effect_lalaStick", bulletSize, bulletRect, effectSize, Vector2(30 * 10, 30 * 10), 3, angleRadian, true, true, 10, true, false, false, false, true, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 

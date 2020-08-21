@@ -1,8 +1,56 @@
 #include "GuidedProjectile.h"
 #include "ProjectileManager.h"
 
-void GuidedProjectile::init(const string imgKey, const string collisionEffect, const Vector2 & drawSize, const Vector2 & collsionRectSize, const Vector2 & effectSize, const Vector2 & force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm, bool collsionEnemy)
+GuidedProjectile::GuidedProjectile(const GuidedProjectile & source)
 {
+	_position = source._position;
+	_size = source._size;
+	_active = source._active;
+	_team = source._team;
+
+	_info = nullptr;
+	_projectileMgr = nullptr;
+	_renderSize = source._renderSize;
+	_force = source._force;
+	_angleRadian = source._angleRadian;
+	_useCollsionEnemy = source._useCollsionEnemy;
+
+	_maxTime = source._maxTime;
+	_count = source._count;
+
+	_img = source._img;
+
+	_effectImg = source._effectImg;
+	_effectSize = source._effectSize;
+
+	_useAni = source._useAni;
+	if (source._ani != nullptr)
+	{
+		_ani = new Animation(*(source._ani));
+	}
+	if (source._ani == nullptr && _useAni)
+	{
+		_ani = new Animation;
+		_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+	}
+
+	_collsionGround = source._collsionGround;
+	_collisionPlatForm = source._collisionPlatForm;
+
+	_collisionEffect = source._collisionEffect;
+	_renderSize = source._renderSize;
+
+	_useGravity = source._useGravity;
+	_gravity = source._gravity;
+
+	_useRotate = source._useRotate;
+	_length = source._length;
+}
+
+void GuidedProjectile::init(const string imgKey, const string collisionEffect, const Vector2 & drawSize, const Vector2 & collsionRectSize, const Vector2 & effectSize, const Vector2 & force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm, bool collsionEnemy, bool afterimage)
+{
+	_img = IMAGE_MANAGER->findImage(imgKey);
+
 	float elapseXY;
 
 	_angleRadian = angleRadian;
@@ -10,8 +58,7 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 
 	_maxTime = maxTime;
 	_count = 0;
-
-	_img = IMAGE_MANAGER->findImage(imgKey);
+	_countI = 0;
 
 	if (useAni)
 	{
@@ -24,6 +71,7 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 		_ani->start();
 	}
 
+	_afterimage = afterimage;
 	_useAni = useAni;
 	_useRotate = useRotate;
 	_useGravity = useGravity;
@@ -33,7 +81,7 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 	_collisionEffect = collisionEffect;
 	_useCollsionEnemy = collsionEnemy;
 
-	_drawSize = drawSize;
+	_renderSize = drawSize;
 	_size = collsionRectSize;
 	_effectSize = effectSize;
 
@@ -44,6 +92,15 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 	_length = _img->getFrameSize().x * 1.0f;
 
 	_timeCount = 0;
+	_afterCount = 0;
+
+	if (_afterimage)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			_afterImg[i] = IMAGE_MANAGER->findImage(imgKey);
+		}
+	}
 }
 
 void GuidedProjectile::release()
@@ -90,37 +147,29 @@ void GuidedProjectile::update(float elapsedTime)
 		{
 			if ((guidedAngleRadian - _angleRadian) > (_angleRadian + (PI2 - guidedAngleRadian)))
 			{
-				//_angleRadian -= 2.f * elapsedTime;
 				if (_angleRadian < 0.f)
 				{
 					_angleRadian = PI2;
 				}
 				_angleRadian -= 3.f * elapsedTime;
-				//_angleRadian -= 0.1f;
 			}
 			else
 			{
 				_angleRadian += 3.f * elapsedTime;
-				//_angleRadian += 2.f * elapsedTime;
-				//_angleRadian += 0.1f;
 			}
 		}
 		else
 		{
 			if ((_angleRadian - guidedAngleRadian) < ((PI2 - _angleRadian) + guidedAngleRadian))
 			{
-				//_angleRadian -= 2.f * elapsedTime;
 				_angleRadian -= 3.f * elapsedTime;
-				//_angleRadian -= 0.1f;
 			}
 			else
 			{
-				//_angleRadian += 2.f * elapsedTime;
 				if (_angleRadian >= PI2)
 				{
 					_angleRadian = 0;
 				}
-				//_angleRadian += 0.1f;
 				_angleRadian += 3.f * elapsedTime;
 			}
 		}
@@ -143,6 +192,7 @@ void GuidedProjectile::update(float elapsedTime)
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
 		_active = false;
+		return;
 	}
 
 	// 타입에 따른 충돌 검사
@@ -169,7 +219,6 @@ void GuidedProjectile::update(float elapsedTime)
 			_active = false;
 			return;
 		}
-
 	}
 
 	// 지속시간을 넘어가면
@@ -187,6 +236,17 @@ void GuidedProjectile::update(float elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
+
+	if (_afterimage)
+	{
+		_mirageCount += elapsedTime;
+
+		/*while (_active)
+		{
+			_afterImg.push_back(IMAGE_MANAGER->findImage(_img->getKey()));
+		}*/
+	
+	}
 }
 
 void GuidedProjectile::render()
@@ -197,15 +257,31 @@ void GuidedProjectile::render()
 	}
 	if (_useAni)
 	{
-		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);
+		_img->aniRender(CAMERA->getRelativeV2(_position), _renderSize, _ani);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
-		_img->render(CAMERA->getRelativeV2(_position), _drawSize);
+		_img->render(CAMERA->getRelativeV2(_position), _renderSize);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
-
+	if (_afterimage)
+	{
+		if (_mirageCount / 2.f <= 1.f)
+		{
+			_mirageCount = 0;
+			Vector2 _pos = Vector2(_position.x - 10, _position.y);
+			_afterImg[0]->frameRender(_pos, _ani->getPlayIndex(), 0);
+		}
+	}
+	
+	/*if (_afterimage)
+	{
+		if (_afterCount%2 == 0)
+		{
+			_afterImg[_countI]->render(CAMERA->getRelativeV2(_position), _renderSize);
+		}
+	}*/
 	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 10), to_wstring(_angleRadian), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.f);
 }
 

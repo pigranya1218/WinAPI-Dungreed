@@ -27,7 +27,18 @@ private:
 	bool _useRotate;				// 투사체를 돌릴 것인가
 	bool _ProjectileReturn;
 
+	Image*		_effectImg;			// 이펙트 이미지
+
+	bool		_collsionGround;	// 빨간 선 충돌 여부
+	bool		_collisionPlatForm;	// 푸른 선 충돌 여부
+	bool		_useGravity;		// 중력 사용 여부
+	Vector2		_gravity;			// 중력값
+
+	float		_length;			// 이펙트 길이 조절용 이미지 길이
+
 public:
+	BoomerangProjectile() {}
+	BoomerangProjectile(const BoomerangProjectile& source);
 	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate = 1);
 	virtual void release();
 	virtual void update(float elapsedTime);
