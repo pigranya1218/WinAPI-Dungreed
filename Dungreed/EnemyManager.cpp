@@ -53,56 +53,56 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, bool spa
 		case ENEMY_TYPE::BANSHEE:
 		{
 			enemy = new Banshee;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::BAT_BOMB:
 		{
 			enemy = new BatBomb;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}		
 		break;
 		case ENEMY_TYPE::BAT_RED:
 		{
 			enemy = new BatRed;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::BAT_NORMAL:
 		{
 			enemy = new BatNormal;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::BAT_ICE:
 		{
 			enemy = new BatIce;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::BAT_GIANT_RED:
 		{
 			enemy = new BatGiantRed;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::BAT_GIANT_NORMAL:
 		{
 			enemy = new BatGiantNormal;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::GHOST:
 		{
 			enemy = new Ghost;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
@@ -113,63 +113,63 @@ void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, bool spa
 		case ENEMY_TYPE::SKEL_BIG_NORMAL:
 		{
 			enemy = new SkelBigNormal;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_BIG_ICE:
 		{
 			enemy = new SkelBigIce;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_DOG:
 		{
 			enemy = new SkelDog;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_MAGICIAN_ICE:
 		{
 			enemy = new SkelMagicianIce;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_SMALL_BOW:
 		{
 			enemy = new SkelSmallBow;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_SMALL_DAGGER:
 		{
 			enemy = new SkelSmallDagger;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::SKEL_SMALL_GSWORD:
 		{
 			enemy = new SkelSmallGsword;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::MINOTAURS:
 		{
 			enemy = new Minotaurs;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;
 		case ENEMY_TYPE::OVIBOS:
 		{
 			enemy = new Ovibos;
-			enemy->init(pos, direction);
+			enemy->init(pos, direction, spawnEffect);
 			enemy->setEnemyManager(this);
 		}
 		break;

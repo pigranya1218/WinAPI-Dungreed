@@ -2,13 +2,13 @@
 #include "EnemyManager.h"
 #include "BatRed.h"
 
-#define DEFSPEED 250.0f
+#define DEFSPEED 200.0f
 
-void BatRed::init(const Vector2& pos, DIRECTION direction)
+void BatRed::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 
-	setState(ENEMY_STATE::MOVE);	
+	setState(ENEMY_STATE::MOVE);
 
 	_position = pos;
 	_direction = direction;
@@ -18,6 +18,11 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 	// 사이즈 설정
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
 	_size = _size * _scale;
+
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -66,6 +71,15 @@ void BatRed::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::MOVE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			// 일정 주기로 이동
@@ -126,7 +140,7 @@ void BatRed::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	_enemyManager->moveEnemy(this, moveDir);
+	_enemyManager->moveEnemy(this, moveDir, true, false);
 
 	_ani->frameUpdate(timeElapsed);
 
@@ -156,6 +170,15 @@ void BatRed::setState(ENEMY_STATE state)
 
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{

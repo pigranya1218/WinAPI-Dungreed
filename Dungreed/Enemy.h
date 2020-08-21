@@ -40,6 +40,8 @@ protected:
 
 	int				_myEnemyType;	// 에너미 타입 변수
 
+	Vector2			_spawnSize;
+
 	vector<size_t>		_attackedId; // 최근 공격받았던 공격들의 아이디 값들을 저장하는 벡터, 최대 10칸 정도 저장하면 적당할 듯
 
 	// 탄막 공격 사용 시

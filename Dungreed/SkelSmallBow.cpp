@@ -2,7 +2,7 @@
 #include "EnemyManager.h"
 #include "SkelSmallBow.h"
 
-void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
+void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	// 애니메이션 할당
 	_ani = new Animation;
@@ -18,7 +18,6 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	_weaponAni->setFPS(10);
 	_weaponAni->stop();
 
-	// 상태 초기화
 	setState(ENEMY_STATE::IDLE);
 
 	// 에너미 관련 변수 초기화
@@ -30,6 +29,11 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	// 충돌 사이즈 및 렉트 초기화
 	_size = Vector2(_img->getFrameSize().x, _img->getFrameSize().y);
 	_size = _size * _scale;
+
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
 
 	// 공격 관련 초기화
 	ZeroMemory(&_attack, sizeof(_attack));
@@ -74,6 +78,15 @@ void SkelSmallBow::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			if (_isDetect)
@@ -121,22 +134,27 @@ void SkelSmallBow::update(float const timeElapsed)
 	}	
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	if (_isStand && _moving.force.y == 0)
+	if (_state != ENEMY_STATE::ENTER)
 	{
-		_position.y -= 15;
-		moveDir.y += 17;
-	}
-	_moving.force.y += _moving.gravity.y * timeElapsed;
-	moveDir.y += _moving.force.y * timeElapsed;
+		if (_isStand && _moving.force.y == 0)
+		{
+			_position.y -= 15;
+			moveDir.y += 17;
+		}
+		_moving.force.y += _moving.gravity.y * timeElapsed;
+		moveDir.y += _moving.force.y * timeElapsed;
 
-	// 이동할 포지션 최종
-	_enemyManager->moveEnemy(this, moveDir);
-	if (_isStand)
-	{
-		_moving.force.y = 0;
-	}	
+		// 이동할 포지션 최종
+		_enemyManager->moveEnemy(this, moveDir);
+		if (_isStand)
+		{
+			_moving.force.y = 0;
+		}
+	}
+
 
 	_weaponAni->frameUpdate(timeElapsed);
+	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
@@ -150,38 +168,43 @@ void SkelSmallBow::render()
 	_handImg->setScale(_scale);
 	_handImg->setAngle(_attack.angle * (180 / PI));
 	_weaponImg->setScale(_scale);
-
-	_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
-
-	// 활 시위 당기는 손 좌표 설정
-	Vector2 handPos = _position;
-	handPos.x += cosf(_attack.angle) * 15;
-	handPos.y -= sinf(_attack.angle) * 20;
-
-	// 무기 좌표 설정
-	Vector2 weaponPos = handPos;
-	weaponPos.x += cosf(_attack.angle) * 9;
-	weaponPos.y -= sinf(_attack.angle) * 9;
-	_weaponImg->setAngle(_attack.angle * (180 / PI));
-	_weaponImg->aniRender(CAMERA->getRelativeV2(weaponPos), _weaponAni);
-
-	// 활 시위 당기는 프레임에 따라 손 좌표도 수정
-	if (_weaponAni->getPlayIndex() <= 3)
+	
+	if (_state != ENEMY_STATE::ENTER)
 	{
-		handPos.x += cosf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
-		handPos.y -= sinf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
+		_img->render(CAMERA->getRelativeV2(_position), (_direction == DIRECTION::LEFT));
+
+		// 활 시위 당기는 손 좌표 설정
+		Vector2 handPos = _position;
+		handPos.x += cosf(_attack.angle) * 15;
+		handPos.y -= sinf(_attack.angle) * 20;
+
+		// 무기 좌표 설정
+		Vector2 weaponPos = handPos;
+		weaponPos.x += cosf(_attack.angle) * 9;
+		weaponPos.y -= sinf(_attack.angle) * 9;
+		_weaponImg->setAngle(_attack.angle * (180 / PI));
+		_weaponImg->aniRender(CAMERA->getRelativeV2(weaponPos), _weaponAni);
+
+		// 활 시위 당기는 프레임에 따라 손 좌표도 수정
+		if (_weaponAni->getPlayIndex() <= 3)
+		{
+			handPos.x += cosf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
+			handPos.y -= sinf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
+		}
+		_handImg->render(CAMERA->getRelativeV2(handPos));	// 손 출력
+
+		// 고정되는 손 좌표 설정
+		handPos = _position;
+		_handImg->setScale(_scale);
+		_handImg->setAngle(_attack.angle * (180 / PI));
+		handPos.x += cosf(_attack.angle) * 35;
+		handPos.y -= sinf(_attack.angle) * 40;
+		_handImg->render(CAMERA->getRelativeV2(handPos));	// 다른 손 출력
 	}
-	_handImg->render(CAMERA->getRelativeV2(handPos));	// 손 출력
-
-	// 고정되는 손 좌표 설정
-	handPos = _position;
-	_handImg->setScale(_scale);
-	_handImg->setAngle(_attack.angle * (180 / PI));
-	handPos.x += cosf(_attack.angle) * 35;
-	handPos.y -= sinf(_attack.angle) * 40;
-	_handImg->render(CAMERA->getRelativeV2(handPos));	// 다른 손 출력
-
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1, 2);
+	if(_state == ENEMY_STATE::ENTER)
+	{
+		_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
+	}
 
 	if (_curHp < _maxHp)
 	{
@@ -198,6 +221,15 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 	// 상태에 따른 애니메이션 설정
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Skel/Small/Idle";

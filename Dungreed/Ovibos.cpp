@@ -5,7 +5,7 @@
 #define RUSHSPEED 500.0f
 #define GRAVITYX 600.0f
 
-void Ovibos::init(const Vector2 & pos, DIRECTION direction)
+void Ovibos::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;	
 
@@ -15,6 +15,11 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 	_direction = direction;
 	_scale = 4;
 	_size = _img->getFrameSize() * _scale;
+
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
 
 	ZeroMemory(&_attacking, sizeof(_attacking));
 	_attacking.attackInit(3, 5, 1,0,0,50);
@@ -46,6 +51,15 @@ void Ovibos::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 
@@ -94,19 +108,28 @@ void Ovibos::update(float const timeElapsed)
 	}
 	hitReaction(playerpos, moveDir, timeElapsed);
 
-	if (_isStand && _moving.force.y == 0)
+	if (_state != ENEMY_STATE::ENTER)
 	{
-		_position.y -= 15;
-		moveDir.y += 25;
-	}
-	_moving.force.y += _moving.gravity.y * timeElapsed;
-	moveDir.y += _moving.force.y * timeElapsed;
+		if (_isStand && _moving.force.y == 0)
+		{
+			_position.y -= 15;
+			moveDir.y += 25;
+		}
+		_moving.force.y += _moving.gravity.y * timeElapsed;
+		moveDir.y += _moving.force.y * timeElapsed;
 
-	_enemyManager->moveEnemy(this, moveDir);
+		Vector2 lastDir = _position;
+		_enemyManager->moveEnemy(this, moveDir);
+		Vector2 currDir = _position;
 
-	if (_isStand)
-	{
-		_moving.force.y = 0;
+		if (_isStand)
+		{
+			_moving.force.y = 0;
+		}
+		if (lastDir.x == currDir.x && _state == ENEMY_STATE::ATTACK)
+		{
+			setState(ENEMY_STATE::IDLE);
+		}
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -136,6 +159,15 @@ void Ovibos::setState(ENEMY_STATE state)
 
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Ovibos/Idle";

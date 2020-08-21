@@ -2,9 +2,9 @@
 #include "EnemyManager.h"
 #include "BatNormal.h"
 
-#define DEFSPEED 250.0f	// 기본 스피드
+#define DEFSPEED 200.0f	// 기본 스피드
 
-void BatNormal::init(const Vector2 & pos, DIRECTION direction)
+void BatNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 
@@ -14,6 +14,15 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 	_direction = direction;
 	_scale = 4;
 
+	// 사이즈 설정
+	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
+	_size = _size * _scale;
+
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
+
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
@@ -21,14 +30,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
-	_hit.delay = 0.3;
-
-	// 사이즈 설정
-	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
-	_size = _size * _scale;
-
-	// 충돌 렉트 설정
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	_hit.delay = 0.3;	
 
 	_isDetect = 0;
 	_active = true;
@@ -52,6 +54,15 @@ void BatNormal::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::MOVE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			// 일정 주기로 이동
@@ -113,6 +124,16 @@ void BatNormal::setState(ENEMY_STATE state)
 
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
+		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{
 			_imageName = "Bat/Normal/Move";

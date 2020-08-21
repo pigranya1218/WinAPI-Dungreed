@@ -4,7 +4,7 @@
 
 #define DEFSPEED 150.0f
 
-void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
+void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 
@@ -17,7 +17,11 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(DEFSPEED, 0.f);
@@ -62,6 +66,15 @@ void SkelBigNormal::update(float const timeElapsed)
 	// 상태에 따른 행동처리
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			if (_isDetect)
@@ -143,19 +156,22 @@ void SkelBigNormal::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	if (_isStand && _moving.force.y == 0)
+	if (_state != ENEMY_STATE::ENTER)
 	{
-		_position.y -= 15;
-		moveDir.y += 17;
-	}
-	_moving.force.y += _moving.gravity.y * timeElapsed;
-	moveDir.y += _moving.force.y * timeElapsed;
+		if (_isStand && _moving.force.y == 0)
+		{
+			_position.y -= 15;
+			moveDir.y += 17;
+		}
+		_moving.force.y += _moving.gravity.y * timeElapsed;
+		moveDir.y += _moving.force.y * timeElapsed;
 
-	// 이동할 포지션 최종
-	_enemyManager->moveEnemy(this, moveDir);
-	if (_isStand)
-	{
-		_moving.force.y = 0;
+		// 이동할 포지션 최종
+		_enemyManager->moveEnemy(this, moveDir);
+		if (_isStand)
+		{
+			_moving.force.y = 0;
+		}
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -202,6 +218,15 @@ void SkelBigNormal::setState(ENEMY_STATE state)
 	// 상태에 따른 애니메이션 설정
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Skel/Big_Normal/Idle";

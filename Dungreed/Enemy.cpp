@@ -151,6 +151,8 @@ bool Enemy::isHit(Projectile* projectile)
 
 bool Enemy::hitEffect(FloatCircle * circle, AttackInfo * info)
 {
+	if (_state == ENEMY_STATE::ENTER) return false;
+
 	_isDetect = true;
 	_hit.isHit = true;
 	_hit.count = 0;
@@ -171,6 +173,8 @@ bool Enemy::hitEffect(FloatCircle * circle, AttackInfo * info)
 //
 bool Enemy::hitEffect(Projectile * projectile)
 {
+	if (_state == ENEMY_STATE::ENTER) return false;
+
 	AttackInfo* info = projectile->getAttackInfo();
 	_isDetect = true;
 	_hit.isHit = true;

@@ -2,12 +2,11 @@
 #include "EnemyManager.h"
 #include "Ghost.h"
 
-void Ghost::init(const Vector2 & pos, DIRECTION direction)
+void Ghost::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	// 애니메이션 할당
 	_ani = new Animation;
 
-	// 처음 상태는 기본
 	setState(ENEMY_STATE::IDLE);
 
 	// 변수 초기화
@@ -18,6 +17,12 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction)
 
 	// 타격 사이즈 초기화
 	_size = _img->getFrameSize() * _scale;
+
+	// 처음 상태 설정
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
 
 	// 공격 관련 변수 초기화
 	ZeroMemory(&_attacking, sizeof(_attacking));
@@ -64,6 +69,15 @@ void Ghost::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			// 플레이어 감지를 했으면
@@ -156,6 +170,15 @@ void Ghost::setState(ENEMY_STATE state)
 
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{

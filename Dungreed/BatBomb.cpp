@@ -2,7 +2,7 @@
 #include "EnemyManager.h"
 #include "BatBomb.h"
 
-void BatBomb::init(const Vector2 & pos, DIRECTION direction)
+void BatBomb::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 
@@ -17,8 +17,10 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 	_size = Vector2(_img->getFrameSize().x - 10, _img->getFrameSize().y);
 	_size = _size * _scale;
 
-	// 충돌 렉트 설정
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);	
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -29,10 +31,15 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
 
+	ZeroMemory(&_attack, sizeof(_attack));
+	_attack.attackInit(10, 10, 0);
+
 	_isDetect = 0;
 	_active = true;
 
 	_curHp = _maxHp = 100;
+
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_BOMB);
 }
 
 void BatBomb::release()
@@ -60,6 +67,15 @@ void BatBomb::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			if (_isDetect)
@@ -95,9 +111,27 @@ void BatBomb::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::SKILL:
 		{
+			// 공격 판정 프레임
+			if (_ani->getPlayIndex() >= 2 && _ani->getPlayIndex() <= 4)
+			{
+				Vector2 rightPos = _position;
+				rightPos.x += cosf(PI / 4 * 7) * 150;
+				rightPos.y -= sinf(PI / 4 * 7) * 150;
+
+				Vector2 leftPos = _position;
+				leftPos.x += cosf(PI / 4 * 3) * 150;
+				leftPos.y -= sinf(PI / 4 * 3) * 150;
+
+				FloatRect rightRc(rightPos, _img->getFrameSize() * _scale, PIVOT::CENTER);
+				FloatRect leftRc(leftPos, _img->getFrameSize() * _scale, PIVOT::CENTER);
+
+				FloatRect atkRect(Vector2(leftRc.left, leftRc.top), Vector2(rightRc.right - leftRc.left, rightRc.bottom - leftRc.top), PIVOT::LEFT_TOP);
+
+				_attack.attackRect(_myEnemyType, _enemyManager, atkRect);
+			}
 			if (!_ani->isPlay())
 			{
-				//setState(ENEMY_STATE::DIE);
+				setState(ENEMY_STATE::DIE);
 				_active = false;
 			}
 		}
@@ -153,6 +187,15 @@ void BatBomb::setState(ENEMY_STATE state)
 {
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{
