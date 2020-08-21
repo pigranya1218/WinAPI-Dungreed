@@ -119,7 +119,7 @@ void UIManager::release()
 	_abilityUI.release();
 }
 
-void UIManager::update(float const elaspedTime)
+void UIManager::update(float const elapsedTime)
 {
 	// Damage UI update
 	for (int i = 0; i < _damageUI.size();)
@@ -134,29 +134,29 @@ void UIManager::update(float const elaspedTime)
 			}
 			else
 			{
-				_damageUI[i].alpha = max(0, _damageUI[i].alpha - elaspedTime * 2.5);
+				_damageUI[i].alpha = max(0, _damageUI[i].alpha - elapsedTime * 2.5);
 			}
 		}
 		else
 		{
-			_damageUI[i].pos.y -= elaspedTime * 40;
-			_damageUI[i].remainTimes -= elaspedTime;
+			_damageUI[i].pos.y -= elapsedTime * 40;
+			_damageUI[i].remainTimes -= elapsedTime;
 		}
 		i++;
 
 	}
 
 	// HP bar animation
-	_hpUI.hpAni->frameUpdate(elaspedTime);
+	_hpUI.hpAni->frameUpdate(elapsedTime);
 
 	// Gold icon animation
-	_goldUI.ani->frameUpdate(elaspedTime);
+	_goldUI.ani->frameUpdate(elapsedTime);
 
 	// Weapon change animation
 	if (_player->getWeaponIndex() != _weaponUI.viewIndex)
 	{
-		_weaponUI.move.x = min(20, _weaponUI.move.x + _weaponUI.moveSpeed * elaspedTime);
-		_weaponUI.move.y = max(-20, _weaponUI.move.y - _weaponUI.moveSpeed * elaspedTime);
+		_weaponUI.move.x = min(20, _weaponUI.move.x + _weaponUI.moveSpeed * elapsedTime);
+		_weaponUI.move.y = max(-20, _weaponUI.move.y - _weaponUI.moveSpeed * elapsedTime);
 		if (_weaponUI.move.x == 20)
 		{
 			_weaponUI.move.x = 0;
@@ -166,10 +166,29 @@ void UIManager::update(float const elaspedTime)
 	}
 
 	// Map Open
-	_mapUI.isShow = false;
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MAP)))
 	{
 		_mapUI.isShow = true;
+		_mapUI.twinkleDelay += elapsedTime;
+		if (_mapUI.twinkleDelay > 0.5)
+		{
+			_mapUI.twinkleDelay = 0;
+			_mapUI.fillCurrRoom = !_mapUI.fillCurrRoom;
+		}
+		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+		{
+			_mapUI.offset.x += _ptMouse.x - _mapUI.lastMoustpt.x;
+			_mapUI.offset.y += _ptMouse.y - _mapUI.lastMoustpt.y;
+		}
+		_mapUI.lastMoustpt = _ptMouse;
+
+	}
+	else
+	{
+		_mapUI.isShow = false;
+		_mapUI.offset = Vector2(0, 0);
+		_mapUI.isDrag = false;
+		_mapUI.twinkleDelay = 0;
 	}
 
 	// Inventory Open
@@ -214,7 +233,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_dialogueUI.update(elaspedTime);
+			_dialogueUI.update(elapsedTime);
 		}
 	}
 	if (_inventoryUI.isActive())
@@ -226,7 +245,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_inventoryUI.update(elaspedTime);
+			_inventoryUI.update(elapsedTime);
 		}
 	}
 	if (_statUI.isActive())
@@ -238,7 +257,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_statUI.update(elaspedTime);
+			_statUI.update(elapsedTime);
 		}
 	}
 	if (_costumeUI.isActive())
@@ -250,7 +269,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_costumeUI.update(elaspedTime);
+			_costumeUI.update(elapsedTime);
 		}
 	}
 	if (_restaurantUI.isActive())
@@ -262,7 +281,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_restaurantUI.update(elaspedTime);
+			_restaurantUI.update(elapsedTime);
 		}
 	}
 	if (_abilityUI.isActive())
@@ -274,11 +293,12 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_abilityUI.update(elaspedTime);
+			_abilityUI.update(elapsedTime);
 		}
 	}
 
 	_isActive = false;
+	_isActive |= _mapUI.isShow;
 	_isActive |= _dialogueUI.isActive();
 	_isActive |= _inventoryUI.isActive();
 	_isActive |= _statUI.isActive();
@@ -557,9 +577,16 @@ void UIManager::render()
 		{
 			D2D_RENDERER->fillRectangle(FloatRect(Vector2(0, 0), Vector2(WINSIZEX, WINSIZEY), PIVOT::LEFT_TOP), 33, 31, 50, 1);
 			
-			int centerX = WINSIZEX / 2;
-			int centerY = 450;
+			int centerX = WINSIZEX / 2 + _mapUI.offset.x;
+			int centerY = 450 + _mapUI.offset.y;
 
+			// 현재 방 깜빡이기
+			if (_mapUI.fillCurrRoom)
+			{
+				D2D_RENDERER->drawRectangle(FloatRect(Vector2(centerX, centerY), Vector2(109, 109), PIVOT::CENTER), 84, 144, 255, 1, 5);
+			}
+
+			// 방 그리기
 			for (int x = 0; x < 4; x++)
 			{
 				for (int y = 0; y < 4; y++)
@@ -573,6 +600,7 @@ void UIManager::render()
 				}
 			}
 
+			// 방을 잇는 선분 그리기
 			for (int x = 0; x < 4; x++)
 			{
 				for (int y = 0; y < 4; y++)
@@ -597,6 +625,8 @@ void UIManager::render()
 			
 			D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, 190), 33, 31, 50, 1);
 			D2D_RENDERER->fillRectangle(FloatRect(0, 850, WINSIZEX, 900), 33, 31, 50, 1);
+			D2D_RENDERER->fillRectangle(FloatRect(0, 0, 165, WINSIZEY), 33, 31, 50, 1);
+			D2D_RENDERER->fillRectangle(FloatRect(1435, 0, WINSIZEX, WINSIZEY), 33, 31, 50, 1);
 
 			_mapUI.headerImg->render(Vector2(WINSIZEX / 2, 90), Vector2(WINSIZEX, 160));
 			_mapUI.bodyImg->render(Vector2(WINSIZEX / 2, WINSIZEY / 2 + 70), Vector2(1300, 660));

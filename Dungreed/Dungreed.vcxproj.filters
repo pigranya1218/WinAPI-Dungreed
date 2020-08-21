@@ -717,6 +717,9 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="GateNpc.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1237,6 +1240,9 @@
     </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="GateNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

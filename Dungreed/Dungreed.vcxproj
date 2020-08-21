@@ -158,6 +158,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
     <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="GateNpc.h" />
     <ClInclude Include="Seeri.h" />
     <ClInclude Include="BatBomb.h" />
     <ClInclude Include="BatGiantNormal.h" />
@@ -344,6 +345,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
     <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="GateNpc.cpp" />
     <ClCompile Include="Seeri.cpp" />
     <ClCompile Include="BatBomb.cpp" />
     <ClCompile Include="BatGiantNormal.cpp" />

@@ -6,10 +6,10 @@ void Room20LTRB::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage20_LTRB.map");
-	_respawnPosition[0] = Vector2(200, 200);
-	_respawnPosition[1] = Vector2(400, 200);
-	_respawnPosition[2] = Vector2(1500, 200);
-	_respawnPosition[3] = Vector2(400, 800);
+	//_respawnPosition[0] = Vector2(200, 200);
+	//_respawnPosition[1] = Vector2(400, 200);
+	//_respawnPosition[2] = Vector2(1500, 200);
+	//_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(350, 500));

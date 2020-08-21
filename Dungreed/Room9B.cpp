@@ -8,7 +8,7 @@ void Room9B::init()
 	loadMap("room/Stage9_B.map");
 	
 	_respawnPosition[3] = Vector2(500, 600);
-	makeDoor(Vector2(600, 800), DIRECTION::DOWN);
+	makeDoor(Vector2(600, 900), DIRECTION::DOWN);
 
 	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
 	_objectMgr->spawnObject(0x0000, Vector2(550, 200));

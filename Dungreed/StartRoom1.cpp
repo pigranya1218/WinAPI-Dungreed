@@ -9,9 +9,9 @@ void StartRoom1::init()
 	loadMap("room/StartRoom1_R.map");
 	//_direction.push_back(DIRECTION::RIGHT);
 	
-	//makeDoor(Vector2(TILESIZE * 19 + TILESIZE * 0.5, TILESIZE * 10), DIRECTION::RIGHT);
+	// makeDoor(Vector2(TILESIZE * 19 + TILESIZE * 0.5, TILESIZE * 10), DIRECTION::RIGHT);
 	_respawnPosition[0] = Vector2(570,670); // 맨 처음 초기화되는 위치
-	_respawnPosition[2] = Vector2(1130,670); // 오른쪽에서 들어올 때 위치
+	// _respawnPosition[2] = Vector2(1130,670); // 오른쪽에서 들어올 때 위치
 
 	_objectMgr->spawnObject(0x0000, Vector2(500, 600));
 	_objectMgr->spawnObject(0x0001, Vector2(200, 600));

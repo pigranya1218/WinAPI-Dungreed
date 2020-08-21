@@ -474,6 +474,7 @@ void Stage::makeDoorAuto()
 				{
 					int centerIndex = index - 2;
 					makeDoor(Vector2(_tile[centerIndex].rc.left, _tile[centerIndex].rc.getCenter().y), DIRECTION::UP);
+					_respawnPosition[1] = Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.getCenter().y + 100);
 					isMake = true;
 					break;
 				}
@@ -501,6 +502,7 @@ void Stage::makeDoorAuto()
 				{
 					int centerIndex = index - 2;
 					makeDoor(Vector2(_tile[centerIndex].rc.left, _tile[centerIndex].rc.getCenter().y), DIRECTION::DOWN);
+					_respawnPosition[3] = Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.getCenter().y - 100);
 					isMake = true;
 					break;
 				}
@@ -528,6 +530,7 @@ void Stage::makeDoorAuto()
 				{
 					int centerIndex = index - 2 * maxSizeX;
 					makeDoor(Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.top), DIRECTION::LEFT);
+					_respawnPosition[0] = Vector2(_tile[centerIndex].rc.getCenter().x + 100, _tile[index].rc.top - 60);
 					isMake = true;
 					break;
 				}
@@ -555,6 +558,7 @@ void Stage::makeDoorAuto()
 				{
 					int centerIndex = index - 2 * maxSizeX;
 					makeDoor(Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.top), DIRECTION::RIGHT);
+					_respawnPosition[2] = Vector2(_tile[centerIndex].rc.getCenter().x - 100, _tile[index].rc.top - 60);
 					isMake = true;
 					break;
 				}
