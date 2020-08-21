@@ -459,7 +459,6 @@ void UIManager::render()
 			int rectOffsetY = offsetY - playerPos.y;
 			for (int i = 0; i < _mapUI.collisionRect.size(); i++)
 			{
-				Vector2 center = _mapUI.collisionRect[i].getCenter();
 				FloatRect drawRc = _mapUI.collisionRect[i];
 			
 				drawRc.left += rectOffsetX;
@@ -468,6 +467,17 @@ void UIManager::render()
 				drawRc.bottom += rectOffsetY;
 
 				D2D_RENDERER->fillRectangle(drawRc, 192, 193, 195, 1);
+			}
+			for (int i = 0; i < _mapUI.doorRect.size(); i++)
+			{
+				FloatRect drawRc = _mapUI.doorRect[i];
+
+				drawRc.left += rectOffsetX;
+				drawRc.right += rectOffsetX;
+				drawRc.top += rectOffsetY;
+				drawRc.bottom += rectOffsetY;
+
+				D2D_RENDERER->fillRectangle(drawRc, 7, 209, 17, 1);
 			}
 		
 			// ENEMY
@@ -521,7 +531,7 @@ void UIManager::render()
 	}
 }
 
-void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager)
+void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager)
 {
 	for (int i = 0; i < groundRect.size(); i++)
 	{
@@ -569,6 +579,20 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 				_mapUI.collisionRect.push_back(miniMapRc);
 			}
 		}
+	}
+
+	for (int i = 0; i < doors.size(); i++)
+	{
+		if (doors[i] != nullptr)
+		{
+			FloatRect miniMapRc = FloatRect(doors[i]->getPosition(), doors[i]->getSize(), PIVOT::CENTER);
+			miniMapRc.left /= 16;
+			miniMapRc.top /= 16;
+			miniMapRc.right /= 16;
+			miniMapRc.bottom /= 16;
+			_mapUI.doorRect.push_back(miniMapRc);
+		}
+		
 	}
 
 	_mapUI.enemyMgr = enemyManager;

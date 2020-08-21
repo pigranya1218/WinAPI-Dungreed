@@ -20,13 +20,13 @@ void DoorObject::init(Vector2 pos, DIRECTION direction)
 	case DIRECTION::LEFT:
 	case DIRECTION::RIGHT:
 	{
-		_size = Vector2(58, 64* 4);
+		_size = Vector2(64, 64* 4);
 	}
 	break;
 	case DIRECTION::UP:
 	case DIRECTION::DOWN:
 	{
-		_size = Vector2(64 * 4, 58);
+		_size = Vector2(64 * 4, 64);
 	}
 	break;
 	}
