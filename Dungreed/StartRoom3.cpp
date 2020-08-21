@@ -6,6 +6,8 @@ void StartRoom3::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/StartRoom3_B.map");
 
+	
+	_respawnPosition[0] = Vector2(610, 400);
 	// makeDoor(Vector2(TILESIZE * 24 + TILESIZE * 0.5, TILESIZE * 9), DIRECTION::DOWN);
 
 }

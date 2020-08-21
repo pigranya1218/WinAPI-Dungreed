@@ -7,7 +7,10 @@ void Room22LTRB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage22_LTRB.map");
 	
-
+	_respawnPosition[0] = Vector2(200, 200);
+	_respawnPosition[1] = Vector2(400, 200);
+	_respawnPosition[2] = Vector2(1500, 200);
+	_respawnPosition[3] = Vector2(400, 800);
 }
 
 void Room22LTRB::release()

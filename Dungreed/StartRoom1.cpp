@@ -10,7 +10,7 @@ void StartRoom1::init()
 	//_direction.push_back(DIRECTION::RIGHT);
 	
 	//makeDoor(Vector2(TILESIZE * 19 + TILESIZE * 0.5, TILESIZE * 10), DIRECTION::RIGHT);
-	_respawnPosition[0] = Vector2(); // 맨 처음 초기화되는 위치
+	_respawnPosition[0] = Vector2(500,600); // 맨 처음 초기화되는 위치
 	_respawnPosition[2] = Vector2(); // 오른쪽에서 들어올 때 위치
 }
 
