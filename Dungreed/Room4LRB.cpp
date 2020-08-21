@@ -9,7 +9,7 @@ void Room4LRB::init()
 	//_respawnPosition[0] = Vector2(150,1300);
 	
 	//_respawnPosition[2] = Vector2(1600,1300);
-	//_respawnPosition[3] = Vector2(750, 1300);
+	_respawnPosition[3] = Vector2(750, 1300);
 
 	_objectMgr->spawnObject(0x0000, Vector2(1600, 1300));
 
