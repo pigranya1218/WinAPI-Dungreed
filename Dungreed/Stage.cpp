@@ -53,6 +53,17 @@ void Stage::update(float const elaspedTime)
 	int stageHeight = _tile[0].tileY * TILESIZE;
 	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
 	CAMERA->setXY(_stageManager->getPlayerPos());
+
+	if (KEY_MANAGER->isOnceKeyDown('L'))
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(!_doors[i]->isOpen());
+			}
+		}
+	}
 }
 
 void Stage::render()

@@ -1036,3 +1036,8 @@ Vector2 Player::getEnemyPos(Vector2 pos)
 {
 	return _gameScene->getEnemyPos(pos);
 }
+
+void Player::moveRoom(Vector2 dir)
+{
+	_gameScene->moveRoom(dir);
+}

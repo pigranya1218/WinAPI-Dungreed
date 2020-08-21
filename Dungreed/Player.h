@@ -112,6 +112,8 @@ public:
 	float getMinDamage();
 	float getMaxDamage();
 
+	// 스테이지 관련 함수
 	Vector2 getEnemyPos(Vector2 pos);
+	void moveRoom(Vector2 dir);
 };
 

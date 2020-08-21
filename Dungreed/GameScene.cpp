@@ -93,6 +93,11 @@ void GameScene::moveTo(GameObject * object, Vector2 moveDir)
 	_stageMgr->moveTo(object, moveDir);
 }
 
+void GameScene::moveRoom(Vector2 dir)
+{
+	_stageMgr->moveRoom(dir);
+}
+
 bool GameScene::attack(FloatRect* rect, AttackInfo* info)
 {
 	return _stageMgr->attack(rect, info);
@@ -103,9 +108,9 @@ bool GameScene::attack(FloatCircle* circle, AttackInfo* info)
 	return _stageMgr->attack(circle, info);
 }
 
-bool GameScene::attack(Projectile* projectile, AttackInfo* info)
+void GameScene::attack(Projectile* projectile, AttackInfo* info)
 {
-	return _stageMgr->attack(projectile, info);
+	_stageMgr->attack(projectile, info);
 }
 
 bool GameScene::isUIActive()

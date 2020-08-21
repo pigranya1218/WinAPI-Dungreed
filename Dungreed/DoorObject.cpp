@@ -47,6 +47,17 @@ void DoorObject::update(float elapsedTime)
 {
 	if (_isOpen)
 	{
+		int move[4][2] = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
+
+		FloatRect playerRc = FloatRect(_player->getPosition(), _player->getSize(), PIVOT::CENTER);
+		FloatRect doorRc = FloatRect(_position, _size, PIVOT::CENTER);
+		if (FloatRect::intersect(playerRc, doorRc))
+		{
+			_player->moveRoom(Vector2(-move[static_cast<int>(_direction)][0], -move[static_cast<int>(_direction)][1]));
+			return;
+		}
+
+
 		if (!_ani->isPlay())
 		{
 			// 텍스쳐들 생성 및 관리
@@ -58,18 +69,15 @@ void DoorObject::update(float elapsedTime)
 				if (_direction == DIRECTION::LEFT || _direction == DIRECTION::RIGHT)
 				{
 					newEffect.pos = Vector2(RANDOM->getFromFloatTo(_position.x - 32, _position.x + 32), RANDOM->getFromFloatTo(_position.y - 32 * 4 + 15, _position.y + 32 * 4 - 15));
-
 				}
 				else
 				{
 					newEffect.pos = Vector2(RANDOM->getFromFloatTo(_position.x - 32 * 4 + 15, _position.x + 32 * 4 - 15), RANDOM->getFromFloatTo(_position.y - 32, _position.y + 32));
-
 				}
 				newEffect.remainTime = 0.6;
 				_openTextures.push_back(newEffect);
 			}
 
-			int move[4][2] = { {1, 0}, {0, 1}, {-1, 0}, {0, -1} };
 			for (int i = 0; i < _openTextures.size();)
 			{
 				_openTextures[i].pos.x += elapsedTime * 100 * move[static_cast<int>(_direction)][0];
@@ -151,6 +159,11 @@ void DoorObject::setOpen(bool isOpen)
 	if (!_isOpen && isOpen)
 	{
 		_ani->setPlayFrame(16, 23, false, false);
+		_ani->start();
+	}
+	else if (_isOpen && !isOpen)
+	{
+		_ani->setPlayFrame(0, 10, false, false);
 		_ani->start();
 	}
 	_isOpen = isOpen;
