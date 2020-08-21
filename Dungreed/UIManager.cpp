@@ -65,6 +65,11 @@ void UIManager::init()
 	_weaponUI.moveSpeed = 80;
 	_weaponUI.viewIndex = 0;
 
+	// MAP UI
+	_mapUI.headerImg = IMAGE_MANAGER->findImage("UI/MAP/HEADER");
+	_mapUI.bodyImg = IMAGE_MANAGER->findImage("UI/MAP/BODY");
+
+
 	// DIALOGUE UI
 	_dialogueUI.init();
 
@@ -133,6 +138,13 @@ void UIManager::update(float const elaspedTime)
 			_weaponUI.move.y = 0;
 			_weaponUI.viewIndex = _player->getWeaponIndex();
 		}
+	}
+
+	// Map Open
+	_mapUI.isShow = false;
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MAP)))
+	{
+		_mapUI.isShow = true;
 	}
 
 	// Inventory Open
@@ -457,9 +469,9 @@ void UIManager::render()
 			
 			int rectOffsetX = offsetX - playerPos.x;
 			int rectOffsetY = offsetY - playerPos.y;
-			for (int i = 0; i < _mapUI.collisionRect.size(); i++)
+			for (int i = 0; i < _miniMapUI.collisionRect.size(); i++)
 			{
-				FloatRect drawRc = _mapUI.collisionRect[i];
+				FloatRect drawRc = _miniMapUI.collisionRect[i];
 			
 				drawRc.left += rectOffsetX;
 				drawRc.right += rectOffsetX;
@@ -468,9 +480,9 @@ void UIManager::render()
 
 				D2D_RENDERER->fillRectangle(drawRc, 192, 193, 195, 1);
 			}
-			for (int i = 0; i < _mapUI.doorRect.size(); i++)
+			for (int i = 0; i < _miniMapUI.doorRect.size(); i++)
 			{
-				FloatRect drawRc = _mapUI.doorRect[i];
+				FloatRect drawRc = _miniMapUI.doorRect[i];
 
 				drawRc.left += rectOffsetX;
 				drawRc.right += rectOffsetX;
@@ -481,7 +493,7 @@ void UIManager::render()
 			}
 		
 			// ENEMY
-			vector<Vector2> enemies = _mapUI.enemyMgr->getAllEnemyPos();
+			vector<Vector2> enemies = _miniMapUI.enemyMgr->getAllEnemyPos();
 			for (int i = 0; i < enemies.size(); i++)
 			{
 				Vector2 renderPos;
@@ -498,6 +510,14 @@ void UIManager::render()
 
 		}
 		
+		// Map UI
+		if (_mapUI.isShow)
+		{
+			D2D_RENDERER->fillRectangle(FloatRect(Vector2(0, 0), Vector2(WINSIZEX, WINSIZEY), PIVOT::LEFT_TOP), 33, 31, 50, 0.7);
+			_mapUI.headerImg->render(Vector2(WINSIZEX / 2, 90), Vector2(WINSIZEX, 160));
+			_mapUI.bodyImg->render(Vector2(WINSIZEX / 2, WINSIZEY / 2 + 70), Vector2(1300, 660));
+		}
+
 
 		// Dialogue UI
 		if (_dialogueUI.isActive())
@@ -531,10 +551,10 @@ void UIManager::render()
 	}
 }
 
-void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager)
+void UIManager::setMiniMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager)
 {
-	_mapUI.collisionRect.clear();
-	_mapUI.doorRect.clear();
+	_miniMapUI.collisionRect.clear();
+	_miniMapUI.doorRect.clear();
 	for (int i = 0; i < groundRect.size(); i++)
 	{
 		FloatRect miniMapRc = groundRect[i];
@@ -542,7 +562,7 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 		miniMapRc.top /= 16;
 		miniMapRc.right /= 16;
 		miniMapRc.bottom /= 16;
-		_mapUI.collisionRect.push_back(miniMapRc);
+		_miniMapUI.collisionRect.push_back(miniMapRc);
 	}
 	for (int i = 0; i < groundLine.size(); i++) // 대각선 땅
 	{
@@ -554,7 +574,7 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 			miniMapRc.top /= 16;
 			miniMapRc.right /= 16;
 			miniMapRc.bottom /= 16;
-			_mapUI.collisionRect.push_back(miniMapRc);
+			_miniMapUI.collisionRect.push_back(miniMapRc);
 		}
 	}
 	for (int i = 0; i < platformLine.size(); i++) // 대각선 땅
@@ -567,7 +587,7 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 			miniMapRc.top /= 16;
 			miniMapRc.right /= 16;
 			miniMapRc.bottom /= 16;
-			_mapUI.collisionRect.push_back(miniMapRc);
+			_miniMapUI.collisionRect.push_back(miniMapRc);
 		}
 		else // 대각선
 		{
@@ -578,7 +598,7 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 				miniMapRc.top /= 16;
 				miniMapRc.right /= 16;
 				miniMapRc.bottom /= 16;
-				_mapUI.collisionRect.push_back(miniMapRc);
+				_miniMapUI.collisionRect.push_back(miniMapRc);
 			}
 		}
 	}
@@ -592,14 +612,24 @@ void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLi
 			miniMapRc.top /= 16;
 			miniMapRc.right /= 16;
 			miniMapRc.bottom /= 16;
-			_mapUI.doorRect.push_back(miniMapRc);
+			_miniMapUI.doorRect.push_back(miniMapRc);
 		}
 		
 	}
 
-	_mapUI.enemyMgr = enemyManager;
-	_mapUI.npcMgr = npcManager;
-	_mapUI.objectMgr = objectManager;
+	_miniMapUI.enemyMgr = enemyManager;
+	_miniMapUI.npcMgr = npcManager;
+	_miniMapUI.objectMgr = objectManager;
+}
+
+void UIManager::setMap(vector<vector<Stage*>> stageMap)
+{
+	_mapUI.stageMap = stageMap;
+}
+
+void UIManager::setCurrentMapIndex(Vector2 currIndex)
+{
+	_mapUI.currIndex = currIndex;
 }
 
 void UIManager::showDamage(DamageInfo damage, Vector2 pos)

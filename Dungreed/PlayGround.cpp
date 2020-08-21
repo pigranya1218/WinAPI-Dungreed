@@ -231,6 +231,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("FOOD/SPARKLING_WATER", L"resources/images/gameScene/ui/restaurant/foods/26_SparklingWater.png");
 	IMAGE_MANAGER->addImage("FOOD/STRAWBERRY_PIE", L"resources/images/gameScene/ui/restaurant/foods/18_StrawberryPie.png");
 
+	// *** MAP
+	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");
+	IMAGE_MANAGER->addImage("UI/MAP/BODY", L"resources/images/gameScene/ui/map/MapBase 1_1.png");
+
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
 
@@ -665,7 +669,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("GAME");	
+	SCENE_MANAGER->changeScene("MapTool");	
 
 	
 	return S_OK;

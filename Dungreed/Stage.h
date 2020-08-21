@@ -81,4 +81,6 @@ public:
 
 	void makeDoor(Vector2 pos, DIRECTION direction);
 	void makeDoorAuto();
+
+	bool isPlayerVisit() { return _isVisited; }
 };

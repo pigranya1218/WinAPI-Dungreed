@@ -14,6 +14,7 @@ class StageManager;
 class EnemyManager;
 class NpcManager;
 class ObjectManager;
+class Stage;
 
 class UIManager
 {
@@ -92,6 +93,20 @@ private:
 		NpcManager* npcMgr;
 		ObjectManager* objectMgr;
 	};
+
+	struct tagMap // 맵
+	{
+		Image* headerImg;
+		Image* bodyImg;
+
+		bool isShow;
+		vector<vector<Stage*>> stageMap;
+		Vector2 currIndex;
+
+		float twinkleDelay; // 현재 위치 깜빡거리는 거 시간 재는 변수
+		string stageTitle; // 스테이지 이름
+	};
+
 private:
 	GameScene* _gameScene;
 	Player* _player;
@@ -104,7 +119,8 @@ private:
 	tagLabelUI	_satietyUI; // 플레이어 포만감 라벨
 	tagProgressUI	_satietyProgress; // 플레이어 포만감 프로그레스바
 	tagWeaponUI	_weaponUI; // 무기 UI
-	tagMiniMap _mapUI; // 미니맵 UI
+	tagMiniMap _miniMapUI; // 미니맵 UI
+	tagMap _mapUI; // 맵 UI
 
 	vector<tagDamageUI> _damageUI; // 대미지 표기 숫자 UI
 	vector<tagEnemyHpUI> _enemyHpUI; // 적 체력바 UI
@@ -125,8 +141,9 @@ public:
 	void update(float const elaspedTime);
 	void render();
 
-	void setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager);
-
+	void setMiniMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager);
+	void setMap(vector<vector<Stage*>> stageMap);
+	void setCurrentMapIndex(Vector2 currIndex);
 	bool isActive() const noexcept { return _isActive; }
 
 	void showDamage(DamageInfo damage, Vector2 pos);

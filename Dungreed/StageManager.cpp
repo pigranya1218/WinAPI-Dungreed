@@ -173,6 +173,8 @@ void StageManager::init()
 	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
 	_mapSize = 4;
 	makeStage();
+	_uiMgr->setMap(_stageMap);
+	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 }
 
 void StageManager::release()
@@ -280,6 +282,7 @@ void StageManager::moveRoom(Vector2 moveDir)
 	{
 		moveType = 1;
 	}
+	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(moveType);
 }
 
