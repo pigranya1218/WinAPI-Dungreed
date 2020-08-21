@@ -618,6 +618,22 @@ void UIManager::render()
 			// PLAYER			
 			D2D_RENDERER->fillRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(4, 4), PIVOT::CENTER), 84, 144, 255, 1);
 			D2D_RENDERER->drawRectangle(FloatRect(Vector2(offsetX, offsetY), Vector2(7, 7), PIVOT::CENTER), D2D1::ColorF::Enum::Black, 1, 3);
+
+			// NPC
+			vector<Npc*> npcs = _miniMapUI.npcMgr->getNpcs();
+			for (int i = 0; i < npcs.size(); i++)
+			{
+				Image* icon = npcs[i]->getMiniMapIcon();
+				if (icon != nullptr)
+				{
+					Vector2 renderPos;
+					Vector2 npcPos = npcs[i]->getPosition() / 16;
+					renderPos.x = offsetX + (npcPos.x - playerPos.x);
+					renderPos.y = offsetY + (npcPos.y - playerPos.y) - 8;
+					icon->setScale(2);
+					icon->render(renderPos);
+				}
+			}
 		}
 		
 		// Map UI

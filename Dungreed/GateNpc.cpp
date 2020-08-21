@@ -6,6 +6,7 @@ void GateNpc::init(Vector2 pos, DIRECTION direction)
 {
 	_type = NPC_TYPE::GATE;
 	_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_WORM");
+	_miniMapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_WORM");
 
 	_img = IMAGE_MANAGER->findImage("NPC_GATE_IDLE");
 	_ani = new Animation;

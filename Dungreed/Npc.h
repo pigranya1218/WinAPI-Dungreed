@@ -32,6 +32,7 @@ protected:
 	Vector2 _force; // 받고 있는 힘
 
 	Image* _mapIcon; // 지도 UI에서 보여질 그림
+	Image* _miniMapIcon;
 
 public:
 	void setNpcManager(NpcManager* npcMgr) { _npcMgr = npcMgr; }
@@ -48,6 +49,7 @@ public:
 	string getBodyDialogue() { return _bodyDialogue; }
 	vector<string> getSelectDialogues() { return _selectDialogues; }
 	Image* getMapIcon() { return _mapIcon; };
+	Image* getMiniMapIcon() { return _miniMapIcon; };
 	
 	NPC_TYPE getType() { return _type; }
 };
