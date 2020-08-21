@@ -9,7 +9,7 @@ void StartRoom1::init()
 	loadMap("room/StartRoom1_r.map");
 	//_direction.push_back(DIRECTION::RIGHT);
 	
-	makeDoor(Vector2(TILESIZE * 19 + TILESIZE * 0.5, TILESIZE * 10), DIRECTION::RIGHT);
+	//makeDoor(Vector2(TILESIZE * 19 + TILESIZE * 0.5, TILESIZE * 10), DIRECTION::RIGHT);
 	
 }
 

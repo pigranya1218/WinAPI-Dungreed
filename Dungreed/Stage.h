@@ -80,4 +80,5 @@ public:
 	bool getOpenDirection(int num) { return _OpenDirection[num]; }
 
 	void makeDoor(Vector2 pos, DIRECTION direction);
+	void makeDoorAuto();
 };

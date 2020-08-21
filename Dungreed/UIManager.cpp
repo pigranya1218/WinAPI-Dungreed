@@ -533,6 +533,8 @@ void UIManager::render()
 
 void UIManager::setMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager)
 {
+	_mapUI.collisionRect.clear();
+	_mapUI.doorRect.clear();
 	for (int i = 0; i < groundRect.size(); i++)
 	{
 		FloatRect miniMapRc = groundRect[i];
