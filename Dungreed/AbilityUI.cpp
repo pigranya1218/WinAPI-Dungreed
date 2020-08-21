@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "AbilityUI.h"
+#include "Player.h"
 
 void AbilityUI::init()
 {
+	_currAbilityPoint = 30;
+
 	//아이콘 이미지 할당
 	for (int i = 0; i < 3; i++)
 	{
@@ -26,6 +29,9 @@ void AbilityUI::init()
 		_windows[i].iconRc[1] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x, _windows[i].baseRc.getCenter().y + 150), Vector2(60, 60), PIVOT::CENTER);
 		_windows[i].iconRc[0] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x - 70, _windows[i].baseRc.getCenter().y + 150), Vector2(60, 60), PIVOT::CENTER);
 		_windows[i].iconRc[2] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x + 70, _windows[i].baseRc.getCenter().y + 150), Vector2(60, 60), PIVOT::CENTER);
+		//특성 이름을 기입할 렉트
+		_windows[i].titleRc = FloatRect(Vector2(_windows[i].baseRc.getCenter().x, _windows[i].baseRc.getCenter().y - 120), Vector2(120, 80), PIVOT::CENTER);
+		
 	}
 
 	//렉트
@@ -197,7 +203,11 @@ void AbilityUI::render()
 		{
 			D2D_RENDERER->drawRectangle(_windows[i].iconRc[j], D2D1::ColorF::Magenta, 1, 1);
 		}
-		//icon[0][0]->render(_windows[i].iconRc[0].getCenter(), _windows[i].iconRc->getSize());
+		//특성 이름 
+		wstring title[5] = { L"분노", L"신속", L"인내", L"신비", L"탐욕" };
+		D2D_RENDERER->drawRectangle(_windows[i].titleRc, D2D1::ColorF::Magenta, 1, 1);
+		D2D_RENDERER->renderTextField(_windows[i].titleRc.left, _windows[i].titleRc.top, title[i], D2D1::ColorF::White, 50, _windows[i].titleRc.getWidth(), _windows[i].titleRc.getHeight(), 1,
+			DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 	}
 	//현재 남은 특성 포인트
 	_currPointBack->render(_currPointRc.getCenter(), _currPointRc.getSize());

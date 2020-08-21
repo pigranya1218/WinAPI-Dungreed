@@ -21,7 +21,7 @@ private:
 		FloatRect statValueRc[2];	//상승하는 스탯의 수치를 적을 렉트
 		FloatRect statNameRc[2];	//상승하는 스탯의 이름을 적을 렉트
 		FloatRect iconRc[3];		//특성 아이콘 렉트
-		FloatRect buttonRc;			//플러스 단추
+		//FloatRect buttonRc;			//플러스 단추
 		FloatCircle buttonCir;		//플러스 단추 서클
 	};
 
@@ -29,6 +29,9 @@ private:
 	Player* _player;
 	
 	bool _isActive;
+
+	int _currAbilityPoint; //현재 남은 특성 포인트
+	int _abilityPoint[5]; //0 ~ 4 : 분노 신속 인내 신비 탐욕 順 (ex:_abilityPoint[1] = 10 -> 신속 포인트가 10찍어져 있음)
 
 	//이미지
 	//*라벨 띠지
