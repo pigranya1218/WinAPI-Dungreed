@@ -19,10 +19,11 @@
 #include "Room1R.h"
 #include "Room9B.h"
 
-#include "Room2LTR.h"
+#include "Room2LR.h"
 
 #include "Room3LR.h"
 #include "Room4LR.h"
+#include "Room4LTR.h"
 #include "Room5LR.h"
 #include "Room6TB.h"
 #include "Room7RT.h"

@@ -5,9 +5,11 @@ void Room7RT::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage7_TR.map");
-	_respawnPosition[1] = Vector2(700, 390);
+	_respawnPosition[1] = Vector2(900, 570);
 
-	_respawnPosition[2] = Vector2(1000, 500);     
+	_respawnPosition[2] = Vector2(1550, 600);          
+	
+	makeDoor(Vector2(900, 475), DIRECTION::UP);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 200));
 	_objectMgr->spawnObject(0x0000, Vector2(250, 200));

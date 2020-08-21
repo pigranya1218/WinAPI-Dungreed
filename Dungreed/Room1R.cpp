@@ -7,7 +7,7 @@ void Room1R::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage1_R.map");
 
-	_respawnPosition[2] = Vector2(1200,500);
+	_respawnPosition[2] = Vector2(1750,500);
 
 	_objectMgr->spawnObject(0x0000, Vector2(550, 600));
 
