@@ -135,7 +135,7 @@ void BrokenObject::init(int objectCode, Vector2 pos)
 
 void BrokenObject::update(float elapsedTime)
 {
-	_force.y += elapsedTime * 4000;
+	_force.y += elapsedTime * 80;
 	_objectMgr->moveTo(this, _force);
 	if (_isStand)
 	{

@@ -9,6 +9,11 @@ void Room4LTRB::init()
 	_respawnPosition[1] = Vector2(300,200);
 	_respawnPosition[2] = Vector2(900, 600);
 	_respawnPosition[3] = Vector2(450, 800);
+
+	_objectMgr->spawnObject(0x0001, Vector2(900, 500));
+	//_objectMgr->spawnObject(0x0001, Vector2(900, 1000));
+	//
+	_objectMgr->spawnObject(0x0002, Vector2(820, 500));
 }
 
 void Room4LTRB::release()

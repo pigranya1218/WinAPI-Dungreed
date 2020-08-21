@@ -7,6 +7,14 @@ void DownStair1L::init()
 	loadMap("room/DownStair1_L.map");
 	
 	_respawnPosition[0] = Vector2(200, 600);
+
+	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
+
+	_objectMgr->spawnObject(0x0000, Vector2(1100, 500));
+	_objectMgr->spawnObject(0x0000, Vector2(1140, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(1080, 500));
 }
 
 void DownStair1L::release()

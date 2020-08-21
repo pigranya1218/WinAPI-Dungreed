@@ -15,9 +15,15 @@ private:
 	int _currBullet; // 현재 총알 갯수
 	float _currReloadDelay; // 남은 재장전 쿨타임
 	bool _drawEffect; // 이번 render 함수에서 이펙트를 시작할 것인지 판단
-
+	bool _oneAttack;
 	NormalProjectile* projectile;
-
+	Vector2 renderPosWeapon;
+	Vector2 _attackMove;
+	float _width;
+	float _height;
+	FloatRect _hand;
+	Vector2 _handSize;
+	float _angleOffset;
 public:
 	virtual void init() override;
 	virtual void release() override;

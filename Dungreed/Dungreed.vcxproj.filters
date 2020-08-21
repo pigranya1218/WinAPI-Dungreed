@@ -717,6 +717,9 @@
     <ClInclude Include="DoorObject.h">
       <Filter>Dungreed\GameScene\Object\Door</Filter>
     </ClInclude>
+    <ClInclude Include="SeeriProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1243,6 +1246,9 @@
     </ClCompile>
     <ClCompile Include="Room12LB.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="SeeriProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

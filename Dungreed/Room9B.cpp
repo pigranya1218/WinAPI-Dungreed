@@ -8,6 +8,10 @@ void Room9B::init()
 	loadMap("room/Stage9_B.map");
 	
 	_respawnPosition[3] = Vector2(500, 600);
+
+	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
+	_objectMgr->spawnObject(0x0000, Vector2(550, 200));
+	_objectMgr->spawnObject(0x0002, Vector2(650, 200));
 }
 
 void Room9B::release()

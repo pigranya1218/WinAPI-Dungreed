@@ -3,6 +3,10 @@
 
 class DungeonShopRoom :public Stage
 {
+private:
+
+	
+
 public:
 	virtual void init();
 	virtual void release();

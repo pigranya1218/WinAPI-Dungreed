@@ -239,11 +239,15 @@ void Player::init()
 
 	Seeri* testAcc21 = new Seeri;
 	testAcc21->init();
-	_inventory[0] = testAcc21;
+	_inventory[5] = testAcc21;
 
-	DemonBoots* testAcc13 = new DemonBoots;
-	testAcc13->init();
-	_inventory[5] = testAcc13;
+	//DemonBoots* testAcc13 = new DemonBoots;
+	//testAcc13->init();
+	//_inventory[5] = testAcc13;
+
+	//Voluspa* testAcc22 = new Voluspa;
+	//testAcc22->init();
+	//_inventory[5] = testAcc22;
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
@@ -279,10 +283,10 @@ void Player::init()
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
-	CosmosSword* testWeapon3 = new CosmosSword;
-	testWeapon3->init();
-	_inventory[12] = testWeapon3;
-
+	//CosmosSword* testWeapon3 = new CosmosSword;
+	//testWeapon3->init();
+	//_inventory[12] = testWeapon3;
+	//
 	/*PickaxeRed* testWeapon4 = new PickaxeRed;
 	testWeapon4->init();
 	_inventory[13] = testWeapon4;*/
@@ -297,8 +301,8 @@ void Player::init()
 
 	MagicStick* testWeapon5 = new MagicStick;
 	testWeapon5->init();
-	_inventory[13] = testWeapon5;
-
+	_inventory[12] = testWeapon5;
+	//
 	/*Boomerang* testweapon5 = new Boomerang;
 	testweapon5->init();
 	_inventory[14] = testweapon5;*/

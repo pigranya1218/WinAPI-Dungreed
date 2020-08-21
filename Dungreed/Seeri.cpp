@@ -1,5 +1,5 @@
 #include "Seeri.h"
-
+#include "SeeriProjectile.h"
 void Seeri::init()
 {
 	_iconImg = IMAGE_MANAGER->findImage("Seeri");
@@ -13,7 +13,7 @@ void Seeri::init()
 	_addStat.criticalChance = 5;
 
 	_price = 600;
-
+	_Delay = 4.0;
 	_img = IMAGE_MANAGER->findImage("Seeri0");
 	_ani = new Animation;
 	_ani->start();
@@ -33,6 +33,35 @@ void Seeri::update(Player * player, float const elapsedTime)
 	_renderPos = player->getPosition();
 	_direction = player->getDirection();
 	_ani->frameUpdate(elapsedTime);
+
+	Vector2 _enemy = player->getEnemyPos(Vector2());
+
+	if (_Delay > 0)
+	{
+		_Delay = max(0, _Delay - elapsedTime);
+	}
+	if (_Delay == 0)
+	{
+		_Delay = 4.0;
+		
+		float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_enemy.y) - _renderPos.y), (CAMERA->getAbsoluteX(_enemy.x) - _renderPos.x)) + PI2;
+		if (angleRadian > PI2)
+		{
+			angleRadian -= PI2;
+		}
+		SeeriProjectile* projectile = new SeeriProjectile;
+		projectile->setPosition(_renderPos);
+		projectile->setTeam(OBJECT_TEAM::PLAYER);			
+		projectile->init("SeeriBullet", "BombPouch2", Vector2(20, 50), Vector2(20, 50), Vector2(100, 100), Vector2(30 * 10, 30 * 10), 10, _renderPos.y, false, false, 10, false, false, false, false, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+		string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
+		AttackInfo* attackInfo = new AttackInfo;
+		attackInfo->team = OBJECT_TEAM::PLAYER;
+		attackInfo->madeByWeapon = false;
+		attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+		attackInfo->maxDamage = 5;
+		attackInfo->minDamage = 3;
+		player->attack(projectile, attackInfo);
+	}
 	
 }
 
