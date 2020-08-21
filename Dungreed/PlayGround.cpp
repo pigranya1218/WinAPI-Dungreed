@@ -493,11 +493,12 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
+	
 	//***MeleeWeaponSound
-	SOUND_MANAGER->addSound("SOUND_katana","resoureces/sound/MeleeWeapon/katana.wav", false, false); 
-	SOUND_MANAGER->addSound("SOUND_katana2","resoureces/sound/MeleeWeapon/katana2.wav", false, false);
-	SOUND_MANAGER->addSound("SOUND_katana3","resoureces/sound/MeleeWeapon/katana3.wav", false, false);
-
+	SOUND_MANAGER->addSound("SOUND_katana", "resources/sound/MeleeWeapon/katana.wav", false, false);  // 카타나
+	SOUND_MANAGER->addSound("SOUND_katana2", "resources/sound/MeleeWeapon/katana2.wav", false, false);
+	SOUND_MANAGER->addSound("SOUND_katana3", "resources/sound/MeleeWeapon/katana3.wav", false, false);
+	SOUND_MANAGER->addSound("SOUND_generalAttack", "resources/sound/MeleeWeapon/generalAttack.wav", false, false); // 기본검 공격
 
 
 
@@ -751,6 +752,9 @@ HRESULT playGround::init()
 
 
 	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
+
+
+
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

@@ -291,6 +291,11 @@ void ShortSword::attack(Player* player)
 	attackCircle->startRadian = attackRadian - PI * 0.28;
 	attackCircle->endRadian = attackRadian + PI * 0.28;
 
+
+	SOUND_MANAGER->stop("SOUND_generalAttack");
+	SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
+
 	_attackDebug = FloatCircle(originPos, 120, attackRadian - PI * 0.28, attackRadian + PI * 0.28); // forDEBUG
 
 	AttackInfo* attackInfo = new AttackInfo;
