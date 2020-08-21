@@ -117,6 +117,7 @@ private:
 		Vector2 currIndex;
 
 		float twinkleDelay; // 현재 위치 깜빡거리는 거 시간 재는 변수
+		bool fillCurrRoom;
 		string stageTitle; // 스테이지 이름
 		FloatRect titleRc;
 

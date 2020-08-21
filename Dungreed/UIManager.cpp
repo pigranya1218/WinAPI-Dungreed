@@ -119,7 +119,7 @@ void UIManager::release()
 	_abilityUI.release();
 }
 
-void UIManager::update(float const elaspedTime)
+void UIManager::update(float const elapsedTime)
 {
 	// Damage UI update
 	for (int i = 0; i < _damageUI.size();)
@@ -134,29 +134,29 @@ void UIManager::update(float const elaspedTime)
 			}
 			else
 			{
-				_damageUI[i].alpha = max(0, _damageUI[i].alpha - elaspedTime * 2.5);
+				_damageUI[i].alpha = max(0, _damageUI[i].alpha - elapsedTime * 2.5);
 			}
 		}
 		else
 		{
-			_damageUI[i].pos.y -= elaspedTime * 40;
-			_damageUI[i].remainTimes -= elaspedTime;
+			_damageUI[i].pos.y -= elapsedTime * 40;
+			_damageUI[i].remainTimes -= elapsedTime;
 		}
 		i++;
 
 	}
 
 	// HP bar animation
-	_hpUI.hpAni->frameUpdate(elaspedTime);
+	_hpUI.hpAni->frameUpdate(elapsedTime);
 
 	// Gold icon animation
-	_goldUI.ani->frameUpdate(elaspedTime);
+	_goldUI.ani->frameUpdate(elapsedTime);
 
 	// Weapon change animation
 	if (_player->getWeaponIndex() != _weaponUI.viewIndex)
 	{
-		_weaponUI.move.x = min(20, _weaponUI.move.x + _weaponUI.moveSpeed * elaspedTime);
-		_weaponUI.move.y = max(-20, _weaponUI.move.y - _weaponUI.moveSpeed * elaspedTime);
+		_weaponUI.move.x = min(20, _weaponUI.move.x + _weaponUI.moveSpeed * elapsedTime);
+		_weaponUI.move.y = max(-20, _weaponUI.move.y - _weaponUI.moveSpeed * elapsedTime);
 		if (_weaponUI.move.x == 20)
 		{
 			_weaponUI.move.x = 0;
@@ -169,7 +169,18 @@ void UIManager::update(float const elaspedTime)
 	_mapUI.isShow = false;
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MAP)))
 	{
-		_mapUI.isShow = true;
+		if (!_mapUI.isShow)
+		{
+			_mapUI.isShow = true;
+			_mapUI.offset = Vector2(0, 0);
+			_mapUI.isDrag = false;
+		}
+		_mapUI.twinkleDelay += elapsedTime;
+		if (_mapUI.twinkleDelay > 0.5)
+		{
+			_mapUI.twinkleDelay = 0;
+			_mapUI.fillCurrRoom = !_mapUI.fillCurrRoom;
+		}
 	}
 
 	// Inventory Open
@@ -214,7 +225,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_dialogueUI.update(elaspedTime);
+			_dialogueUI.update(elapsedTime);
 		}
 	}
 	if (_inventoryUI.isActive())
@@ -226,7 +237,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_inventoryUI.update(elaspedTime);
+			_inventoryUI.update(elapsedTime);
 		}
 	}
 	if (_statUI.isActive())
@@ -238,7 +249,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_statUI.update(elaspedTime);
+			_statUI.update(elapsedTime);
 		}
 	}
 	if (_costumeUI.isActive())
@@ -250,7 +261,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_costumeUI.update(elaspedTime);
+			_costumeUI.update(elapsedTime);
 		}
 	}
 	if (_restaurantUI.isActive())
@@ -262,7 +273,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_restaurantUI.update(elaspedTime);
+			_restaurantUI.update(elapsedTime);
 		}
 	}
 	if (_abilityUI.isActive())
@@ -274,7 +285,7 @@ void UIManager::update(float const elaspedTime)
 		}
 		else
 		{
-			_abilityUI.update(elaspedTime);
+			_abilityUI.update(elapsedTime);
 		}
 	}
 
@@ -557,9 +568,16 @@ void UIManager::render()
 		{
 			D2D_RENDERER->fillRectangle(FloatRect(Vector2(0, 0), Vector2(WINSIZEX, WINSIZEY), PIVOT::LEFT_TOP), 33, 31, 50, 1);
 			
-			int centerX = WINSIZEX / 2;
-			int centerY = 450;
+			int centerX = WINSIZEX / 2 + _mapUI.offset.x;
+			int centerY = 450 + _mapUI.offset.x;
 
+			// 현재 방 깜빡이기
+			if (_mapUI.fillCurrRoom)
+			{
+				D2D_RENDERER->drawRectangle(FloatRect(Vector2(centerX, centerY), Vector2(109, 109), PIVOT::CENTER), 84, 144, 255, 1, 5);
+			}
+
+			// 방 그리기
 			for (int x = 0; x < 4; x++)
 			{
 				for (int y = 0; y < 4; y++)
@@ -573,6 +591,7 @@ void UIManager::render()
 				}
 			}
 
+			// 방을 잇는 선분 그리기
 			for (int x = 0; x < 4; x++)
 			{
 				for (int y = 0; y < 4; y++)
