@@ -299,6 +299,7 @@
     <ClInclude Include="Room8L.h" />
     <ClInclude Include="Room9B.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SeeriProjectile.h" />
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SilverBullet.h" />
     <ClInclude Include="SingletonBase.h" />
@@ -475,6 +476,7 @@
     <ClCompile Include="Room9B.cpp" />
     <ClCompile Include="RestaurantUI.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SeeriProjectile.cpp" />
     <ClCompile Include="SilverBullet.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />

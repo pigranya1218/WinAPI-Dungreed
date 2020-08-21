@@ -5,7 +5,7 @@ class Seeri : public Item
 private:
 	Image* _img;
 	Animation* _ani;
-
+	float _Delay;   // ÄðÅ¸ÀÓ
 	Vector2 _renderPos;
 	DIRECTION _direction;
 

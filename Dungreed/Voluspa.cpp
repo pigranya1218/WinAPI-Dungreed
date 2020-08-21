@@ -48,7 +48,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 		
 		if (_currStopDelay == 0 ) {
 					
-			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
+			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);
 			_currAttackDelay = 1.7f;
 			_Opposition = true;
 		}
@@ -61,7 +61,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 		}
 		
 		if (_currAttackDelay == 0 ) {			
-			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
+			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);
 			_currStopDelay = 1.7f;
 			_Opposition = false;
 		}
