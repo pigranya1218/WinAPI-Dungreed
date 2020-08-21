@@ -5,10 +5,10 @@ void Room6TB::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage6_TB.map");
-	_OpenDirection[0] = false;
-	_OpenDirection[1] = true;
-	_OpenDirection[2] = false;
-	_OpenDirection[3] = true;
+	
+
+	_respawnPosition[1] = Vector2(600, 200);
+	_respawnPosition[3] = Vector2(600, 800);
 }
 
 void Room6TB::release()
