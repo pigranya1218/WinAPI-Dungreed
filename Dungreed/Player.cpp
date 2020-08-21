@@ -91,7 +91,7 @@ void Player::swap(Item *& a, Item *& b)
 	updateAdjustStat();
 }
 
-void Player::attack(FloatRect* rect, AttackInfo* info)
+bool Player::attack(FloatRect* rect, AttackInfo* info)
 {
 	// 아이템 효과 적용
 	for (int i = 0; i < _equippedAcc.size(); i++)
@@ -109,10 +109,10 @@ void Player::attack(FloatRect* rect, AttackInfo* info)
 	info->criticalDamage += _adjustStat.criticalDamage;
 	info->trueDamage += _adjustStat.trueDamage;
 
-	_gameScene->attack(rect, info);
+	return _gameScene->attack(rect, info);
 }
 
-void Player::attack(FloatCircle* circle, AttackInfo* info)
+bool Player::attack(FloatCircle* circle, AttackInfo* info)
 {
 	// 아이템 효과 적용
 	for (int i = 0; i < _equippedAcc.size(); i++)
@@ -130,7 +130,7 @@ void Player::attack(FloatCircle* circle, AttackInfo* info)
 	info->criticalDamage += _adjustStat.criticalDamage;
 	info->trueDamage += _adjustStat.trueDamage;
 
-	_gameScene->attack(circle, info);
+	return _gameScene->attack(circle, info);
 }
 
 void Player::attack(Projectile* projectile, AttackInfo* info)
@@ -526,12 +526,19 @@ void Player::update(float const elapsedTime)
 	}
 	moveDir.y += _force.y * elapsedTime;
 
+	Vector2 lastPos = _position;
 	_gameScene->moveTo(this, moveDir);
-	//착지
+	Vector2 currPos = _position;
+	// 착지
 	if (_isStand)
 	{
 		_force.y = 0;
 		_currJumpCount = _adjustStat.maxJumpCount;
+	}
+	// 머리 부딪힘
+	if (moveDir.y < 0 && lastPos.y == currPos.y)
+	{
+		_force.y = 0;
 	}
 
 	// 점프 처리
@@ -1039,4 +1046,9 @@ float Player::getMaxDamage()
 Vector2 Player::getEnemyPos(Vector2 pos)
 {
 	return _gameScene->getEnemyPos(pos);
+}
+
+void Player::moveRoom(Vector2 dir)
+{
+	_gameScene->moveRoom(dir);
 }

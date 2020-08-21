@@ -49,8 +49,8 @@ void GameScene::update()
 	// 배속 관리
 	float elapsedTime = TIME_MANAGER->getElapsedTime() * _timeSpeed;
 	
-	_stageMgr->update(elapsedTime);
 	_player->update(elapsedTime);
+	_stageMgr->update(elapsedTime);
 	EFFECT_MANAGER->update(elapsedTime);
 	CAMERA->processEvent(elapsedTime);
 	_uiMgr->update(elapsedTime);
@@ -93,14 +93,19 @@ void GameScene::moveTo(GameObject * object, Vector2 moveDir)
 	_stageMgr->moveTo(object, moveDir);
 }
 
-void GameScene::attack(FloatRect* rect, AttackInfo* info)
+void GameScene::moveRoom(Vector2 dir)
 {
-	_stageMgr->attack(rect, info);
+	_stageMgr->moveRoom(dir);
 }
 
-void GameScene::attack(FloatCircle* circle, AttackInfo* info)
+bool GameScene::attack(FloatRect* rect, AttackInfo* info)
 {
-	_stageMgr->attack(circle, info);
+	return _stageMgr->attack(rect, info);
+}
+
+bool GameScene::attack(FloatCircle* circle, AttackInfo* info)
+{
+	return _stageMgr->attack(circle, info);
 }
 
 void GameScene::attack(Projectile* projectile, AttackInfo* info)

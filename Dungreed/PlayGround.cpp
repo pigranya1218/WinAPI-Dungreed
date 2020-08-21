@@ -253,6 +253,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Tree0", L"resources/images/Map/Tree0.png");
 	IMAGE_MANAGER->addImage("Tree1", L"resources/images/Map/Tree1.png");
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
+	IMAGE_MANAGER->addFrameImage("DungeonEat", L"resources/images/Villiage/DungeonEat.png", 28, 1);
 
 	// ** DUNGEON
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
@@ -290,6 +291,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/BULLION", L"resources/images/object/gold/goldBullion.png", 7, 1);
 	// *** HP FAIRY
 	IMAGE_MANAGER->addFrameImage("OBJECT/HP_FAIRY/MID", L"resources/images/object/hpFairy/midFairy.png", 16, 1);
+	// *** DOOR
+	IMAGE_MANAGER->addFrameImage("OBJECT/DOOR", L"resources/images/object/door/door.png", 23, 1);
+	IMAGE_MANAGER->addImage("OBJECT/DOOR_OPEN_EFFECT", L"resources/images/object/door/openEffect.png");
 
 
 	// ** COSTUME

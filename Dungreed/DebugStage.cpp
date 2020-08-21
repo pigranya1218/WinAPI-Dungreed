@@ -10,7 +10,7 @@ void DebugStage::init()
 	Stage::init();
 	// 맵 불러오기
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("testStage.map");
+	loadMap("room/StartRoom3_B.map");
 
 	// 에너미 테스트입니다.
 	/*
@@ -66,6 +66,8 @@ void DebugStage::init()
 	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
 	_objectMgr->spawnObject(0x0001, Vector2(750, 200));
 	_objectMgr->spawnObject(0x0002, Vector2(900, 200));
+
+	makeDoor(Vector2(400, 300), DIRECTION::LEFT);
 }
 
 void DebugStage::release()
@@ -83,6 +85,17 @@ void DebugStage::update(float const elapsedTime)
 	Stage::update(elapsedTime);
 
 	CAMERA->setXY(_stageManager->getPlayerPos());
+
+	if (KEY_MANAGER->isOnceKeyDown('L'))
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(true);
+			}
+		}
+	}
 }
 
 void DebugStage::render()

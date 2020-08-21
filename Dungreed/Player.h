@@ -57,8 +57,8 @@ public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; };
 
 	// 아이템들이 호출할 함수들
-	void attack(FloatRect* rect, AttackInfo* info);
-	void attack(FloatCircle* circle, AttackInfo* info);
+	bool attack(FloatRect* rect, AttackInfo* info);
+	bool attack(FloatCircle* circle, AttackInfo* info);
 	void attack(Projectile* projectile, AttackInfo* info);
 
 	virtual void init() override;
@@ -112,6 +112,8 @@ public:
 	float getMinDamage();
 	float getMaxDamage();
 
+	// 스테이지 관련 함수
 	Vector2 getEnemyPos(Vector2 pos);
+	void moveRoom(Vector2 dir);
 };
 
