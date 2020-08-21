@@ -51,8 +51,8 @@ void Seeri::update(Player * player, float const elapsedTime)
 		}
 		SeeriProjectile* projectile = new SeeriProjectile;
 		projectile->setPosition(_renderPos);
-		projectile->setTeam(OBJECT_TEAM::PLAYER);		
-		projectile->init("SeeriBullet", "BombPouch2", Vector2(_renderPos.x, _renderPos.y), Vector2(20, 50), Vector2(20, 50), Vector2(0, 0), Vector2(30 * 10, 30 * 10), 10, angleRadian, false, false, 10, false, false, false, false, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+		projectile->setTeam(OBJECT_TEAM::PLAYER);			
+		projectile->init("SeeriBullet", "BombPouch2", Vector2(20, 50), Vector2(20, 50), Vector2(100, 100), Vector2(30 * 10, 30 * 10), 10, _renderPos.y, false, false, 10, false, false, false, false, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
 		string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
 		AttackInfo* attackInfo = new AttackInfo;
 		attackInfo->team = OBJECT_TEAM::PLAYER;
