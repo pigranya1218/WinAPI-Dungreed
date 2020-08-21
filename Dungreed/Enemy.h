@@ -8,6 +8,7 @@ class EnemyManager;
 
 enum class ENEMY_STATE
 {
+	ENTER,		// 에너미 소환
 	IDLE,		// 기본
 	MOVE,		// 이동
 	ATTACK,		// 공격
@@ -251,6 +252,7 @@ public:
 	virtual void init() {}
 	virtual void init(const Vector2& pos) {}
 	virtual void init(const Vector2& pos, DIRECTION direction) {}
+	virtual void init(const Vector2& pos, DIRECTION direction, bool spawnEffect) {}
 	virtual void release() = 0;
 	virtual void update(float const timeElapsed) = 0;
 	virtual void render() = 0;

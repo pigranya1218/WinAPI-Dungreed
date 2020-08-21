@@ -677,8 +677,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Ovibos/Attack_Shot"	, L"resources/images/Enemy/Ovibos/attack_shot.png"	, 6, 1);	// 물소 공격 피격	
 
 	// * 에너미 이펙트
-	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png", 11, 1);	// 에너미 죽는 이펙트
-	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 20);	// 이펙트 등록
+	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png"	, 11, 1);	// 에너미 죽는 이펙트
+	IMAGE_MANAGER->addFrameImage("Enemy_Create"	, L"resources/images/Enemy/create.png"	,  5, 3);	// 에너미 소환 이펙트
+
+	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 20);	// 삭제 이펙트 등록
 
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Bat_Explosion", L"resources/images/Enemy/Bat/Bomb/explosion.png", 12, 1);

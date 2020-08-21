@@ -289,6 +289,7 @@ void Belial::update(float const timeElapsed)
 					if (_swordAtk.update(timeElapsed))
 					{
 						EFFECT_MANAGER->play("Enemy_Destroy", _sword[0]->getPosition(), Vector2(_sword[0]->img->getSize().x * _scale, _sword[0]->img->getSize().x * _scale));
+						SAFE_DELETE(_sword[_swordNum]);
 						_sword.erase(_sword.begin());						
 					}
 					if (_sword.empty())

@@ -44,7 +44,7 @@ void EnemyManager::render()
 	}
 }
 
-void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, DIRECTION direction)
+void EnemyManager::spawnEnemy(ENEMY_TYPE enemyType, const Vector2& pos, bool spawnEffect, DIRECTION direction)
 {
 	Enemy* enemy;
 

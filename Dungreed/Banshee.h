@@ -7,7 +7,7 @@ private:
 	tagShootingInfo _shooting;
 
 public:
-	void init(const Vector2& pos, DIRECTION direction);
+	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();
 	void update(float const timeElapsed);
 	void render();

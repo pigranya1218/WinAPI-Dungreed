@@ -2,12 +2,13 @@
 #include "EnemyManager.h"
 #include "Banshee.h"
 
-void Banshee::init(const Vector2& pos, DIRECTION direction)
+void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 {	
 	// 애니메이션 할당
 	_ani = new Animation;
 
 	// 초기 상태는 기본 상태
+	
 	setState(ENEMY_STATE::IDLE);
 
 	// 변수 초기화
@@ -117,6 +118,11 @@ void Banshee::setState(ENEMY_STATE state)
 {
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Banshee/Idle";
