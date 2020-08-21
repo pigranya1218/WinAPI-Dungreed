@@ -404,6 +404,15 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
+	//***MeleeWeaponSound
+	SOUND_MANAGER->addSound("SOUND_katana","resoureces/sound/MeleeWeapon/katana.wav", false, false); 
+	SOUND_MANAGER->addSound("SOUND_katana2","resoureces/sound/MeleeWeapon/katana2.wav", false, false);
+	SOUND_MANAGER->addSound("SOUND_katana3","resoureces/sound/MeleeWeapon/katana3.wav", false, false);
+
+
+
+
+
 
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // 우주검 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSLASH", "CosmosSlashFX0", 30, 10);	  // 우주검 피격시 이펙트

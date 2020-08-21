@@ -10,7 +10,6 @@ void PowerKatana::init()
 	_displayText = L"\"봉인이 되어 있군요. 여덟 개의 문을 열 수 있게 되어 있지만, 네 개 이상은 저희의 힘으론.. -로젠-\"";
 	_itemCode = 0x02301; //양손 희귀 01;
 	// 기본 보조옵션
-	_addStat.dashDamage = 20;
 
 	_handSize = Vector2(5, 5);
 
@@ -36,6 +35,7 @@ void PowerKatana::update(Player* player, float const elapsedTime)
 {
 	float ratio = 180 / (1 / _addStat.attackSpeed / 2);
 	float ratio2 = elapsedTime / (_addStat.attackSpeed * 0.08);
+	
 	if (_oneAttack)
 	{
 	
@@ -113,6 +113,13 @@ void PowerKatana::frontRender(Player* player)
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
 			EFFECT_MANAGER->play("EFFECT_EXKATANAFX", effectPos, Vector2(250, 300), degree , isLeft);
+			//==========================================================================
+			SOUND_MANAGER->stop("SOUND_katana");
+			SOUND_MANAGER->play("SOUND_katana", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+			//==================================================================
+			/*SOUND_MANAGER->stop("SOUND_katana");
+			SOUND_MANAGER->play("SOUND_katana", 1.f);*/
+			
 		}
 		else
 		{
@@ -120,6 +127,10 @@ void PowerKatana::frontRender(Player* player)
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
 			EFFECT_MANAGER->play("EFFECT_EXKATANAFX", effectPos, Vector2(250, 300), -degree+ 180 , isLeft);
+			//==========================================================================
+			//SOUND_MANAGER->stop("SOUND_katana");
+			//SOUND_MANAGER->play("SOUND_katana",1.f);
+			//==================================================================			
 		}
 	}
 	_attackDebug.render(true);
@@ -136,7 +147,6 @@ void PowerKatana::attack(Player* player)
 	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_drawEffect = true;
 	_currAttackDelay = _addStat.attackSpeed;
-	//==========================================================================
 
 	Vector2 originPos = player->getPosition();
 	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15); // 바라보는 방향의 어깨
@@ -146,7 +156,8 @@ void PowerKatana::attack(Player* player)
 	{
 		attackRadian += PI2;
 	}
-
+	//SOUND_MANAGER->stop("SOUND_katana");
+	SOUND_MANAGER->play("SOUND_katana", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
 	FloatCircle* attackCircle = new FloatCircle;
@@ -166,6 +177,9 @@ void PowerKatana::attack(Player* player)
 	attackInfo->maxDamage = _addStat.maxDamage;
 	attackInfo->knockBack = 15;
 	player->attack(attackCircle, attackInfo);
+
+	
+
 	delete attackCircle;
 	delete attackInfo;
 }

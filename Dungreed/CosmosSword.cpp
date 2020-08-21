@@ -23,7 +23,7 @@ void CosmosSword::init()
 	_price = 600;
 
 	// 기본 보조옵션
-	_addStat.dashDamage = 20;
+	
 	_addStat.minDamage = 15;
 	_addStat.maxDamage = 25;
 	_addStat.attackSpeed = 0.4;

@@ -10,7 +10,7 @@ void PickaxeRed::init()
 	_displayText = L"\"신이 가장 싫어하는 색이 입혀진 곡괭이\"";
 	_itemCode = 0x02300; //양손 에픽 00;
 	// 기본 보조옵션
-	_addStat.dashDamage = 20;
+	
 	_handSize = Vector2(5, 5);
 	_addStat.minDamage = 5;
 	_addStat.maxDamage = 15;

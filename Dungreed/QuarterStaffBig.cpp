@@ -9,7 +9,6 @@ void QuarterStaffBig::init()
 	_displayText = L"\"무술의 달인이 애용하던 쌍단봉. 맞으면 매우 아프다.\"";
 	_itemCode = 0x02201; //양손 고급 01;
 	// 기본 보조옵션
-	_addStat.dashDamage = 20;
 	_handSize = Vector2(5, 5);
 	_addStat.minDamage = 4;
 	_addStat.maxDamage = 6;
@@ -61,7 +60,7 @@ void QuarterStaffBig::frontRender(Player* player)
 	Vector2 pos = player->getPosition();
 
 	// 회전축 중점
-	//originPos.x += ((isLeft) ? 0 :0 ); // 바라보는 방향의 어깨
+	originPos.x += ((isLeft) ? -20 :20 ); // 바라보는 방향의 어깨
 	//originPos.y += 0;
 
 	// 회전축으로부터 마우스까지의 각도값

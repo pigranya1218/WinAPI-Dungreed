@@ -25,7 +25,6 @@ void BigPaintBlush::init()
 	_addStat.minDamage = 2;
 	_addStat.maxDamage = 5;
 	_addStat.attackSpeed = 0.4;
-
 	_handSize = Vector2(5, 5);
 
 	

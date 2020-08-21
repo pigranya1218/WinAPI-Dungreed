@@ -257,7 +257,7 @@ void Player::init()
 	//testAcc17->init();
 	//_inventory[2] = testAcc17;
 
-	MultiBullet* testAcc20 = new MultiBullet;
+	FluteGreatSword* testAcc20 = new FluteGreatSword;
 	testAcc20->init();
 	_inventory[2] = testAcc20;
 	
@@ -275,7 +275,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	PickaxeRed* testWeapon2 = new PickaxeRed;
+	Lumber* testWeapon2 = new Lumber;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
