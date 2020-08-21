@@ -68,6 +68,7 @@ void Lumber::update(Player* player, float const elapsedTime)
 		}
 	}
 
+
 	if (_currAttackDelay <= _addStat.attackSpeed * 0.8)
 	{
 		if (_isBroken)
@@ -290,7 +291,7 @@ void Lumber::attack(Player* player)
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
-	_isBroken = true;
+
 	Vector2 renderPosHand = pos;
 
 	// 손으로부터 마우스 에임까지의 각도
@@ -318,6 +319,7 @@ void Lumber::attack(Player* player)
 
 	_attackDebug = FloatCircle(originPos, 120, attackRadian - PI * 0.28, attackRadian + PI * 0.28); // forDEBUG
 
+
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
@@ -327,6 +329,18 @@ void Lumber::attack(Player* player)
 	attackInfo->maxDamage = _addStat.maxDamage;
 	attackInfo->knockBack = 15;
 	player->attack(attackCircle, attackInfo);
+
+
+
+
+	
+	if(player->isHit(attackCircle, attackInfo))
+	{
+	
+			_isBroken = true;
+	}
+	
+
 	delete attackCircle;
 	delete attackInfo;
 }

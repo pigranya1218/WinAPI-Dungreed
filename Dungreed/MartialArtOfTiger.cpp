@@ -10,7 +10,7 @@ void MartialArtOfTiger::init()
 	_displayText = L"\"토끼를 춤추게 하고 여우를 바이올린 켜게 하는 짐승에게 전수받은 권법\"";
 	_itemCode = 0x01300; //한손 에픽 00
 	// 기본 보조옵션
-	_addStat.dashDamage = 20;
+	
 	_handSize = Vector2(5, 5);
 	_addStat.minDamage = 10;
 	_addStat.maxDamage = 22;
