@@ -230,6 +230,77 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("FOOD/RASPBERRY_COOKIE", L"resources/images/gameScene/ui/restaurant/foods/12_RaspberryCookie.png");
 	IMAGE_MANAGER->addImage("FOOD/SPARKLING_WATER", L"resources/images/gameScene/ui/restaurant/foods/26_SparklingWater.png");
 	IMAGE_MANAGER->addImage("FOOD/STRAWBERRY_PIE", L"resources/images/gameScene/ui/restaurant/foods/18_StrawberryPie.png");
+	// *** ABILITY
+	IMAGE_MANAGER->addImage("UI/ABILITY/LABEL", L"resources/images/gameScene/ui/ability/AbilityTItle.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BASE_WRATH", L"resources/images/gameScene/ui/ability/AbilityBackground_Wrath.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BASE_SWIFTNESS", L"resources/images/gameScene/ui/ability/AbilityBackground_Swiftness.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BASE_PATIENCE", L"resources/images/gameScene/ui/ability/AbilityBackground_Patience.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BASE_ARCANE", L"resources/images/gameScene/ui/ability/AbilityBackground_Arcane.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BASE_GREED", L"resources/images/gameScene/ui/ability/AbilityBackground_Greed.png");
+
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_WRATH", L"resources/images/gameScene/ui/ability/AbilityBackgroundButton_Wrath.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_SWIFTNESS", L"resources/images/gameScene/ui/ability/AbilityBackgroundButton_Swiftness.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_PATIENCE", L"resources/images/gameScene/ui/ability/AbilityBackgroundButton_Patience.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_ARCANE", L"resources/images/gameScene/ui/ability/AbilityBackgroundButton_Arcane.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_GREED", L"resources/images/gameScene/ui/ability/AbilityBackgroundButton_Greed.png");
+
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_WRATH_DISABLE", L"resources/images/gameScene/ui/ability/AbilityBackgroundButtonDisable_Wrath.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_SWIFTNESS_DISABLE", L"resources/images/gameScene/ui/ability/AbilityBackgroundButtonDisable_Swiftness.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_PATIENCE_DISABLE", L"resources/images/gameScene/ui/ability/AbilityBackgroundButtonDisable_Patience.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_ARCANE_DISABLE", L"resources/images/gameScene/ui/ability/AbilityBackgroundButtonDisable_Arcane.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/BUTTON_GREED_DISABLE", L"resources/images/gameScene/ui/ability/AbilityBackgroundButtonDisable_Greed.png");
+	// **** ICON
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH1_ABLE", L"resources/images/gameScene/ui/ability/icon/Wrath1_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH1_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Wrath1_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH1_DISABLE", L"resources/images/gameScene/ui/ability/icon/Wrath1_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH2_ABLE", L"resources/images/gameScene/ui/ability/icon/Wrath2_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH2_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Wrath2_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH2_DISABLE", L"resources/images/gameScene/ui/ability/icon/Wrath2_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH3_ABLE", L"resources/images/gameScene/ui/ability/icon/Wrath3_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH3_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Wrath3_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_WRATH3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Wrath3_disable.png");
+
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS1_ABLE", L"resources/images/gameScene/ui/ability/icon/Swiftness1_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS1_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Swiftness1_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS1_DISABLE", L"resources/images/gameScene/ui/ability/icon/Swiftness1_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS2_ABLE", L"resources/images/gameScene/ui/ability/icon/Swiftness2_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS2_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Swiftness2_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS2_DISABLE", L"resources/images/gameScene/ui/ability/icon/Swiftness2_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS3_ABLE", L"resources/images/gameScene/ui/ability/icon/Swiftness3_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS3_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Swiftness3_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_SWIFTNESS3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Swiftness3_disable.png");
+
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE1_ABLE", L"resources/images/gameScene/ui/ability/icon/Patience1_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE1_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Patience1_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE1_DISABLE", L"resources/images/gameScene/ui/ability/icon/Patience1_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE2_ABLE", L"resources/images/gameScene/ui/ability/icon/Patience2_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE2_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Patience2_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE2_DISABLE", L"resources/images/gameScene/ui/ability/icon/Patience2_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE3_ABLE", L"resources/images/gameScene/ui/ability/icon/Patience3_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE3_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Patience3_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_PATIENCE3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Patience3_disable.png");
+
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE1_ABLE", L"resources/images/gameScene/ui/ability/icon/Arcane1_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE1_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Arcane1_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE1_DISABLE", L"resources/images/gameScene/ui/ability/icon/Arcane1_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE2_ABLE", L"resources/images/gameScene/ui/ability/icon/Arcane2_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE2_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Arcane2_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE2_DISABLE", L"resources/images/gameScene/ui/ability/icon/Arcane2_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE3_ABLE", L"resources/images/gameScene/ui/ability/icon/Arcane3_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE3_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Arcane3_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_ARCANE3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Arcane3_disable.png");
+
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED1_ABLE", L"resources/images/gameScene/ui/ability/icon/Greed1_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED1_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Greed1_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED1_DISABLE", L"resources/images/gameScene/ui/ability/icon/Greed1_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED2_ABLE", L"resources/images/gameScene/ui/ability/icon/Greed2_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED2_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Greed2_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED2_DISABLE", L"resources/images/gameScene/ui/ability/icon/Greed2_disable.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED3_ABLE", L"resources/images/gameScene/ui/ability/icon/Greed3_able.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED3_ABLE_SELECTED", L"resources/images/gameScene/ui/ability/icon/Greed3_able_selected.png");
+	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Greed3_disable.png");
+
+	IMAGE_MANAGER->addFrameImage("UI/ABILITY/CLICK_EFFECT", L"resources/images/gameScene/ui/ability/click/ClickEffect.png", 12, 1);
 
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");

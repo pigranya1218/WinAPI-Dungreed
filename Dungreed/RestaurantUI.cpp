@@ -82,7 +82,8 @@ void RestaurantUI::init()
 	_scrollBar.ratio = 0;
 	_scrollBar.bgRc = FloatRect(510, 180, 540, 780);
 	_scrollBar.scrollRc = FloatRect(510.0, 180.0, 540.0, (_scrollBar.height / _scrollBar.totalHeight)*(_scrollBar.bgRc.bottom - _scrollBar.bgRc.top));
-
+	_isScroll = false;
+	_lastPtMouse = _ptMouse;
 	//float offsetY = -100; // 스크롤을 아래로 땡긴 만큼 어떠한 값이 될 것
 	// 맨 처음 스크롤이 맨 위에 있을 땐 0
 }
@@ -105,6 +106,12 @@ void RestaurantUI::update(float elapsedTime)
 		{
 			_isActive = false;
 		}
+		//스크롤바 드래그
+		if (_scrollBar.scrollRc.ptInRect(_ptMouse))
+		{
+			_isScroll = true;
+		}
+
 	}
 	if (KEY_MANAGER->isOnceKeyDown(VK_RBUTTON))
 	{
@@ -120,6 +127,25 @@ void RestaurantUI::update(float elapsedTime)
 			}
 		}
 	}
+
+	if (_isScroll)
+	{
+		Vector2 currCenter = _scrollBar.scrollRc.getCenter();
+		int move = _ptMouse.y - _lastPtMouse.y;
+		currCenter.y += move;
+		currCenter.y = min(currCenter.y, _scrollBar.bgRc.bottom - (_scrollBar.scrollRc.getSize().y / 2));
+		currCenter.y = max(currCenter.y, _scrollBar.bgRc.top + (_scrollBar.scrollRc.getSize().y / 2));
+		_scrollBar.scrollRc = FloatRect(currCenter, _scrollBar.scrollRc.getSize(), PIVOT::CENTER);
+		_scrollBar.ratio = (currCenter.y - (_scrollBar.bgRc.top + (_scrollBar.scrollRc.getSize().y / 2)))
+			/ ((_scrollBar.bgRc.bottom - (_scrollBar.scrollRc.getSize().y / 2)) - (_scrollBar.bgRc.top + (_scrollBar.scrollRc.getSize().y / 2)));
+		CAMERA->setT((_scrollBar.totalHeight - _scrollBar.height) * _scrollBar.ratio);
+	}
+
+	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
+	{
+		_isScroll = false;
+	}
+	_lastPtMouse = _ptMouse;
 }
 
 void RestaurantUI::render()

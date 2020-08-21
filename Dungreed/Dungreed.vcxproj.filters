@@ -708,6 +708,9 @@
     <ClInclude Include="HpFairyObject.h">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
     </ClInclude>
+    <ClInclude Include="AbilityUI.h">
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
+    </ClInclude>
     <ClInclude Include="Room12LB.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClInclude>
@@ -1237,6 +1240,9 @@
     </ClCompile>
     <ClCompile Include="HpFairyObject.cpp">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityUI.cpp">
+      <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
     <ClCompile Include="Seeri.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>

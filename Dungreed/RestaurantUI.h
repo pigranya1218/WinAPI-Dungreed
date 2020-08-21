@@ -32,7 +32,9 @@ private:
 	Image* _foodImg;
 
 	bool _isActive;
-	
+	bool _isScroll;	//스크롤중인지 판별
+
+	POINT _lastPtMouse;
 
 	// *사용되는 이미지
 	// ** 상단 npc아이콘 띠
