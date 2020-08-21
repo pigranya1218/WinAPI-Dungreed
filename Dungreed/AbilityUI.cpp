@@ -142,33 +142,62 @@ void AbilityUI::render()
 		switch (i)
 		{
 		case 0:
-			icon[3][3] = _wrathIcon[3][3];
+			for (int j = 0; j < 3; j++)
+			{
+				for (int k = 0; k < 3; k++)
+				{
+					icon[j][k] = _wrathIcon[j][k];
+				}
+			}
 			break;
 		case 1:
-			icon[3][3] = _swiftnessIcon[3][3];
+			for (int j = 0; j < 3; j++)
+			{
+				for (int k = 0; k < 3; k++)
+				{
+					icon[j][k] = _swiftnessIcon[j][k];
+				}
+			}
 			break;
 		case 2:
-			icon[3][3] = _patienceIcon[3][3];
+			for (int j = 0; j < 3; j++)
+			{
+				for (int k = 0; k < 3; k++)
+				{
+					icon[j][k] = _patienceIcon[j][k];
+				}
+			}
 			break;
 		case 3:
-			icon[3][3] = _arcaneIcon[3][3];
+			for (int j = 0; j < 3; j++)
+			{
+				for (int k = 0; k < 3; k++)
+				{
+					icon[j][k] = _arcaneIcon[j][k];
+				}
+			}
 			break;
 		case 4:
-			icon[3][3] = _greedIcon[3][3];
+			for (int j = 0; j < 3; j++)
+			{
+				for (int k = 0; k < 3; k++)
+				{
+					icon[j][k] = _greedIcon[j][k];
+				}
+			}
 			break;
 		}
-		/*for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 3; j++)
 		{
-			
 			icon[j][2]->render(_windows[i].iconRc[j].getCenter(), _windows[i].iconRc[j].getSize());		
-		}*/
+		}
 		//TEST
 		//특성 아이콘 렉트 렌더
 		for (int j = 0; j < 3; j++)
 		{
 			D2D_RENDERER->drawRectangle(_windows[i].iconRc[j], D2D1::ColorF::Magenta, 1, 1);
 		}
-		
+		//icon[0][0]->render(_windows[i].iconRc[0].getCenter(), _windows[i].iconRc->getSize());
 	}
 	//현재 남은 특성 포인트
 	_currPointBack->render(_currPointRc.getCenter(), _currPointRc.getSize());
