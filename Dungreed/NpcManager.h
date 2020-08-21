@@ -23,5 +23,7 @@ public:
 	void spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction);
 
 	Vector2 getPlayerPos();
+
+	void moveTo(GameObject* gameObject, Vector2 moveDir);
 };
 

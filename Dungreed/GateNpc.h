@@ -1,8 +1,7 @@
 #pragma once
 #include "Npc.h"
 
-// ½Ä´ç NPC
-class RestaurantNpc : public Npc
+class GateNpc : public Npc
 {
 private:
 	Image* _img;
@@ -12,7 +11,6 @@ public:
 	virtual void init(Vector2 pos, DIRECTION direction);
 	virtual void release();
 	virtual void update(float timeElapsed);
-	virtual void interaction();
 	virtual void render();
 };
 
