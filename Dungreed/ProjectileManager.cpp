@@ -2,6 +2,7 @@
 #include "ProjectileManager.h"
 #include "Stage.h"
 #include "EnemyManager.h"
+#include "ObjectManager.h"
 
 void ProjectileManager::init()
 {
@@ -45,6 +46,11 @@ void ProjectileManager::render()
 void ProjectileManager::moveTo(GameObject* gameObject, Vector2 moveDir, bool checkCollisionGround, bool checkCollisionPlatform)
 {
 	_stage->moveTo(gameObject, moveDir, checkCollisionGround, checkCollisionPlatform);
+}
+
+bool ProjectileManager::checkObjectCollision(Projectile* projectile, bool isOnceCollision)
+{
+	return _objectManager->isHit(projectile, isOnceCollision);
 }
 
 bool ProjectileManager::checkEnemyCollision(Projectile* projectile, bool isOnceCollision)

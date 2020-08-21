@@ -72,6 +72,7 @@ void HeartOfCosmos::backRender(Player * player)
 		_img->setScale(4);
 		_img->aniRender(CAMERA->getRelativeV2(_renderPos), _ani, false); 
 	}	
+
 }
 
 void HeartOfCosmos::frontRender(Player * player)

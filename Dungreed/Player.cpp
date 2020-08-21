@@ -41,6 +41,7 @@
 #include "DaisyRing.h"
 #include "Wingboots.h"
 #include "SilverBullet.h"
+#include "Seeri.h"
 
 
 // 장착 아이템 및 스킬에 따른 스탯 변화주기
@@ -232,9 +233,13 @@ void Player::init()
 	testAcc11->init();
 	_inventory[10] = testAcc11;
 
-	HeartOfCosmos* testAcc12 = new HeartOfCosmos;
-	testAcc12->init();
-	_inventory[9] = testAcc12;
+	//HeartOfCosmos* testAcc12 = new HeartOfCosmos;
+	//testAcc12->init();
+	//_inventory[0] = testAcc12;
+
+	Seeri* testAcc21 = new Seeri;
+	testAcc21->init();
+	_inventory[0] = testAcc21;
 
 	DemonBoots* testAcc13 = new DemonBoots;
 	testAcc13->init();
@@ -252,7 +257,7 @@ void Player::init()
 	//testAcc17->init();
 	//_inventory[2] = testAcc17;
 
-	Voluspa* testAcc20 = new Voluspa;
+	MultiBullet* testAcc20 = new MultiBullet;
 	testAcc20->init();
 	_inventory[2] = testAcc20;
 	
@@ -306,13 +311,13 @@ void Player::init()
 	testWeapon6->init();
 	_inventory[3] = testWeapon6;
 
-	SilverBullet* testAcc19 = new SilverBullet;
+	/*SilverBullet* testAcc19 = new SilverBullet;
 	testAcc19->init();
-	_inventory[0] = testAcc19;
+	_inventory[0] = testAcc19;*/
 
-	//MagnifyingGlass* testAcc18 = new MagnifyingGlass;
-	//testAcc18->init();
-	//_inventory[0] = testAcc19;
+	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
+	testAcc18->init();
+	_inventory[0] = testAcc18;
 
 	_hand = new Punch;
 	_hand->init();

@@ -4,7 +4,7 @@ void Room13LTB::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("Stage13LTB.map");
+	loadMap("room/Stage13_LTB.map");
 	
 }
 

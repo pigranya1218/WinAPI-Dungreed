@@ -33,20 +33,20 @@ void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
 		weapon->getIconImg()->setScale(4);
 		weapon->getIconImg()->render(imgRc.getCenter());
 
-		D2D_RENDERER->renderTextField(nameRc.left, nameRc.top, weapon->getItemName(), getRankColor(weapon->getItemRank()), 45, nameRc.getWidth(), 45, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+		D2D_RENDERER->renderTextField(nameRc.left, nameRc.top, weapon->getItemName(), getRankColor(weapon->getItemRank()), 48, nameRc.getWidth(), 45, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
 
 		FloatRect mainInfoRc = FloatRect(Vector2(imgRc.right + 20, mainRc.top), Vector2(200.f, mainRc.getHeight()), PIVOT::LEFT_TOP);
 		Vector2 mainInfoTextPos1 = Vector2(mainInfoRc.left, mainInfoRc.getCenter().y - 25); // 공격력 적을 위치
 		Vector2 mainInfoTextPos2 = Vector2(mainInfoRc.left, mainInfoRc.getCenter().y); // 공격속도 적을 위치
-		D2D_RENDERER->renderTextField(mainInfoTextPos1.x, mainInfoTextPos1.y, L"공격력 : ", RGB(255, 255, 255), 25, 150, 25);
-		D2D_RENDERER->renderTextField(mainInfoTextPos1.x + 110, mainInfoTextPos1.y, to_wstring(static_cast<int>(itemStat.minDamage)) + L" ~ " + to_wstring(static_cast<int>(itemStat.maxDamage)),
-			RGB(255, 212, 0), 25, 150, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
-		D2D_RENDERER->renderTextField(mainInfoTextPos2.x, mainInfoTextPos2.y, L"공격 속도 : ", RGB(255, 255, 255), 25, 150, 25);
+		D2D_RENDERER->renderTextField(mainInfoTextPos1.x, mainInfoTextPos1.y, L"공격력 : ", RGB(255, 255, 255), 26, 150, 25);
+		D2D_RENDERER->renderTextField(mainInfoTextPos1.x + 80, mainInfoTextPos1.y, to_wstring(static_cast<int>(itemStat.minDamage)) + L" ~ " + to_wstring(static_cast<int>(itemStat.maxDamage)),
+			RGB(255, 212, 0), 26, 150, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+		D2D_RENDERER->renderTextField(mainInfoTextPos2.x, mainInfoTextPos2.y, L"공격 속도 : ", RGB(255, 255, 255), 26, 150, 25);
 		
 		stringstream stream;
 		stream << fixed << setprecision(2) << itemStat.attackSpeed;
-		D2D_RENDERER->renderTextField(mainInfoTextPos2.x + 150, mainInfoTextPos2.y, TTYONE_UTIL::stringTOwsting(stream.str()),
-			RGB(255, 212, 0), 25, 150, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+		D2D_RENDERER->renderTextField(mainInfoTextPos2.x + 100, mainInfoTextPos2.y, TTYONE_UTIL::stringTOwsting(stream.str()),
+			RGB(255, 212, 0), 26, 150, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 
 		int count = 0;
 		vector<wstring> displayBonusOption = weapon->getDisplayInfos();
@@ -54,8 +54,8 @@ void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
 		{
 			Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
 			count++;
-			D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 22, 25, 25);
-			D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, displayBonusOption[i], RGB(0, 255, 0), 22, 400, 25);
+			D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25);
+			D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, displayBonusOption[i], RGB(0, 255, 0), 23, 400, 25);
 		}
 		for (int i = 0; i < static_cast<int>(STAT_TYPE::END); i++)
 		{
@@ -66,10 +66,10 @@ void InventoryUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT)
 			{
 				Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
 				count++;
-				D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 22, 25, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
-				D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, ((statValue > 0)?L"+":L"") + to_wstring(statValue), (statValue > 0)?(RGB(0, 255, 0)):(RGB(255, 0, 0)), 22, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+				D2D_RENDERER->renderTextField(bonusPos.x + 25, bonusPos.y, ((statValue > 0)?L"+":L"") + to_wstring(statValue), (statValue > 0)?(RGB(0, 255, 0)):(RGB(255, 0, 0)), 23, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 				int size = TTYONE_UTIL::getSize(statValue);
-				D2D_RENDERER->renderTextField(bonusPos.x + 30 + size * 25 + 8, bonusPos.y, TTYONE_UTIL::stringTOwsting(itemStat.getStatString(statType, false)), RGB(255, 255, 255), 22, 400, 25);
+				D2D_RENDERER->renderTextField(bonusPos.x + 25 + size * 17 + 8, bonusPos.y, TTYONE_UTIL::stringTOwsting(itemStat.getStatString(statType, false)), RGB(255, 255, 255), 23, 400, 25);
 			}
 		}
 
@@ -113,7 +113,7 @@ void InventoryUI::drawAccInfo(Item* acc, Vector2 pos, bool isRT)
 		acc->getIconImg()->setScale(4);
 		acc->getIconImg()->render(imgRc.getCenter());
 
-		D2D_RENDERER->renderTextField(nameRc.left, nameRc.top, acc->getItemName(), getRankColor(acc->getItemRank()), 45, nameRc.getWidth(), 45, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+		D2D_RENDERER->renderTextField(nameRc.left, nameRc.top, acc->getItemName(), getRankColor(acc->getItemRank()), 48, nameRc.getWidth(), 45, 1, DWRITE_TEXT_ALIGNMENT_CENTER);
 
 		FloatRect mainInfoRc = FloatRect(Vector2(imgRc.right + 20, mainRc.top), Vector2(200.f, mainRc.getHeight()), PIVOT::LEFT_TOP);
 
@@ -123,8 +123,8 @@ void InventoryUI::drawAccInfo(Item* acc, Vector2 pos, bool isRT)
 		{
 			Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
 			count++;
-			D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 22, 25, 25);
-			D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, displayBonusOption[i], RGB(0, 255, 0), 22, 400, 25);
+			D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25);
+			D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, displayBonusOption[i], RGB(0, 255, 0), 23, 400, 25);
 		}
 		for (int i = 0; i < static_cast<int>(STAT_TYPE::END); i++)
 		{
@@ -134,10 +134,10 @@ void InventoryUI::drawAccInfo(Item* acc, Vector2 pos, bool isRT)
 			{
 				Vector2 bonusPos = Vector2(mainRc.left + 20, mainInfoRc.bottom + 10 + 28 * count);
 				count++;
-				D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 22, 25, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
-				D2D_RENDERER->renderTextField(bonusPos.x + 30, bonusPos.y, ((statValue > 0) ? L"+" : L"") + to_wstring(statValue), (statValue > 0) ? (RGB(0, 255, 0)) : (RGB(255, 0, 0)), 22, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Alagard");
+				D2D_RENDERER->renderTextField(bonusPos.x, bonusPos.y, L"▶", RGB(255, 255, 255), 23, 25, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+				D2D_RENDERER->renderTextField(bonusPos.x + 25, bonusPos.y, ((statValue > 0) ? L"+" : L"") + to_wstring(statValue), (statValue > 0) ? (RGB(0, 255, 0)) : (RGB(255, 0, 0)), 23, 400, 25, 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 				int size = TTYONE_UTIL::getSize(statValue);
-				D2D_RENDERER->renderTextField(bonusPos.x + 30 + size * 25 + 8, bonusPos.y, TTYONE_UTIL::stringTOwsting(itemStat.getStatString(statType, false)), RGB(255, 255, 255), 22, 400, 25);
+				D2D_RENDERER->renderTextField(bonusPos.x + 25 + size * 17 + 8, bonusPos.y, TTYONE_UTIL::stringTOwsting(itemStat.getStatString(statType, false)), RGB(255, 255, 255), 23, 400, 25);
 			}
 		}
 

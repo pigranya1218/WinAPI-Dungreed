@@ -5,11 +5,8 @@ void Room5LR::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("Stage5LR.map");
-	_OpenDirection[0] = true;
-	_OpenDirection[1] = false;
-	_OpenDirection[2] = true;
-	_OpenDirection[3] = false;
+	loadMap("room/Stage5_LR.map");
+	
 	
 }
 

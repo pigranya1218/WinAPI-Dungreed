@@ -261,6 +261,37 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
 
+	// ** OBJECT
+	// *** BROKEN
+	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BOX", L"resources/images/object/broken/Box0.png");
+	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BIG_BOX", L"resources/images/object/broken/BigBox0.png");
+	IMAGE_MANAGER->addImage("OBJECT/BROKEN/DRUM", L"resources/images/object/broken/OakDrum0.png");
+	// *** PARTICLE
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_0", L"resources/images/object/broken/BoxParticle0_0.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_1", L"resources/images/object/broken/BoxParticle0_1.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_2", L"resources/images/object/broken/BoxParticle0_2.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_3", L"resources/images/object/broken/BoxParticle0_3.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_4", L"resources/images/object/broken/BoxParticle0_4.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_5", L"resources/images/object/broken/BoxParticle0_5.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BOX_6", L"resources/images/object/broken/BoxParticle0_6.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_0", L"resources/images/object/broken/BigBoxParticle0_0.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_1", L"resources/images/object/broken/BigBoxParticle0_1.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_2", L"resources/images/object/broken/BigBoxParticle0_2.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_3", L"resources/images/object/broken/BigBoxParticle0_4.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_4", L"resources/images/object/broken/BigBoxParticle0_5.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/BIG_BOX_5", L"resources/images/object/broken/BigBoxParticle0_6.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_0", L"resources/images/object/broken/OakDrumParticle0_0.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_1", L"resources/images/object/broken/OakDrumParticle0_1.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_2", L"resources/images/object/broken/OakDrumParticle0_2.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_3", L"resources/images/object/broken/OakDrumParticle0_3.png");
+	IMAGE_MANAGER->addImage("OBJECT/PARTICLE/DRUM_4", L"resources/images/object/broken/OakDrumParticle0_4.png");
+	// *** GOLD
+	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/COIN", L"resources/images/object/gold/goldCoin.png", 8, 1);
+	IMAGE_MANAGER->addFrameImage("OBJECT/GOLD/BULLION", L"resources/images/object/gold/goldBullion.png", 7, 1);
+	// *** HP FAIRY
+	IMAGE_MANAGER->addFrameImage("OBJECT/HP_FAIRY/MID", L"resources/images/object/hpFairy/midFairy.png", 16, 1);
+
+
 	// ** COSTUME
 	// *** BASE
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/IDLE", L"resources/images/costumes/base/player_idle.png", 5, 1);
@@ -438,6 +469,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Wing", L"resources/images/Accessories/Wing.png");                                 // 날개
 	IMAGE_MANAGER->addImage("Wing0", L"resources/images/Accessories/Wing0.png");                               // 날개 장착 이미지
 	IMAGE_MANAGER->addImage("Wingboots", L"resources/images/Accessories/Wingboots.png");                       // 윙부츠
+	IMAGE_MANAGER->addImage("Seeri", L"resources/images/Accessories/Seeri.png");                               // 자동공격 인형 아이콘
+	IMAGE_MANAGER->addFrameImage("Seeri0", L"resources/images/Accessories/Seeri0.png", 9, 1);                  // 자동공격 인형 프레임 이미지
+	IMAGE_MANAGER->addImage("selected", L"resources/images/Accessories/selected.png");                         // 자동공격 인형 조준점
+	IMAGE_MANAGER->addImage("SeeriBullet", L"resources/images/Accessories/SeeriBullet.png");                   // 자동공격 인형 탄
 
 	// ** ENEMY
 	// * 수녀
@@ -549,7 +584,6 @@ HRESULT playGround::init()
 
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Bat_Explosion", L"resources/images/Enemy/Bat/Bomb/explosion.png", 12, 1);
-	//EFFECT_MANAGER->addEffect("Bat_Explosion", "Bat_Explosion", 15, 10);
 
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet"	, L"resources/images/Enemy/Bullet/note.png"		, 4, 1);	// 수녀 총알
 	IMAGE_MANAGER->addFrameImage("Banshee/Bullet_FX", L"resources/images/Enemy/Bullet/note_FX.png"	, 6, 1);	// 수녀 총알 삭제
@@ -576,36 +610,34 @@ HRESULT playGround::init()
 
 	//** Boss
 	// * Belial
+	// * Head
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle"			, L"resources/images/boss/Belial/Head/idle.png"			, 10, 1);	// 머리 기본
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot"	, L"resources/images/boss/Belial/Head/idle_Shot.png"	, 10, 1);	// 머리 기본 피격
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack"		, L"resources/images/boss/Belial/Head/attack.png"		, 10, 1);	// 머리 공격
-	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack_Shot"	, L"resources/images/boss/Belial/Head/attack_shot.png"	, 10, 1);	// 머리 공겨 피격
-	IMAGE_MANAGER->addFrameImage("Belial/Back"				, L"resources/images/boss/Belial/Back/idle.png"			, 10, 1);	// 후광 구
+	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack_Shot"	, L"resources/images/boss/Belial/Head/attack_shot.png"	, 10, 1);	// 머리 공격 피격
 
-	IMAGE_MANAGER->addImage("Belial/Sword"					, L"resources/images/boss/Belial/Sword/default.png"				);	// 검 이미지
-	IMAGE_MANAGER->addImage("Belial/Sword_Shoot"			, L"resources/images/boss/Belial/Sword/shoot.png"				);	// 검 이미지
-	IMAGE_MANAGER->addFrameImage("Belial/Sword_Charge"		, L"resources/images/boss/Belial/Sword/charge.png"		,  1, 8);	// 검 이펙트
+	// * Hand
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle"		, L"resources/images/boss/Belial/Hand/idle.png"		, 10, 1);	// 손 기본
+	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack"	, L"resources/images/boss/Belial/Hand/attack.png"	, 18, 1);	// 손 공격
 
-	IMAGE_MANAGER->addFrameImage("Belial/Bullet"			, L"resources/images/boss/Belial/bullet.png"			,  2, 1);	// 투사체	
+	// * Laser
+	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/Laser/head.png", 7, 1);	// 레이저 시작
+	IMAGE_MANAGER->addFrameImage("Belial/Laser/Body", L"resources/images/boss/Belial/Laser/body.png", 7, 1);	// 레이저 몸통
+
+	// * 후광
+	IMAGE_MANAGER->addFrameImage("Belial/Back/Circle"	, L"resources/images/boss/Belial/Back/circle.png"	, 10, 1);	// 후광 구
+	IMAGE_MANAGER->addFrameImage("Belial/Back/Particle"	, L"resources/images/boss/Belial/Back/particle.png"	, 10, 1);	// 이펙트 이미지
+
+	// * Sword
+	IMAGE_MANAGER->addImage("Belial/Sword"		, L"resources/images/boss/Belial/Sword/default.png"	);					// 검 이미지
+	IMAGE_MANAGER->addImage("Belial/Sword_Shoot", L"resources/images/boss/Belial/Sword/shoot.png"	);					// 검 이미지 투사체
+	IMAGE_MANAGER->addFrameImage("Belial/Sword_Charge"	, L"resources/images/boss/Belial/Sword/charge.png"	, 1, 8);	// 검 이펙트
+	IMAGE_MANAGER->addFrameImage("Belial/Sword_Hit"		, L"resources/images/boss/Belial/Sword/hit.png"		, 5, 1);	// 검 충돌 이펙트
+
+	IMAGE_MANAGER->addFrameImage("Belial/Bullet"			, L"resources/images/boss/Belial/bullet.png"	, 2, 1);	// 투사체
+	IMAGE_MANAGER->addFrameImage("Belial/Bullet_FX"			, L"resources/images/boss/Belial/bullet_FX.png"	, 8, 1);	// 투사체 이펙트
 	
 	EFFECT_MANAGER->addEffect("Belial/Sword_Charge", "Belial/Sword_Charge", 15, 6);
-
-	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle", L"resources/images/boss/Belial/HandIdle.png", 10, 1);							//벨리알 손 대기 상태
-	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack", L"resources/images/boss/Belial/Handattack.png", 18, 1);						//벨리알 손 공격 상태
-	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle_Shot", L"resources/images/boss/Belial/getHandDamage_Idle.png", 10, 1);			//벨리알 손 대기 피격 상태
-	IMAGE_MANAGER->addFrameImage("Belial/Hand/IdAttackle_Shot", L"resources/images/boss/Belial/getHandDamage_attack.png", 18, 1);	//벨리알 손 공격 피격 상태
-	
-	IMAGE_MANAGER->addFrameImage("Belial/particle", L"resources/images/boss/Belial/particle.png", 9, 1);							//벨리알 구 주변 이팩트
-	IMAGE_MANAGER->addFrameImage("Belial/Bullet", L"resources/images/boss/Belial/bullet.png", 2, 1);								//벨리알 총알
-	IMAGE_MANAGER->addFrameImage("Belial/Bullet_Fx", L"resources/images/boss/Belial/bullet_Fx.png", 8, 1);							//벨리알 타격 이팩트
-
-	IMAGE_MANAGER->addFrameImage("Belial/Laser", L"resources/images/boss/Belial/laser.png", 7, 1);									//벨리알 레이저
-	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/laser_head.png", 7, 1);						//벨리알 레이저 앞부분
-
-	//IMAGE_MANAGER->addImage("Belial/Sword", L"resources/images/boss/Belial/BossSword.png");										    //벨리알 검
-
-	EFFECT_MANAGER->addEffect("Belial/Bullet_Fx","Belial/Bullet_Fx",10,50);															//벨리알 벽붇 이팩트
-
 
 	// * 니플헤임
 	IMAGE_MANAGER->addFrameImage("Niflheim/Idle"	, L"resources/images/boss/Niflheim/idle.png"	,  6, 1);	// 니플헤임 기본

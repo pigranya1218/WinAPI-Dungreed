@@ -12,6 +12,7 @@ D2DRenderer::D2DRenderer()
 	this->createDefaultBrush();
 	this->addTextFormat(L"둥근모꼴");
 	this->addTextFormat(L"Alagard");
+	this->addTextFormat(L"Aa카시오페아");
 	_D2DRenderTarget->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
 }
 

@@ -4,7 +4,7 @@ void Room14TRB::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("Stage14TRB.map");
+	loadMap("room/Stage14_TRB.map");
 }
 
 void Room14TRB::release()

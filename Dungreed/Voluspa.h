@@ -6,6 +6,7 @@ private:
 	Image* _img;
 	Vector2 _renderPos;
 	Vector2 _location;
+	Vector2 _playerPos;
 	bool _Opposition;
 	float _currAttackDelay;
 	float _currStopDelay;
