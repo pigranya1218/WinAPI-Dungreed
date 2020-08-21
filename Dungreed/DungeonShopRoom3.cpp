@@ -5,6 +5,9 @@ void DungeonShopRoom3::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/DungeonShopRoom1_LR.map");
+
+	_respawnPosition[0] = Vector2(300, 600);
+	_respawnPosition[2] = Vector2(1000, 600);
 }
 
 void DungeonShopRoom3::release()

@@ -7,7 +7,7 @@ void StartRoom3::init()
 	loadMap("room/StartRoom3_B.map");
 
 	
-	_respawnPosition[0] = Vector2(600, 400);
+	_respawnPosition[0] = Vector2(610, 400);
 	// makeDoor(Vector2(TILESIZE * 24 + TILESIZE * 0.5, TILESIZE * 9), DIRECTION::DOWN);
 
 }
