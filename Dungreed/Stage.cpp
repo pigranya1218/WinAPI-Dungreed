@@ -21,13 +21,14 @@ void Stage::init()
 	_projectileMgr->setEnemyManager(_enemyMgr);
 	_projectileMgr->setObjectManager(_objectMgr);
 
+	_respawnPosition.resize(5);
 	_doors.resize(4);
 }
 
 void Stage::enter(int enterType)
 {
 	_uiManager->setMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms, _doors, _enemyMgr, _npcMgr, _objectMgr);
-	_stageManager->setPlayerPos(400, 400);
+	_stageManager->setPlayerPos(_respawnPosition[enterType].x, _respawnPosition[enterType].y);
 }
 
 void Stage::release()
