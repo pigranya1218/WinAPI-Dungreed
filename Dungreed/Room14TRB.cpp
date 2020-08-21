@@ -13,6 +13,8 @@ void Room14TRB::init()
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(350, 500));
 	_objectMgr->spawnObject(0x0002, Vector2(450, 500));
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1200, 1000), DIRECTION::LEFT);
 }
 
 void Room14TRB::release()

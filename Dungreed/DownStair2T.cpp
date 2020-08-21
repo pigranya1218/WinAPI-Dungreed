@@ -16,6 +16,7 @@ void DownStair2T::init()
 	_objectMgr->spawnObject(0x0000, Vector2(740, 900));
 	_objectMgr->spawnObject(0x0001, Vector2(780, 900));
 
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(550, 400), DIRECTION::LEFT);
 }
 
 void DownStair2T::release()

@@ -15,6 +15,8 @@ void DownStair1L::init()
 	_objectMgr->spawnObject(0x0000, Vector2(1100, 500));
 	_objectMgr->spawnObject(0x0000, Vector2(1140, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(1080, 500));
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(380, 500), DIRECTION::LEFT);
 }
 
 void DownStair1L::release()

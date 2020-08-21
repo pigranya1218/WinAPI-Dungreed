@@ -6,6 +6,8 @@ void DungeonShopRoom::init()
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/DungeonShopRoom1_L.map");
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 150), DIRECTION::LEFT);
 }
 
 void DungeonShopRoom::release()

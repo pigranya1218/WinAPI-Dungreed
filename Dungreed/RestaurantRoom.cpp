@@ -11,6 +11,8 @@ void RestaurantRoom::init()
 	//_respawnPosition[0] = Vector2(200, 600);
 
 	//makeDoor(Vector2(100,850), DIRECTION::LEFT);
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(350, 800), DIRECTION::LEFT);
 }
 
 void RestaurantRoom::release()

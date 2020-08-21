@@ -24,6 +24,7 @@ void Room20LTRB::init()
 	_objectMgr->spawnObject(0x0000, Vector2(840, 2500));
 	_objectMgr->spawnObject(0x0001, Vector2(880, 2500));
 
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
 }
 
 void Room20LTRB::release()
