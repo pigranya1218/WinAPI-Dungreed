@@ -6,7 +6,8 @@ void Room9B::init()
 	Stage::init(); 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage9_B.map");
-
+	
+	_respawnPosition[3] = Vector2(500, 600);
 }
 
 void Room9B::release()

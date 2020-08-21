@@ -8,6 +8,8 @@ void RestaurantRoom::init()
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/RestaurantRoom1_L.map");
+	_respawnPosition[0] = Vector2(200, 600);
+
 }
 
 void RestaurantRoom::release()

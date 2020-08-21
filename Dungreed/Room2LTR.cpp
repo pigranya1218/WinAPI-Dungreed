@@ -6,11 +6,9 @@ void Room2LTR::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage2_LR.map");
-	_OpenDirection[0] = true;
-	_OpenDirection[1] = true;
-	_OpenDirection[2] = true;
-	_OpenDirection[3] = false;
-
+	
+	_respawnPosition[0] = Vector2(100, 1300);
+	_respawnPosition[2] = Vector2(1100, 1300);
 }
 
 void Room2LTR::release()

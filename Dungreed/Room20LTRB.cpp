@@ -6,10 +6,10 @@ void Room20LTRB::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage20_LTRB.map");
-	_OpenDirection[0] = true;
-	_OpenDirection[1] = true;
-	_OpenDirection[2] = true;
-	_OpenDirection[3] = true;
+	_respawnPosition[0] = Vector2(200, 200);
+	_respawnPosition[1] = Vector2(400, 200);
+	_respawnPosition[2] = Vector2(1500, 200);
+	_respawnPosition[3] = Vector2(400, 800);
 
 }
 
