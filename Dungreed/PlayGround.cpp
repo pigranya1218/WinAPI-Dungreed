@@ -378,7 +378,7 @@ HRESULT playGround::init()
 	// *** DOOR
 	IMAGE_MANAGER->addFrameImage("OBJECT/DOOR", L"resources/images/object/door/door.png", 23, 1);
 	IMAGE_MANAGER->addImage("OBJECT/DOOR_OPEN_EFFECT", L"resources/images/object/door/openEffect.png");
-
+	IMAGE_MANAGER->addFrameImage("Floor1Door", L"resources/images/Dungeon/Door1.png", 10, 1);
 
 	// ** COSTUME
 	// *** BASE

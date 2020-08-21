@@ -12,6 +12,8 @@ void Room6TB::init()
 
 	/*makeDoor(Vector2(340, 70), DIRECTION::UP);
 	makeDoor(Vector2(340, 920), DIRECTION::DOWN);*/
+
+	//_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
 }
 
 void Room6TB::release()

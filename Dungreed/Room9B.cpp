@@ -13,6 +13,8 @@ void Room9B::init()
 	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
 	_objectMgr->spawnObject(0x0000, Vector2(550, 200));
 	_objectMgr->spawnObject(0x0002, Vector2(650, 200));
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(380, 600), DIRECTION::LEFT);
 }
 
 void Room9B::release()

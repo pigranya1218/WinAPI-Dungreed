@@ -723,6 +723,9 @@
     <ClInclude Include="SeeriProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="Room15TB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
     <ClInclude Include="GateNpc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
@@ -1258,6 +1261,9 @@
     </ClCompile>
     <ClCompile Include="SeeriProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Room15TB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
     <ClCompile Include="GateNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>

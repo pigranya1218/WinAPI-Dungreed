@@ -17,6 +17,7 @@ void Room3LR::init()
 
 	_objectMgr->spawnObject(0x0002, Vector2(800, 200));
 
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1400, 700), DIRECTION::LEFT);
 }
 
 void Room3LR::release()

@@ -8,6 +8,8 @@ void RestaurantRoom2LR::init()
 
 	//_respawnPosition[0] = Vector2(300, 900);
 	//_respawnPosition[2] = Vector2(2100, 900);
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(450, 800), DIRECTION::LEFT);
 }
 
 void RestaurantRoom2LR::release()

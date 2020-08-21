@@ -3,6 +3,10 @@
 class StartRoom2 :
 	public Stage
 {
+private:
+	Image* _img;
+	Animation* _ani;
+
 public:
 	virtual void init();
 	virtual void release();
