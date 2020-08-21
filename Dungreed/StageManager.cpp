@@ -164,8 +164,25 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 	resultRoom->setPlayer(_player);
 	resultRoom->setStageManager(this);
 	resultRoom->setUIManager(_uiMgr);
+	vector<bool> wallInfo{ isWall[0], isWall[1], isWall[2], isWall[3] };
+	resultRoom->setWall(wallInfo);
 	resultRoom->init();
 	return resultRoom;
+}
+
+string StageManager::getStageTitle()
+{
+	switch (_currStageType)
+	{
+	case STAGE_TYPE::TEST:
+		return "Å×½ºÆ® Àü¿ë¸Ê";
+	case STAGE_TYPE::VILLAGE:
+		return "¸¶À»";
+	case STAGE_TYPE::DUNGEON_NORMAL:
+		return "1Ãþ : ÁöÇÏ °¨¿Á";
+	case STAGE_TYPE::DUNGEON_BOSS:
+		return "2Ãþ : º§¸®¾ËÀÇ °ü¹®";
+	}
 }
 
 void StageManager::init()
@@ -173,7 +190,7 @@ void StageManager::init()
 	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
 	_mapSize = 4;
 	makeStage();
-	_uiMgr->setMap(_stageMap);
+	_uiMgr->setMap(_stageMap, getStageTitle());
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 }
 

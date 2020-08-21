@@ -47,6 +47,7 @@ private:
 		FloatRect imgRc;
 		FloatRect textRc;
 		int fontSize;
+		wstring text;
 	};
 
 	struct tagProgressUI
@@ -93,18 +94,36 @@ private:
 		NpcManager* npcMgr;
 		ObjectManager* objectMgr;
 	};
+	
+	struct tagRoomUI // 맵에 있는 
+	{
+		FloatRect rc;
+		bool exist;
+		bool visible;
+		vector<bool> isConnect; // L T R B
+	};
 
 	struct tagMap // 맵
 	{
 		Image* headerImg;
 		Image* bodyImg;
+		Image* nameImg;
+		Image* roomImg;
 
 		bool isShow;
 		vector<vector<Stage*>> stageMap;
+		vector<vector<tagRoomUI>> uiMap;
 		Vector2 currIndex;
 
 		float twinkleDelay; // 현재 위치 깜빡거리는 거 시간 재는 변수
 		string stageTitle; // 스테이지 이름
+		FloatRect titleRc;
+
+		tagLabelUI infos[5];
+
+		POINT lastMoustpt;
+		Vector2 offset;
+		bool isDrag;
 	};
 
 private:
@@ -142,7 +161,7 @@ public:
 	void render();
 
 	void setMiniMap(vector<FloatRect> groundRect, vector<LinearFunc> groundLine, vector<LinearFunc> platformLine, vector<DoorObject*> doors, EnemyManager* enemyManager, NpcManager* npcManager, ObjectManager* objectManager);
-	void setMap(vector<vector<Stage*>> stageMap);
+	void setMap(vector<vector<Stage*>> stageMap, string stageName);
 	void setCurrentMapIndex(Vector2 currIndex);
 	bool isActive() const noexcept { return _isActive; }
 

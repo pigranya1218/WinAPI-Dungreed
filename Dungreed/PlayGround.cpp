@@ -234,6 +234,14 @@ HRESULT playGround::init()
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");
 	IMAGE_MANAGER->addImage("UI/MAP/BODY", L"resources/images/gameScene/ui/map/MapBase 1_1.png");
+	IMAGE_MANAGER->addImage("UI/MAP/NAME_BG", L"resources/images/gameScene/ui/map/MapName.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ROOM", L"resources/images/gameScene/ui/map/room.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_FOOD", L"resources/images/gameScene/ui/map/Food.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_SHOP", L"resources/images/gameScene/ui/map/Shop.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM", L"resources/images/gameScene/ui/map/Worm.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM_SELECTED", L"resources/images/gameScene/ui/map/Worm_Selected.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_EXIT", L"resources/images/gameScene/ui/map/Exit.png");
+
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
@@ -669,7 +677,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("MapTool");	
+	SCENE_MANAGER->changeScene("GAME");	
 
 	
 	return S_OK;

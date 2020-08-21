@@ -68,7 +68,27 @@ void UIManager::init()
 	// MAP UI
 	_mapUI.headerImg = IMAGE_MANAGER->findImage("UI/MAP/HEADER");
 	_mapUI.bodyImg = IMAGE_MANAGER->findImage("UI/MAP/BODY");
+	_mapUI.nameImg = IMAGE_MANAGER->findImage("UI/MAP/NAME_BG");
+	_mapUI.roomImg = IMAGE_MANAGER->findImage("UI/MAP/ROOM");
+	_mapUI.titleRc = FloatRect(Vector2(960, 770), Vector2(600, 100), PIVOT::CENTER);
 
+	_mapUI.infos[0].text = L"당신의 위치";
+	_mapUI.infos[1].text = L"다음층으로 가는 길";
+	_mapUI.infos[2].text = L"비밀통로";
+	_mapUI.infos[3].text = L"상점";
+	_mapUI.infos[4].text = L"음식점";
+
+	_mapUI.infos[1].img = IMAGE_MANAGER->findImage("UI/MAP/ICON_EXIT");
+	_mapUI.infos[2].img = IMAGE_MANAGER->findImage("UI/MAP/ICON_WORM");
+	_mapUI.infos[3].img = IMAGE_MANAGER->findImage("UI/MAP/ICON_SHOP");
+	_mapUI.infos[4].img = IMAGE_MANAGER->findImage("UI/MAP/ICON_FOOD");
+
+	for (int i = 0; i < 5; i++)
+	{
+		_mapUI.infos[i].fontSize = 28;
+		_mapUI.infos[i].imgRc = FloatRect(Vector2(210, 650 + 36 * i), Vector2(40, 40), PIVOT::CENTER);
+		_mapUI.infos[i].textRc = FloatRect(Vector2(390, 650 + 36 * i), Vector2(300, 40), PIVOT::CENTER);
+	}
 
 	// DIALOGUE UI
 	_dialogueUI.init();
@@ -513,9 +533,65 @@ void UIManager::render()
 		// Map UI
 		if (_mapUI.isShow)
 		{
-			D2D_RENDERER->fillRectangle(FloatRect(Vector2(0, 0), Vector2(WINSIZEX, WINSIZEY), PIVOT::LEFT_TOP), 33, 31, 50, 0.7);
+			D2D_RENDERER->fillRectangle(FloatRect(Vector2(0, 0), Vector2(WINSIZEX, WINSIZEY), PIVOT::LEFT_TOP), 33, 31, 50, 1);
+			
+			int centerX = WINSIZEX / 2;
+			int centerY = 450;
+
+			for (int x = 0; x < 4; x++)
+			{
+				for (int y = 0; y < 4; y++)
+				{
+					if (_mapUI.uiMap[x][y].exist)
+					{
+						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
+						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
+						_mapUI.roomImg->render(Vector2(centerX + offsetX, centerY + offsetY), Vector2(114, 114));
+					}
+				}
+			}
+
+			for (int x = 0; x < 4; x++)
+			{
+				for (int y = 0; y < 4; y++)
+				{
+					if (_mapUI.uiMap[x][y].exist)
+					{
+						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
+						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
+						if (_mapUI.uiMap[x][y].isConnect[2]) // 우
+						{
+							FloatRect rc = FloatRect(centerX + offsetX + 48, centerY + offsetY - 3, centerX + offsetX + 48 + 30 + 18, centerY + offsetY + 3);
+							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+						}
+						if (_mapUI.uiMap[x][y].isConnect[3]) // 하
+						{
+							FloatRect rc = FloatRect(centerX + offsetX - 3, centerY + offsetY + 48, centerX + offsetX + 3, centerY + offsetY + 48 + 30 + 18);
+							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+						}
+					}
+				}
+			}
+			
+			D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, 190), 33, 31, 50, 1);
+			D2D_RENDERER->fillRectangle(FloatRect(0, 850, WINSIZEX, 900), 33, 31, 50, 1);
+
 			_mapUI.headerImg->render(Vector2(WINSIZEX / 2, 90), Vector2(WINSIZEX, 160));
 			_mapUI.bodyImg->render(Vector2(WINSIZEX / 2, WINSIZEY / 2 + 70), Vector2(1300, 660));
+			
+			_mapUI.nameImg->render(_mapUI.titleRc.getCenter());
+			D2D_RENDERER->renderTextField(_mapUI.titleRc.left, _mapUI.titleRc.top, TTYONE_UTIL::stringTOwsting(_mapUI.stageTitle), RGB(255, 234, 168),
+				45, _mapUI.titleRc.getWidth(), _mapUI.titleRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+		
+			D2D_RENDERER->fillRectangle(FloatRect(_mapUI.infos[0].imgRc.getCenter(), Vector2(16, 16), PIVOT::CENTER), 84, 144, 255, 1);
+			D2D_RENDERER->renderTextField(_mapUI.infos[0].textRc.left, _mapUI.infos[0].textRc.top, _mapUI.infos[0].text, RGB(255, 255, 255), _mapUI.infos[0].fontSize,
+				_mapUI.infos[0].textRc.getWidth(), _mapUI.infos[0].textRc.getHeight());
+			for (int i = 1; i < 5; i++)
+			{
+				_mapUI.infos[i].img->render(_mapUI.infos[i].imgRc.getCenter(), _mapUI.infos[i].imgRc.getSize());
+				D2D_RENDERER->renderTextField(_mapUI.infos[i].textRc.left, _mapUI.infos[i].textRc.top, _mapUI.infos[i].text, RGB(255, 255, 255), _mapUI.infos[i].fontSize,
+					_mapUI.infos[i].textRc.getWidth(), _mapUI.infos[i].textRc.getHeight());
+			}
 		}
 
 
@@ -622,14 +698,46 @@ void UIManager::setMiniMap(vector<FloatRect> groundRect, vector<LinearFunc> grou
 	_miniMapUI.objectMgr = objectManager;
 }
 
-void UIManager::setMap(vector<vector<Stage*>> stageMap)
+void UIManager::setMap(vector<vector<Stage*>> stageMap, string stageName)
 {
 	_mapUI.stageMap = stageMap;
+	_mapUI.stageTitle = stageName;
+
+	_mapUI.uiMap.resize(4);
+	for (int i = 0; i < 4; i++)
+	{
+		_mapUI.uiMap[i].resize(4);
+	}
+
+	for (int x = 0; x < 4; x++)
+	{
+		for (int y = 0; y < 4; y++)
+		{
+			if (stageMap[x][y] == nullptr)
+			{
+				_mapUI.uiMap[x][y].exist = false;
+			}
+			else
+			{
+				_mapUI.uiMap[x][y].exist = true;
+				_mapUI.uiMap[x][y].visible = true;
+				_mapUI.uiMap[x][y].rc = FloatRect(Vector2(-30 + (30 + 114) * (x), -30 + (30 + 114) * y), Vector2(114, 114), PIVOT::LEFT_TOP);
+				_mapUI.uiMap[x][y].isConnect.resize(4);
+				vector<bool> isWall = _mapUI.stageMap[x][y]->getWall();
+				for (int dir = 0; dir < 4; dir++)
+				{
+					_mapUI.uiMap[x][y].isConnect[dir] = !isWall[dir];
+				}
+			}
+		}
+	}
+
 }
 
 void UIManager::setCurrentMapIndex(Vector2 currIndex)
 {
 	_mapUI.currIndex = currIndex;
+	_mapUI.uiMap[currIndex.x][currIndex.y].visible = true;
 }
 
 void UIManager::showDamage(DamageInfo damage, Vector2 pos)
