@@ -7,8 +7,8 @@ void Room11_RB::init()
 	loadMap("room/Stage11_RB.map");
 
 	
-	_respawnPosition[2] = Vector2(1000, 600);
-	_respawnPosition[3] = Vector2(450, 800);
+	//_respawnPosition[2] = Vector2(1000, 600);
+	//_respawnPosition[3] = Vector2(450, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
 	_objectMgr->spawnObject(0x0000, Vector2(550, 200));

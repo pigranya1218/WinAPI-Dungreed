@@ -6,7 +6,7 @@ void DownStair2T::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/DownStair2_T.map");
 
-	_respawnPosition[1] = Vector2(500, 300);
+	//_respawnPosition[1] = Vector2(500, 300);
 
 	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(740, 500));

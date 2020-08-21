@@ -6,7 +6,7 @@ void RestaurantRoom1R::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/RestaurantRoom1_R.map");
 
-	_respawnPosition[2] = Vector2(1000, 600);
+//	_respawnPosition[2] = Vector2(1000, 600);
 }
 
 void RestaurantRoom1R::release()
