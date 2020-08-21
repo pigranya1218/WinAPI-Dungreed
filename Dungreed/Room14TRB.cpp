@@ -9,6 +9,10 @@ void Room14TRB::init()
 	_respawnPosition[1] = Vector2(500, 300);
 	_respawnPosition[2] = Vector2(900, 600);
 	_respawnPosition[3] = Vector2(450, 800);
+
+	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(350, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(450, 500));
 }
 
 void Room14TRB::release()

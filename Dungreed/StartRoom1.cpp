@@ -10,8 +10,14 @@ void StartRoom1::init()
 	//_direction.push_back(DIRECTION::RIGHT);
 	
 	//makeDoor(Vector2(TILESIZE * 19 + TILESIZE * 0.5, TILESIZE * 10), DIRECTION::RIGHT);
-	_respawnPosition[0] = Vector2(300,650); // 맨 처음 초기화되는 위치
+	_respawnPosition[0] = Vector2(600,650); // 맨 처음 초기화되는 위치
 	_respawnPosition[2] = Vector2(1100,650); // 오른쪽에서 들어올 때 위치
+
+	_objectMgr->spawnObject(0x0000, Vector2(500, 600));
+	_objectMgr->spawnObject(0x0001, Vector2(200, 600));
+	_objectMgr->spawnObject(0x0001, Vector2(380, 600));
+	_objectMgr->spawnObject(0x0001, Vector2(430, 600));
+	_objectMgr->spawnObject(0x0002, Vector2(300, 600));
 }
 
 void StartRoom1::release()

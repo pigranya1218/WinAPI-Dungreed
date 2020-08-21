@@ -10,6 +10,13 @@ void Room23LR::init()
 	
 	_respawnPosition[2] = Vector2(600, 200);
 	
+	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
+
+	_objectMgr->spawnObject(0x0000, Vector2(1100, 500));
+	_objectMgr->spawnObject(0x0000, Vector2(1140, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(1180, 500));
 }
 
 void Room23LR::release()

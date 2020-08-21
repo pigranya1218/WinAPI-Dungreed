@@ -11,6 +11,9 @@ void Room21LR::init()
 	
 	_respawnPosition[2] = Vector2(900, 200);
 	
+	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
 
 }
 

@@ -8,6 +8,11 @@ void DownStair2LT::init()
 
 	_respawnPosition[0] = Vector2(200, 600);
 	_respawnPosition[1] = Vector2(500, 300);
+
+	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
+
 }
 
 void DownStair2LT::release()

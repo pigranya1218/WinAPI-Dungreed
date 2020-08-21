@@ -11,6 +11,19 @@ void Room20LTRB::init()
 	_respawnPosition[2] = Vector2(1500, 200);
 	_respawnPosition[3] = Vector2(400, 800);
 
+	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(350, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(450, 500));
+
+	_objectMgr->spawnObject(0x0000, Vector2(220, 800));
+	_objectMgr->spawnObject(0x0001, Vector2(270, 800));
+
+
+	_objectMgr->spawnObject(0x0002, Vector2(800, 2500));
+
+	_objectMgr->spawnObject(0x0000, Vector2(840, 2500));
+	_objectMgr->spawnObject(0x0001, Vector2(880, 2500));
+
 }
 
 void Room20LTRB::release()
