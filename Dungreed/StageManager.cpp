@@ -367,6 +367,24 @@ void StageManager::makeStage()
 	default:
 		break;
 	}
+
+	switch (_currStageType)
+	{
+	case STAGE_TYPE::TEST:
+		break;
+	case STAGE_TYPE::VILLAGE:
+		break;
+	case STAGE_TYPE::DUNGEON_NORMAL:
+
+		SOUND_MANAGER->stop("MetalDoorSound");
+		SOUND_MANAGER->play("MetalDoorSound",1.0f);
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM",1.0f);
+		break;
+	case STAGE_TYPE::DUNGEON_BOSS:
+		break;
+	}
+
 	TIME_MANAGER->update(60);
 }
 
