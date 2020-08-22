@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbilityNpc.h" />
     <ClInclude Include="AbilityUI.h" />
     <ClInclude Include="AliceAbility.h" />
     <ClInclude Include="AliceCos.h" />
@@ -352,6 +353,7 @@
     <ClInclude Include="Wingboots.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbilityNpc.cpp" />
     <ClCompile Include="AbilityUI.cpp" />
     <ClCompile Include="AliceAbility.cpp" />
     <ClCompile Include="AliceCos.cpp" />

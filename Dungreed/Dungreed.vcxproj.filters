@@ -789,6 +789,9 @@
     <ClInclude Include="AliceAbility.h">
       <Filter>Dungreed\GameScene\Item\SpecialAbility</Filter>
     </ClInclude>
+    <ClInclude Include="AbilityNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1372,6 +1375,9 @@
     </ClCompile>
     <ClCompile Include="AliceAbility.cpp">
       <Filter>Dungreed\GameScene\Item\SpecialAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

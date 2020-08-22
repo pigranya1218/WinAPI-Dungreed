@@ -15,6 +15,7 @@ enum class NPC_TYPE : int
 	CHEST_BOSS, // 보스 상자 (희귀 ~ 전설)
 	ENTRANCE, // 입구
 	EXIT, // 출구
+	ABILITY, //훈련장
 	END
 };
 
