@@ -300,7 +300,6 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Greed3_disable.png");
 
 	IMAGE_MANAGER->addFrameImage("UI/ABILITY/CLICK_EFFECT", L"resources/images/gameScene/ui/ability/click/ClickEffect.png", 12, 1);
-	EFFECT_MANAGER->addEffect("UI/ABILITY/EFFECT_click", "UI/ABILITY/CLICK_EFFECT", 30, 10);
 
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");

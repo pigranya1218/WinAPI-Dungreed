@@ -26,7 +26,7 @@ void AbilityUI::init()
 	for (int i = 0; i < 5; i++)
 	{
 		_windows[i].baseRc = FloatRect(30 + 310 * i, 180, 330 + 310 * i, 780);
-		_windows[i].buttonCir = FloatCircle(Vector2(_windows[i].baseRc.getCenter().x, _windows[i].baseRc.getCenter().y + 250), 30);
+		_windows[i].buttonCir = FloatCircle(Vector2(_windows[i].baseRc.getCenter().x, _windows[i].baseRc.getCenter().y + 250), 50);
 		//특성 아이콘을 배치할 렉트
 		_windows[i].iconRc[1] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x, _windows[i].baseRc.getCenter().y + 150), Vector2(60, 60), PIVOT::CENTER);
 		_windows[i].iconRc[0] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x - 70, _windows[i].baseRc.getCenter().y + 150), Vector2(60, 60), PIVOT::CENTER);
@@ -59,11 +59,17 @@ void AbilityUI::init()
 	_abilityInitTextRc = FloatRect(1150, 830, 1250, WINSIZEY - 20);
 
 	//단추 클릭 이펙트
-
+	_effectImg = IMAGE_MANAGER->findImage("UI/ABILITY/CLICK_EFFECT");
+	_effectAni = new Animation;
+	_effectAni->init(_effectImg->getWidth(), _effectImg->getHeight(), _effectImg->getMaxFrameX(), _effectImg->getMaxFrameY());
+	_effectAni->setDefPlayFrame(false, false);
+	_effectAni->setFPS(25);
 }
 
 void AbilityUI::release()
 {
+	_effectAni->release();
+	delete _effectAni;
 }
 
 void AbilityUI::update(float elapsedTime)
@@ -107,6 +113,9 @@ void AbilityUI::update(float elapsedTime)
 					_abilityStat.maxHp = _windows[i].abilityPoint * 2;
 				}
 
+				_effectPos = _windows[i].buttonCir.origin;
+				_effectAni->start();
+
 				_player->setAbilityStat(_abilityStat);
 			}
 		}
@@ -123,6 +132,8 @@ void AbilityUI::update(float elapsedTime)
 		_abilityStat = PlayerStat();
 		_player->setAbilityStat(_abilityStat);
 	}
+
+	_effectAni->frameUpdate(elapsedTime);
 }
 
 void AbilityUI::render()
@@ -451,6 +462,11 @@ void AbilityUI::render()
 	D2D_RENDERER->renderTextField(_currPointRc.left, _currPointRc.top, L"남은 포인트 : " + to_wstring(_currAbilityPoint), D2D1::ColorF::White, 30, _currPointRc.getWidth(), _currPointRc.getHeight(), 1,
 		DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아", 0);
 	//D2D_RENDERER->renderText(_currPointRc.left + 30, _currPointRc.top - 50, L"남은 포인트 : " + to_wstring(_currAbilityPoint), 20, D2DRenderer::DefaultBrush::White, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아", 0);
+
+	if (_effectAni->isPlay())
+	{
+		_effectImg->aniRender(_effectPos, Vector2(110, 110), _effectAni);
+	}
 }
 
 string AbilityUI::getAbilityIconString(ABILITY_ICON type)
