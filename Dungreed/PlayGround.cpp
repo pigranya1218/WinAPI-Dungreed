@@ -854,7 +854,6 @@ HRESULT playGround::init()
 	//*	니플헤임
 
 
-
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
 	TIME_MANAGER->init();

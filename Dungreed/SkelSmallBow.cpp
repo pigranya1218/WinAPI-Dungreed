@@ -82,6 +82,9 @@ void SkelSmallBow::update(float const timeElapsed)
 		{
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -97,7 +100,7 @@ void SkelSmallBow::update(float const timeElapsed)
 				if (_attack.angle > 360) _attack.angle -= 360;
 
 				if (_attack.update(timeElapsed))
-				{					
+				{
 					setState(ENEMY_STATE::ATTACK);
 					_attackEnd = false;
 				}

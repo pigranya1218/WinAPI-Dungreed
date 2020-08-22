@@ -11,7 +11,7 @@ private:
 	Vector2			_lastPos;	// 이전 좌표
 	Vector2			_currPos;	// 현재 좌표
 	Vector2			_rushPos;	// 돌진 시작 포지션
-
+	int _enterCount;
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();

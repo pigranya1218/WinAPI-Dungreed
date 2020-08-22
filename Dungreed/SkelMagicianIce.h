@@ -14,7 +14,7 @@ private:
 	bool			_attacking;	// 현재 공격 이펙트 진행 중
 	int				_PlayCount;
 
-
+	int _enterCount;
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();
