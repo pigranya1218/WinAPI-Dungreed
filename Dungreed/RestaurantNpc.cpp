@@ -55,3 +55,11 @@ void RestaurantNpc::render()
 
 	Npc::render();
 }
+
+void RestaurantNpc::clickMenu(int menuIndex)
+{
+	if (menuIndex == 0)
+	{
+		_npcMgr->showRestaurantUI();
+	}
+}

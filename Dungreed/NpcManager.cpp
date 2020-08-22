@@ -6,6 +6,7 @@
 #include "GateNpc.h"
 #include "ChestNpc.h"
 #include "DoorNpc.h"
+#include "UIManager.h"
 
 void NpcManager::init()
 {
@@ -159,4 +160,13 @@ Vector2 NpcManager::getGatePos()
 void NpcManager::setShowPlayer(bool showPlayer)
 {
 	_stage->setShowPlayer(showPlayer);
+}
+
+void NpcManager::showRestaurantUI()
+{
+	_uiMgr->showRestaurant();
+}
+
+void NpcManager::showShopUI()
+{
 }

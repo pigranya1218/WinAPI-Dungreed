@@ -35,6 +35,7 @@ public:
 	Vector2 getGatePos();
 
 	void setShowPlayer(bool showPlayer);
-
+	void showRestaurantUI();
+	void showShopUI();
 };
 
