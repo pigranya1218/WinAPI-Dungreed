@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "StageManager.h"
 #include "UIManager.h"
-
+#include "GameEvent.h"
 
 
 class GameScene : public GameNode
@@ -15,7 +15,7 @@ private:
 	StageManager* _stageMgr;
 	UIManager* _uiMgr;
 
-
+	vector<GameEvent*> _events;
 
 public:
 	virtual HRESULT init();			// 초기화 전용 함수
@@ -40,5 +40,8 @@ public:
 	bool isUIActive();
 	void showDamage(DamageInfo info, Vector2 pos);
 
+
+	// EVENT 관련 함수
+	void pushR2REvent(float remainTime);
 };
 

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
+#include "RoomToRoomEvent.h"
 
 HRESULT GameScene::init()
 {
@@ -52,6 +53,22 @@ void GameScene::update()
 	EFFECT_MANAGER->update(elapsedTime);
 	CAMERA->processEvent(elapsedTime);
 	_uiMgr->update(elapsedTime);
+
+	vector<bool> isProcessed(static_cast<int>(GAME_EVENT_TYPE::END), false);
+	for (int i = 0; i < _events.size();)
+	{
+		if (_events[i]->getRemainTime() <= 0)
+		{
+			_events.erase(_events.begin() + i);
+		}
+		else
+		{
+			if (isProcessed[static_cast<int>(_events[i]->getType())]) continue;
+			isProcessed[static_cast<int>(_events[i]->getType())] = true;
+			_events[i]->processEvent(elapsedTime);
+			i++;
+		}
+	}
 }
 
 void GameScene::render()
@@ -70,6 +87,14 @@ void GameScene::render()
 	{
 		IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->setScale(4);
 		IMAGE_MANAGER->findImage("CURSOR_SHOOTING")->render(Vector2(_ptMouse.x, _ptMouse.y));
+	}
+
+	vector<bool> isProcessed(static_cast<int>(GAME_EVENT_TYPE::END), false);
+	for (int i = 0; i < _events.size(); i++)
+	{
+		if (isProcessed[static_cast<int>(_events[i]->getType())]) continue;
+		isProcessed[static_cast<int>(_events[i]->getType())] = true;
+		_events[i]->render();
 	}
 	
 }
@@ -119,4 +144,26 @@ bool GameScene::isUIActive()
 void GameScene::showDamage(DamageInfo info, Vector2 pos)
 {
 	_uiMgr->showDamage(info, pos);
+}
+
+void GameScene::pushR2REvent(float remainTime)
+{
+	bool needMake = true;
+	for (int i = 0; i < _events.size(); i++)
+	{
+		if (_events[i]->getType() != GAME_EVENT_TYPE::R2R) continue;
+		if (_events[i]->getRemainTime() < remainTime)
+		{
+			_events[i]->setRemainTime(remainTime);
+			_events[i]->setTotalTime(remainTime);
+			needMake = false;
+			break;
+		}
+	}
+	if (needMake)
+	{
+		RoomToRoomEvent* event = new RoomToRoomEvent;
+		event->init(remainTime);
+		_events.push_back(event);
+	}
 }

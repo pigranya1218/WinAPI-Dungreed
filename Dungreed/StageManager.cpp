@@ -305,6 +305,7 @@ void StageManager::moveRoom(Vector2 moveDir)
 	}
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(moveType);
+	_gameScene->pushR2REvent(1);
 }
 
 void StageManager::moveRoomIndex(Vector2 index)
@@ -315,6 +316,7 @@ void StageManager::moveRoomIndex(Vector2 index)
 
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(4);
+	_gameScene->pushR2REvent(1);
 }
 
 void StageManager::makeStage()
