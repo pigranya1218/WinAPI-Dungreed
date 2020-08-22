@@ -117,6 +117,7 @@ public:
 
 	// 스테이지 관련 함수
 	Vector2 getEnemyPos(Vector2 pos);
+	vector<FloatRect> getEnemyRects();
 	void moveRoom(Vector2 dir);
 
 	void updateAdjustStat();

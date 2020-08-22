@@ -537,7 +537,7 @@ void Player::update(float const elapsedTime)
 	if (_isStand && _force.y == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 23;
+		moveDir.y += 21;
 	}
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
@@ -1099,6 +1099,12 @@ float Player::getMaxDamage()
 Vector2 Player::getEnemyPos(Vector2 pos)
 {
 	return _gameScene->getEnemyPos(pos);
+}
+
+
+vector<FloatRect> Player::getEnemyRects()
+{
+	return _gameScene->getEnemyRects();
 }
 
 void Player::moveRoom(Vector2 dir)

@@ -38,11 +38,11 @@ void MetalPlateCos::init()
 	_baseStat.attackSpeed = 0;
 	_baseStat.reloadSpeed = 0; // --
 	_baseStat.moveSpeed = 350;
-	_baseStat.dashXPower = 1350;
-	_baseStat.dashYPower = 950;
-	_baseStat.jumpPower = 1200;
-	_baseStat.xGravity = 3000;
-	_baseStat.yGravity = 3000;
+	_baseStat.dashXPower = 1700;
+	_baseStat.dashYPower = 1500;
+	_baseStat.jumpPower = 1400;
+	_baseStat.xGravity = 4000;
+	_baseStat.yGravity = 4000;
 }
 
 void MetalPlateCos::release()

@@ -24,9 +24,19 @@ void AliceAbility::release()
 void AliceAbility::update(Player* player, float const elapsedTime)
 {
 	FloatCircle range = FloatCircle(player->getPosition(), 200);
-	Vector2 neareastEnemyPos = player->getEnemyPos(player->getPosition());
-	POINT enemyPt = { neareastEnemyPos.x, neareastEnemyPos.y };
-	if (range.ptInCircle(enemyPt))
+	vector<FloatRect> enemyRects = player->getEnemyRects();
+
+	bool isIn = false;
+	for (int i = 0; i < enemyRects.size(); i++)
+	{
+		if (range.intersect(enemyRects[i]))
+		{
+			isIn = true;
+			break;
+		}
+	}
+	
+	if (isIn)
 	{
 		if (!_isEnemyIn)
 		{

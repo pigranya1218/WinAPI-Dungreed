@@ -197,7 +197,7 @@ string StageManager::getStageTitle()
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::DUNGEON_NORMAL;
+	_currStageType = STAGE_TYPE::TEST;
 	_mapSize = 4;
 	makeStage();
 	_uiMgr->setMap(_stageMap, getStageTitle());
@@ -678,6 +678,11 @@ void StageManager::setPlayerPos( int x, int y)
 Vector2 StageManager::getEnemyPos(Vector2 pos)
 {
 	return _currStage->getEnemyPos(pos);
+}
+
+vector<FloatRect> StageManager::getEnemyRects()
+{
+	return _currStage->getEnemyRects();
 }
 
 void StageManager::showDamage(DamageInfo info, Vector2 pos)
