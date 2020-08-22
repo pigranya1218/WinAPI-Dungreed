@@ -11,7 +11,7 @@ void DialogueUI::startDialogue(Npc* npc)
 	_nameDialogue = npc->getName();
 	_bodyDialogue = npc->getBodyDialogue();
 	_selectDialogue = npc->getSelectDialogues();
-	_selectDialogue.push_back("아무것도");
+	_selectDialogue.push_back(L"아무것도");
 	_selectRc.clear();
 	for (int i = 0; i < _selectDialogue.size(); i++)
 	{
@@ -48,7 +48,7 @@ void DialogueUI::update(float elapsedTime)
 		while (_currElapsedTime > 0.1f)
 		{
 			_currElapsedTime -= 0.1f;
-			_currBodyLen += 2;
+			_currBodyLen += 1;
 		}
 
 		if (_currBodyLen >= _bodyDialogue.size())
@@ -87,9 +87,9 @@ void DialogueUI::render()
 {
 	IMAGE_MANAGER->findImage("UI/DIALOGUE/BASE")->render(Vector2(WINSIZEX * 0.5, WINSIZEY - 150));
 
-	D2D_RENDERER->renderTextField(_nameRc.left, _nameRc.top, TTYONE_UTIL::stringTOwsting(_nameDialogue), RGB(255, 178, 144), _nameRc.getHeight(), _nameRc.getWidth(), _nameRc.getHeight(),
+	D2D_RENDERER->renderTextField(_nameRc.left, _nameRc.top, _nameDialogue, RGB(255, 178, 144), _nameRc.getHeight(), _nameRc.getWidth(), _nameRc.getHeight(),
 		1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
-	D2D_RENDERER->renderTextField(_bodyRc.left, _bodyRc.top, TTYONE_UTIL::stringTOwsting(_bodyDialogue.substr(0, _currBodyLen)) + ((_currBodyLen >= _bodyDialogue.size())?L".":L""), 
+	D2D_RENDERER->renderTextField(_bodyRc.left, _bodyRc.top, _bodyDialogue.substr(0, _currBodyLen), 
 		RGB(255, 255, 255), 35, _bodyRc.getWidth(), _bodyRc.getHeight(),
 		1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
 
@@ -107,7 +107,7 @@ void DialogueUI::render()
 
 		for (int i = 0; i < _selectDialogue.size(); i++)
 		{
-			D2D_RENDERER->renderTextField(_selectRc[i].left, _selectRc[i].top, TTYONE_UTIL::stringTOwsting(_selectDialogue[i]),
+			D2D_RENDERER->renderTextField(_selectRc[i].left, _selectRc[i].top, _selectDialogue[i],
 				RGB(255, 255, 255), 35, _selectRc[i].getWidth(), _selectRc[i].getHeight(),
 				1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 		}
