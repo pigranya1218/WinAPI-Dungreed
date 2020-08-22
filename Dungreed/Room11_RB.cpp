@@ -6,7 +6,13 @@ void Room11_RB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage11_RB.map");
 
-	
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnChest.spawn = true;
+	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(500, 500);
+
 	//_respawnPosition[2] = Vector2(1000, 600);
 	_respawnPosition[3] = Vector2(450, 800);
 

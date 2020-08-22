@@ -5,6 +5,8 @@
 
 void Stage::init()
 {
+	_state = STAGE_STATE::IDLE;
+
 	_objectMgr = new ObjectManager;
 	_objectMgr->setStage(this);
 	_objectMgr->setPlayer(_player);
@@ -68,6 +70,65 @@ void Stage::update(float const elaspedTime)
 	Vector2 playerPos = _stageManager->getPlayerPos();
 
 	CAMERA->setXY(Vector2(round(playerPos.x), round(playerPos.y)));
+
+	switch (_state)
+	{
+	case STAGE_STATE::IDLE:
+	{
+		if (_spawnEnemies.size() > 0)
+		{
+			_state = STAGE_STATE::START;
+			_spawnDelay = 0;
+			_spawnIndex = 0;
+		}
+		else
+		{
+			_state = STAGE_STATE::END;
+		}
+	}
+	break;
+	case STAGE_STATE::START:
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(false);
+			}
+		}
+
+		_spawnDelay -= elaspedTime;
+		if (_spawnDelay <= 0)
+		{
+			_spawnDelay = 1;
+			if (_spawnIndex < _spawnEnemies.size())
+			{
+				_enemyMgr->spawnEnemy(_spawnEnemies[_spawnIndex].type, _spawnEnemies[_spawnIndex].pos, true);
+				_spawnIndex++;
+			}
+		}
+		if (_spawnIndex >= _spawnEnemies.size() && _enemyMgr->getEnemyCount() == 0)
+		{
+			_state = STAGE_STATE::FINISH;
+			if (_spawnChest.spawn)
+			{
+				_npcMgr->spawnNpc(_spawnChest.type, _spawnChest.pos, DIRECTION::LEFT);
+			}
+		}
+	}
+	break;
+	case STAGE_STATE::FINISH:
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(true);
+			}
+		}
+	}
+	break;
+	}
 
 	if (KEY_MANAGER->isOnceKeyDown('L'))
 	{

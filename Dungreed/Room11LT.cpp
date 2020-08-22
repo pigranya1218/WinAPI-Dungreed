@@ -5,9 +5,13 @@ void Room11LT::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage11_LT.map");
-	//_respawnPosition[0] = Vector2(100, 700);
 
-	//_respawnPosition[1] = Vector2(1050, 200);
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnChest.spawn = true;
+	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(500, 500);
 	
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(750, 450), DIRECTION::LEFT);
 }

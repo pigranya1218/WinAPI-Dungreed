@@ -5,9 +5,14 @@ void Room20TB::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage20_TB.map");
-	//_respawnPosition[0] = Vector2(200, 200);
-	//_respawnPosition[1] = Vector2(400, 200);
-	//_respawnPosition[2] = Vector2(1500, 200);
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnChest.spawn = true;
+	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(500, 500);
+	
 	_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));

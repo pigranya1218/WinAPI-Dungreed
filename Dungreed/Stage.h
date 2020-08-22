@@ -19,12 +19,39 @@ struct tagShowNpc
 	NPC_TYPE type;
 };
 
+enum class STAGE_STATE : int
+{
+	IDLE = 0, // 대기 상태
+	START, // 몬스터 소환하기
+	FINISH, // 끝난 상태
+	END
+};
+
+struct tagEnemySpawn // 적의 소환 위치
+{
+	ENEMY_TYPE type;
+	Vector2 pos;
+};
+
+struct tagChest // 보물상자 소환
+{
+	bool spawn = false; // 보물상자 소환 여부
+	NPC_TYPE type;
+	Vector2 pos;
+};
+
 class Stage
 {
 protected:
 	StageManager* _stageManager;
 	UIManager* _uiManager;
 	Player* _player;
+
+	STAGE_STATE _state;
+	vector<tagEnemySpawn> _spawnEnemies;
+	tagChest _spawnChest;
+	float _spawnDelay;
+	int _spawnIndex;
 
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	

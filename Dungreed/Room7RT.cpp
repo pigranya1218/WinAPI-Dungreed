@@ -5,6 +5,15 @@ void Room7RT::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage7_TR.map");
+
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnChest.spawn = true;
+	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(500, 500);
+
 	_respawnPosition[1] = Vector2(900, 570);
 
 	_respawnPosition[2] = Vector2(1550, 600);          

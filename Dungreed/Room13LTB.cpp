@@ -6,8 +6,13 @@ void Room13LTB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage13_LTB.map");
 
-	//_respawnPosition[0] = Vector2(200, 450);
-	//_respawnPosition[1] = Vector2(640, 300);
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnChest.spawn = true;
+	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(500, 500);
+
 	_respawnPosition[3] = Vector2(300, 800);
 	
 	makeDoor(Vector2(309, 1100), DIRECTION::DOWN);

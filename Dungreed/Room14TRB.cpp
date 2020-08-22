@@ -6,8 +6,13 @@ void Room14TRB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage14_TRB.map");
 
-	//_respawnPosition[1] = Vector2(600, 400);
-	//_respawnPosition[2] = Vector2(1000, 900);
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnChest.spawn = true;
+	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(500, 500);
+
 	_respawnPosition[3] = Vector2(1500, 930);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
