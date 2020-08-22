@@ -75,7 +75,7 @@ void Belial::init(const Vector2 & pos)
 	// 검 패턴
 	ZeroMemory(&_swordAtk, sizeof(_swordAtk));
 	_swordAtk.attackInit(1, 5, 3);
-	_swordAtk.delay = 0.2;
+	_swordAtk.delay = 0.08;
 	_swordAtk.circleSize = 130;
 
 	// 공격 주기 설정
@@ -253,6 +253,7 @@ void Belial::update(float const timeElapsed)
 					if (!_ani->isPlay())
 					{
 						// 기본 상태로 돌아감
+						SOUND_MANAGER->stop("Belial/Bullet");
 						setState(ENEMY_STATE::IDLE);
 					}
 				}
@@ -276,6 +277,8 @@ void Belial::update(float const timeElapsed)
 						sword->chargeEffect.delay = 0.5;
 
 						EFFECT_MANAGER->play("Enemy_Destroy", sword->getPosition(), Vector2(sword->img->getSize().x * _scale, sword->img->getSize().x * _scale));
+						SOUND_MANAGER->stop("Belial/Sword");
+						SOUND_MANAGER->play("Belial/Sword", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 						_sword.push_back(sword);
 						_swordNum++;
@@ -907,6 +910,8 @@ void Belial::tagHandInfo::update(const float timeElapsed, int enemyType, EnemyMa
 			if (ani->getPlayIndex() == 8 && !laserHeadAni->isPlay() && !laserBodyAni->isPlay())
 			{
 				// 레이저 발사 및 공격
+				SOUND_MANAGER->stop("Belial/Laser");
+				SOUND_MANAGER->play("Belial/Laser", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				setState(HAND_STATE::ATTACK_START);
 			}			
 		}
@@ -932,6 +937,7 @@ void Belial::tagHandInfo::update(const float timeElapsed, int enemyType, EnemyMa
 			if (!laserHeadAni->isPlay() && !laserBodyAni->isPlay())
 			{
 				// 기본 상태로 변경
+				SOUND_MANAGER->stop("Belial/Laser");
 				setState(HAND_STATE::IDLE);
 			}
 		}
