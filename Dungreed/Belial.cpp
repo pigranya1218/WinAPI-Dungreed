@@ -104,7 +104,6 @@ void Belial::init(const Vector2 & pos)
 	// 손 초기화
 	_handL.init(Vector2(_position.x - 130 * _scale, _position.y + 50 * _scale));
 	_handR.init(Vector2(_position.x + 130 * _scale, _position.y + 50 * _scale));
-
 	
 	// 오른쪽 레이저 초기화
 	{
@@ -142,6 +141,10 @@ void Belial::init(const Vector2 & pos)
 		);
 	}
 
+	// 알파값 초기화
+	_handAlpha = _headAlpha = 0;
+
+	setState(ENEMY_STATE::ENTER);
 }
 
 void Belial::release()
@@ -173,6 +176,21 @@ void Belial::update(float const timeElapsed)
 		case ENEMY_STATE::ENTER:
 		{
 			headMove(timeElapsed);
+
+			_headAlpha += timeElapsed;
+
+			if (_headAlpha >= 1.0f)
+			{
+				_headAlpha = 1.0f;
+
+				_handAlpha += timeElapsed;
+
+				if (_handAlpha >= 1.0f)
+				{
+					_handAlpha = 1.0f;
+					setState(ENEMY_STATE::IDLE);
+				}
+			}
 		}
 		break;
 		// 기본 상태
@@ -220,7 +238,7 @@ void Belial::update(float const timeElapsed)
 					{
 						// 총알 발사 위치
 						Vector2 bulletPos = _position;
-						bulletPos.x += 7.5f * _scale;
+						//bulletPos.x += 7.5f * _scale;
 						bulletPos.y += 27.5f * _scale;
 
 						// 총알 4개씩 발사
@@ -229,6 +247,10 @@ void Belial::update(float const timeElapsed)
 							_shooting.createBullet(bulletPos, (_shooting.angle + (PI / 2)));
 							_shooting.fireBullet(_myEnemyType, _enemyManager);
 						}
+
+						SOUND_MANAGER->stop("Belial/Bullet");
+						SOUND_MANAGER->play("Belial/Bullet", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 						// 투사체 발사 각도 회전
 						_shooting.angle += timeElapsed * 8.0f;
 					}
@@ -252,8 +274,7 @@ void Belial::update(float const timeElapsed)
 					// 입을 모두 닫았으면
 					if (!_ani->isPlay())
 					{
-						// 기본 상태로 돌아감
-						SOUND_MANAGER->stop("Belial/Bullet");
+						// 기본 상태로 돌아감						
 						setState(ENEMY_STATE::IDLE);
 					}
 				}
@@ -276,7 +297,8 @@ void Belial::update(float const timeElapsed)
 						sword->setActive(true);
 						sword->chargeEffect.delay = 0.5;
 
-						EFFECT_MANAGER->play("Enemy_Destroy", sword->getPosition(), Vector2(sword->img->getSize().x * _scale, sword->img->getSize().x * _scale));
+						EFFECT_MANAGER->play("Enemy_Destroy", sword->getPosition(), Vector2(160, 160));
+
 						SOUND_MANAGER->stop("Belial/Sword");
 						SOUND_MANAGER->play("Belial/Sword", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
@@ -395,7 +417,7 @@ void Belial::update(float const timeElapsed)
 						}
 					}					
 				}
-				break;				
+				break;
 			}
 		}
 		break;
@@ -424,7 +446,7 @@ void Belial::update(float const timeElapsed)
 				{
 					_effectNum++;
 
-					_dieEffect.delay = 0.1f;
+					_dieEffect.delay = 0.15f;
 
 					float angle = 0;
 					for (int i = 0; i < 10; i++)
@@ -539,8 +561,6 @@ void Belial::update(float const timeElapsed)
 
 void Belial::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
-
 	if (_state != ENEMY_STATE::DIE)
 	{
 		for (int i = 0; i < 5; i++)
@@ -555,7 +575,7 @@ void Belial::render()
 		// 후광구 출력
 		Vector2 backPos = _position;
 		// 기본 상태 위치
-		backPos.x += 10;
+		//backPos.x += 10;
 		backPos.y += 60;
 		// 공격 상태 위치
 		if (_backMove)
@@ -563,17 +583,19 @@ void Belial::render()
 			// 입을 벌린 상태임
 			backPos.y += 50;
 		}
+		_backImg->setAlpha(_headAlpha);
 		_backImg->setScale(_scale);
 		_backImg->aniRender(CAMERA->getRelativeV2(backPos), _backAni);
 
 		// 머리 출력
 		Vector2 headPos = _position;
 		headPos.x -= 30;
+		_img->setAlpha(_headAlpha);
 		_img->setScale(_scale);
 		_img->aniRender(CAMERA->getRelativeV2(headPos), _ani);
 
-		_handL.render(_scale);
-		_handR.render(_scale, true);
+		_handL.render(_scale, _handAlpha);
+		_handR.render(_scale, _handAlpha, true);
 
 		// 검 출력
 		for (int i = 0; i < _sword.size(); i++)
@@ -582,8 +604,6 @@ void Belial::render()
 			_sword[i]->img->setAngle((_sword[i]->angle) * (180 / PI));
 			_sword[i]->img->render(CAMERA->getRelativeV2(_sword[i]->getPosition()));
 		}
-
-		_swordAtk.circleDebug.render(true);
 
 		// 좌측 레이저 출력
 		if (_handL.laserBodyAni->isPlay() && _handL.laserHeadAni->isPlay())
@@ -620,7 +640,6 @@ void Belial::render()
 			_deadParticle[i].img->render(CAMERA->getRelativeV2(_deadParticle[i].getPosition()));
 		}
 	}
-	
 }
 
 void Belial::setState(ENEMY_STATE state)
@@ -629,6 +648,12 @@ void Belial::setState(ENEMY_STATE state)
 
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			SOUND_MANAGER->stop("Belial/Enter");
+			SOUND_MANAGER->play("Belial/Enter", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Belial/Head/Idle";
@@ -909,9 +934,7 @@ void Belial::tagHandInfo::update(const float timeElapsed, int enemyType, EnemyMa
 			// 손 프레임이 레이저 발사 프레임과 일치하면
 			if (ani->getPlayIndex() == 8 && !laserHeadAni->isPlay() && !laserBodyAni->isPlay())
 			{
-				// 레이저 발사 및 공격
-				SOUND_MANAGER->stop("Belial/Laser");
-				SOUND_MANAGER->play("Belial/Laser", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				// 레이저 발사 및 공격				
 				setState(HAND_STATE::ATTACK_START);
 			}			
 		}
@@ -936,8 +959,7 @@ void Belial::tagHandInfo::update(const float timeElapsed, int enemyType, EnemyMa
 			// 레이저가 완전히 종료되면
 			if (!laserHeadAni->isPlay() && !laserBodyAni->isPlay())
 			{
-				// 기본 상태로 변경
-				SOUND_MANAGER->stop("Belial/Laser");
+				// 기본 상태로 변경				
 				setState(HAND_STATE::IDLE);
 			}
 		}
@@ -950,8 +972,9 @@ void Belial::tagHandInfo::update(const float timeElapsed, int enemyType, EnemyMa
 	laserBodyAni->frameUpdate(timeElapsed);
 }
 
-void Belial::tagHandInfo::render(const float scale, bool bisymmetry)
+void Belial::tagHandInfo::render(const float scale, const float alpha, bool bisymmetry)
 {
+	img->setAlpha(alpha);
 	img->setScale(scale);
 	img->aniRender(CAMERA->getRelativeV2(position), ani, bisymmetry);
 }
@@ -1008,6 +1031,9 @@ void Belial::tagHandInfo::setState(HAND_STATE state, const Vector2& movePos)
 		{
 			laserHeadAni->start();
 			laserBodyAni->start();
+
+			SOUND_MANAGER->stop("Belial/Laser");
+			SOUND_MANAGER->play("Belial/Laser", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		}
 		break;
 		case HAND_STATE::ATTACK_FINAL:
@@ -1026,6 +1052,8 @@ void Belial::tagHandInfo::setState(HAND_STATE state, const Vector2& movePos)
 			laserBodyAni->setDefPlayFrame(false, false);
 			laserHeadAni->start();
 			laserBodyAni->start();
+
+			SOUND_MANAGER->stop("Belial/Laser");
 		}
 		break;
 	}
