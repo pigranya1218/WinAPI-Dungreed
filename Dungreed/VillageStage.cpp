@@ -156,6 +156,8 @@ void VillageStage::enterDungeon()
 	_eatPos.y= _stageManager->getPlayerPos().y-_dungeonEat->getHeight()-35;
 	_enter = true;
 	_eatAni->start();
+
+
 }
 
 
