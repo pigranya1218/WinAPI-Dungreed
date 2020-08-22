@@ -85,6 +85,6 @@ void GateNpc::move(Vector2 roomIndex)
 	effectScale.x = _img->getSize().x * 4;
 	effectScale.y = _img->getSize().y * 4;
 
-	EFFECT_MANAGER->play("Die_Effect", CAMERA->getAbsoluteV2(_position), effectScale);
+	EFFECT_MANAGER->play("Die_Effect", CAMERA->getAbsoluteV2(_npcMgr->getPlayerPos()), effectScale);
 	
 }
