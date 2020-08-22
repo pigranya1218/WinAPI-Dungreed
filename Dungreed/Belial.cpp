@@ -79,7 +79,7 @@ void Belial::init(const Vector2 & pos)
 
 	// 공격 주기 설정
 	ZeroMemory(&_attackCycle, sizeof(&_attackCycle));
-	_attackCycle.delay = 3;
+	_attackCycle.delay = 2.5;
 
 	ZeroMemory(&_dieEffect, sizeof(_dieEffect));
 	_dieEffect.delay = 0.2;
@@ -276,8 +276,8 @@ void Belial::update(float const timeElapsed)
 
 					Vector2 moveSword(0, 0);
 
-					moveSword.x += cosf(_sword[_swordNum]->angle) * 2500 * timeElapsed;
-					moveSword.y -= sinf(_sword[_swordNum]->angle) * 2500 * timeElapsed;
+					moveSword.x += cosf(_sword[_swordNum]->angle) * 3000 * timeElapsed;
+					moveSword.y -= sinf(_sword[_swordNum]->angle) * 3000 * timeElapsed;
 
 					Vector2 lastDir = _sword[_swordNum]->getPosition();
 					_enemyManager->moveEnemy(_sword[_swordNum], moveSword, true, false);
