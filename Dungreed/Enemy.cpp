@@ -37,7 +37,7 @@ void Enemy::dieEffect()
 	SOUND_MANAGER->play("Enemy/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	Vector2 drawSize = _img->getFrameSize() * _scale;
 	drawSize.x = drawSize.y = max(drawSize.x, drawSize.y);
-	EFFECT_MANAGER->play("Enemy_Destroy", _position, drawSize);
+	EFFECT_MANAGER->play("Enemy_Destroy", _position, Vector2(160, 160));
 }
 
 bool Enemy::isHit(FloatRect* rc, AttackInfo* info)

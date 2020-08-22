@@ -417,12 +417,13 @@ void Belial::update(float const timeElapsed)
 					moveDir.y = _moving.force.y * timeElapsed;
 
 					_enemyManager->moveEnemy(&_deadParticle[i], moveDir);
-					_moving.force.y = 150;
+					_moving.force.y = 150;					
+				}
 
-					/*if (_deadParticle[i].getIsStand())
-					{
-						_moving.force.y = 0;
-					}*/
+				// 머리 흔들리는 효과
+				if (_deadParticle[0].getIsStand())
+				{
+
 				}
 			}
 		}
@@ -553,8 +554,6 @@ void Belial::render()
 	}
 	else
 	{
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_deadParticle[0].getPosition(), _deadParticle[0].getSize(), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
-
 		for (int i = 5; i >= 0; i--)
 		{
 			_deadParticle[i].img->setScale(_scale);
