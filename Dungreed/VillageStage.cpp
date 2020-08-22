@@ -33,7 +33,10 @@ void VillageStage::init()
 	_BG1 = IMAGE_MANAGER->findImage("Town_BG");
 	_BG2 = IMAGE_MANAGER->findImage("Town_BG2");
 	_floor = IMAGE_MANAGER->findImage("Town_Floor");
-	
+	SOUND_MANAGER->stop("Town");
+	SOUND_MANAGER->play("Town", 1.0f);
+	SOUND_MANAGER->stop("ambienceTown");
+	SOUND_MANAGER->play("ambienceTown", 1.0f);
 	_dungeonEat = IMAGE_MANAGER->findImage("DungeonEat");
 	_eatAni = new Animation;
 	_eatAni->init(_dungeonEat->getWidth(), _dungeonEat->getHeight(), _dungeonEat->getMaxFrameX(), _dungeonEat->getMaxFrameY());

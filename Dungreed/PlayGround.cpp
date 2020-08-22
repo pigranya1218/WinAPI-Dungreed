@@ -788,6 +788,12 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
 
 	//사운드
+
+	//** STAGE
+	SOUND_MANAGER->addSound("Town", "resources/sound/stage/bgm/0.Town.wav", true, false);			//마을 bmg 
+	SOUND_MANAGER->addSound("ambienceTown", "resources/sound/stage/bgm/ambience_town.wav", true, false);	//마을 bmg 효과음
+
+
 	//** PLAYER / UI
 	SOUND_MANAGER->addSound("Player/Step1", "resources/sounds/player/step_lth1.wav", false, false);			//플레이어 이동1
 	SOUND_MANAGER->addSound("Player/Step2", "resources/sounds/player/step_lth2.wav", false, false);			//플레이어 이동2
