@@ -53,8 +53,9 @@ void VillageStage::init()
 
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
 
-	//ÈÆ·ÃÀå NPC
+	// NPC
 	_npcMgr->spawnNpc(NPC_TYPE::ABILITY, Vector2(1300, 1500), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::COSTUME, Vector2(950, 600), DIRECTION::LEFT);
 }
 
 void VillageStage::release()

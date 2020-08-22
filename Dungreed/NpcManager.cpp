@@ -187,3 +187,8 @@ void NpcManager::showAbilityUI()
 {
 	_uiMgr->showAbility();
 }
+
+void NpcManager::showCostumeUI()
+{
+	_uiMgr->showCostume();
+}

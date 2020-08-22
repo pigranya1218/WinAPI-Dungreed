@@ -188,5 +188,6 @@ public:
 	void showRestaurant() { _restaurantUI.setActive(true); }
 	void showShop() {  }
 	void showAbility() { _abilityUI.setActive(true); }
+	void showCostume() { _costumeUI.setActive(true); }
 };
 
