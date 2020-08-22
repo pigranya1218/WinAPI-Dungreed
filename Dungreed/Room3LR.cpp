@@ -17,8 +17,8 @@ void Room3LR::init()
 
 	_objectMgr->spawnObject(0x0002, Vector2(800, 200));
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1400, 700), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::CHEST_YELLOW, Vector2(1200, 600), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1150, 800), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::CHEST_YELLOW, Vector2(1400, 800), DIRECTION::LEFT);
 
 }
 
