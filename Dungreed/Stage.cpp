@@ -23,6 +23,8 @@ void Stage::init()
 
 	_respawnPosition.resize(5);
 	_doors.resize(4);
+
+	_isGoNextStage = false;
 }
 
 void Stage::enter(int enterType)
@@ -75,6 +77,11 @@ void Stage::update(float const elaspedTime)
 				_doors[i]->setOpen(!_doors[i]->isOpen());
 			}
 		}
+	}
+
+	if (_isGoNextStage)
+	{
+		_stageManager->nextStage();
 	}
 }
 
@@ -586,6 +593,11 @@ vector<tagShowNpc> Stage::getNpcInfos()
 void Stage::moveToIndex(Vector2 index)
 {
 	_stageManager->moveRoomIndex(index);
+}
+
+void Stage::nextStage()
+{
+	_isGoNextStage = true;
 }
 
 

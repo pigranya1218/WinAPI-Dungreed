@@ -139,6 +139,11 @@ void NpcManager::moveRoom(Vector2 pos)
 	_stage->moveToIndex(pos);
 }
 
+void NpcManager::nextStage()
+{
+	_stage->nextStage();
+}
+
 Vector2 NpcManager::getGatePos()
 {
 	for(int i = 0 ; i < _npcs.size(); i++)

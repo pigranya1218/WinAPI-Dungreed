@@ -41,6 +41,7 @@ protected:
 	vector<LinearFunc> _collisionPlatforms; // 플랫폼 땅
 	
 	bool _isVisited; // 방문한 스테이지인가? (UI 지도에서 그리기 위함)
+	bool _isGoNextStage; // 다음 스테이지로 넘어갈텐가
 
 	vector<bool> _isWall;
 	vector<Vector2> _respawnPosition; // 플레이어가 리스폰될 위치
@@ -94,4 +95,5 @@ public:
 	virtual vector<tagShowNpc> getNpcInfos();
 
 	void moveToIndex(Vector2 index);
+	void nextStage();
 };
