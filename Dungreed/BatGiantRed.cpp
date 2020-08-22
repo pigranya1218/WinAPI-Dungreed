@@ -27,7 +27,7 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 
 	// 투사체 초기화
 	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.02f, 1.5f, false, true, true, false, true, false);
-	_shooting.attackInit(3, 5, 3);
+	_shooting.attackInit(1, 1, 8);
 	
 	_isDetect = 0;
 	_detectRange = 300;
@@ -105,7 +105,6 @@ void BatGiantRed::update(float const timeElapsed)
 			if (!_ani->isPlay())
 			{
 				_countPlay = 0;
-				SOUND_MANAGER->stop("GiantBat/Attack");
 				setState(ENEMY_STATE::IDLE);
 			}
 		}

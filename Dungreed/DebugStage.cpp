@@ -13,7 +13,7 @@ void DebugStage::init()
 	loadMap("room/BossRoom.map");
 
 
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	// 에너미 테스트입니다.
 	/*
 	_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_RED, Vector2(WINSIZEX / 2, WINSIZEY / 2));

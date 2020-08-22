@@ -127,6 +127,7 @@ void BatNormal::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Bat/Die");
 			_active = false;
 		}
 		break;

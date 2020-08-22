@@ -30,13 +30,13 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay =	2;		// 공격 딜레이 초기화
 	_attack.distance = 100;	// 공격 시전 가능 거리
 	_attack.circleSize = 150;
-	_attack.attackInit(3, 5, 1,0,0,25);
+	_attack.attackInit(3, 8, 1,0,0,25);
 
 	// 돌진 관련 변수
 	ZeroMemory(&_skill, sizeof(_skill));
 	_skill.delay = 2;		// 돌진 딜레이 초기화
 	_skill.distance = 800;	// 돌진 시전 시 최대 거리
-	_skill.attackInit(10, 20, 5, 0, 0, 50);
+	_skill.attackInit(5, 15, 4, 0, 0, 50);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;

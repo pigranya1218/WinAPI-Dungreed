@@ -26,7 +26,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	_hit.delay = 0.3f;
 
 	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
-	_shooting.attackInit(3, 5, 3);
+	_shooting.attackInit(1, 1, 8);
 
 	_isDetect = 0;
 	_detectRange = 300.f;
@@ -103,6 +103,7 @@ void BatGiantNormal::update(float const timeElapsed)
 				if (_shooting.delayUpdate(timeElapsed))
 				{
 					_shooting.fireBullet(_myEnemyType, _enemyManager, 3);
+					SOUND_MANAGER->stop("GiantBat/Attack");
 					SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				}				
 			}
@@ -128,6 +129,7 @@ void BatGiantNormal::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		SOUND_MANAGER->stop("GiantBat/Attack");
 		setState(ENEMY_STATE::DIE);
 	}
 }

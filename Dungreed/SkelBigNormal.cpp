@@ -28,7 +28,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay = 1.5f;
 	_attack.distance = 200;	
 	_attack.circleSize = 200;
-	_attack.attackInit(10, 15, 3,0,0,40);
+	_attack.attackInit(10, 15, 3, 0, 0, 40);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;

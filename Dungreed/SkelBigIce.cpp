@@ -38,7 +38,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_hit.delay = 0.3f;
 
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(700, 700), _scale, 0.05f, 1, true, false, false, false, true, false);
-	_shooting.attackInit(3, 5, 1);
+	_shooting.attackInit(2, 6, 1);
 
 	_isDetect = 0;
 	_active = true;
@@ -111,6 +111,7 @@ void SkelBigIce::update(float const timeElapsed)
 			{
 				if (_skill.update(timeElapsed))
 				{
+					SOUND_MANAGER->stop("IceSkell/Magic/Attack");
 					SOUND_MANAGER->play("IceSkell/Magic/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_shooting.bulletNum = RANDOM->getFromIntTo(4, 7);
 					setState(ENEMY_STATE::SKILL);
@@ -132,6 +133,7 @@ void SkelBigIce::update(float const timeElapsed)
 				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
 				if (_playCount == 1)
 				{
+					SOUND_MANAGER->stop("Skell/ice/Attack");
 					SOUND_MANAGER->play("Skell/ice/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				}
 			}
@@ -142,6 +144,8 @@ void SkelBigIce::update(float const timeElapsed)
 			if (!_ani->isPlay())
 			{
 				_playCount = 0;
+				SOUND_MANAGER->stop("IceSkell/Magic/Attack");
+				SOUND_MANAGER->stop("Skell/ice/Attack");
 				setState(ENEMY_STATE::MOVE);
 			}
 		}		

@@ -17,7 +17,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 	_size = _img->getFrameSize() * _scale;
 
 	ZeroMemory(&_attacking, sizeof(_attacking));
-	_attacking.attackInit(3, 5, 1,0,0,50);
+	_attacking.attackInit(3, 8, 1,0,0,50);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(RUSHSPEED, 0.0f);

@@ -43,7 +43,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction)
 	_hit.delay = 0.3;
 
 	_shooting.init("Arrow00", "ArrowHitEffect", Vector2(500, 500), _scale, 1.5, 2.5, true, false, false, false, true, false);
-	_shooting.attackInit(3, 5, 3);
+	_shooting.attackInit(2, 5, 3);
 
 	// 플레이어 감지 변수 초기화
 	_isDetect = _attacking = 0;
