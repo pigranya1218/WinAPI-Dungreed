@@ -792,6 +792,9 @@
     <ClInclude Include="AbilityNpc.h">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClInclude>
+    <ClInclude Include="CostumeNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1377,6 +1380,9 @@
       <Filter>Dungreed\GameScene\Item\SpecialAbility</Filter>
     </ClCompile>
     <ClCompile Include="AbilityNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClCompile>
   </ItemGroup>
