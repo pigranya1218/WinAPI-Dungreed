@@ -528,7 +528,7 @@ void Player::update(float const elapsedTime)
 	if (_isStand && _force.y == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 20;
+		moveDir.y += 23;
 	}
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
