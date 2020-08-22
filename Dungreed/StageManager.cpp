@@ -323,7 +323,7 @@ void StageManager::moveRoomIndex(Vector2 index)
 
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(4);
-	_gameScene->pushR2REvent(1);
+	_gameScene->pushR2REvent(2);
 }
 
 void StageManager::makeStage()
@@ -353,12 +353,14 @@ void StageManager::makeStage()
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
 		
-		_currStage = new BossRoomBef1R;
+		makeBossStage();
+
+		/*_currStage = new BossRoomBef1R;
 		_currStage->setStageManager(this);
 		_currStage->setUIManager(_uiMgr);
 		_currStage->setPlayer(_player);
 		_currStage->init();
-		_currStage->enter(0);
+		_currStage->enter(0);*/
 		
 		break;
 	case STAGE_TYPE::TEST:
@@ -393,6 +395,25 @@ void StageManager::makeBossStage()
 	_currStage->setUIManager(_uiMgr);
 	_currStage->setPlayer(_player);
 	_currStage->init();
+	_currStage->enter(0);
+
+
+
+	for (int x = 0; x < _mapSize; x++)
+	{
+		for (int y = 0; y < _mapSize; y++)
+		{
+			if (_roomInfo[x][y].roomType == -1) continue;
+			if (_roomInfo[x][y].roomType == 1)
+			{
+				_currIndexX = x;
+				_currIndexY = y;
+			}
+			_stageMap[x][y] = getStage(_roomInfo[x][y].roomType, _roomInfo[x][y].isWall);
+		}
+	}
+
+	_currStage = _stageMap[_currIndexX][_currIndexY];
 	_currStage->enter(0);
 }
 
