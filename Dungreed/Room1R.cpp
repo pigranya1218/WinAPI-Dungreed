@@ -7,15 +7,24 @@ void Room1R::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage1_R.map");
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400), 1 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500), 1 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600), 1 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400), 2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500), 2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600), 2 });
+	
+	//Έχ ΌÒΘ―
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(700, 450) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_NORMAL, Vector2(1000, 450) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_NORMAL, Vector2(500, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_RED, Vector2(1100, 750) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_RED, Vector2(730, 720) });
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 850) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(750, 850) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(900, 850) });
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(450, 850) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(1050, 850) });
+
 	_spawnChest.spawn = true;
 	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
-	_spawnChest.pos = Vector2(500, 500);
+	_spawnChest.pos = Vector2(850, 900);
 
 	_objectMgr->spawnObject(0x0000, Vector2(550, 600));
 
@@ -26,6 +35,7 @@ void Room1R::init()
 	_objectMgr->spawnObject(0x0002, Vector2(400, 800));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 800), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BASIC, Vector2(400, 800), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;
 }
