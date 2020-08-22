@@ -52,6 +52,8 @@ void OakBow::update(Player * player, float const elapsedTime)
 		if (_currReloadDelay == 0) // 장전이 끝난 경우
 		{
 			_currBullet = _maxBullet;
+
+
 		}
 	}
 
@@ -103,7 +105,12 @@ void OakBow::update(Player * player, float const elapsedTime)
 		//_ani->setFPS(1);
 		//_ani->setPlayFrame(0, 4, false);
 		//_ani->start();
-
+		if (_frameCount == 1)
+		{
+			SOUND_MANAGER->stop("bow_arrow_draw");
+			SOUND_MANAGER->play("bow_arrow_draw", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+		}
+		
 		//떼면 공격
 		if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 		{
@@ -174,6 +181,9 @@ void OakBow::update(Player * player, float const elapsedTime)
 			player->attack(projectile, attackInfo);
 			_currAttackDelay = _adjustStat.attackSpeed;	// 공격 쿨타임 설정
 			_currBullet -= 1;						// 탄환 1 줄임
+
+			SOUND_MANAGER->stop("bow_attack");
+			SOUND_MANAGER->play("bow_attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 			if (_isAttack)
 			{
@@ -288,6 +298,7 @@ void OakBow::attack(Player * player)
 	{
 		_isAttack = true;
 	}
+
 
 	_addStat.minDamage = 20;
 	_addStat.maxDamage = 25;

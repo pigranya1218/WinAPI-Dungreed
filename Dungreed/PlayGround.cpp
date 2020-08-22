@@ -807,7 +807,6 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Niflheim/Spear"	, L"resources/images/boss/Niflheim/spear.png"	, 13, 1);	// 니플헤임 얼음창
 
 
-	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
 
 	//사운드
 	//** PLAYER / UI
@@ -859,6 +858,12 @@ HRESULT playGround::init()
 
 	//*	니플헤임
 
+	// * 무기
+	// ** 원거리
+	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
+	SOUND_MANAGER->addSound("GatlingWarmUp", "resources/sounds/weapon/LongDistanceWeapon/GatlingWarmUp.wav", false, false);
+	SOUND_MANAGER->addSound("bow_arrow_draw", "resources/sounds/weapon/LongDistanceWeapon/bow_crossbow_arrow_draw_stretch1_03.wav", false, false);
+	SOUND_MANAGER->addSound("bow_attack", "resources/sounds/weapon/LongDistanceWeapon/etc-sound0034_Bow.wav", false, false);
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();

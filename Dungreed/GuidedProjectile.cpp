@@ -252,7 +252,13 @@ void GuidedProjectile::update(float elapsedTime)
 	if (_afterimage)
 	{
 		_mirageCount += elapsedTime;
+		_afterCount = _mirageCount;
 
+		if (_afterCount)
+		{
+			_miragePos = Vector2(_position.x - 10, _position.y + 10);
+
+		}
 		/*while (_active)
 		{
 			_afterImg.push_back(IMAGE_MANAGER->findImage(_img->getKey()));
@@ -281,34 +287,16 @@ void GuidedProjectile::render()
 	if (_afterimage)
 	{
 		int index = _ani->getPlayIndex();
-		Vector2 _pos;
-		Vector2 _pos2 = _pos;
-		Vector2 _pos3 = _pos;
-		Vector2 _pos4 = _pos;
-		Vector2 _pos5 = _pos;
-		_pos = Vector2(_position.x - 5, _position.y - 5);
+		//_pos = Vector2(_position.x - 5, _position.y - 5);
 
-		if (_mirageCount / 0.2f == 0)
+		/*if (_mirageCount / 0.2f == 1)
 		{
-			_pos = Vector2(_position.x - 20, _position.y - 20);
-		}
+			_miragePos = Vector2(_position.x - 20, _position.y - 20);
+		}*/
 
-		if (_mirageCount > 0.3f && _mirageCount < 3.5f)
+		if (_afterCount % 2 == 0)
 		{
-			//_mirageCount = 0;
-
-			_pos2.x = _pos.x - 5;
-			_pos2.y = _pos.y + 5;
-
-			_pos3.x = _pos2.x - 5;
-			_pos3.y = _pos2.y + 5;
-			_pos4.x = _pos3.x - 5;
-			_pos4.y = _pos3.y + 5;
-			_pos5.x = _pos4.x - 5;
-			_pos5.y = _pos4.y + 5;
-
-			_afterImg[0]->frameRender(CAMERA->getRelativeV2(_pos), _renderSize, index, 0);
-
+			_afterImg[0]->frameRender(CAMERA->getRelativeV2(_miragePos), _renderSize, index, 0);
 		}
 		//_afterImg[1]->frameRender(_pos2, _renderSize, index, 0);
 		//_afterImg[2]->frameRender(_pos3, _renderSize, index, 0);
