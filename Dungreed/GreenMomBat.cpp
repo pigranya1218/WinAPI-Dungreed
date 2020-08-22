@@ -88,6 +88,7 @@ void GreenMomBat::frontRender(Player * player)
 
 void GreenMomBat::attack(Player * player)
 {
+	
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currBullet == 0) // 총알이 없다면
 	{
@@ -96,6 +97,10 @@ void GreenMomBat::attack(Player * player)
 			_currReloadDelay = _baseReloadDelay; // 재장전 함
 		}
 		return;
+	}
+	else
+	{
+		SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	}
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
