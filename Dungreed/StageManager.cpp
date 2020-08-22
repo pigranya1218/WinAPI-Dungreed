@@ -197,7 +197,7 @@ string StageManager::getStageTitle()
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::VILLAGE;
 	_mapSize = 4;
 	makeStage();
 	_uiMgr->setMap(_stageMap, getStageTitle());
@@ -352,16 +352,9 @@ void StageManager::makeStage()
 		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
-		
 		makeBossStage();
-
-		/*_currStage = new BossRoomBef1R;
-		_currStage->setStageManager(this);
-		_currStage->setUIManager(_uiMgr);
-		_currStage->setPlayer(_player);
-		_currStage->init();
-		_currStage->enter(0);*/
-		
+		_uiMgr->setMap(_stageMap, getStageTitle());
+		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 		break;
 	case STAGE_TYPE::TEST:
 		_currStage = new DebugStage();
@@ -374,45 +367,57 @@ void StageManager::makeStage()
 	default:
 		break;
 	}
+
+	switch (_currStageType)
+	{
+	case STAGE_TYPE::TEST:
+		break;
+	case STAGE_TYPE::VILLAGE:
+		break;
+	case STAGE_TYPE::DUNGEON_NORMAL:
+
+		SOUND_MANAGER->stop("MetalDoorSound");
+		SOUND_MANAGER->play("MetalDoorSound",1.0f);
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM",1.0f);
+		break;
+	case STAGE_TYPE::DUNGEON_BOSS:
+		break;
+	}
+
+	TIME_MANAGER->update(60);
 }
 
 void StageManager::makeBossStage()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		if(i==0)_currStage = new BossRoomBef1R;
-		else if(i==1)_currStage = new BossRoom1;
-		else if(i==2)_currStage = new DownStair1L;
-		_currStage->setStageManager(this);
-		_currStage->setUIManager(_uiMgr);
-		_currStage->setPlayer(_player);
-		_currStage->init();
-		
-		_bossRoomInfo.push_back(_currStage);
-	}
-	_currStage = _bossRoomInfo[0];
-	_currStage->setStageManager(this);
-	_currStage->setUIManager(_uiMgr);
-	_currStage->setPlayer(_player);
-	_currStage->init();
-	_currStage->enter(0);
-
-
-
-	for (int x = 0; x < _mapSize; x++)
-	{
-		for (int y = 0; y < _mapSize; y++)
+		Stage* stage = nullptr;
+		vector<bool> wall(4, true);
+		if (i == 0)
 		{
-			if (_roomInfo[x][y].roomType == -1) continue;
-			if (_roomInfo[x][y].roomType == 1)
-			{
-				_currIndexX = x;
-				_currIndexY = y;
-			}
-			_stageMap[x][y] = getStage(_roomInfo[x][y].roomType, _roomInfo[x][y].isWall);
+			stage = new BossRoomBef1R;
+			wall[2] = false;
 		}
+		else if (i == 1)
+		{
+			stage = new BossRoom1;
+			wall[2] = false;
+		}
+		else if (i == 2)
+		{
+			stage = new DownStair1L;
+		}
+		stage->setWall(wall);
+		stage->setStageManager(this);
+		stage->setUIManager(_uiMgr);
+		stage->setPlayer(_player);
+		stage->init();
+		_stageMap[i][0] = stage;
 	}
-
+	
+	_currIndexX = 0;
+	_currIndexY = 0;
 	_currStage = _stageMap[_currIndexX][_currIndexY];
 	_currStage->enter(0);
 }
@@ -691,6 +696,11 @@ void StageManager::setPlayerPos( int x, int y)
 Vector2 StageManager::getEnemyPos(Vector2 pos)
 {
 	return _currStage->getEnemyPos(pos);
+}
+
+vector<FloatRect> StageManager::getEnemyRects()
+{
+	return _currStage->getEnemyRects();
 }
 
 void StageManager::showDamage(DamageInfo info, Vector2 pos)

@@ -51,6 +51,9 @@ void VillageStage::init()
 
 	_enter = false;
 
+	SOUND_MANAGER->stop("Villiage_BGM");
+	SOUND_MANAGER->play("Villiage_BGM", 1.0f);
+
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
 }
 
@@ -160,10 +163,17 @@ void VillageStage::render()
 
 void VillageStage::enterDungeon()
 {
+	SOUND_MANAGER->stop("Villiage_BGM");
+
+	SOUND_MANAGER->stop("DungeonEat");
+	SOUND_MANAGER->play("DungeonEat", 1.0f);
+
 	_eatPos.x = _stageManager->getPlayerPos().x;
 	_eatPos.y= _stageManager->getPlayerPos().y-_dungeonEat->getHeight()-35;
 	_enter = true;
 	_eatAni->start();
+
+
 }
 
 

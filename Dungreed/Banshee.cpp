@@ -72,16 +72,14 @@ void Banshee::update(float const timeElapsed)
 			{
 				if (_shooting.delayUpdate(timeElapsed))
 				{
-					setState(ENEMY_STATE::ATTACK);
-
 					for (int i = 0; i < 12; i++)
 					{
 						_shooting.angle += PI / 6;
 						_shooting.createBullet(_position, _shooting.angle);
-					}
-					SOUND_MANAGER->stop("Banshee/Attack");
-					SOUND_MANAGER->play("Banshee/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+					}					
 					_shooting.fireBullet(_myEnemyType, _enemyManager);
+
+					setState(ENEMY_STATE::ATTACK);
 				}
 			}
 			break;
@@ -107,8 +105,7 @@ void Banshee::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->stop("Banshee/Attack");
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -162,12 +159,17 @@ void Banshee::setState(ENEMY_STATE state)
 			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 			_ani->setDefPlayFrame(false, false);
 			_ani->setFPS(15);
-			_ani->start();			
+			_ani->start();
+
+			SOUND_MANAGER->stop("Banshee/Attack");
+			SOUND_MANAGER->play("Banshee/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		}		
 		break;
 		case ENEMY_STATE::DIE:
 		{			
 			_active = false;
+
+			SOUND_MANAGER->stop("Banshee/Attack");
 		}
 		break;
 	}

@@ -213,7 +213,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -226,7 +226,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -252,7 +252,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -265,7 +265,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -447,6 +447,11 @@ Vector2 Stage::getPlayerPos()
 Vector2 Stage::getEnemyPos(const Vector2 & pos)
 {
 	return _enemyMgr->getEnemyPos(pos);
+}
+
+vector<FloatRect> Stage::getEnemyRects()
+{
+	return _enemyMgr->getEnemyRects();
 }
 
 void Stage::showDamage(DamageInfo info, Vector2 pos)
