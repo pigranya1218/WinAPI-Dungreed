@@ -25,6 +25,8 @@ private:
 	Vector2 _pos;
 	Vector2 _gunPos;
 	Vector2 _attackPos;
+	Vector2 _effectPos02;
+
 	FloatRect _attackRect;
 	int _timeCount;
 	int _effectCount;

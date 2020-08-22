@@ -98,6 +98,8 @@ void BoomerangProjectile::update(float elapsedTime)
 		if (_projectileMgr->checkEnemyCollision(this, true)) // 적과 충돌했다면
 		{
 			//_active = false;
+
+			EFFECT_MANAGER->play("L_Effect_Boomerang", _position, _effectSize, ((_useRotate) ? (_angleRadian) : (0.0f)));
 			return;
 		}
 	}

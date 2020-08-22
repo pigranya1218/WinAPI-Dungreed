@@ -107,8 +107,6 @@ void Boomerang::frontRender(Player * player)
 		_effectCount = 0;
 	}
 
-	
-
 	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_pos.x), CAMERA->getRelativeY(_pos.y - 50), to_wstring(_returnCount), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.f);
 }
 
@@ -126,11 +124,18 @@ void Boomerang::attack(Player * player)
 		_angleRadian -= PI2;
 	}
 
+	Image* effectImg02 = IMAGE_MANAGER->findImage("BoomerangEffect");
+	Vector2 effectSize02 = Vector2(effectImg02->getFrameSize().x * 4, effectImg02->getFrameSize().y * 4);
+
+	SOUND_MANAGER->stop("boomerang_attack_sound");
+	SOUND_MANAGER->play("boomerang_attack_sound", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	EFFECT_MANAGER->play("L_Effect_Boomerang", _pos, effectSize02, _isLeft);
+
 	_projectile = new BoomerangProjectile;
 	_projectile->setPosition(_gunPos);
 	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
 	_projectile->setTeam(OBJECT_TEAM::PLAYER);
-	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 15, true, true, 20, true, "", Vector2(), 1);
+	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 15, true, true, 20, true, "", Vector2(effectSize02), 1);
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
