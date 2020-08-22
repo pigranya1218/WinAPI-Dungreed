@@ -167,25 +167,28 @@ void Player::init()
 	setPosition(Vector2(200, 200));
 	_direction = DIRECTION::RIGHT;
 	
+	_equippedWeapon.resize(2);
+	_equippedAcc.resize(4);
+	_inventory.resize(15);
+
+	_hand = new Punch;
+	_hand->init();
+
 	//ÃÖÃÊ¿¡ ÀåÂøÇÏ´Â ÄÚ½ºÆ¬
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
-	
 
 	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
 	_currDashCoolTime = 0;
 	//_currHp = _adjustStat.maxHp;
-	_currHp = 40;
-	_currSatiety = 30;
-	_currGold = 1000;
+	_currHp = _adjustStat.maxHp;
+	_currSatiety = 0;
+	_currGold = 0;
 	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
-	// TEST ITEM
-	_equippedWeapon.resize(2);
-	_equippedAcc.resize(4);
-	_inventory.resize(15);
+	
 
 
 	ShortSpear* testAcc1 = new ShortSpear;
@@ -345,8 +348,7 @@ void Player::init()
 
 	
 
-	_hand = new Punch;
-	_hand->init();
+	
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
@@ -1040,11 +1042,6 @@ bool Player::ateFood(Food * food)
 
 void Player::setSpecialAbility(vector<Item*> specialAbility)
 {
-	for (int i = 0; i < _specialAbility.size(); i++)
-	{
-		_specialAbility[i]->release();
-		delete _specialAbility[i];
-	}
 	_specialAbility = specialAbility;
 }
 
@@ -1052,6 +1049,8 @@ void Player::setCurrCostume(Costume* costume)
 {
 	 _costume = costume;
 	 setSpecialAbility(costume->getSpecialAbility()); 
+	 updateAdjustStat();
+	 _currHp = _adjustStat.maxHp;
 }
 
 float Player::getAttackSpeed()
