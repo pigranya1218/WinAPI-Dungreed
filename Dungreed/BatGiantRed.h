@@ -9,7 +9,7 @@ private:
 
 	int				_renderNum;	// ÃÑ¾Ë ·»´õ¿ë
 	int				_countPlay;
-
+	int _enterCount;
 
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);

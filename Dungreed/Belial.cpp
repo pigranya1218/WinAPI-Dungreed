@@ -74,12 +74,12 @@ void Belial::init(const Vector2 & pos)
 	// 검 패턴
 	ZeroMemory(&_swordAtk, sizeof(_swordAtk));
 	_swordAtk.attackInit(1, 5, 3);
-	_swordAtk.delay = 0.08;
+	_swordAtk.delay = 0.09;
 	_swordAtk.circleSize = 130;
 
 	// 공격 주기 설정
 	ZeroMemory(&_attackCycle, sizeof(&_attackCycle));
-	_attackCycle.delay = 2.5;
+	_attackCycle.delay = 2.8;
 
 	ZeroMemory(&_dieEffect, sizeof(_dieEffect));
 	_dieEffect.delay = 0.2;
@@ -276,8 +276,8 @@ void Belial::update(float const timeElapsed)
 
 					Vector2 moveSword(0, 0);
 
-					moveSword.x += cosf(_sword[_swordNum]->angle) * 3000 * timeElapsed;
-					moveSword.y -= sinf(_sword[_swordNum]->angle) * 3000 * timeElapsed;
+					moveSword.x += cosf(_sword[_swordNum]->angle) * 2700 * timeElapsed;
+					moveSword.y -= sinf(_sword[_swordNum]->angle) * 2700 * timeElapsed;
 
 					Vector2 lastDir = _sword[_swordNum]->getPosition();
 					_enemyManager->moveEnemy(_sword[_swordNum], moveSword, true, false);
@@ -937,15 +937,15 @@ void Belial::tagHandInfo::setState(HAND_STATE state, const Vector2& movePos)
 			ani->stop();
 			ani->init(img->getWidth(), img->getHeight(), img->getMaxFrameX(), img->getMaxFrameY());
 			ani->setDefPlayFrame(false, false);
-			ani->setFPS(15);
+			ani->setFPS(20);
 			ani->start();
 
 			laserHeadAni->stop();
 			laserBodyAni->stop();
 			laserHeadAni->setPlayFrame(0, 2, false, true);
 			laserBodyAni->setPlayFrame(0, 2, false, true);
-			laserHeadAni->setFPS(15);
-			laserBodyAni->setFPS(15);	
+			laserHeadAni->setFPS(20);
+			laserBodyAni->setFPS(20);
 		}
 		break;
 		case HAND_STATE::ATTACK_START:

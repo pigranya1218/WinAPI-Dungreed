@@ -34,7 +34,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffe
 	{
 		setState(ENEMY_STATE::ENTER);
 	}
-
+	_enterCount = 0;
 	// 공격 관련 초기화
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
@@ -80,8 +80,11 @@ void SkelSmallBow::update(float const timeElapsed)
 	{
 		case ENEMY_STATE::ENTER:
 		{
+
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -97,7 +100,7 @@ void SkelSmallBow::update(float const timeElapsed)
 				if (_attack.angle > 360) _attack.angle -= 360;
 
 				if (_attack.update(timeElapsed))
-				{					
+				{
 					setState(ENEMY_STATE::ATTACK);
 					_attacking = true;
 				}
@@ -133,8 +136,10 @@ void SkelSmallBow::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Enemy/Spawn");
 			SOUND_MANAGER->stop("Skell/Arrow/Ready");
 			SOUND_MANAGER->stop("Skell/Arrow/Attack");
+			SOUND_MANAGER->stop("Enemy/Spawn");
 		}
 		break;
 	}	

@@ -4,7 +4,7 @@
 class BatNormal : public Enemy
 {
 private:
-
+	int _enterCount;
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();

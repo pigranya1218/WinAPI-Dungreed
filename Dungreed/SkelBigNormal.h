@@ -6,6 +6,7 @@ class SkelBigNormal : public Enemy
 private:
 	tagAttackInfo	_attack;
 	int _playCount;
+	int _enterCount;
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();

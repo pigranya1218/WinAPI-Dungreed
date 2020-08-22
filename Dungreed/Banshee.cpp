@@ -15,7 +15,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_scale = 4;
 	_isDetect = 0;
 	_detectRange = 300;
-
+	_enterCount = 0;
 	// 피격 렉트 및 사이즈 초기화
 	_size = _img->getFrameSize() * _scale;
 
@@ -59,8 +59,11 @@ void Banshee::update(float const timeElapsed)
 	{
 		case ENEMY_STATE::ENTER:
 		{
+	
 			if (!_ani->isPlay())
 			{	
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -108,6 +111,7 @@ void Banshee::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		SOUND_MANAGER->stop("Enemy/Spawn");
 		SOUND_MANAGER->stop("Banshee/Attack");
 		setState(ENEMY_STATE::DIE);
 	}
