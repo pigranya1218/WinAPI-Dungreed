@@ -134,6 +134,9 @@ void MartialArtOfTiger::frontRender(Player* player)
 void MartialArtOfTiger::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	CAMERA->pushShakeEvent(15, 0.1f);
+
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 	Vector2 renderPosHand = pos; // 손의 위치

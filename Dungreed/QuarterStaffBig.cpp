@@ -147,6 +147,8 @@ void QuarterStaffBig::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
 
+	CAMERA->pushShakeEvent(3, 0.1f);
+
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 

@@ -160,6 +160,10 @@ void PickaxeRed::frontRender(Player* player)
 void PickaxeRed::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	CAMERA->pushShakeEvent(10, 0.1f);
+
+
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
 	Vector2 renderPosHand = pos;

@@ -185,6 +185,10 @@ void CosmosSword::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
 
+	CAMERA->pushShakeEvent(10, 0.1f);
+
+
+
 	if (_oneAttack)
 	{
 		_angleOffset += 95;

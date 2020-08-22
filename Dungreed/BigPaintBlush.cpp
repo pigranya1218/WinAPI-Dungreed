@@ -48,6 +48,10 @@ void BigPaintBlush::release()
 
 void BigPaintBlush::update(Player* player, float const elapsedTime)
 {
+
+	
+
+
 	for (int i = 0; i < _VtagAttack.size();)
 	{
 		_VtagAttack[i]._hitDelay += elapsedTime;
@@ -333,6 +337,11 @@ void BigPaintBlush::frontRender(Player* player)
 void BigPaintBlush::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+	
+
+	
+	CAMERA->pushShakeEvent(10,0.1f);
+
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
