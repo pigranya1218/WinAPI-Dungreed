@@ -83,7 +83,7 @@ void Stage::update(float const elaspedTime)
 		}
 		else
 		{
-			_state = STAGE_STATE::END;
+			_state = STAGE_STATE::FINISH;
 		}
 	}
 	break;
