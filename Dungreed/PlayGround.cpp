@@ -696,7 +696,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png"	, 11, 1);	// 에너미 죽는 이펙트
 	IMAGE_MANAGER->addFrameImage("Enemy_Create"	, L"resources/images/Enemy/create.png"	,  5, 3);	// 에너미 소환 이펙트
 
-	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 20);	// 삭제 이펙트 등록
+	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 80);	// 삭제 이펙트 등록
 
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Bat_Explosion", L"resources/images/Enemy/Bat/Bomb/explosion.png", 12, 1);
@@ -724,34 +724,44 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 	EFFECT_MANAGER->addEffect("DadBatBulletFX", "DadBatBulletFX", 15, 50);
 
-	//** Boss
-	// * Belial
-	// * Head
+	// ** Boss
+	// *  Belial
+	// *  Head
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle"			, L"resources/images/boss/Belial/Head/idle.png"			, 10, 1);	// 머리 기본
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot"	, L"resources/images/boss/Belial/Head/idle_Shot.png"	, 10, 1);	// 머리 기본 피격
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack"		, L"resources/images/boss/Belial/Head/attack.png"		, 10, 1);	// 머리 공격
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack_Shot"	, L"resources/images/boss/Belial/Head/attack_shot.png"	, 10, 1);	// 머리 공격 피격
 
-	// * Hand
+	// *  Hand
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle"		, L"resources/images/boss/Belial/Hand/idle.png"		, 10, 1);	// 손 기본
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack"	, L"resources/images/boss/Belial/Hand/attack.png"	, 18, 1);	// 손 공격
 
-	// * Laser
+	// *  Laser
 	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/Laser/head.png", 7, 1);	// 레이저 시작
 	IMAGE_MANAGER->addFrameImage("Belial/Laser/Body", L"resources/images/boss/Belial/Laser/body.png", 7, 1);	// 레이저 몸통
 
-	// * 후광
+	// *  후광
 	IMAGE_MANAGER->addFrameImage("Belial/Back/Circle"	, L"resources/images/boss/Belial/Back/circle.png"	, 10, 1);	// 후광 구
 	IMAGE_MANAGER->addFrameImage("Belial/Back/Particle"	, L"resources/images/boss/Belial/Back/particle.png"	,  8, 1);	// 이펙트 이미지
 
-	// * Sword
-	IMAGE_MANAGER->addImage("Belial/Sword"		, L"resources/images/boss/Belial/Sword/default.png"	);					// 검 이미지
-	IMAGE_MANAGER->addImage("Belial/Sword_Shoot", L"resources/images/boss/Belial/Sword/shoot.png"	);					// 검 이미지 투사체
+	// *  Sword
+	IMAGE_MANAGER->addImage("Belial/Sword"		, L"resources/images/boss/Belial/Sword/default.png"	);	// 검 이미지
+	IMAGE_MANAGER->addImage("Belial/Sword_Shoot", L"resources/images/boss/Belial/Sword/shoot.png"	);	// 검 이미지 투사체
+
 	IMAGE_MANAGER->addFrameImage("Belial/Sword_Charge"	, L"resources/images/boss/Belial/Sword/charge.png"	, 1, 8);	// 검 이펙트
 	IMAGE_MANAGER->addFrameImage("Belial/Sword_Hit"		, L"resources/images/boss/Belial/Sword/hit.png"		, 5, 1);	// 검 충돌 이펙트
 
+	// *  Bullet
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet"			, L"resources/images/boss/Belial/bullet.png"	, 2, 1);	// 투사체
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet_FX"			, L"resources/images/boss/Belial/bullet_FX.png"	, 8, 1);	// 투사체 이펙트
+
+	// *  Dead
+	IMAGE_MANAGER->addImage("Belial/Dead/Head"		, L"resources/images/boss/Belial/Dead/head.png"		 );	// 머리 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Mouth"		, L"resources/images/boss/Belial/Dead/mouth.png"	 );	// 턱 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_1", L"resources/images/boss/Belial/Dead/particle_1.png");	// 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_2", L"resources/images/boss/Belial/Dead/particle_2.png");	// 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_3", L"resources/images/boss/Belial/Dead/particle_3.png");	// 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_4", L"resources/images/boss/Belial/Dead/particle_4.png");	// 파편
 	
 	EFFECT_MANAGER->addEffect("Belial/Sword_Charge"	, "Belial/Sword_Charge"	, 15, 10);
 	EFFECT_MANAGER->addEffect("Belial/Sword_Hit"	, "Belial/Sword_Hit"	, 15, 10);

@@ -155,6 +155,9 @@ void NormalProjectile::update(float elapsedTime)
 		// TODO: PLAYER와의 충돌 검사
 		if (_projectileMgr->checkPlayerCollision(this, true))
 		{
+			float angleDegree = _angleRadian * (180.0f / PI);
+			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+
 			_active = false;
 			return;
 		}
@@ -165,6 +168,12 @@ void NormalProjectile::update(float elapsedTime)
 	_count += elapsedTime;
 	if (_count >= _maxTime)
 	{
+		if (_info->team == OBJECT_TEAM::ENEMY)
+		{
+			float angleDegree = _angleRadian * (180.0f / PI);
+			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+		}
+
 		_active = false;
 	}
 
@@ -191,7 +200,6 @@ void NormalProjectile::render()
 		_img->render(CAMERA->getRelativeV2(_position), _renderSize);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, resize, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
-
 	}
 }
 
