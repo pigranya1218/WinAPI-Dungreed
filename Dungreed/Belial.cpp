@@ -48,19 +48,23 @@ void Belial::init(const Vector2 & pos)
 
 	// 파편 위치들 초기화
 	_deadParticle[0].setPosition(Vector2(_position.x - 30, _position.y - 30));
-	_deadParticle[1].setPosition(Vector2(_position.x, _position.y + 150));
-	
+	_deadParticle[1].setPosition(Vector2(_position.x, _position.y + 180));
+	_deadParticle[2].setPosition(Vector2(_position.x - 90, _position.y + 80));
+	_deadParticle[3].setPosition(Vector2(_position.x + 90, _position.y + 80));
+	_deadParticle[4].setPosition(Vector2(_position.x - 90, _position.y + 120));
+	_deadParticle[5].setPosition(Vector2(_position.x + 90, _position.y + 120));
+
 	// 사이즈 초기화
 	for (int i = 0; i < 6; i++)
 	{
-		_deadParticle[i].setSize(Vector2(_deadParticle[i].getSize().x * _scale, _deadParticle[i].getSize().y * _scale));
+		_deadParticle[i].setSize(Vector2(_deadParticle[i].img->getSize().x * _scale, _deadParticle[i].img->getSize().y * _scale));
 	}
 
 	// 이동 수정
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(0, 150);
 	_moving.delay = 0.4;
-	_moving.gravity = Vector2(0, 4000);
+	_moving.gravity = Vector2(0, 9000);
 
 	// 벨리알 탄막 패턴
 	_shooting.init("Belial/Bullet", "Belial/Bullet_FX", Vector2(500, 500), _scale, 0.1, 3, false, true, true, false, true, false);
@@ -400,18 +404,31 @@ void Belial::update(float const timeElapsed)
 						if (i == 4) angle += PI / 6;
 					}
 					if (!_realDead) _realDead = true;
-				}
-				// 파티클 움직임
-				if (_realDead)
-				{
+				}				
+			}
+			// 파티클 움직임
+			if (_realDead)
+			{
+				moveDir = Vector2(0, 0);
 
+				for (int i = 0; i < 6; i++)
+				{
+					_moving.force.y += _moving.gravity.y * timeElapsed;
+					moveDir.y = _moving.force.y * timeElapsed;
+
+					_enemyManager->moveEnemy(&_deadParticle[i], moveDir);
+					_moving.force.y = 150;
+
+					/*if (_deadParticle[i].getIsStand())
+					{
+						_moving.force.y = 0;
+					}*/
 				}
 			}
-			
 		}
 		break;
-	}
-	hitReaction(_playerPos, moveDir, timeElapsed);	
+	}	
+	hitReaction(_playerPos, moveDir, timeElapsed);
 
 	if (_state != ENEMY_STATE::DIE)
 	{
@@ -536,7 +553,9 @@ void Belial::render()
 	}
 	else
 	{
-		for (int i = 0; i < 6; i++)
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_deadParticle[0].getPosition(), _deadParticle[0].getSize(), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+
+		for (int i = 5; i >= 0; i--)
 		{
 			_deadParticle[i].img->setScale(_scale);
 			_deadParticle[i].img->render(CAMERA->getRelativeV2(_deadParticle[i].getPosition()));
