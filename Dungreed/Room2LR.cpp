@@ -12,6 +12,7 @@ void Room2LR::init()
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(960, 430), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BLUE, Vector2(500, 430), DIRECTION::LEFT);
 
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room2LR::release()

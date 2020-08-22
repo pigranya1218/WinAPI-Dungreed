@@ -21,6 +21,8 @@ void DownStair2T::init()
 
 	_npcMgr->spawnNpc(NPC_TYPE::EXIT, Vector2(550, 1030), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(550, 435), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void DownStair2T::release()

@@ -13,6 +13,8 @@ void Room5LR::init()
 	
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1450, 1800), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room5LR::release()

@@ -29,7 +29,7 @@ void StartRoom1::init()
 	_npcMgr->spawnNpc(NPC_TYPE::ENTRANCE, Vector2(570, 642), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(870, 400), DIRECTION::LEFT);
 
-
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void StartRoom1::release()

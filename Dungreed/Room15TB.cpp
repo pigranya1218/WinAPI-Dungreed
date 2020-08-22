@@ -9,6 +9,8 @@ void Room15TB::init()
 	_respawnPosition[3] = Vector2(490, 1120);
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(800, 1000), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room15TB::release()

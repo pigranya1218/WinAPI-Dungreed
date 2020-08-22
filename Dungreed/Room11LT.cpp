@@ -10,6 +10,8 @@ void Room11LT::init()
 	//_respawnPosition[1] = Vector2(1050, 200);
 	
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(750, 450), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room11LT::release()

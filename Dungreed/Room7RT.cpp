@@ -16,6 +16,8 @@ void Room7RT::init()
 	_objectMgr->spawnObject(0x0001, Vector2(340, 200));
 	
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(500, 700), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room7RT::release()

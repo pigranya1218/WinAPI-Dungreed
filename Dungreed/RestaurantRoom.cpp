@@ -14,10 +14,19 @@ void RestaurantRoom::init()
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(400, 560), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(850, 860), DIRECTION::LEFT);
-}
 
+	_roomType = ROOMTYPE::RESTAURANT;
+
+	/*SOUND_MANAGER->stop("Floor1_BGM");
+	SOUND_MANAGER->stop("Foodshop");
+	SOUND_MANAGER->play("Foodshop",1.0f);*/
+}
+ 
 void RestaurantRoom::release()
 {
+	//SOUND_MANAGER->stop("Foodshop");
+	/*SOUND_MANAGER->stop("Floor1_BGM");
+	SOUND_MANAGER->play("Floor1_BGM", 1.0f);*/
 	Stage::release();
 }
 

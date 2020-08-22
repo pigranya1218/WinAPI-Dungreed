@@ -10,6 +10,8 @@ void DungeonShopRoom2::init()
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(620, 240), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::SHOP, Vector2(800, 670), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::SHOP;
 }
 
 void DungeonShopRoom2::release()
