@@ -356,8 +356,8 @@ void BigPaintBlush::attack(Player* player)
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
-	SOUND_MANAGER->stop("SOUND_generalAttack");
-	SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	SOUND_MANAGER->stop("SOUND_swing1");
+	SOUND_MANAGER->play("SOUND_swing1", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 	FloatCircle* attackCircle = new FloatCircle;
 	attackCircle->origin = originPos;

@@ -39,6 +39,8 @@ void PickaxeRed::update(Player* player, float const elapsedTime)
 		_angleOffset = max(-180, (_angleOffset)-(elapsedTime * ratio));
 		if (_angleOffset == -180)
 		{
+			SOUND_MANAGER->stop("SOUND_PickaxeRed");
+			SOUND_MANAGER->play("SOUND_PickaxeRed", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 			_oneAttack = false;
 		}
 	}
@@ -186,8 +188,8 @@ void PickaxeRed::attack(Player* player)
 	attackCircle->endRadian = attackRadian + PI * 0.28;
 
 	_attackDebug = FloatCircle(originPos, 120, attackRadian - PI * 0.28, attackRadian + PI * 0.28); // forDEBUG
-	SOUND_MANAGER->stop("SOUND_generalAttack");
-	SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	/*SOUND_MANAGER->stop("SOUND_PickaxeRed");
+	SOUND_MANAGER->play("SOUND_PickaxeRed", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));*/
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);

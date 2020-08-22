@@ -304,7 +304,7 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	MagicStick* testWeapon5 = new MagicStick;
+	CosmosSword* testWeapon5 = new CosmosSword;
 	testWeapon5->init();
 	_inventory[13] = testWeapon5;
 

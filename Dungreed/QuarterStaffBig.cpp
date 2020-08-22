@@ -13,7 +13,7 @@ void QuarterStaffBig::init()
 	_addStat.minDamage = 4;
 	_addStat.maxDamage = 6;
 	_addStat.defense = 5;
-	_addStat.attackSpeed = 0.25;
+	_addStat.attackSpeed = 0.26;
 	//보조옵션
 
 	// private 변수 설정
@@ -31,12 +31,12 @@ void QuarterStaffBig::init()
 void QuarterStaffBig::update(Player* player, float const elapsedTime)
 {
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	float ratio = 180 / ((0.42 * 0.4));
+	float ratio = 180 / ((0.33 * 0.4));
 	if (_oneAttack)
 	{
 		
 
-		
+		_img->setAlpha(0.8f);
 			_angleOffset = max(-720, ((_angleOffset)-(elapsedTime * ratio)));
 		if (_angleOffset == -720)
 		{
@@ -194,6 +194,6 @@ void QuarterStaffBig::equip(Player * player)
 	PlayerStat stat = player->getCurrStat();
 	_adjustStat = _addStat;
 	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
-	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed*0.5) / 100);
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }
 

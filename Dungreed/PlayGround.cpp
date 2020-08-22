@@ -515,6 +515,13 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("SOUND_katana2", "resources/sound/MeleeWeapon/katana2.wav", false, false);
 	SOUND_MANAGER->addSound("SOUND_katana3", "resources/sound/MeleeWeapon/katana3.wav", false, false);
 	SOUND_MANAGER->addSound("SOUND_generalAttack", "resources/sound/MeleeWeapon/generalAttack.wav", false, false); // 기본검 공격
+	SOUND_MANAGER->addSound("SOUND_swing0", "resources/sound/MeleeWeapon/swing0.wav", false, false); // 우주검 기본 공격
+	SOUND_MANAGER->addSound("SOUND_handAttack", "resources/sound/MeleeWeapon/handAttack.wav", false, false); // 맨손 공격
+	SOUND_MANAGER->addSound("SOUND_TigerRoar", "resources/sound/MeleeWeapon/TigerRoar.wav", false, false); // 호랑이권법 공격
+	SOUND_MANAGER->addSound("SOUND_scythe", "resources/sound/MeleeWeapon/scythe.wav", false, false); // 사이더 공격
+	SOUND_MANAGER->addSound("SOUND_PickaxeRed", "resources/sound/MeleeWeapon/PickaxeRed.wav", false, false); // 붉은곡괭이 공격
+	SOUND_MANAGER->addSound("SOUND_wujusword", "resources/sound/MeleeWeapon/wujusword.wav", false, false); // 우주검 공격
+	SOUND_MANAGER->addSound("SOUND_swing1", "resources/sound/MeleeWeapon/swing1.wav", false, false); // 붓 공격
 
 
 
