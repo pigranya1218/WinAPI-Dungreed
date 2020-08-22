@@ -28,7 +28,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay = 1;
 	_attack.distance = 200;
 	_attack.circleSize = 200;
-	_attack.attackInit(10, 15, 3,0,0,25);
+	_attack.attackInit(10, 15, 3,0,0,40);
 	
 	ZeroMemory(&_skill, sizeof(_skill));
 	_skill.delay = 2;
@@ -43,6 +43,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect = 0;
 	_active = true;
 
+	_playCount = 0;
 	_curHp = _maxHp = (MAXHP*2);
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_ICE);
@@ -110,6 +111,7 @@ void SkelBigIce::update(float const timeElapsed)
 			{
 				if (_skill.update(timeElapsed))
 				{
+					SOUND_MANAGER->play("IceSkell/Magic/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_shooting.bulletNum = RANDOM->getFromIntTo(4, 7);
 					setState(ENEMY_STATE::SKILL);
 				}
@@ -120,14 +122,18 @@ void SkelBigIce::update(float const timeElapsed)
 		{
 			if (_ani->getPlayIndex() == 2)
 			{
+				_playCount++;
 				Vector2 attackPos = _position;
 				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
 				attackPos.y += _size.y * 0.5f;
 
 				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (0);
 				float endRad = startRad + PI / 2;
-
 				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
+				if (_playCount == 1)
+				{
+					SOUND_MANAGER->play("Skell/ice/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 			}
 			else
 			{
@@ -135,6 +141,7 @@ void SkelBigIce::update(float const timeElapsed)
 			}
 			if (!_ani->isPlay())
 			{
+				_playCount = 0;
 				setState(ENEMY_STATE::MOVE);
 			}
 		}		
@@ -143,18 +150,26 @@ void SkelBigIce::update(float const timeElapsed)
 		{			
 			if (_shooting.bulletNum > 0 && _ani->getPlayIndex() >= 6)
 			{
+
 				if (_shooting.delayUpdate(timeElapsed))
 				{
+					SOUND_MANAGER->stop("IceSkell/Magic/Attack");
+					_playCount++;
 					float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
 
 					angle += RANDOM->getFromFloatTo(PI / 10 * -1, PI / 10);
-
+					if (_playCount == 1)
+					{
+						SOUND_MANAGER->stop("Skell/ice/blast");
+						SOUND_MANAGER->play("Skell/ice/blast", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+					}
 					_shooting.createBullet(_position, angle);
 					_shooting.fireBullet(_myEnemyType, _enemyManager);
 				}
 			}
 			else if (!_ani->isPlay() && _shooting.bulletNum <= 0)
 			{
+				_playCount = 0;
 				setState(ENEMY_STATE::MOVE);
 			}			
 		}	

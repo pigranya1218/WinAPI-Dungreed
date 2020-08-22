@@ -661,8 +661,12 @@ HRESULT playGround::init()
 	//*	수녀
 	SOUND_MANAGER->addSound("Banshee/Attack", "resources/sound/enemy/banshee/high_pitch_scream_gverb.wav", false, false);	//거대 박쥐 공격
 	//* 해골들
-	SOUND_MANAGER->addSound("IceSkell/Magic/Attack", "resources/sound/enemy/skells/ice.wav", false, false);				//아이스 해골 마법사 공격
-	SOUND_MANAGER->addSound("Skell/Small/Attack", "resources/sound/enemy/skells/swish-1.wav", false, false);			//작은   해골 단검   공격
+	SOUND_MANAGER->addSound("IceSkell/Magic/Attack", "resources/sound/enemy/skells/ice.wav", false, false);						   //아이스 해골 마법사 공격
+	SOUND_MANAGER->addSound("Skell/Small/Attack", "resources/sound/enemy/skells/swish-1.wav", false, false);					   //작은   해골 단검   공격
+	SOUND_MANAGER->addSound("Skell/Small_G/Attack", "resources/sound/enemy/skells/swish-6.wav", false, false);						   //아이스 해골 대검	   공격
+	SOUND_MANAGER->addSound("Skell/Big/Attack", "resources/sound/enemy/skells/swish-5.wav", false, false);						   //거대   해골 일반	   공격
+	SOUND_MANAGER->addSound("Skell/ice/blast", "resources/sound/enemy/skells/ice_blast_projectile_spell_02.wav", false, false);	   //아이스 해골 블라스트 공격
+	SOUND_MANAGER->addSound("Skell/ice/Attack", "resources/sound/enemy/skells/ice_spell_forming_shards_04.wav", false, false);	   //아이스 해골 일반     공격
 	//*	벨리알
 
 	//*	니플헤임
