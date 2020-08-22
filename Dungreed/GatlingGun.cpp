@@ -77,7 +77,6 @@ void GatlingGun::update(Player * player, float const elapsedTime)
 		_isAttack = false;
 		SOUND_MANAGER->stop("GatlingWarmUp");
 		SOUND_MANAGER->play("GatlingWarmUp", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-		
 	}
 	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
@@ -88,7 +87,6 @@ void GatlingGun::update(Player * player, float const elapsedTime)
 			_timeCount = 0;
 		}
 	}
-
 	if (!SOUND_MANAGER->isPlaySound("GatlingWarmUp") && _timeCount == 0)
 	{
 		_isAttack = true;
