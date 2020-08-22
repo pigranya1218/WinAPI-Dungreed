@@ -278,15 +278,22 @@ void GuidedProjectile::render()
 		_img->render(CAMERA->getRelativeV2(_position), _renderSize);
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
+
 	if (_afterimage)
 	{
-		Vector2 _pos = Vector2(_position.x - 10, _position.y);
-		if (_mirageCount >= 3.f)
+		int index;
+		Vector2 _pos;
+		if (_mirageCount >= 0.1f)
 		{
 			_mirageCount = 0;
-			//_afterImg[0]->setAlpha();
+			index = _ani->getPlayIndex();
+			_pos = Vector2(_position.x - 10, _position.y);
+			_afterImg[0]->frameRender(_pos, _renderSize, index, 0);
 		}
-		_afterImg[0]->frameRender(_pos, _renderSize, _ani->getPlayIndex(), 0);
+		/*if (_count < 1)
+		{
+			_afterImg[0]->setAlpha(_afterImg[0]->getAlpha() - _count);
+		}*/
 	}
 	
 	/*if (_afterimage)
