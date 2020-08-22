@@ -54,7 +54,7 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		else if (isWall[0] && !isWall[1] && isWall[2] && !isWall[3])//상, 하 뚫린 경우
 		{
 			int rand = RANDOM->getInt(2);
-		    if(rand==0) resultRoom = new Room6TB;
+		    if(rand==0) resultRoom = new Room15TB;
 			else if(rand==1) resultRoom = new Room15TB;
 			else resultRoom = new Room15TB;
 		}
@@ -228,6 +228,7 @@ void StageManager::update(float const elapsedTime)
 void StageManager::render()
 {
 	_currStage->render();
+	
 }
 
 bool StageManager::attack(FloatRect* rect, AttackInfo* info)

@@ -11,14 +11,14 @@ void Room1R::init()
 
 	_objectMgr->spawnObject(0x0000, Vector2(550, 600));
 
-	_objectMgr->spawnObject(0x0001, Vector2(320, 600));
-	_objectMgr->spawnObject(0x0001, Vector2(450, 600));
+	_objectMgr->spawnObject(0x0001, Vector2(320, 800));
+	_objectMgr->spawnObject(0x0001, Vector2(450, 800));
 	//_objectMgr->spawnObject(0x0001, Vector2(430, 600));
 
-	_objectMgr->spawnObject(0x0002, Vector2(400, 600));
+	_objectMgr->spawnObject(0x0002, Vector2(400, 800));
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BASIC, Vector2(400, 600), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 800), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BASIC, Vector2(400, 800), DIRECTION::LEFT);
 }
 
 void Room1R::release()

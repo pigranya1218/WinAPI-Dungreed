@@ -12,7 +12,7 @@ void Room13LTB::init()
 	
 	makeDoor(Vector2(309, 1100), DIRECTION::DOWN);
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(520, 700), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(550, 600), DIRECTION::LEFT);
 }
 
 void Room13LTB::release()

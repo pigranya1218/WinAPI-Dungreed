@@ -8,11 +8,11 @@ void Room8L::init()
 	loadMap("room/Stage8_L.map");
 	//_respawnPosition[0] = Vector2(160, 680);
 
-	_objectMgr->spawnObject(0x0000, Vector2(1200, 500));
-	_objectMgr->spawnObject(0x0000, Vector2(1240, 500));
-	_objectMgr->spawnObject(0x0001, Vector2(1280, 500));
+	_objectMgr->spawnObject(0x0000, Vector2(1200, 810));
+	_objectMgr->spawnObject(0x0000, Vector2(1240, 810));
+	_objectMgr->spawnObject(0x0001, Vector2(1280, 810));
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(570, 600), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(570, 810), DIRECTION::LEFT);
 }
 
 void Room8L::release()

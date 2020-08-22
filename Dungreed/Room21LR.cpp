@@ -15,7 +15,7 @@ void Room21LR::init()
 	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
 	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1100, 1200), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1100, 500), DIRECTION::LEFT);
 }
 
 void Room21LR::release()

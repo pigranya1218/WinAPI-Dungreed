@@ -20,11 +20,11 @@ void StartRoom1::init()
 	_ani->setFPS(15);
 	_ani->start();
 
-	_objectMgr->spawnObject(0x0000, Vector2(500, 600));
-	_objectMgr->spawnObject(0x0001, Vector2(200, 600));
-	_objectMgr->spawnObject(0x0001, Vector2(380, 600));
-	_objectMgr->spawnObject(0x0001, Vector2(430, 600));
-	_objectMgr->spawnObject(0x0002, Vector2(300, 600));
+	_objectMgr->spawnObject(0x0000, Vector2(500, 700));
+	_objectMgr->spawnObject(0x0001, Vector2(200, 700));
+	_objectMgr->spawnObject(0x0001, Vector2(380, 700));
+	_objectMgr->spawnObject(0x0001, Vector2(430, 700));
+	_objectMgr->spawnObject(0x0002, Vector2(300, 700));
 
 	_npcMgr->spawnNpc(NPC_TYPE::ENTRANCE, Vector2(570, 642), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(870, 400), DIRECTION::LEFT);

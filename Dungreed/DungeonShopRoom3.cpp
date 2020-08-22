@@ -9,8 +9,8 @@ void DungeonShopRoom3::init()
 	//_respawnPosition[0] = Vector2(240, 500);
 	//_respawnPosition[2] = Vector2(1600, 500);
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 150), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::SHOP, Vector2(800, 450), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 250), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::SHOP, Vector2(800, 650), DIRECTION::LEFT);
 }
 
 void DungeonShopRoom3::release()
@@ -26,4 +26,6 @@ void DungeonShopRoom3::update(float const elapsedTime)
 void DungeonShopRoom3::render()
 {
 	Stage::render();
+	IMAGE_MANAGER->findImage("InDungeonShop")->setScale(4);
+	CAMERA->render(IMAGE_MANAGER->findImage("InDungeonShop"), Vector2(1150, 708));
 }

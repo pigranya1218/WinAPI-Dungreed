@@ -359,7 +359,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CandleOn1", L"resources/images/Map/CandleOn1.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
-
+	IMAGE_MANAGER->addFrameImage("Torch", L"resources/images/Map/torch.png", 7, 1);
 	// ** OBJECT
 	// *** BROKEN
 	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BOX", L"resources/images/object/broken/Box0.png");
