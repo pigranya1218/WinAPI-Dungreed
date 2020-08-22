@@ -80,6 +80,7 @@ void Stage::update(float const elaspedTime)
 			_state = STAGE_STATE::START;
 			_spawnDelay = 0;
 			_spawnIndex = 0;
+			_spawnPhase = 1;
 		}
 		else
 		{
@@ -103,8 +104,18 @@ void Stage::update(float const elaspedTime)
 			_spawnDelay = 1;
 			if (_spawnIndex < _spawnEnemies.size())
 			{
-				_enemyMgr->spawnEnemy(_spawnEnemies[_spawnIndex].type, _spawnEnemies[_spawnIndex].pos, true);
-				_spawnIndex++;
+				if (_spawnPhase == _spawnEnemies[_spawnIndex].phase)
+				{
+					_enemyMgr->spawnEnemy(_spawnEnemies[_spawnIndex].type, _spawnEnemies[_spawnIndex].pos, true);
+					_spawnIndex++;
+				}
+				else
+				{
+					if (_enemyMgr->getEnemyCount() == 0)
+					{
+						_spawnPhase++;
+					}
+				}
 			}
 		}
 		if (_spawnIndex >= _spawnEnemies.size() && _enemyMgr->getEnemyCount() == 0)

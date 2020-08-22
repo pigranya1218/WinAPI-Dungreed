@@ -31,6 +31,7 @@ struct tagEnemySpawn // 적의 소환 위치
 {
 	ENEMY_TYPE type;
 	Vector2 pos;
+	int phase = 1;
 };
 
 struct tagChest // 보물상자 소환
@@ -52,6 +53,7 @@ protected:
 	tagChest _spawnChest;
 	float _spawnDelay;
 	int _spawnIndex;
+	int _spawnPhase;
 
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	

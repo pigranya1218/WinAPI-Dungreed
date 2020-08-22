@@ -7,9 +7,9 @@ void Room4LR::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage4_LR.map");
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400), 1 });
+		_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500), 1 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600), 1 });
 	_spawnChest.spawn = true;
 	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
 	_spawnChest.pos = Vector2(500, 500);
@@ -22,7 +22,6 @@ void Room4LR::init()
 	_objectMgr->spawnObject(0x0002, Vector2(650, 500));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1000, 1320), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BOSS, Vector2(1000, 620), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;
 }
