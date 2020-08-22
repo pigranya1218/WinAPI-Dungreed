@@ -170,3 +170,8 @@ void NpcManager::showRestaurantUI()
 void NpcManager::showShopUI()
 {
 }
+
+void NpcManager::showAbilityUI()
+{
+	_uiMgr->showAbility();
+}
