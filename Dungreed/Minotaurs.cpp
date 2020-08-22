@@ -30,7 +30,7 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay =	2;		// 공격 딜레이 초기화
 	_attack.distance = 100;	// 공격 시전 가능 거리
 	_attack.circleSize = 150;
-	_attack.attackInit(1, 5, 5,0,0,25);
+	_attack.attackInit(5, 10, 15,0,0,25);
 
 	// 돌진 관련 변수
 	ZeroMemory(&_skill, sizeof(_skill));
@@ -47,7 +47,7 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 
 	_active = true;
 
-	_curHp = _maxHp = 300;
+	_curHp = _maxHp = 90;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::MINOTAURS);
 }

@@ -39,7 +39,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect = _attacking = 0;
 	_active = true;
 
-	_curHp = _maxHp = 80;
+	_curHp = _maxHp = 60;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_MAGICIAN_ICE);
 }

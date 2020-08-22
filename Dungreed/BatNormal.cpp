@@ -33,7 +33,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect = 0;
 	_active = true;
 
-	_curHp = _maxHp = 50;
+	_curHp = _maxHp = 20;
 }
 
 void BatNormal::release()

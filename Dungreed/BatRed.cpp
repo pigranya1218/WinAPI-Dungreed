@@ -36,7 +36,7 @@ void BatRed::init(const Vector2& pos, DIRECTION direction)
 
 	_active = true;
 
-	_curHp = _maxHp = 70;
+	_curHp = _maxHp = 20;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_RED);
 }

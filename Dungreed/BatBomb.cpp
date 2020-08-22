@@ -32,7 +32,7 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect = 0;
 	_active = true;
 
-	_curHp = _maxHp = 50;
+	_curHp = _maxHp = 25;
 }
 
 void BatBomb::release()
@@ -81,6 +81,7 @@ void BatBomb::update(float const timeElapsed)
 
 			if (getDistance(_position.x, _position.y, playerPos.x, playerPos.y) < 50)
 			{
+				SOUND_MANAGER->play("BoomBat/Ready", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				setState(ENEMY_STATE::ATTACK);
 			}
 		}
@@ -89,6 +90,7 @@ void BatBomb::update(float const timeElapsed)
 		{				
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("BoomBat/Ready");
 				setState(ENEMY_STATE::SKILL);
 			}
 		}
