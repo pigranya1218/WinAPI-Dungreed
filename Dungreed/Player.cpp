@@ -76,6 +76,8 @@ void Player::updateAdjustStat()
 		_adjustStat = _adjustStat + _ateFood[i]->getAddStat();
 	}
 
+	_adjustStat = _adjustStat + _abilityStat;
+
 	if (_equippedWeapon[_currWeaponIndex] != nullptr)
 	{
 		_equippedWeapon[_currWeaponIndex]->equip(this);

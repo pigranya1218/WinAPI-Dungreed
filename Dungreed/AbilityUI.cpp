@@ -120,6 +120,8 @@ void AbilityUI::update(float elapsedTime)
 		{
 			_windows[i].abilityPoint = 0;
 		}
+		_abilityStat = PlayerStat();
+		_player->setAbilityStat(_abilityStat);
 	}
 }
 
