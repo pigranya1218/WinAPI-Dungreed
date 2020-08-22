@@ -23,7 +23,6 @@ HRESULT GameScene::init()
 
 	_uiMgr->setStageManager(_stageMgr);
 
-	TIME_MANAGER->update();
 
 	return S_OK;
 }

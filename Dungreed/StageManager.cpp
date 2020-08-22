@@ -374,6 +374,7 @@ void StageManager::makeStage()
 	default:
 		break;
 	}
+	TIME_MANAGER->update(60);
 }
 
 void StageManager::makeBossStage()

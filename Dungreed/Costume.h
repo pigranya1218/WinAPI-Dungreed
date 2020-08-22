@@ -2,6 +2,8 @@
 #include "PlayerStat.h"
 #include "stdafx.h"
 
+class Item;
+
 enum class COSTUME_TYPE : int
 {
 	BASE = 0,
@@ -35,6 +37,8 @@ protected:
 	Animation* _ani;
 	PLAYER_STATE _imgState;
 
+	vector<Item*> _specialAbility; // 특수 능력
+
 public:
 	virtual void init() = 0;
 	virtual void release() = 0;
@@ -43,6 +47,7 @@ public:
 	virtual void setSprite(PLAYER_STATE state, bool isForced) = 0;	// 애니메이션을 재생시킬 함수
 	
 	PlayerStat const getBaseStat() { return _baseStat + _differStat; } // 코스튬의 기본 스탯을 반환
+	vector<Item*> getSpecialAbility() { return _specialAbility; } // 코스튬의 특수 능력 반환
 	string getCostumeName() { return _costumeName; }
 	wstring getTitle() { return _costumeTitle; }
 	wstring getSummary() { return _costumeSummary; }

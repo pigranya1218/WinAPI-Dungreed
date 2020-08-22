@@ -186,11 +186,6 @@ void InventoryUI::drawItemType(Vector2 pos, ITEM_TYPE type)
 		D2D_RENDERER->renderTextField(pos.x, pos.y, L"액세서리", RGB(180, 180, 180), 22, 200, 25, 1);
 	}
 	break;
-	case ITEM_TYPE::WEAPON_SUB:
-	{
-		D2D_RENDERER->renderTextField(pos.x, pos.y, L"한손 (보조무기)", RGB(180, 180, 180), 22, 200, 25, 1);
-	}
-	break;
 	}
 }
 

@@ -599,6 +599,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("selected", L"resources/images/Accessories/selected.png");                         // 자동공격 인형 조준점
 	IMAGE_MANAGER->addImage("SeeriBullet", L"resources/images/Accessories/SeeriBullet.png");                   // 자동공격 인형 탄
 
+	// ** SPECIAL ABILITY
+	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY_WARNING", L"resources/images/weapon/specialAbility/alice_warning.png", 4, 1);
+	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY", L"resources/images/weapon/specialAbility/alice_safe.png", 1, 1);
+
 	// ** ENEMY
 	// * 수녀
 	IMAGE_MANAGER->addFrameImage("Banshee/Idle"			, L"resources/images/Enemy/Banshee/idle.png"		, 6, 1);	// 기본
@@ -838,7 +842,6 @@ HRESULT playGround::init()
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
-	TIME_MANAGER->update();
 
 
 	// 모든 씬 SCENE_MANAGER에 
@@ -848,7 +851,8 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
 	SCENE_MANAGER->changeScene("GAME");	
-
+	
+	TIME_MANAGER->init();
 	
 	return S_OK;
 }

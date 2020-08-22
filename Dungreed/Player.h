@@ -45,10 +45,10 @@ private:
 	int			  _currWeaponIndex;			// 현재 사용하는 무기 인덱스, 0 or 1
 	float		  _currWeaponChangeCoolTime;// 무기 교체 딜레이 쿨타임
 	vector<Item*> _equippedAcc;				// 장착된 악세사리
+	vector<Item*> _specialAbility;
 	vector<Food*> _ateFood;					// 먹은 음식들
 
 private:
-	void updateAdjustStat();
 	void swap(Item* &a, Item* &b);
 
 public:
@@ -106,9 +106,10 @@ public:
 
 	PlayerStat getCurrStat() { return _adjustStat; };
 	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; }	//어빌리티 스탯 설정자
-	
+	void setSpecialAbility(vector<Item*> specialAbility);
+
 	Costume* getCurrCostume() { return _costume; }
-	void setCurrCostume(Costume* costume) { _costume = costume; }
+	void setCurrCostume(Costume* costume);
 	float getAttackSpeed();
 	float getReloadSpeed();
 	float getMinDamage();
@@ -117,5 +118,7 @@ public:
 	// 스테이지 관련 함수
 	Vector2 getEnemyPos(Vector2 pos);
 	void moveRoom(Vector2 dir);
+
+	void updateAdjustStat();
 };
 
