@@ -810,27 +810,30 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Player/Inven/OpenInven", "resources/sounds/player/inventorySounds/OpenInventory.wav", false, false);	//인벤토리 개폐
 	SOUND_MANAGER->addSound("Player/Inven/PickUpItem", "resources/sounds/player/inventorySounds/PickUpItem.wav", false, false);		//픽업 아이템
 
-	//** ENEMY
-	SOUND_MANAGER->addSound("Enemy/Die", "resources/sound/enemy/public/MonsterDie.wav", false, false);			//사망(공용)
-	SOUND_MANAGER->addSound("Enemy/GetHit", "resources/sound/enemy/public/Hit_Monster.wav", false, false);		//피격(공용)
-	//* 박쥐
-	SOUND_MANAGER->addSound("Bat/Attack", "resources/sound/enemy/bat/monster-sound2_bat.wav", false, false);						//작은 박쥐 공격
-	SOUND_MANAGER->addSound("Bat/Die", "resources/sound/enemy/bat/monster-sound8_bat.wav", false, false);							//작은 박쥐 사망
-	SOUND_MANAGER->addSound("GiantBat/Attack", "resources/sound/enemy/bat/Bat2.wav", false, false);									//거대 박쥐 공격
-	SOUND_MANAGER->addSound("BoomBat/Ready", "resources/sound/enemy/bat/Fantasy_Game_Creature_High_C_Japok.wav", false, false);		//폭발 박쥐 준비
-	SOUND_MANAGER->addSound("BoomBat/Explod", "resources/sound/enemy/bat/Explode.wav", false, false);								//폭발 박쥐 폭발
-	//*	수녀
-	SOUND_MANAGER->addSound("Banshee/Attack", "resources/sound/enemy/banshee/high_pitch_scream_gverb.wav", false, false);			//수녀 공격
-	//* 해골들
-	SOUND_MANAGER->addSound("Skell/Arrow/Ready", "resources/sound/enemy/skells/bow_crossbow_arrow_draw_stretch1_03.wav", false, false);	//작은  해골 활 준비  공격
-	SOUND_MANAGER->addSound("Skell/Arrow/Attack", "resources/sound/enemy/skells/etc-sound0034_Bow.wav", false, false);					//작은  해골 활 발사  공격
-	SOUND_MANAGER->addSound("Skell/Small/Attack", "resources/sound/enemy/skells/swish-1.wav", false, false);					   //작은   해골 단검  공격
-	SOUND_MANAGER->addSound("Skell/Small_G/Attack", "resources/sound/enemy/skells/swish-6.wav", false, false);					   //작은   해골 대검	  공격
-	SOUND_MANAGER->addSound("Skell/Big/Attack", "resources/sound/enemy/skells/swish-5.wav", false, false);						   //거대   해골 일반	  공격
-	SOUND_MANAGER->addSound("Skell/ice/blast", "resources/sound/enemy/skells/ice_blast_projectile_spell_02.wav", false, false);	   //아이스 해골 블라스트  공격
-	SOUND_MANAGER->addSound("Skell/ice/Attack", "resources/sound/enemy/skells/ice_spell_forming_shards_04.wav", false, false);	   //아이스 해골 일반      공격
-	SOUND_MANAGER->addSound("IceSkell/Magic/Attack", "resources/sound/enemy/skells/ice.wav", false, false);						   //아이스 해골 마법사 공격
-	//*	벨리알
+	// ** ENEMY
+	SOUND_MANAGER->addSound("Enemy/Die"		, "resources/sound/enemy/public/MonsterDie.wav"	, false, false);	// 사망(공용)
+	SOUND_MANAGER->addSound("Enemy/GetHit"	, "resources/sound/enemy/public/Hit_Monster.wav", false, false);	// 피격(공용)
+
+	// *  박쥐
+	SOUND_MANAGER->addSound("Bat/Attack"		, "resources/sound/enemy/bat/monster-sound2_bat.wav"				, false, false);	// 작은 박쥐 공격
+	SOUND_MANAGER->addSound("Bat/Die"			, "resources/sound/enemy/bat/monster-sound8_bat.wav"				, false, false);	// 작은 박쥐 사망
+	SOUND_MANAGER->addSound("GiantBat/Attack"	, "resources/sound/enemy/bat/Bat2.wav"								, false, false);	// 거대 박쥐 공격
+	SOUND_MANAGER->addSound("BoomBat/Ready"		, "resources/sound/enemy/bat/Fantasy_Game_Creature_High_C_Japok.wav", false, false);	// 폭발 박쥐 준비
+	SOUND_MANAGER->addSound("BoomBat/Explod"	, "resources/sound/enemy/bat/Explode.wav"							, false, false);	// 폭발 박쥐 폭발
+
+	// *  수녀
+	SOUND_MANAGER->addSound("Banshee/Attack", "resources/sound/enemy/banshee/high_pitch_scream_gverb.wav", false, false);	// 수녀 공격
+
+	// *  해골들
+	SOUND_MANAGER->addSound("Skell/Arrow/Ready"		, "resources/sound/enemy/skells/bow_crossbow_arrow_draw_stretch1_03.wav", false, false);	// 작은 해골 활 준비 공격
+	SOUND_MANAGER->addSound("Skell/Arrow/Attack"	, "resources/sound/enemy/skells/etc-sound0034_Bow.wav"					, false, false);	// 작은 해골 활 발사 공격
+	SOUND_MANAGER->addSound("Skell/Small/Attack"	, "resources/sound/enemy/skells/swish-1.wav"							, false, false);	// 작은 해골 단검 공격
+	SOUND_MANAGER->addSound("Skell/Small_G/Attack"	, "resources/sound/enemy/skells/swish-6.wav"							, false, false);	// 작은 해골 대검	 공격
+	SOUND_MANAGER->addSound("Skell/Big/Attack"		, "resources/sound/enemy/skells/swish-5.wav"							, false, false);	// 거대 해골 일반	 공격
+	SOUND_MANAGER->addSound("Skell/ice/blast"		, "resources/sound/enemy/skells/ice_blast_projectile_spell_02.wav"		, false, false);	// 얼음 해골 스킬 공격
+	SOUND_MANAGER->addSound("Skell/ice/Attack"		, "resources/sound/enemy/skells/ice_spell_forming_shards_04.wav"		, false, false);	// 얼음 해골 일반 공격
+	SOUND_MANAGER->addSound("IceSkell/Magic/Attack"	, "resources/sound/enemy/skells/ice.wav"								, false, false);	// 얼음 해골 법사 공격
+	// * 벨리알
 
 	//*	니플헤임
 

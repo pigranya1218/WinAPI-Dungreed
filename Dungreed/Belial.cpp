@@ -59,13 +59,13 @@ void Belial::init(const Vector2 & pos)
 	{
 		_deadParticle[i].setSize(Vector2(_deadParticle[i].img->getSize().x * _scale, _deadParticle[i].img->getSize().y * _scale));
 	}
-	_deadAngle = -PI / 20;
+	_deadAngle = -PI / 25;
 
 	// 이동 수정
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(0, 150);
 	_moving.delay = 0.4;
-	_moving.gravity = Vector2(0, 9000);
+	_moving.gravity = Vector2(0, 7000);
 
 	// 벨리알 탄막 패턴
 	_shooting.init("Belial/Bullet", "Belial/Bullet_FX", Vector2(500, 500), _scale, 0.1, 3, false, true, true, false, true, false);
@@ -82,6 +82,7 @@ void Belial::init(const Vector2 & pos)
 	ZeroMemory(&_attackCycle, sizeof(&_attackCycle));
 	_attackCycle.delay = 3;
 
+	// 죽은 상태 설정
 	ZeroMemory(&_dieEffect, sizeof(_dieEffect));
 	_dieEffect.delay = 0.2;
 	_effectNum = 0;
@@ -94,6 +95,7 @@ void Belial::init(const Vector2 & pos)
 	_active = true;
 	_laserNum = _backMove = _angleWay = 0;
 
+	// 체력 초기화
 	_curHp = _maxHp = 800;
 
 	// 에너미해시코드 초기화
@@ -168,6 +170,11 @@ void Belial::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);	
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			headMove(timeElapsed);
+		}
+		break;
 		// 기본 상태
 		case ENEMY_STATE::IDLE:
 		{
@@ -335,7 +342,7 @@ void Belial::update(float const timeElapsed)
 					{
 						EFFECT_MANAGER->play("Enemy_Destroy", _sword[0]->getPosition(), Vector2(_sword[0]->img->getSize().x * _scale, _sword[0]->img->getSize().x * _scale));
 						SAFE_DELETE(_sword[_swordNum]);
-						_sword.erase(_sword.begin());						
+						_sword.erase(_sword.begin());
 					}
 					if (_sword.empty())
 					{
@@ -404,13 +411,17 @@ void Belial::update(float const timeElapsed)
 							"Enemy_Destroy",
 							Vector2(RANDOM->getFromFloatTo(_position.x - 300, _position.x + 300), RANDOM->getFromFloatTo(_position.y - 200, _position.y + 200)),
 							Vector2(160, 160)
-						);
+						);						
 					}
+					SOUND_MANAGER->stop("Enemy/Die");
+					SOUND_MANAGER->play("Enemy/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				}
 				// 그 후 가운데에서 퍼지면서 터질 때
 				if (_effectNum >= 20 && _effectNum < 25)
 				{
 					_effectNum++;
+
+					_dieEffect.delay = 0.1f;
 
 					float angle = 0;
 					for (int i = 0; i < 10; i++)
@@ -425,6 +436,9 @@ void Belial::update(float const timeElapsed)
 
 						if (i == 4) angle += PI / 6;
 					}
+					SOUND_MANAGER->stop("Enemy/Die");
+					SOUND_MANAGER->play("Enemy/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 					if (!_realDead) _realDead = true;
 				}				
 			}
@@ -448,7 +462,7 @@ void Belial::update(float const timeElapsed)
 					// 우측으로
 					if (_angleWay)
 					{
-						_moving.angle -= timeElapsed / 10;
+						_moving.angle -= timeElapsed / 7;
 
 						if (_moving.angle < _deadAngle)
 						{
@@ -460,7 +474,7 @@ void Belial::update(float const timeElapsed)
 					// 좌측으로
 					else
 					{
-						_moving.angle += timeElapsed / 10;
+						_moving.angle += timeElapsed / 7;
 
 						if (_moving.angle > 0)
 						{
@@ -505,8 +519,6 @@ void Belial::update(float const timeElapsed)
 		}
 	}
 
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
-
 	for (int i = 0; i < 5; i++)
 	{
 		if (!_particle.ani[i]->isPlay())
@@ -540,7 +552,7 @@ void Belial::render()
 		// 후광구 출력
 		Vector2 backPos = _position;
 		// 기본 상태 위치
-		backPos.x += 30;
+		backPos.x += 10;
 		backPos.y += 60;
 		// 공격 상태 위치
 		if (_backMove)
