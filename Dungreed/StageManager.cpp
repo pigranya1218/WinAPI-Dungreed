@@ -682,4 +682,9 @@ void StageManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 	_uiMgr->showEnemyHp(maxHp, curHp, pos);
 }
 
+void StageManager::setShowPlayer(bool showPlayer)
+{
+	_gameScene->setShowPlayer(showPlayer);
+}
+
 

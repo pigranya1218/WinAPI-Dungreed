@@ -96,4 +96,5 @@ public:
 
 	void moveToIndex(Vector2 index);
 	void nextStage();
+	void setShowPlayer(bool showPlayer);
 };

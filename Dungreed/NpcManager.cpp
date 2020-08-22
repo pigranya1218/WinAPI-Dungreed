@@ -155,3 +155,8 @@ Vector2 NpcManager::getGatePos()
 	}
 	return Vector2(0, 0);
 }
+
+void NpcManager::setShowPlayer(bool showPlayer)
+{
+	_stage->setShowPlayer(showPlayer);
+}

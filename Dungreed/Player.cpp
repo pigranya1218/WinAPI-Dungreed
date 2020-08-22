@@ -608,56 +608,59 @@ void Player::update(float const elapsedTime)
 
 void Player::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1);
+	// D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1);
 
-	// 캐릭터 뒤에 그리기
-	for(int i = 0; i < 4; i++)
+
+	if (_gameScene->showPlayer())
 	{
-		if (_equippedAcc[i] != nullptr)
+		// 캐릭터 뒤에 그리기
+		for (int i = 0; i < 4; i++)
 		{
-			_equippedAcc[i]->backRender(this);
+			if (_equippedAcc[i] != nullptr)
+			{
+				_equippedAcc[i]->backRender(this);
+			}
+		}
+		if (_equippedWeapon[_currWeaponIndex] != nullptr)
+		{
+			_equippedWeapon[_currWeaponIndex]->backRender(this);
+		}
+		else
+		{
+			_hand->backRender(this);
+		}
+
+		// 캐릭터 그리기
+		_costume->render(CAMERA->getRelativeV2(_position), _direction, (_currHitTime > 0));
+
+		// 캐릭터 앞에 그리기
+		for (int i = 0; i < 4; i++)
+		{
+			if (_equippedAcc[i] != nullptr)
+			{
+				_equippedAcc[i]->frontRender(this);
+			}
+		}
+		if (_equippedWeapon[_currWeaponIndex] != nullptr)
+		{
+			_equippedWeapon[_currWeaponIndex]->frontRender(this);
+		}
+		else
+		{
+			_hand->frontRender(this);
+		}
+
+		if (_currHitTime > 0)
+		{
+			if (_currHitTime < 0.25)
+			{
+				IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->setAlpha((_currHitTime / 0.25));
+				IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->setAlpha((_currHitTime / 0.25));
+			}
+			IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->render(Vector2(WINSIZEX * 0.25f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
+			IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->render(Vector2(WINSIZEX * 0.75f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
 		}
 	}
-	if (_equippedWeapon[_currWeaponIndex] != nullptr)
-	{
-		_equippedWeapon[_currWeaponIndex]->backRender(this);
-	}
-	else
-	{
-		_hand->backRender(this);
-	}
-
-	// 캐릭터 그리기
-	_costume->render(CAMERA->getRelativeV2(_position), _direction, (_currHitTime > 0));
-
-	// 캐릭터 앞에 그리기
-	for (int i = 0; i < 4; i++)
-	{
-		if (_equippedAcc[i] != nullptr)
-		{
-			_equippedAcc[i]->frontRender(this);
-		}
-	}
-	if (_equippedWeapon[_currWeaponIndex] != nullptr)
-	{
-		_equippedWeapon[_currWeaponIndex]->frontRender(this);
-	}
-	else
-	{
-		_hand->frontRender(this);
-	}
-
-	if (_currHitTime > 0)
-	{
-		if (_currHitTime < 0.25)
-		{
-			IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->setAlpha((_currHitTime / 0.25));
-			IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->setAlpha((_currHitTime / 0.25));
-		}
-		IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->render(Vector2(WINSIZEX * 0.25f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
-		IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->render(Vector2(WINSIZEX * 0.75f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
-	}
-
 
 	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }

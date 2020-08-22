@@ -34,6 +34,7 @@ public:
 	void nextStage(); // for gate
 	Vector2 getGatePos();
 
+	void setShowPlayer(bool showPlayer);
 
 };
 

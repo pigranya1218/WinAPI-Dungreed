@@ -71,4 +71,6 @@ void GateNpc::move(Vector2 roomIndex)
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setDefPlayFrame(false, false);
 	_ani->start();
+	_npcMgr->setShowPlayer(false);
+	EFFECT_MANAGER->play("Enemy_Destroy", _position, Vector2(50, 50));
 }
