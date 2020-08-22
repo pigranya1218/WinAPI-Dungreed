@@ -26,6 +26,7 @@ void StartRoom1::init()
 	_objectMgr->spawnObject(0x0001, Vector2(430, 600));
 	_objectMgr->spawnObject(0x0002, Vector2(300, 600));
 
+	_npcMgr->spawnNpc(NPC_TYPE::ENTRANCE, Vector2(570, 642), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(870, 400), DIRECTION::LEFT);
 
 
@@ -48,17 +49,4 @@ void StartRoom1::update(float const elapsedTime)
 void StartRoom1::render()
 {
 	Stage::render();
-
-	_img->setScale(4);
-	_img->aniRender(CAMERA->getRelativeV2(Vector2(570, 642)), _ani);
-}
-
-vector<tagShowNpc> StartRoom1::getNpcInfos()
-{
-	vector<tagShowNpc> result = Stage::getNpcInfos();
-	tagShowNpc start;
-	start.icon = IMAGE_MANAGER->findImage("UI/MAP/ICON_START");
-	start.type = NPC_TYPE::END;
-	result.insert(result.begin(), start);
-	return result;
 }

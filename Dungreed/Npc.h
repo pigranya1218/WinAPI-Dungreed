@@ -13,6 +13,8 @@ enum class NPC_TYPE : int
 	CHEST_BLUE, // 일반적인 상자  (일반 ~ 고급)
 	CHEST_YELLOW, // 일반적인 상자 (고급 ~ 희귀)
 	CHEST_BOSS, // 보스 상자 (희귀 ~ 전설)
+	ENTRANCE, // 입구
+	EXIT, // 출구
 	END
 };
 

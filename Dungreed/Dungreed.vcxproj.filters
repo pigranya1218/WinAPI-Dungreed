@@ -759,6 +759,9 @@
     <ClInclude Include="SeeriProjectile.h">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
+    <ClInclude Include="DoorNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1312,6 +1315,9 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

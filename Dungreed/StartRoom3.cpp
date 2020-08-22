@@ -25,6 +25,7 @@ void StartRoom3::init()
 	_ani->setFPS(15);
 	_ani->start();
 
+	_npcMgr->spawnNpc(NPC_TYPE::ENTRANCE, Vector2(640, 320), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(950, 700), DIRECTION::LEFT);
 }
 
@@ -43,18 +44,5 @@ void StartRoom3::update(float const elapsedTime)
 void StartRoom3::render()
 {
 	Stage::render();
-
-	_img->setScale(4);
-	_img->aniRender(CAMERA->getRelativeV2(Vector2(640, 320)), _ani);
 }
 
-
-vector<tagShowNpc> StartRoom3::getNpcInfos()
-{
-	vector<tagShowNpc> result = Stage::getNpcInfos();
-	tagShowNpc start;
-	start.icon = IMAGE_MANAGER->findImage("UI/MAP/ICON_START");
-	start.type = NPC_TYPE::END;
-	result.insert(result.begin(), start);
-	return result;
-}

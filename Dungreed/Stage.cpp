@@ -107,9 +107,9 @@ void Stage::render()
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
 	}
 
-	_objectMgr->render();
 	_npcMgr->render();
 	_enemyMgr->render();
+	_objectMgr->render();
 	_projectileMgr->render();
 }
 

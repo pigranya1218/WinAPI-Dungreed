@@ -312,7 +312,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM", L"resources/images/gameScene/ui/map/Worm.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM_SELECTED", L"resources/images/gameScene/ui/map/Worm_Selected.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_EXIT", L"resources/images/gameScene/ui/map/Exit.png");
-	IMAGE_MANAGER->addImage("UI/MAP/ICON_START", L"resources/images/gameScene/ui/map/Enterance.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_ENTRANCE", L"resources/images/gameScene/ui/map/Enterance.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_CHEST", L"resources/images/gameScene/ui/map/Chest.png");
 
 
@@ -321,6 +321,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("NPC_SHOP", L"resources/images/gameScene/npc/shop.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_IDLE", L"resources/images/gameScene/npc/gate_idle.png", 9, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_EAT", L"resources/images/gameScene/npc/gate_eat.png", 4, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_ENTRANCE", L"resources/images/gameScene/npc/Door1.png", 10, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_EXIT", L"resources/images/gameScene/npc/Door1.png", 10, 1);
 	IMAGE_MANAGER->addImage("NPC_CHEST_BASIC", L"resources/images/gameScene/npc/BasicTresureClosed.png");
 	IMAGE_MANAGER->addImage("NPC_CHEST_BASIC_OPEN", L"resources/images/gameScene/npc/BasicTresureOpened.png");
 	IMAGE_MANAGER->addImage("NPC_CHEST_BLUE", L"resources/images/gameScene/npc/BlueTresureClosed.png");

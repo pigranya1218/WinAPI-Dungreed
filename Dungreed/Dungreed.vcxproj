@@ -158,6 +158,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
     <ClInclude Include="ChestNpc.h" />
+    <ClInclude Include="DoorNpc.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="Room15TB.h" />
@@ -351,6 +352,7 @@
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
     <ClCompile Include="ChestNpc.cpp" />
+    <ClCompile Include="DoorNpc.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="Room15TB.cpp" />
