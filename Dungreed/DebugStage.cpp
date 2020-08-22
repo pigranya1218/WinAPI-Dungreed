@@ -64,7 +64,7 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(WINSIZEX / 2 + 500, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(WINSIZEX / 2 + 300, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(WINSIZEX / 2, WINSIZEY / 2));
-	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_BOMB, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2 + 100));
+	_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_BOMB, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2 + 100));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_NORMAL, Vector2(WINSIZEX / 2 + 400, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_RED, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
@@ -74,23 +74,23 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::OVIBOS, Vector2(WINSIZEX / 2 + 100, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2 + 30, WINSIZEY / 2 + 300));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2 + 30, WINSIZEY / 2 + 300));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 
 	//_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(220, 210), DIRECTION::RIGHT);
 
-	//_objectMgr->spawnObject(0x0000, Vector2(600, 200));
-	//_objectMgr->spawnObject(0x0001, Vector2(750, 200));
-	//_objectMgr->spawnObject(0x0002, Vector2(900, 200));
+	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
+	_objectMgr->spawnObject(0x0001, Vector2(750, 200));
+	_objectMgr->spawnObject(0x0002, Vector2(900, 200));
 
-	//_objectMgr->spawnObject(0x0001, Vector2(700, 500));
-	//_objectMgr->spawnObject(0x0001, Vector2(740, 500));
-	//_objectMgr->spawnObject(0x0002, Vector2(780, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
 
-	//_objectMgr->spawnObject(0x0000, Vector2(700, 900));
-	//_objectMgr->spawnObject(0x0000, Vector2(740, 900));
-	//_objectMgr->spawnObject(0x0001, Vector2(780, 900));
+	_objectMgr->spawnObject(0x0000, Vector2(700, 900));
+	_objectMgr->spawnObject(0x0000, Vector2(740, 900));
+	_objectMgr->spawnObject(0x0001, Vector2(780, 900));
 
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(900, 500), DIRECTION::LEFT);

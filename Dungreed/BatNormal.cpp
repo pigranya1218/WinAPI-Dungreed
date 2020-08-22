@@ -89,7 +89,7 @@ void BatNormal::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-			SOUND_MANAGER->stop("Bat/Die");
+			
 		}
 		break;
 	}
@@ -100,8 +100,7 @@ void BatNormal::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -150,6 +149,8 @@ void BatNormal::setState(ENEMY_STATE state)
 		case ENEMY_STATE::DIE:
 		{
 			SOUND_MANAGER->stop("Bat/Die");
+			SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 			_active = false;
 		}
 		break;

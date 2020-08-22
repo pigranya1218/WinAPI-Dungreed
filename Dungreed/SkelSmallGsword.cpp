@@ -43,8 +43,6 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 
 	_isDetect = 0;
 
-	_playCount = 0;
-		 
 	_active = true;
 
 	_curHp = _maxHp = 35;
@@ -121,18 +119,20 @@ void SkelSmallGsword::update(float const timeElapsed)
 		{
 			if (_weaponAni->getPlayIndex() == 6)
 			{
-				_playCount++;
 				Vector2 attackPos = _position;
 				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
 				attackPos.y += _size.y * 0.1f;
 
 				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (PI / 2 - 2.27);
 				float endRad = startRad + 2.27;
-				if (_playCount == 1)
+
+				// 아이디가 비어있다면 공격을 처음 한 상태
+				if (_attack.id.empty())
 				{
 					SOUND_MANAGER->stop("Skell/Small_G/Attack");
 					SOUND_MANAGER->play("Skell/Small_G/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				}
+
 				_attack.attackCircle(_myEnemyType, _enemyManager, attackPos, startRad, endRad);
 			}
 			else
@@ -141,7 +141,6 @@ void SkelSmallGsword::update(float const timeElapsed)
 			}
 			if (!_weaponAni->isPlay())
 			{
-				_playCount = 0;
 				setState(ENEMY_STATE::IDLE);
 			}
 		}
@@ -209,9 +208,7 @@ void SkelSmallGsword::render()
 		Vector2 renderPos = _position;
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
-	}
-
-	_attack.circleDebug.render(true);
+	}	
 }
 
 void SkelSmallGsword::setState(ENEMY_STATE state)

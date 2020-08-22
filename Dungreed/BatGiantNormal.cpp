@@ -111,13 +111,17 @@ void BatGiantNormal::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			if (_ani->getPlayIndex() >= 4)
-			{
+			if (_ani->getPlayIndex() >= 1)
+			{				
 				if (_shooting.delayUpdate(timeElapsed))
 				{
-					_shooting.fireBullet(_myEnemyType, _enemyManager, 3);
-					SOUND_MANAGER->stop("GiantBat/Attack");
-					SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+					if (_shooting.bullets.size() == 9)
+					{
+						SOUND_MANAGER->stop("GiantBat/Attack");
+						SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+					}
+
+					_shooting.fireBullet(_myEnemyType, _enemyManager, 3);					
 				}				
 			}
 			if (!_ani->isPlay())
@@ -141,8 +145,7 @@ void BatGiantNormal::update(float const timeElapsed)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->stop("GiantBat/Attack");
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -200,6 +203,8 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("GiantBat/Attack");
+
 			_active = false;
 		}
 		break;

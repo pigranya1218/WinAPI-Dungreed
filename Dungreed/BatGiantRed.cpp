@@ -6,8 +6,6 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction, bool spawnEffec
 {
 	_ani = new Animation;
 
-	_countPlay = 0;
-
 	setState(ENEMY_STATE::IDLE);
 
 	_position = pos;
@@ -73,8 +71,7 @@ void BatGiantRed::update(float const timeElapsed)
 		}
 		break;
 		case ENEMY_STATE::IDLE:
-		{
-			SOUND_MANAGER->stop("GiantBat/Attack");
+		{			
 			if (_isDetect)
 			{
 				_direction = (playerPos.x > _position.x) ? (DIRECTION::RIGHT) : (DIRECTION::LEFT);
@@ -107,20 +104,16 @@ void BatGiantRed::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{			
-			if (_ani->getPlayIndex() == 4)
+			if (_ani->getPlayIndex() == 4 && !_shooting.bullets.empty())
 			{
-				_countPlay++;
-				if (_countPlay == 1)
-				{
-					SOUND_MANAGER->stop("GiantBat/Attack");
-					SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-				}
+				SOUND_MANAGER->stop("GiantBat/Attack");
+				SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				_shooting.fireBullet(_myEnemyType, _enemyManager);
 				_renderNum = -1;
 			}
 			if (!_ani->isPlay())
 			{
-				_countPlay = 0;
 				setState(ENEMY_STATE::IDLE);
 			}
 		}
@@ -138,8 +131,7 @@ void BatGiantRed::update(float const timeElapsed)
 	_shooting.aniUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->stop("GiantBat/Attack");
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -201,6 +193,8 @@ void BatGiantRed::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("GiantBat/Attack");
+
 			_active = false;
 		}
 		break;

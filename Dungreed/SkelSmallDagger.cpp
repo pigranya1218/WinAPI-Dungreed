@@ -45,7 +45,7 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_active = true;
 
 	_curHp = _maxHp = 40;
-	count = 0;
+	
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_DAGGER);
 }
 
@@ -117,20 +117,19 @@ void SkelSmallDagger::update(float const timeElapsed)
 		{
 			// 공격 프레임
 			if (_weaponAni->getPlayIndex() == 7)
-			{
-				count++;
-				if (count == 1)
-				{
-					SOUND_MANAGER->stop("Skell/Small/Attack");
-					SOUND_MANAGER->play("Skell/Small/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-				}
-
+			{			
 				Vector2 attackPos = _position;
 				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
 				attackPos.y += _size.y * 0.3f;
 
 				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (0);
 				float endRad = startRad + PI / 2;
+
+				if (_attack.id.empty())
+				{
+					SOUND_MANAGER->stop("Skell/Small/Attack");
+					SOUND_MANAGER->play("Skell/Small/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 
 				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
 			}
@@ -207,9 +206,7 @@ void SkelSmallDagger::render()
 		Vector2 renderPos = _position;
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
-	}
-
-	_attack.circleDebug.render(true);
+	}	
 }
 
 void SkelSmallDagger::setState(ENEMY_STATE state)

@@ -44,10 +44,9 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(850, 850), _scale, 0.05f, 1, true, false, false, false, true, false);
 	_shooting.attackInit(2, 2, 4);
 
-	_isDetect = 0;
+	_isDetect = _bulletNum = 0;
 	_active = true;
 
-	_playCount = 0;
 	_curHp = _maxHp = 80;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_ICE);
@@ -66,7 +65,7 @@ void SkelBigIce::update(float const timeElapsed)
 		_isDetect = _enemyManager->detectPlayer(this, _detectRange);
 	}	
 
-	Vector2 moveDir(0, 0);
+	Vector2 moveDir(0, 0);	
 	// 상태에 따른 행동처리
 	switch (_state)
 	{
@@ -126,7 +125,17 @@ void SkelBigIce::update(float const timeElapsed)
 				{
 					SOUND_MANAGER->stop("IceSkell/Magic/Attack");
 					SOUND_MANAGER->play("IceSkell/Magic/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-					_shooting.bulletNum = RANDOM->getFromIntTo(4, 7);
+
+					_bulletNum = RANDOM->getFromIntTo(4, 7);
+
+					for (int i = 0; i < _bulletNum; i++)
+					{
+						float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
+						angle += RANDOM->getFromFloatTo(PI / 10 * -1, PI / 10);
+
+						_shooting.createBullet(_position, angle);						
+					}
+
 					setState(ENEMY_STATE::SKILL);
 				}
 			}
@@ -135,66 +144,55 @@ void SkelBigIce::update(float const timeElapsed)
 		case ENEMY_STATE::ATTACK:
 		{
 			if (_ani->getPlayIndex() == 2)
-			{
-				_playCount++;
+			{				
+				if (_attack.id.empty())
+				{
+					SOUND_MANAGER->stop("Skell/ice/Attack");
+					SOUND_MANAGER->play("Skell/ice/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
+
 				Vector2 attackPos = _position;
 				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
 				attackPos.y += _size.y * 0.5f;
 
 				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (0);
 				float endRad = startRad + PI / 2;
-				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
-				if (_playCount == 1)
-				{
-					SOUND_MANAGER->stop("Skell/ice/Attack");
-					SOUND_MANAGER->play("Skell/ice/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-				}
+				_attack.attackCircle(_myEnemyType, _enemyManager, attackPos, startRad, endRad);
 			}
 			else
 			{
 				_attack.id.clear();
 			}
 			if (!_ani->isPlay())
-			{
-				_playCount = 0;
-				SOUND_MANAGER->stop("IceSkell/Magic/Attack");
-				SOUND_MANAGER->stop("Skell/ice/Attack");
+			{												
 				setState(ENEMY_STATE::MOVE);
 			}
 		}		
 		break;
 		case ENEMY_STATE::SKILL:
 		{			
-			if (_shooting.bulletNum > 0 && _ani->getPlayIndex() >= 6)
+			if (_ani->getPlayIndex() >= 6 && !_shooting.bullets.empty())
 			{
+				if (_bulletNum == _shooting.bullets.size())
+				{
+					SOUND_MANAGER->stop("Skell/ice/blast");
+					SOUND_MANAGER->play("Skell/ice/blast", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 
 				if (_shooting.delayUpdate(timeElapsed))
 				{
-					SOUND_MANAGER->stop("IceSkell/Magic/Attack");
-					_playCount++;
-					float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
-
-					angle += RANDOM->getFromFloatTo(PI / 10 * -1, PI / 10);
-					if (_playCount == 1)
-					{
-						SOUND_MANAGER->stop("Skell/ice/blast");
-						SOUND_MANAGER->play("Skell/ice/blast", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-					}
-					_shooting.createBullet(_position, angle);
-					_shooting.fireBullet(_myEnemyType, _enemyManager);
+					_shooting.fireBullet(_myEnemyType, _enemyManager, 1);
 				}
 			}
-			else if (!_ani->isPlay() && _shooting.bulletNum <= 0)
+			else if (!_ani->isPlay() && _shooting.bullets.empty())
 			{
-				_playCount = 0;
 				setState(ENEMY_STATE::MOVE);
 			}			
 		}	
 		break;
 		case ENEMY_STATE::DIE:
 		{
-			SOUND_MANAGER->stop("IceSkell/Magic/Attack");
-			SOUND_MANAGER->stop("Skell/ice/blast");
+			
 		}		
 		break;
 	}
@@ -252,9 +250,7 @@ void SkelBigIce::render()
 		Vector2 renderPos = _position;
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
-	}
-
-	_attack.circleDebug.render(true);
+	}	
 }
 
 void SkelBigIce::setState(ENEMY_STATE state)
@@ -323,6 +319,8 @@ void SkelBigIce::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Skell/ice/blast");
+
 			_active = false;
 		}
 		break;

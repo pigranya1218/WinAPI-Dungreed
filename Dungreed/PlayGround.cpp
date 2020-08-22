@@ -857,7 +857,7 @@ HRESULT playGround::init()
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
-
+	TIME_MANAGER->init();
 
 	// ¸ðµç ¾À SCENE_MANAGER¿¡ 
 	SCENE_MANAGER->addScene("MAIN", new MainScene);
@@ -865,9 +865,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("GAME");	
-	
-	TIME_MANAGER->init();
+	SCENE_MANAGER->changeScene("GAME");		
 	
 	return S_OK;
 }

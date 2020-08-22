@@ -102,10 +102,10 @@ void BatRed::update(float const timeElapsed)
 			{
 				if (_shooting.delayUpdate(timeElapsed))
 				{
-					SOUND_MANAGER->stop("Bat/Attack");
-					SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-					setState(ENEMY_STATE::ATTACK);
-					_shooting.bulletNum = 1;
+					float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
+					_shooting.createBullet(_position, angle);
+
+					setState(ENEMY_STATE::ATTACK);					
 				}
 			}
 			else
@@ -121,10 +121,11 @@ void BatRed::update(float const timeElapsed)
 		case ENEMY_STATE::ATTACK:
 		{
 			// 공격 모션일 때 투사체 생성 및 발사
-			if (_ani->getPlayIndex() == 5 && _shooting.bulletNum > 0)
-			{
-				float angle = getAngle(_position.x, _position.y, playerPos.x, playerPos.y);
-				_shooting.createBullet(_position, angle);
+			if (_ani->getPlayIndex() == 5 && !_shooting.bullets.empty())
+			{				
+				SOUND_MANAGER->stop("Bat/Attack");
+				SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				_shooting.fireBullet(_myEnemyType, _enemyManager);
 			}
 			if (!_ani->isPlay())
@@ -136,8 +137,7 @@ void BatRed::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-			SOUND_MANAGER->stop("Bat/Die");
-			SOUND_MANAGER->stop("Bat/Attack");
+			
 		}		
 		break;
 	}
@@ -148,8 +148,7 @@ void BatRed::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -209,6 +208,10 @@ void BatRed::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Bat/Attack");
+			SOUND_MANAGER->stop("Bat/Die");
+			SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 			_active = false;
 		}
 		break;
