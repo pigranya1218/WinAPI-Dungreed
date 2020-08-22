@@ -19,6 +19,8 @@ void GatlingGun::init()
 	_maxBullet = 100;
 	_currBullet = _maxBullet;
 	_currReloadDelay = 0;
+	_isAttack = false;
+	_timeCount = 1;
 
 	//개틀링건 돌아가는 애니메이션
 	_attackImg = IMAGE_MANAGER->findImage("GatlingGun_Ani");
@@ -50,12 +52,14 @@ void GatlingGun::update(Player * player, float const elapsedTime)
 {
 	if (_currAttackDelay > 0) // 공격 딜레이 대기 중
 	{
+		_isAttack = false;
 		_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 	}
 	else if (_currReloadDelay > 0) // 재장전 중
 	{
 		_currReloadDelay = max(0, _currReloadDelay - elapsedTime);
 		_attackAni->stop();
+		_isAttack = false;
 
 		if (_currReloadDelay == 0) // 장전이 끝난 경우
 		{
@@ -67,10 +71,34 @@ void GatlingGun::update(Player * player, float const elapsedTime)
 	_reloadAni->frameUpdate(elapsedTime);
 	_shootEffectAni->frameUpdate(elapsedTime);
 
+	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	{
+		_timeCount += elapsedTime;
+		_isAttack = false;
+		SOUND_MANAGER->stop("GatlingWarmUp");
+		SOUND_MANAGER->play("GatlingWarmUp", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+		
+	}
+	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	{
+		_timeCount += elapsedTime;
+		_isAttack = false;
+		if (!SOUND_MANAGER->isPlaySound("GatlingWarmUp"))
+		{
+			_timeCount = 0;
+		}
+	}
+
+	if (!SOUND_MANAGER->isPlaySound("GatlingWarmUp") && _timeCount == 0)
+	{
+		_isAttack = true;
+	}
+
 	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 	{
 		_attackAni->stop();
 		_shootEffectAni->stop();
+		_isAttack = false;
 	}
 }
 
@@ -165,8 +193,6 @@ void GatlingGun::frontRender(Player * player)
 		shootEffectPos.x += cosf(degree * (PI / 180)) * length;
 		shootEffectPos.y += -sinf(degree * (PI / 180)) * length;
 
-
-
 		_shootEffectImg->setAngle(degree);
 		//_shootEffectImg->setAnglePos(Vector2(0.0f, _shootEffectImg->getFrameSize().y * 0.5f));
 		_shootEffectImg->setScale(4);
@@ -206,62 +232,65 @@ void GatlingGun::attack(Player * player)
 		return;
 	}
 
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-
-	Vector2 renderPosHand = pos;
-	renderPosHand.x += ((isLeft) ? (_iconImg->getWidth() * 0.1f * 4) : -(_iconImg->getWidth() * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
-	renderPosHand.y += 25; // 플레이어의 중점으로부터 무기를 들고 있는 높이
-
-	// 손으로부터 마우스 에임까지의 각도
-	float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2 + RANDOM->getFromFloatTo(-PI * 0.02, PI * 0.02);
-	if (angleRadian > PI2)
+	if (_isAttack)
 	{
-		angleRadian -= PI2;
+		bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+		Vector2 pos = player->getPosition();
+
+		Vector2 renderPosHand = pos;
+		renderPosHand.x += ((isLeft) ? (_iconImg->getWidth() * 0.1f * 4) : -(_iconImg->getWidth() * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
+		renderPosHand.y += 25; // 플레이어의 중점으로부터 무기를 들고 있는 높이
+
+		// 손으로부터 마우스 에임까지의 각도
+		float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2 + RANDOM->getFromFloatTo(-PI * 0.02, PI * 0.02);
+		if (angleRadian > PI2)
+		{
+			angleRadian -= PI2;
+		}
+
+		Vector2 shootPos = renderPosHand;
+		float length = _iconImg->getWidth() * 0.6f * 9; // 무기 길이만큼
+		shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.05) : (0.05))) * length;
+		shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.1) : (0.1))) * length;
+
+		NormalProjectile* projectile = new NormalProjectile;
+		projectile->setPosition(shootPos);
+		projectile->setTeam(OBJECT_TEAM::PLAYER);
+
+		Image* bulletImg = IMAGE_MANAGER->findImage("GunBullet");
+		Vector2 bulletSize = Vector2(bulletImg->getFrameSize().x * 4, bulletImg->getFrameSize().y * 4);
+		Vector2 bulletRect = Vector2(bulletImg->getFrameSize().x, bulletImg->getFrameSize().x);
+
+		Image* effectImg = IMAGE_MANAGER->findImage("GatlingGunEffect");
+		Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
+
+		//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, true, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
+		projectile->init("GunBullet", "L_Effect_GatlingGunBullet", bulletSize, bulletRect, effectSize, Vector2(30 * 50, 30 * 50), 0.6f, angleRadian, true, false, 10, true, false, true, false);	// 함수 인자가 많이 바뀌었어요 >> 확인해주세요.
+
+		string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+
+		AttackInfo* attackInfo = new AttackInfo;
+		attackInfo->team = OBJECT_TEAM::PLAYER;
+		attackInfo->madeByWeapon = true;
+		attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+		attackInfo->critical = 0;
+		attackInfo->criticalDamage = 0;
+		attackInfo->minDamage = _addStat.minDamage;
+		attackInfo->maxDamage = _addStat.maxDamage;
+		attackInfo->knockBack = 30;
+
+		player->attack(projectile, attackInfo);
+
+		SOUND_MANAGER->stop("GatlingFire");
+		SOUND_MANAGER->play("GatlingFire", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
+		_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
+		_currBullet -= 1; // 탄환 1 줄임
+		_drawEffect = true; // 이펙트 그리기
+
+		_attackAni->start();
+		_shootEffectAni->start();
 	}
-
-	Vector2 shootPos = renderPosHand;
-	float length = _iconImg->getWidth() * 0.6f * 9; // 무기 길이만큼
-	shootPos.x += cosf(angleRadian + ((isLeft) ? (-0.05) : (0.05))) * length;
-	shootPos.y += -sinf(angleRadian + ((isLeft) ? (-0.1) : (0.1))) * length;
-
-	NormalProjectile* projectile = new NormalProjectile;
-	projectile->setPosition(shootPos);
-	projectile->setTeam(OBJECT_TEAM::PLAYER);
-
-	Image* bulletImg = IMAGE_MANAGER->findImage("GunBullet");
-	Vector2 bulletSize = Vector2(bulletImg->getFrameSize().x * 4, bulletImg->getFrameSize().y * 4);
-	Vector2 bulletRect = Vector2(bulletImg->getFrameSize().x, bulletImg->getFrameSize().x);
-
-	Image* effectImg = IMAGE_MANAGER->findImage("GatlingGunEffect");
-	Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
-
-	//projectile->init("GunBullet", angleRadian, 30 * 50, true, false, 10, true, "", Vector2(), 800);	// 사정거리 추가했어요 >> 황수현
-	projectile->init("GunBullet", "L_Effect_GatlingGunBullet", bulletSize, bulletRect, effectSize, Vector2(30 * 50, 30 * 50), 0.6f, angleRadian, true, false, 10, true, false, true, false);	// 함수 인자가 많이 바뀌었어요 >> 확인해주세요.
-
-	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
-
-	AttackInfo* attackInfo = new AttackInfo;
-	attackInfo->team = OBJECT_TEAM::PLAYER;
-	attackInfo->madeByWeapon = true;
-	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
-	attackInfo->critical = 0;
-	attackInfo->criticalDamage = 0;
-	attackInfo->minDamage = _addStat.minDamage;
-	attackInfo->maxDamage = _addStat.maxDamage;
-	attackInfo->knockBack = 30;
-
-	player->attack(projectile, attackInfo);
-
-	SOUND_MANAGER->stop("GatlingFire");
-	SOUND_MANAGER->play("GatlingFire", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-	
-	_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
-	_currBullet -= 1; // 탄환 1 줄임
-	_drawEffect = true; // 이펙트 그리기
-
-	_attackAni->start();
-	_shootEffectAni->start();
 }
 
 void GatlingGun::attack(Player* player, FloatRect * rect, AttackInfo * info)
