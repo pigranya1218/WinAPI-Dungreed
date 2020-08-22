@@ -360,6 +360,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("Torch", L"resources/images/Map/torch.png", 7, 1);
+
+	IMAGE_MANAGER->addFrameImage("Die", L"resources/images/Effect/Die/Die.png", 11, 1);
+	EFFECT_MANAGER->addEffect("Die_Effect", "Die", 15, 1); //이건 워프이동에도 이용
+
 	// ** OBJECT
 	// *** BROKEN
 	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BOX", L"resources/images/object/broken/Box0.png");
