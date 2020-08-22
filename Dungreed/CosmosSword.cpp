@@ -239,7 +239,8 @@ void CosmosSword::attack(Player* player)
 	projectile->setPosition(shootPos);	
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
 	projectile->init("CosmosSwordFx", "EFFECT_COSMOSSLASH", Vector2(250, 300), Vector2(50, 50), Vector2(20, 250), Vector2(30 * 50, 30 * 50), 3, radian, true, true, 10, true, false, false, false, false);
-
+	SOUND_MANAGER->stop("SOUND_generalAttack");
+	SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	AttackInfo* attackInfo2 = new AttackInfo;
 	attackInfo2->team = OBJECT_TEAM::PLAYER;
 	attackInfo2->attackID = TTYONE_UTIL::getHash(attackCode);

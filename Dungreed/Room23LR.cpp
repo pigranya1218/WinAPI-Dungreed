@@ -17,6 +17,8 @@ void Room23LR::init()
 	_objectMgr->spawnObject(0x0000, Vector2(1100, 500));
 	_objectMgr->spawnObject(0x0000, Vector2(1140, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(1180, 500));
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
 }
 
 void Room23LR::release()

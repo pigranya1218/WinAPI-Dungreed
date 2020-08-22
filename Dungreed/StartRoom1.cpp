@@ -13,11 +13,22 @@ void StartRoom1::init()
 	_respawnPosition[0] = Vector2(570,670); // 맨 처음 초기화되는 위치
 	// _respawnPosition[2] = Vector2(1130,670); // 오른쪽에서 들어올 때 위치
 
+	_img = IMAGE_MANAGER->findImage("Floor1Door");
+	_ani = new Animation;
+	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+	_ani->setDefPlayFrame(false, false);
+	_ani->setFPS(15);
+	_ani->start();
+
 	_objectMgr->spawnObject(0x0000, Vector2(500, 600));
 	_objectMgr->spawnObject(0x0001, Vector2(200, 600));
 	_objectMgr->spawnObject(0x0001, Vector2(380, 600));
 	_objectMgr->spawnObject(0x0001, Vector2(430, 600));
 	_objectMgr->spawnObject(0x0002, Vector2(300, 600));
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(870, 400), DIRECTION::LEFT);
+
+
 }
 
 void StartRoom1::release()
@@ -29,19 +40,25 @@ void StartRoom1::update(float const elapsedTime)
 {
 	Stage::update(elapsedTime);
 	int stageWidth = _tile[0].tileX*TILESIZE;
-	/*if (_stageManager->getPlayerPos().x >= stageWidth)
-	{
-		_stageManager->setPlayerPos(200, 900);
-		
-		
-		
-	}*/
 	
-
+	
+	_ani->frameUpdate(elapsedTime);
 }
 
 void StartRoom1::render()
 {
 	Stage::render();
 
+	_img->setScale(4);
+	_img->aniRender(CAMERA->getRelativeV2(Vector2(570, 642)), _ani);
+}
+
+vector<tagShowNpc> StartRoom1::getNpcInfos()
+{
+	vector<tagShowNpc> result = Stage::getNpcInfos();
+	tagShowNpc start;
+	start.icon = IMAGE_MANAGER->findImage("UI/MAP/ICON_START");
+	start.type = NPC_TYPE::END;
+	result.insert(result.begin(), start);
+	return result;
 }

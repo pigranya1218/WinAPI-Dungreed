@@ -8,6 +8,7 @@
 #include "DamageInfo.h"
 #include "LinearFunc.h"
 #include "DoorObject.h"
+#include "GateNpc.h"
 
 class GameScene;
 class Player;
@@ -96,12 +97,20 @@ private:
 		ObjectManager* objectMgr;
 	};
 	
+	struct tagNpcIcon
+	{
+		Image* img;
+		Vector2 center;
+		NPC_TYPE type;
+	};
+
 	struct tagRoomUI // ¸Ê¿¡ ÀÖ´Â 
 	{
 		FloatRect rc;
 		bool exist;
 		bool visible;
 		vector<bool> isConnect; // L T R B
+		vector<tagNpcIcon> npcs; // NPC ICON
 	};
 
 	struct tagMap // ¸Ê
@@ -126,6 +135,8 @@ private:
 		POINT lastMoustpt;
 		Vector2 offset;
 		bool isDrag;
+	
+		GateNpc* gate;
 	};
 
 private:
@@ -172,5 +183,6 @@ public:
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 
 	void setDialogue(Npc* npc) { _dialogueUI.startDialogue(npc); }
+	void showMap(GateNpc* gate, bool isShow) { _mapUI.isShow = isShow; _mapUI.gate = gate; }
 };
 

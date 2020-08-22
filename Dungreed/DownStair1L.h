@@ -3,6 +3,9 @@
 class DownStair1L :
 	public Stage
 {
+private:
+	Image* _gateImg;
+
 	public:
 	virtual void init();
 	virtual void release();

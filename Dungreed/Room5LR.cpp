@@ -11,6 +11,8 @@ void Room5LR::init()
 
 	//_respawnPosition[2] = Vector2(900, 1000);
 	
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(900, 1400), DIRECTION::LEFT);
 }
 
 void Room5LR::release()

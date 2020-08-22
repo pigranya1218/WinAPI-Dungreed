@@ -195,6 +195,9 @@ void GuidedProjectile::update(float elapsedTime)
 		return;
 	}
 
+
+	
+
 	// 타입에 따른 충돌 검사
 	if (_info->team == OBJECT_TEAM::PLAYER)
 	{
@@ -202,13 +205,23 @@ void GuidedProjectile::update(float elapsedTime)
 		if (_projectileMgr->checkEnemyCollision(this, _useCollsionEnemy)) // 적과 충돌했다면
 		{
 			float angleDegree = _angleRadian * (180.0f / PI);
+			
 			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
 
 			if (_useCollsionEnemy)
 			{
 				_active = false;
 			}
+			_collisionCount += elapsedTime;
+			if (_collisionCount >= 0.2f)
+			{
+				_collisionCount = 0;
+				_info->attackID = TTYONE_UTIL::getHash(to_string(0x09999) + to_string(TIME_MANAGER->getWorldTime()));
+			}
+			
 			return;
+
+			
 		}
 	}
 	else
@@ -267,12 +280,13 @@ void GuidedProjectile::render()
 	}
 	if (_afterimage)
 	{
-		if (_mirageCount / 2.f <= 1.f)
+		Vector2 _pos = Vector2(_position.x - 10, _position.y);
+		if (_mirageCount >= 3.f)
 		{
 			_mirageCount = 0;
-			Vector2 _pos = Vector2(_position.x - 10, _position.y);
-			_afterImg[0]->frameRender(_pos, _ani->getPlayIndex(), 0);
+			//_afterImg[0]->setAlpha();
 		}
+		_afterImg[0]->frameRender(_pos, _renderSize, _ani->getPlayIndex(), 0);
 	}
 	
 	/*if (_afterimage)

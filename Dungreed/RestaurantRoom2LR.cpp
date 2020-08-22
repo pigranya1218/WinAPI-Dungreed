@@ -8,6 +8,9 @@ void RestaurantRoom2LR::init()
 
 	//_respawnPosition[0] = Vector2(300, 900);
 	//_respawnPosition[2] = Vector2(2100, 900);
+
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(450, 800), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(950, 700), DIRECTION::LEFT);
 }
 
 void RestaurantRoom2LR::release()
@@ -41,6 +44,6 @@ void RestaurantRoom2LR::render()
 	int stageWidth = _tile[0].tileX * TILESIZE;
 	int stageHeight = _tile[0].tileY * TILESIZE;
 
-	IMAGE_MANAGER->findImage("Tavern")->setScale(5);
-	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 760));
+	//IMAGE_MANAGER->findImage("Tavern")->setScale(5);
+	//CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 760));
 }

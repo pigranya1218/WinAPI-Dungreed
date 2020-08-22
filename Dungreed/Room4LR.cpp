@@ -16,6 +16,8 @@ void Room4LR::init()
 
 	_objectMgr->spawnObject(0x0002, Vector2(650, 500));
 
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BOSS, Vector2(400, 600), DIRECTION::LEFT);
 }
 
 void Room4LR::release()

@@ -12,7 +12,7 @@ void Room8L::init()
 	_objectMgr->spawnObject(0x0000, Vector2(1240, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(1280, 500));
 
-	
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(570, 600), DIRECTION::LEFT);
 }
 
 void Room8L::release()

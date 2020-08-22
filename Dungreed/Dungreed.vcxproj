@@ -157,7 +157,9 @@
     <ClInclude Include="AllRoom.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
+    <ClInclude Include="ChestNpc.h" />
     <ClInclude Include="DoorObject.h" />
+    <ClInclude Include="Room15TB.h" />
     <ClInclude Include="GateNpc.h" />
     <ClInclude Include="Seeri.h" />
     <ClInclude Include="BatBomb.h" />
@@ -304,6 +306,7 @@
     <ClInclude Include="Room9B.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SeeriProjectile.h" />
+    <ClInclude Include="ShopNpc.h" />
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SilverBullet.h" />
     <ClInclude Include="SingletonBase.h" />
@@ -333,6 +336,7 @@
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="ViewObject.h" />
     <ClInclude Include="VillageStage.h" />
     <ClInclude Include="Voluspa.h" />
     <ClInclude Include="watCher.h" />
@@ -344,7 +348,9 @@
     <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
+    <ClCompile Include="ChestNpc.cpp" />
     <ClCompile Include="DoorObject.cpp" />
+    <ClCompile Include="Room15TB.cpp" />
     <ClCompile Include="GateNpc.cpp" />
     <ClCompile Include="Seeri.cpp" />
     <ClCompile Include="BatBomb.cpp" />
@@ -485,6 +491,7 @@
     <ClCompile Include="RestaurantUI.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SeeriProjectile.cpp" />
+    <ClCompile Include="ShopNpc.cpp" />
     <ClCompile Include="SilverBullet.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />
@@ -512,6 +519,7 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="ViewObject.cpp" />
     <ClCompile Include="VillageStage.cpp" />
     <ClCompile Include="Voluspa.cpp" />
     <ClCompile Include="watCher.cpp" />

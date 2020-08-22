@@ -2,7 +2,9 @@
 #include "Stage.h"
 #include "NpcManager.h"
 #include "RestaurantNpc.h"
+#include "ShopNpc.h"
 #include "GateNpc.h"
+#include "ChestNpc.h"
 
 void NpcManager::init()
 {
@@ -50,17 +52,44 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	case NPC_TYPE::RESTAURANT:
 	{
 		npc = new RestaurantNpc;
-		
 	}
 	break;
 	case NPC_TYPE::SHOP:
 	{
-
+		npc = new ShopNpc;
 	}
 	break;
 	case NPC_TYPE::GATE:
 	{
 		npc = new GateNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_BASIC:
+	{
+		ChestNpc * chestNpc = new ChestNpc;
+		chestNpc->setRank(0);
+		npc = chestNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_BLUE:
+	{
+		ChestNpc* chestNpc = new ChestNpc;
+		chestNpc->setRank(1);
+		npc = chestNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_YELLOW:
+	{
+		ChestNpc* chestNpc = new ChestNpc;
+		chestNpc->setRank(2);
+		npc = chestNpc;
+	}
+	break;
+	case NPC_TYPE::CHEST_BOSS:
+	{
+		ChestNpc* chestNpc = new ChestNpc;
+		chestNpc->setRank(3);
+		npc = chestNpc;
 	}
 	break;
 	}
@@ -78,4 +107,37 @@ Vector2 NpcManager::getPlayerPos()
 void NpcManager::moveTo(GameObject* gameObject, Vector2 moveDir)
 {
 	_stage->moveTo(gameObject, moveDir);
+}
+
+vector<tagShowNpc> NpcManager::getNpcInfos()
+{
+	vector<tagShowNpc> result;
+	for (int i = 0; i < _npcs.size(); i++)
+	{
+		if (_npcs[i]->getMapIcon() != nullptr)
+		{
+			tagShowNpc info;
+			info.icon = _npcs[i]->getMapIcon();
+			info.type = _npcs[i]->getType();
+			result.push_back(info);
+		}
+	}
+	return result;
+}
+
+void NpcManager::moveRoom(Vector2 pos)
+{
+	_stage->moveToIndex(pos);
+}
+
+Vector2 NpcManager::getGatePos()
+{
+	for(int i = 0 ; i < _npcs.size(); i++)
+	{
+		if (_npcs[i]->getType() == NPC_TYPE::GATE)
+		{
+			return _npcs[i]->getPosition();
+		}
+	}
+	return Vector2(0, 0);
 }

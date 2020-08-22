@@ -6,6 +6,8 @@
 void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
 {
 	_type = NPC_TYPE::RESTAURANT;
+	_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_FOOD");
+	_miniMapIcon = nullptr;
 
 	_img = IMAGE_MANAGER->findImage("NPC_RESTAURANT");
 	_ani = new Animation;
@@ -16,7 +18,7 @@ void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_size = Vector2(50, 100);
+	_size = Vector2(50, 90);
 	_active = true;
 
 	_name = "호레리카";

@@ -240,6 +240,26 @@ void D2DRenderer::drawLine(const Vector2& start, const Vector2& end, const Defau
 		D2D1::Point2F(endPos.x, endPos.y), _defaultBrushList[(UINT)defaultBrush], strokeWidth);
 
 }
+void D2DRenderer::drawLine(const Vector2& start, const Vector2& end, const int r, const int g, const int b, const float alpha, const float strokeWidth)
+{
+	_D2DRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+
+	Vector2 startPos = start;
+	Vector2 endPos = end;
+
+	ID2D1SolidColorBrush* brush;
+	D2D1_COLOR_F clr;
+	clr.r = static_cast<float>(r) / 255;
+	clr.g = static_cast<float>(g) / 255;
+	clr.b = static_cast<float>(b) / 255;
+	clr.a = alpha;
+	_D2DRenderTarget->CreateSolidColorBrush(clr, &brush);
+
+	_D2DRenderTarget->DrawLine(D2D1::Point2F(startPos.x, startPos.y),
+		D2D1::Point2F(endPos.x, endPos.y), brush, strokeWidth);
+	
+	NEW_SAFE_RELEASE(brush);
+}
 /**********************************************************************************************
 ## DrawRectangle ##
 @@ FloatRect rc : ·ºÆ®

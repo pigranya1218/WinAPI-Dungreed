@@ -30,8 +30,8 @@ void DialogueUI::init()
 	_currElapsedTime = 0;
 	_currBodyLen = 0;
 
-	_nameRc = FloatRect(50, WINSIZEY - 270, WINSIZEX, WINSIZEY - 210);
-	_bodyRc = FloatRect(50, WINSIZEY - 180, WINSIZEX, WINSIZEY - 145);
+	_nameRc = FloatRect(50, WINSIZEY - 270, WINSIZEX, WINSIZEY - 200);
+	_bodyRc = FloatRect(50, WINSIZEY - 180, WINSIZEX, WINSIZEY - 140);
 	
 }
 
@@ -74,6 +74,7 @@ void DialogueUI::update(float elapsedTime)
 					{
 						_npc->clickMenu(i);
 					}
+					_npc->setActiveInteraction(false);
 					_isActive = false;
 					break;
 				}

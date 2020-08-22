@@ -312,11 +312,23 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM", L"resources/images/gameScene/ui/map/Worm.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM_SELECTED", L"resources/images/gameScene/ui/map/Worm_Selected.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_EXIT", L"resources/images/gameScene/ui/map/Exit.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_START", L"resources/images/gameScene/ui/map/Enterance.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_CHEST", L"resources/images/gameScene/ui/map/Chest.png");
 
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_SHOP", L"resources/images/gameScene/npc/shop.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_IDLE", L"resources/images/gameScene/npc/gate_idle.png", 9, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_GATE_EAT", L"resources/images/gameScene/npc/gate_eat.png", 4, 1);
+	IMAGE_MANAGER->addImage("NPC_CHEST_BASIC", L"resources/images/gameScene/npc/BasicTresureClosed.png");
+	IMAGE_MANAGER->addImage("NPC_CHEST_BASIC_OPEN", L"resources/images/gameScene/npc/BasicTresureOpened.png");
+	IMAGE_MANAGER->addImage("NPC_CHEST_BLUE", L"resources/images/gameScene/npc/BlueTresureClosed.png");
+	IMAGE_MANAGER->addImage("NPC_CHEST_BLUE_OPEN", L"resources/images/gameScene/npc/BlueTresureOpened.png");
+	IMAGE_MANAGER->addImage("NPC_CHEST_YELLOW", L"resources/images/gameScene/npc/YellowTresureClosed.png");
+	IMAGE_MANAGER->addImage("NPC_CHEST_YELLOW_OPEN", L"resources/images/gameScene/npc/YellowTresureOpened.png");
+	IMAGE_MANAGER->addImage("NPC_CHEST_BOSS", L"resources/images/gameScene/npc/BossTresureClosed.png");
+	IMAGE_MANAGER->addImage("NPC_CHEST_BOSS_OPEN", L"resources/images/gameScene/npc/BossTresureOpened.png");
 
 	// ** VILLIGE
 	IMAGE_MANAGER->addImage("Town_BGL", L"resources/images/Map/BGLayer_0.png");
@@ -378,7 +390,7 @@ HRESULT playGround::init()
 	// *** DOOR
 	IMAGE_MANAGER->addFrameImage("OBJECT/DOOR", L"resources/images/object/door/door.png", 23, 1);
 	IMAGE_MANAGER->addImage("OBJECT/DOOR_OPEN_EFFECT", L"resources/images/object/door/openEffect.png");
-
+	IMAGE_MANAGER->addFrameImage("Floor1Door", L"resources/images/Dungeon/Door1.png", 10, 1);
 
 	// ** COSTUME
 	// *** BASE
@@ -494,11 +506,12 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
+	
 	//***MeleeWeaponSound
-	SOUND_MANAGER->addSound("SOUND_katana","resoureces/sound/MeleeWeapon/katana.wav", false, false); 
-	SOUND_MANAGER->addSound("SOUND_katana2","resoureces/sound/MeleeWeapon/katana2.wav", false, false);
-	SOUND_MANAGER->addSound("SOUND_katana3","resoureces/sound/MeleeWeapon/katana3.wav", false, false);
-
+	SOUND_MANAGER->addSound("SOUND_katana", "resources/sound/MeleeWeapon/katana.wav", false, false);  // 카타나
+	SOUND_MANAGER->addSound("SOUND_katana2", "resources/sound/MeleeWeapon/katana2.wav", false, false);
+	SOUND_MANAGER->addSound("SOUND_katana3", "resources/sound/MeleeWeapon/katana3.wav", false, false);
+	SOUND_MANAGER->addSound("SOUND_generalAttack", "resources/sound/MeleeWeapon/generalAttack.wav", false, false); // 기본검 공격
 
 
 

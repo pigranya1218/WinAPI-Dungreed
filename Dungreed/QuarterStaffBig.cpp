@@ -13,7 +13,7 @@ void QuarterStaffBig::init()
 	_addStat.minDamage = 4;
 	_addStat.maxDamage = 6;
 	_addStat.defense = 5;
-	_addStat.attackSpeed = 0.1;
+	_addStat.attackSpeed = 0.25;
 	//보조옵션
 
 	// private 변수 설정
@@ -31,15 +31,16 @@ void QuarterStaffBig::init()
 void QuarterStaffBig::update(Player* player, float const elapsedTime)
 {
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	float ratio = 180 / ((0.3 * 0.4));
+	float ratio = 180 / ((0.42 * 0.4));
 	if (_oneAttack)
 	{
 		
+
 		
-			_angleOffset = max(-360, ((_angleOffset)-(elapsedTime * ratio)));
-		if (_angleOffset == -360)
+			_angleOffset = max(-720, ((_angleOffset)-(elapsedTime * ratio)));
+		if (_angleOffset == -720)
 		{
-			_angleOffset = 360;
+			_angleOffset = 0;
 			_oneAttack = false;
 		}
 		
@@ -172,7 +173,10 @@ void QuarterStaffBig::attack(Player* player)
 	attackCircle->endRadian = PI2 ;
 
 	_attackDebug = FloatCircle(originPos, 120, 0.01 , PI2); // forDEBUG
-
+	
+		SOUND_MANAGER->stop("SOUND_generalAttack");
+		SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+		SOUND_MANAGER->isPlaySound("SOUND_generalAttack");
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
@@ -190,6 +194,6 @@ void QuarterStaffBig::equip(Player * player)
 	PlayerStat stat = player->getCurrStat();
 	_adjustStat = _addStat;
 	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
-	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
+	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed*0.5) / 100);
 }
 

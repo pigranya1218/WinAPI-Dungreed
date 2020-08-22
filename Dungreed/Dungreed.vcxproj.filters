@@ -163,6 +163,15 @@
     <Filter Include="Dungreed\GameScene\Enemy\Mob">
       <UniqueIdentifier>{759bebd3-6ec7-4b7f-b645-334b4baa4677}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Object\OnlyView">
+      <UniqueIdentifier>{331596e0-74fd-41f5-adc3-346c6f247d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Npc\Door">
+      <UniqueIdentifier>{dae275ec-895b-4bf0-a250-9e97070da4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Npc\Human">
+      <UniqueIdentifier>{33042173-8c0a-4216-8d6d-e34b0411ed98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -489,9 +498,6 @@
     <ClInclude Include="DaisyRing.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
-    <ClInclude Include="RestaurantNpc.h">
-      <Filter>Dungreed\GameScene\Npc</Filter>
-    </ClInclude>
     <ClInclude Include="RestaurantUI.h">
       <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClInclude>
@@ -717,8 +723,32 @@
     <ClInclude Include="EnemyManager.h">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="GateNpc.h">
+    <ClInclude Include="Room15TB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="ChestNpc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2LR.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SeeriProjectile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewObject.h">
+      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
+    </ClInclude>
+    <ClInclude Include="GateNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1013,9 +1043,6 @@
     <ClCompile Include="DaisyRing.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
-    <ClCompile Include="RestaurantNpc.cpp">
-      <Filter>Dungreed\GameScene\Npc</Filter>
-    </ClCompile>
     <ClCompile Include="RestaurantUI.cpp">
       <Filter>Dungreed\GameScene\Stage\UI</Filter>
     </ClCompile>
@@ -1241,8 +1268,35 @@
     <ClCompile Include="EnemyManager.cpp">
       <Filter>Dungreed\GameScene\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="GateNpc.cpp">
+    <ClCompile Include="Room15TB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="ChestNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Room12LB.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2LR.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SeeriProjectile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewObject.cpp">
+      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
+    </ClCompile>
+    <ClCompile Include="GateNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

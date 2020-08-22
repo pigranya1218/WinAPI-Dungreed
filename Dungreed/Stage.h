@@ -13,6 +13,12 @@
 class Player;
 class StageManager;
 
+struct tagShowNpc
+{
+	Image* icon;
+	NPC_TYPE type;
+};
+
 class Stage
 {
 protected:
@@ -84,4 +90,8 @@ public:
 	void makeDoorAuto();
 
 	bool isPlayerVisit() { return _isVisited; }
+
+	virtual vector<tagShowNpc> getNpcInfos();
+
+	void moveToIndex(Vector2 index);
 };

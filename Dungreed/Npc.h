@@ -9,6 +9,11 @@ enum class NPC_TYPE : int
 	RESTAURANT, // 식당
 	SHOP, // 상점
 	GATE, // 게이트
+	CHEST_BASIC, // 일반적인 상자 (일반)
+	CHEST_BLUE, // 일반적인 상자  (일반 ~ 고급)
+	CHEST_YELLOW, // 일반적인 상자 (고급 ~ 희귀)
+	CHEST_BOSS, // 보스 상자 (희귀 ~ 전설)
+	END
 };
 
 class Npc : public GameObject
@@ -31,6 +36,7 @@ protected:
 	Vector2 _force; // 받고 있는 힘
 
 	Image* _mapIcon; // 지도 UI에서 보여질 그림
+	Image* _miniMapIcon;
 
 public:
 	void setNpcManager(NpcManager* npcMgr) { _npcMgr = npcMgr; }
@@ -41,12 +47,15 @@ public:
 	virtual void render();
 	virtual void interaction() {} // 상호작용 키를 눌렀을 때 실행될 것 (오버라이드하여 사용)
 	bool isActiveInteraction() { return _isActiveInteraction; }
+	void setActiveInteraction(bool activeInteraction) { _isActiveInteraction = activeInteraction; }
 	
 	virtual void clickMenu(int menuIndex) {}; // Dialogue 창에서 메뉴를 클릭함
+
 	string getName() { return _name; }
 	string getBodyDialogue() { return _bodyDialogue; }
 	vector<string> getSelectDialogues() { return _selectDialogues; }
 	Image* getMapIcon() { return _mapIcon; };
+	Image* getMiniMapIcon() { return _miniMapIcon; };
 	
 	NPC_TYPE getType() { return _type; }
 };

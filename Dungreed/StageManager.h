@@ -72,6 +72,7 @@ public:
 
 	// 스테이지 이동 
 	void moveRoom(Vector2 moveDir);
+	void moveRoomIndex(Vector2 index);
 
 	// 스테이지 타입에 따른 맵 만들기
 	void makeStage();

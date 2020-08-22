@@ -28,7 +28,15 @@ void Stage::init()
 void Stage::enter(int enterType)
 {
 	_uiManager->setMiniMap(_collisionGroundRects, _collisionGroundLines, _collisionPlatforms, _doors, _enemyMgr, _npcMgr, _objectMgr);
-	_stageManager->setPlayerPos(_respawnPosition[enterType].x, _respawnPosition[enterType].y);
+	if (enterType < 4) // 좌상우하 문으로 들어온 경우
+	{
+		_stageManager->setPlayerPos(_respawnPosition[enterType].x, _respawnPosition[enterType].y);
+	}
+	else // WORM으로 들어온 경우
+	{
+		Vector2 gate = _npcMgr->getGatePos();
+		_stageManager->setPlayerPos(gate.x, gate.y + 10);
+	}
 	_isVisited = true;
 }
 
@@ -530,7 +538,7 @@ void Stage::makeDoorAuto()
 				{
 					int centerIndex = index - 2 * maxSizeX;
 					makeDoor(Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.top), DIRECTION::LEFT);
-					_respawnPosition[0] = Vector2(_tile[centerIndex].rc.getCenter().x + 100, _tile[index].rc.top - 60);
+					_respawnPosition[0] = Vector2(_tile[centerIndex].rc.getCenter().x + 100, _tile[index].rc.top - 30);
 					isMake = true;
 					break;
 				}
@@ -558,7 +566,7 @@ void Stage::makeDoorAuto()
 				{
 					int centerIndex = index - 2 * maxSizeX;
 					makeDoor(Vector2(_tile[centerIndex].rc.getCenter().x, _tile[centerIndex].rc.top), DIRECTION::RIGHT);
-					_respawnPosition[2] = Vector2(_tile[centerIndex].rc.getCenter().x - 100, _tile[index].rc.top - 60);
+					_respawnPosition[2] = Vector2(_tile[centerIndex].rc.getCenter().x - 100, _tile[index].rc.top - 30);
 					isMake = true;
 					break;
 				}
@@ -567,6 +575,16 @@ void Stage::makeDoorAuto()
 		}
 		count = 0;
 	}
+}
+
+vector<tagShowNpc> Stage::getNpcInfos()
+{
+	return _npcMgr->getNpcInfos();
+}
+
+void Stage::moveToIndex(Vector2 index)
+{
+	_stageManager->moveRoomIndex(index);
 }
 
 
