@@ -24,7 +24,6 @@ HRESULT playGround::init()
 
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
-
 	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas3.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas1.png", 10, 10);

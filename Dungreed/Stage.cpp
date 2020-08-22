@@ -62,7 +62,9 @@ void Stage::update(float const elaspedTime)
 	int stageWidth = _tile[0].tileX * TILESIZE;
 	int stageHeight = _tile[0].tileY * TILESIZE;
 	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
-	CAMERA->setXY(_stageManager->getPlayerPos());
+	Vector2 playerPos = _stageManager->getPlayerPos();
+
+	CAMERA->setXY(Vector2(round(playerPos.x), round(playerPos.y)));
 
 	if (KEY_MANAGER->isOnceKeyDown('L'))
 	{
