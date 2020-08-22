@@ -45,7 +45,12 @@ void GameScene::update()
 	}
 
 	// 배속 관리
-	float elapsedTime = TIME_MANAGER->getElapsedTime() * _timeSpeed;
+	float originTime = TIME_MANAGER->getElapsedTime();
+	if (originTime > 0.02)
+	{
+		originTime = 0.02;
+	}
+	float elapsedTime = originTime * _timeSpeed;
 	
 	_player->update(elapsedTime);
 	_stageMgr->update(elapsedTime);
