@@ -45,9 +45,9 @@ void DialogueUI::update(float elapsedTime)
 	{
 		_currElapsedTime += elapsedTime;
 
-		while (_currElapsedTime > 0.1f)
+		while (_currElapsedTime > 0.07f)
 		{
-			_currElapsedTime -= 0.1f;
+			_currElapsedTime -= 0.07f;
 			_currBodyLen += 1;
 		}
 

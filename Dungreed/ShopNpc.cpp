@@ -21,7 +21,7 @@ void ShopNpc::init(Vector2 pos, DIRECTION direction)
 	_active = true;
 
 	_name = L"크록";
-	_bodyDialogue = L"가나다라마바사아자차카타파하";
+	_bodyDialogue = L"반갑다. 좋은 것들 가져왔다.";
 	_selectDialogues.push_back(L"상점");
 
 	_isActiveInteraction = false;

@@ -22,8 +22,8 @@ void RestaurantNpc::init(Vector2 pos, DIRECTION direction)
 	_active = true;
 
 	_name = L"호레리카";
-	_bodyDialogue = L"가나다라마바사아자차카타파하";
-	_selectDialogues.push_back(L"식당");
+	_bodyDialogue = L"오늘은 어떤 요리를 드시러 오셨나요?";
+	_selectDialogues.push_back(L"음식점");
 
 	_isActiveInteraction = false;
 	_isClose = false;
