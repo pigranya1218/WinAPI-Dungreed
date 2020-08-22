@@ -8,7 +8,7 @@ void DoorNpc::setInfo()
 	{
 		_type = NPC_TYPE::ENTRANCE;
 		_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_ENTRANCE");
-		_miniMapIcon = nullptr;
+		_miniMapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_ENTRANCE");
 		_size = Vector2(100, 260);
 
 		_img = IMAGE_MANAGER->findImage("NPC_ENTRANCE");
@@ -24,7 +24,7 @@ void DoorNpc::setInfo()
 	{
 		_type = NPC_TYPE::EXIT;
 		_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_EXIT");
-		_miniMapIcon = nullptr;
+		_miniMapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_EXIT");
 		_size = Vector2(100, 260);
 		
 		_img = IMAGE_MANAGER->findImage("NPC_EXIT");
