@@ -377,7 +377,7 @@ void StageManager::makeStage()
 		break;
 	}
 
-	switch (_currStageType)
+	/*switch (_currStageType)
 	{
 	case STAGE_TYPE::TEST:
 		break;
@@ -395,7 +395,7 @@ void StageManager::makeStage()
 		break;
 	default:
 		break;
-	}
+	}*/
 }
 
 void StageManager::makeBossStage()

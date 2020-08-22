@@ -353,8 +353,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 	IMAGE_MANAGER->addFrameImage("DungeonEat", L"resources/images/Villiage/DungeonEat.png", 28, 1);
 
-	SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true);
-	SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false);
+	//SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true);
+	//SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false);
 	
 
 	// ** DUNGEON
@@ -369,8 +369,8 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("Die_Effect", "Die", 15, 1); //이건 워프이동에도 이용
 
 	
-	SOUND_MANAGER->addSound("Floor1_BGM", "resources/sound/Ui/bgm/1.JailField.wav", true, true);
-	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/Jail Metal Door Sound Effect.wav", false, false);
+	//SOUND_MANAGER->addSound("Floor1_BGM", "resources/sound/Ui/bgm/1.JailField.wav", true, true);
+	//SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
 
 	// ** OBJECT
 	// *** BROKEN
