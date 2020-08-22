@@ -8,7 +8,7 @@ void StartRoom3::init()
 
 	
 	_respawnPosition[0] = Vector2(620, 300);
-	//_respawnPosition[3] = Vector2(620, 800);
+	_respawnPosition[3] = Vector2(620, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(400, 300));
 

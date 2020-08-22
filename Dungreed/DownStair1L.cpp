@@ -6,6 +6,8 @@ void DownStair1L::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/DownStair1_L.map");
 	
+	_gateImg = IMAGE_MANAGER->findImage("Floor1Door");
+
 	//_respawnPosition[0] = Vector2(200, 600);
 
 	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
@@ -32,4 +34,6 @@ void DownStair1L::update(float const elapsedTime)
 void DownStair1L::render()
 {
 	Stage::render();
+	_gateImg->setScale(4);
+	_gateImg->frameRender(CAMERA->getRelativeV2( Vector2(700, 650)), 0, 0);
 }

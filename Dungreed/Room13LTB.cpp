@@ -10,7 +10,7 @@ void Room13LTB::init()
 	//_respawnPosition[1] = Vector2(640, 300);
 	_respawnPosition[3] = Vector2(300, 800);
 	
-	makeDoor(Vector2(300, 1100), DIRECTION::DOWN);
+	makeDoor(Vector2(309, 1100), DIRECTION::DOWN);
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(520, 700), DIRECTION::LEFT);
 }

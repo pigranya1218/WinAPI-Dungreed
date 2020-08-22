@@ -10,7 +10,7 @@ void Room22LTRB::init()
 	//_respawnPosition[0] = Vector2(200, 200);
 	//_respawnPosition[1] = Vector2(400, 200);
 	//_respawnPosition[2] = Vector2(1500, 200);
-	//_respawnPosition[3] = Vector2(400, 800);
+	_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
