@@ -78,6 +78,7 @@ void BatNormal::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Bat/Die");
 		}
 		break;
 	}
