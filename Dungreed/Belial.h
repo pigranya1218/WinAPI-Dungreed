@@ -139,7 +139,9 @@ private:
 
 	BELIAL_PHASE _phase;	// 공격 패턴
 
-	bool		_realDead;
+	bool		_realDead;	// 죽었을 경우 파편이 떨어지는 상태
+	float		_deadAngle;	// 머리가 땅에 착지하면 약간 흔들리는 용
+	bool		_angleWay;	// 머리가 회전되는 방향
 
 public:
 	void init(const Vector2& pos);

@@ -185,9 +185,9 @@ void Player::init()
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
-	Seeri* testAcc24 = new Seeri;
-	testAcc24->init();
-	_inventory[1] = testAcc24;
+	//Seeri* testAcc24 = new Seeri;
+	//testAcc24->init();
+	//_inventory[1] = testAcc24;
 
 	//GreenBat* testAcc2 = new GreenBat;
 	//testAcc2->init();
@@ -457,6 +457,9 @@ void Player::update(float const elapsedTime)
 	// 대쉬
 	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
+		//대쉬 효과음 재생
+
+		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
@@ -483,6 +486,7 @@ void Player::update(float const elapsedTime)
 		{
 			//_force.y = 0;
 			// 대쉬 종료
+			SOUND_MANAGER->stop("Player/Dash");
 		}
 
 	}
@@ -528,7 +532,7 @@ void Player::update(float const elapsedTime)
 	if (_isStand && _force.y == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 20;
+		moveDir.y += 23;
 	}
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
@@ -608,56 +612,59 @@ void Player::update(float const elapsedTime)
 
 void Player::render()
 {
-	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1);
+	// D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Black, 1);
 
-	// 캐릭터 뒤에 그리기
-	for(int i = 0; i < 4; i++)
+
+	if (_gameScene->showPlayer())
 	{
-		if (_equippedAcc[i] != nullptr)
+		// 캐릭터 뒤에 그리기
+		for (int i = 0; i < 4; i++)
 		{
-			_equippedAcc[i]->backRender(this);
+			if (_equippedAcc[i] != nullptr)
+			{
+				_equippedAcc[i]->backRender(this);
+			}
+		}
+		if (_equippedWeapon[_currWeaponIndex] != nullptr)
+		{
+			_equippedWeapon[_currWeaponIndex]->backRender(this);
+		}
+		else
+		{
+			_hand->backRender(this);
+		}
+
+		// 캐릭터 그리기
+		_costume->render(CAMERA->getRelativeV2(_position), _direction, (_currHitTime > 0));
+
+		// 캐릭터 앞에 그리기
+		for (int i = 0; i < 4; i++)
+		{
+			if (_equippedAcc[i] != nullptr)
+			{
+				_equippedAcc[i]->frontRender(this);
+			}
+		}
+		if (_equippedWeapon[_currWeaponIndex] != nullptr)
+		{
+			_equippedWeapon[_currWeaponIndex]->frontRender(this);
+		}
+		else
+		{
+			_hand->frontRender(this);
+		}
+
+		if (_currHitTime > 0)
+		{
+			if (_currHitTime < 0.25)
+			{
+				IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->setAlpha((_currHitTime / 0.25));
+				IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->setAlpha((_currHitTime / 0.25));
+			}
+			IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->render(Vector2(WINSIZEX * 0.25f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
+			IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->render(Vector2(WINSIZEX * 0.75f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
 		}
 	}
-	if (_equippedWeapon[_currWeaponIndex] != nullptr)
-	{
-		_equippedWeapon[_currWeaponIndex]->backRender(this);
-	}
-	else
-	{
-		_hand->backRender(this);
-	}
-
-	// 캐릭터 그리기
-	_costume->render(CAMERA->getRelativeV2(_position), _direction, (_currHitTime > 0));
-
-	// 캐릭터 앞에 그리기
-	for (int i = 0; i < 4; i++)
-	{
-		if (_equippedAcc[i] != nullptr)
-		{
-			_equippedAcc[i]->frontRender(this);
-		}
-	}
-	if (_equippedWeapon[_currWeaponIndex] != nullptr)
-	{
-		_equippedWeapon[_currWeaponIndex]->frontRender(this);
-	}
-	else
-	{
-		_hand->frontRender(this);
-	}
-
-	if (_currHitTime > 0)
-	{
-		if (_currHitTime < 0.25)
-		{
-			IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->setAlpha((_currHitTime / 0.25));
-			IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->setAlpha((_currHitTime / 0.25));
-		}
-		IMAGE_MANAGER->findImage("UI/WARNING_LEFT")->render(Vector2(WINSIZEX * 0.25f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
-		IMAGE_MANAGER->findImage("UI/WARNING_RIGHT")->render(Vector2(WINSIZEX * 0.75f, WINSIZEY * 0.5f), Vector2(WINSIZEX * 0.5, WINSIZEY));
-	}
-
 
 	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, Vector2(10, 10), PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 1, 5);
 }

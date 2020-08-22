@@ -7,7 +7,7 @@ void StartRoom2::init()
 	loadMap("room/StartRoom2_RB.map");
 
 	
-	_respawnPosition[0] = Vector2(565, 670);
+	_respawnPosition[0] = Vector2(565, 650);
 
 	//_respawnPosition[2] = Vector2(1450, 670);
 	

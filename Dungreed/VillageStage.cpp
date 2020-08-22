@@ -77,13 +77,18 @@ void VillageStage::update(float const elapsedTime)
 		enterDungeon();
 	}
 		//_stageManager->nextStage();
-	if (!_eatAni->isPlay()&& _enter)
+	if (_enter)
 	{
-			/*_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
+		if (_eatAni->getPlayIndex() >= 9)
+		{
+			_stageManager->setShowPlayer(false);
+		}
 
-			_stageManager->setPlayerPos(200, 400);
-			_stageManager->makeStage();*/
-		_stageManager->nextStage();
+		if (!_eatAni->isPlay())
+		{
+			_stageManager->nextStage();
+
+		}
 	}
 	
 	
