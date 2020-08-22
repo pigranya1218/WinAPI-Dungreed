@@ -46,7 +46,7 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_active = true;
 
 	_curHp = _maxHp = 35;
-	_enterCount = 0;
+
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_GSWORD);
 }
 
@@ -179,8 +179,7 @@ void SkelSmallGsword::update(float const timeElapsed)
 	_weaponAni->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		_enterCount = 0;
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }

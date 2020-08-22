@@ -111,7 +111,7 @@ void Banshee::update(float const timeElapsed)
 	{
 		SOUND_MANAGER->stop("Enemy/Spawn");
 		SOUND_MANAGER->stop("Banshee/Attack");
-	{		
+		
 		setState(ENEMY_STATE::DIE);
 	}
 }
