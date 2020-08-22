@@ -105,6 +105,7 @@ void BatBomb::update(float const timeElapsed)
 		{				
 			if (!_ani->isPlay())
 			{				
+				SOUND_MANAGER->stop("BoomBat/Explod");
 				SOUND_MANAGER->play("BoomBat/Explod", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				setState(ENEMY_STATE::SKILL);
 			}
@@ -133,7 +134,6 @@ void BatBomb::update(float const timeElapsed)
 			if (!_ani->isPlay())
 			{
 				setState(ENEMY_STATE::DIE);
-				//setState(ENEMY_STATE::DIE);
 				SOUND_MANAGER->stop("BoomBat/Explod");
 				_active = false;
 			}
