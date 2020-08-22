@@ -155,7 +155,7 @@ void AbilityUI::render()
 	for (int i = 0; i < 5; i++)
 	{
 		//특성창 배경
-		D2D_RENDERER->drawRectangle(_windows[i].baseRc, D2D1::ColorF::Magenta, 1, 1);
+		// D2D_RENDERER->drawRectangle(_windows[i].baseRc, D2D1::ColorF::Magenta, 1, 1);
 		Image* backImg = _wrathBackImg;
 		switch (i)
 		{
@@ -248,13 +248,13 @@ void AbilityUI::render()
 		btnImg->render(_windows[i].buttonCir.origin, _windows[i].buttonCir.size);
 		
 		//스탯 수치 변화 표기
-		D2D_RENDERER->drawRectangle(_windows[i].statValueRc[0], D2D1::ColorF::Magenta, 1, 1);
+		/*D2D_RENDERER->drawRectangle(_windows[i].statValueRc[0], D2D1::ColorF::Magenta, 1, 1);
 		D2D_RENDERER->drawRectangle(_windows[i].statNameRc[0], D2D1::ColorF::Magenta, 1, 1);
 		if (i == 1 || i == 3)
 		{
 			D2D_RENDERER->drawRectangle(_windows[i].statValueRc[1], D2D1::ColorF::Magenta, 1, 1);
 			D2D_RENDERER->drawRectangle(_windows[i].statNameRc[1], D2D1::ColorF::Magenta, 1, 1);
-		}
+		}*/
 		int power = (int)_abilityStat.power;
 		float attackSpeed = _abilityStat.attackSpeed;
 		float moveSpeed = _abilityStat.moveSpeed;

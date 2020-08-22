@@ -314,6 +314,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_ENTRANCE", L"resources/images/gameScene/ui/map/Enterance.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_CHEST", L"resources/images/gameScene/ui/map/Chest.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_NPC", L"resources/images/gameScene/ui/map/MiniMapNPC.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_ABILITY", L"resources/images/gameScene/ui/map/Icon_Commander.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_COSTUME", L"resources/images/gameScene/ui/map/Icon_Boutique.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);

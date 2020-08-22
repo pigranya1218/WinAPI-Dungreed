@@ -6,8 +6,8 @@
 void AbilityNpc::init(Vector2 pos, DIRECTION direction)
 {
 	_type = NPC_TYPE::ABILITY;
-	_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_NPC");
-	_miniMapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_NPC");
+	_mapIcon = nullptr;
+	_miniMapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_ABILITY");
 
 	_img = IMAGE_MANAGER->findImage("NPC_ABILITY");
 	_ani = new Animation;
@@ -18,7 +18,7 @@ void AbilityNpc::init(Vector2 pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_size = Vector2(50, 90);
+	_size = Vector2(50, 70);
 	_active = true;
 
 	_name = "카블로비나";

@@ -171,7 +171,7 @@ void Player::init()
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 	
 
-	_level = 1;
+	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
 	_currDashCoolTime = 0;
