@@ -33,7 +33,7 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.attackInit(3, 5, 1,0,0, 25);
+	_attack.attackInit(1, 0, 4,0,0, 25);
 	_attack.delay = 1.5;
 	_attack.distance = 100;
 	_attack.circleSize = 100;
@@ -43,9 +43,11 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 
 	_isDetect = 0;
 
+	_playCount = 0;
+		 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 35;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_GSWORD);
 }
@@ -119,13 +121,18 @@ void SkelSmallGsword::update(float const timeElapsed)
 		{
 			if (_weaponAni->getPlayIndex() == 6)
 			{
+				_playCount++;
 				Vector2 attackPos = _position;
 				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
 				attackPos.y += _size.y * 0.1f;
 
 				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (PI / 2 - 2.27);
 				float endRad = startRad + 2.27;
-
+				if (_playCount == 1)
+				{
+					SOUND_MANAGER->stop("Skell/Small_G/Attack");
+					SOUND_MANAGER->play("Skell/Small_G/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 				_attack.attackCircle(_myEnemyType, _enemyManager, attackPos, startRad, endRad);
 			}
 			else
@@ -134,6 +141,7 @@ void SkelSmallGsword::update(float const timeElapsed)
 			}
 			if (!_weaponAni->isPlay())
 			{
+				_playCount = 0;
 				setState(ENEMY_STATE::IDLE);
 			}
 		}

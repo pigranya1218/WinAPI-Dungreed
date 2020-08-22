@@ -36,7 +36,7 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_attack.delay = 2.0f;
 	_attack.distance = 100;
 	_attack.circleSize = 85;
-	_attack.attackInit(1, 5, 2);
+	_attack.attackInit(1, 0, 2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -44,7 +44,7 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_isDetect = 0;
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 40;
 	count = 0;
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_DAGGER);
 }
@@ -121,6 +121,7 @@ void SkelSmallDagger::update(float const timeElapsed)
 				count++;
 				if (count == 1)
 				{
+					SOUND_MANAGER->stop("Skell/Small/Attack");
 					SOUND_MANAGER->play("Skell/Small/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				}
 

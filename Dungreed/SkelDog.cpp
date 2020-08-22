@@ -33,14 +33,14 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay = 3;
-	_attack.attackInit(3, 5, 1);
+	_attack.attackInit(1, 0, 2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 20;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_DOG);
 }

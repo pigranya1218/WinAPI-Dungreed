@@ -24,7 +24,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 
 	// 공격 관련 변수 초기화
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(600, 600), _scale, 2, 1.5, true, false, false, false, true, false);
-	_shooting.attackInit(3, 5, 3);
+	_shooting.attackInit(1, 1, 3);
 
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -39,7 +39,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 30;
 	_PlayCount = 0;
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_ICE);
 }
@@ -126,6 +126,7 @@ void BatIce::update(float const timeElapsed)
 				_PlayCount++;
 				if (_PlayCount == 1)
 				{
+					SOUND_MANAGER->stop("Bat/Attack");
 					SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				}
 				_shooting.fireBullet(_myEnemyType, _enemyManager);

@@ -35,13 +35,13 @@ void BatRed::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 
 	// √—æÀ √ ±‚»≠
 	_shooting.init("SmallBullet", "SmallBullet_FX", Vector2(500, 500), _scale, 1, 1.5, false, true, true, false, true, false);
-	_shooting.attackInit(3, 5, 3);
+	_shooting.attackInit(1, 3, 1);
 
 	_isDetect = 0;
 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 20;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_RED);
 }
@@ -102,6 +102,7 @@ void BatRed::update(float const timeElapsed)
 			{
 				if (_shooting.delayUpdate(timeElapsed))
 				{
+					SOUND_MANAGER->stop("Bat/Attack");
 					SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					setState(ENEMY_STATE::ATTACK);
 					_shooting.bulletNum = 1;
@@ -135,6 +136,8 @@ void BatRed::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Bat/Die");
+			SOUND_MANAGER->stop("Bat/Attack");
 		}		
 		break;
 	}
