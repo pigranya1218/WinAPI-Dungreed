@@ -52,6 +52,10 @@ void VillageStage::init()
 	SOUND_MANAGER->play("Villiage_BGM", 1.0f);
 
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
+
+	// NPC
+	_npcMgr->spawnNpc(NPC_TYPE::ABILITY, Vector2(1300, 1500), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::COSTUME, Vector2(950, 600), DIRECTION::LEFT);
 }
 
 void VillageStage::release()

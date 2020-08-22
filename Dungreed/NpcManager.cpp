@@ -3,6 +3,8 @@
 #include "NpcManager.h"
 #include "RestaurantNpc.h"
 #include "ShopNpc.h"
+#include "AbilityNpc.h"
+#include "CostumeNpc.h"
 #include "GateNpc.h"
 #include "ChestNpc.h"
 #include "DoorNpc.h"
@@ -64,6 +66,16 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	case NPC_TYPE::GATE:
 	{
 		npc = new GateNpc;
+	}
+	break;
+	case NPC_TYPE::ABILITY:
+	{
+		npc = new AbilityNpc;
+	}
+	break;
+	case NPC_TYPE::COSTUME:
+	{
+		npc = new CostumeNpc;
 	}
 	break;
 	case NPC_TYPE::CHEST_BASIC:
@@ -169,4 +181,14 @@ void NpcManager::showRestaurantUI()
 
 void NpcManager::showShopUI()
 {
+}
+
+void NpcManager::showAbilityUI()
+{
+	_uiMgr->showAbility();
+}
+
+void NpcManager::showCostumeUI()
+{
+	_uiMgr->showCostume();
 }

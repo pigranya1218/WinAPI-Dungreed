@@ -76,6 +76,8 @@ void Player::updateAdjustStat()
 		_adjustStat = _adjustStat + _ateFood[i]->getAddStat();
 	}
 
+	_adjustStat = _adjustStat + _abilityStat;
+
 	if (_equippedWeapon[_currWeaponIndex] != nullptr)
 	{
 		_equippedWeapon[_currWeaponIndex]->equip(this);
@@ -169,7 +171,7 @@ void Player::init()
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 	
 
-	_level = 1;
+	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
 	_currDashCoolTime = 0;
@@ -325,13 +327,17 @@ void Player::init()
 	testWeapon7->init();
 	_inventory[3] = testWeapon7;
 
-	/*OakBow* testWeapon8 = new OakBow;
-	testWeapon8->init();
-	_inventory[14] = testWeapon8;*/
+	//MagicStick* testWeapon8 = new MagicStick;
+	//testWeapon8->init();
+	//_inventory[14] = testWeapon8;
 
-	SilverBullet* testAcc19 = new SilverBullet;
+	OakBow* testWeapon8 = new OakBow;
+	testWeapon8->init();
+	_inventory[14] = testWeapon8;
+
+	/*SilverBullet* testAcc19 = new SilverBullet;
 	testAcc19->init();
-	_inventory[14] = testAcc19;
+	_inventory[14] = testAcc19;*/
 
 	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
 	testAcc18->init();

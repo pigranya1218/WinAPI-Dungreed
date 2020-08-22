@@ -7,9 +7,16 @@ void Room22LTRB::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage22_LTRB.map");
 	
-	//_respawnPosition[0] = Vector2(200, 200);
-	//_respawnPosition[1] = Vector2(400, 200);
-	//_respawnPosition[2] = Vector2(1500, 200);
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400), 1 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500), 1 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600), 1 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400), 2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500), 2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600), 2 });
+	_spawnChest.spawn = true;
+	_spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(500, 500);
+
 	_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0001, Vector2(700, 500));
@@ -17,6 +24,8 @@ void Room22LTRB::init()
 	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room22LTRB::release()

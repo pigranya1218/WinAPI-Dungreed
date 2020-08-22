@@ -35,6 +35,7 @@ private:
 	//vector<Image*> _afterImg;
 	Image*		_afterImg[10];
 	float		_collisionCount;
+	Vector2		_miragePos;
 public:
 	GuidedProjectile() {}
 	GuidedProjectile(const GuidedProjectile& source);

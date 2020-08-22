@@ -10,10 +10,20 @@ void DebugStage::init()
 
 	Stage::init();
 	// 맵 불러오기
-	_respawnPosition[0] = Vector2(800, 200);
-	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/BossRoom.map");
+	_respawnPosition[0] = Vector2(800, 500);
+	
 
+	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
+	loadMap("room/Stage2_LR.map");
+
+
+	//몹 소환
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 440) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 660) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 850) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 440) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 660) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 850) });
 
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	// 에너미 테스트입니다.
@@ -93,7 +103,7 @@ void DebugStage::init()
 	_objectMgr->spawnObject(0x0001, Vector2(780, 900));
 
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(900, 500), DIRECTION::LEFT);
+	//_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(900, 500), DIRECTION::LEFT);
 	
 	//makeDoor(Vector2(400, 300), DIRECTION::LEFT);
 }
