@@ -320,13 +320,17 @@ void Player::init()
 	testWeapon7->init();
 	_inventory[3] = testWeapon7;
 
+	MagicStick* testWeapon8 = new MagicStick;
+	testWeapon8->init();
+	_inventory[14] = testWeapon8;
+
 	/*OakBow* testWeapon8 = new OakBow;
 	testWeapon8->init();
 	_inventory[14] = testWeapon8;*/
 
-	SilverBullet* testAcc19 = new SilverBullet;
+	/*SilverBullet* testAcc19 = new SilverBullet;
 	testAcc19->init();
-	_inventory[14] = testAcc19;
+	_inventory[14] = testAcc19;*/
 
 	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
 	testAcc18->init();
