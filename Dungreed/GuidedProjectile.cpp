@@ -93,6 +93,7 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 
 	_timeCount = 0;
 	_afterCount = 0;
+	_mirageCount = 1;
 
 	if (_afterimage)
 	{
@@ -194,8 +195,6 @@ void GuidedProjectile::update(float elapsedTime)
 		_active = false;
 		return;
 	}
-
-
 	
 
 	// 타입에 따른 충돌 검사
@@ -281,15 +280,41 @@ void GuidedProjectile::render()
 
 	if (_afterimage)
 	{
-		int index;
+		int index = _ani->getPlayIndex();
 		Vector2 _pos;
-		if (_mirageCount >= 0.1f)
+		Vector2 _pos2 = _pos;
+		Vector2 _pos3 = _pos;
+		Vector2 _pos4 = _pos;
+		Vector2 _pos5 = _pos;
+		_pos = Vector2(_position.x - 5, _position.y - 5);
+
+		if (_mirageCount / 0.2f == 0)
 		{
-			_mirageCount = 0;
-			index = _ani->getPlayIndex();
-			_pos = Vector2(_position.x - 10, _position.y);
-			_afterImg[0]->frameRender(_pos, _renderSize, index, 0);
+			_pos = Vector2(_position.x - 20, _position.y - 20);
 		}
+
+		if (_mirageCount > 0.3f && _mirageCount < 3.5f)
+		{
+			//_mirageCount = 0;
+
+			_pos2.x = _pos.x - 5;
+			_pos2.y = _pos.y + 5;
+
+			_pos3.x = _pos2.x - 5;
+			_pos3.y = _pos2.y + 5;
+			_pos4.x = _pos3.x - 5;
+			_pos4.y = _pos3.y + 5;
+			_pos5.x = _pos4.x - 5;
+			_pos5.y = _pos4.y + 5;
+
+			_afterImg[0]->frameRender(CAMERA->getRelativeV2(_pos), _renderSize, index, 0);
+
+		}
+		//_afterImg[1]->frameRender(_pos2, _renderSize, index, 0);
+		//_afterImg[2]->frameRender(_pos3, _renderSize, index, 0);
+		//_afterImg[3]->frameRender(_pos4, _renderSize, index, 0);
+		//_afterImg[4]->frameRender(_pos5, _renderSize, index, 0);
+
 		/*if (_count < 1)
 		{
 			_afterImg[0]->setAlpha(_afterImg[0]->getAlpha() - _count);
