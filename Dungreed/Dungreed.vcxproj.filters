@@ -795,6 +795,9 @@
     <ClInclude Include="CostumeNpc.h">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClInclude>
+    <ClInclude Include="ShopUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1384,6 +1387,9 @@
     </ClCompile>
     <ClCompile Include="CostumeNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

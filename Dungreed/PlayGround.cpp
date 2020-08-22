@@ -301,6 +301,13 @@ HRESULT playGround::init()
 
 	IMAGE_MANAGER->addFrameImage("UI/ABILITY/CLICK_EFFECT", L"resources/images/gameScene/ui/ability/click/ClickEffect.png", 12, 1);
 
+	// *** SHOP
+	IMAGE_MANAGER->addImage("UI/SHOP/BASE", L"resources/images/gameScene/ui/shop/DungeonShopBase.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/ITEM_BASE", L"resources/images/gameScene/ui/shop/shopItemBase.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/ITEM_BASE_SELECTED", L"resources/images/gameScene/ui/shop/shopItemBase_selected.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/GOLD", L"resources/images/gameScene/ui/shop/gold.png");
+
+
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");
 	IMAGE_MANAGER->addImage("UI/MAP/BODY", L"resources/images/gameScene/ui/map/MapBase 1_1.png");

@@ -90,6 +90,34 @@ void Player::updateAdjustStat()
 
 }
 
+void Player::sellItem(int index)
+{
+	if (_inventory[index] != nullptr)
+	{
+		_currGold += _inventory[index]->getPrice() * 0.7;
+		_inventory[index]->release();
+		delete _inventory[index];
+		_inventory[index] = nullptr;
+	}
+}
+
+bool Player::buyItem(Item* item)
+{
+	if (_currGold >= item->getPrice())
+	{
+		for (int i = 0; i < _inventory.size(); i++)
+		{
+			if (_inventory[i] == nullptr)
+			{
+				_currGold -= item->getPrice();
+				_inventory[i] = item;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
 void Player::swap(Item *& a, Item *& b)
 {
 	Item* temp = a;
@@ -184,7 +212,7 @@ void Player::init()
 	//_currHp = _adjustStat.maxHp;
 	_currHp = _adjustStat.maxHp;
 	_currSatiety = 0;
-	_currGold = 0;
+	_currGold = 5000;
 	_currHitTime = 0;
 	_force = Vector2(0, 0);
 

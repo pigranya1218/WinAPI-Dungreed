@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iomanip>
 
+
+
 void StatUI::init()
 {
 	_isActive = false;
