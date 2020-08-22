@@ -71,7 +71,7 @@ void DoorNpc::update(float elapsedTime)
 
 void DoorNpc::interaction() // 출구일 경우
 {
-	_stageManager->nextStage();
+	_npcMgr->nextStage();
 	
 }
 

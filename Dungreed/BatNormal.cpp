@@ -35,7 +35,7 @@ void BatNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_isDetect = 0;
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 20;
 }
 
 void BatNormal::release()
@@ -89,6 +89,7 @@ void BatNormal::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Bat/Die");
 		}
 		break;
 	}
@@ -148,6 +149,7 @@ void BatNormal::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Bat/Die");
 			_active = false;
 		}
 		break;

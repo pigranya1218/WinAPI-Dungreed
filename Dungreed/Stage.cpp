@@ -23,6 +23,8 @@ void Stage::init()
 
 	_respawnPosition.resize(5);
 	_doors.resize(4);
+
+	_isGoNextStage = false;
 }
 
 void Stage::enter(int enterType)
@@ -38,6 +40,7 @@ void Stage::enter(int enterType)
 		_stageManager->setPlayerPos(gate.x, gate.y + 10);
 	}
 	_isVisited = true;
+	_stageManager->setShowPlayer(true);
 }
 
 void Stage::release()
@@ -75,6 +78,11 @@ void Stage::update(float const elaspedTime)
 				_doors[i]->setOpen(!_doors[i]->isOpen());
 			}
 		}
+	}
+
+	if (_isGoNextStage)
+	{
+		_stageManager->nextStage();
 	}
 }
 
@@ -205,7 +213,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -218,7 +226,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -244,7 +252,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -257,7 +265,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -441,6 +449,11 @@ Vector2 Stage::getEnemyPos(const Vector2 & pos)
 	return _enemyMgr->getEnemyPos(pos);
 }
 
+vector<FloatRect> Stage::getEnemyRects()
+{
+	return _enemyMgr->getEnemyRects();
+}
+
 void Stage::showDamage(DamageInfo info, Vector2 pos)
 {
 	_stageManager->showDamage(info, pos);
@@ -586,6 +599,16 @@ vector<tagShowNpc> Stage::getNpcInfos()
 void Stage::moveToIndex(Vector2 index)
 {
 	_stageManager->moveRoomIndex(index);
+}
+
+void Stage::nextStage()
+{
+	_isGoNextStage = true;
+}
+
+void Stage::setShowPlayer(bool showPlayer)
+{
+	_stageManager->setShowPlayer(showPlayer);
 }
 
 

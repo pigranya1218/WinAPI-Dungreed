@@ -314,7 +314,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_EXIT", L"resources/images/gameScene/ui/map/Exit.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_ENTRANCE", L"resources/images/gameScene/ui/map/Enterance.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_CHEST", L"resources/images/gameScene/ui/map/Chest.png");
-
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_NPC", L"resources/images/gameScene/ui/map/MiniMapNPC.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
@@ -353,6 +353,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 	IMAGE_MANAGER->addFrameImage("DungeonEat", L"resources/images/Villiage/DungeonEat.png", 28, 1);
 
+	SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true);
+	SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false);
+	
+
 	// ** DUNGEON
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
 	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
@@ -360,6 +364,14 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("Torch", L"resources/images/Map/torch.png", 7, 1);
+
+	IMAGE_MANAGER->addFrameImage("Die", L"resources/images/Effect/Die/Die.png", 11, 1);
+	EFFECT_MANAGER->addEffect("Die_Effect", "Die", 15, 1); //이건 워프이동에도 이용
+
+	
+	SOUND_MANAGER->addSound("Floor1_BGM", "resources/sound/Ui/bgm/1.JailField.wav", true, true);
+	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
+
 	// ** OBJECT
 	// *** BROKEN
 	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BOX", L"resources/images/object/broken/Box0.png");
@@ -595,6 +607,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("selected", L"resources/images/Accessories/selected.png");                         // 자동공격 인형 조준점
 	IMAGE_MANAGER->addImage("SeeriBullet", L"resources/images/Accessories/SeeriBullet.png");                   // 자동공격 인형 탄
 
+	// ** SPECIAL ABILITY
+	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY_WARNING", L"resources/images/weapon/specialAbility/alice_warning.png", 4, 1);
+	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY", L"resources/images/weapon/specialAbility/alice_safe.png", 1, 1);
+
 	// ** ENEMY
 	// * 수녀
 	IMAGE_MANAGER->addFrameImage("Banshee/Idle"			, L"resources/images/Enemy/Banshee/idle.png"		, 6, 1);	// 기본
@@ -806,19 +822,34 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Player/Inven/OpenInven", "resources/sounds/player/inventorySounds/OpenInventory.wav", false, false);	//인벤토리 개폐
 	SOUND_MANAGER->addSound("Player/Inven/PickUpItem", "resources/sounds/player/inventorySounds/PickUpItem.wav", false, false);		//픽업 아이템
 
-	//** ENEMY
-	SOUND_MANAGER->addSound("Enemy/Die", "resources/sound/enemy/public/MonsterDie.wav", false, false);			//사망(공용)
-	SOUND_MANAGER->addSound("Enemy/GetHit", "resources/sound/enemy/public/Hit_Monster.wav", false, false);		//피격(공용)
-	//* 박쥐
-	SOUND_MANAGER->addSound("Bat/Attack", "resources/sound/enemy/bat/monster-sound2_bat.wav", false, false);	//작은 박쥐 공격
-	SOUND_MANAGER->addSound("Bat/Die", "resources/sound/enemy/bat/monster-sound8_bat.wav", false, false);		//작은 박쥐 사망
-	SOUND_MANAGER->addSound("GiantBat/Attack", "resources/sound/enemy/bat/Bat2.wav", false, false);				//거대 박쥐 공격
-	//*	수녀
-	SOUND_MANAGER->addSound("Banshee/Attack", "resources/sound/enemy/banshee/high_pitch_scream_gverb.wav", false, false);	//거대 박쥐 공격
-	//* 해골들
-	SOUND_MANAGER->addSound("IceSkell/Magic/Attack", "resources/sound/enemy/skells/ice.wav", false, false);				//아이스 해골 마법사 공격
-	SOUND_MANAGER->addSound("Skell/Small/Attack", "resources/sound/enemy/skells/swish-1.wav", false, false);			//작은   해골 단검   공격
-	//*	벨리알
+	// ** ENEMY
+	SOUND_MANAGER->addSound("Enemy/Die"		, "resources/sound/enemy/public/MonsterDie.wav"	, false, false);	// 사망(공용)
+	SOUND_MANAGER->addSound("Enemy/GetHit"	, "resources/sound/enemy/public/Hit_Monster.wav", false, false);	// 피격(공용)
+
+	// *  박쥐
+	SOUND_MANAGER->addSound("Bat/Attack"		, "resources/sound/enemy/bat/monster-sound2_bat.wav"				, false, false);	// 작은 박쥐 공격
+	SOUND_MANAGER->addSound("Bat/Die"			, "resources/sound/enemy/bat/monster-sound8_bat.wav"				, false, false);	// 작은 박쥐 사망
+	SOUND_MANAGER->addSound("GiantBat/Attack"	, "resources/sound/enemy/bat/Bat2.wav"								, false, false);	// 거대 박쥐 공격
+	SOUND_MANAGER->addSound("BoomBat/Ready"		, "resources/sound/enemy/bat/Fantasy_Game_Creature_High_C_Japok.wav", false, false);	// 폭발 박쥐 준비
+	SOUND_MANAGER->addSound("BoomBat/Explod"	, "resources/sound/enemy/bat/Explode.wav"							, false, false);	// 폭발 박쥐 폭발
+
+	// *  수녀
+	SOUND_MANAGER->addSound("Banshee/Attack", "resources/sound/enemy/banshee/high_pitch_scream_gverb.wav", false, false);	// 수녀 공격
+
+	// *  해골들
+	SOUND_MANAGER->addSound("Skell/Arrow/Ready"		, "resources/sound/enemy/skells/bow_crossbow_arrow_draw_stretch1_03.wav", false, false);	// 작은 해골 활 준비 공격
+	SOUND_MANAGER->addSound("Skell/Arrow/Attack"	, "resources/sound/enemy/skells/etc-sound0034_Bow.wav"					, false, false);	// 작은 해골 활 발사 공격
+	SOUND_MANAGER->addSound("Skell/Small/Attack"	, "resources/sound/enemy/skells/swish-1.wav"							, false, false);	// 작은 해골 단검 공격
+	SOUND_MANAGER->addSound("Skell/Small_G/Attack"	, "resources/sound/enemy/skells/swish-6.wav"							, false, false);	// 작은 해골 대검	 공격
+	SOUND_MANAGER->addSound("Skell/Big/Attack"		, "resources/sound/enemy/skells/swish-5.wav"							, false, false);	// 거대 해골 일반	 공격
+	SOUND_MANAGER->addSound("Skell/ice/blast"		, "resources/sound/enemy/skells/ice_blast_projectile_spell_02.wav"		, false, false);	// 얼음 해골 스킬 공격
+	SOUND_MANAGER->addSound("Skell/ice/Attack"		, "resources/sound/enemy/skells/ice_spell_forming_shards_04.wav"		, false, false);	// 얼음 해골 일반 공격
+	SOUND_MANAGER->addSound("IceSkell/Magic/Attack"	, "resources/sound/enemy/skells/ice.wav"								, false, false);	// 얼음 해골 법사 공격
+	// * 벨리알
+	SOUND_MANAGER->addSound("Belial/Enter"	, "resources/sound/enemy/belial/beliallaugh_rev.wav"	, false, false);	// 등장 웃음소리
+	SOUND_MANAGER->addSound("Belial/Laser"	, "resources/sound/enemy/belial/iceball.wav"			, false, false);	// 레이져 발사
+	SOUND_MANAGER->addSound("Belial/Bullet"	, "resources/sound/enemy/belial/random5.wav"			, false, false);	// 탄막 발사
+	SOUND_MANAGER->addSound("Belial/Sword"	, "resources/sound/enemy/belial/slimeball.wav"			, false, false);	// 검 소환
 
 	//*	니플헤임
 
@@ -826,7 +857,6 @@ HRESULT playGround::init()
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
-	TIME_MANAGER->update();
 
 
 	// 모든 씬 SCENE_MANAGER에 
@@ -836,7 +866,8 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
 	SCENE_MANAGER->changeScene("GAME");	
-
+	
+	TIME_MANAGER->init();
 	
 	return S_OK;
 }

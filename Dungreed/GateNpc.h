@@ -1,6 +1,8 @@
 #pragma once
 #include "Npc.h"
 
+class StageManager;
+
 class GateNpc : public Npc
 {
 private:
@@ -9,6 +11,10 @@ private:
 
 	bool _move;
 	Vector2 _roomIndex;
+
+	StageManager* _stageManager;
+
+	
 
 public:
 	virtual void init(Vector2 pos, DIRECTION direction);

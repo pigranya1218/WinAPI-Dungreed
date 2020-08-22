@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "AbilityUI.h"
 #include "Player.h"
+#include <sstream>
+#include <iomanip>
 
 void AbilityUI::init()
 {
@@ -35,6 +37,18 @@ void AbilityUI::init()
 		_windows[i].pointRc = FloatRect(Vector2(_windows[i].baseRc.getCenter().x, _windows[i].baseRc.getCenter().y - 60), Vector2(80, 60), PIVOT::CENTER);
 		//특성 포인트 수치 초기화
 		_windows[i].abilityPoint = 0;
+		//스탯 수치를 기입할 렉트
+		_windows[i].statValueRc[0] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x - 60, _windows[i].baseRc.getCenter().y + 80), Vector2(50, 40), PIVOT::CENTER);
+		if (i == 1 || i == 3)
+		{
+			_windows[i].statValueRc[1] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x - 60, _windows[i].baseRc.getCenter().y + 40), Vector2(50, 40), PIVOT::CENTER);
+		}
+		//스탯 이름을 기입할 렉트
+		_windows[i].statNameRc[0] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x + 35, _windows[i].baseRc.getCenter().y + 80), Vector2(140, 40), PIVOT::CENTER);
+		if (i == 1 || i == 3)
+		{
+			_windows[i].statNameRc[1] = FloatRect(Vector2(_windows[i].baseRc.getCenter().x + 35, _windows[i].baseRc.getCenter().y + 40), Vector2(140, 40), PIVOT::CENTER);
+		}
 	}
 
 	//렉트
@@ -62,12 +76,38 @@ void AbilityUI::update(float elapsedTime)
 		{
 			_isActive = false;
 		}
+		//특성 찍기
 		for (int i = 0; i < 5; i++)
 		{
 			if (_windows[i].buttonCir.ptInCircle(_ptMouse) && _windows[i].abilityPoint < 20 && _currAbilityPoint > 0)
 			{
 				_currAbilityPoint -= 1;
 				_windows[i].abilityPoint += 1;
+				//--- 분노 신속 인내 신비 탐욕 --- 각각의 특성을 올릴 때마다 스탯 수치 적용
+				if (i == 0)	//분노
+				{
+					_abilityStat.power = _windows[i].abilityPoint * 2;
+				}
+				else if (i == 1)	//신속
+				{
+					_abilityStat.attackSpeed = _windows[i].abilityPoint * 0.5;
+					_abilityStat.moveSpeed = _windows[i].abilityPoint * 0.5;
+				}
+				else if (i == 2)	//인내
+				{
+					_abilityStat.defense = _windows[i].abilityPoint * 1.5;
+				}
+				else if (i == 3)	//신비
+				{
+					_abilityStat.criticalChance = _windows[i].abilityPoint * 0.5;
+					_abilityStat.evasion = _windows[i].abilityPoint * 0.5;
+				}
+				else if (i == 4)	//탐욕
+				{
+					_abilityStat.maxHp = _windows[i].abilityPoint * 2;
+				}
+
+				_player->setAbilityStat(_abilityStat);
 			}
 		}
 	}
@@ -193,6 +233,86 @@ void AbilityUI::render()
 		}
 		btnImg->setScale(5.2);
 		btnImg->render(_windows[i].buttonCir.origin, _windows[i].buttonCir.size);
+		
+		//스탯 수치 변화 표기
+		D2D_RENDERER->drawRectangle(_windows[i].statValueRc[0], D2D1::ColorF::Magenta, 1, 1);
+		D2D_RENDERER->drawRectangle(_windows[i].statNameRc[0], D2D1::ColorF::Magenta, 1, 1);
+		if (i == 1 || i == 3)
+		{
+			D2D_RENDERER->drawRectangle(_windows[i].statValueRc[1], D2D1::ColorF::Magenta, 1, 1);
+			D2D_RENDERER->drawRectangle(_windows[i].statNameRc[1], D2D1::ColorF::Magenta, 1, 1);
+		}
+		int power = (int)_abilityStat.power;
+		float attackSpeed = _abilityStat.attackSpeed;
+		float moveSpeed = _abilityStat.moveSpeed;
+		float defense = _abilityStat.defense;
+		float criChan = _abilityStat.criticalChance;
+		float evasion = _abilityStat.evasion;
+		int maxHp = _abilityStat.maxHp;
+		int pre = 0;
+		stringstream str1;
+		stringstream str2;
+		wstring wstr0 = TTYONE_UTIL::stringTOwsting(_abilityStat.getStatString(STAT_TYPE::POW, false));
+		wstring wstr1_0 = TTYONE_UTIL::stringTOwsting(_abilityStat.getStatString(STAT_TYPE::ATTACK_SPEED, false));
+		wstring wstr1_1 = TTYONE_UTIL::stringTOwsting(_abilityStat.getStatString(STAT_TYPE::MOVE_SPEED, false));
+		wstring wstr2 = TTYONE_UTIL::stringTOwsting(_abilityStat.getStatString(STAT_TYPE::DEF, false));
+		wstring wstr3_0 = TTYONE_UTIL::stringTOwsting(_abilityStat.getStatString(STAT_TYPE::EVADE, false));
+		wstring wstr3_1 = TTYONE_UTIL::stringTOwsting(_abilityStat.getStatString(STAT_TYPE::CRITICAL, false));
+		wstring wstr4 = TTYONE_UTIL::stringTOwsting(_abilityStat.getStatString(STAT_TYPE::MAX_HP, false));
+		switch (i)
+		{
+		case 0:
+			D2D_RENDERER->renderTextField(_windows[i].statValueRc[0].left, _windows[i].statValueRc[0].top, L"+" + to_wstring(power),
+			 RGB(0, 255, 0), 25, _windows[i].statValueRc[0].getWidth(), _windows[i].statValueRc[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statNameRc[0].left, _windows[i].statNameRc[0].top, L"+" + wstr0, D2D1::ColorF::White, 25, _windows[i].statNameRc[0].getWidth(), _windows[i].statNameRc[0].getHeight(),
+				1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+			break;
+		case 1:
+			if (attackSpeed - (int)attackSpeed == 0) pre = 0;
+			else pre = 1;
+			str1 << fixed << setprecision(pre) << attackSpeed;
+			str2 << fixed << setprecision(pre) << moveSpeed;
+			D2D_RENDERER->renderTextField(_windows[i].statValueRc[0].left, _windows[i].statValueRc[0].top, L"+" + TTYONE_UTIL::stringTOwsting(str1.str()),
+				RGB(0, 255, 0), 25, _windows[i].statValueRc[0].getWidth(), _windows[i].statValueRc[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statValueRc[1].left, _windows[i].statValueRc[1].top, L"+" + TTYONE_UTIL::stringTOwsting(str2.str()),
+				RGB(0, 255, 0), 25, _windows[i].statValueRc[1].getWidth(), _windows[i].statValueRc[1].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statNameRc[0].left, _windows[i].statNameRc[0].top, wstr1_0, D2D1::ColorF::White, 25, _windows[i].statNameRc[0].getWidth(), _windows[i].statNameRc[0].getHeight(),
+				1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statNameRc[1].left, _windows[i].statNameRc[1].top, wstr1_1, D2D1::ColorF::White, 25, _windows[i].statNameRc[1].getWidth(), _windows[i].statNameRc[1].getHeight(),
+				1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+			break;
+		case 2:
+			if (defense - (int)defense == 0) pre = 0;
+			else pre = 1;
+			str1 << fixed << setprecision(pre) << defense;
+			D2D_RENDERER->renderTextField(_windows[i].statValueRc[0].left, _windows[i].statValueRc[0].top, L"+" + TTYONE_UTIL::stringTOwsting(str1.str()),
+				RGB(0, 255, 0), 25, _windows[i].statValueRc[0].getWidth(), _windows[i].statValueRc[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statNameRc[0].left, _windows[i].statNameRc[0].top, wstr2, D2D1::ColorF::White, 25, _windows[i].statNameRc[0].getWidth(), _windows[i].statNameRc[0].getHeight(),
+				1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+			break;
+		case 3:
+			if (evasion - (int)evasion == 0) pre = 0;
+			else pre = 1;
+			str1 << fixed << setprecision(pre) << evasion;
+			str2 << fixed << setprecision(pre) << criChan;
+			D2D_RENDERER->renderTextField(_windows[i].statValueRc[0].left, _windows[i].statValueRc[0].top, L"+" + TTYONE_UTIL::stringTOwsting(str1.str()),
+				RGB(0, 255, 0), 25, _windows[i].statValueRc[0].getWidth(), _windows[i].statValueRc[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statValueRc[1].left, _windows[i].statValueRc[1].top, L"+" + TTYONE_UTIL::stringTOwsting(str2.str()),
+				RGB(0, 255, 0), 25, _windows[i].statValueRc[1].getWidth(), _windows[i].statValueRc[1].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statNameRc[0].left, _windows[i].statNameRc[0].top, wstr3_0, D2D1::ColorF::White, 25, _windows[i].statNameRc[0].getWidth(), _windows[i].statNameRc[0].getHeight(),
+				1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statNameRc[1].left, _windows[i].statNameRc[1].top, wstr3_1, D2D1::ColorF::White, 25, _windows[i].statNameRc[1].getWidth(), _windows[i].statNameRc[1].getHeight(),
+				1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+			break;
+		case 4:
+			D2D_RENDERER->renderTextField(_windows[i].statValueRc[0].left, _windows[i].statValueRc[0].top, L"+" + to_wstring(maxHp),
+				RGB(0, 255, 0), 25, _windows[i].statValueRc[0].getWidth(), _windows[i].statValueRc[0].getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+			D2D_RENDERER->renderTextField(_windows[i].statNameRc[0].left, _windows[i].statNameRc[0].top, wstr4, D2D1::ColorF::White, 25, _windows[i].statNameRc[0].getWidth(), _windows[i].statNameRc[0].getHeight(),
+				1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");
+			break;
+		}
+
+
 		Image* icon[3][3];
 		//특성 아이콘 배치
 		switch (i)
@@ -279,7 +399,7 @@ void AbilityUI::render()
 				if (_windows[i].abilityPoint < 20) k = 2;
 				else
 				{
-					k = 1;
+					k = 0;
 					if (_windows[i].iconRc[j].ptInRect(_ptMouse))
 					{
 						k = 1;
@@ -302,11 +422,11 @@ void AbilityUI::render()
 		}
 		//특성 이름 
 		wstring title[5] = { L"분노", L"신속", L"인내", L"신비", L"탐욕" };
-		D2D_RENDERER->drawRectangle(_windows[i].titleRc, D2D1::ColorF::Magenta, 1, 1);
+		//D2D_RENDERER->drawRectangle(_windows[i].titleRc, D2D1::ColorF::Magenta, 1, 1);
 		D2D_RENDERER->renderTextField(_windows[i].titleRc.left, _windows[i].titleRc.top, title[i], D2D1::ColorF::White, 50, _windows[i].titleRc.getWidth(), _windows[i].titleRc.getHeight(), 1,
 			DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 		//특성 포인트
-		D2D_RENDERER->drawRectangle(_windows[i].pointRc, D2D1::ColorF::Magenta, 1, 1);
+		//D2D_RENDERER->drawRectangle(_windows[i].pointRc, D2D1::ColorF::Magenta, 1, 1);
 		int r, g, b;
 		if (i == 0) r = 210, g = 130, b = 112;
 		else if (i == 1) r = 181, g = 227, b = 204;
@@ -317,15 +437,15 @@ void AbilityUI::render()
 			1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
 	}
 	//특성 초기화
-	D2D_RENDERER->drawRectangle(_abilityInitRc, D2D1::ColorF::Magenta, 1, 1);
-	D2D_RENDERER->drawRectangle(_abilityInitTextRc, D2D1::ColorF::Magenta, 1, 1);
+	//D2D_RENDERER->drawRectangle(_abilityInitRc, D2D1::ColorF::Magenta, 1, 1);
+	//D2D_RENDERER->drawRectangle(_abilityInitTextRc, D2D1::ColorF::Magenta, 1, 1);
 	_abilityInitImg->render(_abilityInitRc.getCenter(), _abilityInitRc.getSize());
 	D2D_RENDERER->renderTextField(_abilityInitTextRc.left, _abilityInitTextRc.top, L"초기화", D2D1::ColorF::White, 30, _abilityInitTextRc.getWidth(), _abilityInitTextRc.getHeight(), 1,
 		DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 	//현재 남은 특성 포인트
 	_currPointBack->render(_currPointRc.getCenter(), _currPointRc.getSize());
 	_currPointFrame->render(_currPointRc.getCenter(), _currPointRc.getSize());
-	D2D_RENDERER->drawRectangle(_currPointRc, D2D1::ColorF::Magenta, 1, 1);
+	//D2D_RENDERER->drawRectangle(_currPointRc, D2D1::ColorF::Magenta, 1, 1);
 	D2D_RENDERER->renderTextField(_currPointRc.left, _currPointRc.top, L"남은 포인트 : " + to_wstring(_currAbilityPoint), D2D1::ColorF::White, 30, _currPointRc.getWidth(), _currPointRc.getHeight(), 1,
 		DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아", 0);
 	//D2D_RENDERER->renderText(_currPointRc.left + 30, _currPointRc.top - 50, L"남은 포인트 : " + to_wstring(_currAbilityPoint), 20, D2DRenderer::DefaultBrush::White, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아", 0);

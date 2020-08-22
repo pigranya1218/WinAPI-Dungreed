@@ -13,16 +13,6 @@ bool FloatCircle::intersect(FloatRect rc)
 	// (원이 큰 경우)
 	if (TTYONE_UTIL::getDistance(rc.getCenter().x, rc.getCenter().y, origin.x, origin.y) < size)
 	{
-		/*float radian = atan2f(-(rc.getCenter().y - origin.y), (rc.getCenter().x - origin.x));
-		if (radian < 0)
-		{
-			radian += PI;
-		}
-		if (isInsideRadian(radian))
-		{
-			return true;
-		}*/
-		
 		// 사각형의 꼭지점들에 대하여 각도 계산
 		float calcSup[4][2] = { {-0.5, -0.5}, {0.5, -0.5}, {0.5, 0.5}, {-0.5, 0.5} };
 		float radians[4];
@@ -69,20 +59,42 @@ bool FloatCircle::intersect(FloatRect rc)
 
 	}
 	// 사각형의 모서리와 교차점 비교 (원과 사각형의 크기가 비슷한 경우)
-	else if (isCollisionX(rc.left, Vector2(rc.top, rc.bottom)) || isCollisionX(rc.right, Vector2(rc.top, rc.bottom)) || isCollisionY(rc.top, Vector2(rc.left, rc.right)) || isCollisionY(rc.bottom, Vector2(rc.left, rc.right)))
+	else
 	{
-		return true;
+		vector<float> intersects;
+		isCollisionX(rc.left, Vector2(rc.top, rc.bottom), intersects);
+		isCollisionX(rc.right, Vector2(rc.top, rc.bottom), intersects);
+		isCollisionY(rc.top, Vector2(rc.left, rc.right), intersects);
+		isCollisionY(rc.bottom, Vector2(rc.left, rc.right), intersects);
+
+		if (intersects.size() == 2)
+		{
+			if (getRadian(intersects[0], intersects[1]) < PI)
+			{
+				if (isIntersectRadian(Vector2(intersects[0], intersects[1])))
+				{
+					return true;
+				}
+			}
+			else
+			{
+				if (isIntersectRadian(Vector2(intersects[1], intersects[0])))
+				{
+					return true;
+				}
+			}
+		}
 	}
 	
 	return false;
 }
 
-bool FloatCircle::isCollisionX(float x, Vector2 rangeY)
+void FloatCircle::isCollisionX(float x, Vector2 rangeY, vector<float>& intersects)
 {
 	if (origin.x - size <= x && x <= origin.x + size)
 	{
 		float result = size * size - (x - origin.x) * (x - origin.x);
-		if (result < 0) return false;
+		if (result < 0) return;
 		result = sqrt(result);
 		float y[2] = { result + origin.y, -result + origin.y };
 		bool isCollision = false;
@@ -91,21 +103,22 @@ bool FloatCircle::isCollisionX(float x, Vector2 rangeY)
 			if (rangeY.x <= y[i] && y[i] <= rangeY.y)
 			{
 				float radian = atan2f(-(y[i] - origin.y), (x - origin.x));
-				isCollision |= isInsideRadian(radian);
+				if (radian < 0)
+				{
+					radian += PI2;
+				}
+				intersects.push_back(radian);
 			}
 		}
-
-		return isCollision;
 	}
-	return false;
 }
 
-bool FloatCircle::isCollisionY(float y, Vector2 rangeX)
+void FloatCircle::isCollisionY(float y, Vector2 rangeX, vector<float>& intersects)
 {
 	if (origin.y - size <= y && y <= origin.y + size)
 	{
 		float result = size * size - (y - origin.y) * (y - origin.y);
-		if (result < 0) return false;
+		if (result < 0) return;
 		result = sqrt(result);
 		float x[2] = { result + origin.x, -result + origin.x };
 		bool isCollision = false;
@@ -114,13 +127,14 @@ bool FloatCircle::isCollisionY(float y, Vector2 rangeX)
 			if (rangeX.x <= x[i] && x[i] <= rangeX.y)
 			{
 				float radian = atan2f(-(y - origin.y), (x[i] - origin.x));
-				isCollision |= isInsideRadian(radian);
+				if (radian < 0)
+				{
+					radian += PI2;
+				}
+				intersects.push_back(radian);
 			}
 		}
-
-		return isCollision;
 	}
-	return false;
 }
 
 bool FloatCircle::isInsideRadian(float radian)
@@ -175,6 +189,18 @@ bool FloatCircle::ptInCircle(POINT pt) const
 
 	if (length <= size) return true;
 	else return false;
+}
+
+float FloatCircle::getRadian(float start, float end)
+{
+	if (start > end)
+	{
+		return end + PI2 - start;
+	}
+	else
+	{
+		return end - start;
+	}
 }
 
 void FloatCircle::render(bool useCamera)

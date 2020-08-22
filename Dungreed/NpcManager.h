@@ -31,6 +31,11 @@ public:
 	vector<Npc*> getNpcs() { return _npcs; };
 
 	void moveRoom(Vector2 pos); // for gate..
+	void nextStage(); // for gate
 	Vector2 getGatePos();
+
+	void setShowPlayer(bool showPlayer);
+	void showRestaurantUI();
+	void showShopUI();
 };
 

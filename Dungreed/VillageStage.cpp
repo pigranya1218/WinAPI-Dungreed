@@ -5,11 +5,11 @@
 
 void VillageStage::init()
 {
-	_stageManager->setPlayerPos(3600, 1000);
+	
 
 	Stage::init();
 
-	
+	_respawnPosition[0] = Vector2(4600, 1000);
 
 	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950), Vector2(0,2005),Vector2(500,2000)));
 	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(2005, 950), Vector2(2640, 1590),Vector2(2005,2640),Vector2(950,1590)));
@@ -41,12 +41,15 @@ void VillageStage::init()
 	_eatAni->setFPS(12);
 	
 
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 9000, 500);
+	//CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 9000, 500);
 	
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile3");
 	loadMap("Town.map");
 
 	_enter = false;
+
+	SOUND_MANAGER->stop("Villiage_BGM");
+	SOUND_MANAGER->play("Villiage_BGM", 1.0f);
 
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
 }
@@ -74,13 +77,18 @@ void VillageStage::update(float const elapsedTime)
 		enterDungeon();
 	}
 		//_stageManager->nextStage();
-	if (!_eatAni->isPlay()&& _enter)
+	if (_enter)
 	{
-			/*_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
+		if (_eatAni->getPlayIndex() >= 9)
+		{
+			_stageManager->setShowPlayer(false);
+		}
 
-			_stageManager->setPlayerPos(200, 400);
-			_stageManager->makeStage();*/
-		_stageManager->nextStage();
+		if (!_eatAni->isPlay())
+		{
+			_stageManager->nextStage();
+
+		}
 	}
 	
 	
@@ -145,16 +153,24 @@ void VillageStage::render()
 	}
 	Stage::render();
 
+
 	IMAGE_MANAGER->findImage("TempleFront")->setScale(5);
 	CAMERA->render(IMAGE_MANAGER->findImage("TempleFront"), Vector2(4730, 1047 - IMAGE_MANAGER->findImage("TempleFront")->getHeight() * 2));
 }
 
 void VillageStage::enterDungeon()
 {
+	SOUND_MANAGER->stop("Villiage_BGM");
+
+	SOUND_MANAGER->stop("DungeonEat");
+	SOUND_MANAGER->play("DungeonEat", 1.0f);
+
 	_eatPos.x = _stageManager->getPlayerPos().x;
 	_eatPos.y= _stageManager->getPlayerPos().y-_dungeonEat->getHeight()-35;
 	_enter = true;
 	_eatAni->start();
+
+
 }
 
 

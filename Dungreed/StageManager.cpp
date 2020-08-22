@@ -323,7 +323,7 @@ void StageManager::moveRoomIndex(Vector2 index)
 
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(4);
-	_gameScene->pushR2REvent(1);
+	_gameScene->pushR2REvent(2);
 }
 
 void StageManager::makeStage()
@@ -352,9 +352,9 @@ void StageManager::makeStage()
 		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
-		//makeDungeon();
-		makeBoomStage();
-		
+		makeBossStage();
+		_uiMgr->setMap(_stageMap, getStageTitle());
+		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 		break;
 	case STAGE_TYPE::TEST:
 		_currStage = new DebugStage();
@@ -367,27 +367,58 @@ void StageManager::makeStage()
 	default:
 		break;
 	}
+
+	switch (_currStageType)
+	{
+	case STAGE_TYPE::TEST:
+		break;
+	case STAGE_TYPE::VILLAGE:
+		break;
+	case STAGE_TYPE::DUNGEON_NORMAL:
+
+		SOUND_MANAGER->stop("MetalDoorSound");
+		SOUND_MANAGER->play("MetalDoorSound",1.0f);
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM",1.0f);
+		break;
+	case STAGE_TYPE::DUNGEON_BOSS:
+		break;
+	}
+
+	TIME_MANAGER->update(60);
 }
 
-void StageManager::makeBoomStage()
+void StageManager::makeBossStage()
 {
 	for (int i = 0; i < 3; i++)
 	{
-		if(i==0)_currStage = new BossRoomBef1R;
-		else if(i==1)_currStage = new BossRoom1;
-		else if(i==2)_currStage = new DownStair1L;
-		_currStage->setStageManager(this);
-		_currStage->setUIManager(_uiMgr);
-		_currStage->setPlayer(_player);
-		_currStage->init();
-		_currStage->enter(0);
-		_bossRoomInfo.push_back(_currStage);
+		Stage* stage = nullptr;
+		vector<bool> wall(4, true);
+		if (i == 0)
+		{
+			stage = new BossRoomBef1R;
+			wall[2] = false;
+		}
+		else if (i == 1)
+		{
+			stage = new BossRoom1;
+			wall[2] = false;
+		}
+		else if (i == 2)
+		{
+			stage = new DownStair1L;
+		}
+		stage->setWall(wall);
+		stage->setStageManager(this);
+		stage->setUIManager(_uiMgr);
+		stage->setPlayer(_player);
+		stage->init();
+		_stageMap[i][0] = stage;
 	}
-	_currStage = _bossRoomInfo[0];
-	_currStage->setStageManager(this);
-	_currStage->setUIManager(_uiMgr);
-	_currStage->setPlayer(_player);
-	_currStage->init();
+	
+	_currIndexX = 0;
+	_currIndexY = 0;
+	_currStage = _stageMap[_currIndexX][_currIndexY];
 	_currStage->enter(0);
 }
 
@@ -667,6 +698,11 @@ Vector2 StageManager::getEnemyPos(Vector2 pos)
 	return _currStage->getEnemyPos(pos);
 }
 
+vector<FloatRect> StageManager::getEnemyRects()
+{
+	return _currStage->getEnemyRects();
+}
+
 void StageManager::showDamage(DamageInfo info, Vector2 pos)
 {
 	_uiMgr->showDamage(info, pos);
@@ -675,6 +711,11 @@ void StageManager::showDamage(DamageInfo info, Vector2 pos)
 void StageManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 {
 	_uiMgr->showEnemyHp(maxHp, curHp, pos);
+}
+
+void StageManager::setShowPlayer(bool showPlayer)
+{
+	_gameScene->setShowPlayer(showPlayer);
 }
 
 
