@@ -41,6 +41,7 @@ public:
 	bool detectPlayer(GameObject* object, const float distance);															// 에너미 플레이어 감지
 	void fireEnemy(Projectile* projectile, AttackInfo* attackInfo);															// 에너미 불릿
 	Vector2 getEnemyPos(const Vector2& pos);	// 좌표 기준 가장 가까운 에너미 좌표 반환
+	vector<FloatRect> getEnemyRects();
 	vector<Vector2> getAllEnemyPos();
 	void claerEnemy();	// 생성되어 있는 모든 에너미 삭제
 

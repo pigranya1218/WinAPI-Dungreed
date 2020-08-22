@@ -239,6 +239,16 @@ Vector2 EnemyManager::getEnemyPos(const Vector2 & pos)
 	return result;
 }
 
+vector<FloatRect> EnemyManager::getEnemyRects()
+{
+	vector<FloatRect> result;
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		result.push_back(FloatRect(_enemies[i]->getPosition(), _enemies[i]->getSize(), PIVOT::CENTER));
+	}
+	return result;
+}
+
 vector<Vector2> EnemyManager::getAllEnemyPos()
 {
 	vector<Vector2> result;

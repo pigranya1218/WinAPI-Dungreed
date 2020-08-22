@@ -66,6 +66,11 @@ void Player::updateAdjustStat()
 		}
 	}
 
+	for (int i = 0; i < _specialAbility.size(); i++)
+	{
+		_adjustStat = _adjustStat + _specialAbility[i]->getAddStat();
+	}
+
 	for (int i = 0; i < _ateFood.size(); i++)
 	{
 		_adjustStat = _adjustStat + _ateFood[i]->getAddStat();
@@ -161,8 +166,8 @@ void Player::init()
 	_direction = DIRECTION::RIGHT;
 	
 	//최초에 장착하는 코스튬
-	_costume = DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE);
-	_costume->init();
+	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
+	
 
 	_level = 1;
 	_currJumpCount = _adjustStat.maxJumpCount;
@@ -249,9 +254,9 @@ void Player::init()
 	//testAcc13->init();
 	//_inventory[5] = testAcc13;
 
-	//Voluspa* testAcc22 = new Voluspa;
-	//testAcc22->init();
-	//_inventory[5] = testAcc22;
+	Voluspa* testAcc22 = new Voluspa;
+	testAcc22->init();
+	_inventory[1] = testAcc22;
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
@@ -532,7 +537,7 @@ void Player::update(float const elapsedTime)
 	if (_isStand && _force.y == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 23;
+		moveDir.y += 21;
 	}
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
@@ -604,6 +609,12 @@ void Player::update(float const elapsedTime)
 		}
 	}
 
+	// 특수 능력 업데이트
+	for (int i = 0; i < _specialAbility.size(); i++)
+	{
+		_specialAbility[i]->update(this, elapsedTime);
+	}
+
 	if (_currHitTime > 0)
 	{
 		_currHitTime = max(0, _currHitTime - elapsedTime);
@@ -633,6 +644,10 @@ void Player::render()
 		{
 			_hand->backRender(this);
 		}
+		for (int i = 0; i < _specialAbility.size(); i++)
+		{
+			_specialAbility[i]->backRender(this);
+		}
 
 		// 캐릭터 그리기
 		_costume->render(CAMERA->getRelativeV2(_position), _direction, (_currHitTime > 0));
@@ -652,6 +667,10 @@ void Player::render()
 		else
 		{
 			_hand->frontRender(this);
+		}
+		for (int i = 0; i < _specialAbility.size(); i++)
+		{
+			_specialAbility[i]->frontRender(this);
 		}
 
 		if (_currHitTime > 0)
@@ -1013,6 +1032,22 @@ bool Player::ateFood(Food * food)
 	
 }
 
+void Player::setSpecialAbility(vector<Item*> specialAbility)
+{
+	for (int i = 0; i < _specialAbility.size(); i++)
+	{
+		_specialAbility[i]->release();
+		delete _specialAbility[i];
+	}
+	_specialAbility = specialAbility;
+}
+
+void Player::setCurrCostume(Costume* costume)
+{
+	 _costume = costume;
+	 setSpecialAbility(costume->getSpecialAbility()); 
+}
+
 float Player::getAttackSpeed()
 {
 	if (_equippedWeapon[_currWeaponIndex] == nullptr)
@@ -1064,6 +1099,12 @@ float Player::getMaxDamage()
 Vector2 Player::getEnemyPos(Vector2 pos)
 {
 	return _gameScene->getEnemyPos(pos);
+}
+
+
+vector<FloatRect> Player::getEnemyRects()
+{
+	return _gameScene->getEnemyRects();
 }
 
 void Player::moveRoom(Vector2 dir)

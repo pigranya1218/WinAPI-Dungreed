@@ -12,6 +12,7 @@ private:
 	float _currStopDelay;
 	string _attackCode;
 	float _elapsedTime;
+	
 
 public:
 	virtual void init();

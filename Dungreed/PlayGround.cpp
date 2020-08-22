@@ -314,7 +314,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_EXIT", L"resources/images/gameScene/ui/map/Exit.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_ENTRANCE", L"resources/images/gameScene/ui/map/Enterance.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_CHEST", L"resources/images/gameScene/ui/map/Chest.png");
-
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_NPC", L"resources/images/gameScene/ui/map/MiniMapNPC.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
@@ -353,6 +353,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 	IMAGE_MANAGER->addFrameImage("DungeonEat", L"resources/images/Villiage/DungeonEat.png", 28, 1);
 
+	SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true);
+	SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false);
+	
+
 	// ** DUNGEON
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
 	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
@@ -363,6 +367,10 @@ HRESULT playGround::init()
 
 	IMAGE_MANAGER->addFrameImage("Die", L"resources/images/Effect/Die/Die.png", 11, 1);
 	EFFECT_MANAGER->addEffect("Die_Effect", "Die", 15, 1); //이건 워프이동에도 이용
+
+	
+	SOUND_MANAGER->addSound("Floor1_BGM", "resources/sound/Ui/bgm/1.JailField.wav", true, true);
+	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
 
 	// ** OBJECT
 	// *** BROKEN
@@ -598,6 +606,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Seeri0", L"resources/images/Accessories/Seeri0.png", 9, 1);                  // 자동공격 인형 프레임 이미지
 	IMAGE_MANAGER->addImage("selected", L"resources/images/Accessories/selected.png");                         // 자동공격 인형 조준점
 	IMAGE_MANAGER->addImage("SeeriBullet", L"resources/images/Accessories/SeeriBullet.png");                   // 자동공격 인형 탄
+
+	// ** SPECIAL ABILITY
+	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY_WARNING", L"resources/images/weapon/specialAbility/alice_warning.png", 4, 1);
+	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY", L"resources/images/weapon/specialAbility/alice_safe.png", 1, 1);
 
 	// ** ENEMY
 	// * 수녀
@@ -845,7 +857,6 @@ HRESULT playGround::init()
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
-	TIME_MANAGER->update();
 
 
 	// 모든 씬 SCENE_MANAGER에 
@@ -855,7 +866,8 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
 	SCENE_MANAGER->changeScene("GAME");	
-
+	
+	TIME_MANAGER->init();
 	
 	return S_OK;
 }

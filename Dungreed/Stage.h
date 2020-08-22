@@ -80,6 +80,7 @@ public:
 	
 	Vector2 getPlayerPos();
 	Vector2 getEnemyPos(const Vector2& pos);
+	vector<FloatRect> getEnemyRects();
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);

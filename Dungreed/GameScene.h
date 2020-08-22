@@ -29,6 +29,7 @@ public:
 
 	// 플레이어 관련 함수
 	Vector2 getEnemyPos(Vector2 pos);
+	vector<FloatRect> getEnemyRects();
 	bool showPlayer() {return _showPlayer;}
 	void setShowPlayer(float showPlayer) { _showPlayer = showPlayer; }
 	// 스테이지 관련 함수
