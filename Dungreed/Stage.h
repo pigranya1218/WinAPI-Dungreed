@@ -74,6 +74,11 @@ protected:
 	vector<Vector2> _respawnPosition; // 플레이어가 리스폰될 위치
 	vector<DoorObject*> _doors;
 
+	
+
+
+	Synthesize(ROOMTYPE, _roomType, RoomType)
+
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
 	void setUIManager(UIManager* uiManager) { _uiManager = uiManager; }

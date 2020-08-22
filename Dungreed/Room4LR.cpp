@@ -23,6 +23,8 @@ void Room4LR::init()
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1000, 1320), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BOSS, Vector2(1000, 620), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room4LR::release()

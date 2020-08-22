@@ -370,6 +370,10 @@ HRESULT playGround::init()
 	
 	SOUND_MANAGER->addSound("Floor1_BGM", "resources/sound/Ui/bgm/1.JailField.wav", true, true);
 	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
+	SOUND_MANAGER->addSound("Foodshop", "resources/sound/Ui/bgm/Foodshop.wav", true, true);
+	SOUND_MANAGER->addSound("Shop", "resources/sound/Ui/bgm/Shop.wav", true, true);
+	
+
 
 	// ** OBJECT
 	// *** BROKEN

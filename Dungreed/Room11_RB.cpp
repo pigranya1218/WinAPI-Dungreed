@@ -21,6 +21,8 @@ void Room11_RB::init()
 	_objectMgr->spawnObject(0x0002, Vector2(650, 420));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(820, 420), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room11_RB::release()

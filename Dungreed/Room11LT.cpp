@@ -14,6 +14,8 @@ void Room11LT::init()
 	_spawnChest.pos = Vector2(500, 500);
 	
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(750, 450), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room11LT::release()
