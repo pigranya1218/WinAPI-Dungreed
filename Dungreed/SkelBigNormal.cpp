@@ -32,7 +32,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEff
 	_attack.delay = 1.5f;
 	_attack.distance = 200;	
 	_attack.circleSize = 200;
-	_attack.attackInit(10, 15, 3);
+	_attack.attackInit(3, 3, 8, 0, 0, 40);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -40,9 +40,10 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEff
 	_isDetect =  0;
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 60;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_NORMAL);
+	_playCount = 0;
 }
 
 void SkelBigNormal::release()
@@ -130,13 +131,18 @@ void SkelBigNormal::update(float const timeElapsed)
 		{
 			if (_ani->getPlayIndex() == 2)
 			{
+				_playCount++;
 				Vector2 attackPos = _position;
 				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
 				attackPos.y += _size.y * 0.5f;
 
 				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (0);
 				float endRad = startRad + PI / 2;
-
+				if (_playCount == 1)
+				{
+					SOUND_MANAGER->stop("Skell/Big/Attack");
+					SOUND_MANAGER->play("Skell/Big/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
 			}
 			else
@@ -145,6 +151,7 @@ void SkelBigNormal::update(float const timeElapsed)
 			}
 			if (!_ani->isPlay())
 			{
+				_playCount = 0;
 				setState(ENEMY_STATE::MOVE);
 			}
 			break;

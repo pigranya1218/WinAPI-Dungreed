@@ -27,7 +27,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 
 	// ≈∫∏∑ √ ±‚»≠
 	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2.2, false, true, true, false, false, false);
-	_shooting.attackInit(5, 10, 3);
+	_shooting.attackInit(3,3,10);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 
@@ -36,7 +36,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 
 	_active = true;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 35;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BANSHEE);
 }
@@ -79,6 +79,7 @@ void Banshee::update(float const timeElapsed)
 						_shooting.angle += PI / 6;
 						_shooting.createBullet(_position, _shooting.angle);
 					}
+					SOUND_MANAGER->stop("Banshee/Attack");
 					SOUND_MANAGER->play("Banshee/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_shooting.fireBullet(_myEnemyType, _enemyManager);
 				}
@@ -107,6 +108,7 @@ void Banshee::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		SOUND_MANAGER->stop("Banshee/Attack");
 		setState(ENEMY_STATE::DIE);
 	}
 }

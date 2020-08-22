@@ -47,7 +47,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffe
 	_hit.delay = 0.3;
 
 	_shooting.init("Arrow00", "ArrowHitEffect", Vector2(500, 500), _scale, 1.5, 2.5, true, false, false, false, true, false);
-	_shooting.attackInit(3, 5, 3);
+	_shooting.attackInit(3, 2, 10);
 
 	// 플레이어 감지 변수 초기화
 	_isDetect = _attacking = 0;
@@ -55,7 +55,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffe
 	_active = true;
 
 	// TEST
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 30;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_BOW);
 }
