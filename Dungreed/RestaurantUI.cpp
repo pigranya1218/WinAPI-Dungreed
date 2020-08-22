@@ -19,10 +19,13 @@ void RestaurantUI::init()
 		_foods.push_back(new EggFriedFood);
 	}*/
 	_foods.push_back(new BreadFood);
-	_foods.push_back(new GriffinEggOmeletteFood);
 	_foods.push_back(new EggFriedFood);
 	_foods.push_back(new GrilledMushroomFood);
 	_foods.push_back(new TomatoSoupFood);
+	_foods.push_back(new GriffinEggOmeletteFood);
+	_foods.push_back(new RaspberryCookieFood);
+	_foods.push_back(new SparklingWaterFood);
+	_foods.push_back(new StrawberryPieFood);
 	
 
 	_isActive = false;
