@@ -41,7 +41,7 @@ private:
 private:
 	//보스 스테이지 만들기
 	vector<Stage*> _bossRoomInfo;
-	void makeBoomStage();
+	void makeBossStage();
 
 	vector<vector<tagRoomInfo>> _roomInfo;
 	//랜덤 스테이지 만들기

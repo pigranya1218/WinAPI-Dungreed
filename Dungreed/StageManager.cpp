@@ -352,8 +352,13 @@ void StageManager::makeStage()
 		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
-		//makeDungeon();
-		makeBoomStage();
+		
+		_currStage = new BossRoomBef1R;
+		_currStage->setStageManager(this);
+		_currStage->setUIManager(_uiMgr);
+		_currStage->setPlayer(_player);
+		_currStage->init();
+		_currStage->enter(0);
 		
 		break;
 	case STAGE_TYPE::TEST:
@@ -369,7 +374,7 @@ void StageManager::makeStage()
 	}
 }
 
-void StageManager::makeBoomStage()
+void StageManager::makeBossStage()
 {
 	for (int i = 0; i < 3; i++)
 	{
@@ -380,7 +385,7 @@ void StageManager::makeBoomStage()
 		_currStage->setUIManager(_uiMgr);
 		_currStage->setPlayer(_player);
 		_currStage->init();
-		_currStage->enter(0);
+		
 		_bossRoomInfo.push_back(_currStage);
 	}
 	_currStage = _bossRoomInfo[0];

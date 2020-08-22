@@ -9,7 +9,7 @@ void VillageStage::init()
 
 	Stage::init();
 
-	
+	_respawnPosition[0] = Vector2(4600, 1000);
 
 	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950), Vector2(0,2005),Vector2(500,2000)));
 	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(2005, 950), Vector2(2640, 1590),Vector2(2005,2640),Vector2(950,1590)));
@@ -41,7 +41,7 @@ void VillageStage::init()
 	_eatAni->setFPS(12);
 	
 
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 9000, 500);
+	//CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, 9000, 500);
 	
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile3");
 	loadMap("Town.map");
@@ -144,6 +144,7 @@ void VillageStage::render()
 		_dungeonEat->aniRender(CAMERA->getRelativeV2(_eatPos), _eatAni);
 	}
 	Stage::render();
+
 
 	IMAGE_MANAGER->findImage("TempleFront")->setScale(5);
 	CAMERA->render(IMAGE_MANAGER->findImage("TempleFront"), Vector2(4730, 1047 - IMAGE_MANAGER->findImage("TempleFront")->getHeight() * 2));
