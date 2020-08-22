@@ -152,7 +152,8 @@ void Punch::attack(Player* player)
 	_attackCircle->size = 35;
 	_attackCircle->startRadian = attackRadian - PI * 0.03;
 	_attackCircle->endRadian = attackRadian + PI * 0.03;
-
+	SOUND_MANAGER->stop("SOUND_generalAttack");
+	SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	_attackInfo = new AttackInfo;
 	_attackInfo->team = OBJECT_TEAM::PLAYER;
 	_attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);

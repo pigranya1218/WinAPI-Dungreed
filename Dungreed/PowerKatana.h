@@ -2,6 +2,10 @@
 #include "Item.h"
 class PowerKatana : public Item
 {
+
+private: string _sounds[3] = { "SOUND_katana", "SOUND_katana2" ,"SOUND_katana3" };
+
+
 private:
 	// 공격 관련
 	Image* _img;
