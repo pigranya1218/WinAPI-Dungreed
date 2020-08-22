@@ -52,7 +52,7 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_active = true;
 
 	_curHp = _maxHp = 90;
-
+	_enterCount = 0;
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::MINOTAURS);
 }
 
@@ -82,8 +82,12 @@ void Minotaurs::update(float const timeElapsed)
 	{
 		case ENEMY_STATE::ENTER:
 		{
+
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -230,6 +234,7 @@ void Minotaurs::update(float const timeElapsed)
 
 		if (_isStand)
 		{
+
 			_moving.force.y = 0;
 		}
 	}
@@ -238,6 +243,8 @@ void Minotaurs::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		_enterCount = 0;
+		SOUND_MANAGER->stop("Enemy/Spawn");
 		setState(ENEMY_STATE::DIE);
 	}
 }

@@ -76,6 +76,8 @@ void Player::updateAdjustStat()
 		_adjustStat = _adjustStat + _ateFood[i]->getAddStat();
 	}
 
+	_adjustStat = _adjustStat + _abilityStat;
+
 	if (_equippedWeapon[_currWeaponIndex] != nullptr)
 	{
 		_equippedWeapon[_currWeaponIndex]->equip(this);
@@ -169,7 +171,7 @@ void Player::init()
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 	
 
-	_level = 1;
+	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
 	_currDashCoolTime = 0;
@@ -254,9 +256,9 @@ void Player::init()
 	//testAcc13->init();
 	//_inventory[5] = testAcc13;
 
-	//Voluspa* testAcc22 = new Voluspa;
-	//testAcc22->init();
-	//_inventory[5] = testAcc22;
+	Voluspa* testAcc22 = new Voluspa;
+	testAcc22->init();
+	_inventory[1] = testAcc22;
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
@@ -325,13 +327,17 @@ void Player::init()
 	testWeapon7->init();
 	_inventory[3] = testWeapon7;
 
-	/*OakBow* testWeapon8 = new OakBow;
-	testWeapon8->init();
-	_inventory[14] = testWeapon8;*/
+	//MagicStick* testWeapon8 = new MagicStick;
+	//testWeapon8->init();
+	//_inventory[14] = testWeapon8;
 
-	SilverBullet* testAcc19 = new SilverBullet;
+	OakBow* testWeapon8 = new OakBow;
+	testWeapon8->init();
+	_inventory[14] = testWeapon8;
+
+	/*SilverBullet* testAcc19 = new SilverBullet;
 	testAcc19->init();
-	_inventory[14] = testAcc19;
+	_inventory[14] = testAcc19;*/
 
 	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
 	testAcc18->init();
@@ -540,7 +546,7 @@ void Player::update(float const elapsedTime)
 	if (_isStand && _force.y == 0)
 	{
 		_position.y -= 15;
-		moveDir.y += 23;
+		moveDir.y += 21;
 	}
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
@@ -1102,6 +1108,12 @@ float Player::getMaxDamage()
 Vector2 Player::getEnemyPos(Vector2 pos)
 {
 	return _gameScene->getEnemyPos(pos);
+}
+
+
+vector<FloatRect> Player::getEnemyRects()
+{
+	return _gameScene->getEnemyRects();
 }
 
 void Player::moveRoom(Vector2 dir)

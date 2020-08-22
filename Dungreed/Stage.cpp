@@ -5,6 +5,8 @@
 
 void Stage::init()
 {
+	_state = STAGE_STATE::IDLE;
+
 	_objectMgr = new ObjectManager;
 	_objectMgr->setStage(this);
 	_objectMgr->setPlayer(_player);
@@ -69,6 +71,76 @@ void Stage::update(float const elaspedTime)
 
 	CAMERA->setXY(Vector2(round(playerPos.x), round(playerPos.y)));
 
+	switch (_state)
+	{
+	case STAGE_STATE::IDLE:
+	{
+		if (_spawnEnemies.size() > 0)
+		{
+			_state = STAGE_STATE::START;
+			_spawnDelay = 0;
+			_spawnIndex = 0;
+			_spawnPhase = 1;
+		}
+		else
+		{
+			_state = STAGE_STATE::FINISH;
+		}
+	}
+	break;
+	case STAGE_STATE::START:
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(false);
+			}
+		}
+
+		_spawnDelay -= elaspedTime;
+		if (_spawnDelay <= 0)
+		{
+			_spawnDelay = 1;
+			if (_spawnIndex < _spawnEnemies.size())
+			{
+				if (_spawnPhase == _spawnEnemies[_spawnIndex].phase)
+				{
+					_enemyMgr->spawnEnemy(_spawnEnemies[_spawnIndex].type, _spawnEnemies[_spawnIndex].pos, true);
+					_spawnIndex++;
+				}
+				else
+				{
+					if (_enemyMgr->getEnemyCount() == 0)
+					{
+						_spawnPhase++;
+					}
+				}
+			}
+		}
+		if (_spawnIndex >= _spawnEnemies.size() && _enemyMgr->getEnemyCount() == 0)
+		{
+			_state = STAGE_STATE::FINISH;
+			if (_spawnChest.spawn)
+			{
+				_npcMgr->spawnNpc(_spawnChest.type, _spawnChest.pos, DIRECTION::LEFT);
+			}
+		}
+	}
+	break;
+	case STAGE_STATE::FINISH:
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(true);
+			}
+		}
+	}
+	break;
+	}
+
 	if (KEY_MANAGER->isOnceKeyDown('L'))
 	{
 		for (int i = 0; i < 4; i++)
@@ -102,7 +174,7 @@ void Stage::render()
 		}
 	}
 
-	for (int i = 0; i < _collisionGroundRects.size(); i++)
+	/*for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_collisionGroundRects[i]), D2D1::ColorF::Enum::Red, 1, 1);
 	}
@@ -115,7 +187,7 @@ void Stage::render()
 	for (int i = 0; i < _collisionPlatforms.size(); i++)
 	{
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
-	}
+	}*/
 
 	_npcMgr->render();
 	_enemyMgr->render();
@@ -213,7 +285,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -226,7 +298,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
+			_collisionGroundLines.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -252,7 +324,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 1),
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.right, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.left, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[currIndex].rc.left, _tile[startIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -265,7 +337,7 @@ void Stage::makeMapToLine(int startX, int startY, int currX, int currY, vector<v
 		}
 		else
 		{
-			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 1), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 1),
+			_collisionPlatforms.push_back(LinearFunc::getLinearFuncFromPoints(Vector2(_tile[startIndex].rc.left, _tile[startIndex].rc.top - 2), Vector2(_tile[currIndex].rc.right, _tile[currIndex].rc.bottom - 2),
 				Vector2(_tile[startIndex].rc.left, _tile[currIndex].rc.right), Vector2(_tile[startIndex].rc.top, _tile[currIndex].rc.bottom)));
 		}
 	}
@@ -447,6 +519,11 @@ Vector2 Stage::getPlayerPos()
 Vector2 Stage::getEnemyPos(const Vector2 & pos)
 {
 	return _enemyMgr->getEnemyPos(pos);
+}
+
+vector<FloatRect> Stage::getEnemyRects()
+{
+	return _enemyMgr->getEnemyRects();
 }
 
 void Stage::showDamage(DamageInfo info, Vector2 pos)

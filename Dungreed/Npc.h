@@ -16,6 +16,7 @@ enum class NPC_TYPE : int
 	ENTRANCE, // 입구
 	EXIT, // 출구
 	ABILITY, //훈련장
+	COSTUME, // 의상실
 	END
 };
 
@@ -32,9 +33,9 @@ protected:
 	DIRECTION _direction; // 바라보는 방향
 
 	// FOR DIALOGUE
-	string _name; // 이름
-	string _bodyDialogue; // 본문 글
-	vector<string> _selectDialogues; // 선택지
+	wstring _name; // 이름
+	wstring _bodyDialogue; // 본문 글
+	vector<wstring> _selectDialogues; // 선택지
 
 	Vector2 _force; // 받고 있는 힘
 
@@ -54,9 +55,9 @@ public:
 	
 	virtual void clickMenu(int menuIndex) {}; // Dialogue 창에서 메뉴를 클릭함
 
-	string getName() { return _name; }
-	string getBodyDialogue() { return _bodyDialogue; }
-	vector<string> getSelectDialogues() { return _selectDialogues; }
+	wstring getName() { return _name; }
+	wstring getBodyDialogue() { return _bodyDialogue; }
+	vector<wstring> getSelectDialogues() { return _selectDialogues; }
 	Image* getMapIcon() { return _mapIcon; };
 	Image* getMiniMapIcon() { return _miniMapIcon; };
 	

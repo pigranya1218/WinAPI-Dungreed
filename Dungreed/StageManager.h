@@ -87,6 +87,7 @@ public:
 	Vector2 getPlayerPos();
 	void setPlayerPos(int x, int y);
 	Vector2 getEnemyPos(Vector2 pos);
+	vector<FloatRect> getEnemyRects();
 
 	
 

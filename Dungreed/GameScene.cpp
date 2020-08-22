@@ -45,7 +45,12 @@ void GameScene::update()
 	}
 
 	// 배속 관리
-	float elapsedTime = TIME_MANAGER->getElapsedTime() * _timeSpeed;
+	float originTime = TIME_MANAGER->getElapsedTime();
+	if (originTime > 0.03)
+	{
+		originTime = 0.03;
+	}
+	float elapsedTime = originTime * _timeSpeed;
 	
 	_player->update(elapsedTime);
 	_stageMgr->update(elapsedTime);
@@ -108,6 +113,11 @@ void GameScene::loadInfo(tagLoadInfo const info)
 Vector2 GameScene::getEnemyPos(Vector2 pos)
 {
 	return _stageMgr->getEnemyPos(pos);
+}
+
+vector<FloatRect> GameScene::getEnemyRects()
+{
+	return _stageMgr->getEnemyRects();
 }
 
 void GameScene::moveTo(GameObject * object, Vector2 moveDir)

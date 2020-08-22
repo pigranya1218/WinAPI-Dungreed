@@ -5,7 +5,7 @@ class BatBomb : public Enemy
 {
 private:
 	tagAttackInfo	_attack;
-
+	int _enterCount;
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();
@@ -13,6 +13,8 @@ public:
 	void render();
 
 	void setState(ENEMY_STATE state);
+
+	void dieEffect() {}
 
 	void hitReaction(const Vector2& playerPos, Vector2& moveDir, const float timeElapsed);
 

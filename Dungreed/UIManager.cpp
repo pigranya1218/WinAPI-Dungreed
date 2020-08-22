@@ -199,7 +199,7 @@ void UIManager::update(float const elapsedTime)
 				for (int y = 0; y < 4; y++)
 				{
 					if (_mapUI.currIndex.x == x && _mapUI.currIndex.y == y) continue;
-					if (_mapUI.uiMap[x][y].exist)
+					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
@@ -658,7 +658,7 @@ void UIManager::render()
 			{
 				for (int y = 0; y < 4; y++)
 				{
-					if (_mapUI.uiMap[x][y].exist)
+					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
@@ -688,16 +688,16 @@ void UIManager::render()
 			{
 				for (int y = 0; y < 4; y++)
 				{
-					if (_mapUI.uiMap[x][y].exist)
+					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
-						if (_mapUI.uiMap[x][y].isConnect[2]) // 우
+						if (_mapUI.uiMap[x][y].isConnect[2] && _mapUI.uiMap[x + 1][y].visible) // 우
 						{
 							FloatRect rc = FloatRect(centerX + offsetX + 48, centerY + offsetY - 3, centerX + offsetX + 48 + 30 + 18, centerY + offsetY + 3);
 							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
 						}
-						if (_mapUI.uiMap[x][y].isConnect[3]) // 하
+						if (_mapUI.uiMap[x][y].isConnect[3] && _mapUI.uiMap[x][y + 1].visible) // 하
 						{
 							FloatRect rc = FloatRect(centerX + offsetX - 3, centerY + offsetY + 48, centerX + offsetX + 3, centerY + offsetY + 48 + 30 + 18);
 							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);

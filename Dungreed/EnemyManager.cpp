@@ -239,6 +239,16 @@ Vector2 EnemyManager::getEnemyPos(const Vector2 & pos)
 	return result;
 }
 
+vector<FloatRect> EnemyManager::getEnemyRects()
+{
+	vector<FloatRect> result;
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		result.push_back(FloatRect(_enemies[i]->getPosition(), _enemies[i]->getSize(), PIVOT::CENTER));
+	}
+	return result;
+}
+
 vector<Vector2> EnemyManager::getAllEnemyPos()
 {
 	vector<Vector2> result;
@@ -247,16 +257,6 @@ vector<Vector2> EnemyManager::getAllEnemyPos()
 		result.push_back(_enemies[i]->getPosition());
 	}
 	return result;
-}
-
-void EnemyManager::claerEnemy()
-{
-	for (int i = 0; i < _enemies.size(); i++)
-	{
-		_enemies[i]->release();
-		SAFE_DELETE(_enemies[i]);
-	}
-	_enemies.clear();
 }
 
 Vector2 EnemyManager::getPlayerPos()

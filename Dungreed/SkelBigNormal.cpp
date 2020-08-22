@@ -42,8 +42,7 @@ void SkelBigNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEff
 
 	_curHp = _maxHp = 60;
 
-	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_NORMAL);
-	_playCount = 0;
+	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_NORMAL);	
 }
 
 void SkelBigNormal::release()
@@ -71,6 +70,9 @@ void SkelBigNormal::update(float const timeElapsed)
 		{
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -131,18 +133,19 @@ void SkelBigNormal::update(float const timeElapsed)
 		{
 			if (_ani->getPlayIndex() == 2)
 			{
-				_playCount++;
+				if (_attack.id.empty())
+				{
+					SOUND_MANAGER->stop("Skell/Big/Attack");
+					SOUND_MANAGER->play("Skell/Big/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
+
 				Vector2 attackPos = _position;
 				attackPos.x += (_direction == DIRECTION::LEFT) ? (_size.x * -0.5f) : (_size.x * 0.5f);
 				attackPos.y += _size.y * 0.5f;
 
 				float startRad = (_direction == DIRECTION::LEFT) ? (PI / 2) : (0);
 				float endRad = startRad + PI / 2;
-				if (_playCount == 1)
-				{
-					SOUND_MANAGER->stop("Skell/Big/Attack");
-					SOUND_MANAGER->play("Skell/Big/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-				}
+
 				_attack.attackCircle(_myEnemyType, _enemyManager, Vector2(attackPos), startRad, endRad);
 			}
 			else
@@ -150,8 +153,7 @@ void SkelBigNormal::update(float const timeElapsed)
 				_attack.id.clear();
 			}
 			if (!_ani->isPlay())
-			{
-				_playCount = 0;
+			{				
 				setState(ENEMY_STATE::MOVE);
 			}
 			break;
@@ -214,8 +216,6 @@ void SkelBigNormal::render()
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
-
-	_attack.circleDebug.render(true);
 }
 
 void SkelBigNormal::setState(ENEMY_STATE state)
@@ -272,6 +272,9 @@ void SkelBigNormal::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Enemy/Spawn");
+			SOUND_MANAGER->stop("Skell/Big/Attack");
+
 			_active = false;
 		}
 		break;

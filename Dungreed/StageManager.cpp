@@ -197,7 +197,7 @@ string StageManager::getStageTitle()
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::VILLAGE;
+	_currStageType = STAGE_TYPE::TEST;
 	_mapSize = 4;
 	makeStage();
 	_uiMgr->setMap(_stageMap, getStageTitle());
@@ -289,6 +289,10 @@ void StageManager::nextStage()
 
 void StageManager::moveRoom(Vector2 moveDir)
 {
+	Stage* _lastStage;
+	_lastStage = _currStage;
+
+
 	_currIndexX += moveDir.x;
 	_currIndexY += moveDir.y;
 
@@ -313,10 +317,50 @@ void StageManager::moveRoom(Vector2 moveDir)
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(moveType);
 	_gameScene->pushR2REvent(1);
+
+	if(_lastStage->getRoomType()== ROOMTYPE::NORMAL && _currStage->getRoomType()== ROOMTYPE::RESTAURANT)
+	{
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->play("Foodshop", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::RESTAURANT)
+	{
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->play("Foodshop", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::NORMAL)
+	{
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::NORMAL)
+	{
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::SHOP)
+	{
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->play("Shop", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::NORMAL && _currStage->getRoomType() == ROOMTYPE::SHOP)
+	{
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->play("Shop", 1.0f);
+	}
 }
 
 void StageManager::moveRoomIndex(Vector2 index)
 {
+	Stage* _lastStage;
+	_lastStage = _currStage;
+
 	_currIndexX = index.x;
 	_currIndexY = index.y;
 	_currStage = _stageMap[_currIndexX][_currIndexY];
@@ -324,6 +368,44 @@ void StageManager::moveRoomIndex(Vector2 index)
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(4);
 	_gameScene->pushR2REvent(2);
+
+	if (_lastStage->getRoomType() == ROOMTYPE::NORMAL && _currStage->getRoomType() == ROOMTYPE::RESTAURANT)
+	{
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->play("Foodshop", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::RESTAURANT)
+	{
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->play("Foodshop", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::NORMAL)
+	{
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::NORMAL)
+	{
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::SHOP)
+	{
+		SOUND_MANAGER->stop("Foodshop");
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->play("Shop", 1.0f);
+	}
+	else if (_lastStage->getRoomType() == ROOMTYPE::NORMAL && _currStage->getRoomType() == ROOMTYPE::SHOP)
+	{
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->stop("Shop");
+		SOUND_MANAGER->play("Shop", 1.0f);
+	}
+
 }
 
 void StageManager::makeStage()
@@ -350,6 +432,9 @@ void StageManager::makeStage()
 		makeDungeon();
 		_uiMgr->setMap(_stageMap, getStageTitle());
 		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
+
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM",1.0f);
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
 		makeBossStage();
@@ -367,6 +452,7 @@ void StageManager::makeStage()
 	default:
 		break;
 	}
+
 	TIME_MANAGER->update(60);
 }
 
@@ -678,6 +764,11 @@ void StageManager::setPlayerPos( int x, int y)
 Vector2 StageManager::getEnemyPos(Vector2 pos)
 {
 	return _currStage->getEnemyPos(pos);
+}
+
+vector<FloatRect> StageManager::getEnemyRects()
+{
+	return _currStage->getEnemyRects();
 }
 
 void StageManager::showDamage(DamageInfo info, Vector2 pos)
