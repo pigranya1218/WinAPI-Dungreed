@@ -68,12 +68,12 @@ void Belial::init(const Vector2 & pos)
 
 	// 벨리알 탄막 패턴
 	_shooting.init("Belial/Bullet", "Belial/Bullet_FX", Vector2(500, 500), _scale, 0.1, 3, false, true, true, false, true, false);
-	_shooting.attackInit(3, 5, 1);
+	_shooting.attackInit(1,3,1);
 	_shooting.angle = 0;
 
 	// 검 패턴
 	ZeroMemory(&_swordAtk, sizeof(_swordAtk));
-	_swordAtk.attackInit(3, 5, 0);
+	_swordAtk.attackInit(1, 5, 3);
 	_swordAtk.delay = 0.2;
 	_swordAtk.circleSize = 130;
 
@@ -93,7 +93,7 @@ void Belial::init(const Vector2 & pos)
 	_active = true;
 	_laserNum = _backMove = 0;
 
-	_curHp = _maxHp = 100;
+	_curHp = _maxHp = 800;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BELIAL);
 
