@@ -37,6 +37,7 @@ private:
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 
 	PlayerStat _adjustStat; // 각종 요인으로 변화된 최종 스탯
+	PlayerStat _abilityStat;// 어빌리티 추가 스탯
 
 	Item*		_hand; // 주먹질
 	vector<Item*> _inventory;				// 인벤토리
@@ -104,6 +105,7 @@ public:
 	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
+	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; }	//어빌리티 스탯 설정자
 	
 	Costume* getCurrCostume() { return _costume; }
 	void setCurrCostume(Costume* costume) { _costume = costume; }

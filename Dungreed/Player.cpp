@@ -457,6 +457,9 @@ void Player::update(float const elapsedTime)
 	// 대쉬
 	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
+		//대쉬 효과음 재생
+
+		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
@@ -483,6 +486,7 @@ void Player::update(float const elapsedTime)
 		{
 			//_force.y = 0;
 			// 대쉬 종료
+			SOUND_MANAGER->stop("Player/Dash");
 		}
 
 	}
