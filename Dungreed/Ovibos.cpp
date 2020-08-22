@@ -28,7 +28,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction)
 
 	_active = true;
 
-	_curHp = _maxHp = (MAXHP*2);
+	_curHp = _maxHp = 200;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::OVIBOS);
 }

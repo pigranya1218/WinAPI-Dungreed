@@ -26,14 +26,14 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction)
 	_hit.delay = 0.3f;
 
 	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
-	_shooting.attackInit(1, 1, 8);
+	_shooting.attackInit(1, 1, 5);
 
 	_isDetect = 0;
 	_detectRange = 300.f;
 
 	_active = true;
 
-	_curHp = _maxHp = (MAXHP*2);
+	_curHp = _maxHp =150;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_GIANT_NORMAL);
 }

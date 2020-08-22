@@ -28,7 +28,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay = 1;
 	_attack.distance = 200;
 	_attack.circleSize = 200;
-	_attack.attackInit(10, 15, 3,0,0,40);
+	_attack.attackInit(3, 3, 8, 0, 0, 40);
 	
 	ZeroMemory(&_skill, sizeof(_skill));
 	_skill.delay = 2;
@@ -38,13 +38,13 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction)
 	_hit.delay = 0.3f;
 
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(700, 700), _scale, 0.05f, 1, true, false, false, false, true, false);
-	_shooting.attackInit(2, 6, 1);
+	_shooting.attackInit(2, 0, 4);
 
 	_isDetect = 0;
 	_active = true;
 
 	_playCount = 0;
-	_curHp = _maxHp = (MAXHP*2);
+	_curHp = _maxHp = 130;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_BIG_ICE);
 }

@@ -34,7 +34,7 @@ void BatGiantRed::init(const Vector2 & pos, DIRECTION direction)
 	_renderNum = -1;
 	_active = true;
 
-	_curHp = _maxHp = (MAXHP * 2);
+	_curHp = _maxHp =175;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_GIANT_RED);
 }

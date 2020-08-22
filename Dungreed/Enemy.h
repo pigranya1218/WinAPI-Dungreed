@@ -4,8 +4,6 @@
 #include "Shooting.h"
 #include "NormalProjectile.h"
 
-
-#define MAXHP 150
 class EnemyManager;
 
 enum class ENEMY_STATE

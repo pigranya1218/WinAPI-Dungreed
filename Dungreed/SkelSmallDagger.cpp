@@ -32,7 +32,7 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay = 2.0f;
 	_attack.distance = 100;
 	_attack.circleSize = 85;
-	_attack.attackInit(1, 3, 2);
+	_attack.attackInit(1, 0, 2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -40,7 +40,7 @@ void SkelSmallDagger::init(const Vector2 & pos, DIRECTION direction)
 	_isDetect = 0;
 	_active = true;
 
-	_curHp = _maxHp = MAXHP;
+	_curHp = _maxHp = 60;
 	count = 0;
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_DAGGER);
 }

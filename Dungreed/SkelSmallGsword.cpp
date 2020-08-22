@@ -29,7 +29,7 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.attackInit(3, 5, 1,0,0, 25);
+	_attack.attackInit(1, 0, 4,0,0, 25);
 	_attack.delay = 1.5;
 	_attack.distance = 100;
 	_attack.circleSize = 100;
@@ -43,7 +43,7 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 		 
 	_active = true;
 
-	_curHp = _maxHp = MAXHP;
+	_curHp = _maxHp = 60;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_GSWORD);
 }

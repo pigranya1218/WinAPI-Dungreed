@@ -34,12 +34,12 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction)
 
 	// ≈∫∏∑ √ ±‚»≠
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(850, 850), _scale, 0.2, 1.3, true, false, false, false, true, false);
-	_shooting.attackInit(3, 5, 3);
+	_shooting.attackInit(3, 2, 6);
 
 	_isDetect = _attacking = 0;
 	_active = true;
 
-	_curHp = _maxHp = MAXHP;
+	_curHp = _maxHp = 80;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_MAGICIAN_ICE);
 }
