@@ -197,11 +197,13 @@ string StageManager::getStageTitle()
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::VILLAGE;
 	_mapSize = 4;
 	makeStage();
 	_uiMgr->setMap(_stageMap, getStageTitle());
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
+
+	
 }
 
 void StageManager::release()
@@ -352,8 +354,8 @@ void StageManager::makeStage()
 		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
-		
-		makeBossStage();
+		makeDungeon();
+		//makeBossStage();
 
 		/*_currStage = new BossRoomBef1R;
 		_currStage->setStageManager(this);
@@ -370,6 +372,26 @@ void StageManager::makeStage()
 		_currStage->setPlayer(_player);
 		_currStage->init();
 		_currStage->enter(0);
+		break;
+	default:
+		break;
+	}
+
+	switch (_currStageType)
+	{
+	case STAGE_TYPE::TEST:
+		break;
+	case STAGE_TYPE::VILLAGE:
+		break;
+	case STAGE_TYPE::DUNGEON_NORMAL:
+		SOUND_MANAGER->stop("Floor1_BGM");
+		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+
+		SOUND_MANAGER->stop("MetalDoorSound");
+		SOUND_MANAGER->play("MetalDoorSound", 1.0f);
+
+		break;
+	case STAGE_TYPE::DUNGEON_BOSS:
 		break;
 	default:
 		break;
@@ -397,24 +419,6 @@ void StageManager::makeBossStage()
 	_currStage->init();
 	_currStage->enter(0);
 
-
-
-	for (int x = 0; x < _mapSize; x++)
-	{
-		for (int y = 0; y < _mapSize; y++)
-		{
-			if (_roomInfo[x][y].roomType == -1) continue;
-			if (_roomInfo[x][y].roomType == 1)
-			{
-				_currIndexX = x;
-				_currIndexY = y;
-			}
-			_stageMap[x][y] = getStage(_roomInfo[x][y].roomType, _roomInfo[x][y].isWall);
-		}
-	}
-
-	_currStage = _stageMap[_currIndexX][_currIndexY];
-	_currStage->enter(0);
 }
 
 void StageManager::makeDungeon()
@@ -675,6 +679,8 @@ void StageManager::releaseStage()
 		_stageMap[i].clear();
 	}
 	_stageMap.clear();
+
+	
 }
 
 Vector2 StageManager::getPlayerPos()
