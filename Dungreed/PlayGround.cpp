@@ -301,6 +301,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Greed3_disable.png");
 
 	IMAGE_MANAGER->addFrameImage("UI/ABILITY/CLICK_EFFECT", L"resources/images/gameScene/ui/ability/click/ClickEffect.png", 12, 1);
+	EFFECT_MANAGER->addEffect("UI/ABILITY/EFFECT_click", "UI/ABILITY/CLICK_EFFECT", 30, 10);
 
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");
@@ -769,6 +770,24 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
 
 	//사운드
+	//** PLAYER / UI
+	SOUND_MANAGER->addSound("Player/Step1", "resources/sounds/player/step_lth1.wav", false, false);			//플레이어 이동1
+	SOUND_MANAGER->addSound("Player/Step2", "resources/sounds/player/step_lth2.wav", false, false);			//플레이어 이동2
+	SOUND_MANAGER->addSound("Player/Step3", "resources/sounds/player/step_lth3.wav", false, false);			//플레이어 이동3
+	SOUND_MANAGER->addSound("Player/Step4", "resources/sounds/player/step_lth4.wav", false, false);			//플레이어 이동4
+	SOUND_MANAGER->addSound("Player/Dash", "resources/sounds/player/dash.wav", false, false);				//대쉬
+	SOUND_MANAGER->addSound("Player/Dead", "resources/sounds/player/dead.wav", false, false);				//사망
+	SOUND_MANAGER->addSound("Player/GetGold", "resources/sounds/player/gold_collect.wav", false, false);	//수금 (골드 획득)
+	SOUND_MANAGER->addSound("Player/GrowAbility", "resources/sounds/player/GrowAbility.wav", false, false);	//특성 해금
+	SOUND_MANAGER->addSound("Player/GetFairy", "resources/sounds/player/Get_Fairy.wav", false, false);		//회복스팟 획득
+	SOUND_MANAGER->addSound("Player/Hit", "resources/sounds/player/Hit_Player.wav", false, false);			//피격
+	SOUND_MANAGER->addSound("Player/Jump", "resources/sounds/player/Jumping.wav", false, false);			//점프
+	SOUND_MANAGER->addSound("Player/Swap", "resources/sounds/player/swap.wav", false, false);				//무기 교체
+	SOUND_MANAGER->addSound("Player/Inven/Equip", "resources/sounds/player/inventorySounds/Equip.wav", false, false);				//인벤 장비착용
+	SOUND_MANAGER->addSound("Player/Inven/GetItem", "resources/sounds/player/inventorySounds/GetItem.wav", false, false);			//인벤 아이템 획득
+	SOUND_MANAGER->addSound("Player/Inven/OpenInven", "resources/sounds/player/inventorySounds/OpenInventory.wav", false, false);	//인벤토리 개폐
+	SOUND_MANAGER->addSound("Player/Inven/PickUpItem", "resources/sounds/player/inventorySounds/PickUpItem.wav", false, false);		//픽업 아이템
+
 	//** ENEMY
 	SOUND_MANAGER->addSound("Enemy/Die", "resources/sound/enemy/public/MonsterDie.wav", false, false);			//사망(공용)
 	SOUND_MANAGER->addSound("Enemy/GetHit", "resources/sound/enemy/public/Hit_Monster.wav", false, false);		//피격(공용)
