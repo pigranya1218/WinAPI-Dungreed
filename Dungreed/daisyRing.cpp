@@ -12,6 +12,7 @@ void DaisyRing::init()
 	_count = 0;
 	
 	
+
 	for (int i = 0; i < 12; i++)
 	{
 		_DaisyRingStat[i] = 0;

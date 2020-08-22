@@ -23,15 +23,17 @@ private:
 		FloatRect iconRc[3];		//특성 아이콘 렉트
 		//FloatRect buttonRc;			//플러스 단추
 		FloatCircle buttonCir;		//플러스 단추 서클
+		int abilityPoint; //0 ~ 4 : 분노 신속 인내 신비 탐욕 順 각각 부여되는 특성 포인트 (ex: windows[1].abilityPoint = 10 -> 신속 포인트가 10찍어져 있음)
 	};
 
 private:
 	Player* _player;
-	
+	Effect* _clickEffect;
+
 	bool _isActive;
 
 	int _currAbilityPoint; //현재 남은 특성 포인트
-	int _abilityPoint[5]; //0 ~ 4 : 분노 신속 인내 신비 탐욕 順 (ex:_abilityPoint[1] = 10 -> 신속 포인트가 10찍어져 있음)
+	
 
 	//이미지
 	//*라벨 띠지
@@ -65,12 +67,15 @@ private:
 	Image* _greedIcon[3][3];	 //탐욕
 	//*+단추 클릭시 이펙트 이미지
 	Image* _clickEffectImg = IMAGE_MANAGER->findImage("UI/ABILITY/CLICK_EFFECT");
+	//특성 초기화 단추 이미지
+	Image* _abilityInitImg = IMAGE_MANAGER->findImage("KEY_R");
 
 	//사용할 렉트
 	FloatRect _bgRc;	//뒷배경(알파수치 이용하여 투명도 조정)
 	FloatRect _exitRc;	//창닫기 단추
 	FloatRect _currPointRc; //현재 남은 특성 포인트를 표시할 렉트
-
+	FloatRect _abilityInitRc; //초기화 키 이미지를 입힐 렉트
+	FloatRect _abilityInitTextRc;	//초기화라는 글씨를 기입할 렉트
 	//특성 창 구조체
 	tagAbilityWindow _windows[5]; //분노,신속,인내,신비,탐욕 순으로 저장
 

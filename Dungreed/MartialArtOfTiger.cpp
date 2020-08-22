@@ -168,8 +168,8 @@ void MartialArtOfTiger::attack(Player* player)
 	attackCircle->endRadian = attackRadian + PI * 0.28;
 
 	_attackDebug = FloatCircle(originPos, 140, attackRadian - PI * 0.32, attackRadian + PI * 0.32); // forDEBUG
-	SOUND_MANAGER->stop("SOUND_generalAttack");
-	SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	SOUND_MANAGER->stop("SOUND_TigerRoar");
+	SOUND_MANAGER->play("SOUND_TigerRoar", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);

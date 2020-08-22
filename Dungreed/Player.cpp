@@ -185,9 +185,13 @@ void Player::init()
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
-	GreenBat* testAcc2 = new GreenBat;
-	testAcc2->init();
-	_inventory[5] = testAcc2;
+	Seeri* testAcc24 = new Seeri;
+	testAcc24->init();
+	_inventory[1] = testAcc24;
+
+	//GreenBat* testAcc2 = new GreenBat;
+	//testAcc2->init();
+	//_inventory[5] = testAcc2;
 	
 
 	//GreenDadBat* testAcc3 = new GreenDadBat;
@@ -205,9 +209,9 @@ void Player::init()
 	_inventory[8] = testAcc9;
 
 
-	PowerKatana* testAcc5 = new PowerKatana;
-	testAcc5->init();
-	_inventory[6] = testAcc5;
+	//PowerKatana* testAcc5 = new PowerKatana;
+	//testAcc5->init();
+	//_inventory[6] = testAcc5;
 
 
 	//IceBall* testAcc6 = new IceBall;
@@ -253,9 +257,9 @@ void Player::init()
 	testAcc14->init();
 	_inventory[10] = testAcc14;
 
-	MartialArtOfTiger* testAcc16 = new MartialArtOfTiger;
-	testAcc16->init();
-	_inventory[1] = testAcc16;
+	//MartialArtOfTiger* testAcc16 = new MartialArtOfTiger;
+	//testAcc16->init();
+	//_inventory[1] = testAcc16;
 
 	//Wingboots* testAcc17 = new Wingboots;
 	//testAcc17->init();
@@ -266,10 +270,13 @@ void Player::init()
 	_inventory[2] = testAcc20;
 	
 
-	BigPaintBlush* testAcc15 = new BigPaintBlush;
-	testAcc15->init();
-	_inventory[7] = testAcc15;
+	//BigPaintBlush* testAcc15 = new BigPaintBlush;
+	//testAcc15->init();
+	//_inventory[7] = testAcc15;
 
+	//DaisyRing* testAcc23 = new DaisyRing;
+	//testAcc23->init();
+	//_inventory[7] = testAcc23;
 	
 
 	/*KeresScythe* testWeapon1 = new KeresScythe;
@@ -297,7 +304,7 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;*/
 
-	MagicStick* testWeapon5 = new MagicStick;
+	CosmosSword* testWeapon5 = new CosmosSword;
 	testWeapon5->init();
 	_inventory[13] = testWeapon5;
 
@@ -323,7 +330,9 @@ void Player::init()
 
 	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
 	testAcc18->init();
-	_inventory[0] = testAcc18;
+	_inventory[5] = testAcc18;
+
+	
 
 	_hand = new Punch;
 	_hand->init();
