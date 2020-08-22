@@ -4,6 +4,7 @@
 class Player;
 class PlayerStat;
 
+
 class RestaurantUI
 {
 private:
@@ -12,7 +13,7 @@ private:
 	{
 		FloatRect baseRc;
 		FloatRect detailsRc;
-		
+
 		bool isSoldOut;	//구매 여부
 	};
 	struct tagScrollBar
@@ -27,7 +28,7 @@ private:
 	Player* _player;
 	Animation* _tableAni;
 	Animation* _currHpAni;
-
+	
 	vector<Food*>		_foods;
 	Image* _foodImg;
 
@@ -107,13 +108,14 @@ private:
 	FloatRect _goldAmountRc;
 	// 골드 아이콘 렉트
 	FloatRect _goldIconRc;
-	
+
 	tagFoodItems _foodItems[5];
 	tagScrollBar _scrollBar;
-	
+
 
 public:
 	void setPlayer(Player* player) { _player = player; }
+	//void setStatUI(StatUI* statUi) { _statUi = statUi; }
 
 	void init();
 	void release();
@@ -122,5 +124,7 @@ public:
 
 	bool isActive() const noexcept { return _isActive; }
 	void setActive(bool active) { _isActive = active; }
-};
 
+	//Food* getEatFood(int i);	//음식점에서 음식을 구매해서 먹으면 statUI로 전달한다.
+
+};

@@ -472,7 +472,8 @@ void Player::update(float const elapsedTime)
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		//대쉬 이펙트 재생
 		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
-		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, _size, 0, false);
+		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y * 2);
+		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
 
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));

@@ -132,3 +132,8 @@ void StatUI::renderStatInfo(Vector2 pos, STAT_TYPE type)
 		RGB(255, 255, 255), 30, textRc.getWidth(), 90, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 }
 
+void StatUI::setEatFoods(Food food)
+{
+	_foods.push_back(food);
+}
+
