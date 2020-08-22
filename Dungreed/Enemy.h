@@ -81,13 +81,16 @@ protected:
 
 			if (isAni)
 			{
-				collisionSize = drawSize = IMAGE_MANAGER->findImage(bulletName)->getFrameSize() * scale;
+				drawSize = IMAGE_MANAGER->findImage(bulletName)->getFrameSize() * scale;				
 			}
 			else
 			{
 				Vector2 size = IMAGE_MANAGER->findImage(bulletName)->getSize();
-				collisionSize = drawSize = Vector2(size.x * scale, size.y * scale);
+				drawSize = Vector2(size.x * scale, size.y * scale);				
 			}
+
+			effectSize = IMAGE_MANAGER->findImage(effectName)->getFrameSize() * scale;
+			collisionSize.x = collisionSize.y = min(drawSize.x, drawSize.y);
 
 			this->delay = delay;
 			this->duration = duration;
@@ -128,7 +131,7 @@ protected:
 			bullet->setPosition(pos);
 			//bullet->setSize(effectSize);
 			
-			bullet->init(bulletName, effectName, drawSize, collisionSize, drawSize, force, duration, angle, isAni, aniLoop, 15, isRotate, isGravity, collisionGround, collisionPlatForm);
+			bullet->init(bulletName, effectName, drawSize, collisionSize, effectSize, force, duration, angle, isAni, aniLoop, 15, isRotate, isGravity, collisionGround, collisionPlatForm);
 
 			if (bulletNum > 0) --bulletNum;
 			bullets.push_back(bullet);
