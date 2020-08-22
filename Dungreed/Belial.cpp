@@ -59,6 +59,7 @@ void Belial::init(const Vector2 & pos)
 	{
 		_deadParticle[i].setSize(Vector2(_deadParticle[i].img->getSize().x * _scale, _deadParticle[i].img->getSize().y * _scale));
 	}
+	_deadAngle = -PI / 20;
 
 	// 이동 수정
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -91,7 +92,7 @@ void Belial::init(const Vector2 & pos)
 
 	// 액티브 = 1, 레이저변수 초기화
 	_active = true;
-	_laserNum = _backMove = 0;
+	_laserNum = _backMove = _angleWay = 0;
 
 	_curHp = _maxHp = 100;
 
@@ -423,7 +424,28 @@ void Belial::update(float const timeElapsed)
 				// 머리 흔들리는 효과
 				if (_deadParticle[0].getIsStand())
 				{
+					// 우측으로
+					if (_angleWay)
+					{
+						_moving.angle -= timeElapsed / 10;
 
+						if (_moving.angle < _deadAngle)
+						{
+							_deadAngle += timeElapsed * 0.8;
+							_deadAngle = min(_deadAngle, 0);
+							_angleWay = false;
+						}
+					}
+					// 좌측으로
+					else
+					{
+						_moving.angle += timeElapsed / 10;
+
+						if (_moving.angle > 0)
+						{
+							_angleWay = true;
+						}
+					}
 				}
 			}
 		}
@@ -554,6 +576,8 @@ void Belial::render()
 	}
 	else
 	{
+		_deadParticle[0].img->setAngle((_moving.angle) * (180 / PI));
+		_deadParticle[0].img->setAnglePos(Vector2(_deadParticle[0].img->getSize().x * 0.5f, _deadParticle[0].img->getSize().y));
 		for (int i = 5; i >= 0; i--)
 		{
 			_deadParticle[i].img->setScale(_scale);
