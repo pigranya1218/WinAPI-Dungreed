@@ -46,7 +46,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffe
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
 
-	_shooting.init("Arrow00", "ArrowHitEffect", Vector2(500, 500), _scale, 1.5, 2.5, true, false, false, false, true, false);
+	_shooting.init("Arrow00", "ArrowHitEffect", Vector2(1300, 1300), _scale, 1.5, 2.5, true, false, false, false, true, false);
 	_shooting.attackInit(3, 2, 10);
 
 	// 플레이어 감지 변수 초기화
@@ -110,10 +110,15 @@ void SkelSmallBow::update(float const timeElapsed)
 			{
 				if (_weaponAni->isPlay())
 				{
+					SOUND_MANAGER->stop("Skell/Arrow/Ready");
+					SOUND_MANAGER->stop("Skell/Arrow/Attack");
+					SOUND_MANAGER->play("Skell/Arrow/Ready", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_weaponAni->pause();
 				}
 				if (_shooting.delayUpdate(timeElapsed))
 				{
+					SOUND_MANAGER->stop("Skell/Arrow/Ready");
+					SOUND_MANAGER->play("Skell/Arrow/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_weaponAni->resume();
 					_shooting.createBullet(_position, _attack.angle);
 					_shooting.fireBullet(_myEnemyType, _enemyManager);
@@ -128,7 +133,8 @@ void SkelSmallBow::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
-		
+			SOUND_MANAGER->stop("Skell/Arrow/Ready");
+			SOUND_MANAGER->stop("Skell/Arrow/Attack");
 		}
 		break;
 	}	

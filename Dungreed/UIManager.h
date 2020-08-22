@@ -184,5 +184,9 @@ public:
 
 	void setDialogue(Npc* npc) { _dialogueUI.startDialogue(npc); }
 	void showMap(GateNpc* gate, bool isShow) { _mapUI.isShow = isShow; _mapUI.gate = gate; }
+
+	void showRestaurant() { _restaurantUI.setActive(true); }
+	void showShop() {  }
+	void showAbility() { _abilityUI.setActive(true); }
 };
 

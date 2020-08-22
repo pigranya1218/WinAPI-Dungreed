@@ -41,7 +41,7 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
 
-	_shooting.init("IceBullet", "IceBullet_FX", Vector2(700, 700), _scale, 0.05f, 1, true, false, false, false, true, false);
+	_shooting.init("IceBullet", "IceBullet_FX", Vector2(850, 850), _scale, 0.05f, 1, true, false, false, false, true, false);
 	_shooting.attackInit(2, 2, 4);
 
 	_isDetect = 0;
@@ -193,6 +193,8 @@ void SkelBigIce::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("IceSkell/Magic/Attack");
+			SOUND_MANAGER->stop("Skell/ice/blast");
 		}		
 		break;
 	}

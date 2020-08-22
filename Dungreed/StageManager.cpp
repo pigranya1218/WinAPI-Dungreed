@@ -197,7 +197,7 @@ string StageManager::getStageTitle()
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::VILLAGE;
+	_currStageType = STAGE_TYPE::TEST;
 	_mapSize = 4;
 	makeStage();
 	_uiMgr->setMap(_stageMap, getStageTitle());
@@ -701,6 +701,11 @@ void StageManager::showDamage(DamageInfo info, Vector2 pos)
 void StageManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 {
 	_uiMgr->showEnemyHp(maxHp, curHp, pos);
+}
+
+void StageManager::setShowPlayer(bool showPlayer)
+{
+	_gameScene->setShowPlayer(showPlayer);
 }
 
 

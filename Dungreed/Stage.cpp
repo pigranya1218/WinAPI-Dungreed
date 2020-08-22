@@ -40,6 +40,7 @@ void Stage::enter(int enterType)
 		_stageManager->setPlayerPos(gate.x, gate.y + 10);
 	}
 	_isVisited = true;
+	_stageManager->setShowPlayer(true);
 }
 
 void Stage::release()
@@ -598,6 +599,11 @@ void Stage::moveToIndex(Vector2 index)
 void Stage::nextStage()
 {
 	_isGoNextStage = true;
+}
+
+void Stage::setShowPlayer(bool showPlayer)
+{
+	_stageManager->setShowPlayer(showPlayer);
 }
 
 
