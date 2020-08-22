@@ -336,6 +336,7 @@
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
+    <ClInclude Include="ViewObject.h" />
     <ClInclude Include="VillageStage.h" />
     <ClInclude Include="Voluspa.h" />
     <ClInclude Include="watCher.h" />
@@ -518,6 +519,7 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
+    <ClCompile Include="ViewObject.cpp" />
     <ClCompile Include="VillageStage.cpp" />
     <ClCompile Include="Voluspa.cpp" />
     <ClCompile Include="watCher.cpp" />
