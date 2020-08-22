@@ -111,7 +111,6 @@ void Stage::render()
 	_npcMgr->render();
 	_enemyMgr->render();
 	_projectileMgr->render();
-	
 }
 
 void Stage::loadMap(string mapName)

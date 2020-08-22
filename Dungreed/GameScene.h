@@ -15,6 +15,8 @@ private:
 	StageManager* _stageMgr;
 	UIManager* _uiMgr;
 
+
+
 public:
 	virtual HRESULT init();			// 초기화 전용 함수
 	virtual void release();			// 메모리 해제 전용

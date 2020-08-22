@@ -172,6 +172,9 @@
     <Filter Include="Dungreed\GameScene\Npc\Human">
       <UniqueIdentifier>{33042173-8c0a-4216-8d6d-e34b0411ed98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dungreed\GameScene\Event">
+      <UniqueIdentifier>{f8f3f253-ef62-44bf-a058-31b568ff2218}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -729,15 +732,6 @@
     <ClInclude Include="ChestNpc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="DoorObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Room2LR.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="SeeriProjectile.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ViewObject.h">
       <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
     </ClInclude>
@@ -749,6 +743,21 @@
     </ClInclude>
     <ClInclude Include="RestaurantNpc.h">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorObject.h">
+      <Filter>Dungreed\GameScene\Object\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomToRoomEvent.h">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvent.h">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="SeeriProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -820,9 +829,6 @@
     </ClCompile>
     <ClCompile Include="Image.cpp">
       <Filter>2DGameFramework\Image</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>헤더 파일</Filter>
     </ClCompile>
     <ClCompile Include="ConfigManager.cpp">
       <Filter>2DGameFramework\Manager</Filter>
@@ -1274,18 +1280,6 @@
     <ClCompile Include="ChestNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="DoorObject.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Room12LB.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Room2LR.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="SeeriProjectile.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ViewObject.cpp">
       <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
     </ClCompile>
@@ -1297,6 +1291,27 @@
     </ClCompile>
     <ClCompile Include="ShopNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room12LB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEvent.cpp">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomToRoomEvent.cpp">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="SeeriProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

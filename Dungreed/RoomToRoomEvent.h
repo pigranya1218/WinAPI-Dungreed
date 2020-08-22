@@ -1,0 +1,9 @@
+#pragma once
+#include "GameEvent.h"
+
+// 화면이 어두웠다 밝아지는 거
+class RoomToRoomEvent : public GameEvent
+{
+
+};
+
