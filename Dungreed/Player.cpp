@@ -185,9 +185,9 @@ void Player::init()
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
-	Seeri* testAcc24 = new Seeri;
-	testAcc24->init();
-	_inventory[1] = testAcc24;
+	//Seeri* testAcc24 = new Seeri;
+	//testAcc24->init();
+	//_inventory[1] = testAcc24;
 
 	//GreenBat* testAcc2 = new GreenBat;
 	//testAcc2->init();
