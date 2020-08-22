@@ -26,7 +26,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	}
 
 	// Åº¸· ÃÊ±âÈ­
-	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2.2, false, true, true, false, false, false);
+	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2, false, true, true, false, false, false);
 	_shooting.attackInit(3,3,10);
 
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -62,8 +62,7 @@ void Banshee::update(float const timeElapsed)
 	
 			if (!_ani->isPlay())
 			{	
-				SOUND_MANAGER->stop("Enemy/Spawn");
-				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}

@@ -29,7 +29,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEf
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
 
-	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.3f, 1.5f, false, true, true, false, true, false);
+	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.5f, 1.5f, false, true, true, false, true, false);
 	_shooting.attackInit(1, 1, 5);
 
 	_isDetect = 0;
