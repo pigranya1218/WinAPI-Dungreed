@@ -161,6 +161,10 @@
     <ClInclude Include="DoorNpc.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="Room20LB.h" />
+    <ClInclude Include="Room20LRB.h" />
+    <ClInclude Include="Room20TB.h" />
+    <ClInclude Include="Room4TB.h" />
     <ClInclude Include="Room15TB.h" />
     <ClInclude Include="GateNpc.h" />
     <ClInclude Include="RoomToRoomEvent.h" />
@@ -355,6 +359,10 @@
     <ClCompile Include="DoorNpc.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="GameEvent.cpp" />
+    <ClCompile Include="Room20LB.cpp" />
+    <ClCompile Include="Room20LRB.cpp" />
+    <ClCompile Include="Room20TB.cpp" />
+    <ClCompile Include="Room4TB.cpp" />
     <ClCompile Include="Room15TB.cpp" />
     <ClCompile Include="GateNpc.cpp" />
     <ClCompile Include="RoomToRoomEvent.cpp" />
