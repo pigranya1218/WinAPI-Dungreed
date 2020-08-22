@@ -5,6 +5,7 @@
 #include "ShopNpc.h"
 #include "GateNpc.h"
 #include "ChestNpc.h"
+#include "DoorNpc.h"
 
 void NpcManager::init()
 {
@@ -90,6 +91,14 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 		ChestNpc* chestNpc = new ChestNpc;
 		chestNpc->setRank(3);
 		npc = chestNpc;
+	}
+	break;
+	case NPC_TYPE::ENTRANCE:
+	case NPC_TYPE::EXIT:
+	{
+		DoorNpc* doorNpc = new DoorNpc;
+		doorNpc->setType(type);
+		npc = doorNpc;
 	}
 	break;
 	}

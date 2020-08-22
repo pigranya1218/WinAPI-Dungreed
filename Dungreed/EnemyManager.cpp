@@ -249,6 +249,16 @@ vector<Vector2> EnemyManager::getAllEnemyPos()
 	return result;
 }
 
+void EnemyManager::claerEnemy()
+{
+	for (int i = 0; i < _enemies.size(); i++)
+	{
+		_enemies[i]->release();
+		SAFE_DELETE(_enemies[i]);
+	}
+	_enemies.clear();
+}
+
 Vector2 EnemyManager::getPlayerPos()
 {
 	return _stage->getPlayerPos();

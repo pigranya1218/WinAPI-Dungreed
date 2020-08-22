@@ -16,12 +16,12 @@ void StartRoom2::init()
 	/*makeDoor(Vector2(TILESIZE * 24 + TILESIZE * 0.5, TILESIZE * 9), DIRECTION::RIGHT);
 	makeDoor(Vector2(TILESIZE * 19, TILESIZE * 14 + TILESIZE * 0.5), DIRECTION::DOWN);*/	
 
-	_objectMgr->spawnObject(0x0000, Vector2(500, 600));
+	_objectMgr->spawnObject(0x0000, Vector2(750, 700));
 
-	_objectMgr->spawnObject(0x0001, Vector2(200, 600));
-	_objectMgr->spawnObject(0x0001, Vector2(380, 600));
-	_objectMgr->spawnObject(0x0001, Vector2(430, 600));
-	_objectMgr->spawnObject(0x0002, Vector2(300, 600));
+	//_objectMgr->spawnObject(0x0001, Vector2(800, 700));
+	//_objectMgr->spawnObject(0x0001, Vector2(750, 700));
+	_objectMgr->spawnObject(0x0001, Vector2(820, 700));
+	//_objectMgr->spawnObject(0x0002, Vector2(300, 700));
 
 	_img = IMAGE_MANAGER->findImage("Floor1Door");
 	_ani = new Animation;
@@ -32,6 +32,7 @@ void StartRoom2::init()
 
 
 
+	_npcMgr->spawnNpc(NPC_TYPE::ENTRANCE, Vector2(570, 573), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(930, 620), DIRECTION::LEFT);
 }
 
@@ -52,17 +53,5 @@ void StartRoom2::render()
 	
 
 	Stage::render();
-
-	_img->setScale(4);
-	_img->aniRender(CAMERA->getRelativeV2(Vector2(570, 573)), _ani);
 }
 
-vector<tagShowNpc> StartRoom2::getNpcInfos()
-{
-	vector<tagShowNpc> result = Stage::getNpcInfos();
-	tagShowNpc start;
-	start.icon = IMAGE_MANAGER->findImage("UI/MAP/ICON_START");
-	start.type = NPC_TYPE::END;
-	result.insert(result.begin(), start);
-	return result;
-}

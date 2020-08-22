@@ -112,6 +112,7 @@ void PowerKatana::frontRender(Player* player)
 		{
 			effectPos.x += cosf(degree * (PI / 180)) * length;
 			effectPos.y += -sinf(degree * (PI / 180)) * length;
+			DamageInfo* damageinfo;
 			EFFECT_MANAGER->play("EFFECT_EXKATANAFX", effectPos, Vector2(250, 300), degree , isLeft);
 			
 			

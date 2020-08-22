@@ -11,9 +11,9 @@ void Room12LRB::init()
 	//_respawnPosition[2] = Vector2(900, 600);
 	_respawnPosition[3] = Vector2(600, 820);
 
-	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
-	_objectMgr->spawnObject(0x0001, Vector2(550, 200));
-	_objectMgr->spawnObject(0x0002, Vector2(650, 200));
+	_objectMgr->spawnObject(0x0000, Vector2(600, 320));
+	_objectMgr->spawnObject(0x0001, Vector2(550, 320));
+	_objectMgr->spawnObject(0x0002, Vector2(650, 320));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
 }

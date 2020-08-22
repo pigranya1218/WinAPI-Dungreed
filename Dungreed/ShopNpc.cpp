@@ -6,7 +6,7 @@ void ShopNpc::init(Vector2 pos, DIRECTION direction)
 {
 	_type = NPC_TYPE::SHOP;
 	_mapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_SHOP");
-	_miniMapIcon = nullptr;
+	_miniMapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_SHOP");
 
 	_img = IMAGE_MANAGER->findImage("NPC_SHOP");
 	_ani = new Animation;

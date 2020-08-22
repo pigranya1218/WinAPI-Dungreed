@@ -19,7 +19,8 @@ void DownStair2T::init()
 	_objectMgr->spawnObject(0x0000, Vector2(740, 900));
 	_objectMgr->spawnObject(0x0001, Vector2(780, 900));
 
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(550, 400), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::EXIT, Vector2(550, 1030), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(550, 435), DIRECTION::LEFT);
 }
 
 void DownStair2T::release()
@@ -35,6 +36,4 @@ void DownStair2T::update(float const elapsedTime)
 void DownStair2T::render()
 {
 	Stage::render();
-	_gateImg->setScale(4);
-	_gateImg->frameRender(CAMERA->getRelativeV2(Vector2(550, 1030)), 0, 0);
 }

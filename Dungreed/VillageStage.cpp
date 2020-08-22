@@ -5,9 +5,11 @@
 
 void VillageStage::init()
 {
-	_stageManager->setPlayerPos(400, 400);
+	_stageManager->setPlayerPos(3600, 1000);
 
 	Stage::init();
+
+	
 
 	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(0, 950), Vector2(2005, 950), Vector2(0,2005),Vector2(500,2000)));
 	_collisionPlatforms.push_back( LinearFunc::getLinearFuncFromPoints(Vector2(2005, 950), Vector2(2640, 1590),Vector2(2005,2640),Vector2(950,1590)));
@@ -74,10 +76,11 @@ void VillageStage::update(float const elapsedTime)
 		//_stageManager->nextStage();
 	if (!_eatAni->isPlay()&& _enter)
 	{
-			_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
+			/*_stageManager->setStageType(STAGE_TYPE::DUNGEON_NORMAL);
 
 			_stageManager->setPlayerPos(200, 400);
-			_stageManager->makeStage();
+			_stageManager->makeStage();*/
+		_stageManager->nextStage();
 	}
 	
 	

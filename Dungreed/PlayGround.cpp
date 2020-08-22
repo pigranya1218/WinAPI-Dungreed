@@ -24,7 +24,6 @@ HRESULT playGround::init()
 
 	// 모든 이미지 IMAGE_MANAGER에 등록
 	// * COMMON IMAGE
-
 	IMAGE_MANAGER->addFrameImage("sampleTile1", L"resources/images/Map/tileAtlas3.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile2", L"resources/images/Map/iceAtlas.png", 10, 10);
 	IMAGE_MANAGER->addFrameImage("sampleTile3", L"resources/images/Map/townAtlas1.png", 10, 10);
@@ -301,6 +300,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Greed3_disable.png");
 
 	IMAGE_MANAGER->addFrameImage("UI/ABILITY/CLICK_EFFECT", L"resources/images/gameScene/ui/ability/click/ClickEffect.png", 12, 1);
+	EFFECT_MANAGER->addEffect("UI/ABILITY/EFFECT_click", "UI/ABILITY/CLICK_EFFECT", 30, 10);
 
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");
@@ -312,7 +312,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM", L"resources/images/gameScene/ui/map/Worm.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_WORM_SELECTED", L"resources/images/gameScene/ui/map/Worm_Selected.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_EXIT", L"resources/images/gameScene/ui/map/Exit.png");
-	IMAGE_MANAGER->addImage("UI/MAP/ICON_START", L"resources/images/gameScene/ui/map/Enterance.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_ENTRANCE", L"resources/images/gameScene/ui/map/Enterance.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_CHEST", L"resources/images/gameScene/ui/map/Chest.png");
 
 
@@ -321,6 +321,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("NPC_SHOP", L"resources/images/gameScene/npc/shop.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_IDLE", L"resources/images/gameScene/npc/gate_idle.png", 9, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_EAT", L"resources/images/gameScene/npc/gate_eat.png", 4, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_ENTRANCE", L"resources/images/gameScene/npc/Door1.png", 10, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_EXIT", L"resources/images/gameScene/npc/Door1.png", 10, 1);
 	IMAGE_MANAGER->addImage("NPC_CHEST_BASIC", L"resources/images/gameScene/npc/BasicTresureClosed.png");
 	IMAGE_MANAGER->addImage("NPC_CHEST_BASIC_OPEN", L"resources/images/gameScene/npc/BasicTresureOpened.png");
 	IMAGE_MANAGER->addImage("NPC_CHEST_BLUE", L"resources/images/gameScene/npc/BlueTresureClosed.png");
@@ -357,7 +359,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("CandleOn1", L"resources/images/Map/CandleOn1.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn2", L"resources/images/Map/CandleOn2.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("CandleOn3", L"resources/images/Map/CandleOn3.png", 6, 1);
-
+	IMAGE_MANAGER->addFrameImage("Torch", L"resources/images/Map/torch.png", 7, 1);
 	// ** OBJECT
 	// *** BROKEN
 	IMAGE_MANAGER->addImage("OBJECT/BROKEN/BOX", L"resources/images/object/broken/Box0.png");
@@ -512,6 +514,13 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("SOUND_katana2", "resources/sound/MeleeWeapon/katana2.wav", false, false);
 	SOUND_MANAGER->addSound("SOUND_katana3", "resources/sound/MeleeWeapon/katana3.wav", false, false);
 	SOUND_MANAGER->addSound("SOUND_generalAttack", "resources/sound/MeleeWeapon/generalAttack.wav", false, false); // 기본검 공격
+	SOUND_MANAGER->addSound("SOUND_swing0", "resources/sound/MeleeWeapon/swing0.wav", false, false); // 우주검 기본 공격
+	SOUND_MANAGER->addSound("SOUND_handAttack", "resources/sound/MeleeWeapon/handAttack.wav", false, false); // 맨손 공격
+	SOUND_MANAGER->addSound("SOUND_TigerRoar", "resources/sound/MeleeWeapon/TigerRoar.wav", false, false); // 호랑이권법 공격
+	SOUND_MANAGER->addSound("SOUND_scythe", "resources/sound/MeleeWeapon/scythe.wav", false, false); // 사이더 공격
+	SOUND_MANAGER->addSound("SOUND_PickaxeRed", "resources/sound/MeleeWeapon/PickaxeRed.wav", false, false); // 붉은곡괭이 공격
+	SOUND_MANAGER->addSound("SOUND_wujusword", "resources/sound/MeleeWeapon/wujusword.wav", false, false); // 우주검 공격
+	SOUND_MANAGER->addSound("SOUND_swing1", "resources/sound/MeleeWeapon/swing1.wav", false, false); // 붓 공격
 
 
 
@@ -694,7 +703,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Enemy_Destroy", L"resources/images/Enemy/destroy.png"	, 11, 1);	// 에너미 죽는 이펙트
 	IMAGE_MANAGER->addFrameImage("Enemy_Create"	, L"resources/images/Enemy/create.png"	,  5, 3);	// 에너미 소환 이펙트
 
-	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 20);	// 삭제 이펙트 등록
+	EFFECT_MANAGER->addEffect("Enemy_Destroy", "Enemy_Destroy", 15, 80);	// 삭제 이펙트 등록
 
 	// * 에너미 불릿
 	IMAGE_MANAGER->addFrameImage("Bat_Explosion", L"resources/images/Enemy/Bat/Bomb/explosion.png", 12, 1);
@@ -722,34 +731,44 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 	EFFECT_MANAGER->addEffect("DadBatBulletFX", "DadBatBulletFX", 15, 50);
 
-	//** Boss
-	// * Belial
-	// * Head
+	// ** Boss
+	// *  Belial
+	// *  Head
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle"			, L"resources/images/boss/Belial/Head/idle.png"			, 10, 1);	// 머리 기본
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Idle_Shot"	, L"resources/images/boss/Belial/Head/idle_Shot.png"	, 10, 1);	// 머리 기본 피격
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack"		, L"resources/images/boss/Belial/Head/attack.png"		, 10, 1);	// 머리 공격
 	IMAGE_MANAGER->addFrameImage("Belial/Head/Attack_Shot"	, L"resources/images/boss/Belial/Head/attack_shot.png"	, 10, 1);	// 머리 공격 피격
 
-	// * Hand
+	// *  Hand
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Idle"		, L"resources/images/boss/Belial/Hand/idle.png"		, 10, 1);	// 손 기본
 	IMAGE_MANAGER->addFrameImage("Belial/Hand/Attack"	, L"resources/images/boss/Belial/Hand/attack.png"	, 18, 1);	// 손 공격
 
-	// * Laser
+	// *  Laser
 	IMAGE_MANAGER->addFrameImage("Belial/Laser/Head", L"resources/images/boss/Belial/Laser/head.png", 7, 1);	// 레이저 시작
 	IMAGE_MANAGER->addFrameImage("Belial/Laser/Body", L"resources/images/boss/Belial/Laser/body.png", 7, 1);	// 레이저 몸통
 
-	// * 후광
+	// *  후광
 	IMAGE_MANAGER->addFrameImage("Belial/Back/Circle"	, L"resources/images/boss/Belial/Back/circle.png"	, 10, 1);	// 후광 구
 	IMAGE_MANAGER->addFrameImage("Belial/Back/Particle"	, L"resources/images/boss/Belial/Back/particle.png"	,  8, 1);	// 이펙트 이미지
 
-	// * Sword
-	IMAGE_MANAGER->addImage("Belial/Sword"		, L"resources/images/boss/Belial/Sword/default.png"	);					// 검 이미지
-	IMAGE_MANAGER->addImage("Belial/Sword_Shoot", L"resources/images/boss/Belial/Sword/shoot.png"	);					// 검 이미지 투사체
+	// *  Sword
+	IMAGE_MANAGER->addImage("Belial/Sword"		, L"resources/images/boss/Belial/Sword/default.png"	);	// 검 이미지
+	IMAGE_MANAGER->addImage("Belial/Sword_Shoot", L"resources/images/boss/Belial/Sword/shoot.png"	);	// 검 이미지 투사체
+
 	IMAGE_MANAGER->addFrameImage("Belial/Sword_Charge"	, L"resources/images/boss/Belial/Sword/charge.png"	, 1, 8);	// 검 이펙트
 	IMAGE_MANAGER->addFrameImage("Belial/Sword_Hit"		, L"resources/images/boss/Belial/Sword/hit.png"		, 5, 1);	// 검 충돌 이펙트
 
+	// *  Bullet
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet"			, L"resources/images/boss/Belial/bullet.png"	, 2, 1);	// 투사체
 	IMAGE_MANAGER->addFrameImage("Belial/Bullet_FX"			, L"resources/images/boss/Belial/bullet_FX.png"	, 8, 1);	// 투사체 이펙트
+
+	// *  Dead
+	IMAGE_MANAGER->addImage("Belial/Dead/Head"		, L"resources/images/boss/Belial/Dead/head.png"		 );	// 머리 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Mouth"		, L"resources/images/boss/Belial/Dead/mouth.png"	 );	// 턱 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_1", L"resources/images/boss/Belial/Dead/particle_1.png");	// 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_2", L"resources/images/boss/Belial/Dead/particle_2.png");	// 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_3", L"resources/images/boss/Belial/Dead/particle_3.png");	// 파편
+	IMAGE_MANAGER->addImage("Belial/Dead/Particle_4", L"resources/images/boss/Belial/Dead/particle_4.png");	// 파편
 	
 	EFFECT_MANAGER->addEffect("Belial/Sword_Charge"	, "Belial/Sword_Charge"	, 15, 10);
 	EFFECT_MANAGER->addEffect("Belial/Sword_Hit"	, "Belial/Sword_Hit"	, 15, 10);
@@ -769,6 +788,24 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
 
 	//사운드
+	//** PLAYER / UI
+	SOUND_MANAGER->addSound("Player/Step1", "resources/sounds/player/step_lth1.wav", false, false);			//플레이어 이동1
+	SOUND_MANAGER->addSound("Player/Step2", "resources/sounds/player/step_lth2.wav", false, false);			//플레이어 이동2
+	SOUND_MANAGER->addSound("Player/Step3", "resources/sounds/player/step_lth3.wav", false, false);			//플레이어 이동3
+	SOUND_MANAGER->addSound("Player/Step4", "resources/sounds/player/step_lth4.wav", false, false);			//플레이어 이동4
+	SOUND_MANAGER->addSound("Player/Dash", "resources/sounds/player/dash.wav", false, false);				//대쉬
+	SOUND_MANAGER->addSound("Player/Dead", "resources/sounds/player/dead.wav", false, false);				//사망
+	SOUND_MANAGER->addSound("Player/GetGold", "resources/sounds/player/gold_collect.wav", false, false);	//수금 (골드 획득)
+	SOUND_MANAGER->addSound("Player/GrowAbility", "resources/sounds/player/GrowAbility.wav", false, false);	//특성 해금
+	SOUND_MANAGER->addSound("Player/GetFairy", "resources/sounds/player/Get_Fairy.wav", false, false);		//회복스팟 획득
+	SOUND_MANAGER->addSound("Player/Hit", "resources/sounds/player/Hit_Player.wav", false, false);			//피격
+	SOUND_MANAGER->addSound("Player/Jump", "resources/sounds/player/Jumping.wav", false, false);			//점프
+	SOUND_MANAGER->addSound("Player/Swap", "resources/sounds/player/swap.wav", false, false);				//무기 교체
+	SOUND_MANAGER->addSound("Player/Inven/Equip", "resources/sounds/player/inventorySounds/Equip.wav", false, false);				//인벤 장비착용
+	SOUND_MANAGER->addSound("Player/Inven/GetItem", "resources/sounds/player/inventorySounds/GetItem.wav", false, false);			//인벤 아이템 획득
+	SOUND_MANAGER->addSound("Player/Inven/OpenInven", "resources/sounds/player/inventorySounds/OpenInventory.wav", false, false);	//인벤토리 개폐
+	SOUND_MANAGER->addSound("Player/Inven/PickUpItem", "resources/sounds/player/inventorySounds/PickUpItem.wav", false, false);		//픽업 아이템
+
 	//** ENEMY
 	SOUND_MANAGER->addSound("Enemy/Die", "resources/sound/enemy/public/MonsterDie.wav", false, false);			//사망(공용)
 	SOUND_MANAGER->addSound("Enemy/GetHit", "resources/sound/enemy/public/Hit_Monster.wav", false, false);		//피격(공용)

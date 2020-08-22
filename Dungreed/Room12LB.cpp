@@ -9,11 +9,11 @@ void Room12LB::init()
 	//_respawnPosition[0] = Vector2(230, 980);
 
 	
-	_respawnPosition[3] = Vector2(630, 960);
+	_respawnPosition[3] = Vector2(650, 980);
 
-	_objectMgr->spawnObject(0x0000, Vector2(600, 200));
-	_objectMgr->spawnObject(0x0001, Vector2(550, 200));
-	_objectMgr->spawnObject(0x0002, Vector2(650, 200));
+	_objectMgr->spawnObject(0x0000, Vector2(800, 605));
+	_objectMgr->spawnObject(0x0001, Vector2(750, 605));
+	_objectMgr->spawnObject(0x0002, Vector2(900, 605));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(550, 600), DIRECTION::LEFT);
 }

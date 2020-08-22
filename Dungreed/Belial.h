@@ -106,6 +106,13 @@ private:
 		Vector2		pos[5];
 	};
 
+	struct tagDeadParticleInfo : public GameObject
+	{
+		Image* img;
+	};
+
+	tagDeadParticleInfo _deadParticle[6];
+
 	tagParticleInfo _particle;
 
 	Vector2			_playerPos;
@@ -132,7 +139,7 @@ private:
 
 	BELIAL_PHASE _phase;	// 공격 패턴
 
-
+	bool		_realDead;
 
 public:
 	void init(const Vector2& pos);

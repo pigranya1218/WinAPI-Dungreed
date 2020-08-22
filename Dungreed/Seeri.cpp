@@ -33,9 +33,9 @@ void Seeri::update(Player * player, float const elapsedTime)
 	_renderPos = player->getPosition();
 	_direction = player->getDirection();
 	_ani->frameUpdate(elapsedTime);
+	
 
-	Vector2 _enemy = player->getEnemyPos(Vector2());
-
+	
 	if (_Delay > 0)
 	{
 		_Delay = max(0, _Delay - elapsedTime);
@@ -44,7 +44,7 @@ void Seeri::update(Player * player, float const elapsedTime)
 	{
 		_Delay = 4.0;
 		
-		float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_enemy.y) - _renderPos.y), (CAMERA->getAbsoluteX(_enemy.x) - _renderPos.x)) + PI2;
+		float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _renderPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _renderPos.x)) + PI2;
 		if (angleRadian > PI2)
 		{
 			angleRadian -= PI2;
