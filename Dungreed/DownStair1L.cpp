@@ -10,13 +10,13 @@ void DownStair1L::init()
 
 	//_respawnPosition[0] = Vector2(200, 600);
 
-	_objectMgr->spawnObject(0x0001, Vector2(800, 500));
-	_objectMgr->spawnObject(0x0001, Vector2(740, 500));
-	_objectMgr->spawnObject(0x0002, Vector2(780, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(940, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(980, 500));
+	_objectMgr->spawnObject(0x0002, Vector2(1040, 500));
 
-	_objectMgr->spawnObject(0x0000, Vector2(1200, 500));
+	/*_objectMgr->spawnObject(0x0000, Vector2(1200, 500));
 	_objectMgr->spawnObject(0x0000, Vector2(1140, 500));
-	_objectMgr->spawnObject(0x0001, Vector2(1080, 500));
+	_objectMgr->spawnObject(0x0001, Vector2(1080, 500));*/
 
 	_npcMgr->spawnNpc(NPC_TYPE::EXIT, Vector2(700, 650), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(380, 500), DIRECTION::LEFT);

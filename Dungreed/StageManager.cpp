@@ -31,7 +31,10 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		}
 		else if (!isWall[0] && isWall[1] && !isWall[2] && !isWall[3])//ÁÂ, ¿ì, ÇÏ  ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new Room12LRB;
+			int rand = RANDOM->getInt(5);
+			if (rand == 0)resultRoom = new Room12LRB;
+			else if (rand == 1)resultRoom = new Room20LRB;
+			else resultRoom = new Room12LRB;
 		}
 		else if (!isWall[0] && !isWall[1] && isWall[2] && !isWall[3])//ÁÂ, »ó, ÇÏ  ¶Õ¸° °æ¿ì
 		{
@@ -55,8 +58,8 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		{
 			int rand = RANDOM->getInt(2);
 		    if(rand==0) resultRoom = new Room15TB;
-			else if(rand==1) resultRoom = new Room15TB;
-			else resultRoom = new Room15TB;
+			else if(rand==1) resultRoom = new Room4TB;
+			else resultRoom = new Room20TB;
 		}
 		else if (!isWall[0] && !isWall[1] && isWall[2] && isWall[3])//ÁÂ, »ó ¶Õ¸° °æ¿ì
 		{
@@ -64,7 +67,10 @@ Stage * StageManager::getStage(int stageType, bool isWall[])
 		}
 		else if (!isWall[0] && isWall[1] && isWall[2] && !isWall[3])//ÁÂ, ÇÏ ¶Õ¸° °æ¿ì
 		{
-			resultRoom = new Room12LB;
+			int rand = RANDOM->getInt(5);
+			if (rand == 0)resultRoom = new Room12LB;
+			else if (rand == 1)resultRoom = new Room20LB;
+			else resultRoom = new Room12LB;
 		}
 		else if (isWall[0] && !isWall[1] && !isWall[2] && isWall[3])//»ó, ¿ì ¶Õ¸° °æ¿ì
 		{
@@ -191,7 +197,7 @@ string StageManager::getStageTitle()
 
 void StageManager::init()
 {
-	_currStageType = STAGE_TYPE::TEST;
+	_currStageType = STAGE_TYPE::VILLAGE;
 	_mapSize = 4;
 	makeStage();
 	_uiMgr->setMap(_stageMap, getStageTitle());
@@ -338,12 +344,17 @@ void StageManager::makeStage()
 		_currStage->setPlayer(_player);
 		_currStage->init();
 		_currStage->enter(0);
+		
 		break;
 	case STAGE_TYPE::DUNGEON_NORMAL:
 		makeDungeon();
+		_uiMgr->setMap(_stageMap, getStageTitle());
+		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
-		makeDungeon();
+		//makeDungeon();
+		makeBoomStage();
+		
 		break;
 	case STAGE_TYPE::TEST:
 		_currStage = new DebugStage();
@@ -356,6 +367,28 @@ void StageManager::makeStage()
 	default:
 		break;
 	}
+}
+
+void StageManager::makeBoomStage()
+{
+	for (int i = 0; i < 3; i++)
+	{
+		if(i==0)_currStage = new BossRoomBef1R;
+		else if(i==1)_currStage = new BossRoom1;
+		else if(i==2)_currStage = new DownStair1L;
+		_currStage->setStageManager(this);
+		_currStage->setUIManager(_uiMgr);
+		_currStage->setPlayer(_player);
+		_currStage->init();
+		_currStage->enter(0);
+		_bossRoomInfo.push_back(_currStage);
+	}
+	_currStage = _bossRoomInfo[0];
+	_currStage->setStageManager(this);
+	_currStage->setUIManager(_uiMgr);
+	_currStage->setPlayer(_player);
+	_currStage->init();
+	_currStage->enter(0);
 }
 
 void StageManager::makeDungeon()

@@ -1,7 +1,7 @@
 #pragma once
 #include "Stage.h"
-class Room1R :
-	public Stage
+class Room4TB :
+    public Stage
 {
 public:
 	virtual void init();

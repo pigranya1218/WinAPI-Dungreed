@@ -12,7 +12,8 @@
 #include "DungeonShopRoom2.h"
 #include "DungeonShopRoom3.h"
 
-
+#include "BossRoom1.h"
+#include "BossRoomBef1R.h"
 
 #include "Room8L.h"
 #include "Room10T.h"
@@ -24,6 +25,7 @@
 #include "Room3LR.h"
 #include "Room4LR.h"
 #include "Room4LTR.h"
+#include "Room4TB.h"
 #include "Room5LR.h"
 #include "Room6TB.h"
 #include "Room7RT.h"
@@ -38,6 +40,9 @@
 #include "Room15TB.h"
 
 #include "Room20LTRB.h"
+#include "Room20LB.h"
+#include "Room20TB.h"
+#include "Room20LRB.h"
 #include "Room21LR.h"
 #include "Room22LTRB.h"
 #include "Room23LR.h"

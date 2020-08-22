@@ -16,12 +16,12 @@ void StartRoom2::init()
 	/*makeDoor(Vector2(TILESIZE * 24 + TILESIZE * 0.5, TILESIZE * 9), DIRECTION::RIGHT);
 	makeDoor(Vector2(TILESIZE * 19, TILESIZE * 14 + TILESIZE * 0.5), DIRECTION::DOWN);*/	
 
-	_objectMgr->spawnObject(0x0000, Vector2(500, 700));
+	_objectMgr->spawnObject(0x0000, Vector2(750, 700));
 
-	_objectMgr->spawnObject(0x0001, Vector2(200, 700));
-	_objectMgr->spawnObject(0x0001, Vector2(380, 700));
-	_objectMgr->spawnObject(0x0001, Vector2(430, 700));
-	_objectMgr->spawnObject(0x0002, Vector2(300, 700));
+	//_objectMgr->spawnObject(0x0001, Vector2(800, 700));
+	//_objectMgr->spawnObject(0x0001, Vector2(750, 700));
+	_objectMgr->spawnObject(0x0001, Vector2(820, 700));
+	//_objectMgr->spawnObject(0x0002, Vector2(300, 700));
 
 	_img = IMAGE_MANAGER->findImage("Floor1Door");
 	_ani = new Animation;
