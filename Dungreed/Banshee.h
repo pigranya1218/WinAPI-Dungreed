@@ -5,7 +5,7 @@ class Banshee : public Enemy
 {
 private:	
 	tagShootingInfo _shooting;
-
+	int _enterCount;
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();
