@@ -4,7 +4,7 @@
 
 #define RUSHSPEED 1000.0f
 
-void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
+void Minotaurs::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 
@@ -18,7 +18,11 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	// 피격 렉트 및 사이즈 
 	_size = Vector2(_img->getFrameSize().x - 15, _img->getFrameSize().y);
 	_size = _size * _scale;
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
 
 	// 이동 관련 변수 >> 여기서는 돌진에 사용
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -30,13 +34,13 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction)
 	_attack.delay =	2;		// 공격 딜레이 초기화
 	_attack.distance = 100;	// 공격 시전 가능 거리
 	_attack.circleSize = 150;
-	_attack.attackInit(3, 5, 1);
+	_attack.attackInit(3, 5, 1,0,0,25);
 
 	// 돌진 관련 변수
 	ZeroMemory(&_skill, sizeof(_skill));
 	_skill.delay = 2;		// 돌진 딜레이 초기화
 	_skill.distance = 800;	// 돌진 시전 시 최대 거리
-	_skill.attackInit(10, 20, 5, 0, 0, 40);
+	_skill.attackInit(10, 20, 5, 0, 0, 50);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
@@ -76,6 +80,15 @@ void Minotaurs::update(float const timeElapsed)
 	// 상태에 따른 행동 처리
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			if (_isDetect)
@@ -199,23 +212,26 @@ void Minotaurs::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	// 마지막에 중력 적용	
-	if (_isStand && _moving.force.y == 0)
+	if (_state != ENEMY_STATE::ENTER)
 	{
-		_position.y -= 15;
-		moveDir.y += 25;
-	}
+		// 마지막에 중력 적용	
+		if (_isStand && _moving.force.y == 0)
+		{
+			_position.y -= 15;
+			moveDir.y += 25;
+		}
 
-	_moving.force.y += _moving.gravity.y * timeElapsed;
-	moveDir.y += _moving.force.y * timeElapsed;
+		_moving.force.y += _moving.gravity.y * timeElapsed;
+		moveDir.y += _moving.force.y * timeElapsed;
 
-	_lastPos = _position;
-	_enemyManager->moveEnemy(this, moveDir);
-	_currPos = _position;
+		_lastPos = _position;
+		_enemyManager->moveEnemy(this, moveDir);
+		_currPos = _position;
 
-	if (_isStand)
-	{
-		_moving.force.y = 0;
+		if (_isStand)
+		{
+			_moving.force.y = 0;
+		}
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -265,6 +281,15 @@ void Minotaurs::setState(ENEMY_STATE state)
 	// 상태에 따른 애니메이션 설정
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Minotaurs/Idle";

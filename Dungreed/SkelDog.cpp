@@ -6,7 +6,7 @@
 #define MAXJUMP -1000.0f
 #define DEFJUMP -5.0f;
 
-void SkelDog::init(const Vector2& pos, DIRECTION direction)
+void SkelDog::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 
@@ -16,11 +16,14 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction)
 	_direction = direction;
 	_detectRange = 100;
 	_scale = 4;
-
 	_size = Vector2(_img->getFrameSize().x - 4, _img->getFrameSize().y);
 	_size = _size * _scale;
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
+	
 	_isDetect = 0;
 
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -60,6 +63,15 @@ void SkelDog::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			if (_isDetect)
@@ -112,22 +124,25 @@ void SkelDog::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	if (_isStand && _moving.force.y == 0)
+	if (_state != ENEMY_STATE::ENTER)
 	{
-		_position.y -= 15;
-		moveDir.y += 25;
-	}
-	_moving.force.y += _moving.gravity.y * timeElapsed;
-	moveDir.y += _moving.force.y * timeElapsed;
-
-	_enemyManager->moveEnemy(this, moveDir);
-
-	if (_isStand)
-	{
-		_moving.force.y = 0;
-		if (_state == ENEMY_STATE::ATTACK && !_ani->isPlay())
+		if (_isStand && _moving.force.y == 0)
 		{
-			setState(ENEMY_STATE::IDLE);
+			_position.y -= 15;
+			moveDir.y += 25;
+		}
+		_moving.force.y += _moving.gravity.y * timeElapsed;
+		moveDir.y += _moving.force.y * timeElapsed;
+
+		_enemyManager->moveEnemy(this, moveDir);
+
+		if (_isStand)
+		{
+			_moving.force.y = 0;
+			if (_state == ENEMY_STATE::ATTACK && !_ani->isPlay())
+			{
+				setState(ENEMY_STATE::IDLE);
+			}
 		}
 	}
 
@@ -150,8 +165,6 @@ void SkelDog::render()
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}	
-
-	D2D_RENDERER->drawRectangle(rectMakePivot(CAMERA->getRelativeV2(_position), _size, PIVOT::CENTER));
 }
 
 void SkelDog::setState(ENEMY_STATE state)
@@ -160,6 +173,15 @@ void SkelDog::setState(ENEMY_STATE state)
 
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Skel/Dog/Idle";

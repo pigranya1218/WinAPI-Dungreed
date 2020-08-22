@@ -2,7 +2,7 @@
 #include "EnemyManager.h"
 #include "BatIce.h"
 
-void BatIce::init(const Vector2 & pos, DIRECTION direction)
+void BatIce::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 
@@ -17,8 +17,10 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
 	_size = _size * _scale;
 
-	// 충돌 렉트 설정
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}	
 
 	// 공격 관련 변수 초기화
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(600, 600), _scale, 2, 1.5, true, false, false, false, true, false);
@@ -27,7 +29,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	// 이동 관련 변수 초기화
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 3;
-	_moving.force = Vector2(250, 0);
+	_moving.force = Vector2(200, 0);
 	_moving.angle = RANDOM->getFromFloatTo(0, PI2);
 
 	ZeroMemory(&_hit, sizeof(_hit));
@@ -38,7 +40,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction)
 	_active = true;
 
 	_curHp = _maxHp = 100;
-
+	_PlayCount = 0;
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_ICE);
 }
 
@@ -67,6 +69,15 @@ void BatIce::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::MOVE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			// 일정 주기로 이동
@@ -109,13 +120,20 @@ void BatIce::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
+
 			if (_ani->getPlayIndex() == 5)
 			{
+				_PlayCount++;
+				if (_PlayCount == 1)
+				{
+					SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+				}
 				_shooting.fireBullet(_myEnemyType, _enemyManager);
 			}
 			if (!_ani->isPlay())
 			{
 				// 공격 완료 후 IDLE 상태로 변경
+				_PlayCount = 0;
 				setState(ENEMY_STATE::IDLE);
 			}
 		}
@@ -133,6 +151,7 @@ void BatIce::update(float const timeElapsed)
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -154,6 +173,15 @@ void BatIce::setState(ENEMY_STATE state)
 {
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		case ENEMY_STATE::MOVE:
 		{

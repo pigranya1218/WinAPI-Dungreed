@@ -4,7 +4,7 @@
 
 #define DEFSPEED 150.0f
 
-void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
+void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 {
 	_ani = new Animation;
 	_weaponAni = new Animation;
@@ -21,15 +21,19 @@ void SkelSmallGsword::init(const Vector2 & pos, DIRECTION direction)
 	_scale = 4;
 
 	_size = _img->getFrameSize() * _scale;
-	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
+	if (spawnEffect)
+	{
+		setState(ENEMY_STATE::ENTER);
+	}
+	
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.delay = 0.3;
 	_moving.force = Vector2(DEFSPEED, 0.f);
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.attackInit(3, 5, 1);
+	_attack.attackInit(3, 5, 1,0,0, 25);
 	_attack.delay = 1.5;
 	_attack.distance = 100;
 	_attack.circleSize = 100;
@@ -64,6 +68,15 @@ void SkelSmallGsword::update(float const timeElapsed)
 	Vector2 moveDir(0, 0);
 	switch (_state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			if (!_ani->isPlay())
+			{
+				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
+				setState(ENEMY_STATE::IDLE);
+			}
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			if (_isDetect)
@@ -133,19 +146,22 @@ void SkelSmallGsword::update(float const timeElapsed)
 	}
 	hitReaction(playerPos, moveDir, timeElapsed);
 
-	if (_isStand && _moving.force.y == 0)
+	if (_state != ENEMY_STATE::ENTER)
 	{
-		_position.y -= 15;
-		moveDir.y += 17;
-	}
-	_moving.force.y += _moving.gravity.y * timeElapsed;
-	moveDir.y += _moving.force.y * timeElapsed;
+		if (_isStand && _moving.force.y == 0)
+		{
+			_position.y -= 15;
+			moveDir.y += 17;
+		}
+		_moving.force.y += _moving.gravity.y * timeElapsed;
+		moveDir.y += _moving.force.y * timeElapsed;
 
-	// 이동할 포지션 최종
-	_enemyManager->moveEnemy(this, moveDir);
-	if (_isStand)
-	{
-		_moving.force.y = 0;
+		// 이동할 포지션 최종
+		_enemyManager->moveEnemy(this, moveDir, true, true);
+		if (_isStand)
+		{
+			_moving.force.y = 0;
+		}
 	}
 
 	_ani->frameUpdate(timeElapsed);
@@ -162,13 +178,16 @@ void SkelSmallGsword::render()
 	_img->setScale(_scale);
 	_weaponImg->setScale(_scale);
 
-	Vector2 weaponPos = _position;
-	weaponPos.x += _weaponImg->getFrameSize().x * 0.3f * _scale * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
-	weaponPos.y -= 2 * _scale;
+	if (_state != ENEMY_STATE::ENTER)
+	{
+		Vector2 weaponPos = _position;
+		weaponPos.x += _weaponImg->getFrameSize().x * 0.3f * _scale * ((_direction == DIRECTION::RIGHT) ? (1) : (-1));
+		weaponPos.y -= 2 * _scale;
 
-	_weaponImg->aniRender(CAMERA->getRelativeV2(weaponPos), _weaponAni, (_direction == DIRECTION::LEFT));
+		_weaponImg->aniRender(CAMERA->getRelativeV2(weaponPos), _weaponAni, (_direction == DIRECTION::LEFT));
+	}
 
-	if (_state == ENEMY_STATE::MOVE)
+	if (_state == ENEMY_STATE::MOVE || _state == ENEMY_STATE::ENTER)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 	}
@@ -194,6 +213,15 @@ void SkelSmallGsword::setState(ENEMY_STATE state)
 	// 상태에 따른 애니메이션 설정
 	switch (state)
 	{
+		case ENEMY_STATE::ENTER:
+		{
+			_img = IMAGE_MANAGER->findImage("Enemy_Create");
+			_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
+			_ani->setPlayFrame(14, 0, false, false);
+			_ani->setFPS(15);
+			_ani->start();
+		}
+		break;
 		case ENEMY_STATE::IDLE:
 		{
 			_imageName = "Skel/Small/Idle";

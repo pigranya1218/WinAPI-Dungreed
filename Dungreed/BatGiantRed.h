@@ -8,9 +8,11 @@ private:
 	tagAttackInfo	_attack;	// °ø°Ý °ü·Ã
 
 	int				_renderNum;	// ÃÑ¾Ë ·»´õ¿ë
+	int				_countPlay;
+
 
 public:
-	void init(const Vector2& pos, DIRECTION direction);
+	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();
 	void update(float const timeElapsed);
 	void render();

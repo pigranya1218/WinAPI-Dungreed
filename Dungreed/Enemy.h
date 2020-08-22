@@ -8,6 +8,7 @@ class EnemyManager;
 
 enum class ENEMY_STATE
 {
+	ENTER,		// 에너미 소환
 	IDLE,		// 기본
 	MOVE,		// 이동
 	ATTACK,		// 공격
@@ -25,11 +26,10 @@ protected:
 	ENEMY_STATE		_state;			// 현재 상태
 	DIRECTION		_direction;		// 행동
 	Image*			_img;			// 이미지
-	Image*			_img1;			// 이미지
+	Sound*			_sound;			// 사운드
 	Animation*		_ani;			// 애니메이션
 	string			_imageName;		// 이미지 이름
-	string			_imageName1;
-
+	string			_soundName;		// 사운드 이름	
 
 	bool			_isDetect;		// 플레이어를 감지하였는가
 	float			_scale;			// 렉트와 출력에 사용할 스케일
@@ -39,6 +39,8 @@ protected:
 	float			_maxHp;
 
 	int				_myEnemyType;	// 에너미 타입 변수
+
+	Vector2			_spawnSize;
 
 	vector<size_t>		_attackedId; // 최근 공격받았던 공격들의 아이디 값들을 저장하는 벡터, 최대 10칸 정도 저장하면 적당할 듯
 
@@ -98,7 +100,7 @@ protected:
 			this->collisionGround = collisionGround;
 			this->collisionPlatForm = collisionPlatForm;
 		}		
-		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 0)
+		void attackInit(const float minDamage, const float maxDamage, const float trueDamage, const float knockBack = 15)
 		{
 			info.minDamage = minDamage;
 			info.maxDamage = maxDamage;
@@ -180,7 +182,7 @@ protected:
 			return false;
 		}
 		// 공격 정보 저장용
-		void attackInit(float minDamage, float maxDamage, float trueDamage, float critical = 0, float criDamage = 0, float knockBack = 0)
+		void attackInit(float minDamage, float maxDamage, float trueDamage, float critical = 0, float criDamage = 0, float knockBack = 15)
 		{
 			info.minDamage = minDamage;
 			info.maxDamage = maxDamage;
@@ -252,6 +254,7 @@ public:
 	virtual void init() {}
 	virtual void init(const Vector2& pos) {}
 	virtual void init(const Vector2& pos, DIRECTION direction) {}
+	virtual void init(const Vector2& pos, DIRECTION direction, bool spawnEffect) {}
 	virtual void release() = 0;
 	virtual void update(float const timeElapsed) = 0;
 	virtual void render() = 0;
