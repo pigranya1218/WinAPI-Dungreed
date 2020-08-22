@@ -185,10 +185,10 @@ void Player::init()
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
-	//GreenBat* testAcc2 = new GreenBat;
-	//testAcc2->init();
-	//_inventory[6] = testAcc2;
-	//
+	GreenBat* testAcc2 = new GreenBat;
+	testAcc2->init();
+	_inventory[5] = testAcc2;
+	
 
 	//GreenDadBat* testAcc3 = new GreenDadBat;
 	//testAcc3->init();
@@ -237,9 +237,9 @@ void Player::init()
 	//testAcc12->init();
 	//_inventory[0] = testAcc12;
 
-	Seeri* testAcc21 = new Seeri;
-	testAcc21->init();
-	_inventory[5] = testAcc21;
+	//Seeri* testAcc21 = new Seeri;
+	//testAcc21->init();
+	//_inventory[5] = testAcc21;
 
 	//DemonBoots* testAcc13 = new DemonBoots;
 	//testAcc13->init();
