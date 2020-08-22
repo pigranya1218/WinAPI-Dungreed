@@ -124,6 +124,8 @@ void Banshee::render()
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
 	}
+
+	D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)));
 }
 
 void Banshee::setState(ENEMY_STATE state)
