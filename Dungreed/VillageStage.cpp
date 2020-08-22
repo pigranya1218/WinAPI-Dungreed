@@ -5,7 +5,7 @@
 
 void VillageStage::init()
 {
-	_stageManager->setPlayerPos(3600, 1000);
+	
 
 	Stage::init();
 
