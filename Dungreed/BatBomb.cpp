@@ -37,9 +37,9 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_isDetect = 0;
 	_active = true;
 
+	_curHp = _maxHp = 25;	
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_BOMB);
-	_curHp = _maxHp = 25;
 }
 
 void BatBomb::release()
@@ -107,6 +107,7 @@ void BatBomb::update(float const timeElapsed)
 			if (!_ani->isPlay())
 			{
 				SOUND_MANAGER->stop("BoomBat/Ready");
+				SOUND_MANAGER->play("BoomBat/Explod", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 				setState(ENEMY_STATE::SKILL);
 			}
 		}
@@ -134,6 +135,8 @@ void BatBomb::update(float const timeElapsed)
 			if (!_ani->isPlay())
 			{
 				setState(ENEMY_STATE::DIE);
+				//setState(ENEMY_STATE::DIE);
+				SOUND_MANAGER->stop("BoomBat/Explod");
 				_active = false;
 			}
 		}
