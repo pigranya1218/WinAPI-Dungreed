@@ -1,5 +1,7 @@
 #pragma once
-class CostumeNpc
+#include "Npc.h"
+
+class CostumeNpc : public Npc
 {
 };
 

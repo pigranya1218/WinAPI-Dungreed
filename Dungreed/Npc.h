@@ -16,6 +16,7 @@ enum class NPC_TYPE : int
 	ENTRANCE, // 입구
 	EXIT, // 출구
 	ABILITY, //훈련장
+	COSTUME, // 의상실
 	END
 };
 
