@@ -5,26 +5,27 @@ void DebugStage::init()
 {
 	int stageWidth = _tile[0].tileX*TILESIZE;
 	int stageHeight = _tile[0].tileY*TILESIZE;
-	_stageManager->setPlayerPos(500, 500);
+	_stageManager->setPlayerPos(2300, 250);
 
 
 	Stage::init();
 	// 맵 불러오기
-	_respawnPosition[0] = Vector2(800, 500);
+	_respawnPosition[0] = Vector2(2300, 250);
 	
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/Stage2_LR.map");
+	loadMap("room/Stage3_LR.map");
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(400, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(1300, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(2200, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
 
 
 	//몹 소환
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 440) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 660) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 850) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 440) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 660) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 850) });
-
+	
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	// 에너미 테스트입니다.
 	
