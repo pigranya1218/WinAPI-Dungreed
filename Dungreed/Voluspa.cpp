@@ -1,6 +1,6 @@
 #include "Voluspa.h"
 #include "stdafx.h"
-#include "Stage.h"
+
 
 void Voluspa::init()
 {
@@ -34,8 +34,8 @@ void Voluspa::release()
 
 void Voluspa::update(Player * player, float const elapsedTime)
 {	
-	_playerPos = player->getPosition();	
-	Vector2 enemypos = player->getEnemyPos(Vector2());
+	
+	
 	_elapsedTime += elapsedTime;
 	_location.x = 2500* elapsedTime;
 	
@@ -47,8 +47,9 @@ void Voluspa::update(Player * player, float const elapsedTime)
 			_currStopDelay = max(0, _currStopDelay - elapsedTime);		}
 		
 		if (_currStopDelay == 0 ) {
-					
-			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);
+			_playerPos = player->getPosition();
+			Vector2 enemypos = player->getEnemyPos(Vector2());
+			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
 			_currAttackDelay = 1.7f;
 			_Opposition = true;
 		}
@@ -60,8 +61,10 @@ void Voluspa::update(Player * player, float const elapsedTime)
 			_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 		}
 		
-		if (_currAttackDelay == 0 ) {			
-			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);
+		if (_currAttackDelay == 0 ) {	
+			_playerPos = player->getPosition();
+			Vector2 enemypos = player->getEnemyPos(Vector2());
+			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
 			_currStopDelay = 1.7f;
 			_Opposition = false;
 		}
