@@ -8,6 +8,9 @@ private:
 	bool _isEventScene;
 	float _timeCount;
 
+	Image* _torchImg;
+	Animation* _torchAni;
+
 private:
 	void startEventScene();
 

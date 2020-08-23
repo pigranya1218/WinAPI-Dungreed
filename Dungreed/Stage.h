@@ -77,7 +77,10 @@ protected:
 	vector<DoorObject*> _doors;
 
 
+
 	Synthesize(ROOMTYPE, _roomType, RoomType)
+
+
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }

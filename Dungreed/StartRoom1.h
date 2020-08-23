@@ -8,6 +8,8 @@ class StartRoom1 :
 private:
 	Image* _img;
 	Animation* _ani;
+
+	
 public:
 	virtual void init();
 	virtual void release();
