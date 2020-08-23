@@ -158,8 +158,6 @@ void ShortSpear::attack(Player* player)
 	SOUND_MANAGER->stop("SOUND_generalAttack");
 	SOUND_MANAGER->play("SOUND_generalAttack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
-	_attackCircle = new FloatCircle;
-	_attackCircle->origin = originPos;
 	_attackCircle->size = 150;
 	_attackCircle->startRadian = attackRadian - PI * 0.05;
 	_attackCircle->endRadian = attackRadian + PI * 0.05;
