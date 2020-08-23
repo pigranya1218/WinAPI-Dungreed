@@ -24,6 +24,14 @@ void BossRoom1::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/BossRoom.map");
+
+	_torchImg = IMAGE_MANAGER->findImage("Torch");
+	_torchAni = new Animation;
+	_torchAni->init(_torchImg->getWidth(), _torchImg->getHeight(), _torchImg->getMaxFrameX(), _torchImg->getMaxFrameY());
+	_torchAni->setDefPlayFrame(false, true);
+	_torchAni->setFPS(15);
+	_torchAni->start();
+
 }
 
 void BossRoom1::release()
@@ -33,6 +41,8 @@ void BossRoom1::release()
 
 void BossRoom1::update(float const elapsedTime)
 {
+	_torchAni->frameUpdate(elapsedTime);
+
 	_projectileMgr->update(elapsedTime);
 	_objectMgr->update(elapsedTime);
 	_npcMgr->update(elapsedTime);
@@ -143,4 +153,13 @@ void BossRoom1::render()
 			D2D_RENDERER->renderTextField(35, 615, L"감옥의 수문장", RGB(255, 255, 255), 45, 300, 40, alpha);
 		}
 	}
+
+	int sizeX=_torchImg->getSize().x*4;
+	int sizeY = _torchImg->getSize().y*4;
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(400, 1160)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1300,1160)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2( Vector2(650, 600)),Vector2(sizeX,sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1000, 600)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(650, 900)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1000, 900)), Vector2(sizeX, sizeY), _torchAni);
 }

@@ -858,7 +858,6 @@ bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 	renderPos.x = RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x);
 	renderPos.y = RANDOM->getFromFloatTo(_position.y - _size.y, _position.y);
 	_gameScene->showDamage(damageInfo, renderPos);
-
 	return true;
 }
 
