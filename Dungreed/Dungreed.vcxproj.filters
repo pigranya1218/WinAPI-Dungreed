@@ -801,6 +801,9 @@
     <ClInclude Include="ItemObject.h">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
     </ClInclude>
+    <ClInclude Include="TorchObject.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1103,12 +1106,6 @@
     <ClCompile Include="DialogueUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Lumber.cpp">
-      <Filter>Dungreed\GameScene\Item\Melee</Filter>
-    </ClCompile>
-    <ClCompile Include="FluteGreatSword.cpp">
-      <Filter>Dungreed\GameScene\Item\Melee</Filter>
-    </ClCompile>
     <ClCompile Include="AccProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
@@ -1310,9 +1307,6 @@
     <ClCompile Include="ChestNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="ViewObject.cpp">
-      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
-    </ClCompile>
     <ClCompile Include="GateNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClCompile>
@@ -1405,6 +1399,9 @@
     </ClCompile>
     <ClCompile Include="ItemObject.cpp">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchObject.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

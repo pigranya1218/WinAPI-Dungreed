@@ -1,5 +1,7 @@
 #pragma once
 #include "Stage.h"
+
+
 class StartRoom1 :
 	public Stage
 {
