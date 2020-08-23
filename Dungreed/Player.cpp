@@ -287,9 +287,9 @@ void Player::init()
 	//testAcc13->init();
 	//_inventory[5] = testAcc13;
 
-	Voluspa* testAcc22 = new Voluspa;
-	testAcc22->init();
-	_inventory[1] = testAcc22;
+	//Voluspa* testAcc22 = new Voluspa;
+	//testAcc22->init();
+	//_inventory[1] = testAcc22;
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
