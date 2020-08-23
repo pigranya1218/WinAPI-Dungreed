@@ -3,17 +3,54 @@
 
 HRESULT MazeScene::init()
 {
-	_size = 4;
+	_size = 8;
 	_stage.resize(_size);
 	for (int i = 0; i < _size; i++)
 	{
 		_stage[i].resize(_size);
 	}
 
-	
+	//while (true)
+	//{
+	//	for (int y = 0; y < _size; y++)
+	//	{
+	//		for (int x = 0; x < _size; x++)
+	//		{
+	//			_stage[x][y]._isVisited = false;
+	//			for (int i = 0; i < 4; i++)
+	//			{
+	//				_stage[x][y]._isWall[i] = true;
+	//			}
+	//			_stage[x][y]._rc = FloatRect(Vector2(100 + x * 60, 100 + y * 60), Vector2(60, 60), PIVOT::LEFT_TOP);
+	//		}
+	//	}
+	//	// 랜덤의 시작 지점을 잡고
+	//	int startX = RANDOM->getInt(_size);
+	//	int startY = RANDOM->getInt(_size);
+	//	makeRoom(startX, startY);
+	//	if (makeSpecialRoom()) // 시작방, 끝방, 식당, 상점을 만들 수 있는지 판단
+	//	{
+	//		break;
+	//	}
+	//}
 
-	while (true)
+	return S_OK;
+}
+
+void MazeScene::release()
+{
+}
+
+void MazeScene::update()
+{
+
+	if (KEY_MANAGER->isOnceKeyDown('A'))
 	{
+		_start = make_pair(-1, -1);
+		_end = make_pair(-1, -1);
+		_restaurant = make_pair(-1, -1);
+		_shop = make_pair(-1, -1);
+		_notUse.clear();
 		for (int y = 0; y < _size; y++)
 		{
 			for (int x = 0; x < _size; x++)
@@ -30,22 +67,25 @@ HRESULT MazeScene::init()
 		int startX = RANDOM->getInt(_size);
 		int startY = RANDOM->getInt(_size);
 		makeRoom(startX, startY);
-		if (makeSpecialRoom()) // 시작방, 끝방, 식당, 상점을 만들 수 있는지 판단
-		{
-			break;
-		}
 	}
 
-	return S_OK;
-}
+	if (KEY_MANAGER->isOnceKeyDown('S'))
+	{
+		_start = make_pair(-1, -1);
+		_end = make_pair(-1, -1);
+		_restaurant = make_pair(-1, -1);
+		_shop = make_pair(-1, -1);
+		_notUse.clear();
 
-void MazeScene::release()
-{
-}
-
-void MazeScene::update()
-{
-
+		if (!makeSpecialRoom())
+		{
+			_start = make_pair(-1, -1);
+			_end = make_pair(-1, -1);
+			_restaurant = make_pair(-1, -1);
+			_shop = make_pair(-1, -1);
+			_notUse.clear();
+		}
+	}
 }
 
 void MazeScene::render()
@@ -71,20 +111,26 @@ void MazeScene::render()
 		}
 	}
 
-	D2D_RENDERER->renderTextField(_stage[_start.first][_start.second]._rc.left, _stage[_start.first][_start.second]._rc.top, L"START", RGB(0, 0, 0), 15, 
-		_stage[_start.first][_start.second]._rc.getWidth(), _stage[_start.first][_start.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
-	D2D_RENDERER->renderTextField(_stage[_end.first][_end.second]._rc.left, _stage[_end.first][_end.second]._rc.top, L"END", RGB(0, 0, 0), 15,
-		_stage[_end.first][_end.second]._rc.getWidth(), _stage[_end.first][_end.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
-	D2D_RENDERER->renderTextField(_stage[_restaurant.first][_restaurant.second]._rc.left, _stage[_restaurant.first][_restaurant.second]._rc.top, L"REST", RGB(0, 0, 0), 15,
-		_stage[_restaurant.first][_restaurant.second]._rc.getWidth(), _stage[_restaurant.first][_restaurant.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
-	D2D_RENDERER->renderTextField(_stage[_shop.first][_shop.second]._rc.left, _stage[_shop.first][_shop.second]._rc.top, L"SHOP", RGB(0, 0, 0), 15,
-		_stage[_shop.first][_shop.second]._rc.getWidth(), _stage[_shop.first][_shop.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
-	
-	for (int i = 0; i < _notUse.size(); i++)
+	if (_shop.first != -1)
 	{
-		D2D_RENDERER->fillRectangle(_stage[_notUse[i].first][_notUse[i].second]._rc);
+		D2D_RENDERER->renderTextField(_stage[_start.first][_start.second]._rc.left, _stage[_start.first][_start.second]._rc.top, L"START", RGB(0, 0, 0), 15,
+			_stage[_start.first][_start.second]._rc.getWidth(), _stage[_start.first][_start.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+		D2D_RENDERER->renderTextField(_stage[_end.first][_end.second]._rc.left, _stage[_end.first][_end.second]._rc.top, L"END", RGB(0, 0, 0), 15,
+			_stage[_end.first][_end.second]._rc.getWidth(), _stage[_end.first][_end.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+		D2D_RENDERER->renderTextField(_stage[_restaurant.first][_restaurant.second]._rc.left, _stage[_restaurant.first][_restaurant.second]._rc.top, L"REST", RGB(0, 0, 0), 15,
+			_stage[_restaurant.first][_restaurant.second]._rc.getWidth(), _stage[_restaurant.first][_restaurant.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+		D2D_RENDERER->renderTextField(_stage[_shop.first][_shop.second]._rc.left, _stage[_shop.first][_shop.second]._rc.top, L"SHOP", RGB(0, 0, 0), 15,
+			_stage[_shop.first][_shop.second]._rc.getWidth(), _stage[_shop.first][_shop.second]._rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+	
+		for (int i = 0; i < _notUse.size(); i++)
+		{
+			D2D_RENDERER->fillRectangle(_stage[_notUse[i].first][_notUse[i].second]._rc);
 
+		}
 	}
+	
+	
+	
 }
 
 void MazeScene::makeRoom(int x, int y)
@@ -120,8 +166,6 @@ void MazeScene::makeRoom(int x, int y)
 		_stage[newX][newY]._isWall[(dir + 2) % 4] = false; 
 
 		makeRoom(newX, newY);
-
-		
 	}
 }
 
@@ -141,6 +185,10 @@ bool MazeScene::makeSpecialRoom()
 			{
 				candidate.push_back(make_pair(x, y));
 			}
+			else if (_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && _stage[x][y]._isWall[2] && !_stage[x][y]._isWall[3]) // 하
+			{
+				candidate.push_back(make_pair(x, y));
+			}
 		}
 	}
 
@@ -155,7 +203,15 @@ bool MazeScene::makeSpecialRoom()
 		for (int y = 0; y < _size; y++)
 		{
 			if (_start.first == x && _start.second == y) continue;
-			if (!_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && _stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 좌
+			if (!_stage[x][y]._isWall[0] && !_stage[x][y]._isWall[1] && _stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 좌 상
+			{
+				candidate.push_back(make_pair(x, y));
+			}
+			else if (!_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && _stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 좌
+			{
+				candidate.push_back(make_pair(x, y));
+			}
+			else if (_stage[x][y]._isWall[0] && !_stage[x][y]._isWall[1] && _stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 상
 			{
 				candidate.push_back(make_pair(x, y));
 			}
@@ -180,6 +236,14 @@ bool MazeScene::makeSpecialRoom()
 			{
 				candidate.push_back(make_pair(x, y));
 			}
+			else if (!_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && _stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 좌
+			{
+				candidate.push_back(make_pair(x, y));
+			}
+			else if (_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && !_stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 우
+			{
+				candidate.push_back(make_pair(x, y));
+			}
 		}
 	}
 
@@ -197,6 +261,14 @@ bool MazeScene::makeSpecialRoom()
 			if (_end.first == x && _end.second == y) continue;
 			if (_restaurant.first == x && _restaurant.second == y) continue;
 			if (!_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && !_stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 좌 우
+			{
+				candidate.push_back(make_pair(x, y));
+			}
+			else if (!_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && _stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 좌
+			{
+				candidate.push_back(make_pair(x, y));
+			}
+			else if (_stage[x][y]._isWall[0] && _stage[x][y]._isWall[1] && !_stage[x][y]._isWall[2] && _stage[x][y]._isWall[3]) // 우
 			{
 				candidate.push_back(make_pair(x, y));
 			}

@@ -33,7 +33,7 @@ void SeeriProjectile::init(const string imgKey, const string collisionEffect, co
 	_collisionPlatForm = collsionPlatForm;
 	_collisionEffect = collisionEffect;
 	_useCollsionEnemy = collsionEnemy;
-
+	SOUND_MANAGER->play("SeeriBullet1", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	_drawSize = drawSize;
 	_size = collsionRectSize;
 	_effectSize = effectSize;
@@ -42,8 +42,7 @@ void SeeriProjectile::init(const string imgKey, const string collisionEffect, co
 
 	_active = true;
 	_Delay = 0.2f;
-	_length = _img->getFrameSize().x * 1.0f;
-
+	_length = _img->getFrameSize().x * 1.0f;	
 	_timeCount = 0;
 	_isTrun = false;
 	
@@ -64,13 +63,13 @@ void SeeriProjectile::release()
 
 void SeeriProjectile::update(float elapsedTime)
 {
-	Vector2 _effectpos = _position;
+     _effectpos = _position;
 
-	EFFECT_MANAGER->play("SeeriBullet0", _effectpos, _drawSize, 0, _isTrun);
+	
 	if (_Delay > 0)
 	{
 		_Delay = max(0, _Delay - elapsedTime);
-		_position.y -= 100* elapsedTime;
+		
 		
 	}
 	_enemyPos = _projectileMgr->getEnemyPos(_position);
@@ -142,6 +141,7 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_active = false;
 	}
 	
@@ -154,7 +154,7 @@ void SeeriProjectile::update(float elapsedTime)
 		{
 			float angleDegree = _angleRadian * (180.0f / PI);
 			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
-
+			SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 			if (_useCollsionEnemy)
 			{
 				_active = false;
@@ -178,7 +178,7 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
-
+		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_active = false;
 	}
 
@@ -187,10 +187,12 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
+	
 }
 
 void SeeriProjectile::render()
 {	
+	EFFECT_MANAGER->play("SeeriBullet0", _effectpos, Vector2(_drawSize.x, _drawSize.y*1.5f), 0, _isTrun);
 	if (_useRotate)
 	{
 		_img->setAngle(_angleRadian * (180 / PI));
@@ -199,15 +201,17 @@ void SeeriProjectile::render()
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani, _isTrun);
 		
-		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		
 	}
 	else
 	{
 	
 		_img->render(CAMERA->getRelativeV2(_position), _drawSize, _isTrun);
-		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		
 	}
+	
 }
+
 
 void SeeriProjectile::aniUpdate(float const elapsedTime)
 {

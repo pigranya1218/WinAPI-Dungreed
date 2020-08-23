@@ -10,9 +10,9 @@ void DownStair1L::init()
 
 	//_respawnPosition[0] = Vector2(200, 600);
 
-	_objectMgr->spawnObject(0x0001, Vector2(940, 650));
-	_objectMgr->spawnObject(0x0001, Vector2(980, 650));
-	_objectMgr->spawnObject(0x0002, Vector2(1040, 650));
+	_objectMgr->spawnObject(0x0001, Vector2(940, 660));
+	_objectMgr->spawnObject(0x0001, Vector2(980, 660));
+	_objectMgr->spawnObject(0x0002, Vector2(1040, 660));
 
 	/*_objectMgr->spawnObject(0x0000, Vector2(1200, 500));
 	_objectMgr->spawnObject(0x0000, Vector2(1140, 500));

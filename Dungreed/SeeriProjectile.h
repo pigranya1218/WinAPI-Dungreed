@@ -30,7 +30,7 @@ private:
 
 	bool		_useGravity;		// 중력 사용 여부
 	Vector2		_gravity;			// 중력값
-
+	Vector2     _effectpos;
 	bool		_useRotate;			// 투사체를 돌릴 것인가
 
 	Vector2		_enemyPos;			// 적몹 위치값
@@ -45,7 +45,6 @@ public:
 	virtual void release();
 	virtual void update(float elapsedTime);
 	virtual void render();
-
 	// 애니메이션 업데이트 하려고 만듬 
 	virtual void aniUpdate(float const elapsedTime);
 };

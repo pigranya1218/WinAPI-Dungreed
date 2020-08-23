@@ -53,5 +53,19 @@ void Room7RT::update(float const elapsedTime)
 
 void Room7RT::render()
 {
-	Stage::render();
+	
+	Image* torture1 = IMAGE_MANAGER->findImage("TortureTable0");
+	torture1->setScale(4);
+	torture1->render(CAMERA->getRelativeV2(Vector2(450, 290)));
+	Image* torture2 = IMAGE_MANAGER->findImage("TortureTable1");
+	torture2->setScale(4);
+	torture2->render(CAMERA->getRelativeV2(Vector2(1150, 280)));
+	Image* cell = IMAGE_MANAGER->findImage("BrokenCell");
+	cell->setScale(4);
+	cell->render(CAMERA->getRelativeV2(Vector2(850, 230)));
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
 }

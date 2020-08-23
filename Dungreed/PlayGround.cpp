@@ -381,6 +381,11 @@ HRESULT playGround::init()
 	
 
 	// ** DUNGEON
+	IMAGE_MANAGER->addImage("BrokenCell", L"resources/images/Dungeon/BrokenCell0.png");
+	IMAGE_MANAGER->addImage("TortureTable0", L"resources/images/Dungeon/TortureTable0.png");
+	IMAGE_MANAGER->addImage("TortureTable1", L"resources/images/Dungeon/TortureTable1.png");
+	IMAGE_MANAGER->addImage("UpperCell0", L"resources/images/Dungeon/UpperCell0.png");
+	IMAGE_MANAGER->addImage("UpperCell1", L"resources/images/Dungeon/UpperCell1.png");
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
 	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
 	IMAGE_MANAGER->addFrameImage("CandleOn1", L"resources/images/Map/CandleOn1.png", 6, 1);
@@ -908,6 +913,12 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Reload", "resources/sounds/weapon/LongDistanceWeapon/Reload.wav", false, false);
 	SOUND_MANAGER->addSound("Reload2", "resources/sounds/weapon/LongDistanceWeapon/Reload2.wav", false, false);
 
+	 //¾Ç¼¼¼­¸®
+	SOUND_MANAGER->addSound("SeeriBullet1", "resources/sounds/accessories/bigdrummo_MetalJumper_Landing.wav", false, false);
+	SOUND_MANAGER->addSound("SeeriBullet2", "resources/sounds/accessories/fireball(CC-BY3.0) Bart K..wav", false, false);
+	SOUND_MANAGER->addSound("VolspaS", "resources/sounds/accessories/ice_spell_freeze_small_02", false, false);
+	
+
 	TIME_MANAGER->init();
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();	
@@ -919,7 +930,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("MAIN");		
+	SCENE_MANAGER->changeScene("GAME");		
 	
 	return S_OK;
 }

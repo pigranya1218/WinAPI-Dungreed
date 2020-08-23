@@ -46,5 +46,13 @@ void Room12LRB::update(float const elapsedTime)
 
 void Room12LRB::render()
 {
-	Stage::render();
+	
+	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1000, 1050)));
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
 }

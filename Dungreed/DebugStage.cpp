@@ -14,19 +14,8 @@ void DebugStage::init()
 	
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/RestaurantRoom2_L.map");
-	//_respawnPosition[0] = Vector2(200, 600);
+	loadMap("room/Stage20_LB.map");
 
-	//makeDoor(Vector2(100,850), DIRECTION::LEFT);
-
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(400, 750), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(1200, 750), DIRECTION::LEFT);
-
-	_roomType = ROOMTYPE::RESTAURANT;
-
-	/*SOUND_MANAGER->stop("Floor1_BGM");
-	SOUND_MANAGER->stop("Foodshop");
-	SOUND_MANAGER->play("Foodshop",1.0f);*/
 	
 
 
@@ -117,6 +106,12 @@ void DebugStage::init()
 	//_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(900, 500), DIRECTION::LEFT);
 	
 	//makeDoor(Vector2(400, 300), DIRECTION::LEFT);
+	_torchImg = IMAGE_MANAGER->findImage("Torch");
+	_torchAni = new Animation;
+	_torchAni->init(_torchImg->getWidth(), _torchImg->getHeight(), _torchImg->getMaxFrameX(), _torchImg->getMaxFrameY());
+	_torchAni->setDefPlayFrame(false, true);
+	_torchAni->setFPS(15);
+	_torchAni->start();
 }
 
 void DebugStage::release()
@@ -145,6 +140,7 @@ void DebugStage::update(float const elapsedTime)
 			}
 		}
 	}
+	_torchAni->frameUpdate(elapsedTime);
 }
 
 void DebugStage::render()
@@ -154,11 +150,18 @@ void DebugStage::render()
 	int stageWidth = _tile[0].tileX * TILESIZE;
 	int stageHeight = _tile[0].tileY * TILESIZE;
 
-	IMAGE_MANAGER->findImage("Tavern")->setScale(4);
-	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 648));
+	/*IMAGE_MANAGER->findImage("Tavern")->setScale(4);
+	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 648));*/
 
-	
+	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1200, 1110)));
 
+	Image* cell = IMAGE_MANAGER->findImage("BrokenCell");
+	cell->setScale(4);
+	cell->render(CAMERA->getRelativeV2(Vector2(300, 2094)));
 
-	//CAMERA->frameRender(_tileImage, Vector2(800,400));
+	Image* table2 = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1000, 794)));
 }

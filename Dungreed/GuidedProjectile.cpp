@@ -331,7 +331,7 @@ void GuidedProjectile::generateAfterImage(float elapsedTime)
 	shadow.angleRadian = PI - _angleRadian;
 	shadow.pos.x = _position.x + cosf(shadow.angleRadian) * distance;
 	shadow.pos.y = _position.y + -sinf(shadow.angleRadian) * distance;
-	shadow.remainTime = 1.0;
+	shadow.remainTime = 0.5;
 	
 	_frameIndex++;
 	if (_frameIndex > 3)

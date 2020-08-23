@@ -775,6 +775,8 @@ bool Player::isHit(FloatRect* rc, AttackInfo* info)
 	}
 	_attackedId.push_back(info->attackID); // 맨 뒤에 새로운 공격 ID 추가
 
+	SOUND_MANAGER->play("Player/Hit");
+
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }
 
@@ -810,6 +812,8 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 		_attackedId.erase(_attackedId.begin()); // 맨 먼저 들어온 ID를 제거하고
 	}
 	_attackedId.push_back(info->attackID); // 맨 뒤에 새로운 공격 ID 추가
+
+	SOUND_MANAGER->play("Player/Hit");
 
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }
