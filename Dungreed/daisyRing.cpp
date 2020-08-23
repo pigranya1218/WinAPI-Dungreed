@@ -58,7 +58,10 @@ void DaisyRing::release()
 
 void DaisyRing::update(Player * player, float const elapsedTime)
 {
-	
+	if (KEY_MANAGER->isOnceKeyDown('9'))
+	{
+		return init();
+	}
 	
 	
 }

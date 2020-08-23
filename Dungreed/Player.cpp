@@ -305,10 +305,10 @@ void Player::init()
 	////testAcc15->init();
 	////_inventory[7] = testAcc15;
 
-	////DaisyRing* testAcc23 = new DaisyRing;
-	////testAcc23->init();
-	////_inventory[7] = testAcc23;
-	//
+	DaisyRing* testAcc23 = new DaisyRing;
+	testAcc23->init();
+	_inventory[0] = testAcc23;
+	
 
 	///*KeresScythe* testWeapon1 = new KeresScythe;
 	//testWeapon1->init();
