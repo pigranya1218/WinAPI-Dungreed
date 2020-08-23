@@ -5,7 +5,7 @@ void MartialArtOfTiger::init()
 {
 	_effect = IMAGE_MANAGER->findImage("EFFECT_TIGERPUNCH");
 	_iconImg =IMAGE_MANAGER->findImage("TigerPunchIcon");
-	_price = 600;
+	_price = 2300;
 	_itemName = L"호랑이 권법";
 	_displayText = L"\"토끼를 춤추게 하고 여우를 바이올린 켜게 하는 짐승에게 전수받은 권법\"";
 	_itemCode = 0x01300; //한손 에픽 00

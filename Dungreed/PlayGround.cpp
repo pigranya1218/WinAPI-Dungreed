@@ -543,6 +543,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
+	IMAGE_MANAGER->addFrameImage("CosmosSwordFx1", L"resources/images/MeleeWeapon/CosmosSwordFx1.png",7,1);
 	
 	//***MeleeWeaponSound
 	SOUND_MANAGER->addSound("SOUND_katana", "resources/sound/MeleeWeapon/katana.wav", false, false);  // Ä«Å¸³ª
