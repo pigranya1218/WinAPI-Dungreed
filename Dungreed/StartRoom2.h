@@ -7,6 +7,8 @@ private:
 	Image* _img;
 	Animation* _ani;
 
+	Image* _torchImg;
+	Animation* _torchAni;
 public:
 	virtual void init();
 	virtual void release();

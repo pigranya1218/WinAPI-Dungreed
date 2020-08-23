@@ -66,4 +66,7 @@ void Room23LR::update(float const elapsedTime)
 void Room23LR::render()
 {
 	Stage::render();
+	Image* cell = IMAGE_MANAGER->findImage("UpperCell0");
+	cell->setScale(4);
+	cell->render(CAMERA->getRelativeV2(Vector2(1050, 370)));
 }

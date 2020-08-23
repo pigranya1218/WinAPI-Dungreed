@@ -381,6 +381,11 @@ HRESULT playGround::init()
 	
 
 	// ** DUNGEON
+	IMAGE_MANAGER->addImage("BrokenCell", L"resources/images/Dungeon/BrokenCell0.png");
+	IMAGE_MANAGER->addImage("TortureTable0", L"resources/images/Dungeon/TortureTable0.png");
+	IMAGE_MANAGER->addImage("TortureTable1", L"resources/images/Dungeon/TortureTable1.png");
+	IMAGE_MANAGER->addImage("UpperCell0", L"resources/images/Dungeon/UpperCell0.png");
+	IMAGE_MANAGER->addImage("UpperCell1", L"resources/images/Dungeon/UpperCell1.png");
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
 	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
 	IMAGE_MANAGER->addFrameImage("CandleOn1", L"resources/images/Map/CandleOn1.png", 6, 1);

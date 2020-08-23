@@ -41,6 +41,13 @@ void Room3LR::init()
 	_npcMgr->spawnNpc(NPC_TYPE::CHEST_YELLOW, Vector2(1400, 800), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;
+
+	_torchImg = IMAGE_MANAGER->findImage("Torch");
+	_torchAni = new Animation;
+	_torchAni->init(_torchImg->getWidth(), _torchImg->getHeight(), _torchImg->getMaxFrameX(), _torchImg->getMaxFrameY());
+	_torchAni->setDefPlayFrame(false, true);
+	_torchAni->setFPS(15);
+	_torchAni->start();
 }
 
 void Room3LR::release()
@@ -56,9 +63,19 @@ void Room3LR::update(float const elapsedTime)
 		//_stageManager->moveRoom();
 		
 	}
+	_torchAni->frameUpdate(elapsedTime);
 }
 
 void Room3LR::render()
 {
 	Stage::render();
+	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1000, 794)));
+
+	int sizeX = _torchImg->getSize().x * 4;
+	int sizeY = _torchImg->getSize().y * 4;
+
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(460, 700)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(2200, 700)), Vector2(sizeX, sizeY), _torchAni);
 }
