@@ -26,7 +26,7 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 
 	// 이동 관련 변수 >> 여기서는 돌진에 사용
 	ZeroMemory(&_moving, sizeof(_moving));
-	_moving.force = Vector2(RUSHSPEED, 0.0f);
+	_moving.force = Vector2(0.0f, 0.0f);
 	_moving.gravity = Vector2(10, 4000);
 
 	// 공격 관련 변수
@@ -119,6 +119,7 @@ void Minotaurs::update(float const timeElapsed)
 					{
 						// 돌진 상태로 전환
 						setState(ENEMY_STATE::SKILL);
+						_moving.force.x = RUSHSPEED;
 						_rushPos = _position;
 					}
 				}
@@ -186,8 +187,6 @@ void Minotaurs::update(float const timeElapsed)
 			// 돌진이 끝났을 때
 			if (!_ani->isPlay() && _ani->getPlayIndex() != 4)
 			{
-				_moving.force.x = RUSHSPEED;
-
 				// 플레이어와 거리 계산 후
 				float distance = getDistance(playerPos.x, playerPos.y, _position.x, _position.y);
 
@@ -306,6 +305,8 @@ void Minotaurs::setState(ENEMY_STATE state)
 			_ani->setDefPlayFrame(false, true);
 			_ani->setFPS(15);
 			_ani->start();
+
+			_moving.force.x = 0;
 		}	
 		break;
 		case ENEMY_STATE::ATTACK:
@@ -370,9 +371,12 @@ void Minotaurs::hitReaction(const Vector2 & playerPos, Vector2 & moveDir, const 
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_hit.isHit = false;
 		}
-		_moving.force.x -= _moving.gravity.x * timeElapsed;
-		_moving.gravity.x -= _moving.gravity.x * timeElapsed;
-		moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (-1) : (1));
+		if (_state != ENEMY_STATE::SKILL)
+		{
+			_moving.force.x -= _moving.gravity.x * timeElapsed;
+			_moving.gravity.x -= _moving.gravity.x * timeElapsed;
+			moveDir.x += _moving.force.x * timeElapsed * ((playerPos.x > _position.x) ? (1) : (-1));
+		}		
 	}
 }
 

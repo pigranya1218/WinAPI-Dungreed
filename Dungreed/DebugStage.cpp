@@ -16,7 +16,7 @@ void DebugStage::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage23_LR.map");
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_BOMB, Vector2(950, 700) });
+	/*_spawnEnemies.push_back({ ENEMY_TYPE::BAT_BOMB, Vector2(950, 700) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_BOMB, Vector2(1250, 700) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(650, 400) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(1450, 400) });
@@ -38,7 +38,8 @@ void DebugStage::init()
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(740, 900),2 });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(1300, 900),2 });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(640, 900),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(1390, 900),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(1390, 900),2 });*/
+	_spawnEnemies.push_back({ ENEMY_TYPE::MINOTAURS, Vector2(1390, 900) });
 
 	int randBox = RANDOM->getInt(10);
 	int boxPer = RANDOM->getInt(10);
@@ -129,7 +130,7 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::OVIBOS, Vector2(WINSIZEX / 2 + 100, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2 + 30, WINSIZEY / 2 + 300));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2 + 30, WINSIZEY / 2 + 300));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 
