@@ -79,19 +79,15 @@ void SeeriProjectile::update(float elapsedTime)
 	}
 	if (_enemyPos.y < _position.y)
 	{
-		_angele += 0.033f;
-		_img->setAngle(_img->getAngle() + _angele*15);
+		_angele += 0.033f*elapsedTime;
+		_img->setAngle(_img->getAngle() + _angele*1000);
 	}
 	else
 	{
-		_angele -= 0.033f;
-		_img->setAngle(_img->getAngle() + _angele* 15);
+		_angele -= 0.033f*elapsedTime;
+		_img->setAngle(_img->getAngle() + _angele* 1000);
 	}
-
-	if (_enemyPos.y + 50 < _position.y)
-	{
-		_position.y -= 3;
-	}
+	
 	EFFECT_MANAGER->play("SeeriBullet0", _effectpos, _drawSize, 0, _isTrun);
 	if (_Delay > 0)
 	{
@@ -129,24 +125,23 @@ void SeeriProjectile::update(float elapsedTime)
 
 		if (_timeCount > 0.3f)
 		{
-			if (_angleRadian <= guidedAngleRadian)
+			if (_angleRadian <= _enemyPos.y)
 			{
 				if ((guidedAngleRadian - _angleRadian) > (_angleRadian + (PI2 - guidedAngleRadian)))
 				{
-					//_angleRadian -= 2.f * elapsedTime;
+					
 					if (_angleRadian < 0.f)
 					{
 						_angleRadian = PI2;
 					}
 					_angleRadian -= 3.f * elapsedTime;
 					
-					//_angleRadian -= 0.1f;
+					
 				}
 				else
 				{
 					_angleRadian += 3.f * elapsedTime;
-					//_angleRadian += 2.f * elapsedTime;
-					//_angleRadian += 0.1f;
+					
 					
 				}
 			}
@@ -154,18 +149,18 @@ void SeeriProjectile::update(float elapsedTime)
 			{
 				if ((_angleRadian - guidedAngleRadian) < ((PI2 - _angleRadian) + guidedAngleRadian))
 				{
-					//_angleRadian -= 2.f * elapsedTime;
+					
 					_angleRadian -= 3.f * elapsedTime;
-					//_angleRadian -= 0.1f;
+					
 				}
 				else
 				{
-					//_angleRadian += 2.f * elapsedTime;
+					
 					if (_angleRadian >= PI2)
 					{
 						_angleRadian = 0;
 					}
-					//_angleRadian += 0.1f;
+					
 					_angleRadian += 3.f * elapsedTime;
 				}
 			}
@@ -246,13 +241,13 @@ void SeeriProjectile::render()
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani, _isTrun);
 		
-		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		
 	}
 	else
 	{
 	
 		_img->render(CAMERA->getRelativeV2(_position), _drawSize, _isTrun);
-		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		
 	}
 }
 

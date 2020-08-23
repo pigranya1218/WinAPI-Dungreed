@@ -47,12 +47,7 @@ void Seeri::update(Player * player, float const elapsedTime)
 			if (_Delay == 0)
 			{
 				_Delay = 4.0;
-
-				float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _renderPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _renderPos.x)) + PI2;
-				if (angleRadian > PI2)
-				{
-					angleRadian -= PI2;
-				}
+				
 				SeeriProjectile* projectile = new SeeriProjectile;
 				projectile->setPosition(_renderPos);
 				projectile->setTeam(OBJECT_TEAM::PLAYER);
