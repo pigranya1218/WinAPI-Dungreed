@@ -1,7 +1,6 @@
 #pragma once
 #include "GameObject.h"
 #include "AttackInfo.h"
-#include "Shooting.h"
 #include "NormalProjectile.h"
 
 class EnemyManager;

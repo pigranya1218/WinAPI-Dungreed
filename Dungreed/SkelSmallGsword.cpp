@@ -70,7 +70,6 @@ void SkelSmallGsword::update(float const timeElapsed)
 	{
 		case ENEMY_STATE::ENTER:
 		{
-
 			if (!_ani->isPlay())
 			{
 				SOUND_MANAGER->stop("Enemy/Spawn");

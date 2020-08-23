@@ -795,6 +795,9 @@
     <ClInclude Include="ShopUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClInclude>
     <ClInclude Include="CameraEvent.h">
       <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
     </ClInclude>
@@ -1396,6 +1399,9 @@
     </ClCompile>
     <ClCompile Include="ShopUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Dungreed\GameScene\Item</Filter>
     </ClCompile>
     <ClCompile Include="CameraEvent.cpp">
       <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
