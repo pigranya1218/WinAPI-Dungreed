@@ -497,10 +497,7 @@ void Player::update(float const elapsedTime)
 	{
 		//대쉬 효과음 재생
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-		//대쉬 이펙트 재생
-		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
-		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y);
-		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
+		
 
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
@@ -575,7 +572,22 @@ void Player::update(float const elapsedTime)
 	{
 		_position.y -= 15;
 		moveDir.y += 21;
+		
+		if (moveDir.x != 0)
+		{
+			_walkEffectDelay -= elapsedTime;
+			if (_walkEffectDelay <= 0)
+			{
+				_walkEffectDelay = 0.5;
+				//먼지 이펙트 재생
+				Vector2 dashEffectPos = Vector2(_position.x + ((_direction == DIRECTION::LEFT) ? (_size.x / 2) : (-_size.x / 2)), _position.y + _size.y / 2);
+				Vector2 dashEffectSize = Vector2(56, 52);
+				EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, _direction == DIRECTION::LEFT);
+			}
+		}
 	}
+
+
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
 	{

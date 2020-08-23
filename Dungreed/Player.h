@@ -31,6 +31,8 @@ private:
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	
+	float	_walkEffectDelay = 0;
+
 	float	_currHitTime;			// 피격 타임
 	
 	bool	_isDead;				// 사망 여부
