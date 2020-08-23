@@ -158,8 +158,8 @@ void BossRoom1::render()
 	int sizeY = _torchImg->getSize().y*4;
 	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(400, 1160)), Vector2(sizeX, sizeY), _torchAni);
 	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1300,1160)), Vector2(sizeX, sizeY), _torchAni);
-	_torchImg->aniRender(CAMERA->getRelativeV2( Vector2(650, 600)),Vector2(sizeX,sizeY), _torchAni);
-	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1000, 600)), Vector2(sizeX, sizeY), _torchAni);
-	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(650, 900)), Vector2(sizeX, sizeY), _torchAni);
-	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1000, 900)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2( Vector2(650, 490)),Vector2(sizeX,sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1000, 490)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(450, 840)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1200, 840)), Vector2(sizeX, sizeY), _torchAni);
 }
