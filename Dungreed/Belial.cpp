@@ -517,6 +517,9 @@ void Belial::update(float const timeElapsed)
 	{
 		_ani->frameUpdate(timeElapsed);
 
+		_enemyManager->activeBossUI(true);
+		_enemyManager->setBossUIHp(_maxHp, _curHp);
+
 		_backAni->frameUpdate(timeElapsed);
 		for (int i = 0; i < 5; i++)
 		{
@@ -555,6 +558,7 @@ void Belial::update(float const timeElapsed)
 
 	if (_curHp <= 0 && _state != ENEMY_STATE::DIE)
 	{
+		_enemyManager->activeBossUI(false);
 		setState(ENEMY_STATE::DIE);
 	}
 }

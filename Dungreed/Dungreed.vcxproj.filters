@@ -804,6 +804,9 @@
     <ClInclude Include="CameraShakeEvent.h">
       <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
     </ClInclude>
+    <ClInclude Include="CameraFillEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1398,6 +1401,9 @@
       <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
     </ClCompile>
     <ClCompile Include="CameraShakeEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFillEvent.cpp">
       <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
     </ClCompile>
   </ItemGroup>

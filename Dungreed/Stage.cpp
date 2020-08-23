@@ -687,5 +687,12 @@ void Stage::setShowPlayer(bool showPlayer)
 	_stageManager->setShowPlayer(showPlayer);
 }
 
+void Stage::activeBossUI(bool active)
+{
+	_uiManager->showBossHP(active);
+}
 
-
+void Stage::setBossUIHp(int maxHp, int currHp)
+{
+	_uiManager->setBossHP(maxHp, currHp);
+}

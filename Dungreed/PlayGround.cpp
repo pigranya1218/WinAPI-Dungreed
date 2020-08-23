@@ -310,6 +310,10 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/SHOP/ITEM_BASE_SELECTED", L"resources/images/gameScene/ui/shop/shopItemBase_selected.png");
 	IMAGE_MANAGER->addImage("UI/SHOP/GOLD", L"resources/images/gameScene/ui/shop/gold.png");
 
+	// *** BOSS HP
+	IMAGE_MANAGER->addImage("UI/BOSS/HP_FRAME", L"resources/images/gameScene/ui/BossLifeBase.png");
+	IMAGE_MANAGER->addImage("UI/BOSS/HP_BG", L"resources/images/gameScene/ui/BossLifeBack.png");
+	IMAGE_MANAGER->addImage("UI/BOSS/HP_MARK", L"resources/images/gameScene/ui/BossSkellPortrait.png");
 
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");

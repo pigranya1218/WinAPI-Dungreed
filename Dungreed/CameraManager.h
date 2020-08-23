@@ -37,6 +37,7 @@ public:
 	void render();
 	void pushShakeEvent(float power, float remainTime);
 	void pushMoveEvnet(Vector2 targetPos, float moveTime, float waitTime);
+	void pushFillEvnet(vector<FloatRect> fillRects, float waitTime, float enterTime, float displayTime, float closeTime, COLORREF color);
 
 	void setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT);
 	void setConfigCenter(float x, float y, float width, float height, float minX, float minY, float maxX, float maxY);

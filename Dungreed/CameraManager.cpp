@@ -2,6 +2,7 @@
 #include "CameraManager.h"
 #include "CameraShakeEvent.h"
 #include "CameraMoveEvent.h"
+#include "CameraFillEvent.h"
 
 CameraManager::CameraManager()
 {
@@ -93,6 +94,13 @@ void CameraManager::pushShakeEvent(float power, float remainTime)
 void CameraManager::pushMoveEvnet(Vector2 targetPos, float moveTime, float waitTime)
 {
 	CameraMoveEvent* event = new CameraMoveEvent(targetPos, moveTime, waitTime);
+
+	_eventList.push_back(event);
+}
+
+void CameraManager::pushFillEvnet(vector<FloatRect> fillRects, float waitTime, float enterTime, float displayTime, float closeTime, COLORREF color)
+{
+	CameraFillEvent* event = new CameraFillEvent(fillRects, waitTime, enterTime, displayTime, closeTime, color);
 
 	_eventList.push_back(event);
 }

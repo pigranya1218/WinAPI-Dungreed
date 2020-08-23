@@ -132,4 +132,7 @@ public:
 	void moveToIndex(Vector2 index);
 	void nextStage();
 	void setShowPlayer(bool showPlayer);
+
+	void activeBossUI(bool active);
+	void setBossUIHp(int maxHp, int currHp);
 };

@@ -11,6 +11,11 @@ void BossRoom1::startEventScene()
 	Vector2 cameraPos = spawnPos;
 	cameraPos.y += 140;
 	CAMERA->pushMoveEvnet(cameraPos, 2.5, 1.5);
+	
+	vector<FloatRect> fillRect;
+	fillRect.push_back(FloatRect(0, 0, WINSIZEX, 150));
+	fillRect.push_back(FloatRect(0, WINSIZEY - 150, WINSIZEX, WINSIZEY));
+	CAMERA->pushFillEvnet(fillRect, 1, 1, 1, 1, RGB(0, 0, 0));
 }
 
 void BossRoom1::init()
@@ -105,5 +110,22 @@ void BossRoom1::render()
 {
 	Stage::render();
 
-
+	if (_isEventScene)
+	{
+		float infoTime = 1;
+		if (4 - infoTime >= _timeCount)
+		{
+			float alpha = 1;
+			if (4 - infoTime - 1 >= _timeCount)
+			{
+				alpha = min(alpha, _timeCount / (4 - infoTime - 2));
+			}
+			else
+			{
+				alpha = min(alpha, (1 - (_timeCount - 2)));
+			}
+			D2D_RENDERER->renderTextField(20, 670, L"벨리알", RGB(255, 255, 255), 55, 300, 50, alpha);
+			D2D_RENDERER->renderTextField(35, 615, L"감옥의 수문장", RGB(255, 255, 255), 45, 300, 40, alpha);
+		}
+	}
 }

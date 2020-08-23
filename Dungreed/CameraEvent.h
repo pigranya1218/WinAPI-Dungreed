@@ -4,6 +4,7 @@ enum class CAMERA_EVENT_TYPE : int
 {
 	SHAKE = 0,
 	MOVE = 1,
+	FILL = 2,
 	END
 };
 
