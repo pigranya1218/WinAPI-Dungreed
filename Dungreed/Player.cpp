@@ -367,9 +367,9 @@ void Player::init()
 	//testAcc18->init();
 	//_inventory[5] = testAcc18;
 
-	
-
-	
+	MultiBullet* testAcc19 = new MultiBullet;
+	testAcc19->init();
+	_inventory[6] = testAcc19;
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
