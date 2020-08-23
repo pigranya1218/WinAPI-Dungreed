@@ -166,6 +166,7 @@
     <ClInclude Include="DoorNpc.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Room20LB.h" />
     <ClInclude Include="Room20LRB.h" />
     <ClInclude Include="Room20TB.h" />
@@ -371,6 +372,7 @@
     <ClCompile Include="DoorNpc.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="GameEvent.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Room20LB.cpp" />
     <ClCompile Include="Room20LRB.cpp" />
     <ClCompile Include="Room20TB.cpp" />

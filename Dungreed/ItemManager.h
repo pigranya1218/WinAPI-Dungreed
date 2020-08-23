@@ -1,19 +1,20 @@
 #pragma once
-#include "Item.h"
-#include "stdafx.h"
-#include "Player.h"
+
+class Item;
+enum class ITEM_RANK;
 
 class ItemManager
 {
 private:
-	vector<Item*>	_VItem;
-public:
-	virtual void init();
-	virtual void release();
-	virtual void update();
-	virtual void render();
+	vector<Item*>	_items;
 
-	void spawnItem();
-	void pickUp();
+	map<int, Item*> _itemMap;
+
+public:
+	void init();
+	void release();
+
+	vector<Item*> getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count) const;
+	inline Item* getItem(int itemCode) const;
 };
 

@@ -35,9 +35,9 @@ void Enemy::tagShootingInfo::fireBullet(int enemyCode, EnemyManager * enemyManag
 void Enemy::dieEffect()
 {
 	SOUND_MANAGER->stop("Enemy/GetHit");
+	SOUND_MANAGER->stop("Enemy/Die");
 	SOUND_MANAGER->play("Enemy/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-	Vector2 drawSize = _img->getFrameSize() * _scale;
-	drawSize.x = drawSize.y = max(drawSize.x, drawSize.y);
+
 	EFFECT_MANAGER->play("Enemy_Destroy", _position, Vector2(160, 160));
 }
 
