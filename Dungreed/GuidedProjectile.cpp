@@ -123,7 +123,7 @@ void GuidedProjectile::update(float elapsedTime)
 	}
 
 	// 투사체부터 에너미까지의 각도
-	float guidedAngleRadian = atan2f(-(CAMERA->getRelativeY(_enemyPos.y) - _position.y), (CAMERA->getRelativeX(_enemyPos.x) - _position.x)) + PI2;
+	float guidedAngleRadian = atan2f(-(_enemyPos.y - _position.y), (_enemyPos.x) - _position.x) + PI2;
 	if (guidedAngleRadian > PI2)
 	{
 		guidedAngleRadian -= PI2;
@@ -212,10 +212,7 @@ void GuidedProjectile::update(float elapsedTime)
 				_collisionCount = 0;
 				_info->attackID = TTYONE_UTIL::getHash(to_string(0x09999) + to_string(TIME_MANAGER->getWorldTime()));
 			}
-			
 			return;
-
-			
 		}
 	}
 	else
