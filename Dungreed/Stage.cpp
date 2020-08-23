@@ -79,6 +79,7 @@ void Stage::update(float const elaspedTime)
 	{
 	case STAGE_STATE::IDLE:
 	{
+		_player->setSatiety(_player->getSatiety() - 2);
 		if (_spawnEnemies.size() > 0)
 		{
 			_state = STAGE_STATE::START;
@@ -125,6 +126,7 @@ void Stage::update(float const elaspedTime)
 		if (_spawnIndex >= _spawnEnemies.size() && _enemyMgr->getEnemyCount() == 0)
 		{
 			_state = STAGE_STATE::FINISH;
+			_player->setSatiety(_player->getSatiety() - 2);
 			if (_spawnChest.spawn)
 			{
 				_npcMgr->spawnNpc(_spawnChest.type, _spawnChest.pos, DIRECTION::LEFT);

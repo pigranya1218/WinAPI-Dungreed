@@ -83,12 +83,13 @@ public:
 	int getLevel() const noexcept { return _level; }
 	int getMaxHp() const noexcept { return _adjustStat.maxHp; }
 	int getCurrHp() const noexcept { return _currHp; }
-	void setCurrHp(int hp) { _currHp = min(_adjustStat.maxHp, hp); }
+	void setCurrHp(int hp) { _currHp = max(0, min(_adjustStat.maxHp, hp)); }
 
 	int getGold() const noexcept { return _currGold; }
 	void setGold(int gold) { _currGold = max(0, gold); }
 	int getMaxSatiety() const noexcept { return _adjustStat.maxSatiety; }
 	int getSatiety() const noexcept { return _currSatiety; }
+	void setSatiety(int satiety) { _currSatiety = max(0, satiety); }
 
 	int getMaxDash() const noexcept { return _adjustStat.maxDashCount; }
 	int getCurrDash() const noexcept { return _currDashCount; }
