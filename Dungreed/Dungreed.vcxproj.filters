@@ -810,6 +810,9 @@
     <ClInclude Include="TimeRatioEvent.h">
       <Filter>Dungreed\GameScene\Event</Filter>
     </ClInclude>
+    <ClInclude Include="Room22LTB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1411,6 +1414,9 @@
     </ClCompile>
     <ClCompile Include="TimeRatioEvent.cpp">
       <Filter>Dungreed\GameScene\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Room22LTB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
