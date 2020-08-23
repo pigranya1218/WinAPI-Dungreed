@@ -744,19 +744,26 @@ void UIManager::render()
 			{
 				for (int y = 0; y < 4; y++)
 				{
-					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
+					if (_mapUI.uiMap[x][y].exist)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
 						if (_mapUI.uiMap[x][y].isConnect[2]) // ©Л
 						{
-							FloatRect rc = FloatRect(centerX + offsetX + 48, centerY + offsetY - 3, centerX + offsetX + 48 + 30 + 18, centerY + offsetY + 3);
-							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							if (_mapUI.uiMap[x + 1][y].visible)
+							{
+								FloatRect rc = FloatRect(centerX + offsetX + 48, centerY + offsetY - 3, centerX + offsetX + 48 + 30 + 18, centerY + offsetY + 3);
+								D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							}
+							
 						}
-						if (_mapUI.uiMap[x][y].isConnect[3]) // го
+						if (_mapUI.uiMap[x][y].isConnect[3] ) // го
 						{
-							FloatRect rc = FloatRect(centerX + offsetX - 3, centerY + offsetY + 48, centerX + offsetX + 3, centerY + offsetY + 48 + 30 + 18);
-							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							if (_mapUI.uiMap[x][y + 1].visible)
+							{
+								FloatRect rc = FloatRect(centerX + offsetX - 3, centerY + offsetY + 48, centerX + offsetX + 3, centerY + offsetY + 48 + 30 + 18);
+								D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							}
 						}
 					}
 				}
