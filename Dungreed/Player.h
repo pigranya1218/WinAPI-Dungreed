@@ -33,6 +33,7 @@ private:
 	
 	float	_currHitTime;			// 피격 타임
 	
+	bool	_isDead;				// 사망 여부
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 	
