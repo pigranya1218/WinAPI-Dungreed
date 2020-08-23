@@ -24,7 +24,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffe
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 700;
 
 	// 충돌 사이즈 및 렉트 초기화
 	_size = Vector2(_img->getFrameSize().x, _img->getFrameSize().y);

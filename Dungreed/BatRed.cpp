@@ -145,6 +145,7 @@ void BatRed::update(float const timeElapsed)
 		}		
 		break;
 	}
+
 	hitReaction(playerPos, moveDir, timeElapsed);
 
 	_enemyManager->moveEnemy(this, moveDir, true, false);
@@ -201,6 +202,7 @@ void BatRed::setState(ENEMY_STATE state)
 			_ani->start();
 		}		
 		break;
+
 		case ENEMY_STATE::ATTACK:
 		{
 			_imageName = "Bat/Red/Attack";
@@ -213,6 +215,7 @@ void BatRed::setState(ENEMY_STATE state)
 			_ani->start();
 		}
 		break;
+
 		case ENEMY_STATE::DIE:
 		{
 			SOUND_MANAGER->stop("Enemy/Spawn");
