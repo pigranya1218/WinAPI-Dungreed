@@ -32,15 +32,15 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	// 공격 관련 변수
 	ZeroMemory(&_attack, sizeof(_attack));
 	_attack.delay =	2.5;		// 공격 딜레이 초기화
-	_attack.distance = 100;	// 공격 시전 가능 거리
+	_attack.distance = 150;	// 공격 시전 가능 거리
 	_attack.circleSize = 150;
-	_attack.attackInit(5, 10, 15,0,0,25);
+	_attack.attackInit(5, 10, 15, 0, 0, 25);
 
 	// 돌진 관련 변수
 	ZeroMemory(&_skill, sizeof(_skill));
 	_skill.delay = 2.5;		// 돌진 딜레이 초기화
 	_skill.distance = 800;	// 돌진 시전 시 최대 거리
-	_skill.attackInit(2,3,5, 0, 0, 50);
+	_skill.attackInit(2, 3, 5, 0, 0, 50);
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3;
@@ -52,7 +52,7 @@ void Minotaurs::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_active = true;
 
 	_curHp = _maxHp = 90;
-	_enterCount = 0;
+	
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::MINOTAURS);
 }
 
@@ -240,9 +240,7 @@ void Minotaurs::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		_enterCount = 0;
-		SOUND_MANAGER->stop("Enemy/Spawn");
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -338,6 +336,8 @@ void Minotaurs::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Enemy/Spawn");
+
 			_active = false;
 		}
 		break;
