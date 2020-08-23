@@ -919,7 +919,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("MAIN");		
+	SCENE_MANAGER->changeScene("STAGE_MAKE");		
 	
 	return S_OK;
 }
