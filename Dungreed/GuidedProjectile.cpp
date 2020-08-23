@@ -249,6 +249,7 @@ void GuidedProjectile::update(float elapsedTime)
 		_mirageCount += elapsedTime;
 		if (_mirageCount > 1)
 		{
+			_mirageCount -= 1;
 			_miragePos = _position;
 			_shodow.angleRadian = _angleRadian;
 			//_shodow.pos = Vector2(_position.x );
@@ -266,12 +267,12 @@ void GuidedProjectile::render()
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _renderSize, _ani);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
 		_img->render(CAMERA->getRelativeV2(_position), _renderSize);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 
 	if (_afterimage)

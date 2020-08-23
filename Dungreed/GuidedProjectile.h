@@ -4,9 +4,10 @@
 struct tagShadow
 {
 	Vector2 pos;
-	float angleRadian;
-	float alpha;
-	Image* img;
+	float	angleRadian;
+	float	alpha;
+	int		frameX;
+	Image*  img;
 };
 
 class GuidedProjectile : public Projectile
