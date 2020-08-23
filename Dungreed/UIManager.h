@@ -5,6 +5,7 @@
 #include "RestaurantUI.h"
 #include "DialogueUI.h"
 #include "AbilityUI.h"
+#include "ShopUI.h"
 #include "DamageInfo.h"
 #include "LinearFunc.h"
 #include "DoorObject.h"
@@ -17,6 +18,7 @@ class EnemyManager;
 class NpcManager;
 class ObjectManager;
 class Stage;
+
 
 class UIManager
 {
@@ -163,6 +165,7 @@ private:
 	CostumeUI _costumeUI;
 	RestaurantUI _restaurantUI;
 	AbilityUI _abilityUI;
+	ShopUI _shopUI;
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
@@ -186,7 +189,7 @@ public:
 	void showMap(GateNpc* gate, bool isShow) { _mapUI.isShow = isShow; _mapUI.gate = gate; }
 
 	void showRestaurant() { _restaurantUI.setActive(true); }
-	void showShop() {  }
+	void showShop() { _shopUI.setActive(true); }
 	void showAbility() { _abilityUI.setActive(true); }
 	void showCostume() { _costumeUI.setActive(true); }
 };

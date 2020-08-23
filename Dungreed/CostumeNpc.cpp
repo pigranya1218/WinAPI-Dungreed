@@ -9,7 +9,7 @@ void CostumeNpc::init(Vector2 pos, DIRECTION direction)
 	_mapIcon = nullptr;
 	_miniMapIcon = IMAGE_MANAGER->findImage("UI/MAP/ICON_COSTUME");
 
-	_img = IMAGE_MANAGER->findImage("NPC_ABILITY");
+	_img = IMAGE_MANAGER->findImage("NPC_COSTUME");
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());
 	_ani->setDefPlayFrame(false, true);
@@ -18,7 +18,7 @@ void CostumeNpc::init(Vector2 pos, DIRECTION direction)
 
 	_position = pos;
 	_direction = direction;
-	_size = Vector2(50, 76);
+	_size = Vector2(50, 90);
 	_active = true;
 
 	_name = L"ºí·Î½´";

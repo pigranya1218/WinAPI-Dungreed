@@ -181,6 +181,7 @@ void NpcManager::showRestaurantUI()
 
 void NpcManager::showShopUI()
 {
+	_uiMgr->showShop();
 }
 
 void NpcManager::showAbilityUI()

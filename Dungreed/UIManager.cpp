@@ -12,6 +12,7 @@ void UIManager::setPlayer(Player * player)
 	_costumeUI.setPlayer(player);
 	_restaurantUI.setPlayer(player);
 	_abilityUI.setPlayer(player);
+	_shopUI.setPlayer(player);
 }
 
 void UIManager::init()
@@ -108,6 +109,9 @@ void UIManager::init()
 
 	// ABILITY UI
 	_abilityUI.init();
+
+	// SHOP UI
+	_shopUI.init();
 }
 
 void UIManager::release()
@@ -242,6 +246,7 @@ void UIManager::update(float const elapsedTime)
 	{
 		_statUI.setActive(!_statUI.isActive());
 	}
+	
 	// Boutique(CostumeUI) Open
 	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
 	{
@@ -256,6 +261,11 @@ void UIManager::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(VK_F3))
 	{
 		_abilityUI.setActive(!_abilityUI.isActive());
+	}
+	// SHOP Open
+	if (KEY_MANAGER->isOnceKeyDown(VK_F4))
+	{
+		_shopUI.setActive(!_shopUI.isActive());
 	}
 
 	bool isClose = false;
@@ -346,6 +356,19 @@ void UIManager::update(float const elapsedTime)
 		}
 	}
 
+	if (_shopUI.isActive())
+	{
+		if (isClose)
+		{
+			_shopUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_shopUI.update(elapsedTime);
+		}
+	}
+
 	_isActive = false;
 	_isActive |= _mapUI.isShow;
 	_isActive |= _dialogueUI.isActive();
@@ -354,6 +377,7 @@ void UIManager::update(float const elapsedTime)
 	_isActive |= _costumeUI.isActive();
 	_isActive |= _restaurantUI.isActive();
 	_isActive |= _abilityUI.isActive();
+	_isActive |= _shopUI.isActive();
 }
 
 void UIManager::render()
@@ -780,6 +804,12 @@ void UIManager::render()
 		if (_abilityUI.isActive())
 		{
 			_abilityUI.render();
+		}
+
+		// ShopUI
+		if (_shopUI.isActive())
+		{
+			_shopUI.render();
 		}
 	}
 }

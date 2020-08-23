@@ -301,6 +301,13 @@ HRESULT playGround::init()
 
 	IMAGE_MANAGER->addFrameImage("UI/ABILITY/CLICK_EFFECT", L"resources/images/gameScene/ui/ability/click/ClickEffect.png", 12, 1);
 
+	// *** SHOP
+	IMAGE_MANAGER->addImage("UI/SHOP/BASE", L"resources/images/gameScene/ui/shop/DungeonShopBase.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/ITEM_BASE", L"resources/images/gameScene/ui/shop/shopItemBase.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/ITEM_BASE_SELECTED", L"resources/images/gameScene/ui/shop/shopItemBase_selected.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/GOLD", L"resources/images/gameScene/ui/shop/gold.png");
+
+
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");
 	IMAGE_MANAGER->addImage("UI/MAP/BODY", L"resources/images/gameScene/ui/map/MapBase 1_1.png");
@@ -321,6 +328,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_SHOP", L"resources/images/gameScene/npc/shop.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_ABILITY", L"resources/images/gameScene/npc/Ability.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_COSTUME", L"resources/images/gameScene/npc/costume.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_IDLE", L"resources/images/gameScene/npc/gate_idle.png", 9, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_EAT", L"resources/images/gameScene/npc/gate_eat.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_ENTRANCE", L"resources/images/gameScene/npc/Door1.png", 10, 1);

@@ -57,7 +57,7 @@ void RestaurantUI::init()
 	_goldIconRc = FloatRect(WINSIZEX - 80, 800, WINSIZEX - 20, 880);
 
 	//음식 리스트 항목 창
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < _foods.size(); i++)
 	{
 		_foodItems[i].isSoldOut = false;
 		//가로 440, 세로 200

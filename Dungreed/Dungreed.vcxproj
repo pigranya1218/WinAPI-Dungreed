@@ -317,6 +317,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SeeriProjectile.h" />
     <ClInclude Include="ShopNpc.h" />
+    <ClInclude Include="ShopUI.h" />
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SilverBullet.h" />
     <ClInclude Include="SingletonBase.h" />
@@ -512,6 +513,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SeeriProjectile.cpp" />
     <ClCompile Include="ShopNpc.cpp" />
+    <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="SilverBullet.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />

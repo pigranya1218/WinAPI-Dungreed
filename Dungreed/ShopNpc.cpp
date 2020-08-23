@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ShopNpc.h"
 #include "UIManager.h"
+#include "NpcManager.h"
 
 void ShopNpc::init(Vector2 pos, DIRECTION direction)
 {
@@ -53,4 +54,12 @@ void ShopNpc::render()
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
 	Npc::render();
+}
+
+void ShopNpc::clickMenu(int menuIndex)
+{
+	if (menuIndex == 0)
+	{
+		_npcMgr->showShopUI();
+	}
 }
