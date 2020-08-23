@@ -108,12 +108,16 @@ void VillageStage::render()
 	//_BGL->setScale(5);
 	_BGL->render(Vector2(WINSIZEX/2,WINSIZEY/2),Vector2(WINSIZEX, WINSIZEY));
 
+	int bg1StartX = CAMERA->getRelativeX(WINSIZEX / 2.f, 0.5);
+	int bg2StartX = CAMERA->getRelativeX(WINSIZEX / 2.f, 0.8);
 	for (int i = 0; i < stageWidth / _BG1->getWidth(); i++)
 	{
 		_BG1->setScale(6);
-		CAMERA->render(_BG1, Vector2(WINSIZEX/2+i* _BG1->getWidth()*6, stageHeight - 900));
+		//_BG1->render(Vector2((CAMERA->getRelativeX(WINSIZEX / 2 + i * _BG1->getWidth() * 6.f, 1)), CAMERA->getRelativeY(stageHeight - 900.f)));
+		_BG1->render(Vector2(bg1StartX + i * _BG1->getWidth() * 6.f, CAMERA->getRelativeY(stageHeight - 900.f)));
 		_BG2->setScale(5);
-		CAMERA->render(_BG2, Vector2(WINSIZEX / 2 + i * _BG2->getWidth() * 5, stageHeight - 480));
+		//_BG2->render(Vector2((CAMERA->getRelativeX(WINSIZEX / 2 + i * _BG2->getWidth() * 5.f, 1)), CAMERA->getRelativeY(stageHeight - 480.f)));
+		_BG2->render(Vector2(bg2StartX + i * _BG2->getWidth() * 5.f, CAMERA->getRelativeY(stageHeight - 480.f)));
 	}
 	_floor->setScale(5);
 	CAMERA->render(_floor,Vector2(5000, WINSIZEY / 2 + 470));

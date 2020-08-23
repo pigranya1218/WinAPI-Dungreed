@@ -200,6 +200,8 @@ void ConfigManager::init()
 void ConfigManager::update()
 {
 	CAMERA->setConfig(0, 180, WINSIZEX, _scrollBar.height, 0, 0, 0, _scrollBar.totalHeight - _scrollBar.height);
+	CAMERA->setT((_scrollBar.totalHeight - _scrollBar.height) * _scrollBar.ratio);
+
 
 	if (_keyChangeRemain > 0)
 	{
@@ -304,7 +306,6 @@ void ConfigManager::update()
 		_scrollBar.scrollRc = FloatRect(currCenter, _scrollBar.scrollRc.getSize(), PIVOT::CENTER);
 		_scrollBar.ratio = (currCenter.y - (_scrollBar.bgRc.top + (_scrollBar.scrollRc.getSize().y / 2))) 
 			/ ((_scrollBar.bgRc.bottom - (_scrollBar.scrollRc.getSize().y / 2)) - (_scrollBar.bgRc.top + (_scrollBar.scrollRc.getSize().y / 2)));
-		CAMERA->setT((_scrollBar.totalHeight - _scrollBar.height) * _scrollBar.ratio);
 	}
 
 	if (KEY_MANAGER->isOnceKeyUp(VK_LBUTTON))
