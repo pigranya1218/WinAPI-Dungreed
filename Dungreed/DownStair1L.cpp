@@ -18,8 +18,8 @@ void DownStair1L::init()
 	_objectMgr->spawnObject(0x0000, Vector2(1140, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(1080, 500));*/
 
-	//_npcMgr->spawnNpc(NPC_TYPE::EXIT, Vector2(700, 650), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(380, 650), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::EXIT, Vector2(700, 650), DIRECTION::LEFT);
+	//_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(380, 650), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;
 }
