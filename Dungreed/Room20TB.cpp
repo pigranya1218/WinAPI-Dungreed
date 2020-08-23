@@ -70,6 +70,21 @@ void Room20TB::update(float const elapsedTime)
 
 void Room20TB::render()
 {
+	D2D_RENDERER->fillRectangle(FloatRect(0, 0, TILESIZE * 30, TILESIZE * 20), 51, 49, 67, 1);
+	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
+	{
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
+	}
+
 	
 	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
 	table->setScale(4);

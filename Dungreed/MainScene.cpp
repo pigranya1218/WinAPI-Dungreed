@@ -50,6 +50,7 @@ void MainScene::release()
 
 void MainScene::update()
 {
+	SOUND_MANAGER->setVolume("main_title", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	if (CONFIG_MANAGER->isActive()) 
 	{ 
 		CONFIG_MANAGER->update();

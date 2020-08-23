@@ -56,13 +56,13 @@ public:
 	void movePivot(float offsetX, float offsetY);
 	void movePivot(Vector2 offsetXY);
 
-	float getRelativeX(float left);
-	LONG getRelativeX(LONG left);
-	float getRelativeY(float top);
-	LONG getRelativeY(LONG top);
-	POINT getRelativePt(POINT pt);
-	Vector2 getRelativeV2(Vector2 vec2);
-	FloatRect getRelativeFR(FloatRect rc);
+	float getRelativeX(float left, float ratio = 1.0);
+	LONG getRelativeX(LONG left, float ratio = 1.0);
+	float getRelativeY(float top, float ratio = 1.0);
+	LONG getRelativeY(LONG top, float ratio = 1.0);
+	POINT getRelativePt(POINT pt, float ratio = 1.0);
+	Vector2 getRelativeV2(Vector2 vec2, float ratio = 1.0);
+	FloatRect getRelativeFR(FloatRect rc, float ratio = 1.0);
 
 	float getAbsoluteX(float left);
 	LONG getAbsoluteX(LONG left);
