@@ -76,8 +76,6 @@ protected:
 	vector<Vector2> _respawnPosition; // 플레이어가 리스폰될 위치
 	vector<DoorObject*> _doors;
 
-	
-
 
 	Synthesize(ROOMTYPE, _roomType, RoomType)
 

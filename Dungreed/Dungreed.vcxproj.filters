@@ -795,8 +795,14 @@
     <ClInclude Include="TimeRatioEvent.h">
       <Filter>Dungreed\GameScene\Event</Filter>
     </ClInclude>
+    <ClInclude Include="Room22LTB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
     <ClInclude Include="ItemObject.h">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchObject.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1388,8 +1394,14 @@
     <ClCompile Include="TimeRatioEvent.cpp">
       <Filter>Dungreed\GameScene\Event</Filter>
     </ClCompile>
+    <ClCompile Include="Room22LTB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
     <ClCompile Include="ItemObject.cpp">
       <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchObject.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

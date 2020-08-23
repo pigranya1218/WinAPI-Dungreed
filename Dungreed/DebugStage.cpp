@@ -14,35 +14,19 @@ void DebugStage::init()
 	
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/RestaurantRoom2_LR.map");
+	loadMap("room/RestaurantRoom2_L.map");
 	//_respawnPosition[0] = Vector2(200, 600);
 
-	/*_spawnEnemies.push_back({ ENEMY_TYPE::BAT_BOMB, Vector2(950, 700) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_BOMB, Vector2(1250, 700) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(650, 400) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(1450, 400) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(700, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(800, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(900, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1000, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1100, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1200, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1300, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1400, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1500, 500) });
+	//makeDoor(Vector2(100,850), DIRECTION::LEFT);
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(650, 650),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1450, 650),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(670, 900),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(1430, 900),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(740, 900),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(1300, 900),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(640, 900),2 });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(1390, 900),2 });*/
-	_spawnEnemies.push_back({ ENEMY_TYPE::MINOTAURS, Vector2(1390, 900) });
+	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(400, 750), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(1200, 750), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::RESTAURANT;
+
+	/*SOUND_MANAGER->stop("Floor1_BGM");
+	SOUND_MANAGER->stop("Foodshop");
+	SOUND_MANAGER->play("Foodshop",1.0f);*/
 	
 
 
@@ -171,7 +155,7 @@ void DebugStage::render()
 	int stageHeight = _tile[0].tileY * TILESIZE;
 
 	IMAGE_MANAGER->findImage("Tavern")->setScale(4);
-	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 586));
+	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 648));
 
 	
 

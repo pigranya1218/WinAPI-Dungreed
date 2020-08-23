@@ -23,6 +23,8 @@ void StartRoom2::init()
 	_objectMgr->spawnObject(0x0001, Vector2(820, 700));
 	//_objectMgr->spawnObject(0x0002, Vector2(300, 700));
 
+	
+
 	_img = IMAGE_MANAGER->findImage("Floor1Door");
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());

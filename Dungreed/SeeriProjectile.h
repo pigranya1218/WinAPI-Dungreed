@@ -16,14 +16,15 @@ private:
 
 	bool		_collsionGround;	// 빨간 선 충돌 여부
 	bool		_collisionPlatForm;	// 푸른 선 충돌 여부
-
+	bool        _isTrun;
 	bool        _bulletMove;
 	Vector2     _playerPos;
 	int         _y;
 	int y;
-	float chaseRadian;
-	bool isLeft;
+	float       chaseRadian;
+	bool        isLeft;
 	float       _Delay;
+	float       _angele;
 	string		_collisionEffect;	// 부딪혀서 폭발할 때 이펙트
 	Vector2		_drawSize;			// 부딪혀서 폭발할 때 이펙트 사이즈
 

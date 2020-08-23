@@ -34,9 +34,9 @@ void Voluspa::release()
 
 void Voluspa::update(Player * player, float const elapsedTime)
 {	
-	Vector2 enemypos = player->getEnemyPos(Vector2());
+	_enemypos = player->getEnemyPos(Vector2());
 	_playerPos = player->getPosition();
-	if (_playerPos.x - 600 < enemypos.x && _playerPos.x + 600 > enemypos.x && _playerPos.y - 600 < enemypos.y && _playerPos.y + 600 > enemypos.y)
+	if (_playerPos.x - 600 < _enemypos.x && _playerPos.x + 600 > _enemypos.x && _playerPos.y - 600 < _enemypos.y && _playerPos.y + 600 > _enemypos.y)
 	{
 		
 		_elapsedTime += elapsedTime;
@@ -51,7 +51,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 			}
 
 			if (_currStopDelay == 0) {				
-				_renderPos.y = enemypos.y;
+				_renderPos.y = _enemypos.y;
 				_currAttackDelay = 1.7f;
 				_Opposition = true;
 			}
@@ -65,7 +65,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 
 			if (_currAttackDelay == 0) {
 				
-				_renderPos.y = enemypos.y;
+				_renderPos.y = _enemypos.y;
 				_currStopDelay = 1.7f;
 				_Opposition = false;
 			}
@@ -108,12 +108,21 @@ void Voluspa::update(Player * player, float const elapsedTime)
 		delete attackInfo;
 	}
 	
+	
 
 }
 
 void Voluspa::backRender(Player * player)
 {
-	_img->setScale(3);	
+	if (_playerPos.x - 600 < _enemypos.x && _playerPos.x + 600 > _enemypos.x && _playerPos.y - 600 < _enemypos.y && _playerPos.y + 600 > _enemypos.y)
+	{
+		_img->setScale(3);
+	}
+	else if(_playerPos.x - 600 > _enemypos.x && _playerPos.x + 600 < _enemypos.x && _playerPos.y - 600 > _enemypos.y && _playerPos.y + 600 < _enemypos.y)
+	{
+		_img->setScale(0);
+	}
+		
 	if (_Opposition)
 	{
 		_img->render(CAMERA->getRelativeV2(_renderPos), true);
@@ -122,6 +131,7 @@ void Voluspa::backRender(Player * player)
 	{
 		_img->render(CAMERA->getRelativeV2(_renderPos), false);
 	}
+	
 }
 
 void Voluspa::frontRender(Player * player)

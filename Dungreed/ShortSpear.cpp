@@ -7,7 +7,6 @@ void ShortSpear::init()
 	_price = 600;
 	
 	_itemName = L"단창";
-	_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
 	_displayText = L"\"던질 수 있게 제작된 짧은 창\"";
 	_itemCode = 0x02101; // 양손 일반
 

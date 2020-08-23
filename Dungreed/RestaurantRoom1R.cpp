@@ -9,7 +9,7 @@ void RestaurantRoom1R::init()
 //	_respawnPosition[2] = Vector2(1000, 600);
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(450, 560), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(850, 760), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::RESTAURANT, Vector2(1000, 760), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::RESTAURANT;
 

@@ -42,7 +42,6 @@ private:
 	float		_mirageCount;
 	int			_afterCount;
 	float		_collisionCount;
-	Vector2		_miragePos;
 	tagShadow	_shodow;
 	vector<tagShadow> _vShadow;
 public:
