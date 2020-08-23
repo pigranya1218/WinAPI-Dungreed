@@ -427,6 +427,7 @@ void Player::update(float const elapsedTime)
 	// 장비 교체
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::CHANGE_WEAPON)) && _currWeaponChangeCoolTime == 0)
 	{
+		SOUND_MANAGER->play("Player/Swap", 1);
 		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
 		updateAdjustStat();
@@ -502,7 +503,7 @@ void Player::update(float const elapsedTime)
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		//대쉬 이펙트 재생
 		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
-		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y * 2);
+		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y);
 		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
 
 		_currDashCount -= 1;

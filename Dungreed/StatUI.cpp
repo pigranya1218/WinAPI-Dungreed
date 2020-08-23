@@ -45,9 +45,16 @@ void StatUI::init()
 	}
 
 	//Foods 창 리스트 렉트
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 8; i++)
 	{
-		_foodList[i].cellRc = FloatRect(30, 610 + i * 65, 380, 670 + i * 65);
+		if (i < 4)
+		{
+			_foodList[i].cellRc = FloatRect(30, 610 + i * 55, 260, 660 + i * 55);
+		}
+		else
+		{
+			_foodList[i].cellRc = FloatRect(265, 610 + (i - 4) * 55, 495, 660 + (i - 4) * 55);
+		}
 	}
 
 }
@@ -135,11 +142,15 @@ void StatUI::render()
 	}
 
 	//Foods 리스트
-	for (int i = 0; i < _foods.size(); i++)
+	/*for (int i = 0; i < 8; i++)
 	{
 		D2D_RENDERER->drawRectangle(_foodList[i].cellRc, D2D1::ColorF::Magenta, 1, 1);
+	}*/
+	for (int i = 0; i < _foods.size(); i++)
+	{
 		//_foodListCellBackImg->render(_foodList[i].cellRc.getCenter(), _foodList[i].cellRc.getSize());
 		_foodListCellFrameImg->render(_foodList[i].cellRc.getCenter(), _foodList[i].cellRc.getSize());
+		
 		D2D_RENDERER->renderTextField(_foodList[i].cellRc.left, _foodList[i].cellRc.top, TTYONE_UTIL::stringTOwsting(_foods[i]->getName()), D2D1::ColorF::White, 30,
 			_foodList[i].cellRc.getWidth(), _foodList[i].cellRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 	}
@@ -158,5 +169,13 @@ void StatUI::renderStatInfo(Vector2 pos, STAT_TYPE type)
 void StatUI::setEatFoods(Food* food)
 {
 	_foods.push_back(food);
+	////중복되는 음식이 있는지 검사
+	//for (_viFoods = _foods.begin(); _viFoods != _foods.end(); ++_viFoods)
+	//{
+	//	if (_viFoods < _foods.end() && food)
+	//	{
+	//		
+	//	}
+	//}
 }
 
