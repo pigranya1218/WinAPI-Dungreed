@@ -370,8 +370,8 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 	IMAGE_MANAGER->addFrameImage("DungeonEat", L"resources/images/Villiage/DungeonEat.png", 28, 1);
 
-	SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true);
-	SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false);
+	SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true); //마을 bmg 
+	SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false); //던그리드가 입을 벌릴때 소리
 	
 
 	// ** DUNGEON
@@ -391,8 +391,8 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
 	SOUND_MANAGER->addSound("Foodshop", "resources/sound/Ui/bgm/Foodshop.wav", true, true);
 	SOUND_MANAGER->addSound("Shop", "resources/sound/Ui/bgm/Shop.wav", true, true);
-	
-
+	SOUND_MANAGER->addSound("BossRoomBef", "resources/sound/Ui/bgm/ambience_prison.wav", true, true);
+	SOUND_MANAGER->addSound("Boss", "resources/sound/Ui/bgm/1.JailBoss.wav", true, true);
 
 	// ** OBJECT
 	// *** BROKEN
@@ -826,7 +826,7 @@ HRESULT playGround::init()
 	//사운드
 
 	//** STAGE
-	SOUND_MANAGER->addSound("Town", "resources/sound/stage/bgm/0.Town.wav", true, false);			//마을 bmg 
+	//SOUND_MANAGER->addSound("Town", "resources/sound/stage/bgm/0.Town.wav", true, false);			//마을 bmg 
 	SOUND_MANAGER->addSound("ambienceTown", "resources/sound/stage/bgm/ambience_town.wav", true, false);	//마을 bmg 효과음
 
 

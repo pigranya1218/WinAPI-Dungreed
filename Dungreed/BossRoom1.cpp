@@ -53,6 +53,9 @@ void BossRoom1::update(float const elapsedTime)
 	{
 		if (playerPos.x >= stageWidth / 2)
 		{
+			SOUND_MANAGER->stop("BossRoomBef");
+			SOUND_MANAGER->stop("Boss");
+			SOUND_MANAGER->play("Boss", 1.0f);
 			_state = STAGE_STATE::START;
 			startEventScene();
 		}
@@ -60,10 +63,13 @@ void BossRoom1::update(float const elapsedTime)
 	break;
 	case STAGE_STATE::START:
 	{
+		
+
 		for (int i = 0; i < 4; i++)
 		{
 			if (_doors[i] != nullptr)
 			{
+				
 				_doors[i]->setOpen(false);
 			}
 		}
@@ -87,10 +93,15 @@ void BossRoom1::update(float const elapsedTime)
 	break;
 	case STAGE_STATE::FINISH:
 	{
+		SOUND_MANAGER->stop("Boss");
+		SOUND_MANAGER->stop("BossRoomBef");
+		SOUND_MANAGER->play("BossRoomBef", 1.0f);
+
 		for (int i = 0; i < 4; i++)
 		{
 			if (_doors[i] != nullptr)
 			{
+				
 				_doors[i]->setOpen(true);
 			}
 		}

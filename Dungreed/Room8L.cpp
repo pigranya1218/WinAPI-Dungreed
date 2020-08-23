@@ -5,6 +5,8 @@ void Room8L::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
+	loadMap("room/Stage8_L.map");
+
 	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(700, 600) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(800, 600) });

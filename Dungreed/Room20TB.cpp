@@ -32,7 +32,7 @@ void Room20TB::init()
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
 	_spawnChest.pos = Vector2(600, 2100);
 
-	_respawnPosition[3] = Vector2(400, 800);
+//	_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(350, 500));
