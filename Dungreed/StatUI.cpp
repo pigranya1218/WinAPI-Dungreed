@@ -15,8 +15,7 @@ void StatUI::init()
 	_statBaseRc = FloatRect(20, 150, 560, 540);
 	_foodBaseRc = FloatRect(20, 555, 510, WINSIZEY - 70);
 	_foodListCellBackImg = IMAGE_MANAGER->findImage("UI/RESTAURANT/LIFE_BASE_BACK");
-	_foodListCellFrameImg = IMAGE_MANAGER->findImage("UI/RESTAURANT/LIFE_BASE");
-		
+	_foodListCellFrameImg = IMAGE_MANAGER->findImage("UI/STAT/LIST_BASE");
 
 	//창닫기 이미지
 	_exitImg = IMAGE_MANAGER->findImage("BUTTON_EXIT");
@@ -48,7 +47,7 @@ void StatUI::init()
 	//Foods 창 리스트 렉트
 	for (int i = 0; i < 10; i++)
 	{
-		_foodList[i].cellRc = FloatRect(30, 610 + i * 65, 425, 670 + i * 65);
+		_foodList[i].cellRc = FloatRect(30, 610 + i * 65, 380, 670 + i * 65);
 	}
 
 }
@@ -139,8 +138,10 @@ void StatUI::render()
 	for (int i = 0; i < _foods.size(); i++)
 	{
 		D2D_RENDERER->drawRectangle(_foodList[i].cellRc, D2D1::ColorF::Magenta, 1, 1);
-		_foodListCellBackImg->render(_foodList[i].cellRc.getCenter(), _foodList[i].cellRc.getSize());
+		//_foodListCellBackImg->render(_foodList[i].cellRc.getCenter(), _foodList[i].cellRc.getSize());
 		_foodListCellFrameImg->render(_foodList[i].cellRc.getCenter(), _foodList[i].cellRc.getSize());
+		D2D_RENDERER->renderTextField(_foodList[i].cellRc.left, _foodList[i].cellRc.top, TTYONE_UTIL::stringTOwsting(_foods[i]->getName()), D2D1::ColorF::White, 30,
+			_foodList[i].cellRc.getWidth(), _foodList[i].cellRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 	}
 }
 
