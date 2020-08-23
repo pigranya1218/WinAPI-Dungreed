@@ -38,6 +38,13 @@ void StartRoom2::init()
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(930, 620), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;
+
+	_torchImg = IMAGE_MANAGER->findImage("Torch");
+	_torchAni = new Animation;
+	_torchAni->init(_torchImg->getWidth(), _torchImg->getHeight(), _torchImg->getMaxFrameX(), _torchImg->getMaxFrameY());
+	_torchAni->setDefPlayFrame(false, true);
+	_torchAni->setFPS(15);
+	_torchAni->start();
 }
 
 void StartRoom2::release()
@@ -50,6 +57,7 @@ void StartRoom2::update(float const elapsedTime)
 	Stage::update(elapsedTime);
 
 	_ani->frameUpdate(elapsedTime);
+	_torchAni->frameUpdate(elapsedTime);
 }
 
 void StartRoom2::render()
@@ -57,5 +65,10 @@ void StartRoom2::render()
 	
 
 	Stage::render();
+	int sizeX = _torchImg->getSize().x * 4;
+	int sizeY = _torchImg->getSize().y * 4;
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(350, 380)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(800, 380)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(1060, 380)), Vector2(sizeX, sizeY), _torchAni);
 }
 

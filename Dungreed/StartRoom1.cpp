@@ -33,7 +33,12 @@ void StartRoom1::init()
 
 	_roomType = ROOMTYPE::NORMAL;
 
-	
+	_torchImg = IMAGE_MANAGER->findImage("Torch");
+	_torchAni = new Animation;
+	_torchAni->init(_torchImg->getWidth(), _torchImg->getHeight(), _torchImg->getMaxFrameX(), _torchImg->getMaxFrameY());
+	_torchAni->setDefPlayFrame(false, true);
+	_torchAni->setFPS(15);
+	_torchAni->start();
 }
 
 void StartRoom1::release()
@@ -48,10 +53,15 @@ void StartRoom1::update(float const elapsedTime)
 	
 	
 	_ani->frameUpdate(elapsedTime);
-	
+	_torchAni->frameUpdate(elapsedTime);
 }
 
 void StartRoom1::render()
 {
 	Stage::render();
+	int sizeX = _torchImg->getSize().x * 4;
+	int sizeY = _torchImg->getSize().y * 4;
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(400, 420)), Vector2(sizeX, sizeY), _torchAni);
+	_torchImg->aniRender(CAMERA->getRelativeV2(Vector2(800, 420)), Vector2(sizeX, sizeY), _torchAni);
+	
 }
