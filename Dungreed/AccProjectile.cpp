@@ -62,6 +62,7 @@ void AccProjectile::release()
 
 	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize*_sizeUp, ((_useRotate) ? (_angleRadian) : (0.0f)));
 	if (_img == IMAGE_MANAGER->findImage("BombPouch0")) {
+		SOUND_MANAGER->stop("SeeriBullet2");
 		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	}
 }

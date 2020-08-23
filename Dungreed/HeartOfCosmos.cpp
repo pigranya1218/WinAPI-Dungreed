@@ -85,23 +85,6 @@ void HeartOfCosmos::dash(Player * player)
 	_playerpos = player->getPosition();
 	_renderPos = _playerpos;
 	_ani->start();
-	/*
-	AccProjectile* projectile = new AccProjectile;
-	projectile->setPosition(_renderPos);	
-	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("HeartOfCosmos0", "HeartOfCosmosF", 1, Vector2(200, 200), Vector2(330, 300), Vector2(0, 0), 1.3, 0, true, false, 15, false, false, false, false);
-	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
-	AttackInfo* attackInfo = new AttackInfo;
-	attackInfo->team = OBJECT_TEAM::PLAYER;
-	attackInfo->madeByWeapon = false;
-	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
-	attackInfo->maxDamage = 5;
-	attackInfo->minDamage = 3;
-	player->attack(projectile, attackInfo);	
-	*/
-
-	
-
 }
 
 

@@ -141,6 +141,7 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+		SOUND_MANAGER->stop("SeeriBullet2");
 		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_active = false;
 	}
@@ -154,6 +155,7 @@ void SeeriProjectile::update(float elapsedTime)
 		{
 			float angleDegree = _angleRadian * (180.0f / PI);
 			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+			SOUND_MANAGER->stop("SeeriBullet2");
 			SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 			if (_useCollsionEnemy)
 			{
@@ -178,6 +180,7 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+		SOUND_MANAGER->stop("SeeriBullet2");
 		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_active = false;
 	}

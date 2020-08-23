@@ -100,6 +100,7 @@ void GreenMomBat::attack(Player * player)
 	}
 	else
 	{
+		SOUND_MANAGER->stop("GiantBat/Attack");
 		SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	}
 

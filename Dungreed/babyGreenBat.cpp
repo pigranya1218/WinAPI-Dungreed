@@ -104,6 +104,7 @@ void babyGreenBat::attack(Player* player)
 	if (_currAttackDelay > 0) return; // 공격 쿨타임인 경우 공격을 하지 않음
 	if (_currBullet == 0) // 총알이 없다면
 	{
+		SOUND_MANAGER->stop("Bat/Attack");
 		SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		if (_currReloadDelay == 0) // 재장전 중이 아니라면
 		{
@@ -113,6 +114,7 @@ void babyGreenBat::attack(Player* player)
 	}
 	else
 	{
+		SOUND_MANAGER->stop("Bat/Attack");
 		SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	}
 

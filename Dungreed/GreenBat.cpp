@@ -101,6 +101,7 @@ void GreenBat::attack(Player * player)
 	}
 	else
 	{
+		SOUND_MANAGER->stop("Bat/Attack");
 		SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	}
 
