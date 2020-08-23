@@ -207,6 +207,7 @@ public:
 	void showAbility() { _abilityUI.setActive(true); }
 	void showCostume() { _costumeUI.setActive(true); }
 
+	bool getBossHpActive() { return _bossUI.active; }
 	void showBossHP(bool active) { _bossUI.active = active; }
 	void setBossHP(int maxHp, int currHp) { _bossUI.maxHP = maxHp; _bossUI.currHp = currHp; }
 };

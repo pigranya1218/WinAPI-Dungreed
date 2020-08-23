@@ -559,6 +559,8 @@ void Belial::update(float const timeElapsed)
 	if (_curHp <= 0 && _state != ENEMY_STATE::DIE)
 	{
 		_enemyManager->activeBossUI(false);
+		_enemyManager->makeR2REvent(RGB(255, 255, 255), 3);
+		_enemyManager->makeTimeRatioEvent(0.2, 3);
 		setState(ENEMY_STATE::DIE);
 	}
 }

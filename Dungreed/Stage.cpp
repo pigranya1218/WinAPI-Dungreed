@@ -696,3 +696,14 @@ void Stage::setBossUIHp(int maxHp, int currHp)
 {
 	_uiManager->setBossHP(maxHp, currHp);
 }
+
+void Stage::makeR2REvent(COLORREF color, float time)
+{
+	_stageManager->makeR2REvent(color, time);
+}
+
+void Stage::makeTimeRatioEvent(float ratio, float time)
+{
+	_stageManager->makeTimeRatioEvent(ratio, time);
+
+}

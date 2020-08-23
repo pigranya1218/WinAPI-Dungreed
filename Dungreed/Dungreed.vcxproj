@@ -345,6 +345,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TimeRatioEvent.h" />
     <ClInclude Include="TomatoSoupFood.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
@@ -541,6 +542,7 @@
     <ClCompile Include="StrawberryPieFood.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TimeRatioEvent.cpp" />
     <ClCompile Include="TomatoSoupFood.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utils.cpp" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "BossRoom1.h"
 #include "StageManager.h"
+#include "UIManager.h"
 
 void BossRoom1::startEventScene()
 {
@@ -77,7 +78,10 @@ void BossRoom1::update(float const elapsedTime)
 		}
 		else
 		{
-
+			if (!_uiManager->getBossHpActive())
+			{
+				_state = STAGE_STATE::FINISH;
+			}
 		}
 	}
 	break;

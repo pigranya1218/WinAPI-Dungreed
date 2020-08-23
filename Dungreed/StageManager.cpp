@@ -285,7 +285,7 @@ void StageManager::nextStage()
 	_currStageType = static_cast<STAGE_TYPE>(static_cast<int>(_currStageType) + 1);
 	releaseStage();
 	makeStage();
-	_gameScene->pushR2REvent(2);
+	_gameScene->pushR2REvent(RGB(0, 0, 0), 2);
 }
 
 void StageManager::moveRoom(Vector2 moveDir)
@@ -317,7 +317,7 @@ void StageManager::moveRoom(Vector2 moveDir)
 	}
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(moveType);
-	_gameScene->pushR2REvent(1);
+	_gameScene->pushR2REvent(RGB(0, 0, 0), 1);
 
 	if(_lastStage->getRoomType()== ROOMTYPE::NORMAL && _currStage->getRoomType()== ROOMTYPE::RESTAURANT)
 	{
@@ -368,7 +368,7 @@ void StageManager::moveRoomIndex(Vector2 index)
 
 	_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 	_currStage->enter(4);
-	_gameScene->pushR2REvent(2);
+	_gameScene->pushR2REvent(RGB(0, 0, 0), 2);
 
 	if (_lastStage->getRoomType() == ROOMTYPE::NORMAL && _currStage->getRoomType() == ROOMTYPE::RESTAURANT)
 	{
@@ -770,6 +770,17 @@ Vector2 StageManager::getEnemyPos(Vector2 pos)
 vector<FloatRect> StageManager::getEnemyRects()
 {
 	return _currStage->getEnemyRects();
+}
+
+void StageManager::makeR2REvent(COLORREF color, float time)
+{
+	_gameScene->pushR2REvent(color, time);
+}
+
+void StageManager::makeTimeRatioEvent(float ratio, float time)
+{
+	_gameScene->pushTimeRatioEvent(ratio, time);
+
 }
 
 void StageManager::showDamage(DamageInfo info, Vector2 pos)

@@ -5,9 +5,10 @@
 class RoomToRoomEvent : public GameEvent
 {
 private:
+	COLORREF _color;
 public:
-	void init(float remainTime);
-	virtual void processEvent(float elpasedTime) override;
+	void init(COLORREF color, float remainTime);
+	virtual void processEvent(float& elpasedTime) override;
 	virtual void render() override;
 };
 
