@@ -202,8 +202,6 @@ void Player::init()
 	//ÃÖÃÊ¿¡ ÀåÂøÇÏ´Â ÄÚ½ºÆ¬
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 
-	_isDead = false;
-
 	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
@@ -668,14 +666,6 @@ void Player::update(float const elapsedTime)
 	{
 		_currHitTime = max(0, _currHitTime - elapsedTime);
 	}
-
-	// »ç¸Á Ã³¸®
-	if (_currHp <= 0 && !_isDead)
-	{
-		SOUND_MANAGER->play("Player/Dead");
-		_isDead = true;
-	}
-	if(_isDead) _costume->setSprite(PLAYER_STATE::DIE, false);
 }
 
 void Player::render()

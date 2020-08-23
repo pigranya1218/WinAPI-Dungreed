@@ -13,7 +13,7 @@ void ShortSword::init()
 	// 기본 보조옵션
 	_addStat.minDamage = 8;
 	_addStat.maxDamage = 10;
-	_addStat.attackSpeed = 0.8;
+	_addStat.attackSpeed = 0.6;
 	_handSize = Vector2(5, 5);
 
 	// private 변수 설정
