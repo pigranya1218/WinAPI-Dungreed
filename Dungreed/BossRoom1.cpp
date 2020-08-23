@@ -4,9 +4,9 @@ void BossRoom1::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/BossRoom.map");
+	loadMap("room/BossRoom.map");	
 
-
+	//_roomType = ROOMTYPE::NORMAL;
 }
 
 void BossRoom1::release()
@@ -17,7 +17,6 @@ void BossRoom1::release()
 void BossRoom1::update(float const elapsedTime)
 {
 	Stage::update(elapsedTime);
-
 
 }
 

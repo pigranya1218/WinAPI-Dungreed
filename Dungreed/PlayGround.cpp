@@ -380,6 +380,7 @@ HRESULT playGround::init()
 
 	
 	SOUND_MANAGER->addSound("Floor1_BGM", "resources/sound/Ui/bgm/1.JailField.wav", true, true);
+	SOUND_MANAGER->addSound("Floor2_BGM", "resources/sound/Ui/bgm/1.JailBoss.wav" , true, true);
 	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
 	SOUND_MANAGER->addSound("Foodshop", "resources/sound/Ui/bgm/Foodshop.wav", true, true);
 	SOUND_MANAGER->addSound("Shop", "resources/sound/Ui/bgm/Shop.wav", true, true);
@@ -760,6 +761,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("HeartOfCosmosF", "HeartOfCosmosF", 15, 50);
 	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 	EFFECT_MANAGER->addEffect("DadBatBulletFX", "DadBatBulletFX", 15, 50);
+	EFFECT_MANAGER->addEffect("ArrowHitEffect", "ArrowHitEffect", 15, 20);
 
 	// ** Boss
 	// *  Belial
@@ -858,7 +860,8 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Skell/ice/blast"		, "resources/sound/enemy/skells/ice_blast_projectile_spell_02.wav"		, false, false);	// 얼음 해골 스킬 공격
 	SOUND_MANAGER->addSound("Skell/ice/Attack"		, "resources/sound/enemy/skells/ice_spell_forming_shards_04.wav"		, false, false);	// 얼음 해골 일반 공격
 	SOUND_MANAGER->addSound("IceSkell/Magic/Attack"	, "resources/sound/enemy/skells/ice.wav"								, false, false);	// 얼음 해골 법사 공격
-	// * 벨리알
+
+	// *  벨리알
 	SOUND_MANAGER->addSound("Belial/Enter"	, "resources/sound/enemy/belial/beliallaugh_rev.wav"	, false, false);	// 등장 웃음소리
 	SOUND_MANAGER->addSound("Belial/Laser"	, "resources/sound/enemy/belial/iceball.wav"			, false, false);	// 레이져 발사
 	SOUND_MANAGER->addSound("Belial/Bullet"	, "resources/sound/enemy/belial/random5.wav"			, false, false);	// 탄막 발사

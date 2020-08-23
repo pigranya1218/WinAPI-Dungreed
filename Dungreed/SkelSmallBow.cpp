@@ -54,7 +54,6 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffe
 
 	_active = true;
 
-	// TEST
 	_curHp = _maxHp = 30;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_SMALL_BOW);
@@ -194,8 +193,8 @@ void SkelSmallBow::render()
 		// 활 시위 당기는 프레임에 따라 손 좌표도 수정
 		if (_weaponAni->getPlayIndex() <= 3)
 		{
-			handPos.x += cosf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
-			handPos.y -= sinf(_attack.angle) * (_weaponAni->getPlayIndex() * ((_direction == DIRECTION::LEFT) ? (-5) : (-5)));
+			handPos.x += cosf(_attack.angle) * (_weaponAni->getPlayIndex() * -5);
+			handPos.y -= sinf(_attack.angle) * (_weaponAni->getPlayIndex() * -5);
 		}
 		_handImg->render(CAMERA->getRelativeV2(handPos));	// 손 출력
 
