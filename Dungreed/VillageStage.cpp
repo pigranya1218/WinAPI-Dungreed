@@ -155,7 +155,25 @@ void VillageStage::render()
 		_dungeonEat->setScale(4);
 		_dungeonEat->aniRender(CAMERA->getRelativeV2(_eatPos), _eatAni);
 	}
-	Stage::render();
+	
+	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
+	{
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
+	}
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
 
 
 	IMAGE_MANAGER->findImage("TempleFront")->setScale(5);

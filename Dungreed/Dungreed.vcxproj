@@ -159,6 +159,7 @@
     <ClInclude Include="AllRoom.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
+    <ClInclude Include="CameraMoveEvent.h" />
     <ClInclude Include="ChestNpc.h" />
     <ClInclude Include="CostumeNpc.h" />
     <ClInclude Include="DoorNpc.h" />
@@ -361,6 +362,7 @@
     <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
+    <ClCompile Include="CameraMoveEvent.cpp" />
     <ClCompile Include="ChestNpc.cpp" />
     <ClCompile Include="CostumeNpc.cpp" />
     <ClCompile Include="DoorNpc.cpp" />

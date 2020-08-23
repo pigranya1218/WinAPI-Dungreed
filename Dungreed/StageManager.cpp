@@ -285,6 +285,7 @@ void StageManager::nextStage()
 	_currStageType = static_cast<STAGE_TYPE>(static_cast<int>(_currStageType) + 1);
 	releaseStage();
 	makeStage();
+	_gameScene->pushR2REvent(2);
 }
 
 void StageManager::moveRoom(Vector2 moveDir)

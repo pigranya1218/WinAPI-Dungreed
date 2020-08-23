@@ -43,6 +43,10 @@ void Stage::enter(int enterType)
 	}
 	_isVisited = true;
 	_stageManager->setShowPlayer(true);
+
+	int stageWidth = _tile[0].tileX * TILESIZE;
+	int stageHeight = _tile[0].tileY * TILESIZE;
+	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
 }
 
 void Stage::release()
@@ -66,7 +70,6 @@ void Stage::update(float const elaspedTime)
 
 	int stageWidth = _tile[0].tileX * TILESIZE;
 	int stageHeight = _tile[0].tileY * TILESIZE;
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
 	Vector2 playerPos = _stageManager->getPlayerPos();
 
 	CAMERA->setXY(Vector2(round(playerPos.x), round(playerPos.y)));
@@ -160,6 +163,7 @@ void Stage::update(float const elaspedTime)
 
 void Stage::render()
 {
+	D2D_RENDERER->fillRectangle(FloatRect(0, 0, TILESIZE * 30, TILESIZE * 20), 51, 49, 67, 1);
 	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
 	{
 		if (_tile[i].tileFrameX[0] != -1)

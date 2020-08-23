@@ -122,7 +122,7 @@ void DebugStage::update(float const elapsedTime)
 
 	Stage::update(elapsedTime);
 
-	CAMERA->setXY(_stageManager->getPlayerPos());
+	// CAMERA->setXY(_stageManager->getPlayerPos());
 
 	if (KEY_MANAGER->isOnceKeyDown('L'))
 	{
