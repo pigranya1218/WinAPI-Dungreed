@@ -171,6 +171,7 @@
     <ClInclude Include="Room20LB.h" />
     <ClInclude Include="Room20LRB.h" />
     <ClInclude Include="Room20TB.h" />
+    <ClInclude Include="Room22LTB.h" />
     <ClInclude Include="Room4TB.h" />
     <ClInclude Include="Room15TB.h" />
     <ClInclude Include="GateNpc.h" />
@@ -345,6 +346,7 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="TimeRatioEvent.h" />
     <ClInclude Include="TomatoSoupFood.h" />
+    <ClInclude Include="TorchObject.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
@@ -373,6 +375,7 @@
     <ClCompile Include="Room20LB.cpp" />
     <ClCompile Include="Room20LRB.cpp" />
     <ClCompile Include="Room20TB.cpp" />
+    <ClCompile Include="Room22LTB.cpp" />
     <ClCompile Include="Room4TB.cpp" />
     <ClCompile Include="Room15TB.cpp" />
     <ClCompile Include="GateNpc.cpp" />
@@ -539,6 +542,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="TimeRatioEvent.cpp" />
     <ClCompile Include="TomatoSoupFood.cpp" />
+    <ClCompile Include="TorchObject.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />

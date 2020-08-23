@@ -113,6 +113,11 @@ void AbilityUI::update(float elapsedTime)
 					_abilityStat.maxHp = _windows[i].abilityPoint * 2;
 				}
 
+				/*if (_windows[i].abilityPoint == 5 || _windows[i].abilityPoint == 10 || _windows[i].abilityPoint == 20)
+				{
+					
+				}*/
+
 				_effectPos = _windows[i].buttonCir.origin;
 				_effectAni->start();
 

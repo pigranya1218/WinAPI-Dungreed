@@ -202,6 +202,8 @@ void Player::init()
 	//ÃÖÃÊ¿¡ ÀåÂøÇÏ´Â ÄÚ½ºÆ¬
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 
+	_isDead = false;
+
 	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
@@ -280,9 +282,9 @@ void Player::init()
 	////testAcc13->init();
 	////_inventory[5] = testAcc13;
 
-	//Voluspa* testAcc22 = new Voluspa;
-	//testAcc22->init();
-	//_inventory[1] = testAcc22;
+	Voluspa* testAcc22 = new Voluspa;
+	testAcc22->init();
+	_inventory[5] = testAcc22;
 
 	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	//testAcc14->init();
@@ -484,6 +486,7 @@ void Player::update(float const elapsedTime)
 		}
 		else if (_currJumpCount > 0)
 		{
+			SOUND_MANAGER->play("Player/Jump", 1);
 			_force.y = -_adjustStat.jumpPower;
 			_currJumpCount -= 1;
 		}
@@ -653,6 +656,14 @@ void Player::update(float const elapsedTime)
 	{
 		_currHitTime = max(0, _currHitTime - elapsedTime);
 	}
+
+	// »ç¸Á Ã³¸®
+	if (_currHp <= 0 && !_isDead)
+	{
+		SOUND_MANAGER->play("Player/Dead");
+		_isDead = true;
+	}
+	if(_isDead) _costume->setSprite(PLAYER_STATE::DIE, false);
 }
 
 void Player::render()

@@ -59,6 +59,8 @@ void GoldObject::update(float elapsedTime)
 	FloatRect goldRc = FloatRect(_position, _size, PIVOT::CENTER);
 	if (FloatRect::intersect(playerRc, goldRc))
 	{
+		SOUND_MANAGER->stop("Player/GetGold");
+		SOUND_MANAGER->play("Player/GetGold", 1);
 		_active = false;
 		_player->setGold(_player->getGold() + _value);
 	}
