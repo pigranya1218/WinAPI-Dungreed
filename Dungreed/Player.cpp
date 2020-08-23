@@ -223,9 +223,9 @@ void Player::init()
 	testAcc1->init();
 	_inventory[4] = testAcc1;
 
-	//Seeri* testAcc24 = new Seeri;
-	//testAcc24->init();
-	//_inventory[1] = testAcc24;
+	Seeri* testAcc24 = new Seeri;
+	testAcc24->init();
+	_inventory[1] = testAcc24;
 
 	//GreenBat* testAcc2 = new GreenBat;
 	//testAcc2->init();
@@ -287,9 +287,9 @@ void Player::init()
 	//testAcc13->init();
 	//_inventory[5] = testAcc13;
 
-	Voluspa* testAcc22 = new Voluspa;
-	testAcc22->init();
-	_inventory[1] = testAcc22;
+	//Voluspa* testAcc22 = new Voluspa;
+	//testAcc22->init();
+	//_inventory[1] = testAcc22;
 
 	MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	testAcc14->init();

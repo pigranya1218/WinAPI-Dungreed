@@ -108,6 +108,7 @@ void SeeriProjectile::update(float elapsedTime)
 						_angleRadian = PI2;
 					}
 					_angleRadian -= 3.f * elapsedTime;
+					_img->setAngle(_angleRadian);
 					//_angleRadian -= 0.1f;
 				}
 				else
@@ -115,6 +116,7 @@ void SeeriProjectile::update(float elapsedTime)
 					_angleRadian += 3.f * elapsedTime;
 					//_angleRadian += 2.f * elapsedTime;
 					//_angleRadian += 0.1f;
+					_img->setAngle(_angleRadian);
 				}
 			}
 			else
