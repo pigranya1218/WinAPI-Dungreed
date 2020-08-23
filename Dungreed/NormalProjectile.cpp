@@ -38,7 +38,6 @@ NormalProjectile::NormalProjectile(const NormalProjectile & source)
 	_collisionPlatForm = source._collisionPlatForm;
 
 	_collisionEffect = source._collisionEffect;
-	_renderSize = source._renderSize;
 
 	_useGravity = source._useGravity;
 	_gravity = source._gravity;

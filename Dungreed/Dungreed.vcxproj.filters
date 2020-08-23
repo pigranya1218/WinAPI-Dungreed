@@ -1,0 +1,1390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="2DGameFramework">
+      <UniqueIdentifier>{0357af01-3edc-4c39-a3d9-2b8ff468a91e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed">
+      <UniqueIdentifier>{1cefc68e-8b1d-4ce0-b8e8-9205494e8468}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Animation">
+      <UniqueIdentifier>{520fca63-5cd4-4d8a-80a5-93408525a7d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\D2DRenderer">
+      <UniqueIdentifier>{2098b4a6-1398-4a0a-821f-79fe04dcbb04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Effect">
+      <UniqueIdentifier>{f4666868-421e-4923-bb0d-efc43cb14c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\GameObject">
+      <UniqueIdentifier>{1f3a64a1-057a-49ad-9839-331873b87e2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Image">
+      <UniqueIdentifier>{c5a8407b-e905-46d7-909d-0a91bc453b21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Manager">
+      <UniqueIdentifier>{db7e9f0d-ad9b-4998-99df-aa14108c1921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\ProgressBar">
+      <UniqueIdentifier>{8a394e58-ee3b-4b2e-b861-9bab4c355775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\SingletonBase">
+      <UniqueIdentifier>{14d2192f-6396-4b0d-bddb-2328c615fe03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Timer">
+      <UniqueIdentifier>{51ac7ca8-0db0-4538-b0aa-abc6b5454b9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Utils">
+      <UniqueIdentifier>{40367b04-14d5-4d7e-91d9-15ddbf431719}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\GameNode">
+      <UniqueIdentifier>{cad5ca17-2639-45f7-9bbe-f37611b6fb8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\Enum">
+      <UniqueIdentifier>{b9efc908-0e29-4eca-a912-9a87c94bced3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MainScene">
+      <UniqueIdentifier>{903493cd-7c18-443b-91dd-1ab6ad8965cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene">
+      <UniqueIdentifier>{73b1e60c-9850-47f8-a28b-31eba2de0026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player">
+      <UniqueIdentifier>{4034af17-4b69-457e-97f8-6c3df58dd7ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Enemy">
+      <UniqueIdentifier>{053ceacc-322a-4912-aaa8-2df7309d11b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Enemy\Boss">
+      <UniqueIdentifier>{367166ca-ab94-4406-8aee-d969a435713d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage">
+      <UniqueIdentifier>{9a0e7d88-bd8a-4386-a524-7bab0e407516}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object">
+      <UniqueIdentifier>{f89c22bc-65c8-4c41-98b1-bbff413b7784}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Projectile">
+      <UniqueIdentifier>{59eb532c-177e-4d86-bcdd-cf24bc40a955}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item">
+      <UniqueIdentifier>{21b99b21-fb28-44de-9187-ec8a4b85d545}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Village">
+      <UniqueIdentifier>{d2dd7050-886e-48eb-944a-8ab14e1433db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon">
+      <UniqueIdentifier>{7e8e49aa-110b-4327-a474-bd2b96273960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Test">
+      <UniqueIdentifier>{8e4844fc-7b62-4b6f-aa47-5d213d8e72d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Npc">
+      <UniqueIdentifier>{f27c1b85-e2e6-4efe-ac36-0a247dd856a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MapToolScene">
+      <UniqueIdentifier>{074ba322-124e-4072-a364-88a006739539}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\MapToolScene\MapTool">
+      <UniqueIdentifier>{0669a0e9-7d5e-4ffe-8a51-5fe5ca0e4bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Melee">
+      <UniqueIdentifier>{f1b72083-9db5-40f8-9a83-940a459f1449}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Long">
+      <UniqueIdentifier>{1dc5ded9-4313-42b5-9530-0684c145314a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Costume">
+      <UniqueIdentifier>{d01a2838-1c1c-4035-b841-2308d2d14be2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item\Accessories">
+      <UniqueIdentifier>{6cd4b808-2924-4835-ae3b-9c78ec86045a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\Manager\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2DGameFramework\CameraManager">
+      <UniqueIdentifier>{9921e2d6-8235-4494-bcbe-ad2686651255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Food">
+      <UniqueIdentifier>{3fb4c7dc-3689-4f1c-bd49-e59d87934099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Food\Normal">
+      <UniqueIdentifier>{a3887282-0571-4bb3-a1a2-0d83fa793e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Player\Food\Rare">
+      <UniqueIdentifier>{ad5c4d38-a59c-4b12-9419-dcb43177874c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\StageMakeTestScene">
+      <UniqueIdentifier>{790f18f4-50d7-4d44-bdd0-81e354776cf4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\Shop">
+      <UniqueIdentifier>{983bec92-4207-4ee4-9daf-a9eeed75781b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\Restaurant">
+      <UniqueIdentifier>{5b9e44c9-01e1-4bb9-961b-b9c910dd0b9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\start">
+      <UniqueIdentifier>{ca375f5a-a300-47c0-ba7f-57152a6fb369}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\endRoom">
+      <UniqueIdentifier>{ef1ec331-af5f-410d-826f-957a1a0ce73c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Stage\Dungeon\Boss">
+      <UniqueIdentifier>{4179b7f2-54ab-4559-a24e-f33c7a8a7ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Obstacle">
+      <UniqueIdentifier>{5c160c15-d798-4324-bab0-ca617a7bcca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Drops">
+      <UniqueIdentifier>{11d9e7d4-19b1-4e5d-9622-ee0f79674e0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Particle">
+      <UniqueIdentifier>{fa3be956-0718-4875-8345-bde7fe9c47ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\Door">
+      <UniqueIdentifier>{0184043f-15af-42e9-bb8f-e8ea6549a681}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Enemy\Mob">
+      <UniqueIdentifier>{759bebd3-6ec7-4b7f-b645-334b4baa4677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Object\OnlyView">
+      <UniqueIdentifier>{331596e0-74fd-41f5-adc3-346c6f247d9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Npc\Door">
+      <UniqueIdentifier>{dae275ec-895b-4bf0-a250-9e97070da4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Npc\Human">
+      <UniqueIdentifier>{33042173-8c0a-4216-8d6d-e34b0411ed98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Event">
+      <UniqueIdentifier>{f8f3f253-ef62-44bf-a058-31b568ff2218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\Item\SpecialAbility">
+      <UniqueIdentifier>{43196fed-3784-48cb-850d-3a5349c3a07e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dungreed\GameScene\UI">
+      <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="windowsAPI.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>2DGameFramework\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraShakeEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="D2DRenderer.h">
+      <Filter>2DGameFramework\D2DRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>2DGameFramework\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatRect.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="LibraryHeader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressBar.h">
+      <Filter>2DGameFramework\ProgressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="randomFunction.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="AllEnums.h">
+      <Filter>Dungreed\Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearFunc.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameNode.h">
+      <Filter>2DGameFramework\GameNode</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>2DGameFramework\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="SingletonBase.h">
+      <Filter>2DGameFramework\SingletonBase</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGround.h">
+      <Filter>Dungreed</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>2DGameFramework\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>2DGameFramework\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="MainScene.h">
+      <Filter>Dungreed\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Dungreed\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="StageManager.h">
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="UIManager.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileManager.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="FloatCircle.h">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.h">
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="NpcManager.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="Npc.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="MapToolScene.h">
+      <Filter>Dungreed\MapToolScene</Filter>
+    </ClInclude>
+    <ClInclude Include="MapTool.h">
+      <Filter>Dungreed\MapToolScene\MapTool</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Dungreed\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeManager.h">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStat.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortSpear.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Punch.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="SpikeBall.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="babyGreenBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="bombPouch.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="VillageStage.h">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
+    </ClInclude>
+    <ClInclude Include="MatchLockGun.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="Boomerang.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="ShortSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraManager.h">
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugStage.h">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="IceBall.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="miniEarth.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="watCher.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Costume.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeManager.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="MetalPlateCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="PickaxCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="NormalProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenDadBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="GreenMomBat.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="MagnifyingGlass.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackInfo.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Voluspa.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="CosmosSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="StatUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="OakBow.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="AliceCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="RedLotusCos.h">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClInclude>
+    <ClInclude Include="KeresScythe.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="MartialArtOfTiger.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="PickaxeRed.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="Niflheim.h">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CostumeUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HeartOfCosmos.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="DemonBoots.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="AllRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room21LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room20LTRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room22LTRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room1R.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room3LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room8L.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room9B.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room10T.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Belial.h">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BoomerangProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiBullet.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="PowerKatana.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="QuarterStaffBig.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="BigPaintBlush.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="DaisyRing.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageInfo.h">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MagicStick.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="GatlingGun.h">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClInclude>
+    <ClInclude Include="MetalBoots.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="AccProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="Food.h">
+      <Filter>Dungreed\GameScene\Player\Food</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogueUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Lumber.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="FluteGreatSword.h">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClInclude>
+    <ClInclude Include="BreadFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="EggFriedFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="GrilledMushroomFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="TomatoSoupFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="GriffinEggOmeletteFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="RaspberryCookieFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="SparklingWaterFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="StrawberryPieFood.h">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClInclude>
+    <ClInclude Include="Wingboots.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeScene.h">
+      <Filter>Dungreed\StageMakeTestScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Room5LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room6TB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room11LT.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room7RT.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room12LRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room7_RB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room13LTB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room14TRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonShopRoom3.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonShopRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonShopRoom2.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantRoom.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantRoom2LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="StartRoom2.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClInclude>
+    <ClInclude Include="StartRoom1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClInclude>
+    <ClInclude Include="DownStair1L.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRoom1.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="BossRoomBef1R.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="DownStair2T.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="DownStair2LT.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantRoom1R.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LTRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4LTR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room11_RB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room23LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="StartRoom3.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClInclude>
+    <ClInclude Include="SilverBullet.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="GuidedProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleObject.h">
+      <Filter>Dungreed\GameScene\Object\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="GoldObject.h">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="BrokenObject.h">
+      <Filter>Dungreed\GameScene\Object\Obstacle</Filter>
+    </ClInclude>
+    <ClInclude Include="HpFairyObject.h">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Room12LB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Seeri.h">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClInclude>
+    <ClInclude Include="Banshee.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatBomb.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatGiantNormal.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatGiantRed.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatIce.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatNormal.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="BatRed.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Ghost.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Minotaurs.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="Ovibos.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelBigIce.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelBigNormal.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelDog.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelMagicianIce.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallBow.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallDagger.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="SkelSmallGsword.h">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Room15TB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="ChestNpc.h">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewObject.h">
+      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
+    </ClInclude>
+    <ClInclude Include="GateNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="RestaurantNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorObject.h">
+      <Filter>Dungreed\GameScene\Object\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomToRoomEvent.h">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvent.h">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="SeeriProjectile.h">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorObject.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="SeeriProjectile.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Room2LR.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room4TB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room20LB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room20LRB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="Room20TB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="AliceAbility.h">
+      <Filter>Dungreed\GameScene\Item\SpecialAbility</Filter>
+    </ClInclude>
+    <ClInclude Include="AbilityNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="windowsAPI.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="GameNode.cpp">
+      <Filter>2DGameFramework\GameNode</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraShakeEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DRenderer.cpp">
+      <Filter>2DGameFramework\D2DRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D2DRenderer+Draw.cpp">
+      <Filter>2DGameFramework\D2DRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>2DGameFramework\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatRect.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>2DGameFramework\ProgressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearFunc.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>2DGameFramework\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGround.cpp">
+      <Filter>Dungreed</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>2DGameFramework\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>2DGameFramework\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManager.cpp">
+      <Filter>2DGameFramework\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="MainScene.cpp">
+      <Filter>Dungreed\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>Dungreed\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="StageManager.cpp">
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="UIManager.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ProjectileManager.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatCircle.cpp">
+      <Filter>2DGameFramework\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage.cpp">
+      <Filter>Dungreed\GameScene\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="NpcManager.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="Npc.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="MapToolScene.cpp">
+      <Filter>Dungreed\MapToolScene</Filter>
+    </ClCompile>
+    <ClCompile Include="MapTool.cpp">
+      <Filter>Dungreed\MapToolScene\MapTool</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStat.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortSpear.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Punch.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="SpikeBall.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="babyGreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="bombPouch.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="VillageStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Village</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchLockGun.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="Boomerang.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="ShortSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraManager.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugStage.cpp">
+      <Filter>Dungreed\GameScene\Stage\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="miniEarth.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="watCher.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeManager.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="MetalPlateCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="PickaxCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="NormalProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="Voluspa.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackInfo.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IceBall.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenDadBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GreenMomBat.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="StatUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MagnifyingGlass.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="CosmosSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackInfo.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="OakBow.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="RedLotusCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="AliceCos.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
+    <ClCompile Include="KeresScythe.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="MartialArtOfTiger.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="PickaxeRed.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="Niflheim.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="HeartOfCosmos.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="DemonBoots.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Room21LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room20LTRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room22LTRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room1R.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room3LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room8L.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room9B.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room10T.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Belial.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomerangProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiBullet.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PowerKatana.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="QuarterStaffBig.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="BigPaintBlush.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="DaisyRing.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MagicStick.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="GatlingGun.cpp">
+      <Filter>Dungreed\GameScene\Item\Long</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageInfo.cpp">
+      <Filter>Dungreed\GameScene\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MetalBoots.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Food.cpp">
+      <Filter>Dungreed\GameScene\Player\Food</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogueUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Lumber.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="FluteGreatSword.cpp">
+      <Filter>Dungreed\GameScene\Item\Melee</Filter>
+    </ClCompile>
+    <ClCompile Include="AccProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="BreadFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="EggFriedFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="GrilledMushroomFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="TomatoSoupFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="GriffinEggOmeletteFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="RaspberryCookieFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="SparklingWaterFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="StrawberryPieFood.cpp">
+      <Filter>Dungreed\GameScene\Player\Food\Rare</Filter>
+    </ClCompile>
+    <ClCompile Include="Wingboots.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeScene.cpp">
+      <Filter>Dungreed\StageMakeTestScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Room5LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room6TB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room11LT.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room7RT.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room12LRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room7_RB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room13LTB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room14TRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonShopRoom3.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonShopRoom.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonShopRoom2.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantRoom.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantRoom2LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClCompile>
+    <ClCompile Include="StartRoom1.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClCompile>
+    <ClCompile Include="StartRoom2.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair1L.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoom1.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BossRoomBef1R.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair2T.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="DownStair2LT.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\endRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantRoom1R.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\Restaurant</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LTRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4LTR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room11_RB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room23LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="StartRoom3.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon\start</Filter>
+    </ClCompile>
+    <ClCompile Include="SilverBullet.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="GuidedProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="GoldObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="BrokenObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Obstacle</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="HpFairyObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Seeri.cpp">
+      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
+    </ClCompile>
+    <ClCompile Include="Banshee.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatBomb.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatGiantNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatGiantRed.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="BatRed.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Ghost.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Minotaurs.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="Ovibos.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelBigNormal.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelDog.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelMagicianIce.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallBow.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallDagger.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="SkelSmallGsword.cpp">
+      <Filter>Dungreed\GameScene\Enemy\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Dungreed\GameScene\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Room15TB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="ChestNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewObject.cpp">
+      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
+    </ClCompile>
+    <ClCompile Include="GateNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="RestaurantNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room12LB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEvent.cpp">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomToRoomEvent.cpp">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="SeeriProjectile.cpp">
+      <Filter>Dungreed\GameScene\Projectile</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorObject.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SeeriProjectile.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Room12LB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room2LR.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room4TB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room20LB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room20LRB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="Room20TB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="AliceAbility.cpp">
+      <Filter>Dungreed\GameScene\Item\SpecialAbility</Filter>
+    </ClCompile>
+    <ClCompile Include="AbilityNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Dungreed.rc">
+      <Filter>리소스 파일</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+    <Image Include="Dungreed.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
