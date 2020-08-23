@@ -15,6 +15,6 @@ public:
 	void release();
 
 	vector<Item*> getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count);
-	inline Item* getItem(int itemCode);
+	Item* getItem(int itemCode);
 };
 

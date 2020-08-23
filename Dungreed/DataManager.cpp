@@ -126,12 +126,12 @@ Costume* DataManager::getCostume(COSTUME_TYPE type)
 	return _costumeMgr->getCostume(type);
 }
 
-//vector<Item*> DataManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count)
-//{
-//	return _itemMgr->getRandomItem(startRank, endRank, count);
-//}
-//
-//Item* DataManager::getItem(int itemCode)
-//{
-//	return _itemMgr->getItem(itemCode);
-//}
+vector<Item*> DataManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count)
+{
+	return _itemMgr->getRandomItem(startRank, endRank, count);
+}
+
+Item* DataManager::getItem(int itemCode)
+{
+	return _itemMgr->getItem(itemCode);
+}
