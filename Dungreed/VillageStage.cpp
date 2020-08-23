@@ -176,7 +176,7 @@ void VillageStage::render()
 
 	for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_collisionGroundRe¤±¤±cts[i]), D2D1::ColorF::Enum::Red, 1, 1);
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_collisionGroundRects[i]), D2D1::ColorF::Enum::Red, 1, 1);
 	}
 
 	for (int i = 0; i < _collisionGroundLines.size(); i++)
