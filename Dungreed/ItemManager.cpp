@@ -198,7 +198,7 @@ void ItemManager::release()
 	_itemMap.clear();
 }
 
-vector<Item*> ItemManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count) const
+vector<Item*> ItemManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count)
 {
 	// π›»Ø«“ ∫§≈Õ
 	vector<Item*> result;
@@ -250,7 +250,7 @@ vector<Item*> ItemManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank,
 	return result;
 }
 
-Item* ItemManager::getItem(int itemCode) const
+Item* ItemManager::getItem(int itemCode)
 {
 	return _itemMap.find(itemCode)->second;
 }
