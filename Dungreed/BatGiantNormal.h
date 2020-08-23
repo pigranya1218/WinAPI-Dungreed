@@ -6,7 +6,7 @@ class BatGiantNormal : public Enemy
 private:
 	tagShootingInfo _shooting;	// 탄막 관련
 	tagAttackInfo	_attack;	// 공격 관련
-	int _enterCount;
+	
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();

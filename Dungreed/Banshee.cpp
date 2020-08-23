@@ -15,7 +15,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_scale = 4;
 	_isDetect = 0;
 	_detectRange = 500;
-	_enterCount = 0;
+	
 	// 피격 렉트 및 사이즈 초기화
 	_size = _img->getFrameSize() * _scale;
 
@@ -108,10 +108,7 @@ void Banshee::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->stop("Enemy/Spawn");
-		SOUND_MANAGER->stop("Banshee/Attack");
-		
+	{				
 		setState(ENEMY_STATE::DIE);
 	}
 }
