@@ -65,33 +65,7 @@ void SeeriProjectile::release()
 void SeeriProjectile::update(float elapsedTime)
 {
 	Vector2 _effectpos = _position;
-	if (_enemyPos.x < _position.x)
-	{
-		_isTrun = true;
 
-
-		_effectpos.x = _effectpos.x + 10;
-	}
-	else
-	{
-		_isTrun = false;
-		_effectpos.x = _effectpos.x - 10;
-	}
-	if (_enemyPos.y < _position.y)
-	{
-		_angele += 0.033f;
-		_img->setAngle(_img->getAngle() + _angele*15);
-	}
-	else
-	{
-		_angele -= 0.033f;
-		_img->setAngle(_img->getAngle() + _angele* 15);
-	}
-
-	if (_enemyPos.y + 50 < _position.y)
-	{
-		_position.y -= 3;
-	}
 	EFFECT_MANAGER->play("SeeriBullet0", _effectpos, _drawSize, 0, _isTrun);
 	if (_Delay > 0)
 	{
@@ -118,62 +92,42 @@ void SeeriProjectile::update(float elapsedTime)
 		{
 			guidedAngleRadian -= PI2;
 		}
-		
 
-
-		if (_timeCount <= 0.3f)
+		if (_angleRadian <= guidedAngleRadian)
 		{
-			moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
-			moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
-		}
-
-		if (_timeCount > 0.3f)
-		{
-			if (_angleRadian <= guidedAngleRadian)
+			if ((guidedAngleRadian - _angleRadian) > (_angleRadian + (PI2 - guidedAngleRadian)))
 			{
-				if ((guidedAngleRadian - _angleRadian) > (_angleRadian + (PI2 - guidedAngleRadian)))
+				if (_angleRadian < 0.f)
 				{
-					//_angleRadian -= 2.f * elapsedTime;
-					if (_angleRadian < 0.f)
-					{
-						_angleRadian = PI2;
-					}
-					_angleRadian -= 3.f * elapsedTime;
-					
-					//_angleRadian -= 0.1f;
+					_angleRadian = PI2;
 				}
-				else
-				{
-					_angleRadian += 3.f * elapsedTime;
-					//_angleRadian += 2.f * elapsedTime;
-					//_angleRadian += 0.1f;
-					
-				}
+				_angleRadian -= 3.f * elapsedTime;
 			}
 			else
 			{
-				if ((_angleRadian - guidedAngleRadian) < ((PI2 - _angleRadian) + guidedAngleRadian))
-				{
-					//_angleRadian -= 2.f * elapsedTime;
-					_angleRadian -= 3.f * elapsedTime;
-					//_angleRadian -= 0.1f;
-				}
-				else
-				{
-					//_angleRadian += 2.f * elapsedTime;
-					if (_angleRadian >= PI2)
-					{
-						_angleRadian = 0;
-					}
-					//_angleRadian += 0.1f;
-					_angleRadian += 3.f * elapsedTime;
-				}
+				_angleRadian += 3.f * elapsedTime;
 			}
-
-			// 이동
-			moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
-			moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
 		}
+		else
+		{
+			if ((_angleRadian - guidedAngleRadian) < ((PI2 - _angleRadian) + guidedAngleRadian))
+			{
+				_angleRadian -= 3.f * elapsedTime;
+			}
+			else
+			{
+				if (_angleRadian >= PI2)
+				{
+					_angleRadian = 0;
+				}
+				_angleRadian += 3.f * elapsedTime;
+			}
+		}
+
+		// 이동
+		moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
+		moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
+
 	}
 	Vector2 lastDir = _position;
 	_projectileMgr->moveTo(this, moveDir, _collsionGround, _collisionPlatForm);
@@ -216,7 +170,6 @@ void SeeriProjectile::update(float elapsedTime)
 			_active = false;
 			return;
 		}
-
 	}
 
 	// 지속시간을 넘어가면
@@ -234,14 +187,14 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
-
-	
-
 }
 
 void SeeriProjectile::render()
 {	
-	
+	if (_useRotate)
+	{
+		_img->setAngle(_angleRadian * (180 / PI));
+	}
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani, _isTrun);
