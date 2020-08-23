@@ -71,17 +71,19 @@ void MultiBullet::attack(Player* player, Projectile * projectile, AttackInfo * i
 			}
 		}
 
-		//BoomerangProjectile* boomerangProjectile = dynamic_cast<BoomerangProjectile*>(projectile);
-		//for (int i = 0; i < 2; i++)
-		//{
-		//	if (boomerangProjectile != nullptr)
-		//	{
-		//		BoomerangProjectile* copyBoomerangProjectile = new BoomerangProjectile(*boomerangProjectile);
-		//		copyBoomerangProjectile->setAngleRadian(boomerangProjectile->getAngleRadian() + ((i == 0) ? (-0.025 * PI) : (0.025 * PI))); // °¢µµ¸¦ »ìÂ¦ ²ªÀº µÚ¿¡
-		//		AttackInfo* copyInfo = new AttackInfo(*info);
-		//		player->attack(copyBoomerangProjectile, copyInfo);
-		//	}
-		//}
+		BoomerangProjectile* boomerangProjectile = dynamic_cast<BoomerangProjectile*>(projectile);
+		for (int i = 0; i < 2; i++)
+		{
+			if (boomerangProjectile != nullptr)
+			{
+				BoomerangProjectile* copyBoomerangProjectile = new BoomerangProjectile(*boomerangProjectile);
+				copyBoomerangProjectile->setAngleRadian(boomerangProjectile->getAngleRadian() + ((i == 0) ? (-0.3 * PI) : (0.3 * PI))); // °¢µµ¸¦ »ìÂ¦ ²ªÀº µÚ¿¡
+				AttackInfo* copyInfo = new AttackInfo(*info);
+				string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime() + i);
+				copyInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+				player->attack(copyBoomerangProjectile, copyInfo);
+			}
+		}
 	}
 }
 

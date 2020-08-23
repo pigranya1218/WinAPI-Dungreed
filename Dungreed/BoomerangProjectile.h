@@ -4,9 +4,7 @@
 class BoomerangProjectile :	public Projectile
 {
 private:
-	float		_angleRadian;		// 투사체 날라가는 각도
-	float		_speed;				// 투사체 날라가는 속도
-	
+	Vector2		_force;				// 투사체 속도
 	float		_radius;			// 충돌용
 
 	float		_range;				// 투사체 사정거리
@@ -39,7 +37,7 @@ private:
 public:
 	BoomerangProjectile() {}
 	BoomerangProjectile(const BoomerangProjectile& source);
-	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float range, bool useRotate = 1);
+	void init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, Vector2 force, float range, bool useRotate = 1);
 	virtual void release();
 	virtual void update(float elapsedTime);
 	virtual void render();

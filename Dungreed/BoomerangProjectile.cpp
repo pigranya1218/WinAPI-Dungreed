@@ -31,7 +31,6 @@ BoomerangProjectile::BoomerangProjectile(const BoomerangProjectile & source)
 	_collisionPlatForm = source._collisionPlatForm;
 
 	_collisionEffect = source._collisionEffect;
-	_renderSize = source._renderSize;
 
 	_useGravity = source._useGravity;
 	_gravity = source._gravity;
@@ -40,10 +39,10 @@ BoomerangProjectile::BoomerangProjectile(const BoomerangProjectile & source)
 	_length = source._length;
 }
 
-void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, float maxTime, bool useRotate)
+void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, Vector2 force, float maxTime, bool useRotate)
 {
 	_angleRadian = angleRadian;
-	_speed = speed;
+	_force = force;
 	_maxTime = maxTime;
 	_count = 0;
 	_returnCount = 0;
@@ -118,8 +117,8 @@ void BoomerangProjectile::update(float elapsedTime)
 
 	if (!_ProjectileReturn)
 	{
-		moveDir.x += cosf(_angleRadian) * _speed * elapsedTime;
-		moveDir.y += -sinf(_angleRadian) * _speed * elapsedTime;
+		moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
+		moveDir.y += -sinf(_angleRadian) * _force.y * elapsedTime;
 	}
 
 	// 사정거리를 넘어가면
@@ -136,8 +135,8 @@ void BoomerangProjectile::update(float elapsedTime)
 		{
 			angleValue = _angleRadian + PI;
 		}
-		moveDir.x += cosf(angleValue) * _speed * elapsedTime;
-		moveDir.y += -sinf(angleValue) * _speed * elapsedTime;
+		moveDir.x += cosf(angleValue) * _force.x * elapsedTime;
+		moveDir.y += -sinf(angleValue) * _force.y * elapsedTime;
 	}
 	_position += moveDir;
 }
@@ -151,7 +150,8 @@ void BoomerangProjectile::render()
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _size, _ani);
-		D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _radius, D2D1::ColorF::Enum::Red, 5);
+		//D2D_RENDERER->drawEllipse(CAMERA->getRelativeV2(_position), _radius, D2D1::ColorF::Enum::Red, 5);
+		//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y), to_wstring(_position.x) + to_wstring(_position.y), 30, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아", 0.f);
 	}
 	else
 	{
