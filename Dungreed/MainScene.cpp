@@ -29,6 +29,8 @@ HRESULT MainScene::init()
 	_backCloud = IMAGE_MANAGER->findImage("MAIN_SCENE/BACK_CLOUD");
 	_backSpeed = 1;
 
+	SOUND_MANAGER->play("main_title", 1);
+
 	_mouseMove = false;
 	_lastMousePt = _ptMouse;
 

@@ -56,6 +56,14 @@ void DataManager::update()
 		if (_loadRc[i].ptInRect(_ptMouse))
 		{
 			_selectedSlot = i;
+				
+			if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
+			{
+				SOUND_MANAGER->stop("main_title");
+				SCENE_MANAGER->changeScene("GAME");
+				_isActive = false;
+			}
+
 		}
 		if (_deleteRc[i].ptInRect(_ptMouse))
 		{

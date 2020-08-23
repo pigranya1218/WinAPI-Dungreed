@@ -202,8 +202,6 @@ void Player::init()
 	//최초에 장착하는 코스튬
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 
-	_isDead = false;
-
 	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
@@ -497,16 +495,14 @@ void Player::update(float const elapsedTime)
 	{
 		//대쉬 효과음 재생
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-		//대쉬 이펙트 재생
-		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
-		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y);
-		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
+		
 
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
 		_currDashTime = 0.1f;
+		_currEffectTime = 0.015f;
 		if (angle < 0)
 		{
 			_position.y += 1.5;
@@ -524,6 +520,12 @@ void Player::update(float const elapsedTime)
 	if (_currDashTime > 0) // 대쉬 상태라면
 	{
 		_currDashTime = max(0, _currDashTime - elapsedTime);
+		_currEffectTime = max(0, _currEffectTime - elapsedTime);
+		if (_currEffectTime == 0)
+		{
+			_costume->dashEffect(_position, _direction);
+			_currEffectTime = 0.015f;
+		}
 		if (_currDashTime == 0)
 		{
 			//_force.y = 0;
@@ -575,7 +577,22 @@ void Player::update(float const elapsedTime)
 	{
 		_position.y -= 15;
 		moveDir.y += 21;
+		
+		if (moveDir.x != 0)
+		{
+			_walkEffectDelay -= elapsedTime;
+			if (_walkEffectDelay <= 0)
+			{
+				_walkEffectDelay = 0.5;
+				//먼지 이펙트 재생
+				Vector2 dashEffectPos = Vector2(_position.x + ((_direction == DIRECTION::LEFT) ? (_size.x / 2) : (-_size.x / 2)), _position.y + _size.y / 2);
+				Vector2 dashEffectSize = Vector2(56, 52);
+				EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, _direction == DIRECTION::LEFT);
+			}
+		}
 	}
+
+
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
 	{
@@ -656,14 +673,6 @@ void Player::update(float const elapsedTime)
 	{
 		_currHitTime = max(0, _currHitTime - elapsedTime);
 	}
-
-	// 사망 처리
-	if (_currHp <= 0 && !_isDead)
-	{
-		SOUND_MANAGER->play("Player/Dead");
-		_isDead = true;
-	}
-	if(_isDead) _costume->setSprite(PLAYER_STATE::DIE, false);
 }
 
 void Player::render()
@@ -869,7 +878,6 @@ bool Player::hitEffect(FloatRect* rc, AttackInfo* info)
 	renderPos.x = RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x);
 	renderPos.y = RANDOM->getFromFloatTo(_position.y - _size.y, _position.y);
 	_gameScene->showDamage(damageInfo, renderPos);
-
 	return true;
 }
 

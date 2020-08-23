@@ -13,6 +13,8 @@ void EnemyManager::release()
 		_enemies[i]->release();
 		delete _enemies[i];
 	}
+
+	_enemies.clear();
 }
 
 void EnemyManager::update(float const timeElapsed)

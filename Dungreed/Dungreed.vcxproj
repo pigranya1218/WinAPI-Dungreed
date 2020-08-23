@@ -366,6 +366,7 @@
     <ClCompile Include="CameraFillEvent.cpp" />
     <ClCompile Include="CameraMoveEvent.cpp" />
     <ClCompile Include="ChestNpc.cpp" />
+    <ClCompile Include="Costume.cpp" />
     <ClCompile Include="CostumeNpc.cpp" />
     <ClCompile Include="DoorNpc.cpp" />
     <ClCompile Include="DoorObject.cpp" />

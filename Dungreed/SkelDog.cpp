@@ -41,7 +41,7 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_active = true;
 
 	_curHp = _maxHp = 20;
-	_enterCount = 0;
+	
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_DOG);
 }
 
@@ -152,9 +152,7 @@ void SkelDog::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		_enterCount = 0;
-		SOUND_MANAGER->stop("Enemy/Spawn");
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -215,6 +213,8 @@ void SkelDog::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+
+			SOUND_MANAGER->stop("Enemy/Spawn");
 
 			_active = false;
 		}

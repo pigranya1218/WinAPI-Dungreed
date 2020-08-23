@@ -88,7 +88,7 @@ public:
 	void setPlayerPos(int x, int y);
 	Vector2 getEnemyPos(Vector2 pos);
 	vector<FloatRect> getEnemyRects();
-
+	void playerDead();
 	
 	void makeR2REvent(COLORREF color, float time);
 	void makeTimeRatioEvent(float ratio, float time);
@@ -96,4 +96,6 @@ public:
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
 	void setShowPlayer(bool showPlayer);
+
+	
 };

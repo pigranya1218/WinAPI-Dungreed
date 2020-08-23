@@ -212,22 +212,6 @@ void StageManager::release()
 
 void StageManager::update(float const elapsedTime)
 {
-	/*if (KEY_MANAGER->isOnceKeyDown('A'))
-	{
-		moveRoom(Vector2(-1, 0));
-	}
-	else if (KEY_MANAGER->isOnceKeyDown('D'))
-	{
-		moveRoom(Vector2(1, 0));
-	}
-	else if (KEY_MANAGER->isOnceKeyDown('W'))
-	{
-		moveRoom(Vector2(0, -1));
-	}
-	else if (KEY_MANAGER->isOnceKeyDown('S'))
-	{
-		moveRoom(Vector2(0, 1));
-	}*/
 	_currStage->update(elapsedTime);
 }
 
@@ -773,6 +757,14 @@ Vector2 StageManager::getEnemyPos(Vector2 pos)
 vector<FloatRect> StageManager::getEnemyRects()
 {
 	return _currStage->getEnemyRects();
+}
+
+void StageManager::playerDead()
+{
+	_currStageType = static_cast<STAGE_TYPE>(static_cast<int>(STAGE_TYPE::VILLAGE));
+	releaseStage();
+	makeStage();
+	_gameScene->pushR2REvent(RGB(0, 0, 0), 2);
 }
 
 void StageManager::makeR2REvent(COLORREF color, float time)

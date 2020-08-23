@@ -133,6 +133,11 @@ HRESULT playGround::init()
 	// ** PLAYER
 	IMAGE_MANAGER->addFrameImage("PLAYER/DASH_DUST", L"resources/images/Effect/Dash/DustEffect.png", 6, 1);
 	EFFECT_MANAGER->addEffect("PLAYER/DASH_DUST_EFFECT", "PLAYER/DASH_DUST", 30, 10);
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/BASE", L"resources/images/Effect/Dash/Shadow/base_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/METAL", L"resources/images/Effect/Dash/Shadow/metal_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/ALICE", L"resources/images/Effect/Dash/Shadow/alice_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/RED_LOTUS", L"resources/images/Effect/Dash/Shadow/redLotus_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/PICKAX", L"resources/images/Effect/Dash/Shadow/pickax_player_jump_shadow.png");
 	// ** UI
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BG", L"resources/images/gameScene/ui/PlayerLifeBack.png");
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_FRAME", L"resources/images/gameScene/ui/PlayerLifeBase 1.png");
@@ -434,30 +439,35 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/IDLE", L"resources/images/costumes/base/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/MOVE", L"resources/images/costumes/base/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/BASE/JUMP", L"resources/images/costumes/base/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/BASE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/base_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/BASE/DIE", L"resources/images/costumes/base/player_die.png");
 
 	// *** METAL_PLATE
 	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/IDLE", L"resources/images/costumes/metalPlate/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/MOVE", L"resources/images/costumes/metalPlate/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/JUMP", L"resources/images/costumes/metalPlate/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/metal_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/DIE", L"resources/images/costumes/metalPlate/player_die.png");
 
 	// *** PICKAX
 	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/IDLE", L"resources/images/costumes/pickax/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/MOVE", L"resources/images/costumes/pickax/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP", L"resources/images/costumes/pickax/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/pickax_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/DIE", L"resources/images/costumes/pickax/player_die.png");
 
 	// *** ALICE
 	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/IDLE", L"resources/images/costumes/alice/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/MOVE", L"resources/images/costumes/alice/player_run.png", 6, 1);
 	IMAGE_MANAGER->addImage("COSTUME/ALICE/JUMP", L"resources/images/costumes/alice/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/ALICE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/alice_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/ALICE/DIE", L"resources/images/costumes/alice/player_die.png");
 
 	// *** RED_LOTUS
 	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/IDLE", L"resources/images/costumes/redLotus/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/MOVE", L"resources/images/costumes/redLotus/player_run.png", 6, 1);
 	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/JUMP", L"resources/images/costumes/redLotus/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/redLotus_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/DIE", L"resources/images/costumes/redLotus/player_die.png");
 
 	// ** WEAPON
@@ -827,11 +837,13 @@ HRESULT playGround::init()
 
 
 	//사운드
+	//** MAIN SCENE
+	SOUND_MANAGER->addSound("main_title", "resources/sound/Ui/bgm/title.wav", true, false);					//메인 타이틀 화면 bgm
 
 	//** STAGE
 	//SOUND_MANAGER->addSound("Town", "resources/sound/stage/bgm/0.Town.wav", true, false);			//마을 bmg 
 	SOUND_MANAGER->addSound("ambienceTown", "resources/sound/stage/bgm/ambience_town.wav", true, false);	//마을 bmg 효과음
-
+	
 
 	//** PLAYER / UI
 	SOUND_MANAGER->addSound("Player/Step1", "resources/sounds/player/step_lth1.wav", false, false);			//플레이어 이동1
@@ -907,7 +919,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("GAME");		
+	SCENE_MANAGER->changeScene("MAIN");		
 	
 	return S_OK;
 }

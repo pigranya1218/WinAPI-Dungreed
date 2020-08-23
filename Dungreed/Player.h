@@ -28,12 +28,13 @@ private:
 	int		_currDashCount;			// 현재 남은 대쉬 카운트
 	float	_currDashCoolTime;		// 현재 대쉬 쿨타임
 	float	_currDashTime;			// 현재 대쉬 남은 유지시간
+	float	_currEffectTime;		// 현재 대쉬 이펙트 체크 시간
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	
+	float	_walkEffectDelay = 0;
+
 	float	_currHitTime;			// 피격 타임
-	
-	bool	_isDead;				// 사망 여부
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 	
@@ -110,7 +111,7 @@ public:
 	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
-	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); }	// 어빌리티 스탯 설정자
+	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); _currHp = _adjustStat.maxHp; }	// 어빌리티 스탯 설정자
 	void setSpecialAbility(vector<Item*> specialAbility);
 
 	Costume* getCurrCostume() { return _costume; }

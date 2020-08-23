@@ -451,8 +451,8 @@ void AbilityUI::render()
 		else if (i == 2) r = 176, g = 182, b = 194;
 		else if (i == 3) r = 160, g = 177, b = 210;
 		else if (i == 4) r = 225, g = 183, b = 98;
-		D2D_RENDERER->renderTextField(_windows[i].pointRc.left, _windows[i].pointRc.top, to_wstring(_windows[i].abilityPoint), RGB(r, g, b), 50, _windows[i].pointRc.getWidth(), _windows[i].pointRc.getHeight(),
-			1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Alagard");
+		D2D_RENDERER->renderTextField(_windows[i].pointRc.left, _windows[i].pointRc.top, to_wstring(_windows[i].abilityPoint), RGB(r, g, b), 55, _windows[i].pointRc.getWidth(), _windows[i].pointRc.getHeight(),
+			1, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 	}
 	//특성 초기화
 	//D2D_RENDERER->drawRectangle(_abilityInitRc, D2D1::ColorF::Magenta, 1, 1);

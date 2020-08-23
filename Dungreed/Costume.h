@@ -25,6 +25,14 @@ enum class PLAYER_STATE : int
 class Costume
 {
 protected:
+	struct tagDashEffect
+	{
+		Vector2 pos;
+		float remainTime;
+		DIRECTION dir;
+	};
+
+protected:
 	string _costumeName;	// 이미지를 찾기 위해 활용되는 코스튬별 이름
 	wstring _costumeTitle;	// 코스튬의 한글 이름
 	wstring _costumeSummary;	// 코스튬 개요
@@ -39,13 +47,17 @@ protected:
 
 	vector<Item*> _specialAbility; // 특수 능력
 
+	vector<tagDashEffect> _effects; // 대쉬 이펙트
+
 public:
-	virtual void init() = 0;
-	virtual void release() = 0;
-	virtual void update(float elaspedTime) = 0;
-	virtual void render(Vector2 pos, DIRECTION dir, bool isAlpha) = 0;
-	virtual void setSprite(PLAYER_STATE state, bool isForced) = 0;	// 애니메이션을 재생시킬 함수
-	
+	virtual void init() {}
+	void release();
+	void update(float elaspedTime);
+	void render(Vector2 pos, DIRECTION dir, bool isAlpha);
+	void setSprite(PLAYER_STATE state, bool isForced);	// 애니메이션을 재생시킬 함수
+	void dashEffect(Vector2 pos, DIRECTION dir);
+
+
 	PlayerStat const getBaseStat() { return _baseStat + _differStat; } // 코스튬의 기본 스탯을 반환
 	vector<Item*> getSpecialAbility() { return _specialAbility; } // 코스튬의 특수 능력 반환
 	string getCostumeName() { return _costumeName; }
