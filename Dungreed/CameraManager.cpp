@@ -231,49 +231,49 @@ void CameraManager::movePivot(Vector2 offsetXY)
 	setT(_T + offsetXY.y);
 }
 
-float CameraManager::getRelativeX(float left)
+float CameraManager::getRelativeX(float left, float ratio)
 {
-	float newL = _offsetL + left - _L;
+	float newL = left + (_offsetL  - _L) * ratio;
 	return newL;
 }
 
-LONG CameraManager::getRelativeX(LONG left)
+LONG CameraManager::getRelativeX(LONG left, float ratio)
 {
-	LONG newL = _offsetL + left - _L;
+	LONG newL = left + (_offsetL - _L) * ratio;
 	return newL;
 }
 
-float CameraManager::getRelativeY(float top)
+float CameraManager::getRelativeY(float top, float ratio)
 {
-	float newT = _offsetT + top - _T;
+	float newT = top + (_offsetT - _T) * ratio;
 	return  newT;
 }
 
-LONG CameraManager::getRelativeY(LONG top)
+LONG CameraManager::getRelativeY(LONG top, float ratio)
 {
-	LONG newT = _offsetT + top - _T;
+	LONG newT = top + (_offsetT - _T) * ratio;
 	return  newT;
 }
 
-POINT CameraManager::getRelativePt(POINT pt)
+POINT CameraManager::getRelativePt(POINT pt, float ratio)
 {
 	POINT result;
-	result.x = getRelativeX(pt.x);
-	result.y = getRelativeY(pt.y);
+	result.x = getRelativeX(pt.x, ratio);
+	result.y = getRelativeY(pt.y, ratio);
 	return result;
 }
 
-Vector2 CameraManager::getRelativeV2(Vector2 vec2)
+Vector2 CameraManager::getRelativeV2(Vector2 vec2, float ratio)
 {
-	return Vector2(getRelativeX(vec2.x), getRelativeY(vec2.y));
+	return Vector2(getRelativeX(vec2.x, ratio), getRelativeY(vec2.y, ratio));
 }
 
-FloatRect CameraManager::getRelativeFR(FloatRect rc)
+FloatRect CameraManager::getRelativeFR(FloatRect rc, float ratio)
 {
-	float left = getRelativeX(rc.left);
-	float top = getRelativeY(rc.top);
-	float right = getRelativeX(rc.right);
-	float bottom = getRelativeY(rc.bottom);
+	float left = getRelativeX(rc.left, ratio);
+	float top = getRelativeY(rc.top, ratio);
+	float right = getRelativeX(rc.right, ratio);
+	float bottom = getRelativeY(rc.bottom, ratio);
 
 	return FloatRect(left, top,
 		right, bottom);
