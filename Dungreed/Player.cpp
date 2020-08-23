@@ -347,17 +347,17 @@ void Player::init()
 	//testWeapon6->init();
 	//_inventory[14] = testWeapon6;*/
 
-	//GatlingGun* testWeapon7 = new GatlingGun;
-	//testWeapon7->init();
-	//_inventory[3] = testWeapon7;
+	/*GatlingGun* testWeapon7 = new GatlingGun;
+	testWeapon7->init();
+	_inventory[3] = testWeapon7;*/
 
-	//MagicStick* testWeapon8 = new MagicStick;
+	MagicStick* testWeapon8 = new MagicStick;
+	testWeapon8->init();
+	_inventory[14] = testWeapon8;
+
+	//OakBow* testWeapon8 = new OakBow;
 	//testWeapon8->init();
 	//_inventory[14] = testWeapon8;
-
-	////OakBow* testWeapon8 = new OakBow;
-	////testWeapon8->init();
-	////_inventory[14] = testWeapon8;
 
 	///*SilverBullet* testAcc19 = new SilverBullet;
 	//testAcc19->init();
