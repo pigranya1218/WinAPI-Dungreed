@@ -175,7 +175,6 @@ void Lumber::backRender(Player* player)
 			EFFECT_MANAGER->play("EFFECT_SWING", effectPos, Vector2(120, 180), degree);
 		}
 	}
-	_attackDebug.render(true);
 }
 
 void Lumber::frontRender(Player* player)
@@ -280,7 +279,6 @@ void Lumber::frontRender(Player* player)
 			EFFECT_MANAGER->play("EFFECT_SWING", effectPos, Vector2(120, 180), degree);
 		}
 	}
-	_attackDebug.render(true);
 }
 
 

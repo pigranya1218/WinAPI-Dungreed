@@ -229,7 +229,6 @@ void BigPaintBlush::backRender(Player* player)
 	}
 
 
-	_attackDebug.render(true);
 
 }
 
@@ -330,27 +329,15 @@ void BigPaintBlush::frontRender(Player* player)
 		}
 		
 	}
-	_attackDebug.render(true);
 }
 
 
 void BigPaintBlush::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-	
-
-	
+			
 	CAMERA->pushShakeEvent(10,0.1f);
-
-
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-
-	Vector2 renderPosHand = pos;
-
-	// 손으로부터 마우스 에임까지의 각도
-	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
-	_reverseMove = false;
+	   		_reverseMove = false;
 	_currAttackDelay = _addStat.attackSpeed;
 	//==========================================================================
 

@@ -176,7 +176,6 @@ void CosmosSword::frontRender(Player* player)
 		}
 	}
 
-	_attackDebug.render(true);
 }
 
 
