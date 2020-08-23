@@ -176,7 +176,6 @@ void CosmosSword::frontRender(Player* player)
 		}
 	}
 
-	_attackDebug.render(true);
 }
 
 
@@ -184,6 +183,10 @@ void CosmosSword::frontRender(Player* player)
 void CosmosSword::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	CAMERA->pushShakeEvent(10, 0.1f);
+
+
 
 	if (_oneAttack)
 	{

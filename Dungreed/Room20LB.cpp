@@ -14,14 +14,14 @@ void Room20LB::init()
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_ICE, Vector2(350, 1100) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(750, 1100) });
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(670, 1490) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::MINOTAURS, Vector2(400, 2100) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(670, 1670) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(380, 1650) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(970, 1650) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 2100) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 2100) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(700, 2100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(670, 1490),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::MINOTAURS, Vector2(400, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(670, 1670),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(380, 1650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(970, 1650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(700, 2100),2 });
 	int randBox = RANDOM->getInt(10);
 	int boxPer = RANDOM->getInt(10);
 	if (boxPer % 5 == 1)_spawnChest.spawn = false;

@@ -228,7 +228,6 @@ void FluteGreatSword::frontRender(Player* player)
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(hand2), 210, 188, 181, 1, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos));
 			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (handDegree + _angleOffset), CAMERA->getRelativeV2(originPos)); // 손의 렉트를 그린다
 		}
-		_attackDebug.render(true);
 	}
 }
 
