@@ -11,7 +11,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEf
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 500;
+	_detectRange = 800;
 
 	_size = Vector2(_img->getFrameSize().x - 35, _img->getFrameSize().y - 15);
 	_size = _size * _scale;

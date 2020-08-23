@@ -80,7 +80,7 @@ void Belial::init(const Vector2 & pos)
 
 	// 공격 주기 설정
 	ZeroMemory(&_attackCycle, sizeof(&_attackCycle));
-	_attackCycle.delay = 2.8;
+	_attackCycle.delay = 1.8;
 
 	// 죽은 상태 설정
 	ZeroMemory(&_dieEffect, sizeof(_dieEffect));
@@ -892,7 +892,7 @@ void Belial::tagHandInfo::init(const Vector2& pos)
 	
 	// 움직인다.
 	ZeroMemory(&moving, sizeof(moving));
-	moving.force = Vector2(0, 800);
+	moving.force = Vector2(0, 1300);
 
 	// 레이저 공격정보 초기화
 	laserAtk.attackInit(3, 5, 0);
