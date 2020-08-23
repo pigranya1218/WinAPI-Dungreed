@@ -892,6 +892,9 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("bow_attack", "resources/sounds/weapon/LongDistanceWeapon/etc-sound0034_Bow.wav", false, false);
 	SOUND_MANAGER->addSound("boomerang_attack_sound", "resources/sounds/weapon/LongDistanceWeapon/Fantasy_Game_Skill_Axethrow_B.wav", false, false);
 	SOUND_MANAGER->addSound("MagicStick_sound", "resources/sounds/weapon/LongDistanceWeapon/flaunchLightbringer.wav", false, false);
+	SOUND_MANAGER->addSound("RifleFire", "resources/sounds/weapon/LongDistanceWeapon/RifleFire.wav", false, false);
+	SOUND_MANAGER->addSound("Reload", "resources/sounds/weapon/LongDistanceWeapon/Reload.wav", false, false);
+	SOUND_MANAGER->addSound("Reload2", "resources/sounds/weapon/LongDistanceWeapon/Reload2.wav", false, false);
 
 	TIME_MANAGER->init();
 	CONFIG_MANAGER->init();

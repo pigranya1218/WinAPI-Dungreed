@@ -247,13 +247,20 @@ void GuidedProjectile::update(float elapsedTime)
 	if (_afterimage)
 	{
 		_mirageCount += elapsedTime;
-		if (_mirageCount > 1)
+		if (_mirageCount > 0.1)
 		{
 			_mirageCount -= 1;
-			_miragePos = _position;
-			_shodow.angleRadian = _angleRadian;
-			//_shodow.pos = Vector2(_position.x );
-			//_shadow.push_back()
+			float distance = 2.0f;
+			_shodow.angleRadian = PI - _angleRadian;
+			_shodow.pos.x = _position.x + cosf(_shodow.angleRadian) * distance;
+			_shodow.pos.y = _position.y + -sinf(_shodow.angleRadian) * distance;
+
+			_shodow.img = _img;
+
+			if (_useAni)
+			{
+				_shodow.frameX = _ani->getPlayIndex();
+			}
 		}
 	}
 }
@@ -277,20 +284,16 @@ void GuidedProjectile::render()
 
 	if (_afterimage)
 	{
-		if (_mirageCount > 1)
+		_shodow.img->setScale(4);
+		if (_useAni)
 		{
-			_mirageCount -= 1;
+			_shodow.img->frameRender(CAMERA->getRelativeV2(_shodow.pos), _shodow.frameX, 0);
+		}
+		if (!_useAni)
+		{
+			_shodow.img->render(CAMERA->getRelativeV2(_shodow.pos));
 		}
 	}
-	
-	/*if (_afterimage)
-	{
-		if (_afterCount%2 == 0)
-		{
-			_afterImg[_countI]->render(CAMERA->getRelativeV2(_position), _renderSize);
-		}
-	}*/
-	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 10), to_wstring(_angleRadian), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"µÕ±Ù¸ð²Ã", 0.f);
 }
 
 void GuidedProjectile::aniUpdate(float const elapsedTime)

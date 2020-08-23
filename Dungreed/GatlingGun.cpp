@@ -155,49 +155,21 @@ void GatlingGun::frontRender(Player * player)
 	subHandPos.x += _iconImg->getWidth() * 0.4 * 4;
 	subHandPos.y += (isLeft) ? (_iconImg->getHeight() * 0.2 * 4) : (_iconImg->getHeight() * -0.2 * 4);
 	FloatRect subhandRc = rectMakePivot(subHandPos, Vector2(5, 5), PIVOT::CENTER);
-
-	//D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(subhandRc), 210, 188, 181, 1.f, degree, CAMERA->getRelativeV2(renderPosHand));
-	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(subhandRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
-
 	FloatRect handRc = rectMakePivot(renderPosHand, Vector2(5, 5), PIVOT::CENTER);
-
-	//D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(handRc), 210, 188, 181, 1.f, degree, CAMERA->getRelativeV2(renderPosHand));
-	//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(handRc), 40, 36, 58, 1.f, 2.f, degree, CAMERA->getRelativeV2(renderPosHand));
 	
 	Vector2 renderPosHand02 = pos;
 	renderPosHand02.x += ((isLeft) ? (_iconImg->getWidth() * 0.1f * 4) : -(_iconImg->getWidth() * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
 	renderPosHand02.y += 30; // 플레이어의 중점으로부터 무기를 들고 있는 높이
 
-	//if (_drawEffect) // 발사 이펙트를 그린다
-	//{
-	//	_drawEffect = false;
-	//	Vector2 effectPos = renderPosHand; // 손의 위치로부터
-	//	effectPos.x += 5;
-	//	//effectPos.y = renderPosHand.y + 15;
-
-	//	Image* effectImg = IMAGE_MANAGER->findImage("ShootEffect");
-	//	Vector2 effectSize = Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4);
-
-	//	float length = _iconImg->getWidth() * 0.6f * 7; // 무기 길이만큼
-	//	effectPos.x += cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-	//	effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-
-	//	EFFECT_MANAGER->play("L_Effect_Shoot", effectPos, effectSize, degree);
-	//}
-
 	if (_shootEffectAni->isPlay())
 	{
 		Vector2 shootEffectPos = renderPosHand;
-		
-		//shootEffectPos.x += renderPosHand.x + 70;
-		//shootEffectPos.y = renderPosHand.y + 25;
 
 		float length = _iconImg->getWidth() * 1.00f * 4; // 무기 길이만큼
 		shootEffectPos.x += cosf(degree * (PI / 180)) * length;
 		shootEffectPos.y += -sinf(degree * (PI / 180)) * length;
 
 		_shootEffectImg->setAngle(degree);
-		//_shootEffectImg->setAnglePos(Vector2(0.0f, _shootEffectImg->getFrameSize().y * 0.5f));
 		_shootEffectImg->setScale(4);
 		_shootEffectImg->aniRender(CAMERA->getRelativeV2(shootEffectPos), _shootEffectAni);
 	}
@@ -237,6 +209,7 @@ void GatlingGun::attack(Player * player)
 
 	if (_isAttack)
 	{
+
 		bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 		Vector2 pos = player->getPosition();
 
