@@ -927,7 +927,7 @@ void UIManager::setMap(vector<vector<Stage*>> stageMap, string stageName)
 			else
 			{
 				_mapUI.uiMap[x][y].exist = true;
-				_mapUI.uiMap[x][y].visible = true;
+				_mapUI.uiMap[x][y].visible = false;
 				_mapUI.uiMap[x][y].rc = FloatRect(Vector2(-30 + (30 + 114) * (x), -30 + (30 + 114) * y), Vector2(114, 114), PIVOT::LEFT_TOP);
 				_mapUI.uiMap[x][y].isConnect.resize(4);
 				vector<bool> isWall = _mapUI.stageMap[x][y]->getWall();
