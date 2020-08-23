@@ -879,9 +879,9 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("bow_arrow_draw", "resources/sounds/weapon/LongDistanceWeapon/bow_crossbow_arrow_draw_stretch1_03.wav", false, false);
 	SOUND_MANAGER->addSound("bow_attack", "resources/sounds/weapon/LongDistanceWeapon/etc-sound0034_Bow.wav", false, false);
 
-	CONFIG_MANAGER->init();
-	DATA_MANAGER->init();
 	TIME_MANAGER->init();
+	CONFIG_MANAGER->init();
+	DATA_MANAGER->init();	
 
 
 	// ¸ðµç ¾À SCENE_MANAGER¿¡ 

@@ -798,6 +798,9 @@
     <ClInclude Include="ShopUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
     </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -1390,6 +1393,9 @@
     </ClCompile>
     <ClCompile Include="ShopUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Dungreed\GameScene\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

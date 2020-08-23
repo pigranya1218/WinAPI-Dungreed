@@ -1,5 +1,6 @@
 #pragma once
 #include "CostumeManager.h"
+#include "ItemManager.h"
 
 struct tagLoadInfo
 {
@@ -28,6 +29,7 @@ private:
 	int _selectedDelete;
 
 	CostumeManager* _costumeMgr;
+	ItemManager*	_itemMgr;
 
 public:
 	void init(); // 로드 데이터 존재한다면 읽음
@@ -39,5 +41,8 @@ public:
 	void save(int slot, tagLoadInfo info) {} // 저장하는 함수
 
 	Costume* getCostume (COSTUME_TYPE type) const;
+
+	vector<Item*> getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count) const;
+	Item* getItem(int itemCode) const;
 };
 
