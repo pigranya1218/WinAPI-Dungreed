@@ -2,6 +2,7 @@
 #include "ObjectManager.h"
 #include "Stage.h"
 #include "BrokenObject.h"
+#include "TorchObject.h"
 
 void ObjectManager::init()
 {

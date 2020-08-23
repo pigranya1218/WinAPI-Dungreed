@@ -17,7 +17,6 @@ void StartRoom3::init()
 	
 
 	
-
 	_img = IMAGE_MANAGER->findImage("Floor1Door");
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());

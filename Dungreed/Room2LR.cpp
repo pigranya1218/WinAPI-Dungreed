@@ -25,12 +25,12 @@ void Room2LR::init()
 	else if(randBox%3==1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
 
-	_spawnChest.pos = Vector2(910, 400);
+	_spawnChest.pos = Vector2(980, 400);
 
 	//_respawnPosition[0] = Vector2(100, 450);
 	//_respawnPosition[2] = Vector2(1100, 450);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(960, 430), DIRECTION::LEFT);
-	_npcMgr->spawnNpc(NPC_TYPE::CHEST_BLUE, Vector2(500, 430), DIRECTION::LEFT);
+	//_npcMgr->spawnNpc(NPC_TYPE::CHEST_BLUE, Vector2(500, 430), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;
 }

@@ -202,6 +202,8 @@ void Player::init()
 	//ÃÖÃÊ¿¡ ÀåÂøÇÏ´Â ÄÚ½ºÆ¬
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 
+	_isDead = false;
+
 	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
@@ -212,9 +214,9 @@ void Player::init()
 	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
-	ShortSpear* testAcc1 = new ShortSpear;
+	/*ShortSpear* testAcc1 = new ShortSpear;
 	testAcc1->init();
-	_equippedWeapon[0] = testAcc1;
+	_equippedWeapon[0] = testAcc1;*/
 
 	Seeri* testAcc24 = new Seeri;
 	testAcc24->init();
@@ -229,10 +231,10 @@ void Player::init()
 	////testAcc3->init();
 	////_inventory[3] = testAcc3;
 
-	//
-	//ShortSword* testAcc4 = new ShortSword;
-	//testAcc4->init();
-	//_inventory[3] = testAcc4;
+	
+	ShortSword* testAcc4 = new ShortSword;
+	testAcc4->init();
+	_equippedWeapon[0] = testAcc4;
 
 
 	//MartialArtOfTiger* testAcc9 = new MartialArtOfTiger;
@@ -347,17 +349,17 @@ void Player::init()
 	//testWeapon6->init();
 	//_inventory[14] = testWeapon6;*/
 
-	//GatlingGun* testWeapon7 = new GatlingGun;
-	//testWeapon7->init();
-	//_inventory[3] = testWeapon7;
+	/*GatlingGun* testWeapon7 = new GatlingGun;
+	testWeapon7->init();
+	_inventory[3] = testWeapon7;*/
 
-	//MagicStick* testWeapon8 = new MagicStick;
+	MagicStick* testWeapon8 = new MagicStick;
+	testWeapon8->init();
+	_inventory[14] = testWeapon8;
+
+	//OakBow* testWeapon8 = new OakBow;
 	//testWeapon8->init();
 	//_inventory[14] = testWeapon8;
-
-	////OakBow* testWeapon8 = new OakBow;
-	////testWeapon8->init();
-	////_inventory[14] = testWeapon8;
 
 	///*SilverBullet* testAcc19 = new SilverBullet;
 	//testAcc19->init();
@@ -484,6 +486,7 @@ void Player::update(float const elapsedTime)
 		}
 		else if (_currJumpCount > 0)
 		{
+			SOUND_MANAGER->play("Player/Jump", 1);
 			_force.y = -_adjustStat.jumpPower;
 			_currJumpCount -= 1;
 		}
@@ -653,6 +656,14 @@ void Player::update(float const elapsedTime)
 	{
 		_currHitTime = max(0, _currHitTime - elapsedTime);
 	}
+
+	// »ç¸Á Ã³¸®
+	if (_currHp <= 0 && !_isDead)
+	{
+		SOUND_MANAGER->play("Player/Dead");
+		_isDead = true;
+	}
+	if(_isDead) _costume->setSprite(PLAYER_STATE::DIE, false);
 }
 
 void Player::render()

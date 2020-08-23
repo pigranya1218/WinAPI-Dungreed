@@ -1,6 +1,7 @@
 #include "StartRoom1.h"
 #include "StageManager.h"
 
+
 void StartRoom1::init()
 {
 	
@@ -26,10 +27,13 @@ void StartRoom1::init()
 	_objectMgr->spawnObject(0x0001, Vector2(430, 700));
 	_objectMgr->spawnObject(0x0002, Vector2(300, 700));
 
+
 	_npcMgr->spawnNpc(NPC_TYPE::ENTRANCE, Vector2(570, 642), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(870, 600), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;
+
+	
 }
 
 void StartRoom1::release()
@@ -44,6 +48,7 @@ void StartRoom1::update(float const elapsedTime)
 	
 	
 	_ani->frameUpdate(elapsedTime);
+	
 }
 
 void StartRoom1::render()

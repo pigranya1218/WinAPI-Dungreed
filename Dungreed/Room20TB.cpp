@@ -4,7 +4,7 @@ void Room20TB::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/Stage20_LB.map");
+	loadMap("room/Stage20_TB.map");
 
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 1100) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 1100) });
