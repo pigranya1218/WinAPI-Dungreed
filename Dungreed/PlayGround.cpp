@@ -391,8 +391,8 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
 	SOUND_MANAGER->addSound("Foodshop", "resources/sound/Ui/bgm/Foodshop.wav", true, true);
 	SOUND_MANAGER->addSound("Shop", "resources/sound/Ui/bgm/Shop.wav", true, true);
-	
-
+	SOUND_MANAGER->addSound("BossRoomBef", "resources/sound/Ui/bgm/ambience_prison.wav", true, true);
+	SOUND_MANAGER->addSound("Boss", "resources/sound/Ui/bgm/1.JailBoss.wav", true, true);
 
 	// ** OBJECT
 	// *** BROKEN

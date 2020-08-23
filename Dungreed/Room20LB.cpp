@@ -22,6 +22,7 @@ void Room20LB::init()
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 2100),2 });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 2100),2 });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(700, 2100),2 });
+
 	int randBox = RANDOM->getInt(10);
 	int boxPer = RANDOM->getInt(10);
 	if (boxPer % 5 == 1)_spawnChest.spawn = false;
@@ -32,7 +33,7 @@ void Room20LB::init()
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
 	_spawnChest.pos = Vector2(600, 2100);
 
-	_respawnPosition[3] = Vector2(400, 800);
+	//_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(350, 500));

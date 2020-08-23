@@ -52,7 +52,7 @@ void RestaurantRoom2LR::render()
 	int stageHeight = _tile[0].tileY * TILESIZE;
 
 	IMAGE_MANAGER->findImage("Tavern")->setScale(4);
-	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 580));
+	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 586));
 
 	_npcMgr->render();
 	_enemyMgr->render();
