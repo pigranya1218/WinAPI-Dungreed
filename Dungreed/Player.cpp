@@ -199,6 +199,8 @@ void Player::init()
 	_hand = new Punch;
 	_hand->init();
 
+	_isStep = false;
+
 	//최초에 장착하는 코스튬
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
 
@@ -455,10 +457,21 @@ void Player::update(float const elapsedTime)
 
 	//이동
 	Vector2 moveDir(0, 0);
-	
+	int i = 1;
 	if (!_gameScene->isUIActive() && 
 		(KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)) || KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_RIGHT)))) // 좌우 이동중
 	{
+		//이동 중 효과음
+		for (i; i < 5;)
+		{
+			if (!_isStep)
+			{
+				SOUND_MANAGER->play("Player/Step" + to_string(i), 1);
+				_isStep = true;
+			}
+			else break;
+		}
+
 		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::MOVE_LEFT)))
 		{
 			moveDir.x -= _adjustStat.moveSpeed * elapsedTime;
@@ -467,10 +480,21 @@ void Player::update(float const elapsedTime)
 		{
 			moveDir.x += _adjustStat.moveSpeed * elapsedTime;
 		}
+
+		// 효과음이 끝나면 stop
+		if (!SOUND_MANAGER->isPlaySound("Player/Step" + to_string(i)))
+		{
+			SOUND_MANAGER->stop("Player/Step" + to_string(i));
+			i += 1;
+			_isStep = false;
+		}
+
 		_costume->setSprite(PLAYER_STATE::MOVE, false);
 	}
 	else // 이동 안하는 중 
 	{
+		_isStep = false;
+		
 		_costume->setSprite(PLAYER_STATE::IDLE, false);
 	}
 

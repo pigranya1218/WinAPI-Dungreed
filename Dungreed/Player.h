@@ -35,6 +35,8 @@ private:
 	float	_walkEffectDelay = 0;
 
 	float	_currHitTime;			// 피격 타임
+
+	bool	_isStep;				// 스탭 효과음 처리
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 	
