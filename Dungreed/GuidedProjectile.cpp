@@ -279,7 +279,6 @@ void GuidedProjectile::render()
 		if (_mirageCount > 1)
 		{
 			_mirageCount -= 1;
-			_afterImg[0]->render(CAMERA->getRelativeV2(_miragePos), _renderSize);
 		}
 	}
 	
