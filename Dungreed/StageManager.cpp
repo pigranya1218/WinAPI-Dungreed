@@ -307,37 +307,37 @@ void StageManager::moveRoom(Vector2 moveDir)
 	{
 		SOUND_MANAGER->stop("Floor1_BGM");
 		SOUND_MANAGER->stop("Foodshop");
-		SOUND_MANAGER->play("Foodshop", 1.0f);
+		SOUND_MANAGER->play("Foodshop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::RESTAURANT)
 	{
 		SOUND_MANAGER->stop("Shop");
 		SOUND_MANAGER->stop("Foodshop");
-		SOUND_MANAGER->play("Foodshop", 1.0f);
+		SOUND_MANAGER->play("Foodshop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::NORMAL)
 	{
 		SOUND_MANAGER->stop("Foodshop");
 		SOUND_MANAGER->stop("Floor1_BGM");
-		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+		SOUND_MANAGER->play("Floor1_BGM", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::NORMAL)
 	{
 		SOUND_MANAGER->stop("Shop");
 		SOUND_MANAGER->stop("Floor1_BGM");
-		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+		SOUND_MANAGER->play("Floor1_BGM", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::SHOP)
 	{
 		SOUND_MANAGER->stop("Foodshop");
 		SOUND_MANAGER->stop("Shop");
-		SOUND_MANAGER->play("Shop", 1.0f);
+		SOUND_MANAGER->play("Shop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::NORMAL && _currStage->getRoomType() == ROOMTYPE::SHOP)
 	{
 		SOUND_MANAGER->stop("Floor1_BGM");
 		SOUND_MANAGER->stop("Shop");
-		SOUND_MANAGER->play("Shop", 1.0f);
+		SOUND_MANAGER->play("Shop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 }
 
@@ -358,37 +358,37 @@ void StageManager::moveRoomIndex(Vector2 index)
 	{
 		SOUND_MANAGER->stop("Floor1_BGM");
 		SOUND_MANAGER->stop("Foodshop");
-		SOUND_MANAGER->play("Foodshop", 1.0f);
+		SOUND_MANAGER->play("Foodshop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::RESTAURANT)
 	{
 		SOUND_MANAGER->stop("Shop");
 		SOUND_MANAGER->stop("Foodshop");
-		SOUND_MANAGER->play("Foodshop", 1.0f);
+		SOUND_MANAGER->play("Foodshop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::NORMAL)
 	{
 		SOUND_MANAGER->stop("Foodshop");
 		SOUND_MANAGER->stop("Floor1_BGM");
-		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+		SOUND_MANAGER->play("Floor1_BGM", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::SHOP && _currStage->getRoomType() == ROOMTYPE::NORMAL)
 	{
 		SOUND_MANAGER->stop("Shop");
 		SOUND_MANAGER->stop("Floor1_BGM");
-		SOUND_MANAGER->play("Floor1_BGM", 1.0f);
+		SOUND_MANAGER->play("Floor1_BGM", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::RESTAURANT && _currStage->getRoomType() == ROOMTYPE::SHOP)
 	{
 		SOUND_MANAGER->stop("Foodshop");
 		SOUND_MANAGER->stop("Shop");
-		SOUND_MANAGER->play("Shop", 1.0f);
+		SOUND_MANAGER->play("Shop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::NORMAL && _currStage->getRoomType() == ROOMTYPE::SHOP)
 	{
 		SOUND_MANAGER->stop("Floor1_BGM");
 		SOUND_MANAGER->stop("Shop");
-		SOUND_MANAGER->play("Shop", 1.0f);
+		SOUND_MANAGER->play("Shop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	}
 
 }
@@ -419,7 +419,7 @@ void StageManager::makeStage()
 		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
 
 		SOUND_MANAGER->stop("Floor1_BGM");
-		SOUND_MANAGER->play("Floor1_BGM",1.0f);
+		SOUND_MANAGER->play("Floor1_BGM", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 		break;
 	case STAGE_TYPE::DUNGEON_BOSS:
 		makeBossStage();

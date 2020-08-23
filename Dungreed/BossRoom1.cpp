@@ -65,7 +65,7 @@ void BossRoom1::update(float const elapsedTime)
 		{
 			SOUND_MANAGER->stop("BossRoomBef");
 			SOUND_MANAGER->stop("Boss");
-			SOUND_MANAGER->play("Boss", 1.0f);
+			SOUND_MANAGER->play("Boss", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 			_state = STAGE_STATE::START;
 			startEventScene();
 		}
@@ -105,7 +105,7 @@ void BossRoom1::update(float const elapsedTime)
 	{
 		SOUND_MANAGER->stop("Boss");
 		SOUND_MANAGER->stop("BossRoomBef");
-		SOUND_MANAGER->play("BossRoomBef", 1.0f);
+		SOUND_MANAGER->play("BossRoomBef", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 
 		for (int i = 0; i < 4; i++)
 		{
