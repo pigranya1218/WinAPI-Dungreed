@@ -1,5 +1,14 @@
 #pragma once
 #include "Projectile.h"
+
+struct tagShadow
+{
+	Vector2 pos;
+	float angleRadian;
+	float alpha;
+	Image* img;
+};
+
 class GuidedProjectile : public Projectile
 {
 private:
@@ -27,15 +36,14 @@ private:
 
 	Vector2		_enemyPos;			// 적몹 위치값
 	float		_length;			// 이펙트 길이 조절용 이미지 길이
-	float		_timeCount;
-	bool		_afterimage;
-	int			_countI;
+	float		_timeCount;			// 투사체 각도 조절용 카운트
+	bool		_afterimage;		// 잔상 효과 사용여부
 	float		_mirageCount;
 	int			_afterCount;
-	//vector<Image*> _afterImg;
-	Image*		_afterImg[10];
 	float		_collisionCount;
 	Vector2		_miragePos;
+	tagShadow	_shodow;
+	vector<tagShadow> _vShadow;
 public:
 	GuidedProjectile() {}
 	GuidedProjectile(const GuidedProjectile& source);
