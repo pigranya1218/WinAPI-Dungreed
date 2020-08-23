@@ -2,7 +2,7 @@
 
 void RestaurantRoom::init()
 {
-
+	
 
 	Stage::init();
 
