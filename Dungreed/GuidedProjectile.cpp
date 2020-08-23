@@ -96,6 +96,8 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 
 	if (_afterimage)
 	{
+		_alphaValue = 1.0f;
+		_alphaCount = 0;
 	}
 }
 
@@ -242,25 +244,27 @@ void GuidedProjectile::update(float elapsedTime)
 	}
 
 	// 잔상 사용시
-	/*if (_afterimage)
+	if (_afterimage)
 	{
+		_alphaCount += elapsedTime;
+		_shodow.img = _img;
+
+		_alphaValue =-_alphaCount;
+
 		_mirageCount += elapsedTime;
-		if (_mirageCount > 0.1)
+		if (_mirageCount > 1)
 		{
+			_alphaCount = 0;
 			_mirageCount -= 1;
-			float distance = 2.0f;
-			_shodow.angleRadian = PI - _angleRadian;
-			_shodow.pos.x = _position.x + cosf(_shodow.angleRadian) * distance;
-			_shodow.pos.y = _position.y + -sinf(_shodow.angleRadian) * distance;
-
-			_shodow.img = _img;
-
+			generateAfterImage(elapsedTime);
 			if (_useAni)
 			{
 				_shodow.frameX = _ani->getPlayIndex();
 			}
+			
 		}
-	}*/
+		
+	}
 }
 
 void GuidedProjectile::render()
@@ -280,9 +284,11 @@ void GuidedProjectile::render()
 		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 
-	/*if (_afterimage)
+	if (_afterimage)
 	{
 		_shodow.img->setScale(4);
+		_shodow.img->setAlpha(_alphaValue);
+
 		if (_useAni)
 		{
 			_shodow.img->frameRender(CAMERA->getRelativeV2(_shodow.pos), _shodow.frameX, 0);
@@ -291,7 +297,7 @@ void GuidedProjectile::render()
 		{
 			_shodow.img->render(CAMERA->getRelativeV2(_shodow.pos));
 		}
-	}*/
+	}
 	D2D_RENDERER->renderText(CAMERA->getRelativeX(_enemyPos.x), CAMERA->getRelativeY(_enemyPos.y - 50), to_wstring(_enemyPos.x) + to_wstring(_enemyPos.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 	D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 50), to_wstring(_position.x) + to_wstring(_position.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 
@@ -303,4 +309,12 @@ void GuidedProjectile::aniUpdate(float const elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
+}
+
+void GuidedProjectile::generateAfterImage(float elapsedTime)
+{
+	float distance = 2.0f;
+	_shodow.angleRadian = PI - _angleRadian;
+	_shodow.pos.x = _position.x + cosf(_shodow.angleRadian) * distance;
+	_shodow.pos.y = _position.y + -sinf(_shodow.angleRadian) * distance;
 }

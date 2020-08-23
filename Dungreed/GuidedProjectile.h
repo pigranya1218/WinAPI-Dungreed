@@ -42,6 +42,8 @@ private:
 	float		_mirageCount;
 	int			_afterCount;
 	float		_collisionCount;
+	float		_alphaCount;
+	float		_alphaValue;
 	tagShadow	_shodow;
 	vector<tagShadow> _vShadow;
 public:
@@ -57,4 +59,6 @@ public:
 
 	// 애니메이션 업데이트 하려고 만듬 
 	virtual void aniUpdate(float const elapsedTime);
+
+	void generateAfterImage(float elapsedTime);
 };
