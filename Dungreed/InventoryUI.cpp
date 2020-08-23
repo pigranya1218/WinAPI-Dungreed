@@ -428,6 +428,7 @@ void InventoryUI::update(float elapsedTime)
 		{
 			if (_equippedWeaponRc[i * 2].ptInRect(_ptMouse))
 			{
+				SOUND_MANAGER->play("Player/Inven/Equip", 1);
 				_player->unequipWeapon(i);
 				break;
 			}
@@ -438,6 +439,7 @@ void InventoryUI::update(float elapsedTime)
 		{
 			if (_equippedAccRc[i].ptInRect(_ptMouse))
 			{
+				SOUND_MANAGER->play("Player/Inven/Equip", 1);
 				_player->unequipAcc(i);
 				break;
 			}
@@ -449,6 +451,7 @@ void InventoryUI::update(float elapsedTime)
 		{
 			if (_invenRc[i].ptInRect(_ptMouse))
 			{
+				SOUND_MANAGER->play("Player/Inven/Equip", 1);
 				_player->equipItem(i);
 				break;
 			}
