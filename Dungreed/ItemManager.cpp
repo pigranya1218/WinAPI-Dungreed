@@ -33,7 +33,6 @@
 #include "MartialArtOfTiger.h"
 #include "PickaxeRed.h"
 #include "PowerKatana.h"
-#include "Punch.h"
 #include "QuarterStaffBig.h"
 #include "ShortSpear.h"
 #include "ShortSword.h"
@@ -155,10 +154,6 @@ void ItemManager::init()
 	Item* powerKatana = new PowerKatana;
 	powerKatana->init();
 	_itemMap.insert(pair<int, Item*>(powerKatana->getItemCode(), powerKatana));
-
-	Item* punch = new Punch;
-	punch->init();
-	_itemMap.insert(pair<int, Item*>(punch->getItemCode(), punch));
 
 	Item* quarterStaffBig = new QuarterStaffBig;
 	quarterStaffBig->init();
