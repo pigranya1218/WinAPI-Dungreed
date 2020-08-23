@@ -851,6 +851,8 @@ HRESULT playGround::init()
 	// ** ENEMY
 	SOUND_MANAGER->addSound("Enemy/Die"		, "resources/sound/enemy/public/MonsterDie.wav"	, false, false);	// 사망(공용)
 	SOUND_MANAGER->addSound("Enemy/GetHit"	, "resources/sound/enemy/public/Hit_Monster.wav", false, false);	// 피격(공용)
+	SOUND_MANAGER->addSound("Enemy/Spawn", "resources/sound/enemy/public/SpawnMonster.wav", false, false);	// 피격(공용)
+
 
 	// *  박쥐
 	SOUND_MANAGER->addSound("Bat/Attack"		, "resources/sound/enemy/bat/monster-sound2_bat.wav"				, false, false);	// 작은 박쥐 공격
@@ -878,7 +880,6 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Belial/Bullet"	, "resources/sound/enemy/belial/random5.wav"			, false, false);	// 탄막 발사
 	SOUND_MANAGER->addSound("Belial/Sword"	, "resources/sound/enemy/belial/slimeball.wav"			, false, false);	// 검 소환
 
-	//*	니플헤임
 
 	// * 무기
 	// ** 원거리

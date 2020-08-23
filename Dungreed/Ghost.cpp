@@ -13,7 +13,7 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 800;
 
 	// 타격 사이즈 초기화
 	_size = _img->getFrameSize() * _scale;
@@ -43,7 +43,7 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_active = true;
 	_enterCount = 0;
 	// 체력 초기화
-	_curHp = _maxHp = 5;
+	_curHp = _maxHp = 10;
 
 	// 에너미 타입변수 초기화
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::GHOST);
