@@ -5,6 +5,8 @@
 
 void Stage::init()
 {
+	_state = STAGE_STATE::IDLE;
+
 	_objectMgr = new ObjectManager;
 	_objectMgr->setStage(this);
 	_objectMgr->setPlayer(_player);
@@ -41,6 +43,10 @@ void Stage::enter(int enterType)
 	}
 	_isVisited = true;
 	_stageManager->setShowPlayer(true);
+
+	int stageWidth = _tile[0].tileX * TILESIZE;
+	int stageHeight = _tile[0].tileY * TILESIZE;
+	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
 }
 
 void Stage::release()
@@ -64,10 +70,79 @@ void Stage::update(float const elaspedTime)
 
 	int stageWidth = _tile[0].tileX * TILESIZE;
 	int stageHeight = _tile[0].tileY * TILESIZE;
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, stageWidth - WINSIZEX, stageHeight - WINSIZEY);
 	Vector2 playerPos = _stageManager->getPlayerPos();
 
 	CAMERA->setXY(Vector2(round(playerPos.x), round(playerPos.y)));
+
+	switch (_state)
+	{
+	case STAGE_STATE::IDLE:
+	{
+		if (_spawnEnemies.size() > 0)
+		{
+			_state = STAGE_STATE::START;
+			_spawnDelay = 0;
+			_spawnIndex = 0;
+			_spawnPhase = 1;
+		}
+		else
+		{
+			_state = STAGE_STATE::FINISH;
+		}
+	}
+	break;
+	case STAGE_STATE::START:
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(false);
+			}
+		}
+
+		_spawnDelay -= elaspedTime;
+		if (_spawnDelay <= 0)
+		{
+			_spawnDelay = 1;
+			if (_spawnIndex < _spawnEnemies.size())
+			{
+				if (_spawnPhase == _spawnEnemies[_spawnIndex].phase)
+				{
+					_enemyMgr->spawnEnemy(_spawnEnemies[_spawnIndex].type, _spawnEnemies[_spawnIndex].pos, true);
+					_spawnIndex++;
+				}
+				else
+				{
+					if (_enemyMgr->getEnemyCount() == 0)
+					{
+						_spawnPhase++;
+					}
+				}
+			}
+		}
+		if (_spawnIndex >= _spawnEnemies.size() && _enemyMgr->getEnemyCount() == 0)
+		{
+			_state = STAGE_STATE::FINISH;
+			if (_spawnChest.spawn)
+			{
+				_npcMgr->spawnNpc(_spawnChest.type, _spawnChest.pos, DIRECTION::LEFT);
+			}
+		}
+	}
+	break;
+	case STAGE_STATE::FINISH:
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (_doors[i] != nullptr)
+			{
+				_doors[i]->setOpen(true);
+			}
+		}
+	}
+	break;
+	}
 
 	if (KEY_MANAGER->isOnceKeyDown('L'))
 	{
@@ -88,6 +163,7 @@ void Stage::update(float const elaspedTime)
 
 void Stage::render()
 {
+	D2D_RENDERER->fillRectangle(FloatRect(0, 0, TILESIZE * 30, TILESIZE * 20), 51, 49, 67, 1);
 	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
 	{
 		if (_tile[i].tileFrameX[0] != -1)
@@ -102,7 +178,7 @@ void Stage::render()
 		}
 	}
 
-	for (int i = 0; i < _collisionGroundRects.size(); i++)
+	/*for (int i = 0; i < _collisionGroundRects.size(); i++)
 	{
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_collisionGroundRects[i]), D2D1::ColorF::Enum::Red, 1, 1);
 	}
@@ -115,7 +191,7 @@ void Stage::render()
 	for (int i = 0; i < _collisionPlatforms.size(); i++)
 	{
 		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
-	}
+	}*/
 
 	_npcMgr->render();
 	_enemyMgr->render();
@@ -611,5 +687,12 @@ void Stage::setShowPlayer(bool showPlayer)
 	_stageManager->setShowPlayer(showPlayer);
 }
 
+void Stage::activeBossUI(bool active)
+{
+	_uiManager->showBossHP(active);
+}
 
-
+void Stage::setBossUIHp(int maxHp, int currHp)
+{
+	_uiManager->setBossHP(maxHp, currHp);
+}

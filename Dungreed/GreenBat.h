@@ -16,8 +16,7 @@ private:
 	int _maxBullet;           // 최대 총알 갯수
 	int _currBullet;          // 현재 총알 갯수
 	float _baseReloadDelay;   // 재장전 쿨타임
-	float _currReloadDelay;   // 남은 재장전 쿨타임
-	bool _drawEffect;         // 이번 render 함수에서 이펙트를 시작할 것인지 판단
+	float _currReloadDelay;   // 남은 재장전 쿨타임	
 public:
 	virtual void init();
 	virtual void release();

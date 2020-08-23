@@ -130,6 +130,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("MAIN_SCENE/BIRD", L"resources/images/mainScene/bird.png", 8, 1);
 
 	// * STAGE SCENE
+	// ** PLAYER
+	IMAGE_MANAGER->addFrameImage("PLAYER/DASH_DUST", L"resources/images/Effect/Dash/DustEffect.png", 6, 1);
+	EFFECT_MANAGER->addEffect("PLAYER/DASH_DUST_EFFECT", "PLAYER/DASH_DUST", 30, 10);
 	// ** UI
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BG", L"resources/images/gameScene/ui/PlayerLifeBack.png");
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_FRAME", L"resources/images/gameScene/ui/PlayerLifeBase 1.png");
@@ -300,7 +303,17 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/ABILITY/ICON_GREED3_DISABLE", L"resources/images/gameScene/ui/ability/icon/Greed3_disable.png");
 
 	IMAGE_MANAGER->addFrameImage("UI/ABILITY/CLICK_EFFECT", L"resources/images/gameScene/ui/ability/click/ClickEffect.png", 12, 1);
-	EFFECT_MANAGER->addEffect("UI/ABILITY/EFFECT_click", "UI/ABILITY/CLICK_EFFECT", 30, 10);
+
+	// *** SHOP
+	IMAGE_MANAGER->addImage("UI/SHOP/BASE", L"resources/images/gameScene/ui/shop/DungeonShopBase.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/ITEM_BASE", L"resources/images/gameScene/ui/shop/shopItemBase.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/ITEM_BASE_SELECTED", L"resources/images/gameScene/ui/shop/shopItemBase_selected.png");
+	IMAGE_MANAGER->addImage("UI/SHOP/GOLD", L"resources/images/gameScene/ui/shop/gold.png");
+
+	// *** BOSS HP
+	IMAGE_MANAGER->addImage("UI/BOSS/HP_FRAME", L"resources/images/gameScene/ui/BossLifeBase.png");
+	IMAGE_MANAGER->addImage("UI/BOSS/HP_BG", L"resources/images/gameScene/ui/BossLifeBack.png");
+	IMAGE_MANAGER->addImage("UI/BOSS/HP_MARK", L"resources/images/gameScene/ui/BossSkellPortrait.png");
 
 	// *** MAP
 	IMAGE_MANAGER->addImage("UI/MAP/HEADER", L"resources/images/gameScene/ui/map/MapBase 1_0.png");
@@ -315,10 +328,14 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_ENTRANCE", L"resources/images/gameScene/ui/map/Enterance.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_CHEST", L"resources/images/gameScene/ui/map/Chest.png");
 	IMAGE_MANAGER->addImage("UI/MAP/ICON_NPC", L"resources/images/gameScene/ui/map/MiniMapNPC.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_ABILITY", L"resources/images/gameScene/ui/map/Icon_Commander.png");
+	IMAGE_MANAGER->addImage("UI/MAP/ICON_COSTUME", L"resources/images/gameScene/ui/map/Icon_Boutique.png");
 
 	// ** NPC
 	IMAGE_MANAGER->addFrameImage("NPC_RESTAURANT", L"resources/images/gameScene/npc/restaurant.png", 6, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_SHOP", L"resources/images/gameScene/npc/shop.png", 4, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_ABILITY", L"resources/images/gameScene/npc/Ability.png", 6, 1);
+	IMAGE_MANAGER->addFrameImage("NPC_COSTUME", L"resources/images/gameScene/npc/costume.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_IDLE", L"resources/images/gameScene/npc/gate_idle.png", 9, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_GATE_EAT", L"resources/images/gameScene/npc/gate_eat.png", 4, 1);
 	IMAGE_MANAGER->addFrameImage("NPC_ENTRANCE", L"resources/images/gameScene/npc/Door1.png", 10, 1);
@@ -371,6 +388,10 @@ HRESULT playGround::init()
 	
 	SOUND_MANAGER->addSound("Floor1_BGM", "resources/sound/Ui/bgm/1.JailField.wav", true, true);
 	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
+	SOUND_MANAGER->addSound("Foodshop", "resources/sound/Ui/bgm/Foodshop.wav", true, true);
+	SOUND_MANAGER->addSound("Shop", "resources/sound/Ui/bgm/Shop.wav", true, true);
+	
+
 
 	// ** OBJECT
 	// *** BROKEN
@@ -801,7 +822,6 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Niflheim/Spear"	, L"resources/images/boss/Niflheim/spear.png"	, 13, 1);	// 니플헤임 얼음창
 
 
-	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
 
 	//사운드
 
@@ -859,7 +879,12 @@ HRESULT playGround::init()
 
 	//*	니플헤임
 
-
+	// * 무기
+	// ** 원거리
+	SOUND_MANAGER->addSound("GatlingFire", "resources/sounds/weapon/LongDistanceWeapon/GatlingFire.wav", false, false);
+	SOUND_MANAGER->addSound("GatlingWarmUp", "resources/sounds/weapon/LongDistanceWeapon/GatlingWarmUp.wav", false, false);
+	SOUND_MANAGER->addSound("bow_arrow_draw", "resources/sounds/weapon/LongDistanceWeapon/bow_crossbow_arrow_draw_stretch1_03.wav", false, false);
+	SOUND_MANAGER->addSound("bow_attack", "resources/sounds/weapon/LongDistanceWeapon/etc-sound0034_Bow.wav", false, false);
 
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();
@@ -872,7 +897,7 @@ HRESULT playGround::init()
 	SCENE_MANAGER->addScene("MapTool", new MapToolScene);
 	SCENE_MANAGER->addScene("STAGE_MAKE", new MazeScene);
 	
-	SCENE_MANAGER->changeScene("GAME");	
+	SCENE_MANAGER->changeScene("GAME");		
 	
 	return S_OK;
 }

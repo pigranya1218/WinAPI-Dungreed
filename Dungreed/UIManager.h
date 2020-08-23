@@ -5,6 +5,7 @@
 #include "RestaurantUI.h"
 #include "DialogueUI.h"
 #include "AbilityUI.h"
+#include "ShopUI.h"
 #include "DamageInfo.h"
 #include "LinearFunc.h"
 #include "DoorObject.h"
@@ -17,6 +18,7 @@ class EnemyManager;
 class NpcManager;
 class ObjectManager;
 class Stage;
+
 
 class UIManager
 {
@@ -88,6 +90,18 @@ private:
 		Vector2 pos; // 그릴 위치
 	};
 
+	struct tagBossHpUI
+	{
+		bool active;
+		Image* bossHpFrameImg;
+		Image* bossHpBgImg;
+		Image* bossMark;
+		float maxHP;
+		float currHp;
+		FloatRect hpBg; // hp바 배경
+		FloatRect hpBar; // hp바 게이지
+	};
+
 	struct tagMiniMap // 미니맵
 	{
 		vector<FloatRect> collisionRect; // 미니맵에 그려질 땅
@@ -154,6 +168,8 @@ private:
 	tagMiniMap _miniMapUI; // 미니맵 UI
 	tagMap _mapUI; // 맵 UI
 
+	tagBossHpUI _bossUI;
+
 	vector<tagDamageUI> _damageUI; // 대미지 표기 숫자 UI
 	vector<tagEnemyHpUI> _enemyHpUI; // 적 체력바 UI
 
@@ -163,6 +179,7 @@ private:
 	CostumeUI _costumeUI;
 	RestaurantUI _restaurantUI;
 	AbilityUI _abilityUI;
+	ShopUI _shopUI;
 
 public:
 	void setGameScene(GameScene* gameScene) { _gameScene = gameScene; }
@@ -186,7 +203,11 @@ public:
 	void showMap(GateNpc* gate, bool isShow) { _mapUI.isShow = isShow; _mapUI.gate = gate; }
 
 	void showRestaurant() { _restaurantUI.setActive(true); }
-	void showShop() {  }
+	void showShop() { _shopUI.setActive(true); }
 	void showAbility() { _abilityUI.setActive(true); }
+	void showCostume() { _costumeUI.setActive(true); }
+
+	void showBossHP(bool active) { _bossUI.active = active; }
+	void setBossHP(int maxHp, int currHp) { _bossUI.maxHP = maxHp; _bossUI.currHp = currHp; }
 };
 

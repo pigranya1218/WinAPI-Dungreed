@@ -100,7 +100,8 @@ void GameScene::render()
 		isProcessed[static_cast<int>(_events[i]->getType())] = true;
 		_events[i]->render();
 	}
-	
+
+	CAMERA->render();
 }
 
 

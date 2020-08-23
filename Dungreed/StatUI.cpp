@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iomanip>
 
+
+
 void StatUI::init()
 {
 	_isActive = false;
@@ -130,5 +132,10 @@ void StatUI::renderStatInfo(Vector2 pos, STAT_TYPE type)
 		RGB(255, 238, 184), 40, textRc.getWidth(), 40, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 	D2D_RENDERER->renderTextField(textRc.left + 5, textRc.top + 55, TTYONE_UTIL::stringTOwsting(PlayerStat::getStatInfo(type)),
 		RGB(255, 255, 255), 30, textRc.getWidth(), 90, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+}
+
+void StatUI::setEatFoods(Food food)
+{
+	_foods.push_back(food);
 }
 

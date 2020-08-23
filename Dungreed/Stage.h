@@ -19,12 +19,41 @@ struct tagShowNpc
 	NPC_TYPE type;
 };
 
+enum class STAGE_STATE : int
+{
+	IDLE = 0, // 대기 상태
+	START, // 몬스터 소환하기
+	FINISH, // 끝난 상태
+	END
+};
+
+struct tagEnemySpawn // 적의 소환 위치
+{
+	ENEMY_TYPE type;
+	Vector2 pos;
+	int phase = 1;
+};
+
+struct tagChest // 보물상자 소환
+{
+	bool spawn = false; // 보물상자 소환 여부
+	NPC_TYPE type;
+	Vector2 pos;
+};
+
 class Stage
 {
 protected:
 	StageManager* _stageManager;
 	UIManager* _uiManager;
 	Player* _player;
+
+	STAGE_STATE _state;
+	vector<tagEnemySpawn> _spawnEnemies;
+	tagChest _spawnChest;
+	float _spawnDelay;
+	int _spawnIndex;
+	int _spawnPhase;
 
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	
@@ -46,6 +75,11 @@ protected:
 	vector<bool> _isWall;
 	vector<Vector2> _respawnPosition; // 플레이어가 리스폰될 위치
 	vector<DoorObject*> _doors;
+
+	
+
+
+	Synthesize(ROOMTYPE, _roomType, RoomType)
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
@@ -98,4 +132,7 @@ public:
 	void moveToIndex(Vector2 index);
 	void nextStage();
 	void setShowPlayer(bool showPlayer);
+
+	void activeBossUI(bool active);
+	void setBossUIHp(int maxHp, int currHp);
 };

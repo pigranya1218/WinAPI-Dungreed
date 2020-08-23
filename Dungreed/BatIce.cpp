@@ -40,7 +40,7 @@ void BatIce::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_active = true;
 
 	_curHp = _maxHp = 30;
-	_PlayCount = 0;
+	
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_ICE);
 }
 
@@ -73,6 +73,9 @@ void BatIce::update(float const timeElapsed)
 		{
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::MOVE);
 			}
@@ -93,7 +96,7 @@ void BatIce::update(float const timeElapsed)
 		{
 			// 이동
 			moveDir.x += cosf(_moving.angle) * (timeElapsed * _moving.force.x);
-			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);			
+			moveDir.y -= sinf(_moving.angle) * (timeElapsed * _moving.force.x);	
 
 			// 일정 주기로 공격
 			if (_isDetect)
@@ -120,21 +123,16 @@ void BatIce::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-
-			if (_ani->getPlayIndex() == 5)
+			if (_ani->getPlayIndex() == 5 && !_shooting.bullets.empty())
 			{
-				_PlayCount++;
-				if (_PlayCount == 1)
-				{
-					SOUND_MANAGER->stop("Bat/Attack");
-					SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-				}
+				SOUND_MANAGER->stop("Bat/Attack");
+				SOUND_MANAGER->play("Bat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				_shooting.fireBullet(_myEnemyType, _enemyManager);
 			}
 			if (!_ani->isPlay())
 			{
 				// 공격 완료 후 IDLE 상태로 변경
-				_PlayCount = 0;
 				setState(ENEMY_STATE::IDLE);
 			}
 		}
@@ -151,8 +149,7 @@ void BatIce::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -210,6 +207,10 @@ void BatIce::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Enemy/Spawn");
+			SOUND_MANAGER->stop("Bat/Die");
+			SOUND_MANAGER->play("Bat/Die", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 			_active = false;
 		}
 		break;

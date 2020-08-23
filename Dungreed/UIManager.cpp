@@ -12,6 +12,7 @@ void UIManager::setPlayer(Player * player)
 	_costumeUI.setPlayer(player);
 	_restaurantUI.setPlayer(player);
 	_abilityUI.setPlayer(player);
+	_shopUI.setPlayer(player);
 }
 
 void UIManager::init()
@@ -91,6 +92,13 @@ void UIManager::init()
 		_mapUI.infos[i].textRc = FloatRect(Vector2(390, 650 + 36 * i), Vector2(300, 40), PIVOT::CENTER);
 	}
 
+	_bossUI.active = false;
+	_bossUI.bossHpFrameImg = IMAGE_MANAGER->findImage("UI/BOSS/HP_FRAME");
+	_bossUI.bossHpBgImg = IMAGE_MANAGER->findImage("UI/BOSS/HP_BG");
+	_bossUI.bossMark = IMAGE_MANAGER->findImage("UI/BOSS/HP_MARK");
+	_bossUI.hpBar = FloatRect(Vector2(845, WINSIZEY - 50), Vector2(490, 40), PIVOT::CENTER);
+	_bossUI.hpBg = FloatRect(Vector2(WINSIZEX / 2, WINSIZEY - 50), Vector2(600, 64), PIVOT::CENTER);
+
 	// DIALOGUE UI
 	_dialogueUI.init();
 
@@ -108,6 +116,9 @@ void UIManager::init()
 
 	// ABILITY UI
 	_abilityUI.init();
+
+	// SHOP UI
+	_shopUI.init();
 }
 
 void UIManager::release()
@@ -199,7 +210,7 @@ void UIManager::update(float const elapsedTime)
 				for (int y = 0; y < 4; y++)
 				{
 					if (_mapUI.currIndex.x == x && _mapUI.currIndex.y == y) continue;
-					if (_mapUI.uiMap[x][y].exist)
+					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
@@ -242,6 +253,7 @@ void UIManager::update(float const elapsedTime)
 	{
 		_statUI.setActive(!_statUI.isActive());
 	}
+	
 	// Boutique(CostumeUI) Open
 	if (KEY_MANAGER->isOnceKeyDown(VK_F1))
 	{
@@ -256,6 +268,11 @@ void UIManager::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(VK_F3))
 	{
 		_abilityUI.setActive(!_abilityUI.isActive());
+	}
+	// SHOP Open
+	if (KEY_MANAGER->isOnceKeyDown(VK_F4))
+	{
+		_shopUI.setActive(!_shopUI.isActive());
 	}
 
 	bool isClose = false;
@@ -346,6 +363,19 @@ void UIManager::update(float const elapsedTime)
 		}
 	}
 
+	if (_shopUI.isActive())
+	{
+		if (isClose)
+		{
+			_shopUI.setActive(false);
+			isClose = false;
+		}
+		else
+		{
+			_shopUI.update(elapsedTime);
+		}
+	}
+
 	_isActive = false;
 	_isActive |= _mapUI.isShow;
 	_isActive |= _dialogueUI.isActive();
@@ -354,6 +384,7 @@ void UIManager::update(float const elapsedTime)
 	_isActive |= _costumeUI.isActive();
 	_isActive |= _restaurantUI.isActive();
 	_isActive |= _abilityUI.isActive();
+	_isActive |= _shopUI.isActive();
 }
 
 void UIManager::render()
@@ -658,7 +689,7 @@ void UIManager::render()
 			{
 				for (int y = 0; y < 4; y++)
 				{
-					if (_mapUI.uiMap[x][y].exist)
+					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
@@ -688,16 +719,16 @@ void UIManager::render()
 			{
 				for (int y = 0; y < 4; y++)
 				{
-					if (_mapUI.uiMap[x][y].exist)
+					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
-						if (_mapUI.uiMap[x][y].isConnect[2]) // 우
+						if (_mapUI.uiMap[x][y].isConnect[2] && _mapUI.uiMap[x + 1][y].visible) // 우
 						{
 							FloatRect rc = FloatRect(centerX + offsetX + 48, centerY + offsetY - 3, centerX + offsetX + 48 + 30 + 18, centerY + offsetY + 3);
 							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
 						}
-						if (_mapUI.uiMap[x][y].isConnect[3]) // 하
+						if (_mapUI.uiMap[x][y].isConnect[3] && _mapUI.uiMap[x][y + 1].visible) // 하
 						{
 							FloatRect rc = FloatRect(centerX + offsetX - 3, centerY + offsetY + 48, centerX + offsetX + 3, centerY + offsetY + 48 + 30 + 18);
 							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
@@ -745,6 +776,17 @@ void UIManager::render()
 			}
 		}
 
+		// BOSS HP UI
+		if (_bossUI.active)
+		{
+			_bossUI.bossHpBgImg->render(_bossUI.hpBg.getCenter(), _bossUI.hpBg.getSize());
+			_bossUI.bossMark->render(Vector2(554, WINSIZEY - 50), Vector2(68, 40));
+			FloatRect currRc = _bossUI.hpBar;
+			float ratio = static_cast<float>(_bossUI.currHp) / _bossUI.maxHP;
+			currRc.right = currRc.left + ratio * _bossUI.hpBar.getSize().x;
+			D2D_RENDERER->fillRectangle(currRc, 132, 46, 37, 1);
+			_bossUI.bossHpFrameImg->render(_bossUI.hpBg.getCenter(), _bossUI.hpBg.getSize());
+		}
 
 		// Dialogue UI
 		if (_dialogueUI.isActive())
@@ -780,6 +822,12 @@ void UIManager::render()
 		if (_abilityUI.isActive())
 		{
 			_abilityUI.render();
+		}
+
+		// ShopUI
+		if (_shopUI.isActive())
+		{
+			_shopUI.render();
 		}
 	}
 }

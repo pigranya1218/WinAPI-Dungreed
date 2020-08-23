@@ -14,7 +14,7 @@ void miniEarth::init()
 	//악세서리 가격
 	_price = 600;
 
-
+	_angle = PI / 4;
 	_x = _y = 0;
 	_ani = new Animation;
 	_ani->init(_img->getWidth(), _img->getHeight(), _img->getMaxFrameX(), _img->getMaxFrameY());

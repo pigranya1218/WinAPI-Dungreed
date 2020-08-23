@@ -178,6 +178,9 @@
     <Filter Include="Dungreed\GameScene\UI">
       <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2DGameFramework\Manager\CameraManager\Event">
+      <UniqueIdentifier>{c42e6d8d-39f1-4463-815e-773d112f527e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -197,12 +200,6 @@
     </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraEvent.h">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraShakeEvent.h">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -792,6 +789,24 @@
     <ClInclude Include="AbilityNpc.h">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClInclude>
+    <ClInclude Include="CostumeNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraMoveEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraShakeEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFillEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
@@ -799,12 +814,6 @@
     </ClCompile>
     <ClCompile Include="GameNode.cpp">
       <Filter>2DGameFramework\GameNode</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraShakeEvent.cpp">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -1378,6 +1387,24 @@
     </ClCompile>
     <ClCompile Include="AbilityNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="CostumeNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraMoveEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraShakeEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFillEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

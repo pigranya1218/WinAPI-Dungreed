@@ -50,7 +50,7 @@ void SkelSmallBow::init(const Vector2 & pos, DIRECTION direction, bool spawnEffe
 	_shooting.attackInit(3, 2, 10);
 
 	// 플레이어 감지 변수 초기화
-	_isDetect = _attacking = 0;
+	_isDetect = _attackEnd = 0;
 
 	_active = true;
 
@@ -82,6 +82,9 @@ void SkelSmallBow::update(float const timeElapsed)
 		{
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -97,44 +100,41 @@ void SkelSmallBow::update(float const timeElapsed)
 				if (_attack.angle > 360) _attack.angle -= 360;
 
 				if (_attack.update(timeElapsed))
-				{					
+				{
 					setState(ENEMY_STATE::ATTACK);
-					_attacking = true;
+					_attackEnd = false;
 				}
 			}
 		}
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			if (_weaponAni->getPlayIndex() == 3 && _attacking)
+			if (_weaponAni->getPlayIndex() == 3 && !_attackEnd)
 			{
 				if (_weaponAni->isPlay())
 				{
-					SOUND_MANAGER->stop("Skell/Arrow/Ready");
-					SOUND_MANAGER->stop("Skell/Arrow/Attack");
-					SOUND_MANAGER->play("Skell/Arrow/Ready", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_weaponAni->pause();
 				}
-				if (_shooting.delayUpdate(timeElapsed))
+				if (_shooting.delayUpdate(timeElapsed) && !_weaponAni->isPlay())
 				{
-					SOUND_MANAGER->stop("Skell/Arrow/Ready");
+					SOUND_MANAGER->stop("Skell/Arrow/Attack");
 					SOUND_MANAGER->play("Skell/Arrow/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 					_weaponAni->resume();
 					_shooting.createBullet(_position, _attack.angle);
 					_shooting.fireBullet(_myEnemyType, _enemyManager);
-					_attacking = false;
+
+					_attackEnd = true;
 				}
 			}
-			if (!_weaponAni->isPlay() && !_attacking)
+			if (!_weaponAni->isPlay() && _attackEnd)
 			{
 				setState(ENEMY_STATE::IDLE);
 			}
 		}
 		break;
 		case ENEMY_STATE::DIE:
-		{
-			SOUND_MANAGER->stop("Skell/Arrow/Ready");
-			SOUND_MANAGER->stop("Skell/Arrow/Attack");
+		{			
 		}
 		break;
 	}	
@@ -255,10 +255,16 @@ void SkelSmallBow::setState(ENEMY_STATE state)
 
 			_img = IMAGE_MANAGER->findImage(_imageName);
 			_weaponAni->start();
+
+			SOUND_MANAGER->stop("Skell/Arrow/Ready");
+			SOUND_MANAGER->play("Skell/Arrow/Ready", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		}
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("Skell/Arrow/Ready");
+			SOUND_MANAGER->stop("Skell/Arrow/Attack");
+
 			_active = false;
 		}
 		break;

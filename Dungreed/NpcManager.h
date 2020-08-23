@@ -37,5 +37,7 @@ public:
 	void setShowPlayer(bool showPlayer);
 	void showRestaurantUI();
 	void showShopUI();
+	void showAbilityUI();
+	void showCostumeUI();
 };
 
