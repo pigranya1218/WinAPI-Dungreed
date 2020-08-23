@@ -175,7 +175,6 @@ void Lumber::backRender(Player* player)
 			EFFECT_MANAGER->play("EFFECT_SWING", effectPos, Vector2(120, 180), degree);
 		}
 	}
-	_attackDebug.render(true);
 }
 
 void Lumber::frontRender(Player* player)
@@ -280,7 +279,6 @@ void Lumber::frontRender(Player* player)
 			EFFECT_MANAGER->play("EFFECT_SWING", effectPos, Vector2(120, 180), degree);
 		}
 	}
-	_attackDebug.render(true);
 }
 
 
@@ -288,6 +286,8 @@ void Lumber::frontRender(Player* player)
 void Lumber::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	CAMERA->pushShakeEvent(10, 0.1f);
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();

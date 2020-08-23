@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CameraManager.h"
 #include "CameraShakeEvent.h"
+#include "CameraMoveEvent.h"
+#include "CameraFillEvent.h"
 
 CameraManager::CameraManager()
 {
@@ -47,6 +49,23 @@ void CameraManager::processEvent(float elapsedTime)
 	}
 }
 
+void CameraManager::render()
+{
+	vector<bool> dupEvent(static_cast<int>(CAMERA_EVENT_TYPE::END), false);
+	for (int i = 0; i < _eventList.size();)
+	{
+		if (dupEvent[static_cast<int>(_eventList[i]->getType())])
+		{
+			i++;
+		}
+		else
+		{
+			dupEvent[static_cast<int>(_eventList[i]->getType())] = true;
+			_eventList[i]->render();
+		}
+	}
+}
+
 void CameraManager::pushShakeEvent(float power, float remainTime)
 {
 	CameraShakeEvent* event = new CameraShakeEvent(power, remainTime);
@@ -70,6 +89,20 @@ void CameraManager::pushShakeEvent(float power, float remainTime)
 		_eventList.push_back(event);
 	}
 	
+}
+
+void CameraManager::pushMoveEvnet(Vector2 targetPos, float moveTime, float waitTime)
+{
+	CameraMoveEvent* event = new CameraMoveEvent(targetPos, moveTime, waitTime);
+
+	_eventList.push_back(event);
+}
+
+void CameraManager::pushFillEvnet(vector<FloatRect> fillRects, float waitTime, float enterTime, float displayTime, float closeTime, COLORREF color)
+{
+	CameraFillEvent* event = new CameraFillEvent(fillRects, waitTime, enterTime, displayTime, closeTime, color);
+
+	_eventList.push_back(event);
 }
 
 void CameraManager::setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT)
@@ -342,4 +375,5 @@ void CameraManager::aniRender(Image* img, Vector2 center, Vector2 size, Animatio
 	Vector2 drawPos = getRelativeV2(center);
 	img->aniRender(drawPos, size, ani, bisymmetry);
 }
+
 

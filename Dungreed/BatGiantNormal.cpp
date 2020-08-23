@@ -37,7 +37,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEf
 
 	_active = true;
 
-	_curHp = _maxHp =40;
+	_curHp = _maxHp = 40;
 
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::BAT_GIANT_NORMAL);
 }
@@ -63,6 +63,9 @@ void BatGiantNormal::update(float const timeElapsed)
 		{
 			if (!_ani->isPlay())
 			{
+				SOUND_MANAGER->stop("Enemy/Spawn");
+				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -111,13 +114,17 @@ void BatGiantNormal::update(float const timeElapsed)
 		break;
 		case ENEMY_STATE::ATTACK:
 		{
-			if (_ani->getPlayIndex() >= 4)
-			{
+			if (_ani->getPlayIndex() >= 1)
+			{				
 				if (_shooting.delayUpdate(timeElapsed))
 				{
-					_shooting.fireBullet(_myEnemyType, _enemyManager, 3);
-					SOUND_MANAGER->stop("GiantBat/Attack");
-					SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+					if (_shooting.bullets.size() == 9)
+					{
+						SOUND_MANAGER->stop("GiantBat/Attack");
+						SOUND_MANAGER->play("GiantBat/Attack", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+					}
+
+					_shooting.fireBullet(_myEnemyType, _enemyManager, 3);					
 				}				
 			}
 			if (!_ani->isPlay())
@@ -141,8 +148,7 @@ void BatGiantNormal::update(float const timeElapsed)
 	_rect = rectMakePivot(_position, _size, PIVOT::CENTER);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->stop("GiantBat/Attack");
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -200,6 +206,9 @@ void BatGiantNormal::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("GiantBat/Attack");
+			SOUND_MANAGER->stop("Enemy/Spawn");
+
 			_active = false;
 		}
 		break;

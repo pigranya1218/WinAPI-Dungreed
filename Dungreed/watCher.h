@@ -7,7 +7,7 @@ private:
 	Animation* _ani;
 	Vector2 _renderPos;
 	Vector2 _anglePos;
-	FloatRect _crash;
+	
 	int _x, _y;
 	int _radius;
 	int _fspeed;	

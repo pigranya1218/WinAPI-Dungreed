@@ -10,6 +10,8 @@
 #include "StrawberryPieFood.h"
 #include "Player.h"
 #include "PlayerStat.h"
+//#include "StatUI.h"
+#include "UIManager.h"
 
 void RestaurantUI::init()
 {
@@ -19,10 +21,13 @@ void RestaurantUI::init()
 		_foods.push_back(new EggFriedFood);
 	}*/
 	_foods.push_back(new BreadFood);
-	_foods.push_back(new GriffinEggOmeletteFood);
 	_foods.push_back(new EggFriedFood);
 	_foods.push_back(new GrilledMushroomFood);
 	_foods.push_back(new TomatoSoupFood);
+	_foods.push_back(new GriffinEggOmeletteFood);
+	_foods.push_back(new RaspberryCookieFood);
+	_foods.push_back(new SparklingWaterFood);
+	_foods.push_back(new StrawberryPieFood);
 	
 
 	_isActive = false;
@@ -54,7 +59,7 @@ void RestaurantUI::init()
 	_goldIconRc = FloatRect(WINSIZEX - 80, 800, WINSIZEX - 20, 880);
 
 	//음식 리스트 항목 창
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < _foods.size(); i++)
 	{
 		_foodItems[i].isSoldOut = false;
 		//가로 440, 세로 200
@@ -128,6 +133,8 @@ void RestaurantUI::update(float elapsedTime)
 				if (_player->ateFood(_foods[i]))
 				{
 					_foodItems[i].isSoldOut = true;
+					//구매하면 음식 정보 전달
+					_uiMgr->setEatFoods(_foods[i]);
 				}
 			}
 		}
@@ -323,3 +330,6 @@ void RestaurantUI::render()
 	//D2D_RENDERER->drawRectangle(_goldIconRc, D2D1::ColorF::White, 1, 1);	//아이콘 그릴 칸
 	_goldIcon->render(_goldIconRc.getCenter(), Vector2(_goldIcon->getSize().x * 4, _goldIcon->getSize().y * 4));
 }
+
+
+

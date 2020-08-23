@@ -5,9 +5,33 @@ void Room20LB::init()
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage20_LB.map");
-	//_respawnPosition[0] = Vector2(200, 200);
-	//_respawnPosition[1] = Vector2(400, 200);
-	//_respawnPosition[2] = Vector2(1500, 200);
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 1100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 1100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(700, 1100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(400, 1100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(300, 1100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_ICE, Vector2(350, 1100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(750, 1100) });
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(670, 1490),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::MINOTAURS, Vector2(400, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(670, 1670),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(380, 1650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(970, 1650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(700, 2100),2 });
+	int randBox = RANDOM->getInt(10);
+	int boxPer = RANDOM->getInt(10);
+	if (boxPer % 5 == 1)_spawnChest.spawn = false;
+	else _spawnChest.spawn = true;
+
+	if (randBox % 10 == 1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
+	else if (randBox % 3 == 1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
+	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(600, 2100);
+
 	_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
@@ -24,6 +48,8 @@ void Room20LB::init()
 	_objectMgr->spawnObject(0x0001, Vector2(880, 2500));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(900, 350), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room20LB::release()

@@ -33,7 +33,10 @@ void VillageStage::init()
 	_BG1 = IMAGE_MANAGER->findImage("Town_BG");
 	_BG2 = IMAGE_MANAGER->findImage("Town_BG2");
 	_floor = IMAGE_MANAGER->findImage("Town_Floor");
-	
+	SOUND_MANAGER->stop("Town");
+	SOUND_MANAGER->play("Town", 1.0f);
+	SOUND_MANAGER->stop("ambienceTown");
+	SOUND_MANAGER->play("ambienceTown", 1.0f);
 	_dungeonEat = IMAGE_MANAGER->findImage("DungeonEat");
 	_eatAni = new Animation;
 	_eatAni->init(_dungeonEat->getWidth(), _dungeonEat->getHeight(), _dungeonEat->getMaxFrameX(), _dungeonEat->getMaxFrameY());
@@ -52,6 +55,10 @@ void VillageStage::init()
 	SOUND_MANAGER->play("Villiage_BGM", 1.0f);
 
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
+
+	// NPC
+	_npcMgr->spawnNpc(NPC_TYPE::ABILITY, Vector2(1300, 1500), DIRECTION::LEFT);
+	_npcMgr->spawnNpc(NPC_TYPE::COSTUME, Vector2(950, 600), DIRECTION::LEFT);
 }
 
 void VillageStage::release()
@@ -151,7 +158,25 @@ void VillageStage::render()
 		_dungeonEat->setScale(4);
 		_dungeonEat->aniRender(CAMERA->getRelativeV2(_eatPos), _eatAni);
 	}
-	Stage::render();
+	
+	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
+	{
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
+	}
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
 
 
 	IMAGE_MANAGER->findImage("TempleFront")->setScale(5);

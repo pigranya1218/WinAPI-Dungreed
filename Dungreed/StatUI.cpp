@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iomanip>
 
+
+
 void StatUI::init()
 {
 	_isActive = false;
@@ -12,6 +14,9 @@ void StatUI::init()
 	_foodBaseImg = IMAGE_MANAGER->findImage("UI/STAT/BASE");
 	_statBaseRc = FloatRect(20, 150, 560, 540);
 	_foodBaseRc = FloatRect(20, 555, 510, WINSIZEY - 70);
+	_foodListCellBackImg = IMAGE_MANAGER->findImage("UI/RESTAURANT/LIFE_BASE_BACK");
+	_foodListCellFrameImg = IMAGE_MANAGER->findImage("UI/RESTAURANT/LIFE_BASE");
+		
 
 	//창닫기 이미지
 	_exitImg = IMAGE_MANAGER->findImage("BUTTON_EXIT");
@@ -39,6 +44,13 @@ void StatUI::init()
 			_statEntity[i * 3 + j + 1].iconRc = FloatRect(40 + 170 * j, 270 + 65 * i, 90 + 170 * j, 320 + 65 * i);
 		}
 	}
+
+	//Foods 창 리스트 렉트
+	for (int i = 0; i < 10; i++)
+	{
+		_foodList[i].cellRc = FloatRect(30, 610 + i * 65, 425, 670 + i * 65);
+	}
+
 }
 
 void StatUI::release()
@@ -61,6 +73,8 @@ void StatUI::render()
 	//바탕
 	_statBaseImg->render(_statBaseRc.getCenter(), _statBaseRc.getSize());
 	_foodBaseImg->render(_foodBaseRc.getCenter(), _foodBaseRc.getSize());
+	/*D2D_RENDERER->renderTextField(_foodBaseRc.left + 40, _foodBaseRc.top + 40, to_wstring(_foods.size()), D2D1::ColorF::White, 30,
+		_foodBaseRc.getWidth(), _foodBaseRc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_LEADING, L"Aa카시오페아");*/
 	string statname = PlayerStat::getStatString(STAT_TYPE::ATTACK_SPEED, false);
 	
 	// 창닫기
@@ -120,6 +134,14 @@ void StatUI::render()
 			renderStatInfo(_statEntity[i].iconRc.getCenter(), static_cast<STAT_TYPE>(i));
 		}
 	}
+
+	//Foods 리스트
+	for (int i = 0; i < _foods.size(); i++)
+	{
+		D2D_RENDERER->drawRectangle(_foodList[i].cellRc, D2D1::ColorF::Magenta, 1, 1);
+		_foodListCellBackImg->render(_foodList[i].cellRc.getCenter(), _foodList[i].cellRc.getSize());
+		_foodListCellFrameImg->render(_foodList[i].cellRc.getCenter(), _foodList[i].cellRc.getSize());
+	}
 }
 
 void StatUI::renderStatInfo(Vector2 pos, STAT_TYPE type)
@@ -130,5 +152,10 @@ void StatUI::renderStatInfo(Vector2 pos, STAT_TYPE type)
 		RGB(255, 238, 184), 40, textRc.getWidth(), 40, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
 	D2D_RENDERER->renderTextField(textRc.left + 5, textRc.top + 55, TTYONE_UTIL::stringTOwsting(PlayerStat::getStatInfo(type)),
 		RGB(255, 255, 255), 30, textRc.getWidth(), 90, 1, DWRITE_TEXT_ALIGNMENT_LEADING);
+}
+
+void StatUI::setEatFoods(Food* food)
+{
+	_foods.push_back(food);
 }
 

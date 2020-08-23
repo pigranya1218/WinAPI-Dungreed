@@ -35,9 +35,9 @@ private:
 	
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
-
-	PlayerStat _adjustStat; // 각종 요인으로 변화된 최종 스탯
+	
 	PlayerStat _abilityStat;// 어빌리티 추가 스탯
+	PlayerStat _adjustStat; // 각종 요인으로 변화된 최종 스탯
 
 	Item*		_hand; // 주먹질
 	vector<Item*> _inventory;				// 인벤토리
@@ -47,6 +47,8 @@ private:
 	vector<Item*> _equippedAcc;				// 장착된 악세사리
 	vector<Item*> _specialAbility;
 	vector<Food*> _ateFood;					// 먹은 음식들
+
+	Animation* _dashEffectAni;				// 대쉬할 때 먼지날리는 이펙트 애니메이션
 
 private:
 	void swap(Item* &a, Item* &b);
@@ -105,7 +107,7 @@ public:
 	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
-	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; }	//어빌리티 스탯 설정자
+	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); }	// 어빌리티 스탯 설정자
 	void setSpecialAbility(vector<Item*> specialAbility);
 
 	Costume* getCurrCostume() { return _costume; }
@@ -121,5 +123,8 @@ public:
 	void moveRoom(Vector2 dir);
 
 	void updateAdjustStat();
+
+	void sellItem(int index);
+	bool buyItem(Item* item); // 구매에 성공하면 true 반환
 };
 

@@ -76,6 +76,8 @@ void Player::updateAdjustStat()
 		_adjustStat = _adjustStat + _ateFood[i]->getAddStat();
 	}
 
+	_adjustStat = _adjustStat + _abilityStat;
+
 	if (_equippedWeapon[_currWeaponIndex] != nullptr)
 	{
 		_equippedWeapon[_currWeaponIndex]->equip(this);
@@ -86,6 +88,34 @@ void Player::updateAdjustStat()
 	}
 
 
+}
+
+void Player::sellItem(int index)
+{
+	if (_inventory[index] != nullptr)
+	{
+		_currGold += _inventory[index]->getPrice() * 0.7;
+		_inventory[index]->release();
+		delete _inventory[index];
+		_inventory[index] = nullptr;
+	}
+}
+
+bool Player::buyItem(Item* item)
+{
+	if (_currGold >= item->getPrice())
+	{
+		for (int i = 0; i < _inventory.size(); i++)
+		{
+			if (_inventory[i] == nullptr)
+			{
+				_currGold -= item->getPrice();
+				_inventory[i] = item;
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 void Player::swap(Item *& a, Item *& b)
@@ -165,25 +195,28 @@ void Player::init()
 	setPosition(Vector2(200, 200));
 	_direction = DIRECTION::RIGHT;
 	
+	_equippedWeapon.resize(2);
+	_equippedAcc.resize(4);
+	_inventory.resize(15);
+
+	_hand = new Punch;
+	_hand->init();
+
 	//최초에 장착하는 코스튬
 	setCurrCostume(DATA_MANAGER->getCostume(COSTUME_TYPE::ALICE));
-	
 
-	_level = 1;
+	_level = 30;
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
 	_currDashCoolTime = 0;
 	//_currHp = _adjustStat.maxHp;
-	_currHp = 40;
-	_currSatiety = 30;
-	_currGold = 1000;
+	_currHp = _adjustStat.maxHp;
+	_currSatiety = 0;
+	_currGold = 5000;
 	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
-	// TEST ITEM
-	_equippedWeapon.resize(2);
-	_equippedAcc.resize(4);
-	_inventory.resize(15);
+	
 
 
 	ShortSpear* testAcc1 = new ShortSpear;
@@ -258,7 +291,7 @@ void Player::init()
 	testAcc22->init();
 	_inventory[1] = testAcc22;
 
-	MultiBullet* testAcc14 = new MultiBullet;
+	MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	testAcc14->init();
 	_inventory[10] = testAcc14;
 
@@ -270,7 +303,7 @@ void Player::init()
 	//testAcc17->init();
 	//_inventory[2] = testAcc17;
 
-	FluteGreatSword* testAcc20 = new FluteGreatSword;
+	PowerKatana* testAcc20 = new PowerKatana;
 	testAcc20->init();
 	_inventory[2] = testAcc20;
 	
@@ -289,7 +322,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	Lumber* testWeapon2 = new Lumber;
+	PickaxeRed* testWeapon2 = new PickaxeRed;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
@@ -343,8 +376,7 @@ void Player::init()
 
 	
 
-	_hand = new Punch;
-	_hand->init();
+	
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
@@ -467,8 +499,12 @@ void Player::update(float const elapsedTime)
 	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		//대쉬 효과음 재생
-
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+		//대쉬 이펙트 재생
+		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
+		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y * 2);
+		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
+
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
@@ -1021,11 +1057,13 @@ bool Player::ateFood(Food * food)
 	PlayerStat foodOneceStat = food->getOnceStat();
 	if (_currGold >= food->getPrice() && (getMaxSatiety() - _currSatiety) >= foodOneceStat.currSatiety)
 	{
-		_currGold -= food->getPrice();
-		_currSatiety += foodOneceStat.currSatiety;
-		_currHp += foodOneceStat.currHp;
+		
 		_ateFood.push_back(food);
 		updateAdjustStat();
+		_currGold -= food->getPrice();
+		_currSatiety += foodOneceStat.currSatiety;
+		_currHp = min(_adjustStat.maxHp, _currHp + foodOneceStat.currHp);
+		
 		return true;
 	}
 	// 못먹으면 FALSE 반한
@@ -1038,11 +1076,6 @@ bool Player::ateFood(Food * food)
 
 void Player::setSpecialAbility(vector<Item*> specialAbility)
 {
-	for (int i = 0; i < _specialAbility.size(); i++)
-	{
-		_specialAbility[i]->release();
-		delete _specialAbility[i];
-	}
 	_specialAbility = specialAbility;
 }
 
@@ -1050,6 +1083,8 @@ void Player::setCurrCostume(Costume* costume)
 {
 	 _costume = costume;
 	 setSpecialAbility(costume->getSpecialAbility()); 
+	 updateAdjustStat();
+	 _currHp = _adjustStat.maxHp;
 }
 
 float Player::getAttackSpeed()

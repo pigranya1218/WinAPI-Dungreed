@@ -65,7 +65,6 @@ void CostumeUI::release()
 
 void CostumeUI::update(float elapsedTime)
 {
-	CAMERA->setConfig(0, 0, WINSIZEX, WINSIZEY, 0, 0, _scrollBar.totalWidth - WINSIZEX, 0);
 	if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
 	{
 		//창닫기
@@ -153,7 +152,7 @@ void CostumeUI::render()
 			_costumeCell[i].costumeEquippedImg->render(Vector2((relativeCell.getCenter().x), relativeCell.getCenter().y + 10), false);
 		}
 		//현재 선택한 코스튬
-		if (_costumeCell[i].cellRect.ptInRect(_ptMouse))
+		if (relativeCell.ptInRect(_ptMouse))
 		{
 			_costumeCell[i].costumeSelectedImg->setSize(Vector2(300, 500));
 			//_costumeCell[i].costumeSelectedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);
@@ -346,7 +345,7 @@ void CostumeUI::render()
 		if (i >= static_cast<int>(COSTUME_TYPE::END)) continue;
 		_costumeCell[i].costumeSample->setScale(5);
 		//_costumeCell[i].costumeSample->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 131), false); 
-		_costumeCell[i].costumeSample->render(Vector2(CAMERA->getRelativeX(relativeCell.getCenter().x), relativeCell.getCenter().y + 131), false);
+		_costumeCell[i].costumeSample->render(Vector2(relativeCell.getCenter().x, relativeCell.getCenter().y + 131), false);
 
 		//_costumeCell[i].costumeSample->render(_costumeCell[i].cellRect.getCenter(), false);
 		/*D2D_RENDERER->drawRectangle(_costumeCell[i].cellRect, D2D1::ColorF::Enum::Red, 1.0f, 3.0f);

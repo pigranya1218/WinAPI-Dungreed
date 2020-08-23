@@ -31,8 +31,13 @@ public:
 
 	HRESULT init();
 	void release();
+\
+	// for Event
 	void processEvent(float elapsedTime);
+	void render();
 	void pushShakeEvent(float power, float remainTime);
+	void pushMoveEvnet(Vector2 targetPos, float moveTime, float waitTime);
+	void pushFillEvnet(vector<FloatRect> fillRects, float waitTime, float enterTime, float displayTime, float closeTime, COLORREF color);
 
 	void setConfig(float offsetL, float offsetT, float width, float height, float minL, float minT, float maxL, float maxT);
 	void setConfigCenter(float x, float y, float width, float height, float minX, float minY, float maxX, float maxY);
@@ -81,6 +86,8 @@ public:
 
 	void aniRender(Image* img, Vector2 center, Animation* ani, bool bisymmetry = false);
 	void aniRender(Image* img, Vector2 center, Vector2 size, Animation* ani, bool bisymmetry = false);
+
+	
 
 	
 };

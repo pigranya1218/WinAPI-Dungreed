@@ -90,6 +90,8 @@ public:
 	vector<FloatRect> getEnemyRects();
 
 	
+	void makeR2REvent(COLORREF color, float time);
+	void makeTimeRatioEvent(float ratio, float time);
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);

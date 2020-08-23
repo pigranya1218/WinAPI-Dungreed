@@ -7,8 +7,28 @@ void Room3LR::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage3_LR.map");
 
-	//_respawnPosition[0] = Vector2(200,1400);
-	//_respawnPosition[2] = Vector2(2300, 1100);
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(400, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(1300, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(2200, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(1280, 1200) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(1000, 1300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(1400, 1300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_RED, Vector2(900, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_RED, Vector2(1150, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_RED, Vector2(1300, 700) });
+
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 300,  WINSIZEY / 2 + 600) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(2200,  WINSIZEY / 2 + 600) });
+
+	int randBox = RANDOM->getInt(10);
+	int boxPer = RANDOM->getInt(10);
+	if(boxPer%5==1)_spawnChest.spawn = false;
+	else _spawnChest.spawn = true;
+	
+	if(randBox%10==1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
+	else if(randBox%3==1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
+	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
+	_spawnChest.pos = Vector2(1200, 700);
 
 	_objectMgr->spawnObject(0x0000, Vector2(1700, 1300));
 
@@ -20,6 +40,7 @@ void Room3LR::init()
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1150, 800), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::CHEST_YELLOW, Vector2(1400, 800), DIRECTION::LEFT);
 
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void Room3LR::release()

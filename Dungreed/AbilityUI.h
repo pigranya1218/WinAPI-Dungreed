@@ -72,6 +72,10 @@ private:
 	//특성 초기화 단추 이미지
 	Image* _abilityInitImg = IMAGE_MANAGER->findImage("KEY_R");
 
+	Vector2 _effectPos;
+	Image* _effectImg;
+	Animation* _effectAni;
+
 	//사용할 렉트
 	FloatRect _bgRc;	//뒷배경(알파수치 이용하여 투명도 조정)
 	FloatRect _exitRc;	//창닫기 단추
