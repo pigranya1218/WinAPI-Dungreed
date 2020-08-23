@@ -341,6 +341,10 @@ void ShopUI::init()
 
 	// FOR TEST
 	_shopItem = DATA_MANAGER->getRandomItem(ITEM_RANK::NORMAL, ITEM_RANK::LEGEND, 5);
+	for (int i = 0; i < 5; i++)
+	{
+		_shopItem[i]->init();
+	}
 }
 
 void ShopUI::release()
