@@ -166,6 +166,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_INFO", L"resources/images/gameScene/ui/inventory/info.png");
 	// *** STATUS
 	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
+	IMAGE_MANAGER->addImage("UI/STAT/LIST_BASE", L"resources/images/gameScene/ui/status/RestaurantMenu_Withoutmoney.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW_SELECTED", L"resources/images/gameScene/ui/status/Stat_00_Pow_Selected.png");
 	IMAGE_MANAGER->addImage("UI/STAT/DEF", L"resources/images/gameScene/ui/status/Stat_01_Def.png");
@@ -542,6 +543,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
+	IMAGE_MANAGER->addFrameImage("CosmosSwordFx1", L"resources/images/MeleeWeapon/CosmosSwordFx1.png",7,1);
 	
 	//***MeleeWeaponSound
 	SOUND_MANAGER->addSound("SOUND_katana", "resources/sound/MeleeWeapon/katana.wav", false, false);  // 카타나
@@ -851,6 +853,8 @@ HRESULT playGround::init()
 	// ** ENEMY
 	SOUND_MANAGER->addSound("Enemy/Die"		, "resources/sound/enemy/public/MonsterDie.wav"	, false, false);	// 사망(공용)
 	SOUND_MANAGER->addSound("Enemy/GetHit"	, "resources/sound/enemy/public/Hit_Monster.wav", false, false);	// 피격(공용)
+	SOUND_MANAGER->addSound("Enemy/Spawn", "resources/sound/enemy/public/SpawnMonster.wav", false, false);	// 피격(공용)
+
 
 	// *  박쥐
 	SOUND_MANAGER->addSound("Bat/Attack"		, "resources/sound/enemy/bat/monster-sound2_bat.wav"				, false, false);	// 작은 박쥐 공격
@@ -878,7 +882,6 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Belial/Bullet"	, "resources/sound/enemy/belial/random5.wav"			, false, false);	// 탄막 발사
 	SOUND_MANAGER->addSound("Belial/Sword"	, "resources/sound/enemy/belial/slimeball.wav"			, false, false);	// 검 소환
 
-	//*	니플헤임
 
 	// * 무기
 	// ** 원거리

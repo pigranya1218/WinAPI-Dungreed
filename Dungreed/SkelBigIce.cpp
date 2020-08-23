@@ -29,13 +29,13 @@ void SkelBigIce::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect
 	_moving.delay = 0.2;
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 1;
+	_attack.delay = 2.5;
 	_attack.distance = 200;
 	_attack.circleSize = 200;
 	_attack.attackInit(3, 3, 8, 0, 0, 40);
 	
 	ZeroMemory(&_skill, sizeof(_skill));
-	_skill.delay = 2;
+	_skill.delay = 3;
 	_skill.distance = 300;
 
 	ZeroMemory(&_hit, sizeof(_hit));

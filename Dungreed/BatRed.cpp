@@ -13,7 +13,7 @@ void BatRed::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 800;
 
 	// 사이즈 설정
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);
@@ -144,6 +144,7 @@ void BatRed::update(float const timeElapsed)
 		}		
 		break;
 	}
+
 	hitReaction(playerPos, moveDir, timeElapsed);
 
 	_enemyManager->moveEnemy(this, moveDir, true, false);
@@ -197,6 +198,7 @@ void BatRed::setState(ENEMY_STATE state)
 			_ani->start();
 		}		
 		break;
+
 		case ENEMY_STATE::ATTACK:
 		{
 			_imageName = "Bat/Red/Attack";
@@ -209,6 +211,7 @@ void BatRed::setState(ENEMY_STATE state)
 			_ani->start();
 		}
 		break;
+
 		case ENEMY_STATE::DIE:
 		{
 			SOUND_MANAGER->stop("Enemy/Spawn");

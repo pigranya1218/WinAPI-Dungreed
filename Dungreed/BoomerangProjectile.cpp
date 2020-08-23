@@ -39,7 +39,7 @@ BoomerangProjectile::BoomerangProjectile(const BoomerangProjectile & source)
 	_length = source._length;
 }
 
-void BoomerangProjectile::init(string imgKey, float angleRadian, float speed, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, Vector2 force, float maxTime, bool useRotate)
+void BoomerangProjectile::init(string imgKey, float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool checkCollision, string collisionEffect, Vector2 effectSize, Vector2 force, float maxTime, bool useRotate)
 {
 	_angleRadian = angleRadian;
 	_force = force;

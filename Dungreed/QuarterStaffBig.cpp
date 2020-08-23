@@ -4,7 +4,7 @@ void QuarterStaffBig::init()
 {
 	_iconImg = IMAGE_MANAGER->findImage("QuarterStaffBig");
 	_img = IMAGE_MANAGER->findImage("QuarterStaffBig");
-	_price = 600;
+	_price = 1600;
 	_itemName = L"박달나무 쌍단봉'";
 	_displayText = L"\"무술의 달인이 애용하던 쌍단봉. 맞으면 매우 아프다.\"";
 	_itemCode = 0x02201; //양손 고급 01;

@@ -49,7 +49,7 @@ public:
 public:
 	Costume* getCostume (COSTUME_TYPE type);
 
-	/*vector<Item*> getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count);
-	Item* getItem(int itemCode);*/
+	vector<Item*> getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count);
+	Item* getItem(int itemCode);
 };
 

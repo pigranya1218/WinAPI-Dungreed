@@ -14,8 +14,6 @@
 #include "PowerKatana.h"
 #include "QuarterStaffBig.h"
 #include "BigPaintBlush.h"
-#include "Lumber.h"
-#include "FluteGreatSword.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -25,7 +23,6 @@
 
 #include "SpikeBall.h"
 #include "IceBall.h"
-#include "miniEarth.h"
 #include "watCher.h"
 #include "babyGreenBat.h"
 #include "GreenBat.h"
@@ -209,174 +206,170 @@ void Player::init()
 	_currJumpCount = _adjustStat.maxJumpCount;
 	_currDashCount = _adjustStat.maxDashCount;
 	_currDashCoolTime = 0;
-	//_currHp = _adjustStat.maxHp;
 	_currHp = _adjustStat.maxHp;
 	_currSatiety = 0;
-	_currGold = 5000;
+	_currGold = 0;
 	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
-	
-
-
 	ShortSpear* testAcc1 = new ShortSpear;
 	testAcc1->init();
-	_inventory[4] = testAcc1;
+	_equippedWeapon[0] = testAcc1;
 
-	//Seeri* testAcc24 = new Seeri;
-	//testAcc24->init();
-	//_inventory[1] = testAcc24;
+	Seeri* testAcc24 = new Seeri;
+	testAcc24->init();
+	_inventory[1] = testAcc24;
 
-	//GreenBat* testAcc2 = new GreenBat;
-	//testAcc2->init();
-	//_inventory[5] = testAcc2;
-	
+	////GreenBat* testAcc2 = new GreenBat;
+	////testAcc2->init();
+	////_inventory[5] = testAcc2;
+	//
 
-	//GreenDadBat* testAcc3 = new GreenDadBat;
-	//testAcc3->init();
-	//_inventory[3] = testAcc3;
+	////GreenDadBat* testAcc3 = new GreenDadBat;
+	////testAcc3->init();
+	////_inventory[3] = testAcc3;
 
-	
-	ShortSword* testAcc4 = new ShortSword;
-	testAcc4->init();
-	_inventory[3] = testAcc4;
-
-
-	MartialArtOfTiger* testAcc9 = new MartialArtOfTiger;
-	testAcc9->init();
-	_inventory[8] = testAcc9;
+	//
+	//ShortSword* testAcc4 = new ShortSword;
+	//testAcc4->init();
+	//_inventory[3] = testAcc4;
 
 
-	//PowerKatana* testAcc5 = new PowerKatana;
-	//testAcc5->init();
-	//_inventory[6] = testAcc5;
+	//MartialArtOfTiger* testAcc9 = new MartialArtOfTiger;
+	//testAcc9->init();
+	//_inventory[8] = testAcc9;
 
 
-	//IceBall* testAcc6 = new IceBall;
-	//testAcc6->init();
-	//_inventory[3] = testAcc6;
+	////PowerKatana* testAcc5 = new PowerKatana;
+	////testAcc5->init();
+	////_inventory[6] = testAcc5;
+
+
+	////IceBall* testAcc6 = new IceBall;
+	////testAcc6->init();
+	////_inventory[3] = testAcc6;
+	////
+	////
+	////miniEarth* testAcc7 = new miniEarth;
+	////testAcc7->init();
+	////_inventory[7] = testAcc7;
+	////
+	////
+	//QuarterStaffBig* testAcc8 = new QuarterStaffBig;
+	//testAcc8->init();
+	//_inventory[8] = testAcc8;
 	//
 	//
-	//miniEarth* testAcc7 = new miniEarth;
-	//testAcc7->init();
-	//_inventory[7] = testAcc7;
+	//BigPaintBlush* testAcc10 = new BigPaintBlush;
+	//testAcc10->init();
+	//_inventory[9] = testAcc10;
+
+	//Lumber* testAcc11 = new Lumber;
+	//testAcc11->init();
+	//_inventory[10] = testAcc11;
+
+	////HeartOfCosmos* testAcc12 = new HeartOfCosmos;
+	////testAcc12->init();
+	////_inventory[0] = testAcc12;
+
+	////Seeri* testAcc21 = new Seeri;
+	////testAcc21->init();
+	////_inventory[5] = testAcc21;
+
+	////DemonBoots* testAcc13 = new DemonBoots;
+	////testAcc13->init();
+	////_inventory[5] = testAcc13;
+
+	//Voluspa* testAcc22 = new Voluspa;
+	//testAcc22->init();
+	//_inventory[1] = testAcc22;
+
+	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
+	//testAcc14->init();
+	//_inventory[10] = testAcc14;
+
+	////MartialArtOfTiger* testAcc16 = new MartialArtOfTiger;
+	////testAcc16->init();
+	////_inventory[1] = testAcc16;
+
+	////Wingboots* testAcc17 = new Wingboots;
+	////testAcc17->init();
+	////_inventory[2] = testAcc17;
+
+	//PowerKatana* testAcc20 = new PowerKatana;
+	//testAcc20->init();
+	//_inventory[2] = testAcc20;
 	//
+
+	////BigPaintBlush* testAcc15 = new BigPaintBlush;
+	////testAcc15->init();
+	////_inventory[7] = testAcc15;
+
+	////DaisyRing* testAcc23 = new DaisyRing;
+	////testAcc23->init();
+	////_inventory[7] = testAcc23;
 	//
-	QuarterStaffBig* testAcc8 = new QuarterStaffBig;
-	testAcc8->init();
-	_inventory[8] = testAcc8;
-	
-	
-	BigPaintBlush* testAcc10 = new BigPaintBlush;
-	testAcc10->init();
-	_inventory[9] = testAcc10;
 
-	Lumber* testAcc11 = new Lumber;
-	testAcc11->init();
-	_inventory[10] = testAcc11;
+	///*KeresScythe* testWeapon1 = new KeresScythe;
+	//testWeapon1->init();
+	//_inventory[11] = testWeapon1;
+	//*/
 
-	//HeartOfCosmos* testAcc12 = new HeartOfCosmos;
-	//testAcc12->init();
-	//_inventory[0] = testAcc12;
+	//PickaxeRed* testWeapon2 = new PickaxeRed;
+	//testWeapon2->init();
+	//_inventory[11] = testWeapon2;
 
-	//Seeri* testAcc21 = new Seeri;
-	//testAcc21->init();
-	//_inventory[5] = testAcc21;
+	CosmosSword* testWeapon3 = new CosmosSword; // 이거 없으면 못깰 지경../
+	testWeapon3->init();
+	_inventory[12] = testWeapon3;
+	////
+	///*PickaxeRed* testWeapon4 = new PickaxeRed;
+	//testWeapon4->init();
+	//_inventory[13] = testWeapon4;*/
 
-	//DemonBoots* testAcc13 = new DemonBoots;
-	//testAcc13->init();
-	//_inventory[5] = testAcc13;
+	///*BigPaintBlush* testWeapon5 = new BigPaintBlush;
+	//testWeapon5->init();
+	//_inventory[14] = testWeapon5;*/
 
-	Voluspa* testAcc22 = new Voluspa;
-	testAcc22->init();
-	_inventory[1] = testAcc22;
+	///*FluteGreatSword* testWeapon5 = new FluteGreatSword;
+	//testWeapon5->init();
+	//_inventory[14] = testWeapon5;*/
 
-	MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
-	testAcc14->init();
-	_inventory[10] = testAcc14;
+	//CosmosSword* testWeapon5 = new CosmosSword;
+	//testWeapon5->init();
+	//_inventory[13] = testWeapon5;
 
-	//MartialArtOfTiger* testAcc16 = new MartialArtOfTiger;
-	//testAcc16->init();
-	//_inventory[1] = testAcc16;
+	//Boomerang* testweapon6 = new Boomerang;
+	//testweapon6->init();
+	//_inventory[12] = testweapon6;
 
-	//Wingboots* testAcc17 = new Wingboots;
-	//testAcc17->init();
-	//_inventory[2] = testAcc17;
+	///*MatchLockGun* testWeapon6 = new MatchLockGun;
+	//testWeapon6->init();
+	//_inventory[14] = testWeapon6;*/
 
-	PowerKatana* testAcc20 = new PowerKatana;
-	testAcc20->init();
-	_inventory[2] = testAcc20;
-	
+	//GatlingGun* testWeapon7 = new GatlingGun;
+	//testWeapon7->init();
+	//_inventory[3] = testWeapon7;
 
-	//BigPaintBlush* testAcc15 = new BigPaintBlush;
-	//testAcc15->init();
-	//_inventory[7] = testAcc15;
-
-	//DaisyRing* testAcc23 = new DaisyRing;
-	//testAcc23->init();
-	//_inventory[7] = testAcc23;
-	
-
-	/*KeresScythe* testWeapon1 = new KeresScythe;
-	testWeapon1->init();
-	_inventory[11] = testWeapon1;
-	*/
-
-	PickaxeRed* testWeapon2 = new PickaxeRed;
-	testWeapon2->init();
-	_inventory[11] = testWeapon2;
-
-	//CosmosSword* testWeapon3 = new CosmosSword;
-	//testWeapon3->init();
-	//_inventory[12] = testWeapon3;
-	//
-	/*PickaxeRed* testWeapon4 = new PickaxeRed;
-	testWeapon4->init();
-	_inventory[13] = testWeapon4;*/
-
-	/*BigPaintBlush* testWeapon5 = new BigPaintBlush;
-	testWeapon5->init();
-	_inventory[14] = testWeapon5;*/
-
-	/*FluteGreatSword* testWeapon5 = new FluteGreatSword;
-	testWeapon5->init();
-	_inventory[14] = testWeapon5;*/
-
-	CosmosSword* testWeapon5 = new CosmosSword;
-	testWeapon5->init();
-	_inventory[13] = testWeapon5;
-
-	Boomerang* testweapon6 = new Boomerang;
-	testweapon6->init();
-	_inventory[12] = testweapon6;
-
-	/*MatchLockGun* testWeapon6 = new MatchLockGun;
-	testWeapon6->init();
-	_inventory[14] = testWeapon6;*/
-
-	GatlingGun* testWeapon7 = new GatlingGun;
-	testWeapon7->init();
-	_inventory[3] = testWeapon7;
-
-	MagicStick* testWeapon8 = new MagicStick;
-	testWeapon8->init();
-	_inventory[14] = testWeapon8;
-
-	//OakBow* testWeapon8 = new OakBow;
+	//MagicStick* testWeapon8 = new MagicStick;
 	//testWeapon8->init();
 	//_inventory[14] = testWeapon8;
 
-	/*SilverBullet* testAcc19 = new SilverBullet;
+	////OakBow* testWeapon8 = new OakBow;
+	////testWeapon8->init();
+	////_inventory[14] = testWeapon8;
+
+	///*SilverBullet* testAcc19 = new SilverBullet;
+	//testAcc19->init();
+	//_inventory[14] = testAcc19;*/
+
+	//MagnifyingGlass* testAcc18 = new MagnifyingGlass;
+	//testAcc18->init();
+	//_inventory[5] = testAcc18;
+
+	MultiBullet* testAcc19 = new MultiBullet;
 	testAcc19->init();
-	_inventory[14] = testAcc19;*/
-
-	MagnifyingGlass* testAcc18 = new MagnifyingGlass;
-	testAcc18->init();
-	_inventory[5] = testAcc18;
-
-	
-
-	
+	_inventory[6] = testAcc19;
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
@@ -427,6 +420,7 @@ void Player::update(float const elapsedTime)
 	// 장비 교체
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::CHANGE_WEAPON)) && _currWeaponChangeCoolTime == 0)
 	{
+		SOUND_MANAGER->play("Player/Swap", 1);
 		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
 		updateAdjustStat();
@@ -502,7 +496,7 @@ void Player::update(float const elapsedTime)
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		//대쉬 이펙트 재생
 		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
-		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y * 2);
+		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y);
 		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
 
 		_currDashCount -= 1;
@@ -1048,6 +1042,20 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 			swap(_inventory[indexA - 6], _inventory[indexB - 6]);
 		}
 	}
+}
+
+bool Player::collisionItem(Item* item)
+{
+	for (int i = 0; i < _inventory.size(); i++)
+	{
+		if (_inventory[i] == nullptr)
+		{
+			_inventory[i] = item;
+			_gameScene->showDropItem(item);
+			return true;
+		}
+	}
+	return false;
 }
 
 bool Player::ateFood(Food * food)

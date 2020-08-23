@@ -5,7 +5,7 @@ void PickaxeRed::init()
 {
 	_iconImg = IMAGE_MANAGER->findImage("PickaxeRedIcon");
 	_img = IMAGE_MANAGER->findImage("PickaxeRed");
-	_price = 600;
+	_price = 2600;
 	_itemName = L"붉은 곡괭이";
 	_displayText = L"\"신이 가장 싫어하는 색이 입혀진 곡괭이\"";
 	_itemCode = 0x02300; //양손 에픽 00;
