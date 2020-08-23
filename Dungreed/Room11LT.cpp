@@ -6,9 +6,15 @@ void Room11LT::init()
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
 	loadMap("room/Stage11_LT.map");
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(680, 250) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(600, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(700, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(450, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(500, 500) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_ICE, Vector2(450, 300) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_RED, Vector2(950, 350) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(300, 300) });
+
 	int randBox = RANDOM->getInt(10);
 	int boxPer = RANDOM->getInt(10);
 	if (boxPer % 5 == 1)_spawnChest.spawn = false;
@@ -17,8 +23,8 @@ void Room11LT::init()
 	if (randBox % 10 == 1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
 	else if (randBox % 3 == 1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
-	_spawnChest.pos = Vector2(500, 500);
-	
+	_spawnChest.pos = Vector2(600, 400);
+
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(750, 450), DIRECTION::LEFT);
 
 	_roomType = ROOMTYPE::NORMAL;

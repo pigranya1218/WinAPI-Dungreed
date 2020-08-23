@@ -7,9 +7,15 @@ void Room7RT::init()
 	loadMap("room/Stage7_TR.map");
 
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(400, 400) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(500, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 600) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(400, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(500, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(600, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(800, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(1000, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(1150, 700) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_NORMAL, Vector2(1300, 600) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_NORMAL, Vector2(750, 600) });
+
 	int randBox = RANDOM->getInt(10);
 	int boxPer = RANDOM->getInt(10);
 	if (boxPer % 5 == 1)_spawnChest.spawn = false;
