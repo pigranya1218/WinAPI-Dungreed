@@ -37,36 +37,34 @@ void Seeri::update(Player * player, float const elapsedTime)
 	
 
 	
-	if (_enemy != Vector2(0, 0)) {
-		if (_renderPos.x - 700 < _enemy.x && _renderPos.x + 700 > _enemy.x && _renderPos.y - 700 < _enemy.y && _renderPos.y + 700 > _enemy.y)
-		{
-			if (_Delay > 0)
-			{
-				_Delay = max(0, _Delay - elapsedTime);
-			}
-			if (_Delay == 0)
-			{
-				_Delay = 4.0;
+	if(_enemy != Vector2(0,0)){
+	if (_Delay > 0)
+	{
+		_Delay = max(0, _Delay - elapsedTime);
+	}
+	if (_Delay == 0)
+	{
+		_Delay = 4.0;
 
-				float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _renderPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _renderPos.x)) + PI2;
-				if (angleRadian > PI2)
-				{
-					angleRadian -= PI2;
-				}
-				SeeriProjectile* projectile = new SeeriProjectile;
-				projectile->setPosition(_renderPos);
-				projectile->setTeam(OBJECT_TEAM::PLAYER);
-				projectile->init("SeeriBullet", "BombPouch2", Vector2(40, 22), Vector2(25, 25), Vector2(80, 80), Vector2(60 * 10, 60 * 10), 10, _renderPos.y, false, false, 10, true, false, false, false, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
-				string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
-				AttackInfo* attackInfo = new AttackInfo;
-				attackInfo->team = OBJECT_TEAM::PLAYER;
-				attackInfo->madeByWeapon = false;
-				attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
-				attackInfo->maxDamage = 5;
-				attackInfo->minDamage = 3;
-				player->attack(projectile, attackInfo);
-			}
+		float angleRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _renderPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _renderPos.x)) + PI2;
+		if (angleRadian > PI2)
+		{
+			angleRadian -= PI2;
 		}
+		SeeriProjectile* projectile = new SeeriProjectile;
+		projectile->setPosition(_renderPos);
+		projectile->setTeam(OBJECT_TEAM::PLAYER);
+		projectile->init("SeeriBullet", "BombPouch2", Vector2(50, 33), Vector2(25, 25), Vector2(300 ,300), Vector2(60 * 10, 60 * 10), 10, _renderPos.y, false, false, 10, true, false, false, false, true);	// 함수 인수가 바뀌었어요 >> 확인해주세요	
+		string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime());
+		AttackInfo* attackInfo = new AttackInfo;
+		attackInfo->team = OBJECT_TEAM::PLAYER;
+		attackInfo->madeByWeapon = false;
+		attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
+		attackInfo->maxDamage = 5;
+		attackInfo->minDamage = 3;
+		player->attack(projectile, attackInfo);
+		
+	}
 	}
 	
 }

@@ -913,6 +913,12 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Reload", "resources/sounds/weapon/LongDistanceWeapon/Reload.wav", false, false);
 	SOUND_MANAGER->addSound("Reload2", "resources/sounds/weapon/LongDistanceWeapon/Reload2.wav", false, false);
 
+	 //¾Ç¼¼¼­¸®
+	SOUND_MANAGER->addSound("SeeriBullet1", "resources/sounds/accessories/bigdrummo_MetalJumper_Landing.wav", false, false);
+	SOUND_MANAGER->addSound("SeeriBullet2", "resources/sounds/accessories/fireball(CC-BY3.0) Bart K..wav", false, false);
+	SOUND_MANAGER->addSound("VolspaS", "resources/sounds/accessories/ice_spell_freeze_small_02", false, false);
+	
+
 	TIME_MANAGER->init();
 	CONFIG_MANAGER->init();
 	DATA_MANAGER->init();	
