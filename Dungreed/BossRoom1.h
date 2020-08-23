@@ -1,8 +1,12 @@
 #pragma once
 #include "Stage.h"
-class BossRoom1 :
-	public Stage
+
+
+
+class BossRoom1 : public Stage
 {
+private:
+
 public:
 	virtual void init();
 	virtual void release();

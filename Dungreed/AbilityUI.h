@@ -1,7 +1,8 @@
 #pragma once
+#include "PlayerStat.h"
 
 class Player;
-class PlayerStat;
+
 
 enum class ABILITY_ICON : int
 {
@@ -20,14 +21,15 @@ private:
 		FloatRect pointRc;			//특성 포인트 적을 렉트
 		FloatRect statValueRc[2];	//상승하는 스탯의 수치를 적을 렉트
 		FloatRect statNameRc[2];	//상승하는 스탯의 이름을 적을 렉트
+		//FloatRect statRc[2];		//스탯의 수치와 이름을 한번에 적을 렉트
 		FloatRect iconRc[3];		//특성 아이콘 렉트
-		//FloatRect buttonRc;			//플러스 단추
 		FloatCircle buttonCir;		//플러스 단추 서클
 		int abilityPoint; //0 ~ 4 : 분노 신속 인내 신비 탐욕 順 각각 부여되는 특성 포인트 (ex: windows[1].abilityPoint = 10 -> 신속 포인트가 10찍어져 있음)
 	};
 
 private:
 	Player* _player;
+	PlayerStat _abilityStat;	//특성을 찍으면 변화하는 스탯의 값
 	Effect* _clickEffect;
 
 	bool _isActive;
@@ -69,6 +71,10 @@ private:
 	Image* _clickEffectImg = IMAGE_MANAGER->findImage("UI/ABILITY/CLICK_EFFECT");
 	//특성 초기화 단추 이미지
 	Image* _abilityInitImg = IMAGE_MANAGER->findImage("KEY_R");
+
+	Vector2 _effectPos;
+	Image* _effectImg;
+	Animation* _effectAni;
 
 	//사용할 렉트
 	FloatRect _bgRc;	//뒷배경(알파수치 이용하여 투명도 조정)

@@ -27,7 +27,7 @@ HRESULT GameNode::init(bool managerInit)
 	if (_managerInit)
 	{
 		KEY_MANAGER->init();
-		TIME_MANAGER->init();
+		// TIME_MANAGER->init();
 		EFFECT_MANAGER->init();
 		SOUND_MANAGER->init();
 		SCENE_MANAGER->init();

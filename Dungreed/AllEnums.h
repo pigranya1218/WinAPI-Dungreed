@@ -78,3 +78,10 @@ enum class SOUND_TYPE
 	BGM, // 배경음
 	EFFECT // 효과음
 };
+
+enum class ROOMTYPE
+{
+	NORMAL,
+	RESTAURANT,
+	SHOP
+};

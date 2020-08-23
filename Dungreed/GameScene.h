@@ -16,6 +16,7 @@ private:
 	UIManager* _uiMgr;
 
 	vector<GameEvent*> _events;
+	bool _showPlayer;
 
 public:
 	virtual HRESULT init();			// 초기화 전용 함수
@@ -28,7 +29,9 @@ public:
 
 	// 플레이어 관련 함수
 	Vector2 getEnemyPos(Vector2 pos);
-
+	vector<FloatRect> getEnemyRects();
+	bool showPlayer() {return _showPlayer;}
+	void setShowPlayer(float showPlayer) { _showPlayer = showPlayer; }
 	// 스테이지 관련 함수
 	void moveTo(GameObject* object, Vector2 moveDir);
 	void moveRoom(Vector2 dir);

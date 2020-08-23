@@ -8,8 +8,7 @@ private:
 
 	Image*			_weaponImg;	// 무기 이미지
 	Animation*		_weaponAni;	// 무기 애니메이션
-	int count;
-	int _enterCount;
+	
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();

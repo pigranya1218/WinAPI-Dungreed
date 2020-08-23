@@ -1,6 +1,6 @@
 #include "Voluspa.h"
 #include "stdafx.h"
-#include "Stage.h"
+
 
 void Voluspa::init()
 {
@@ -25,7 +25,7 @@ void Voluspa::init()
 	_renderPos.y = 500;
 	
 	_Opposition = false;
-	_attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+	//_attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 }
 
 void Voluspa::release()
@@ -34,8 +34,8 @@ void Voluspa::release()
 
 void Voluspa::update(Player * player, float const elapsedTime)
 {	
-	_playerPos = player->getPosition();	
-	Vector2 enemypos = player->getEnemyPos(Vector2());
+	
+	
 	_elapsedTime += elapsedTime;
 	_location.x = 2500* elapsedTime;
 	
@@ -47,8 +47,9 @@ void Voluspa::update(Player * player, float const elapsedTime)
 			_currStopDelay = max(0, _currStopDelay - elapsedTime);		}
 		
 		if (_currStopDelay == 0 ) {
-					
-			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);
+			_playerPos = player->getPosition();
+			Vector2 enemypos = player->getEnemyPos(Vector2());
+			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
 			_currAttackDelay = 1.7f;
 			_Opposition = true;
 		}
@@ -60,8 +61,10 @@ void Voluspa::update(Player * player, float const elapsedTime)
 			_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 		}
 		
-		if (_currAttackDelay == 0 ) {			
-			_renderPos.y = CAMERA->getAbsoluteY(enemypos.y);
+		if (_currAttackDelay == 0 ) {	
+			_playerPos = player->getPosition();
+			Vector2 enemypos = player->getEnemyPos(Vector2());
+			_renderPos.y = CAMERA->getRelativeY(enemypos.y);
 			_currStopDelay = 1.7f;
 			_Opposition = false;
 		}

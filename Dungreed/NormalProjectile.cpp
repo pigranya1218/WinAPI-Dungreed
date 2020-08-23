@@ -168,12 +168,8 @@ void NormalProjectile::update(float elapsedTime)
 	_count += elapsedTime;
 	if (_count >= _maxTime)
 	{
-		if (_info->team == OBJECT_TEAM::ENEMY)
-		{
-			float angleDegree = _angleRadian * (180.0f / PI);
-			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
-		}
-
+		float angleDegree = _angleRadian * (180.0f / PI);
+		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
 		_active = false;
 	}
 

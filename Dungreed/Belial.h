@@ -1,10 +1,6 @@
 #pragma once
 #include "Enemy.h"
 
-#define HANDSPEED 600
-#define PARTICLEMAX 30
-#define SIZEMAX 5
-
 enum class BELIAL_PHASE : unsigned
 {
 	SHOOTING_READY,	// 탄막 준비
@@ -19,11 +15,11 @@ enum class BELIAL_PHASE : unsigned
 
 enum class HAND_STATE : unsigned
 {
-	IDLE,
-	MOVE,
-	ATTACK_READY,
-	ATTACK_START,
-	ATTACK_FINAL
+	IDLE,			// 기본
+	MOVE,			// 이동
+	ATTACK_READY,	// 준비
+	ATTACK_START,	// 발사!
+	ATTACK_FINAL	// 종료
 };
 
 class Belial : public Enemy
@@ -41,10 +37,10 @@ private:
 		Animation*	laserHeadAni;	// 레이저 머리 애니메이션
 		Animation*	laserBodyAni;	// 레이저 중간 애니메이션
 
-		tagMoveInfo moving;	// 이동
-		tagAttackInfo	laserAtk;		// 레이저 공격
+		tagMoveInfo		moving;		// 이동
+		tagAttackInfo	laserAtk;	// 레이저 공격
 
-		HAND_STATE	state;	// 현재 손 상태
+		HAND_STATE	state;			// 현재 손 상태
 
 		vector<FloatRect> laserRect;	// 레이저 출력 벡터
 
@@ -66,7 +62,7 @@ private:
 		// 손 업데이트
 		void update(const float timeElapsed, int enemyType, EnemyManager* enemyManager);
 		// 출력
-		void render(const float scale, bool bisymmetry = 0);
+		void render(const float scale, const float alpha, bool bisymmetry = 0);
 
 		void setState(HAND_STATE state, const Vector2& movePos = Vector2(0, 0));
 	};
@@ -99,6 +95,7 @@ private:
 		tagTimeInfo chargeEffect;
 	};
 
+	// 단순히 출력만 하면됨
 	struct tagParticleInfo
 	{
 		Image*		img;
@@ -106,40 +103,44 @@ private:
 		Vector2		pos[5];
 	};
 
+	// 파티클 스테이지에서 충돌 검사하려고 상속받음
 	struct tagDeadParticleInfo : public GameObject
 	{
 		Image* img;
 	};
 
-	tagDeadParticleInfo _deadParticle[6];
+	BELIAL_PHASE	_phase;		// 공격 패턴	
 
-	tagParticleInfo _particle;
-
-	Vector2			_playerPos;
+	Vector2			_playerPos;	// 플레이어 포지션은 언제나 가지고 있음
 
 	tagMoveInfo		_moving;	// 이동
+
 	tagShootingInfo _shooting;	// 탄막용
 
 	vector<tagSwordInfo*>	_sword;		// 검을 담을 벡터
 	unsigned int			_swordNum;	// 현재 검 넘버
 	tagAttackInfo			_swordAtk;	// 검 공격 판정용
 
-	Image*		_backImg;	// 후광구 이미지
-	Animation*	_backAni;	// 후광구 애니메이션
-	bool	_backMove;		// 후광구 좌표 이동 플래그
+	Image*			_backImg;	// 후광구 이미지
+	Animation*		_backAni;	// 후광구 애니메이션
+	tagParticleInfo	_particle;	// 후광 파티클
+	bool			_backMove;	// 후광구 좌표 이동 플래그
 
-	tagHandInfo _handR;		// 오른손
-	tagHandInfo _handL;		// 왼손
-	int			_laserNum;	// 레이저 발사 횟수 지정
+	tagHandInfo _handR;			// 오른손
+	tagHandInfo _handL;			// 왼손
+	int			_laserNum;		// 레이저 발사 횟수 지정
 
 	tagTimeInfo _attackCycle;	// 공격 주기 저장용
 
-	tagTimeInfo _dieEffect;
-	int			_effectNum;
+	tagTimeInfo			_dieEffect;			// 터지는 이펙트 관련 시간
+	tagDeadParticleInfo _deadParticle[6];	// 벨리알 파편들
+	int					_effectNum;			// 터지는 이펙트 재생횟수
+	bool				_realDead;			// 죽었을 경우 파편이 떨어지는 상태
+	float				_deadAngle;			// 머리가 땅에 착지하면 약간 흔들리는 용
+	bool				_angleWay;			// 머리가 회전되는 방향	
 
-	BELIAL_PHASE _phase;	// 공격 패턴
-
-	bool		_realDead;
+	float		_headAlpha;		// 머리 알파값
+	float		_handAlpha;		// 양손 알파값
 
 public:
 	void init(const Vector2& pos);

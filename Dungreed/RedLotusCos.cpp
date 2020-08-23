@@ -8,7 +8,6 @@ void RedLotusCos::init()
 	//코스튬 설명창에 보여줄 내용들
 	_costumeTitle = L"홍련";
 	_costumeSummary = L"저 너머로...개화하고 싶지 않은가, 그대?";
-	_costumeDetails = L"표식: 적을 공격하면 위력을 6올려주는 표식을 남깁니다. (최대 10개)";
 
 	_ani = new Animation;
 
@@ -17,7 +16,7 @@ void RedLotusCos::init()
 
 	//변동 스탯
 	_differStat.maxHp = -15;
-	_differStat.evasion = -5;
+	_differStat.evasion = 25;
 
 	//베이스 스탯
 	_baseStat.maxHp = 80;
@@ -38,11 +37,11 @@ void RedLotusCos::init()
 	_baseStat.attackSpeed = 0;
 	_baseStat.reloadSpeed = 0; // --
 	_baseStat.moveSpeed = 350;
-	_baseStat.dashXPower = 1350;
-	_baseStat.dashYPower = 950;
-	_baseStat.jumpPower = 1200;
-	_baseStat.xGravity = 3000;
-	_baseStat.yGravity = 3000;
+	_baseStat.dashXPower = 1700;
+	_baseStat.dashYPower = 1500;
+	_baseStat.jumpPower = 1400;
+	_baseStat.xGravity = 4000;
+	_baseStat.yGravity = 4000;
 }
 
 void RedLotusCos::release()

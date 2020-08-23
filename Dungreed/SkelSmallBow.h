@@ -11,8 +11,8 @@ private:
 
 	Image*			_handImg;		// 손 이미지
 
-	bool			_attacking;		// 공격 판단용
-	int				_enterCount;
+	bool			_attackEnd;		// 화살을 발사했는지
+
 public:
 	void init(const Vector2& pos, DIRECTION direction, bool spawnEffect);
 	void release();

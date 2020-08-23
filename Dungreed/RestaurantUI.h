@@ -108,7 +108,7 @@ private:
 	// 골드 아이콘 렉트
 	FloatRect _goldIconRc;
 	
-	tagFoodItems _foodItems[5];
+	tagFoodItems _foodItems[8];
 	tagScrollBar _scrollBar;
 	
 

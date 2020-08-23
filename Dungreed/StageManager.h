@@ -40,8 +40,7 @@ private:
 
 private:
 	//보스 스테이지 만들기
-	vector<Stage*> _bossRoomInfo;
-	void makeBoomStage();
+	void makeBossStage();
 
 	vector<vector<tagRoomInfo>> _roomInfo;
 	//랜덤 스테이지 만들기
@@ -88,9 +87,11 @@ public:
 	Vector2 getPlayerPos();
 	void setPlayerPos(int x, int y);
 	Vector2 getEnemyPos(Vector2 pos);
+	vector<FloatRect> getEnemyRects();
 
 	
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
+	void setShowPlayer(bool showPlayer);
 };

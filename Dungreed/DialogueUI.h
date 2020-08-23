@@ -8,9 +8,9 @@ private:
 	
 	Npc* _npc; // 현재 대화창을 연 NPC
 
-	string _nameDialogue;
-	string _bodyDialogue;
-	vector<string> _selectDialogue;
+	wstring _nameDialogue;
+	wstring _bodyDialogue;
+	vector<wstring> _selectDialogue;
 
 	FloatRect _nameRc;
 	FloatRect _bodyRc;

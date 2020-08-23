@@ -151,13 +151,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AbilityNpc.h" />
     <ClInclude Include="AbilityUI.h" />
+    <ClInclude Include="AliceAbility.h" />
     <ClInclude Include="AliceCos.h" />
     <ClInclude Include="AllEnums.h" />
     <ClInclude Include="AllRoom.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
     <ClInclude Include="ChestNpc.h" />
+    <ClInclude Include="CostumeNpc.h" />
     <ClInclude Include="DoorNpc.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="GameEvent.h" />
@@ -314,6 +317,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SeeriProjectile.h" />
     <ClInclude Include="ShopNpc.h" />
+    <ClInclude Include="ShopUI.h" />
     <ClInclude Include="ShortSpear.h" />
     <ClInclude Include="SilverBullet.h" />
     <ClInclude Include="SingletonBase.h" />
@@ -351,11 +355,14 @@
     <ClInclude Include="Wingboots.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AbilityNpc.cpp" />
     <ClCompile Include="AbilityUI.cpp" />
+    <ClCompile Include="AliceAbility.cpp" />
     <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
     <ClCompile Include="ChestNpc.cpp" />
+    <ClCompile Include="CostumeNpc.cpp" />
     <ClCompile Include="DoorNpc.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="GameEvent.cpp" />
@@ -506,6 +513,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SeeriProjectile.cpp" />
     <ClCompile Include="ShopNpc.cpp" />
+    <ClCompile Include="ShopUI.cpp" />
     <ClCompile Include="SilverBullet.cpp" />
     <ClCompile Include="SkelBigIce.cpp" />
     <ClCompile Include="ShortSpear.cpp" />

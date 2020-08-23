@@ -153,7 +153,7 @@ void CostumeUI::render()
 			_costumeCell[i].costumeEquippedImg->render(Vector2((relativeCell.getCenter().x), relativeCell.getCenter().y + 10), false);
 		}
 		//현재 선택한 코스튬
-		if (_costumeCell[i].cellRect.ptInRect(_ptMouse))
+		if (relativeCell.ptInRect(_ptMouse))
 		{
 			_costumeCell[i].costumeSelectedImg->setSize(Vector2(300, 500));
 			//_costumeCell[i].costumeSelectedImg->render(Vector2(_costumeCell[i].cellRect.getCenter().getIntX(), _costumeCell[i].cellRect.getCenter().getIntY() + 10), false);

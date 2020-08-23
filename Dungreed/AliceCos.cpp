@@ -1,9 +1,14 @@
 #include "AliceCos.h"
+#include "AliceAbility.h"
 
 void AliceCos::init()
 {
 	//코스튬 이름 설정
 	_costumeName = "ALICE";
+
+	AliceAbility* ability = new AliceAbility;
+	ability->init();
+	_specialAbility.push_back(ability);
 
 	//코스튬 설명창에 보여줄 내용들
 	_costumeTitle = L"앨리스";
@@ -17,7 +22,7 @@ void AliceCos::init()
 
 	//변동 스탯
 	_differStat.maxHp = -30;
-	_differStat.power = 0;
+	_differStat.power = 40;
 
 	//베이스 스탯
 	_baseStat.maxHp = 80;
@@ -38,11 +43,11 @@ void AliceCos::init()
 	_baseStat.attackSpeed = 0;
 	_baseStat.reloadSpeed = 0; // --
 	_baseStat.moveSpeed = 350;
-	_baseStat.dashXPower = 1350;
-	_baseStat.dashYPower = 950;
-	_baseStat.jumpPower = 1200;
-	_baseStat.xGravity = 3000;
-	_baseStat.yGravity = 3000;
+	_baseStat.dashXPower = 1700;
+	_baseStat.dashYPower = 1500;
+	_baseStat.jumpPower = 1400;
+	_baseStat.xGravity = 4000;
+	_baseStat.yGravity = 4000;
 }
 
 void AliceCos::release()

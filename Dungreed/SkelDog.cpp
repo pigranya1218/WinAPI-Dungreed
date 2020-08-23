@@ -32,8 +32,8 @@ void SkelDog::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_moving.gravity = Vector2(0, 4000);
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 3;
 	_attack.attackInit(1, 0, 2);
+	_attack.delay = 3;	
 
 	ZeroMemory(&_hit, sizeof(_hit));
 	_hit.delay = 0.3f;
@@ -65,12 +65,11 @@ void SkelDog::update(float const timeElapsed)
 	{
 		case ENEMY_STATE::ENTER:
 		{
-
-
 			if (!_ani->isPlay())
 			{
 				SOUND_MANAGER->stop("Enemy/Spawn");
 				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}

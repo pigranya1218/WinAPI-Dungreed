@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ShopNpc.h"
 #include "UIManager.h"
+#include "NpcManager.h"
 
 void ShopNpc::init(Vector2 pos, DIRECTION direction)
 {
@@ -20,9 +21,9 @@ void ShopNpc::init(Vector2 pos, DIRECTION direction)
 	_size = Vector2(50, 190);
 	_active = true;
 
-	_name = "크록";
-	_bodyDialogue = "가나다라마바사아자차카타파하";
-	_selectDialogues.push_back("상점");
+	_name = L"크록";
+	_bodyDialogue = L"반갑다. 좋은 것들 가져왔다.";
+	_selectDialogues.push_back(L"상점");
 
 	_isActiveInteraction = false;
 	_isClose = false;
@@ -53,4 +54,12 @@ void ShopNpc::render()
 	_img->aniRender(CAMERA->getRelativeV2(_position), _ani, (_direction == DIRECTION::LEFT));
 
 	Npc::render();
+}
+
+void ShopNpc::clickMenu(int menuIndex)
+{
+	if (menuIndex == 0)
+	{
+		_npcMgr->showShopUI();
+	}
 }

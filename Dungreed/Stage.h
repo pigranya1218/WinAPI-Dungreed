@@ -19,12 +19,41 @@ struct tagShowNpc
 	NPC_TYPE type;
 };
 
+enum class STAGE_STATE : int
+{
+	IDLE = 0, // 대기 상태
+	START, // 몬스터 소환하기
+	FINISH, // 끝난 상태
+	END
+};
+
+struct tagEnemySpawn // 적의 소환 위치
+{
+	ENEMY_TYPE type;
+	Vector2 pos;
+	int phase = 1;
+};
+
+struct tagChest // 보물상자 소환
+{
+	bool spawn = false; // 보물상자 소환 여부
+	NPC_TYPE type;
+	Vector2 pos;
+};
+
 class Stage
 {
 protected:
 	StageManager* _stageManager;
 	UIManager* _uiManager;
 	Player* _player;
+
+	STAGE_STATE _state;
+	vector<tagEnemySpawn> _spawnEnemies;
+	tagChest _spawnChest;
+	float _spawnDelay;
+	int _spawnIndex;
+	int _spawnPhase;
 
 	Stage* _connectedStage[static_cast<int>(DIRECTION::END)]; // 연결된 스테이지(좌 우 상 하)
 	
@@ -41,10 +70,16 @@ protected:
 	vector<LinearFunc> _collisionPlatforms; // 플랫폼 땅
 	
 	bool _isVisited; // 방문한 스테이지인가? (UI 지도에서 그리기 위함)
+	bool _isGoNextStage; // 다음 스테이지로 넘어갈텐가
 
 	vector<bool> _isWall;
 	vector<Vector2> _respawnPosition; // 플레이어가 리스폰될 위치
 	vector<DoorObject*> _doors;
+
+	
+
+
+	Synthesize(ROOMTYPE, _roomType, RoomType)
 
 public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
@@ -79,6 +114,7 @@ public:
 	
 	Vector2 getPlayerPos();
 	Vector2 getEnemyPos(const Vector2& pos);
+	vector<FloatRect> getEnemyRects();
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
@@ -94,4 +130,6 @@ public:
 	virtual vector<tagShowNpc> getNpcInfos();
 
 	void moveToIndex(Vector2 index);
+	void nextStage();
+	void setShowPlayer(bool showPlayer);
 };

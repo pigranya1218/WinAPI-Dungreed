@@ -7,7 +7,7 @@ void StartRoom2::init()
 	loadMap("room/StartRoom2_RB.map");
 
 	
-	_respawnPosition[0] = Vector2(565, 670);
+	_respawnPosition[0] = Vector2(565, 650);
 
 	//_respawnPosition[2] = Vector2(1450, 670);
 	
@@ -34,6 +34,8 @@ void StartRoom2::init()
 
 	_npcMgr->spawnNpc(NPC_TYPE::ENTRANCE, Vector2(570, 573), DIRECTION::LEFT);
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(930, 620), DIRECTION::LEFT);
+
+	_roomType = ROOMTYPE::NORMAL;
 }
 
 void StartRoom2::release()

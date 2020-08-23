@@ -24,7 +24,7 @@ void SeeriProjectile::init(const string imgKey, const string collisionEffect, co
 		_ani->setDefPlayFrame(false, isAniLoop);
 		_ani->start();
 	}
-
+	_position.x = _position.x - 100;
 	_useAni = useAni;
 	_useRotate = useRotate;
 	_useGravity = useGravity;
@@ -61,10 +61,12 @@ void SeeriProjectile::release()
 
 void SeeriProjectile::update(float elapsedTime)
 {
+	
 	if (_Delay > 0)
 	{
 		_Delay = max(0, _Delay - elapsedTime);
-		_position.y -= 300* elapsedTime;		
+		_position.y -= 100* elapsedTime;
+		
 	}
 	_enemyPos = _projectileMgr->getEnemyPos(_position);
 	_timeCount += elapsedTime;	
@@ -72,6 +74,7 @@ void SeeriProjectile::update(float elapsedTime)
 	
 	if (_Delay == 0)
 	{
+		
 		// 중력 적용
 		if (_useGravity)
 		{
@@ -84,7 +87,7 @@ void SeeriProjectile::update(float elapsedTime)
 		{
 			guidedAngleRadian -= PI2;
 		}
-
+		
 
 
 		if (_timeCount <= 0.3f)
@@ -146,7 +149,7 @@ void SeeriProjectile::update(float elapsedTime)
 	Vector2 effectPos = _position;
 	effectPos.x += cosf(_angleRadian) * _length;
 	effectPos.y += -sinf(_angleRadian) * _length;
-	_img->setAngle(_angleRadian*2);
+	
 
 	if (lastDir + moveDir != currDir)
 	{
@@ -198,14 +201,13 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
+
+	_img->setAngle(PI / 5);
 }
 
 void SeeriProjectile::render()
-{
-	if (_useRotate)
-	{
-		_img->setAngle(_angleRadian * (180 / PI));
-	}
+{	
+	
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);
