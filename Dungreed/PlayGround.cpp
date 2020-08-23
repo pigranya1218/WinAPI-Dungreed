@@ -837,11 +837,13 @@ HRESULT playGround::init()
 
 
 	//사운드
+	//** MAIN SCENE
+	SOUND_MANAGER->addSound("main_title", "resources/sound/Ui/bgm/title.wav", true, false);					//메인 타이틀 화면 bgm
 
 	//** STAGE
 	//SOUND_MANAGER->addSound("Town", "resources/sound/stage/bgm/0.Town.wav", true, false);			//마을 bmg 
 	SOUND_MANAGER->addSound("ambienceTown", "resources/sound/stage/bgm/ambience_town.wav", true, false);	//마을 bmg 효과음
-
+	
 
 	//** PLAYER / UI
 	SOUND_MANAGER->addSound("Player/Step1", "resources/sounds/player/step_lth1.wav", false, false);			//플레이어 이동1
