@@ -319,9 +319,9 @@ void Player::init()
 	//testWeapon2->init();
 	//_inventory[11] = testWeapon2;
 
-	CosmosSword* testWeapon3 = new CosmosSword; // 이거 없으면 못깰 지경../
-	testWeapon3->init();
-	_inventory[12] = testWeapon3;
+	//CosmosSword* testWeapon3 = new CosmosSword; // 이거 없으면 못깰 지경../
+	//testWeapon3->init();
+	//_inventory[12] = testWeapon3;
 	////
 	///*PickaxeRed* testWeapon4 = new PickaxeRed;
 	//testWeapon4->init();
@@ -339,25 +339,25 @@ void Player::init()
 	//testWeapon5->init();
 	//_inventory[13] = testWeapon5;
 
-	//Boomerang* testweapon6 = new Boomerang;
-	//testweapon6->init();
-	//_inventory[12] = testweapon6;
+	OakBow* testWeapon1 = new OakBow;
+	testWeapon1->init();
+	_inventory[10] = testWeapon1;
 
-	///*MatchLockGun* testWeapon6 = new MatchLockGun;
-	//testWeapon6->init();
-	//_inventory[14] = testWeapon6;*/
+	MatchLockGun* testWeapon2 = new MatchLockGun;
+	testWeapon2->init();
+	_inventory[11] = testWeapon2;
 
-	/*GatlingGun* testWeapon7 = new GatlingGun;
-	testWeapon7->init();
-	_inventory[3] = testWeapon7;*/
+	Boomerang* testweapon3 = new Boomerang;
+	testweapon3->init();
+	_inventory[12] = testweapon3;
 
-	MagicStick* testWeapon8 = new MagicStick;
-	testWeapon8->init();
-	_inventory[14] = testWeapon8;
+	GatlingGun* testWeapon4 = new GatlingGun;
+	testWeapon4->init();
+	_inventory[13] = testWeapon4;
 
-	//OakBow* testWeapon8 = new OakBow;
-	//testWeapon8->init();
-	//_inventory[14] = testWeapon8;
+	MagicStick* testWeapon5 = new MagicStick;
+	testWeapon5->init();
+	_inventory[14] = testWeapon5;
 
 	///*SilverBullet* testAcc19 = new SilverBullet;
 	//testAcc19->init();

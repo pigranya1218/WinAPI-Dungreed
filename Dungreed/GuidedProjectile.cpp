@@ -298,18 +298,6 @@ void GuidedProjectile::render()
 
 	if (_afterimage)
 	{
-		//_shodow.img->setScale(4);
-		//_shodow.img->setAlpha(_alphaValue);
-
-		/*if (_useAni)
-		{
-			_shodow.img->frameRender(CAMERA->getRelativeV2(_shodow.pos), _shodow.frameX, 0);
-		}
-		if (!_useAni)
-		{
-			_shodow.img->render(CAMERA->getRelativeV2(_shodow.pos));
-		}*/
-
 		for (int i = 0; i < _vShadow.size(); i++)
 		{
 			_shodow.img->setScale(4);
@@ -325,9 +313,6 @@ void GuidedProjectile::render()
 			}
 		}
 	}
-	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_enemyPos.x), CAMERA->getRelativeY(_enemyPos.y - 50), to_wstring(_enemyPos.x) + to_wstring(_enemyPos.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
-	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 50), to_wstring(_position.x) + to_wstring(_position.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
-
 }
 
 void GuidedProjectile::aniUpdate(float const elapsedTime)
