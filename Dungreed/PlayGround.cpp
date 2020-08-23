@@ -133,6 +133,11 @@ HRESULT playGround::init()
 	// ** PLAYER
 	IMAGE_MANAGER->addFrameImage("PLAYER/DASH_DUST", L"resources/images/Effect/Dash/DustEffect.png", 6, 1);
 	EFFECT_MANAGER->addEffect("PLAYER/DASH_DUST_EFFECT", "PLAYER/DASH_DUST", 30, 10);
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/BASE", L"resources/images/Effect/Dash/Shadow/base_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/METAL", L"resources/images/Effect/Dash/Shadow/metal_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/ALICE", L"resources/images/Effect/Dash/Shadow/alice_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/RED_LOTUS", L"resources/images/Effect/Dash/Shadow/redLotus_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/PICKAX", L"resources/images/Effect/Dash/Shadow/pickax_player_jump_shadow.png");
 	// ** UI
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BG", L"resources/images/gameScene/ui/PlayerLifeBack.png");
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_FRAME", L"resources/images/gameScene/ui/PlayerLifeBase 1.png");
