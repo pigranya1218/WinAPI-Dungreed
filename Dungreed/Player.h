@@ -112,7 +112,7 @@ public:
 	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
-	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); }	// 어빌리티 스탯 설정자
+	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); _currHp = _adjustStat.maxHp; }	// 어빌리티 스탯 설정자
 	void setSpecialAbility(vector<Item*> specialAbility);
 
 	Costume* getCurrCostume() { return _costume; }
