@@ -346,9 +346,9 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[13] = testWeapon5;
 
-	/*Boomerang* testweapon6 = new Boomerang;
+	Boomerang* testweapon6 = new Boomerang;
 	testweapon6->init();
-	_inventory[14] = testweapon6;*/
+	_inventory[12] = testweapon6;
 
 	/*MatchLockGun* testWeapon6 = new MatchLockGun;
 	testWeapon6->init();
@@ -358,13 +358,13 @@ void Player::init()
 	testWeapon7->init();
 	_inventory[3] = testWeapon7;
 
-	//MagicStick* testWeapon8 = new MagicStick;
-	//testWeapon8->init();
-	//_inventory[14] = testWeapon8;
-
-	OakBow* testWeapon8 = new OakBow;
+	MagicStick* testWeapon8 = new MagicStick;
 	testWeapon8->init();
 	_inventory[14] = testWeapon8;
+
+	//OakBow* testWeapon8 = new OakBow;
+	//testWeapon8->init();
+	//_inventory[14] = testWeapon8;
 
 	/*SilverBullet* testAcc19 = new SilverBullet;
 	testAcc19->init();

@@ -558,8 +558,6 @@ HRESULT playGround::init()
 
 
 
-
-
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // ¿ìÁÖ°Ë ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSLASH", "CosmosSlashFX0", 30, 10);	  // ¿ìÁÖ°Ë ÇÇ°İ½Ã ÀÌÆåÆ®
 	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // ³´ ÀÌÆåÆ®
@@ -882,6 +880,8 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("GatlingWarmUp", "resources/sounds/weapon/LongDistanceWeapon/GatlingWarmUp.wav", false, false);
 	SOUND_MANAGER->addSound("bow_arrow_draw", "resources/sounds/weapon/LongDistanceWeapon/bow_crossbow_arrow_draw_stretch1_03.wav", false, false);
 	SOUND_MANAGER->addSound("bow_attack", "resources/sounds/weapon/LongDistanceWeapon/etc-sound0034_Bow.wav", false, false);
+	SOUND_MANAGER->addSound("boomerang_attack_sound", "resources/sounds/weapon/LongDistanceWeapon/Fantasy_Game_Skill_Axethrow_B.wav", false, false);
+	SOUND_MANAGER->addSound("MagicStick_sound", "resources/sounds/weapon/LongDistanceWeapon/flaunchLightbringer.wav", false, false);
 
 	TIME_MANAGER->init();
 	CONFIG_MANAGER->init();
