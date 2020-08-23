@@ -160,6 +160,9 @@ bool Enemy::hitEffect(FloatCircle * circle, AttackInfo * info)
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
 
+	SOUND_MANAGER->stop("Enemy/GetHit");
+	SOUND_MANAGER->play("Enemy/GetHit", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 	_img = IMAGE_MANAGER->findImage(_imageName + "_Shot");
 
 	DamageInfo damageInfo = info->getDamageInfo();
@@ -182,6 +185,7 @@ bool Enemy::hitEffect(Projectile * projectile)
 	_hit.count = 0;
 	//_hit.knockCount = 0;
 	_moving.gravity.x = info->knockBack;
+
 	SOUND_MANAGER->stop("Enemy/GetHit");
 	SOUND_MANAGER->play("Enemy/GetHit", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
