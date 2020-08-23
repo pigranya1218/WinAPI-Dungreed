@@ -11,8 +11,10 @@ void UIManager::setPlayer(Player * player)
 	_statUI.setPlayer(player);
 	_costumeUI.setPlayer(player);
 	_restaurantUI.setPlayer(player);
+	_restaurantUI.setUIMgr(this);
 	_abilityUI.setPlayer(player);
 	_shopUI.setPlayer(player);
+
 }
 
 void UIManager::init()
@@ -1041,4 +1043,14 @@ void UIManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 	hpUI.currHp = curHp;
 	_enemyHpUI.push_back(hpUI);
 }
+
+void UIManager::setEatFoods(Food* food)
+{
+	//_foodList.push_back(food);
+	_statUI.setEatFoods(food);
+}
+
+
+
+
 
