@@ -212,9 +212,9 @@ void Player::init()
 	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
-	ShortSpear* testAcc1 = new ShortSpear;
+	/*ShortSpear* testAcc1 = new ShortSpear;
 	testAcc1->init();
-	_equippedWeapon[0] = testAcc1;
+	_equippedWeapon[0] = testAcc1;*/
 
 	Seeri* testAcc24 = new Seeri;
 	testAcc24->init();
@@ -229,10 +229,10 @@ void Player::init()
 	////testAcc3->init();
 	////_inventory[3] = testAcc3;
 
-	//
-	//ShortSword* testAcc4 = new ShortSword;
-	//testAcc4->init();
-	//_inventory[3] = testAcc4;
+	
+	ShortSword* testAcc4 = new ShortSword;
+	testAcc4->init();
+	_equippedWeapon[0] = testAcc4;
 
 
 	//MartialArtOfTiger* testAcc9 = new MartialArtOfTiger;
