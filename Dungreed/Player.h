@@ -103,6 +103,7 @@ public:
 	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함
 	void unequipAcc(int index);		// 악세사리 장착중이던 아이템을 해제함
 	void swapItem(int indexA, int indexB);
+	bool collisionItem(Item* item);
 
 	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 

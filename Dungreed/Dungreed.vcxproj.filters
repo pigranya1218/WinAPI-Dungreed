@@ -160,9 +160,6 @@
     <Filter Include="Dungreed\GameScene\Enemy\Mob">
       <UniqueIdentifier>{759bebd3-6ec7-4b7f-b645-334b4baa4677}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\GameScene\Object\OnlyView">
-      <UniqueIdentifier>{331596e0-74fd-41f5-adc3-346c6f247d9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Npc\Door">
       <UniqueIdentifier>{dae275ec-895b-4bf0-a250-9e97070da4fd}</UniqueIdentifier>
     </Filter>
@@ -729,9 +726,6 @@
     <ClInclude Include="ChestNpc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="ViewObject.h">
-      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
-    </ClInclude>
     <ClInclude Include="GateNpc.h">
       <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClInclude>
@@ -809,6 +803,9 @@
     </ClInclude>
     <ClInclude Include="TimeRatioEvent.h">
       <Filter>Dungreed\GameScene\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemObject.h">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1322,9 +1319,6 @@
     <ClCompile Include="ChestNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="ViewObject.cpp">
-      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
-    </ClCompile>
     <ClCompile Include="GateNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClCompile>
@@ -1411,6 +1405,9 @@
     </ClCompile>
     <ClCompile Include="TimeRatioEvent.cpp">
       <Filter>Dungreed\GameScene\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

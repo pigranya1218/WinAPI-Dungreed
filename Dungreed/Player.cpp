@@ -1050,6 +1050,20 @@ void Player::swapItem(int indexA, int indexB) // 0 ~ 1 : weapon, 2 ~ 5 : Acc, 6 
 	}
 }
 
+bool Player::collisionItem(Item* item)
+{
+	for (int i = 0; i < _inventory.size(); i++)
+	{
+		if (_inventory[i] == nullptr)
+		{
+			_inventory[i] = item;
+			
+			return true;
+		}
+	}
+	return false;
+}
+
 bool Player::ateFood(Food * food)
 {
 	// 플레이어의 현재 골드와 포만감을 비교하여 먹을 수 있다면

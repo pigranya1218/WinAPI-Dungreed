@@ -100,17 +100,7 @@ void BrokenObject::respawnGold()
 		object->init(10, pos, power, radian);
 		_objectMgr->pushObject(object);
 	}
-	for (int i = 0; i < 5; i++)
-	{
-		Vector2 pos = Vector2(RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x), RANDOM->getFromFloatTo(_position.y, _position.y - _size.y));
-		float power = RANDOM->getFromFloatTo(600, 800);
-		float radian = RANDOM->getFromFloatTo(0.2 * PI, 0.8 * PI);
 
-		GoldObject* object = new GoldObject;
-		object->setObjectManager(_objectMgr);
-		object->init(100, pos, power, radian);
-		_objectMgr->pushObject(object);
-	}
 }
 
 void BrokenObject::respawnHpFairy()
@@ -154,8 +144,15 @@ bool BrokenObject::hitEffect(FloatRect* rect, AttackInfo* info)
 {
 	_active = false;
 	respawnParticle();
-	respawnGold();
-	respawnHpFairy();
+	int randomCount = RANDOM->getInt(100);
+	if (randomCount < 80)
+	{
+		respawnGold();
+	}
+	else
+	{
+		respawnHpFairy();
+	}
 	return true;
 }
 
@@ -163,8 +160,15 @@ bool BrokenObject::hitEffect(FloatCircle* circle, AttackInfo* info)
 {
 	_active = false;
 	respawnParticle();
-	respawnGold();
-	respawnHpFairy();
+	int randomCount = RANDOM->getInt(100);
+	if (randomCount < 80)
+	{
+		respawnGold();
+	}
+	else
+	{
+		respawnHpFairy();
+	}
 	return true;
 }
 
@@ -172,7 +176,14 @@ bool BrokenObject::hitEffect(Projectile* projectile)
 {
 	_active = false;
 	respawnParticle();
-	respawnGold();
-	respawnHpFairy();
+	int randomCount = RANDOM->getInt(100);
+	if (randomCount < 80)
+	{
+		respawnGold();
+	}
+	else
+	{
+		respawnHpFairy();
+	}
 	return true;
 }
