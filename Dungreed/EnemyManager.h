@@ -62,4 +62,9 @@ public:
 
 	void showDamage(DamageInfo info, Vector2 pos);
 	void showEnemyHp(float maxHp, float curHp, Vector2 pos);
+
+	void activeBossUI(bool active);
+	void setBossUIHp(int maxHp, int currHp);
+	void makeR2REvent(COLORREF color, float time);
+	void makeTimeRatioEvent(float ratio, float time);
 };

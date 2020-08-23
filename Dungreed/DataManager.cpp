@@ -25,6 +25,9 @@ void DataManager::init()
 
 	_costumeMgr = new CostumeManager;
 	_costumeMgr->init();
+
+	_itemMgr = new ItemManager;
+	_itemMgr->init();
 }
 
 void DataManager::update()
@@ -119,4 +122,14 @@ void DataManager::render()
 Costume* DataManager::getCostume(COSTUME_TYPE type) const
 {
 	return _costumeMgr->getCostume(type);
+}
+
+vector<Item*> DataManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count) const
+{
+	return _itemMgr->getRandomItem(startRank, endRank, count);
+}
+
+Item* DataManager::getItem(int itemCode) const
+{
+	return _itemMgr->getItem(itemCode);
 }

@@ -91,6 +91,18 @@ private:
 		Vector2 pos; // 그릴 위치
 	};
 
+	struct tagBossHpUI
+	{
+		bool active;
+		Image* bossHpFrameImg;
+		Image* bossHpBgImg;
+		Image* bossMark;
+		float maxHP;
+		float currHp;
+		FloatRect hpBg; // hp바 배경
+		FloatRect hpBar; // hp바 게이지
+	};
+
 	struct tagMiniMap // 미니맵
 	{
 		vector<FloatRect> collisionRect; // 미니맵에 그려질 땅
@@ -157,6 +169,8 @@ private:
 	tagMiniMap _miniMapUI; // 미니맵 UI
 	tagMap _mapUI; // 맵 UI
 
+	tagBossHpUI _bossUI;
+
 	vector<tagDamageUI> _damageUI; // 대미지 표기 숫자 UI
 	vector<tagEnemyHpUI> _enemyHpUI; // 적 체력바 UI
 
@@ -195,6 +209,10 @@ public:
 	void showShop() { _shopUI.setActive(true); }
 	void showAbility() { _abilityUI.setActive(true); }
 	void showCostume() { _costumeUI.setActive(true); }
+
+	bool getBossHpActive() { return _bossUI.active; }
+	void showBossHP(bool active) { _bossUI.active = active; }
+	void setBossHP(int maxHp, int currHp) { _bossUI.maxHP = maxHp; _bossUI.currHp = currHp; }
 
 	void setEatFoods(Food* food); //음식점UI -> get -> 스탯UI -> set
 	//Food getEatFoods(int i) { return _foodList[i]; }	//음식점UI -> 스탯UI

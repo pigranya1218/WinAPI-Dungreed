@@ -45,6 +45,7 @@ public:
 
 
 	// EVENT 관련 함수
-	void pushR2REvent(float remainTime);
+	void pushR2REvent(COLORREF color, float remainTime);
+	void pushTimeRatioEvent(float ratio, float remainTime);
 };
 

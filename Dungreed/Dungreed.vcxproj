@@ -159,11 +159,14 @@
     <ClInclude Include="AllRoom.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackInfo.h" />
+    <ClInclude Include="CameraFillEvent.h" />
+    <ClInclude Include="CameraMoveEvent.h" />
     <ClInclude Include="ChestNpc.h" />
     <ClInclude Include="CostumeNpc.h" />
     <ClInclude Include="DoorNpc.h" />
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="GameEvent.h" />
+    <ClInclude Include="ItemManager.h" />
     <ClInclude Include="Room20LB.h" />
     <ClInclude Include="Room20LRB.h" />
     <ClInclude Include="Room20TB.h" />
@@ -193,7 +196,6 @@
     <ClInclude Include="CameraShakeEvent.h" />
     <ClInclude Include="ConfigManager.h" />
     <ClInclude Include="CosmosSword.h" />
-    <ClInclude Include="CosmosSwordProjectile.h" />
     <ClInclude Include="Costume.h" />
     <ClInclude Include="CostumeManager.h" />
     <ClInclude Include="CostumeUI.h" />
@@ -343,6 +345,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="TimeRatioEvent.h" />
     <ClInclude Include="TomatoSoupFood.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
@@ -361,11 +364,14 @@
     <ClCompile Include="AliceCos.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackInfo.cpp" />
+    <ClCompile Include="CameraFillEvent.cpp" />
+    <ClCompile Include="CameraMoveEvent.cpp" />
     <ClCompile Include="ChestNpc.cpp" />
     <ClCompile Include="CostumeNpc.cpp" />
     <ClCompile Include="DoorNpc.cpp" />
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="GameEvent.cpp" />
+    <ClCompile Include="ItemManager.cpp" />
     <ClCompile Include="Room20LB.cpp" />
     <ClCompile Include="Room20LRB.cpp" />
     <ClCompile Include="Room20TB.cpp" />
@@ -395,7 +401,6 @@
     <ClCompile Include="CameraShakeEvent.cpp" />
     <ClCompile Include="ConfigManager.cpp" />
     <ClCompile Include="CosmosSword.cpp" />
-    <ClCompile Include="CosmosSwordProjectile.cpp" />
     <ClCompile Include="CostumeManager.cpp" />
     <ClCompile Include="CostumeUI.cpp" />
     <ClCompile Include="D2DRenderer+Draw.cpp" />
@@ -537,6 +542,7 @@
     <ClCompile Include="StrawberryPieFood.cpp" />
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="TimeRatioEvent.cpp" />
     <ClCompile Include="TomatoSoupFood.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utils.cpp" />

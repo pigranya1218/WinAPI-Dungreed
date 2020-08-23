@@ -140,17 +140,14 @@ void QuarterStaffBig::frontRender(Player* player)
 	
 	
 	
-	_attackDebug.render(true);
 }
 
 void QuarterStaffBig::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
 
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-
-	Vector2 renderPosHand = pos;
+	CAMERA->pushShakeEvent(3, 0.1f);
+	
 	_oneAttack = true;
 	_currAttackDelay = _addStat.attackSpeed;
 	//==========================================================================

@@ -34,13 +34,14 @@ void Voluspa::release()
 
 void Voluspa::update(Player * player, float const elapsedTime)
 {	
-	
-	_playerPos = player->getPosition();
-	_elapsedTime += elapsedTime;
-	_location.x = 2500* elapsedTime;
 	Vector2 enemypos = player->getEnemyPos(Vector2());
+	_playerPos = player->getPosition();
 	if (_playerPos.x - 600 < enemypos.x && _playerPos.x + 600 > enemypos.x && _playerPos.y - 600 < enemypos.y && _playerPos.y + 600 > enemypos.y)
 	{
+		
+		_elapsedTime += elapsedTime;
+		_location.x = 2500 * elapsedTime;
+	
 		if (_renderPos.x > _playerPos.x + 300)
 		{
 			if (_currStopDelay > 0) // 공격 딜레이 대기 중

@@ -294,6 +294,9 @@ void MagicStick::attack(Player * player)
 	_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임
 	_drawEffect = true; // 이펙트 그리기
+
+	SOUND_MANAGER->stop("MagicStick_sound");
+	SOUND_MANAGER->play("MagicStick_sound", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 }
 
 void MagicStick::attack(Player* player, FloatRect * rect, AttackInfo * info)

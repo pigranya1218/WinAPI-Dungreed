@@ -94,6 +94,13 @@ void UIManager::init()
 		_mapUI.infos[i].textRc = FloatRect(Vector2(390, 650 + 36 * i), Vector2(300, 40), PIVOT::CENTER);
 	}
 
+	_bossUI.active = false;
+	_bossUI.bossHpFrameImg = IMAGE_MANAGER->findImage("UI/BOSS/HP_FRAME");
+	_bossUI.bossHpBgImg = IMAGE_MANAGER->findImage("UI/BOSS/HP_BG");
+	_bossUI.bossMark = IMAGE_MANAGER->findImage("UI/BOSS/HP_MARK");
+	_bossUI.hpBar = FloatRect(Vector2(845, WINSIZEY - 50), Vector2(490, 40), PIVOT::CENTER);
+	_bossUI.hpBg = FloatRect(Vector2(WINSIZEX / 2, WINSIZEY - 50), Vector2(600, 64), PIVOT::CENTER);
+
 	// DIALOGUE UI
 	_dialogueUI.init();
 
@@ -771,6 +778,17 @@ void UIManager::render()
 			}
 		}
 
+		// BOSS HP UI
+		if (_bossUI.active)
+		{
+			_bossUI.bossHpBgImg->render(_bossUI.hpBg.getCenter(), _bossUI.hpBg.getSize());
+			_bossUI.bossMark->render(Vector2(554, WINSIZEY - 50), Vector2(68, 40));
+			FloatRect currRc = _bossUI.hpBar;
+			float ratio = static_cast<float>(_bossUI.currHp) / _bossUI.maxHP;
+			currRc.right = currRc.left + ratio * _bossUI.hpBar.getSize().x;
+			D2D_RENDERER->fillRectangle(currRc, 132, 46, 37, 1);
+			_bossUI.bossHpFrameImg->render(_bossUI.hpBg.getCenter(), _bossUI.hpBg.getSize());
+		}
 
 		// Dialogue UI
 		if (_dialogueUI.isActive())
@@ -909,7 +927,7 @@ void UIManager::setMap(vector<vector<Stage*>> stageMap, string stageName)
 			else
 			{
 				_mapUI.uiMap[x][y].exist = true;
-				_mapUI.uiMap[x][y].visible = true;
+				_mapUI.uiMap[x][y].visible = false;
 				_mapUI.uiMap[x][y].rc = FloatRect(Vector2(-30 + (30 + 114) * (x), -30 + (30 + 114) * y), Vector2(114, 114), PIVOT::LEFT_TOP);
 				_mapUI.uiMap[x][y].isConnect.resize(4);
 				vector<bool> isWall = _mapUI.stageMap[x][y]->getWall();
