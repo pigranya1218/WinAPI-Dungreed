@@ -49,7 +49,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 				}
 
 				if (_currStopDelay == 0) {
-					
+					SOUND_MANAGER->play("VoluspaS", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_renderPos.y = _enemypos.y;
 					_currAttackDelay = 1.7f;
 					_Opposition = true;
@@ -66,7 +66,8 @@ void Voluspa::update(Player * player, float const elapsedTime)
 					_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 				}
 
-				if (_currAttackDelay == 0) {									
+				if (_currAttackDelay == 0) {
+					SOUND_MANAGER->play("VoluspaS", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 					_renderPos.y = _enemypos.y;
 					_currStopDelay = 1.7f;
 					_Opposition = false;

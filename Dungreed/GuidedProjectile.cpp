@@ -93,9 +93,12 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 	_timeCount = 0;
 	_afterCount = 0;
 	_mirageCount = 1;
+	_frameIndex = 0;
 
 	if (_afterimage)
 	{
+		_alphaValue = 1.0f;
+		_alphaCount = 0;
 	}
 }
 
@@ -123,7 +126,7 @@ void GuidedProjectile::update(float elapsedTime)
 	}
 
 	// 투사체부터 에너미까지의 각도
-	float guidedAngleRadian = atan2f(-(CAMERA->getRelativeY(_enemyPos.y) - _position.y), (CAMERA->getRelativeX(_enemyPos.x) - _position.x)) + PI2;
+	float guidedAngleRadian = atan2f(-(_enemyPos.y - _position.y), (_enemyPos.x) - _position.x) + PI2;
 	if (guidedAngleRadian > PI2)
 	{
 		guidedAngleRadian -= PI2;
@@ -212,10 +215,7 @@ void GuidedProjectile::update(float elapsedTime)
 				_collisionCount = 0;
 				_info->attackID = TTYONE_UTIL::getHash(to_string(0x09999) + to_string(TIME_MANAGER->getWorldTime()));
 			}
-			
 			return;
-
-			
 		}
 	}
 	else
@@ -245,25 +245,38 @@ void GuidedProjectile::update(float elapsedTime)
 	}
 
 	// 잔상 사용시
-	/*if (_afterimage)
+	if (_afterimage)
 	{
+		_alphaCount += elapsedTime;
+		_shodow.img = IMAGE_MANAGER->findImage(_img->getLoadInfo().key);
+
+		_alphaValue =-_alphaCount;
+
 		_mirageCount += elapsedTime;
-		if (_mirageCount > 0.1)
+		if (_mirageCount > 0.15)
 		{
-			_mirageCount -= 1;
-			float distance = 2.0f;
-			_shodow.angleRadian = PI - _angleRadian;
-			_shodow.pos.x = _position.x + cosf(_shodow.angleRadian) * distance;
-			_shodow.pos.y = _position.y + -sinf(_shodow.angleRadian) * distance;
-
-			_shodow.img = _img;
-
+			_alphaCount = 0;
+			_mirageCount -= 0.15;
+			generateAfterImage(elapsedTime);
 			if (_useAni)
 			{
-				_shodow.frameX = _ani->getPlayIndex();
+				_shodow.frameX = _frameIndex;
+				
 			}
 		}
-	}*/
+		for (int i = 0; i < _vShadow.size();)
+		{
+			if (_vShadow[i].remainTime <= 0)
+			{
+				_vShadow.erase(_vShadow.begin() + i);
+			}
+			else
+			{
+				_vShadow[i].remainTime = max(0, _vShadow[i].remainTime - elapsedTime);
+				i++;
+			}
+		}
+	}
 }
 
 void GuidedProjectile::render()
@@ -283,20 +296,37 @@ void GuidedProjectile::render()
 		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 
-	/*if (_afterimage)
+	if (_afterimage)
 	{
-		_shodow.img->setScale(4);
-		if (_useAni)
+		//_shodow.img->setScale(4);
+		//_shodow.img->setAlpha(_alphaValue);
+
+		/*if (_useAni)
 		{
 			_shodow.img->frameRender(CAMERA->getRelativeV2(_shodow.pos), _shodow.frameX, 0);
 		}
 		if (!_useAni)
 		{
 			_shodow.img->render(CAMERA->getRelativeV2(_shodow.pos));
+		}*/
+
+		for (int i = 0; i < _vShadow.size(); i++)
+		{
+			_shodow.img->setScale(4);
+			_shodow.img->setAlpha(_vShadow[i].remainTime / 0.5);
+
+			if (_useAni)
+			{
+				_shodow.img->frameRender(CAMERA->getRelativeV2(_vShadow[i].pos), 0, 0);
+			}
+			if (!_useAni)
+			{
+				_shodow.img->render(CAMERA->getRelativeV2(_vShadow[i].pos));
+			}
 		}
-	}*/
-	D2D_RENDERER->renderText(CAMERA->getRelativeX(_enemyPos.x), CAMERA->getRelativeY(_enemyPos.y - 50), to_wstring(_enemyPos.x) + to_wstring(_enemyPos.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
-	D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 50), to_wstring(_position.x) + to_wstring(_position.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+	}
+	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_enemyPos.x), CAMERA->getRelativeY(_enemyPos.y - 50), to_wstring(_enemyPos.x) + to_wstring(_enemyPos.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 50), to_wstring(_position.x) + to_wstring(_position.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 
 }
 
@@ -306,4 +336,22 @@ void GuidedProjectile::aniUpdate(float const elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
+}
+
+void GuidedProjectile::generateAfterImage(float elapsedTime)
+{
+	float distance = 2.0f;
+	tagShadow shadow;
+
+	shadow.angleRadian = PI - _angleRadian;
+	shadow.pos.x = _position.x + cosf(shadow.angleRadian) * distance;
+	shadow.pos.y = _position.y + -sinf(shadow.angleRadian) * distance;
+	shadow.remainTime = 0.5;
+	
+	_frameIndex++;
+	if (_frameIndex > 3)
+	{
+		_frameIndex = 0;
+	}
+	_vShadow.push_back(shadow);
 }

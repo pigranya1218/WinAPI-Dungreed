@@ -33,7 +33,7 @@ void SeeriProjectile::init(const string imgKey, const string collisionEffect, co
 	_collisionPlatForm = collsionPlatForm;
 	_collisionEffect = collisionEffect;
 	_useCollsionEnemy = collsionEnemy;
-
+	SOUND_MANAGER->play("SeeriBullet1", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	_drawSize = drawSize;
 	_size = collsionRectSize;
 	_effectSize = effectSize;
@@ -42,8 +42,7 @@ void SeeriProjectile::init(const string imgKey, const string collisionEffect, co
 
 	_active = true;
 	_Delay = 0.2f;
-	_length = _img->getFrameSize().x * 1.0f;
-
+	_length = _img->getFrameSize().x * 1.0f;	
 	_timeCount = 0;
 	_isTrun = false;
 	
@@ -64,39 +63,13 @@ void SeeriProjectile::release()
 
 void SeeriProjectile::update(float elapsedTime)
 {
-	Vector2 _effectpos = _position;
-	if (_enemyPos.x < _position.x)
-	{
-		_isTrun = true;
+     _effectpos = _position;
 
-
-		_effectpos.x = _effectpos.x + 10;
-	}
-	else
-	{
-		_isTrun = false;
-		_effectpos.x = _effectpos.x - 10;
-	}
-	if (_enemyPos.y < _position.y)
-	{
-		_angele += 0.033f;
-		_img->setAngle(_img->getAngle() + _angele*15);
-	}
-	else
-	{
-		_angele -= 0.033f;
-		_img->setAngle(_img->getAngle() + _angele* 15);
-	}
-
-	if (_enemyPos.y + 50 < _position.y)
-	{
-		_position.y -= 3;
-	}
-	EFFECT_MANAGER->play("SeeriBullet0", _effectpos, _drawSize, 0, _isTrun);
+	
 	if (_Delay > 0)
 	{
 		_Delay = max(0, _Delay - elapsedTime);
-		_position.y -= 100* elapsedTime;
+		
 		
 	}
 	_enemyPos = _projectileMgr->getEnemyPos(_position);
@@ -118,62 +91,42 @@ void SeeriProjectile::update(float elapsedTime)
 		{
 			guidedAngleRadian -= PI2;
 		}
-		
 
-
-		if (_timeCount <= 0.3f)
+		if (_angleRadian <= guidedAngleRadian)
 		{
-			moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
-			moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
-		}
-
-		if (_timeCount > 0.3f)
-		{
-			if (_angleRadian <= guidedAngleRadian)
+			if ((guidedAngleRadian - _angleRadian) > (_angleRadian + (PI2 - guidedAngleRadian)))
 			{
-				if ((guidedAngleRadian - _angleRadian) > (_angleRadian + (PI2 - guidedAngleRadian)))
+				if (_angleRadian < 0.f)
 				{
-					//_angleRadian -= 2.f * elapsedTime;
-					if (_angleRadian < 0.f)
-					{
-						_angleRadian = PI2;
-					}
-					_angleRadian -= 3.f * elapsedTime;
-					
-					//_angleRadian -= 0.1f;
+					_angleRadian = PI2;
 				}
-				else
-				{
-					_angleRadian += 3.f * elapsedTime;
-					//_angleRadian += 2.f * elapsedTime;
-					//_angleRadian += 0.1f;
-					
-				}
+				_angleRadian -= 3.f * elapsedTime;
 			}
 			else
 			{
-				if ((_angleRadian - guidedAngleRadian) < ((PI2 - _angleRadian) + guidedAngleRadian))
-				{
-					//_angleRadian -= 2.f * elapsedTime;
-					_angleRadian -= 3.f * elapsedTime;
-					//_angleRadian -= 0.1f;
-				}
-				else
-				{
-					//_angleRadian += 2.f * elapsedTime;
-					if (_angleRadian >= PI2)
-					{
-						_angleRadian = 0;
-					}
-					//_angleRadian += 0.1f;
-					_angleRadian += 3.f * elapsedTime;
-				}
+				_angleRadian += 3.f * elapsedTime;
 			}
-
-			// 이동
-			moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
-			moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
 		}
+		else
+		{
+			if ((_angleRadian - guidedAngleRadian) < ((PI2 - _angleRadian) + guidedAngleRadian))
+			{
+				_angleRadian -= 3.f * elapsedTime;
+			}
+			else
+			{
+				if (_angleRadian >= PI2)
+				{
+					_angleRadian = 0;
+				}
+				_angleRadian += 3.f * elapsedTime;
+			}
+		}
+
+		// 이동
+		moveDir.x += cosf(_angleRadian) * _force.x * elapsedTime;
+		moveDir.y -= sinf(_angleRadian) * _force.y * elapsedTime;
+
 	}
 	Vector2 lastDir = _position;
 	_projectileMgr->moveTo(this, moveDir, _collsionGround, _collisionPlatForm);
@@ -188,6 +141,7 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
+		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_active = false;
 	}
 	
@@ -200,7 +154,7 @@ void SeeriProjectile::update(float elapsedTime)
 		{
 			float angleDegree = _angleRadian * (180.0f / PI);
 			EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
-
+			SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 			if (_useCollsionEnemy)
 			{
 				_active = false;
@@ -216,7 +170,6 @@ void SeeriProjectile::update(float elapsedTime)
 			_active = false;
 			return;
 		}
-
 	}
 
 	// 지속시간을 넘어가면
@@ -225,7 +178,7 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		float angleDegree = _angleRadian * (180.0f / PI);
 		EFFECT_MANAGER->play(_collisionEffect, effectPos, _effectSize, ((_useRotate) ? (angleDegree) : (0.0f)));
-
+		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_active = false;
 	}
 
@@ -234,27 +187,31 @@ void SeeriProjectile::update(float elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
-
 	
-
 }
 
 void SeeriProjectile::render()
 {	
-	
+	EFFECT_MANAGER->play("SeeriBullet0", _effectpos, Vector2(_drawSize.x, _drawSize.y*1.5f), 0, _isTrun);
+	if (_useRotate)
+	{
+		_img->setAngle(_angleRadian * (180 / PI));
+	}
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani, _isTrun);
 		
-		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		
 	}
 	else
 	{
 	
 		_img->render(CAMERA->getRelativeV2(_position), _drawSize, _isTrun);
-		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		
 	}
+	
 }
+
 
 void SeeriProjectile::aniUpdate(float const elapsedTime)
 {
