@@ -70,7 +70,7 @@ void Room20TB::update(float const elapsedTime)
 
 void Room20TB::render()
 {
-	Stage::render();
+	
 	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
 	table->setScale(4);
 	table->render(CAMERA->getRelativeV2(Vector2(1200, 1110)));
@@ -78,4 +78,9 @@ void Room20TB::render()
 	Image* cell = IMAGE_MANAGER->findImage("BrokenCell");
 	cell->setScale(4);
 	cell->render(CAMERA->getRelativeV2(Vector2(300, 2094)));
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
 }
