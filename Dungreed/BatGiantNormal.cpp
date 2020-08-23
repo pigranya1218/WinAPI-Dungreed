@@ -11,7 +11,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEf
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 100;
+	_detectRange = 500;
 
 	_size = Vector2(_img->getFrameSize().x - 35, _img->getFrameSize().y - 15);
 	_size = _size * _scale;
@@ -22,7 +22,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEf
 	}
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 3.f;
+	_attack.delay = 6;
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	
@@ -30,7 +30,7 @@ void BatGiantNormal::init(const Vector2 & pos, DIRECTION direction, bool spawnEf
 	_hit.delay = 0.3f;
 
 	_shooting.init("GiantBullet", "GiantBullet_FX", Vector2(500, 500), _scale, 0.5f, 1.5f, false, true, true, false, true, false);
-	_shooting.attackInit(1, 1, 5);
+	_shooting.attackInit(1, 1, 4);
 
 	_isDetect = 0;
 	_detectRange = 300.f;

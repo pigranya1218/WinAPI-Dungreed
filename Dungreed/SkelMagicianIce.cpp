@@ -18,7 +18,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 600;
 
 	_size = Vector2(_img->getFrameSize().x, _img->getFrameSize().y);
 	_size = _size * _scale;
@@ -29,7 +29,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	}	
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 0.5;	
+	_attack.delay = 2;	
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	
@@ -38,7 +38,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 
 	// ≈∫∏∑ √ ±‚»≠
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(850, 850), _scale, 0.2, 1.3, true, false, false, false, true, false);
-	_shooting.attackInit(3, 2, 6);
+	_shooting.attackInit(2, 2, 4);
 
 	_isDetect = _attacking = 0;
 	_active = true;

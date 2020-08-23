@@ -13,7 +13,7 @@ void BatRed::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 800;
 
 	// 사이즈 설정
 	_size = Vector2(_img->getFrameSize().x - 20, _img->getFrameSize().y - 10);

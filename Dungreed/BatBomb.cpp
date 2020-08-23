@@ -32,7 +32,7 @@ void BatBomb::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_hit.delay = 0.3;
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.attackInit(10, 10, 0);
+	_attack.attackInit(4, 8, 0);
 
 	_isDetect = 0;
 	_active = true;

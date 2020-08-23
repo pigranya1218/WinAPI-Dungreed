@@ -14,7 +14,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_direction = direction;
 	_scale = 4;
 	_isDetect = 0;
-	_detectRange = 300;
+	_detectRange = 500;
 	_enterCount = 0;
 	// 피격 렉트 및 사이즈 초기화
 	_size = _img->getFrameSize() * _scale;

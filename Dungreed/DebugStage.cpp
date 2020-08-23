@@ -18,17 +18,13 @@ void DebugStage::init()
 
 
 	//몹 소환
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 440) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 660) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(350, 850) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 440) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 660) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1600, 850) });
-
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(350, 440) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_ICE, Vector2(350, 660) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_RED, Vector2(350, 850) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_NORMAL, Vector2(350, 850) });
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	// 에너미 테스트입니다.
 	
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(WINSIZEX / 2, WINSIZEY / 2 + 300));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
