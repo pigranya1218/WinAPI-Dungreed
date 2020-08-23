@@ -249,6 +249,8 @@ void UIManager::update(float const elapsedTime)
 	// Inventory Open
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::INVENTORY)))
 	{
+		SOUND_MANAGER->stop("Player/Inven/OpenInven");
+		SOUND_MANAGER->play("Player/Inven/OpenInven", 1);
 		// toggle
 		_inventoryUI.setActive(!_inventoryUI.isActive());
 	}

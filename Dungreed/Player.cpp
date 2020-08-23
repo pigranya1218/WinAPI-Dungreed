@@ -212,9 +212,9 @@ void Player::init()
 	_currHitTime = 0;
 	_force = Vector2(0, 0);
 
-	ShortSpear* testAcc1 = new ShortSpear;
+	/*ShortSpear* testAcc1 = new ShortSpear;
 	testAcc1->init();
-	_equippedWeapon[0] = testAcc1;
+	_equippedWeapon[0] = testAcc1;*/
 
 	Seeri* testAcc24 = new Seeri;
 	testAcc24->init();
@@ -229,10 +229,10 @@ void Player::init()
 	////testAcc3->init();
 	////_inventory[3] = testAcc3;
 
-	//
-	//ShortSword* testAcc4 = new ShortSword;
-	//testAcc4->init();
-	//_inventory[3] = testAcc4;
+	
+	ShortSword* testAcc4 = new ShortSword;
+	testAcc4->init();
+	_equippedWeapon[0] = testAcc4;
 
 
 	//MartialArtOfTiger* testAcc9 = new MartialArtOfTiger;
@@ -280,9 +280,9 @@ void Player::init()
 	////testAcc13->init();
 	////_inventory[5] = testAcc13;
 
-	//Voluspa* testAcc22 = new Voluspa;
-	//testAcc22->init();
-	//_inventory[1] = testAcc22;
+	Voluspa* testAcc22 = new Voluspa;
+	testAcc22->init();
+	_inventory[5] = testAcc22;
 
 	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	//testAcc14->init();
@@ -347,17 +347,17 @@ void Player::init()
 	//testWeapon6->init();
 	//_inventory[14] = testWeapon6;*/
 
-	//GatlingGun* testWeapon7 = new GatlingGun;
-	//testWeapon7->init();
-	//_inventory[3] = testWeapon7;
+	/*GatlingGun* testWeapon7 = new GatlingGun;
+	testWeapon7->init();
+	_inventory[3] = testWeapon7;*/
 
-	//MagicStick* testWeapon8 = new MagicStick;
+	MagicStick* testWeapon8 = new MagicStick;
+	testWeapon8->init();
+	_inventory[14] = testWeapon8;
+
+	//OakBow* testWeapon8 = new OakBow;
 	//testWeapon8->init();
 	//_inventory[14] = testWeapon8;
-
-	////OakBow* testWeapon8 = new OakBow;
-	////testWeapon8->init();
-	////_inventory[14] = testWeapon8;
 
 	///*SilverBullet* testAcc19 = new SilverBullet;
 	//testAcc19->init();
@@ -484,6 +484,7 @@ void Player::update(float const elapsedTime)
 		}
 		else if (_currJumpCount > 0)
 		{
+			SOUND_MANAGER->play("Player/Jump", 1);
 			_force.y = -_adjustStat.jumpPower;
 			_currJumpCount -= 1;
 		}
@@ -494,10 +495,7 @@ void Player::update(float const elapsedTime)
 	{
 		//대쉬 효과음 재생
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-		//대쉬 이펙트 재생
-		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
-		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y);
-		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
+		
 
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
@@ -572,7 +570,22 @@ void Player::update(float const elapsedTime)
 	{
 		_position.y -= 15;
 		moveDir.y += 21;
+		
+		if (moveDir.x != 0)
+		{
+			_walkEffectDelay -= elapsedTime;
+			if (_walkEffectDelay <= 0)
+			{
+				_walkEffectDelay = 0.5;
+				//먼지 이펙트 재생
+				Vector2 dashEffectPos = Vector2(_position.x + ((_direction == DIRECTION::LEFT) ? (_size.x / 2) : (-_size.x / 2)), _position.y + _size.y / 2);
+				Vector2 dashEffectSize = Vector2(56, 52);
+				EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, _direction == DIRECTION::LEFT);
+			}
+		}
 	}
+
+
 	
 	if (_currDashTime == 0) // 대쉬 중이지 않을 때 중력의 영향을 받기 시작
 	{

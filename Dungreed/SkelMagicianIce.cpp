@@ -44,7 +44,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_active = true;
 
 	_curHp = _maxHp = 70;
-	_enterCount = 0;
+	
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_MAGICIAN_ICE);
 }
 
@@ -118,9 +118,7 @@ void SkelMagicianIce::update(float const timeElapsed)
 		}	
 		break;
 		case ENEMY_STATE::DIE:
-		{
-			SOUND_MANAGER->stop("IceSkell/Magic/Attack");
-			SOUND_MANAGER->stop("Enemy/Spawn");
+		{			
 		}
 		break;
 	}
@@ -151,8 +149,7 @@ void SkelMagicianIce::update(float const timeElapsed)
 	_attackAni->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		_enterCount = 0;
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -222,6 +219,9 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("IceSkell/Magic/Attack");
+			SOUND_MANAGER->stop("Enemy/Spawn");
+
 			_attacking = _active = false;
 			_attackAni->stop();
 		}

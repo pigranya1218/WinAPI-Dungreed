@@ -123,7 +123,7 @@ void GuidedProjectile::update(float elapsedTime)
 	}
 
 	// 투사체부터 에너미까지의 각도
-	float guidedAngleRadian = atan2f(-(CAMERA->getAbsoluteY(_enemyPos.y) - _position.y), (CAMERA->getAbsoluteX(_enemyPos.x) - _position.x)) + PI2;
+	float guidedAngleRadian = atan2f(-(CAMERA->getRelativeY(_enemyPos.y) - _position.y), (CAMERA->getRelativeX(_enemyPos.x) - _position.x)) + PI2;
 	if (guidedAngleRadian > PI2)
 	{
 		guidedAngleRadian -= PI2;
@@ -244,18 +244,26 @@ void GuidedProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	if (_afterimage)
+	// 잔상 사용시
+	/*if (_afterimage)
 	{
 		_mirageCount += elapsedTime;
-		if (_mirageCount > 1)
+		if (_mirageCount > 0.1)
 		{
 			_mirageCount -= 1;
-			_miragePos = _position;
-			_shodow.angleRadian = _angleRadian;
-			//_shodow.pos = Vector2(_position.x );
-			//_shadow.push_back()
+			float distance = 2.0f;
+			_shodow.angleRadian = PI - _angleRadian;
+			_shodow.pos.x = _position.x + cosf(_shodow.angleRadian) * distance;
+			_shodow.pos.y = _position.y + -sinf(_shodow.angleRadian) * distance;
+
+			_shodow.img = _img;
+
+			if (_useAni)
+			{
+				_shodow.frameX = _ani->getPlayIndex();
+			}
 		}
-	}
+	}*/
 }
 
 void GuidedProjectile::render()
@@ -275,22 +283,21 @@ void GuidedProjectile::render()
 		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 
-	if (_afterimage)
-	{
-		if (_mirageCount > 1)
-		{
-			_mirageCount -= 1;
-		}
-	}
-	
 	/*if (_afterimage)
 	{
-		if (_afterCount%2 == 0)
+		_shodow.img->setScale(4);
+		if (_useAni)
 		{
-			_afterImg[_countI]->render(CAMERA->getRelativeV2(_position), _renderSize);
+			_shodow.img->frameRender(CAMERA->getRelativeV2(_shodow.pos), _shodow.frameX, 0);
+		}
+		if (!_useAni)
+		{
+			_shodow.img->render(CAMERA->getRelativeV2(_shodow.pos));
 		}
 	}*/
-	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 10), to_wstring(_angleRadian), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.f);
+	D2D_RENDERER->renderText(CAMERA->getRelativeX(_enemyPos.x), CAMERA->getRelativeY(_enemyPos.y - 50), to_wstring(_enemyPos.x) + to_wstring(_enemyPos.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+	D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 50), to_wstring(_position.x) + to_wstring(_position.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+
 }
 
 void GuidedProjectile::aniUpdate(float const elapsedTime)

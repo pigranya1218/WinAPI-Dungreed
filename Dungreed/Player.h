@@ -31,8 +31,9 @@ private:
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	
+	float	_walkEffectDelay = 0;
+
 	float	_currHitTime;			// 피격 타임
-	
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 	
@@ -109,7 +110,7 @@ public:
 	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
-	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); }	// 어빌리티 스탯 설정자
+	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); _currHp = _adjustStat.maxHp; }	// 어빌리티 스탯 설정자
 	void setSpecialAbility(vector<Item*> specialAbility);
 
 	Costume* getCurrCostume() { return _costume; }
