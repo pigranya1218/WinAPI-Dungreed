@@ -93,6 +93,7 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 	_timeCount = 0;
 	_afterCount = 0;
 	_mirageCount = 1;
+	_frameIndex = 0;
 
 	if (_afterimage)
 	{
@@ -247,23 +248,34 @@ void GuidedProjectile::update(float elapsedTime)
 	if (_afterimage)
 	{
 		_alphaCount += elapsedTime;
-		_shodow.img = _img;
+		_shodow.img = IMAGE_MANAGER->findImage(_img->getLoadInfo().key);
 
 		_alphaValue =-_alphaCount;
 
 		_mirageCount += elapsedTime;
-		if (_mirageCount > 1)
+		if (_mirageCount > 0.15)
 		{
 			_alphaCount = 0;
-			_mirageCount -= 1;
+			_mirageCount -= 0.15;
 			generateAfterImage(elapsedTime);
 			if (_useAni)
 			{
-				_shodow.frameX = _ani->getPlayIndex();
+				_shodow.frameX = _frameIndex;
+				
 			}
-			
 		}
-		
+		for (int i = 0; i < _vShadow.size();)
+		{
+			if (_vShadow[i].remainTime <= 0)
+			{
+				_vShadow.erase(_vShadow.begin() + i);
+			}
+			else
+			{
+				_vShadow[i].remainTime = max(0, _vShadow[i].remainTime - elapsedTime);
+				i++;
+			}
+		}
 	}
 }
 
@@ -286,20 +298,35 @@ void GuidedProjectile::render()
 
 	if (_afterimage)
 	{
-		_shodow.img->setScale(4);
-		_shodow.img->setAlpha(_alphaValue);
+		//_shodow.img->setScale(4);
+		//_shodow.img->setAlpha(_alphaValue);
 
-		if (_useAni)
+		/*if (_useAni)
 		{
 			_shodow.img->frameRender(CAMERA->getRelativeV2(_shodow.pos), _shodow.frameX, 0);
 		}
 		if (!_useAni)
 		{
 			_shodow.img->render(CAMERA->getRelativeV2(_shodow.pos));
+		}*/
+
+		for (int i = 0; i < _vShadow.size(); i++)
+		{
+			_shodow.img->setScale(4);
+			_shodow.img->setAlpha(_vShadow[i].remainTime / 0.5);
+
+			if (_useAni)
+			{
+				_shodow.img->frameRender(CAMERA->getRelativeV2(_vShadow[i].pos), 0, 0);
+			}
+			if (!_useAni)
+			{
+				_shodow.img->render(CAMERA->getRelativeV2(_vShadow[i].pos));
+			}
 		}
 	}
-	D2D_RENDERER->renderText(CAMERA->getRelativeX(_enemyPos.x), CAMERA->getRelativeY(_enemyPos.y - 50), to_wstring(_enemyPos.x) + to_wstring(_enemyPos.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
-	D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 50), to_wstring(_position.x) + to_wstring(_position.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_enemyPos.x), CAMERA->getRelativeY(_enemyPos.y - 50), to_wstring(_enemyPos.x) + to_wstring(_enemyPos.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
+	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 50), to_wstring(_position.x) + to_wstring(_position.y), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_CENTER, L"Aa카시오페아");
 
 }
 
@@ -314,7 +341,17 @@ void GuidedProjectile::aniUpdate(float const elapsedTime)
 void GuidedProjectile::generateAfterImage(float elapsedTime)
 {
 	float distance = 2.0f;
-	_shodow.angleRadian = PI - _angleRadian;
-	_shodow.pos.x = _position.x + cosf(_shodow.angleRadian) * distance;
-	_shodow.pos.y = _position.y + -sinf(_shodow.angleRadian) * distance;
+	tagShadow shadow;
+
+	shadow.angleRadian = PI - _angleRadian;
+	shadow.pos.x = _position.x + cosf(shadow.angleRadian) * distance;
+	shadow.pos.y = _position.y + -sinf(shadow.angleRadian) * distance;
+	shadow.remainTime = 1.0;
+	
+	_frameIndex++;
+	if (_frameIndex > 3)
+	{
+		_frameIndex = 0;
+	}
+	_vShadow.push_back(shadow);
 }

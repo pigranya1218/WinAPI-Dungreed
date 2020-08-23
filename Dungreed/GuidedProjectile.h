@@ -6,6 +6,7 @@ struct tagShadow
 	Vector2 pos;
 	float	angleRadian;
 	float	alpha;
+	float	remainTime;
 	int		frameX;
 	Image*  img;
 };
@@ -46,6 +47,7 @@ private:
 	float		_alphaValue;
 	tagShadow	_shodow;
 	vector<tagShadow> _vShadow;
+	int			_frameIndex;
 public:
 	GuidedProjectile() {}
 	GuidedProjectile(const GuidedProjectile& source);
