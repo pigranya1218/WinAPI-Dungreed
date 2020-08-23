@@ -13,7 +13,6 @@
 #include "IceBall.h"
 #include "MagnifyingGlass.h"
 #include "MetalBoots.h"
-#include "miniEarth.h"
 #include "MultiBullet.h"
 #include "Seeri.h"
 #include "SilverBullet.h"
@@ -30,9 +29,7 @@
 
 #include "BigPaintBlush.h"
 #include "CosmosSword.h"
-#include "FluteGreatSword.h"
 #include "KeresScythe.h"
-#include "Lumber.h"
 #include "MartialArtOfTiger.h"
 #include "PickaxeRed.h"
 #include "PowerKatana.h"
@@ -86,10 +83,6 @@ void ItemManager::init()
 	Item* metalBoots = new MetalBoots;
 	metalBoots->init();
 	_itemMap.insert(pair<int, Item*>(metalBoots->getItemCode(), metalBoots));
-
-	Item* MiniEarth = new miniEarth;
-	MiniEarth->init();
-	_itemMap.insert(pair<int, Item*>(MiniEarth->getItemCode(), MiniEarth));
 
 	Item* multiBullet = new MultiBullet;
 	multiBullet->init();
@@ -147,17 +140,9 @@ void ItemManager::init()
 	cosmosSword->init();
 	_itemMap.insert(pair<int, Item*>(cosmosSword->getItemCode(), cosmosSword));
 
-	Item* fluteGreatSword = new FluteGreatSword;
-	fluteGreatSword->init();
-	_itemMap.insert(pair<int, Item*>(fluteGreatSword->getItemCode(), fluteGreatSword));
-
 	Item* keresScythe = new KeresScythe;
 	keresScythe->init();
 	_itemMap.insert(pair<int, Item*>(keresScythe->getItemCode(), keresScythe));
-
-	Item* lumber = new Lumber;
-	lumber->init();
-	_itemMap.insert(pair<int, Item*>(lumber->getItemCode(), lumber));
 
 	Item* martialArtOfTiger = new MartialArtOfTiger;
 	martialArtOfTiger->init();

@@ -167,6 +167,7 @@
     <ClInclude Include="DoorObject.h" />
     <ClInclude Include="GameEvent.h" />
     <ClInclude Include="ItemManager.h" />
+    <ClInclude Include="ItemObject.h" />
     <ClInclude Include="Room20LB.h" />
     <ClInclude Include="Room20LRB.h" />
     <ClInclude Include="Room20TB.h" />
@@ -222,7 +223,6 @@
     <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="FloatCircle.h" />
     <ClInclude Include="FloatRect.h" />
-    <ClInclude Include="FluteGreatSword.h" />
     <ClInclude Include="Food.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameNode.h" />
@@ -249,7 +249,6 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="LibraryHeader.h" />
     <ClInclude Include="LinearFunc.h" />
-    <ClInclude Include="Lumber.h" />
     <ClInclude Include="MagicStick.h" />
     <ClInclude Include="MagnifyingGlass.h" />
     <ClInclude Include="MainScene.h" />
@@ -260,7 +259,6 @@
     <ClInclude Include="MazeScene.h" />
     <ClInclude Include="MetalBoots.h" />
     <ClInclude Include="Minotaurs.h" />
-    <ClInclude Include="miniEarth.h" />
     <ClInclude Include="MetalPlateCos.h" />
     <ClInclude Include="MultiBullet.h" />
     <ClInclude Include="Niflheim.h" />
@@ -350,7 +348,6 @@
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Vector2.h" />
-    <ClInclude Include="ViewObject.h" />
     <ClInclude Include="VillageStage.h" />
     <ClInclude Include="Voluspa.h" />
     <ClInclude Include="watCher.h" />
@@ -372,6 +369,7 @@
     <ClCompile Include="DoorObject.cpp" />
     <ClCompile Include="GameEvent.cpp" />
     <ClCompile Include="ItemManager.cpp" />
+    <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="Room20LB.cpp" />
     <ClCompile Include="Room20LRB.cpp" />
     <ClCompile Include="Room20TB.cpp" />
@@ -427,7 +425,6 @@
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="FloatCircle.cpp" />
     <ClCompile Include="FloatRect.cpp" />
-    <ClCompile Include="FluteGreatSword.cpp" />
     <ClCompile Include="Food.cpp" />
     <ClCompile Include="GameNode.cpp" />
     <ClCompile Include="GameScene.cpp" />
@@ -451,7 +448,6 @@
     <ClCompile Include="KeresScythe.cpp" />
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="LinearFunc.cpp" />
-    <ClCompile Include="Lumber.cpp" />
     <ClCompile Include="MagicStick.cpp" />
     <ClCompile Include="MagnifyingGlass.cpp" />
     <ClCompile Include="MainScene.cpp" />
@@ -462,7 +458,6 @@
     <ClCompile Include="MazeScene.cpp" />
     <ClCompile Include="MetalBoots.cpp" />
     <ClCompile Include="Minotaurs.cpp" />
-    <ClCompile Include="miniEarth.cpp" />
     <ClCompile Include="MetalPlateCos.cpp" />
     <ClCompile Include="MultiBullet.cpp" />
     <ClCompile Include="Niflheim.cpp" />
@@ -547,7 +542,6 @@
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Vector2.cpp" />
-    <ClCompile Include="ViewObject.cpp" />
     <ClCompile Include="VillageStage.cpp" />
     <ClCompile Include="Voluspa.cpp" />
     <ClCompile Include="watCher.cpp" />
