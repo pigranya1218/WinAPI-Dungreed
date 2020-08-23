@@ -1057,11 +1057,13 @@ bool Player::ateFood(Food * food)
 	PlayerStat foodOneceStat = food->getOnceStat();
 	if (_currGold >= food->getPrice() && (getMaxSatiety() - _currSatiety) >= foodOneceStat.currSatiety)
 	{
-		_currGold -= food->getPrice();
-		_currSatiety += foodOneceStat.currSatiety;
-		_currHp += foodOneceStat.currHp;
+		
 		_ateFood.push_back(food);
 		updateAdjustStat();
+		_currGold -= food->getPrice();
+		_currSatiety += foodOneceStat.currSatiety;
+		_currHp = min(_adjustStat.maxHp, _currHp + foodOneceStat.currHp);
+		
 		return true;
 	}
 	// 못먹으면 FALSE 반한
