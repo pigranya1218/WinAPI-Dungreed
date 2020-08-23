@@ -48,6 +48,8 @@ private:
 	vector<Item*> _specialAbility;
 	vector<Food*> _ateFood;					// 먹은 음식들
 
+	Animation* _dashEffectAni;				// 대쉬할 때 먼지날리는 이펙트 애니메이션
+
 private:
 	void swap(Item* &a, Item* &b);
 

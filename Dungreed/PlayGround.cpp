@@ -130,6 +130,9 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("MAIN_SCENE/BIRD", L"resources/images/mainScene/bird.png", 8, 1);
 
 	// * STAGE SCENE
+	// ** PLAYER
+	IMAGE_MANAGER->addFrameImage("PLAYER/DASH_DUST", L"resources/images/Effect/Dash/DustEffect.png", 6, 1);
+	EFFECT_MANAGER->addEffect("PLAYER/DASH_DUST_EFFECT", "PLAYER/DASH_DUST", 30, 10);
 	// ** UI
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BG", L"resources/images/gameScene/ui/PlayerLifeBack.png");
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_FRAME", L"resources/images/gameScene/ui/PlayerLifeBase 1.png");
