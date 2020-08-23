@@ -1,14 +1,14 @@
 #include "stdafx.h"
 #include "RoomToRoomEvent.h"
 
-void RoomToRoomEvent::init(float remainTime)
+void RoomToRoomEvent::init(COLORREF color, float remainTime)
 {
 	_type = GAME_EVENT_TYPE::R2R;
-	_remainTime = remainTime;
-	_totalTime = remainTime;
+	_color = color;
+	_totalTime= _remainTime = remainTime;
 }
 
-void RoomToRoomEvent::processEvent(float elpasedTime)
+void RoomToRoomEvent::processEvent(float& elpasedTime)
 {
 	_remainTime = max(0, _remainTime - elpasedTime);
 }
@@ -16,5 +16,5 @@ void RoomToRoomEvent::processEvent(float elpasedTime)
 void RoomToRoomEvent::render()
 {
 	float alpha = _remainTime / _totalTime;
-	D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, WINSIZEY), 0, 0, 0, alpha);
+	D2D_RENDERER->fillRectangle(FloatRect(0, 0, WINSIZEX, WINSIZEY), GetRValue(_color), GetGValue(_color), GetBValue(_color), alpha);
 }

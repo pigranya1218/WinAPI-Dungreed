@@ -3,6 +3,7 @@
 enum class GAME_EVENT_TYPE
 {
 	R2R,
+	TIME_RATIO,
 	END
 };
 
@@ -19,7 +20,7 @@ public:
 	void setRemainTime(float time) { _remainTime = time; }
 	float getTotalTime() const { return _totalTime; }
 	void setTotalTime(float time) { _totalTime = time; }
-	virtual void processEvent(float elapsedTime) {}
+	virtual void processEvent(float& elapsedTime) {}
 	virtual void render() {}
 };
 

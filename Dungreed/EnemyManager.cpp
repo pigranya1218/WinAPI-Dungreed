@@ -326,3 +326,23 @@ void EnemyManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 {
 	_stage->showEnemyHp(maxHp, curHp, pos);
 }
+
+void EnemyManager::activeBossUI(bool active)
+{
+	_stage->activeBossUI(active);
+}
+
+void EnemyManager::setBossUIHp(int maxHp, int currHp)
+{
+	_stage->setBossUIHp(maxHp, currHp);
+}
+
+void EnemyManager::makeR2REvent(COLORREF color, float time)
+{
+	_stage->makeR2REvent(color, time);
+}
+
+void EnemyManager::makeTimeRatioEvent(float ratio, float time)
+{
+	_stage->makeTimeRatioEvent(ratio, time);
+}

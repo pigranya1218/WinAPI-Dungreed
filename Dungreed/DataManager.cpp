@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "DataManager.h"
+#include "CostumeManager.h"
+#include "ItemManager.h"
 
 void DataManager::init()
 {
@@ -25,6 +27,9 @@ void DataManager::init()
 
 	_costumeMgr = new CostumeManager;
 	_costumeMgr->init();
+
+	_itemMgr = new ItemManager;
+	_itemMgr->init();
 }
 
 void DataManager::update()
@@ -116,7 +121,17 @@ void DataManager::render()
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->render(Vector2(_ptMouse.x, _ptMouse.y));
 }
 
-Costume* DataManager::getCostume(COSTUME_TYPE type) const
+Costume* DataManager::getCostume(COSTUME_TYPE type) 
 {
 	return _costumeMgr->getCostume(type);
+}
+
+vector<Item*> DataManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count)
+{
+	return _itemMgr->getRandomItem(startRank, endRank, count);
+}
+
+Item* DataManager::getItem(int itemCode)
+{
+	return _itemMgr->getItem(itemCode);
 }

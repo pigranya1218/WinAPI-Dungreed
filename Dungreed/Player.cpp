@@ -291,7 +291,7 @@ void Player::init()
 	testAcc22->init();
 	_inventory[1] = testAcc22;
 
-	MultiBullet* testAcc14 = new MultiBullet;
+	MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	testAcc14->init();
 	_inventory[10] = testAcc14;
 
@@ -303,7 +303,7 @@ void Player::init()
 	//testAcc17->init();
 	//_inventory[2] = testAcc17;
 
-	FluteGreatSword* testAcc20 = new FluteGreatSword;
+	PowerKatana* testAcc20 = new PowerKatana;
 	testAcc20->init();
 	_inventory[2] = testAcc20;
 	
@@ -322,7 +322,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	Lumber* testWeapon2 = new Lumber;
+	PickaxeRed* testWeapon2 = new PickaxeRed;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 
@@ -346,9 +346,9 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[13] = testWeapon5;
 
-	/*Boomerang* testweapon6 = new Boomerang;
+	Boomerang* testweapon6 = new Boomerang;
 	testweapon6->init();
-	_inventory[14] = testweapon6;*/
+	_inventory[12] = testweapon6;
 
 	/*MatchLockGun* testWeapon6 = new MatchLockGun;
 	testWeapon6->init();
@@ -358,13 +358,13 @@ void Player::init()
 	testWeapon7->init();
 	_inventory[3] = testWeapon7;
 
-	//MagicStick* testWeapon8 = new MagicStick;
-	//testWeapon8->init();
-	//_inventory[14] = testWeapon8;
-
-	OakBow* testWeapon8 = new OakBow;
+	MagicStick* testWeapon8 = new MagicStick;
 	testWeapon8->init();
 	_inventory[14] = testWeapon8;
+
+	//OakBow* testWeapon8 = new OakBow;
+	//testWeapon8->init();
+	//_inventory[14] = testWeapon8;
 
 	/*SilverBullet* testAcc19 = new SilverBullet;
 	testAcc19->init();
@@ -499,8 +499,12 @@ void Player::update(float const elapsedTime)
 	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		//대쉬 효과음 재생
-
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+		//대쉬 이펙트 재생
+		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
+		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y * 2);
+		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
+
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
@@ -1053,11 +1057,13 @@ bool Player::ateFood(Food * food)
 	PlayerStat foodOneceStat = food->getOnceStat();
 	if (_currGold >= food->getPrice() && (getMaxSatiety() - _currSatiety) >= foodOneceStat.currSatiety)
 	{
-		_currGold -= food->getPrice();
-		_currSatiety += foodOneceStat.currSatiety;
-		_currHp += foodOneceStat.currHp;
+		
 		_ateFood.push_back(food);
 		updateAdjustStat();
+		_currGold -= food->getPrice();
+		_currSatiety += foodOneceStat.currSatiety;
+		_currHp = min(_adjustStat.maxHp, _currHp + foodOneceStat.currHp);
+		
 		return true;
 	}
 	// 못먹으면 FALSE 반한

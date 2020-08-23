@@ -85,6 +85,7 @@ public:
 	void setStageManager(StageManager* stageManager) { _stageManager = stageManager; }
 	void setUIManager(UIManager* uiManager) { _uiManager = uiManager; }
 	void setPlayer(Player* player) { _player = player; }
+
 	virtual void init();
 	virtual void enter(int enterType); // enterType 0 ~ 3 : L T R B, 4 : DOOR
 	virtual void release();
@@ -132,4 +133,11 @@ public:
 	void moveToIndex(Vector2 index);
 	void nextStage();
 	void setShowPlayer(bool showPlayer);
+
+	void activeBossUI(bool active);
+	void setBossUIHp(int maxHp, int currHp);
+
+	void makeR2REvent(COLORREF color, float time);
+	void makeTimeRatioEvent(float ratio, float time);
+
 };

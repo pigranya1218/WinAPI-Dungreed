@@ -3,6 +3,8 @@
 enum class CAMERA_EVENT_TYPE : int
 {
 	SHAKE = 0,
+	MOVE = 1,
+	FILL = 2,
 	END
 };
 
@@ -17,5 +19,6 @@ public:
 	float getRemainTime() { return _remainTime; }
 	void setRemainTime(float time) { _remainTime = time; }
 	virtual void processEvent(float elapsedTime);
+	virtual void render() {}
 };
 

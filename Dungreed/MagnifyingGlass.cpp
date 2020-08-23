@@ -12,8 +12,6 @@ void MagnifyingGlass::init()
 	_displayInfos.push_back(L"하지만 총알의 속도 30% 감소");
 	_displayText = L"\"보는 대상을 실제로 더 크게 만들어 줍니다.\"";
 	
-	//악세서리 옵션
-	// _addStat.power = 17;
 	
 	
 	//악세서리 가격

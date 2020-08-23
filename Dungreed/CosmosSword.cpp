@@ -176,7 +176,6 @@ void CosmosSword::frontRender(Player* player)
 		}
 	}
 
-	_attackDebug.render(true);
 }
 
 
@@ -184,6 +183,10 @@ void CosmosSword::frontRender(Player* player)
 void CosmosSword::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	CAMERA->pushShakeEvent(10, 0.1f);
+
+
 
 	if (_oneAttack)
 	{
@@ -238,7 +241,7 @@ void CosmosSword::attack(Player* player)
 	projectile = new NormalProjectile;
 	projectile->setPosition(shootPos);	
 	projectile->setTeam(OBJECT_TEAM::PLAYER);
-	projectile->init("CosmosSwordFx", "EFFECT_COSMOSSLASH", Vector2(250, 300), Vector2(50, 50), Vector2(20, 250), Vector2(30 * 50, 30 * 50), 3, radian, true, true, 10, true, false, false, false, false);
+	projectile->init("CosmosSwordFx", "EFFECT_COSMOSSLASH", Vector2(250, 300), Vector2(50, 50), Vector2(20, 250), Vector2(30 * 50, 30 * 50), 3, radian, true, true, 2, true, false, false, false, false);
 	SOUND_MANAGER->stop("SOUND_swing0");
 	SOUND_MANAGER->stop("SOUND_wujusword");
 	SOUND_MANAGER->play("SOUND_swing0", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));

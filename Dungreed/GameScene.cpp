@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "RoomToRoomEvent.h"
+#include "TimeRatioEvent.h"
 
 HRESULT GameScene::init()
 {
@@ -44,6 +45,9 @@ void GameScene::update()
 		}
 	}
 
+	vector<bool> isProcessed(static_cast<int>(GAME_EVENT_TYPE::END), false);
+
+
 	// 배속 관리
 	float originTime = TIME_MANAGER->getElapsedTime();
 	if (originTime > 0.03)
@@ -52,13 +56,6 @@ void GameScene::update()
 	}
 	float elapsedTime = originTime * _timeSpeed;
 	
-	_player->update(elapsedTime);
-	_stageMgr->update(elapsedTime);
-	EFFECT_MANAGER->update(elapsedTime);
-	CAMERA->processEvent(elapsedTime);
-	_uiMgr->update(elapsedTime);
-
-	vector<bool> isProcessed(static_cast<int>(GAME_EVENT_TYPE::END), false);
 	for (int i = 0; i < _events.size();)
 	{
 		if (_events[i]->getRemainTime() <= 0)
@@ -67,7 +64,35 @@ void GameScene::update()
 		}
 		else
 		{
-			if (isProcessed[static_cast<int>(_events[i]->getType())]) continue;
+			if (_events[i]->getType() == GAME_EVENT_TYPE::TIME_RATIO)
+			{
+				isProcessed[static_cast<int>(GAME_EVENT_TYPE::TIME_RATIO)] = true;
+				_events[i]->processEvent(elapsedTime);
+				break;
+			}
+			i++;
+		}
+	}
+
+	_player->update(elapsedTime);
+	_stageMgr->update(elapsedTime);
+	EFFECT_MANAGER->update(elapsedTime);
+	CAMERA->processEvent(elapsedTime);
+	_uiMgr->update(elapsedTime);
+
+	for (int i = 0; i < _events.size();)
+	{
+		if (_events[i]->getRemainTime() <= 0)
+		{
+			_events.erase(_events.begin() + i);
+		}
+		else
+		{
+			if (isProcessed[static_cast<int>(_events[i]->getType())])
+			{
+				i++;
+				continue;
+			}
 			isProcessed[static_cast<int>(_events[i]->getType())] = true;
 			_events[i]->processEvent(elapsedTime);
 			i++;
@@ -100,7 +125,8 @@ void GameScene::render()
 		isProcessed[static_cast<int>(_events[i]->getType())] = true;
 		_events[i]->render();
 	}
-	
+
+	CAMERA->render();
 }
 
 
@@ -155,7 +181,7 @@ void GameScene::showDamage(DamageInfo info, Vector2 pos)
 	_uiMgr->showDamage(info, pos);
 }
 
-void GameScene::pushR2REvent(float remainTime)
+void GameScene::pushR2REvent(COLORREF color, float remainTime)
 {
 	bool needMake = true;
 	for (int i = 0; i < _events.size(); i++)
@@ -172,7 +198,14 @@ void GameScene::pushR2REvent(float remainTime)
 	if (needMake)
 	{
 		RoomToRoomEvent* event = new RoomToRoomEvent;
-		event->init(remainTime);
+		event->init(color, remainTime);
 		_events.push_back(event);
 	}
+}
+
+void GameScene::pushTimeRatioEvent(float ratio, float remainTime)
+{
+	TimeRatioEvent* event = new TimeRatioEvent;
+	event->init(ratio, remainTime);
+	_events.push_back(event);
 }

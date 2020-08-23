@@ -58,7 +58,6 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 
 	_maxTime = maxTime;
 	_count = 0;
-	_countI = 0;
 
 	if (useAni)
 	{
@@ -97,10 +96,6 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 
 	if (_afterimage)
 	{
-		for (int i = 0; i < 10; i++)
-		{
-			_afterImg[i] = IMAGE_MANAGER->findImage(imgKey);
-		}
 	}
 }
 
@@ -252,18 +247,13 @@ void GuidedProjectile::update(float elapsedTime)
 	if (_afterimage)
 	{
 		_mirageCount += elapsedTime;
-		_afterCount = _mirageCount;
-
-		if (_afterCount)
+		if (_mirageCount > 1)
 		{
-			_miragePos = Vector2(_position.x - 10, _position.y + 10);
-
+			_miragePos = _position;
+			_shodow.angleRadian = _angleRadian;
+			//_shodow.pos = Vector2(_position.x );
+			//_shadow.push_back()
 		}
-		/*while (_active)
-		{
-			_afterImg.push_back(IMAGE_MANAGER->findImage(_img->getKey()));
-		}*/
-	
 	}
 }
 
@@ -286,27 +276,10 @@ void GuidedProjectile::render()
 
 	if (_afterimage)
 	{
-		int index = _ani->getPlayIndex();
-		//_pos = Vector2(_position.x - 5, _position.y - 5);
-
-		/*if (_mirageCount / 0.2f == 1)
+		if (_mirageCount > 1)
 		{
-			_miragePos = Vector2(_position.x - 20, _position.y - 20);
-		}*/
-
-		if (_afterCount % 2 == 0)
-		{
-			_afterImg[0]->frameRender(CAMERA->getRelativeV2(_miragePos), _renderSize, index, 0);
+			_mirageCount -= 1;
 		}
-		//_afterImg[1]->frameRender(_pos2, _renderSize, index, 0);
-		//_afterImg[2]->frameRender(_pos3, _renderSize, index, 0);
-		//_afterImg[3]->frameRender(_pos4, _renderSize, index, 0);
-		//_afterImg[4]->frameRender(_pos5, _renderSize, index, 0);
-
-		/*if (_count < 1)
-		{
-			_afterImg[0]->setAlpha(_afterImg[0]->getAlpha() - _count);
-		}*/
 	}
 	
 	/*if (_afterimage)
