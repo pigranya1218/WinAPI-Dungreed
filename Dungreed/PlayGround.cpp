@@ -833,7 +833,6 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Belial/Bullet", "resources/sound/enemy/belial/random5.wav", false, false);					//벨리알 탄막   발사
 	SOUND_MANAGER->addSound("Belial/Sword", "resources/sound/enemy/belial/slimeball.wav", false, false);				//벨리알 검     소환
 
-	//*	니플헤임
 
 
 	CONFIG_MANAGER->init();
