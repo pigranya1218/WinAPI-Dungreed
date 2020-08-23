@@ -14,8 +14,6 @@
 #include "PowerKatana.h"
 #include "QuarterStaffBig.h"
 #include "BigPaintBlush.h"
-#include "Lumber.h"
-#include "FluteGreatSword.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -25,7 +23,6 @@
 
 #include "SpikeBall.h"
 #include "IceBall.h"
-#include "miniEarth.h"
 #include "watCher.h"
 #include "babyGreenBat.h"
 #include "GreenBat.h"
@@ -283,9 +280,9 @@ void Player::init()
 	////testAcc13->init();
 	////_inventory[5] = testAcc13;
 
-	//Voluspa* testAcc22 = new Voluspa;
-	//testAcc22->init();
-	//_inventory[1] = testAcc22;
+	Voluspa* testAcc22 = new Voluspa;
+	testAcc22->init();
+	_inventory[1] = testAcc22;
 
 	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	//testAcc14->init();

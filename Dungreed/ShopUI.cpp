@@ -5,12 +5,6 @@
 #include <sstream>
 #include <iomanip>
 
-#include "BigPaintBlush.h"
-#include "CosmosSword.h"
-#include "GreenDadBat.h"
-#include "MiniEarth.h"
-#include "GatlingGun.h"
-
 void ShopUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT, bool isSell)
 {
 	if (weapon == nullptr) return;
