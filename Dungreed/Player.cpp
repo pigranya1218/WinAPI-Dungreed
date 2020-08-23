@@ -322,9 +322,9 @@ void Player::init()
 	//testWeapon2->init();
 	//_inventory[11] = testWeapon2;
 
-	////CosmosSword* testWeapon3 = new CosmosSword;
-	////testWeapon3->init();
-	////_inventory[12] = testWeapon3;
+	CosmosSword* testWeapon3 = new CosmosSword; // 이거 없으면 못깰 지경../
+	testWeapon3->init();
+	_inventory[12] = testWeapon3;
 	////
 	///*PickaxeRed* testWeapon4 = new PickaxeRed;
 	//testWeapon4->init();
@@ -1053,7 +1053,7 @@ bool Player::collisionItem(Item* item)
 		if (_inventory[i] == nullptr)
 		{
 			_inventory[i] = item;
-			
+			_gameScene->showDropItem(item);
 			return true;
 		}
 	}

@@ -154,6 +154,13 @@ private:
 		GateNpc* gate;
 	};
 
+	struct tagDropItem
+	{
+		FloatRect rc;
+		Item* item;
+		float remainTime;
+	};
+
 private:
 	GameScene* _gameScene;
 	Player* _player;
@@ -168,6 +175,8 @@ private:
 	tagWeaponUI	_weaponUI; // ¹«±â UI
 	tagMiniMap _miniMapUI; // ¹Ì´Ï¸Ê UI
 	tagMap _mapUI; // ¸Ê UI
+
+	tagDropItem _dropUI;
 
 	tagBossHpUI _bossUI;
 
@@ -209,6 +218,9 @@ public:
 	void showShop() { _shopUI.setActive(true); }
 	void showAbility() { _abilityUI.setActive(true); }
 	void showCostume() { _costumeUI.setActive(true); }
+	
+	void showDropItem(Item* item);
+	COLORREF getItemRankColor(ITEM_RANK rank);
 
 	bool getBossHpActive() { return _bossUI.active; }
 	void showBossHP(bool active) { _bossUI.active = active; }

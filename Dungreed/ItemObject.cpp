@@ -8,7 +8,7 @@ void ItemObject::init(Item* item, Vector2 pos, float power, float radian)
 	_objectCode = 0x0020;
 	_item = item;
 	_position = pos;
-	_size = Vector2(20, 20);
+	_size = Vector2(40, 40);
 	_power = power;
 	_radian = radian;
 	_force = Vector2(0, 0);
@@ -48,5 +48,5 @@ void ItemObject::update(float elapsedTime)
 void ItemObject::render()
 {
 	_item->getIconImg()->setScale(4);
-	_item->getIconImg()->render(_position);
+	_item->getIconImg()->render(CAMERA->getRelativeV2(_position));
 }

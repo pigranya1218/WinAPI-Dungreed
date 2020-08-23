@@ -95,10 +95,10 @@ void ChestNpc::interaction()
 	Item* item = getItem();
 	ItemObject* itemObject = new ItemObject;
 	itemObject->setObjectManager(_objectMgr);
-	itemObject->init(item, _position, 700, PI * 0.5);
+	itemObject->init(item, _position, 1100, PI * 0.5);
 	_objectMgr->pushObject(itemObject);
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		Vector2 pos = Vector2(RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x), RANDOM->getFromFloatTo(_position.y, _position.y - _size.y));
 		float power = RANDOM->getFromFloatTo(600, 800);
@@ -109,7 +109,7 @@ void ChestNpc::interaction()
 		object->init(10, pos, power, radian);
 		_objectMgr->pushObject(object);
 	}
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 2; i++)
 	{
 		Vector2 pos = Vector2(RANDOM->getFromFloatTo(_position.x - _size.x, _position.x + _size.x), RANDOM->getFromFloatTo(_position.y, _position.y - _size.y));
 		float power = RANDOM->getFromFloatTo(600, 800);
