@@ -1403,6 +1403,9 @@
     <ClCompile Include="TorchObject.cpp">
       <Filter>Dungreed\GameScene\Object</Filter>
     </ClCompile>
+    <ClCompile Include="Costume.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dungreed.rc">

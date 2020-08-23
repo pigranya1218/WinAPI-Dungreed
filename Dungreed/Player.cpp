@@ -502,6 +502,7 @@ void Player::update(float const elapsedTime)
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
 		_force.y = -sinf(angle) * _adjustStat.dashYPower;
 		_currDashTime = 0.1f;
+		_currEffectTime = 0.015f;
 		if (angle < 0)
 		{
 			_position.y += 1.5;
@@ -519,6 +520,12 @@ void Player::update(float const elapsedTime)
 	if (_currDashTime > 0) // 대쉬 상태라면
 	{
 		_currDashTime = max(0, _currDashTime - elapsedTime);
+		_currEffectTime = max(0, _currEffectTime - elapsedTime);
+		if (_currEffectTime == 0)
+		{
+			_costume->dashEffect(_position, _direction);
+			_currEffectTime = 0.015f;
+		}
 		if (_currDashTime == 0)
 		{
 			//_force.y = 0;

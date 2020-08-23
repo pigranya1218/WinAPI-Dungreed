@@ -28,6 +28,7 @@ private:
 	int		_currDashCount;			// 현재 남은 대쉬 카운트
 	float	_currDashCoolTime;		// 현재 대쉬 쿨타임
 	float	_currDashTime;			// 현재 대쉬 남은 유지시간
+	float	_currEffectTime;		// 현재 대쉬 이펙트 체크 시간
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	

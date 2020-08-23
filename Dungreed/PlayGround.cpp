@@ -439,30 +439,35 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/IDLE", L"resources/images/costumes/base/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/MOVE", L"resources/images/costumes/base/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/BASE/JUMP", L"resources/images/costumes/base/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/BASE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/base_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/BASE/DIE", L"resources/images/costumes/base/player_die.png");
 
 	// *** METAL_PLATE
 	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/IDLE", L"resources/images/costumes/metalPlate/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/MOVE", L"resources/images/costumes/metalPlate/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/JUMP", L"resources/images/costumes/metalPlate/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/metal_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/DIE", L"resources/images/costumes/metalPlate/player_die.png");
 
 	// *** PICKAX
 	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/IDLE", L"resources/images/costumes/pickax/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/MOVE", L"resources/images/costumes/pickax/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP", L"resources/images/costumes/pickax/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/pickax_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/DIE", L"resources/images/costumes/pickax/player_die.png");
 
 	// *** ALICE
 	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/IDLE", L"resources/images/costumes/alice/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/MOVE", L"resources/images/costumes/alice/player_run.png", 6, 1);
 	IMAGE_MANAGER->addImage("COSTUME/ALICE/JUMP", L"resources/images/costumes/alice/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/ALICE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/alice_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/ALICE/DIE", L"resources/images/costumes/alice/player_die.png");
 
 	// *** RED_LOTUS
 	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/IDLE", L"resources/images/costumes/redLotus/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/MOVE", L"resources/images/costumes/redLotus/player_run.png", 6, 1);
 	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/JUMP", L"resources/images/costumes/redLotus/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/redLotus_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/DIE", L"resources/images/costumes/redLotus/player_die.png");
 
 	// ** WEAPON
