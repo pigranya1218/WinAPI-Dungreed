@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "PlayerStat.h"
 //#include "StatUI.h"
+#include "UIManager.h"
 
 void RestaurantUI::init()
 {
@@ -132,7 +133,8 @@ void RestaurantUI::update(float elapsedTime)
 				if (_player->ateFood(_foods[i]))
 				{
 					_foodItems[i].isSoldOut = true;
-					
+					//구매하면 음식 정보 전달
+					_uiMgr->setEatFoods(_foods[i]);
 				}
 			}
 		}
@@ -328,4 +330,6 @@ void RestaurantUI::render()
 	//D2D_RENDERER->drawRectangle(_goldIconRc, D2D1::ColorF::White, 1, 1);	//아이콘 그릴 칸
 	_goldIcon->render(_goldIconRc.getCenter(), Vector2(_goldIcon->getSize().x * 4, _goldIcon->getSize().y * 4));
 }
+
+
 

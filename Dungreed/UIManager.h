@@ -10,6 +10,7 @@
 #include "LinearFunc.h"
 #include "DoorObject.h"
 #include "GateNpc.h"
+#include "Food.h"
 
 class GameScene;
 class Player;
@@ -173,6 +174,8 @@ private:
 	vector<tagDamageUI> _damageUI; // 대미지 표기 숫자 UI
 	vector<tagEnemyHpUI> _enemyHpUI; // 적 체력바 UI
 
+	//vector<Food*> _foodList;	//음식점UI로부터 전달 받은 먹은 음식 저장
+
 	DialogueUI _dialogueUI;
 	InventoryUI _inventoryUI;
 	StatUI _statUI;
@@ -210,5 +213,8 @@ public:
 	bool getBossHpActive() { return _bossUI.active; }
 	void showBossHP(bool active) { _bossUI.active = active; }
 	void setBossHP(int maxHp, int currHp) { _bossUI.maxHP = maxHp; _bossUI.currHp = currHp; }
+
+	void setEatFoods(Food* food); //음식점UI -> get -> 스탯UI -> set
+	//Food getEatFoods(int i) { return _foodList[i]; }	//음식점UI -> 스탯UI
 };
 
