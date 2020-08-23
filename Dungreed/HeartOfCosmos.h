@@ -7,8 +7,7 @@ private:
 	Image* _img;
 	Animation* _ani;
 	Vector2 _renderPos;
-	Vector2 _playerpos;
-	int _x, _y;
+	Vector2 _playerpos;	
 	string _attackCode;
 	float _elapsedTime;
 	

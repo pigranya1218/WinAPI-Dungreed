@@ -20,6 +20,7 @@ void IceBall::init()
 	_radius = 85;
 	_fspeed = 10;
 	_x = _y = 0;
+	_angle = PI / 2;
 	_elapsedTime = 0;
 	_img = IMAGE_MANAGER->findImage("IceBall0");
 	_ani = new Animation;

@@ -24,6 +24,7 @@ void MetalBoots::release()
 
 void MetalBoots::update(Player * player, float const elapsedTime)
 {
+	
 }
 
 void MetalBoots::backRender(Player * player)
