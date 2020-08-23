@@ -20,8 +20,15 @@ void Room23LR::init()
 	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1300, 500) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1400, 500) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1500, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(670, 900) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(1430, 900) });
+	
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(650, 650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(1450, 650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(670, 900),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(1430, 900),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(740, 900),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(1300, 900),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(640, 900),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_GSWORD, Vector2(1390, 900),2 });
 
 	int randBox = RANDOM->getInt(10);
 	int boxPer = RANDOM->getInt(10);
@@ -31,7 +38,7 @@ void Room23LR::init()
 	if (randBox % 10 == 1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
 	else if (randBox % 3 == 1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
-	_spawnChest.pos = Vector2(1200, 900);
+	_spawnChest.pos = Vector2(1090, 900);
 
 	_objectMgr->spawnObject(0x0001, Vector2(700, 650));
 	_objectMgr->spawnObject(0x0001, Vector2(740, 650));
