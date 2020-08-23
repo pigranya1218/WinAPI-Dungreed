@@ -216,9 +216,9 @@ void Player::init()
 	testAcc1->init();
 	_equippedWeapon[0] = testAcc1;*/
 
-	Seeri* testAcc24 = new Seeri;
+	/*Seeri* testAcc24 = new Seeri;
 	testAcc24->init();
-	_inventory[1] = testAcc24;
+	_inventory[1] = testAcc24;*/
 
 	////GreenBat* testAcc2 = new GreenBat;
 	////testAcc2->init();
@@ -280,9 +280,9 @@ void Player::init()
 	////testAcc13->init();
 	////_inventory[5] = testAcc13;
 
-	Voluspa* testAcc22 = new Voluspa;
+	/*Voluspa* testAcc22 = new Voluspa;
 	testAcc22->init();
-	_inventory[5] = testAcc22;
+	_inventory[5] = testAcc22;*/
 
 	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	//testAcc14->init();
@@ -351,9 +351,9 @@ void Player::init()
 	testWeapon7->init();
 	_inventory[3] = testWeapon7;*/
 
-	MagicStick* testWeapon8 = new MagicStick;
-	testWeapon8->init();
-	_inventory[14] = testWeapon8;
+	//MagicStick* testWeapon8 = new MagicStick;
+	//testWeapon8->init();
+	//_inventory[14] = testWeapon8;
 
 	//OakBow* testWeapon8 = new OakBow;
 	//testWeapon8->init();
@@ -367,9 +367,9 @@ void Player::init()
 	//testAcc18->init();
 	//_inventory[5] = testAcc18;
 
-	MultiBullet* testAcc19 = new MultiBullet;
-	testAcc19->init();
-	_inventory[6] = testAcc19;
+	//MultiBullet* testAcc19 = new MultiBullet;
+	//testAcc19->init();
+	//_inventory[6] = testAcc19;
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
