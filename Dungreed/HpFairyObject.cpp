@@ -41,6 +41,8 @@ void HpFairyObject::update(float elapsedTime)
 	{
 		if (_player->getMaxHp() != _player->getCurrHp())
 		{
+			SOUND_MANAGER->stop("Player/GetFairy");
+			SOUND_MANAGER->play("Player/GetFairy", 1);
 			_active = false;
 			_player->setCurrHp(_player->getCurrHp() + _value);
 		}

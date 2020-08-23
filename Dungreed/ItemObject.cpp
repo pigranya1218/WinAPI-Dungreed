@@ -40,6 +40,8 @@ void ItemObject::update(float elapsedTime)
 	{
 		if (_player->collisionItem(_item))
 		{
+			SOUND_MANAGER->stop("Player/Inven/GetItem");
+			SOUND_MANAGER->play("Player/Inven/GetItem", 1);
 			_active = false;
 		}
 	}
