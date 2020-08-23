@@ -244,6 +244,7 @@ void GuidedProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
+	// 잔상 사용시
 	if (_afterimage)
 	{
 		_mirageCount += elapsedTime;
