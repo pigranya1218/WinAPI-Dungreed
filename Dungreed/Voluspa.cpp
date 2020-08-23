@@ -51,7 +51,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 			}
 
 			if (_currStopDelay == 0) {				
-				_renderPos.y = CAMERA->getRelativeY(enemypos.y);
+				_renderPos.y = enemypos.y;
 				_currAttackDelay = 1.7f;
 				_Opposition = true;
 			}
@@ -65,7 +65,7 @@ void Voluspa::update(Player * player, float const elapsedTime)
 
 			if (_currAttackDelay == 0) {
 				
-				_renderPos.y = CAMERA->getRelativeY(enemypos.y);
+				_renderPos.y = enemypos.y;
 				_currStopDelay = 1.7f;
 				_Opposition = false;
 			}
@@ -113,7 +113,6 @@ void Voluspa::update(Player * player, float const elapsedTime)
 
 void Voluspa::backRender(Player * player)
 {
-
 	_img->setScale(3);	
 	if (_Opposition)
 	{
@@ -123,8 +122,6 @@ void Voluspa::backRender(Player * player)
 	{
 		_img->render(CAMERA->getRelativeV2(_renderPos), false);
 	}
-
-
 }
 
 void Voluspa::frontRender(Player * player)

@@ -24,11 +24,11 @@ void Room7RT::init()
 	if (randBox % 10 == 1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
 	else if (randBox % 3 == 1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
-	_spawnChest.pos = Vector2(500, 500);
+	_spawnChest.pos = Vector2(900, 700);
 
 	_respawnPosition[1] = Vector2(900, 570);
 
-	_respawnPosition[2] = Vector2(1550, 600);          
+	     
 	
 	makeDoor(Vector2(900, 475), DIRECTION::UP);
 

@@ -24,7 +24,7 @@ void Room21LR::init()
 	if (randBox % 10 == 1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
 	else if (randBox % 3 == 1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
-	_spawnChest.pos = Vector2(500, 500);
+	_spawnChest.pos = Vector2(800, 680);
 
 	_objectMgr->spawnObject(0x0001, Vector2(700, 700));
 	_objectMgr->spawnObject(0x0001, Vector2(740, 700));

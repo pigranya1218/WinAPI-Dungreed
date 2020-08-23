@@ -14,8 +14,6 @@
 #include "PowerKatana.h"
 #include "QuarterStaffBig.h"
 #include "BigPaintBlush.h"
-#include "Lumber.h"
-#include "FluteGreatSword.h"
 
 #include "OakBow.h"
 #include "MatchLockGun.h"
@@ -25,7 +23,6 @@
 
 #include "SpikeBall.h"
 #include "IceBall.h"
-#include "miniEarth.h"
 #include "watCher.h"
 #include "babyGreenBat.h"
 #include "GreenBat.h"
@@ -219,9 +216,9 @@ void Player::init()
 	testAcc1->init();
 	_equippedWeapon[0] = testAcc1;
 
-	////Seeri* testAcc24 = new Seeri;
-	////testAcc24->init();
-	////_inventory[1] = testAcc24;
+	Seeri* testAcc24 = new Seeri;
+	testAcc24->init();
+	_inventory[1] = testAcc24;
 
 	////GreenBat* testAcc2 = new GreenBat;
 	////testAcc2->init();
@@ -370,9 +367,9 @@ void Player::init()
 	//testAcc18->init();
 	//_inventory[5] = testAcc18;
 
-	
-
-	
+	MultiBullet* testAcc19 = new MultiBullet;
+	testAcc19->init();
+	_inventory[6] = testAcc19;
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
@@ -423,6 +420,7 @@ void Player::update(float const elapsedTime)
 	// 장비 교체
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::CHANGE_WEAPON)) && _currWeaponChangeCoolTime == 0)
 	{
+		SOUND_MANAGER->play("Player/Swap", 1);
 		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
 		updateAdjustStat();
@@ -498,7 +496,7 @@ void Player::update(float const elapsedTime)
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		//대쉬 이펙트 재생
 		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
-		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y * 2);
+		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y);
 		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
 
 		_currDashCount -= 1;

@@ -16,9 +16,9 @@ void BigPaintBlush::init()
 	_ani->isPlay();
 	_itemName = L"서예용 붓";
 	_displayText = L"\"아름답게 글자를 쓰는 것이 귀족들 사이에서 유행이라고 한다\"";
-	_itemCode = 0x01103; // 한손 일반
+	_itemCode = 0x01103;
 
-	_price = 2000;
+	_price = 1200;
 
 	// 기본 보조옵션
 	
@@ -94,11 +94,11 @@ void BigPaintBlush::update(Player* player, float const elapsedTime)
 		degree -= 360;
 	}
 
-	if (_drawEffect) // 이펙트를 그린다
+	if (_drawEffect)
 	{
 		_drawEffect = false;
-		Vector2 effectPos = pos; // 손의 위치로부터
-		float length = _img->getWidth() * 4 * 1.0; // 무기 길이만큼
+		Vector2 effectPos = pos;
+		float length = _img->getWidth() * 4 * 1.0;
 		effectPos.x += cosf(degree * (PI / 180)) * length;
 		effectPos.y += -sinf(degree * (PI / 180)) * length;
 		EFFECT_MANAGER->play("EFFECT_PAINTSWING", effectPos, Vector2(130, 200), degree);
@@ -134,7 +134,7 @@ void BigPaintBlush::update(Player* player, float const elapsedTime)
 		}
 	}
 
-	// 공격 딜레이 계산
+	
 	_currAttackDelay = max(0, _currAttackDelay - elapsedTime);
 
 	
@@ -147,12 +147,12 @@ void BigPaintBlush::backRender(Player* player)
 	Vector2 pos = player->getPosition();
 	if (_oneAttack)
 	{
-		// 플레이어 중점
+		
 		originPos.x += ((isLeft) ? -20 : 20);
 
 
 
-		// 손으로부터 마우스 에임까지의 각도
+		
 
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x - pos.x))) * (180 / PI);
 		float degreeOffsetangle = degree + 90;
@@ -167,11 +167,11 @@ void BigPaintBlush::backRender(Player* player)
 		{
 			degreeOffsetangle -= 360;
 		}
-		// 손 의 각도 
+		
 		Vector2 renderPosHand = originPos;
 		Vector2 renderPosWeapon = originPos;
 
-		if (isLeft) // 왼쪽을 보고 있음
+		if (isLeft) 
 		{
 
 			renderPosWeapon.x -= 31 - (cosf(degreeOffsetangle * (PI / 180))*-(_img->getWidth() * 0.4f * 4));
@@ -188,29 +188,29 @@ void BigPaintBlush::backRender(Player* player)
 		}
 		float renderDegree = degreeOffsetangle;
 
-		if (isLeft) // 왼쪽을 보고 있음
+		if (isLeft) 
 		{
 			renderDegree = 360 - degreeOffsetangle;
 			if (renderDegree < 0) renderDegree += 360;
 		}
 
-		renderPosWeapon.x += ((isLeft) ? (-_attackMove.x) : (_attackMove.x));		 // 무기의 x좌표
-		renderPosWeapon.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y)); // 무기의 y좌표
-		renderPosHand.x += ((isLeft) ? (_attackMove.x) : (-_attackMove.x));			 // 손의 x좌표
-		renderPosHand.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y));	 // 손의 y좌표
+		renderPosWeapon.x += ((isLeft) ? (-_attackMove.x) : (_attackMove.x));		
+		renderPosWeapon.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y)); 
+		renderPosHand.x += ((isLeft) ? (_attackMove.x) : (-_attackMove.x));			
+		renderPosHand.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y));	
 
-		_img->setScale(4); // 이미지 크기 
-		_img->setAngle(renderDegree + _angleOffset); // 이미지 각도 
-		if (isLeft) // 왼쪽을 보고 있음
+		_img->setScale(4); 
+		_img->setAngle(renderDegree + _angleOffset); 
+		if (isLeft)
 		{
-			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); // 이미지 회전시킬 중점
+			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); 
 		}
 		else
 		{
-			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); // 이미지 회전시킬 중점
+			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); 
 
 		}
-		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft); // 그린다
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);
 
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 		Vector2 last = renderPosHand;
@@ -218,12 +218,12 @@ void BigPaintBlush::backRender(Player* player)
 		if (isLeft) // 왼쪽을 보고 있음
 		{
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(last));
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(last)); 
 		}
 		else
 		{
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree + _angleOffset), CAMERA->getRelativeV2(last));
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(last)); // 손의 렉트를 그린다
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(last)); 
 		}
 		
 	}
@@ -255,10 +255,10 @@ void BigPaintBlush::frontRender(Player* player)
 	}
 	if (!_oneAttack)
 	{
-		// 플레이어 중점
+		
 		originPos.x += ((isLeft) ? -40 : 20);
 
-		// 손으로부터 마우스 에임까지의 각도
+		
 
 		float degree = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - pos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - pos.x)) * (180 / PI);
 		float degreeOffsetangle = degree + 90;
@@ -271,11 +271,11 @@ void BigPaintBlush::frontRender(Player* player)
 		{
 			degreeOffsetangle -= 360;
 		}
-		// 손 의 각도 
+		
 		Vector2 renderPosHand = originPos;
 		Vector2 renderPosWeapon = originPos;
 
-		if (isLeft) // 왼쪽을 보고 있음
+		if (isLeft) 
 		{
 
 			renderPosWeapon.x += -2 + (-cosf(degreeOffsetangle * (PI / 180)) * -(_img->getWidth()  * 0.1f * 4));
@@ -292,40 +292,40 @@ void BigPaintBlush::frontRender(Player* player)
 		}
 		float renderDegree = degreeOffsetangle;
 
-		if (isLeft) // 왼쪽을 보고 있음
+		if (isLeft) 
 		{
 			renderDegree = 360 - degreeOffsetangle;
 			if (renderDegree < 0) renderDegree += 360;
 		}
 
-		renderPosWeapon.x += ((isLeft) ? (-_attackMove.x) : (_attackMove.x));		 // 무기의 x좌표
-		renderPosWeapon.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y)); // 무기의 y좌표
-		renderPosHand.x += ((isLeft) ? (_attackMove.x) : (-_attackMove.x));			 // 손의 x좌표
-		renderPosHand.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y));	 // 손의 y좌표
-		_img->setScale(4); // 이미지 크기 
-		_img->setAngle(renderDegree + _angleOffset); // 이미지 각도 
-		if (isLeft) // 왼쪽을 보고 있음
+		renderPosWeapon.x += ((isLeft) ? (-_attackMove.x) : (_attackMove.x));		
+		renderPosWeapon.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y)); 
+		renderPosHand.x += ((isLeft) ? (_attackMove.x) : (-_attackMove.x));			
+		renderPosHand.y += ((degreeOffsetangle >= 180) ? (_attackMove.y) : (-_attackMove.y));	
+		_img->setScale(4); 
+		_img->setAngle(renderDegree + _angleOffset);
+		if (isLeft)
 		{
-			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); // 이미지 회전시킬 중점
+			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight()));
 		}
 		else
 		{
-			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight())); // 이미지 회전시킬 중점
+			_img->setAnglePos(Vector2(0.2f * _img->getWidth(), 0.5f * _img->getHeight()));
 
 		}
-		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft); // 그린다
+		_img->render(CAMERA->getRelativeV2(renderPosWeapon), isLeft);
 
 		_hand = rectMakePivot(renderPosHand, _handSize, PIVOT::CENTER);
 
-		if (isLeft) // 왼쪽을 보고 있음
+		if (isLeft)
 		{
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, -(renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); 
 		}
 		else
 		{
 			D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_hand), 210, 188, 181, 1, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand)); // 손의 렉트를 그린다
+			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_hand), 40, 36, 58, 1.f, 2.f, (renderDegree + _angleOffset), CAMERA->getRelativeV2(renderPosHand));
 		}
 		
 	}
@@ -339,10 +339,9 @@ void BigPaintBlush::attack(Player* player)
 	CAMERA->pushShakeEvent(10,0.1f);
 	   		_reverseMove = false;
 	_currAttackDelay = _addStat.attackSpeed;
-	//==========================================================================
-
+	
 	Vector2 originPos = player->getPosition();
-	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15); // 바라보는 방향의 어깨
+	originPos.x += ((player->getDirection() == DIRECTION::LEFT) ? -15 : 15);
 	originPos.y += 10;
 	float attackRadian = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - originPos.y), (CAMERA->getAbsoluteX(_ptMouse.x) - originPos.x));
 	if (attackRadian < 0)
@@ -350,7 +349,7 @@ void BigPaintBlush::attack(Player* player)
 		attackRadian += PI2;
 	}
 
-	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
+	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); 
 
 	SOUND_MANAGER->stop("SOUND_swing1");
 	SOUND_MANAGER->play("SOUND_swing1", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
@@ -361,7 +360,7 @@ void BigPaintBlush::attack(Player* player)
 	attackCircle->startRadian = attackRadian - PI * 0.28;
 	attackCircle->endRadian = attackRadian + PI * 0.28;
 
-	_attackDebug = FloatCircle(originPos, 150, attackRadian - PI * 0.37, attackRadian + PI * 0.37); // forDEBUG
+	_attackDebug = FloatCircle(originPos, 150, attackRadian - PI * 0.37, attackRadian + PI * 0.37); 
 	AttackInfo* attackInfo = new AttackInfo;
 	attackInfo->team = OBJECT_TEAM::PLAYER;
 	attackInfo->attackID = TTYONE_UTIL::getHash(attackCode);
@@ -378,7 +377,7 @@ void BigPaintBlush::attack(Player* player)
 	attack._count = 0;
 	_VtagAttack.push_back(attack);
 
-	// player->attack(attackCircle, attackInfo);
+	
 
 
 }
@@ -387,6 +386,6 @@ void BigPaintBlush::equip(Player* player)
 {
 	PlayerStat stat = player->getCurrStat();
 	_adjustStat = _addStat;
-	// 플레이어의 공격속도가 30이라면 원래 공격속도의 (100 - 30)%로 공격함 = 70%
+	
 	_adjustStat.attackSpeed = _addStat.attackSpeed * ((100 - stat.attackSpeed) / 100);
 }

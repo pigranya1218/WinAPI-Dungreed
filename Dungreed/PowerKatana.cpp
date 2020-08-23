@@ -6,7 +6,7 @@ void PowerKatana::init()
 	_iconImg = IMAGE_MANAGER->findImage("PowerKatana");
 	_img = IMAGE_MANAGER->findImage("PowerKatanaHUD");
 	_imgAttack = IMAGE_MANAGER->findImage("KatanaWhite");
-	_price = 600;
+	_price = 2800;
 	_itemName = L"육도 '가이'";
 	_displayText = L"\"봉인이 되어 있군요. 여덟 개의 문을 열 수 있게 되어 있지만, 네 개 이상은 저희의 힘으론.. -로젠-\"";
 	_itemCode = 0x02301; //양손 희귀 01;

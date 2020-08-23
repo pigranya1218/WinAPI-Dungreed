@@ -441,6 +441,9 @@ void StageManager::makeStage()
 		makeBossStage();
 		_uiMgr->setMap(_stageMap, getStageTitle());
 		_uiMgr->setCurrentMapIndex(Vector2(_currIndexX, _currIndexY));
+
+		
+		
 		break;
 	case STAGE_TYPE::TEST:
 		_currStage = new DebugStage();
