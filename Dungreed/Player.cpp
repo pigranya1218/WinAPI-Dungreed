@@ -287,9 +287,9 @@ void Player::init()
 	//testAcc13->init();
 	//_inventory[5] = testAcc13;
 
-	Voluspa* testAcc22 = new Voluspa;
-	testAcc22->init();
-	_inventory[1] = testAcc22;
+	//Voluspa* testAcc22 = new Voluspa;
+	//testAcc22->init();
+	//_inventory[1] = testAcc22;
 
 	MultiBullet* testAcc14 = new MultiBullet;
 	testAcc14->init();
@@ -499,8 +499,12 @@ void Player::update(float const elapsedTime)
 	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		//대쉬 효과음 재생
-
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+		//대쉬 이펙트 재생
+		Vector2 dashEffectPos = Vector2(_position.x + _size.x / 2, _position.y + _size.y / 2);
+		Vector2 dashEffectSize = Vector2(_size.x * 2, _size.y * 2);
+		EFFECT_MANAGER->play("PLAYER/DASH_DUST_EFFECT", dashEffectPos, dashEffectSize, 0, false);
+
 		_currDashCount -= 1;
 		float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - _position.y), (CAMERA->getAbsoluteX(_ptMouse.x) - _position.x));
 		_force.x = cosf(angle) * _adjustStat.dashXPower;
@@ -1053,11 +1057,13 @@ bool Player::ateFood(Food * food)
 	PlayerStat foodOneceStat = food->getOnceStat();
 	if (_currGold >= food->getPrice() && (getMaxSatiety() - _currSatiety) >= foodOneceStat.currSatiety)
 	{
-		_currGold -= food->getPrice();
-		_currSatiety += foodOneceStat.currSatiety;
-		_currHp += foodOneceStat.currHp;
+		
 		_ateFood.push_back(food);
 		updateAdjustStat();
+		_currGold -= food->getPrice();
+		_currSatiety += foodOneceStat.currSatiety;
+		_currHp = min(_adjustStat.maxHp, _currHp + foodOneceStat.currHp);
+		
 		return true;
 	}
 	// 못먹으면 FALSE 반한
