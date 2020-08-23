@@ -544,6 +544,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSwordFx1", L"resources/images/MeleeWeapon/CosmosSwordFx1.png",7,1);
+	IMAGE_MANAGER->addFrameImage("smallHit", L"resources/images/MeleeWeapon/smallHit.png",6,1);
 	
 	//***MeleeWeaponSound
 	SOUND_MANAGER->addSound("SOUND_katana", "resources/sound/MeleeWeapon/katana.wav", false, false);  // 카타나
@@ -558,8 +559,7 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("SOUND_wujusword", "resources/sound/MeleeWeapon/wujusword.wav", false, false); // 우주검 공격
 	SOUND_MANAGER->addSound("SOUND_swing1", "resources/sound/MeleeWeapon/swing1.wav", false, false); // 붓 공격
 
-
-
+	EFFECT_MANAGER->addEffect("EFFECT_smallHit", "smallHit", 30, 10); // 피격 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSWING", "CosmosSwordFx", 30, 10); // 우주검 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_COSMOSSLASH", "CosmosSlashFX0", 30, 10);	  // 우주검 피격시 이펙트
 	EFFECT_MANAGER->addEffect("EFFECT_SCYTHESWING", "KeresScytheSwingFX", 30, 10); // 낫 이펙트
