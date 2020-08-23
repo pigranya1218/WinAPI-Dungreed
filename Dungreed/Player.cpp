@@ -280,9 +280,9 @@ void Player::init()
 	////testAcc13->init();
 	////_inventory[5] = testAcc13;
 
-	Voluspa* testAcc22 = new Voluspa;
-	testAcc22->init();
-	_inventory[5] = testAcc22;
+	//Voluspa* testAcc22 = new Voluspa;
+	//testAcc22->init();
+	//_inventory[5] = testAcc22;
 
 	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	//testAcc14->init();
@@ -359,17 +359,17 @@ void Player::init()
 	testWeapon5->init();
 	_inventory[14] = testWeapon5;
 
-	///*SilverBullet* testAcc19 = new SilverBullet;
-	//testAcc19->init();
-	//_inventory[14] = testAcc19;*/
+	SilverBullet* testAcc20 = new SilverBullet;
+	testAcc20->init();
+	_inventory[7] = testAcc20;
 
-	//MagnifyingGlass* testAcc18 = new MagnifyingGlass;
-	//testAcc18->init();
-	//_inventory[5] = testAcc18;
+	MagnifyingGlass* testAcc21 = new MagnifyingGlass;
+	testAcc21->init();
+	_inventory[8] = testAcc21;
 
-	MultiBullet* testAcc19 = new MultiBullet;
-	testAcc19->init();
-	_inventory[6] = testAcc19;
+	MultiBullet* testAcc22 = new MultiBullet;
+	testAcc22->init();
+	_inventory[9] = testAcc22;
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
