@@ -291,7 +291,7 @@ void Player::init()
 	testAcc22->init();
 	_inventory[1] = testAcc22;
 
-	MultiBullet* testAcc14 = new MultiBullet;
+	MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	testAcc14->init();
 	_inventory[10] = testAcc14;
 
@@ -303,7 +303,7 @@ void Player::init()
 	//testAcc17->init();
 	//_inventory[2] = testAcc17;
 
-	FluteGreatSword* testAcc20 = new FluteGreatSword;
+	PowerKatana* testAcc20 = new PowerKatana;
 	testAcc20->init();
 	_inventory[2] = testAcc20;
 	
@@ -322,7 +322,7 @@ void Player::init()
 	_inventory[11] = testWeapon1;
 	*/
 
-	Lumber* testWeapon2 = new Lumber;
+	PickaxeRed* testWeapon2 = new PickaxeRed;
 	testWeapon2->init();
 	_inventory[11] = testWeapon2;
 

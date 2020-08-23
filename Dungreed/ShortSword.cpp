@@ -258,18 +258,15 @@ void ShortSword::frontRender(Player* player)
 			EFFECT_MANAGER->play("EFFECT_SWING", effectPos, Vector2(120, 180), degree);
 		}
 	}
-	_attackDebug.render(true);
 }
 
 
 void ShortSword::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-	Vector2 renderPosHand = pos;
-	// 손으로부터 마우스 에임까지의 각도
-	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) ;	
+
+	CAMERA->pushShakeEvent(10, 0.1f);
+	
 	_reverseMove = false;	
 	_currAttackDelay = _addStat.attackSpeed;
 	//==========================================================================
