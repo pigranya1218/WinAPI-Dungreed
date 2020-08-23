@@ -282,9 +282,9 @@ void Player::init()
 	////testAcc13->init();
 	////_inventory[5] = testAcc13;
 
-	//Voluspa* testAcc22 = new Voluspa;
-	//testAcc22->init();
-	//_inventory[1] = testAcc22;
+	Voluspa* testAcc22 = new Voluspa;
+	testAcc22->init();
+	_inventory[5] = testAcc22;
 
 	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	//testAcc14->init();

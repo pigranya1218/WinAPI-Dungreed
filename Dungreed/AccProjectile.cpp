@@ -127,14 +127,14 @@ void AccProjectile::render()
 	{
 		if (_ani->isPlay()) {
 			_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+			//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		}
 	}
 	else
 	{
 		if (_ani->isPlay()) {
 			_img->render(CAMERA->getRelativeV2(_position), _drawSize);
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+			//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 			//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, resize, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		}
 

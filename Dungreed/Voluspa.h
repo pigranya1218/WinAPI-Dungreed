@@ -12,7 +12,7 @@ private:
 	float _currStopDelay;
 	string _attackCode;
 	float _elapsedTime;
-	
+	Vector2 _enemypos;
 
 public:
 	virtual void init();
