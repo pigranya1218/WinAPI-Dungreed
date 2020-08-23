@@ -71,32 +71,37 @@ void GatlingGun::update(Player * player, float const elapsedTime)
 	_reloadAni->frameUpdate(elapsedTime);
 	_shootEffectAni->frameUpdate(elapsedTime);
 
-	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+	if (player->getWeapon(player->getWeaponIndex())->getItemCode() == 0x02361)
 	{
-		_timeCount += elapsedTime;
-		_isAttack = false;
-		SOUND_MANAGER->stop("GatlingWarmUp");
-		SOUND_MANAGER->play("GatlingWarmUp", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
-	}
-	if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
-	{
-		_timeCount += elapsedTime;
-		_isAttack = false;
-		if (!SOUND_MANAGER->isPlaySound("GatlingWarmUp"))
+		if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
 		{
-			_timeCount = 0;
+			_timeCount += elapsedTime;
+			_isAttack = false;
+			SOUND_MANAGER->stop("GatlingWarmUp");
+			SOUND_MANAGER->play("GatlingWarmUp", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		}
-	}
-	if (!SOUND_MANAGER->isPlaySound("GatlingWarmUp") && _timeCount == 0)
-	{
-		_isAttack = true;
-	}
 
-	if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
-	{
-		_attackAni->stop();
-		_shootEffectAni->stop();
-		_isAttack = false;
+		if (KEY_MANAGER->isStayKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+		{
+			_timeCount += elapsedTime;
+			_isAttack = false;
+			if (!SOUND_MANAGER->isPlaySound("GatlingWarmUp"))
+			{
+				_timeCount = 0;
+			}
+		}
+
+		if (!SOUND_MANAGER->isPlaySound("GatlingWarmUp") && _timeCount == 0)
+		{
+			_isAttack = true;
+		}
+
+		if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+		{
+			_attackAni->stop();
+			_shootEffectAni->stop();
+			_isAttack = false;
+		}
 	}
 }
 

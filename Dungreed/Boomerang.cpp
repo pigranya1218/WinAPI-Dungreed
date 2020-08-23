@@ -135,7 +135,7 @@ void Boomerang::attack(Player * player)
 	_projectile->setPosition(_gunPos);
 	_projectile->setSize(Vector2(_img->getFrameSize().x * 4, _img->getFrameSize().y * 4));
 	_projectile->setTeam(OBJECT_TEAM::PLAYER);
-	_projectile->init("Boomerang_Moving", _angleRadian, 30 * 15, true, true, 20, true, "", Vector2(effectSize02), Vector2(30 * 10, 30 * 10), 1.5);
+	_projectile->init("Boomerang_Moving", _angleRadian, true, true, 20, true, "", Vector2(effectSize02), Vector2(30 * 20, 30 * 20), 1);
 
 	string attackCode = to_string(_itemCode) + to_string(TIME_MANAGER->getWorldTime()); // 아이템 코드와 현재 시간을 Concat하여 공격 아이디를 구하기 위한 공격 코드를 생성함
 
