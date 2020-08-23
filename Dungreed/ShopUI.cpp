@@ -346,21 +346,7 @@ void ShopUI::init()
 	}
 
 	// FOR TEST
-	Item* item1 = new BigPaintBlush;
-	item1->init();
-	_shopItem.push_back(item1);
-	Item* item2 = new CosmosSword;
-	item2->init();
-	_shopItem.push_back(item2);
-	Item* item3 = new GreenDadBat;
-	item3->init();
-	_shopItem.push_back(item3);
-	Item* item4 = new miniEarth;
-	item4->init();
-	_shopItem.push_back(item4);
-	Item* item5 = new GatlingGun;
-	item5->init();
-	_shopItem.push_back(item5);
+	_shopItem = DATA_MANAGER->getRandomItem(ITEM_RANK::NORMAL, ITEM_RANK::LEGEND, 5);
 }
 
 void ShopUI::release()
