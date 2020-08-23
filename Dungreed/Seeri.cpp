@@ -38,7 +38,7 @@ void Seeri::update(Player * player, float const elapsedTime)
 
 	
 
-	if (_renderPos.x - 600 < _enemy.x && _renderPos.x + 600 > _enemy.x && _renderPos.y - 600 < _enemy.y && _renderPos.y + 600 > _enemy.y)
+	if (_renderPos.x - 700 < _enemy.x && _renderPos.x + 700 > _enemy.x && _renderPos.y - 700 < _enemy.y && _renderPos.y + 700 > _enemy.y)
 	{
 		if (_Delay > 0)
 		{

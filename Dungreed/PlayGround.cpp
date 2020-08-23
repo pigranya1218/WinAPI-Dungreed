@@ -628,6 +628,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Seeri0", L"resources/images/Accessories/Seeri0.png", 9, 1);                  // 자동공격 인형 프레임 이미지
 	IMAGE_MANAGER->addImage("selected", L"resources/images/Accessories/selected.png");                         // 자동공격 인형 조준점
 	IMAGE_MANAGER->addImage("SeeriBullet", L"resources/images/Accessories/SeeriBullet.png");                   // 자동공격 인형 탄
+	IMAGE_MANAGER->addFrameImage("SeeriBullet0", L"resources/images/Accessories/SeeriBullet0.png", 6, 1);                  // 자동공격 인형 프레임 이미지
 
 	// ** SPECIAL ABILITY
 	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY_WARNING", L"resources/images/weapon/specialAbility/alice_warning.png", 4, 1);
@@ -769,7 +770,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 	EFFECT_MANAGER->addEffect("DadBatBulletFX", "DadBatBulletFX", 15, 50);
 	EFFECT_MANAGER->addEffect("ArrowHitEffect", "ArrowHitEffect", 15, 20);
-
+	EFFECT_MANAGER->addEffect("SeeriBullet0", "SeeriBullet0", 20, 20);
 	// ** Boss
 	// *  Belial
 	// *  Head

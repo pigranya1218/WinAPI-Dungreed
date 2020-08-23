@@ -45,6 +45,9 @@ void SeeriProjectile::init(const string imgKey, const string collisionEffect, co
 	_length = _img->getFrameSize().x * 1.0f;
 
 	_timeCount = 0;
+	_isTrun = false;
+	
+	_angele = 0;
 }
 
 void SeeriProjectile::release()
@@ -61,7 +64,35 @@ void SeeriProjectile::release()
 
 void SeeriProjectile::update(float elapsedTime)
 {
-	
+	Vector2 _effectpos = _position;
+	if (_enemyPos.x < _position.x)
+	{
+		_isTrun = true;
+
+
+		_effectpos.x = _effectpos.x + 10;
+	}
+	else
+	{
+		_isTrun = false;
+		_effectpos.x = _effectpos.x - 10;
+	}
+	if (_enemyPos.y < _position.y)
+	{
+		_angele += 0.033f;
+		_img->setAngle(_img->getAngle() + _angele*15);
+	}
+	else
+	{
+		_angele -= 0.033f;
+		_img->setAngle(_img->getAngle() + _angele* 15);
+	}
+
+	if (_enemyPos.y + 50 < _position.y)
+	{
+		_position.y -= 3;
+	}
+	EFFECT_MANAGER->play("SeeriBullet0", _effectpos, _drawSize, 0, _isTrun);
 	if (_Delay > 0)
 	{
 		_Delay = max(0, _Delay - elapsedTime);
@@ -82,7 +113,7 @@ void SeeriProjectile::update(float elapsedTime)
 		}
 
 		// 투사체부터 에너미까지의 각도
-		float guidedAngleRadian = atan2f(-(CAMERA->getAbsoluteY(_enemyPos.y) - _position.y), (CAMERA->getAbsoluteX(_enemyPos.x) - _position.x)) + PI2;
+		float guidedAngleRadian = atan2f(-(_enemyPos.y - _position.y), (_enemyPos.x - _position.x)) + PI2;
 		if (guidedAngleRadian > PI2)
 		{
 			guidedAngleRadian -= PI2;
@@ -108,7 +139,7 @@ void SeeriProjectile::update(float elapsedTime)
 						_angleRadian = PI2;
 					}
 					_angleRadian -= 3.f * elapsedTime;
-					_img->setAngle(_angleRadian);
+					
 					//_angleRadian -= 0.1f;
 				}
 				else
@@ -116,7 +147,7 @@ void SeeriProjectile::update(float elapsedTime)
 					_angleRadian += 3.f * elapsedTime;
 					//_angleRadian += 2.f * elapsedTime;
 					//_angleRadian += 0.1f;
-					_img->setAngle(_angleRadian);
+					
 				}
 			}
 			else
@@ -204,7 +235,8 @@ void SeeriProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	_img->setAngle(PI / 5);
+	
+
 }
 
 void SeeriProjectile::render()
@@ -212,15 +244,15 @@ void SeeriProjectile::render()
 	
 	if (_useAni)
 	{
-		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani, _isTrun);
+		
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
-		
 	
-		_img->render(CAMERA->getRelativeV2(_position), _drawSize);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		_img->render(CAMERA->getRelativeV2(_position), _drawSize, _isTrun);
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 }
 
