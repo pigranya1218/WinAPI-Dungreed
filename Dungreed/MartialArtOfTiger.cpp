@@ -5,7 +5,7 @@ void MartialArtOfTiger::init()
 {
 	_effect = IMAGE_MANAGER->findImage("EFFECT_TIGERPUNCH");
 	_iconImg =IMAGE_MANAGER->findImage("TigerPunchIcon");
-	_price = 600;
+	_price = 2300;
 	_itemName = L"호랑이 권법";
 	_displayText = L"\"토끼를 춤추게 하고 여우를 바이올린 켜게 하는 짐승에게 전수받은 권법\"";
 	_itemCode = 0x01300; //한손 에픽 00
@@ -84,7 +84,6 @@ void MartialArtOfTiger::backRender(Player* player)
 		D2D_RENDERER->fillRectangle(CAMERA->getRelativeFR(_rightHand), 210, 188, 181, 1.f, angle, CAMERA->getRelativeV2(_rightHand.getCenter()));
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_rightHand), 40, 36, 58, 1, 2.f, angle, CAMERA->getRelativeV2(_rightHand.getCenter()));
 	}
-	_attackDebug.render(true);
 }
 
 void MartialArtOfTiger::frontRender(Player* player)
@@ -127,26 +126,15 @@ void MartialArtOfTiger::frontRender(Player* player)
 		}
 
 	}
-	_attackDebug.render(true);
 }
 
 
 void MartialArtOfTiger::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-	Vector2 renderPosHand = pos; // 손의 위치
-	renderPosHand.x += ((isLeft) ? (-20) : (20));
-	renderPosHand.y += 20;
-	// 손으로부터 마우스 에임까지의 각도
-	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x)) + PI2;
-	if (angle > PI2)
-	{
-		angle -= PI2;
-	}
-	_reverseMove = false;
-	_attackAngle = angle;
+
+	CAMERA->pushShakeEvent(15, 0.1f);
+			_reverseMove = false;
 	_currAttackDelay = _addStat.attackSpeed;
 	//==========================================================================
 

@@ -40,6 +40,8 @@ public:
 	void pause(string keyName);
 	void resume(string keyName);
 
+	void setVolume(string keyName, float volume);
+
 	bool isPlaySound(string keyName);
 	bool isPauseSound(string keyName);
 };

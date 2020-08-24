@@ -39,8 +39,13 @@ void HpFairyObject::update(float elapsedTime)
 	FloatRect goldRc = FloatRect(_position, _size, PIVOT::CENTER);
 	if (FloatRect::intersect(playerRc, goldRc))
 	{
-		_active = false;
-		_player->setCurrHp(_player->getCurrHp() + _value);
+		if (_player->getMaxHp() != _player->getCurrHp())
+		{
+			SOUND_MANAGER->stop("Player/GetFairy");
+			SOUND_MANAGER->play("Player/GetFairy", 1);
+			_active = false;
+			_player->setCurrHp(_player->getCurrHp() + _value);
+		}
 	}
 }
 

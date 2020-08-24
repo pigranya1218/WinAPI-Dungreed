@@ -32,6 +32,8 @@ public:
 	vector<FloatRect> getEnemyRects();
 	bool showPlayer() {return _showPlayer;}
 	void setShowPlayer(float showPlayer) { _showPlayer = showPlayer; }
+	void showDropItem(Item* item);
+
 	// 스테이지 관련 함수
 	void moveTo(GameObject* object, Vector2 moveDir);
 	void moveRoom(Vector2 dir);

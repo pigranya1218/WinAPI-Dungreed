@@ -49,7 +49,7 @@ void VillageStage::init()
 	_enter = false;
 
 	SOUND_MANAGER->stop("Villiage_BGM");
-	SOUND_MANAGER->play("Villiage_BGM", 1.0f);
+	SOUND_MANAGER->play("Villiage_BGM", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 
 	//_collisions.push_back({ LinearFunc::getLinearFuncFromPoints(Vector2()) }
 
@@ -108,12 +108,16 @@ void VillageStage::render()
 	//_BGL->setScale(5);
 	_BGL->render(Vector2(WINSIZEX/2,WINSIZEY/2),Vector2(WINSIZEX, WINSIZEY));
 
+	int bg1StartX = CAMERA->getRelativeX(WINSIZEX / 2.f, 0.5);
+	int bg2StartX = CAMERA->getRelativeX(WINSIZEX / 2.f, 0.8);
 	for (int i = 0; i < stageWidth / _BG1->getWidth(); i++)
 	{
 		_BG1->setScale(6);
-		CAMERA->render(_BG1, Vector2(WINSIZEX/2+i* _BG1->getWidth()*6, stageHeight - 900));
+		//_BG1->render(Vector2((CAMERA->getRelativeX(WINSIZEX / 2 + i * _BG1->getWidth() * 6.f, 1)), CAMERA->getRelativeY(stageHeight - 900.f)));
+		_BG1->render(Vector2(bg1StartX + i * _BG1->getWidth() * 6.f, CAMERA->getRelativeY(stageHeight - 900.f)));
 		_BG2->setScale(5);
-		CAMERA->render(_BG2, Vector2(WINSIZEX / 2 + i * _BG2->getWidth() * 5, stageHeight - 480));
+		//_BG2->render(Vector2((CAMERA->getRelativeX(WINSIZEX / 2 + i * _BG2->getWidth() * 5.f, 1)), CAMERA->getRelativeY(stageHeight - 480.f)));
+		_BG2->render(Vector2(bg2StartX + i * _BG2->getWidth() * 5.f, CAMERA->getRelativeY(stageHeight - 480.f)));
 	}
 	_floor->setScale(5);
 	CAMERA->render(_floor,Vector2(5000, WINSIZEY / 2 + 470));
@@ -170,6 +174,22 @@ void VillageStage::render()
 		}
 	}
 
+	for (int i = 0; i < _collisionGroundRects.size(); i++)
+	{
+		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(_collisionGroundRects[i]), D2D1::ColorF::Enum::Red, 1, 1);
+	}
+
+	for (int i = 0; i < _collisionGroundLines.size(); i++)
+	{
+		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionGroundLines[i].getStart()), CAMERA->getRelativeV2(_collisionGroundLines[i].getEnd()), D2D1::ColorF::Enum::Red, 1);
+	}
+
+	for (int i = 0; i < _collisionPlatforms.size(); i++)
+	{
+		D2D_RENDERER->drawLine(CAMERA->getRelativeV2(_collisionPlatforms[i].getStart()), CAMERA->getRelativeV2(_collisionPlatforms[i].getEnd()), D2D1::ColorF::Enum::Blue, 1);
+	}
+
+
 	_npcMgr->render();
 	_enemyMgr->render();
 	_objectMgr->render();
@@ -185,7 +205,7 @@ void VillageStage::enterDungeon()
 	SOUND_MANAGER->stop("Villiage_BGM");
 
 	SOUND_MANAGER->stop("DungeonEat");
-	SOUND_MANAGER->play("DungeonEat", 1.0f);
+	SOUND_MANAGER->play("DungeonEat", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 
 	_eatPos.x = _stageManager->getPlayerPos().x;
 	_eatPos.y= _stageManager->getPlayerPos().y-_dungeonEat->getHeight()-35;

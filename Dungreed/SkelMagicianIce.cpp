@@ -18,7 +18,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 600;
 
 	_size = Vector2(_img->getFrameSize().x, _img->getFrameSize().y);
 	_size = _size * _scale;
@@ -29,7 +29,7 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 	}	
 
 	ZeroMemory(&_attack, sizeof(_attack));
-	_attack.delay = 0.5;	
+	_attack.delay = 2;	
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	
@@ -38,13 +38,13 @@ void SkelMagicianIce::init(const Vector2 & pos, DIRECTION direction, bool spawnE
 
 	// ≈∫∏∑ √ ±‚»≠
 	_shooting.init("IceBullet", "IceBullet_FX", Vector2(850, 850), _scale, 0.2, 1.3, true, false, false, false, true, false);
-	_shooting.attackInit(3, 2, 6);
+	_shooting.attackInit(2, 2, 4);
 
 	_isDetect = _attacking = 0;
 	_active = true;
 
 	_curHp = _maxHp = 70;
-	_enterCount = 0;
+	
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::SKEL_MAGICIAN_ICE);
 }
 
@@ -118,9 +118,7 @@ void SkelMagicianIce::update(float const timeElapsed)
 		}	
 		break;
 		case ENEMY_STATE::DIE:
-		{
-			SOUND_MANAGER->stop("IceSkell/Magic/Attack");
-			SOUND_MANAGER->stop("Enemy/Spawn");
+		{			
 		}
 		break;
 	}
@@ -151,8 +149,7 @@ void SkelMagicianIce::update(float const timeElapsed)
 	_attackAni->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		_enterCount = 0;
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -222,6 +219,9 @@ void SkelMagicianIce::setState(ENEMY_STATE state)
 		break;
 		case ENEMY_STATE::DIE:
 		{
+			SOUND_MANAGER->stop("IceSkell/Magic/Attack");
+			SOUND_MANAGER->stop("Enemy/Spawn");
+
 			_attacking = _active = false;
 			_attackAni->stop();
 		}

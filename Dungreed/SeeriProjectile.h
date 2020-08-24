@@ -16,20 +16,21 @@ private:
 
 	bool		_collsionGround;	// 빨간 선 충돌 여부
 	bool		_collisionPlatForm;	// 푸른 선 충돌 여부
-
+	bool        _isTrun;
 	bool        _bulletMove;
 	Vector2     _playerPos;
 	int         _y;
 	int y;
-	float chaseRadian;
-	bool isLeft;
+	float       chaseRadian;
+	bool        isLeft;
 	float       _Delay;
+	float       _angele;
 	string		_collisionEffect;	// 부딪혀서 폭발할 때 이펙트
 	Vector2		_drawSize;			// 부딪혀서 폭발할 때 이펙트 사이즈
 
 	bool		_useGravity;		// 중력 사용 여부
 	Vector2		_gravity;			// 중력값
-
+	Vector2     _effectpos;
 	bool		_useRotate;			// 투사체를 돌릴 것인가
 
 	Vector2		_enemyPos;			// 적몹 위치값
@@ -44,7 +45,6 @@ public:
 	virtual void release();
 	virtual void update(float elapsedTime);
 	virtual void render();
-
 	// 애니메이션 업데이트 하려고 만듬 
 	virtual void aniUpdate(float const elapsedTime);
 };

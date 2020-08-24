@@ -4,9 +4,11 @@
 struct tagShadow
 {
 	Vector2 pos;
-	float angleRadian;
-	float alpha;
-	Image* img;
+	float	angleRadian;
+	float	alpha;
+	float	remainTime;
+	int		frameX;
+	Image*  img;
 };
 
 class GuidedProjectile : public Projectile
@@ -41,9 +43,11 @@ private:
 	float		_mirageCount;
 	int			_afterCount;
 	float		_collisionCount;
-	Vector2		_miragePos;
+	float		_alphaCount;
+	float		_alphaValue;
 	tagShadow	_shodow;
 	vector<tagShadow> _vShadow;
+	int			_frameIndex;
 public:
 	GuidedProjectile() {}
 	GuidedProjectile(const GuidedProjectile& source);
@@ -57,4 +61,6 @@ public:
 
 	// 애니메이션 업데이트 하려고 만듬 
 	virtual void aniUpdate(float const elapsedTime);
+
+	void generateAfterImage(float elapsedTime);
 };

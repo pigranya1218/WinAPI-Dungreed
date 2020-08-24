@@ -82,6 +82,7 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	{
 		ChestNpc * chestNpc = new ChestNpc;
 		chestNpc->setRank(0);
+		chestNpc->setObjectManager(_objectMgr);
 		npc = chestNpc;
 	}
 	break;
@@ -89,6 +90,7 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	{
 		ChestNpc* chestNpc = new ChestNpc;
 		chestNpc->setRank(1);
+		chestNpc->setObjectManager(_objectMgr);
 		npc = chestNpc;
 	}
 	break;
@@ -96,6 +98,7 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	{
 		ChestNpc* chestNpc = new ChestNpc;
 		chestNpc->setRank(2);
+		chestNpc->setObjectManager(_objectMgr);
 		npc = chestNpc;
 	}
 	break;
@@ -103,6 +106,7 @@ void NpcManager::spawnNpc(NPC_TYPE type, Vector2 pos, DIRECTION direction)
 	{
 		ChestNpc* chestNpc = new ChestNpc;
 		chestNpc->setRank(3);
+		chestNpc->setObjectManager(_objectMgr);
 		npc = chestNpc;
 	}
 	break;

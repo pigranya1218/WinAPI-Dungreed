@@ -4,7 +4,7 @@ void Room20TB::init()
 {
 	Stage::init();
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/Stage20_LB.map");
+	loadMap("room/Stage20_TB.map");
 
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 1100) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 1100) });
@@ -32,7 +32,7 @@ void Room20TB::init()
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
 	_spawnChest.pos = Vector2(600, 2100);
 
-	_respawnPosition[3] = Vector2(400, 800);
+//	_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(350, 500));
@@ -70,5 +70,32 @@ void Room20TB::update(float const elapsedTime)
 
 void Room20TB::render()
 {
-	Stage::render();
+	D2D_RENDERER->fillRectangle(FloatRect(0, 0, TILESIZE * 30, TILESIZE * 20), 51, 49, 67, 1);
+	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
+	{
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
+	}
+
+	
+	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1200, 1110)));
+
+	Image* cell = IMAGE_MANAGER->findImage("BrokenCell");
+	cell->setScale(4);
+	cell->render(CAMERA->getRelativeV2(Vector2(300, 2094)));
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
 }

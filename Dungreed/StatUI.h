@@ -48,8 +48,9 @@ private:
 	tagStatUI _statEntity[12];
 
 private:
-	vector<Food*>		_foods;		//먹은 음식 정보를 저장
-	tagEatFoods			_foodList[10];	//음식 리스트 셀을 배열로 저장
+	vector<Food*>			_foods;		//먹은 음식 정보를 저장
+	vector<Food*>::iterator	_viFoods;	//삽입 되는 음식이 이미 먹었던 음식과 같은 종류가 있는지 검사하기 위한 반복자
+	tagEatFoods				_foodList[10];	//음식 리스트 셀을 배열로 저장
 
 public:
 	void setPlayer(Player* player) { _player = player; }

@@ -61,13 +61,16 @@ void AccProjectile::release()
 	}
 
 	EFFECT_MANAGER->play(_collisionEffect, _position, _effectSize*_sizeUp, ((_useRotate) ? (_angleRadian) : (0.0f)));
+	if (_img == IMAGE_MANAGER->findImage("BombPouch0")) {
+		SOUND_MANAGER->play("SeeriBullet2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+	}
 }
 
 void AccProjectile::update(float elapsedTime)
 {
 	Vector2 moveDir(0, 0);
 
-	// 중력 적용
+	// 중력 적용s
 	if (_useGravity)
 	{
 		_force.y += _gravity.y * elapsedTime * ((_angleRadian > PI) ? (1) : (-1));
@@ -127,14 +130,14 @@ void AccProjectile::render()
 	{
 		if (_ani->isPlay()) {
 			_img->aniRender(CAMERA->getRelativeV2(_position), _drawSize, _ani);
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+			//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		}
 	}
 	else
 	{
 		if (_ani->isPlay()) {
 			_img->render(CAMERA->getRelativeV2(_position), _drawSize);
-			D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+			//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 			//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, resize, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 		}
 

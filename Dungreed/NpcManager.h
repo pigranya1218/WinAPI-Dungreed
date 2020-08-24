@@ -3,18 +3,21 @@
 
 class Stage;
 class UIManager;
+class ObjectManager;
 struct tagShowNpc;
 
 class NpcManager
 {
 private:
 	Stage* _stage;
+	ObjectManager* _objectMgr;
 	UIManager* _uiMgr;
 	vector<Npc*> _npcs;
 
 public:
 	void setStage(Stage* stage) { _stage = stage; }
 	void setUIManager(UIManager* uiMgr) { _uiMgr = uiMgr; }
+	void setObjectManager(ObjectManager* objectMgr) { _objectMgr = objectMgr; }
 
 	void init();
 	void release();

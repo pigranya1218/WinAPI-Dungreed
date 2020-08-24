@@ -5,12 +5,6 @@
 #include <sstream>
 #include <iomanip>
 
-#include "BigPaintBlush.h"
-#include "CosmosSword.h"
-#include "GreenDadBat.h"
-#include "MiniEarth.h"
-#include "GatlingGun.h"
-
 void ShopUI::drawWeaponInfo(Item* weapon, Vector2 pos, bool isRT, bool isSell)
 {
 	if (weapon == nullptr) return;
@@ -346,21 +340,11 @@ void ShopUI::init()
 	}
 
 	// FOR TEST
-	Item* item1 = new BigPaintBlush;
-	item1->init();
-	_shopItem.push_back(item1);
-	Item* item2 = new CosmosSword;
-	item2->init();
-	_shopItem.push_back(item2);
-	Item* item3 = new GreenDadBat;
-	item3->init();
-	_shopItem.push_back(item3);
-	Item* item4 = new miniEarth;
-	item4->init();
-	_shopItem.push_back(item4);
-	Item* item5 = new GatlingGun;
-	item5->init();
-	_shopItem.push_back(item5);
+	_shopItem = DATA_MANAGER->getRandomItem(ITEM_RANK::NORMAL, ITEM_RANK::LEGEND, 5);
+	for (int i = 0; i < 5; i++)
+	{
+		_shopItem[i]->init();
+	}
 }
 
 void ShopUI::release()
@@ -650,7 +634,7 @@ void ShopUI::render()
 	}
 
 	// 골드 적기	
-	D2D_RENDERER->renderTextField(_goldRc.left, _goldRc.top, to_wstring(_player->getGold()), RGB(255, 255, 255), _goldRc.getSize().y, _goldRc.getSize().x, _goldRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Alagard");
+	D2D_RENDERER->renderTextField(_goldRc.left, _goldRc.top, to_wstring(_player->getGold()), RGB(255, 255, 255), _goldRc.getSize().y, _goldRc.getSize().x, _goldRc.getSize().y, 1, DWRITE_TEXT_ALIGNMENT_TRAILING, L"Aa카시오페아");
 
 
 	// 드래그 중이라면 마우스 위치에 아이템 그리기

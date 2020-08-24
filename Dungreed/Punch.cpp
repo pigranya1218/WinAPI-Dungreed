@@ -89,7 +89,6 @@ void Punch::backRender(Player* player)
 
 	if (_attackCircle != nullptr)
 	{
-		_attackCircle->render(true);
 	}
 }
 

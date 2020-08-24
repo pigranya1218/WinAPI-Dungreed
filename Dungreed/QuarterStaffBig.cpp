@@ -4,7 +4,7 @@ void QuarterStaffBig::init()
 {
 	_iconImg = IMAGE_MANAGER->findImage("QuarterStaffBig");
 	_img = IMAGE_MANAGER->findImage("QuarterStaffBig");
-	_price = 600;
+	_price = 1600;
 	_itemName = L"박달나무 쌍단봉'";
 	_displayText = L"\"무술의 달인이 애용하던 쌍단봉. 맞으면 매우 아프다.\"";
 	_itemCode = 0x02201; //양손 고급 01;
@@ -140,17 +140,14 @@ void QuarterStaffBig::frontRender(Player* player)
 	
 	
 	
-	_attackDebug.render(true);
 }
 
 void QuarterStaffBig::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
 
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-
-	Vector2 renderPosHand = pos;
+	CAMERA->pushShakeEvent(3, 0.1f);
+	
 	_oneAttack = true;
 	_currAttackDelay = _addStat.attackSpeed;
 	//==========================================================================

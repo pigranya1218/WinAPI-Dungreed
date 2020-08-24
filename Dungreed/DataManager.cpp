@@ -1,5 +1,7 @@
 #include "stdafx.h"
 #include "DataManager.h"
+#include "CostumeManager.h"
+#include "ItemManager.h"
 
 void DataManager::init()
 {
@@ -54,6 +56,14 @@ void DataManager::update()
 		if (_loadRc[i].ptInRect(_ptMouse))
 		{
 			_selectedSlot = i;
+				
+			if (KEY_MANAGER->isOnceKeyDown(VK_LBUTTON))
+			{
+				SOUND_MANAGER->stop("main_title");
+				SCENE_MANAGER->changeScene("GAME");
+				_isActive = false;
+			}
+
 		}
 		if (_deleteRc[i].ptInRect(_ptMouse))
 		{
@@ -119,17 +129,17 @@ void DataManager::render()
 	IMAGE_MANAGER->findImage("CURSOR_BASIC")->render(Vector2(_ptMouse.x, _ptMouse.y));
 }
 
-Costume* DataManager::getCostume(COSTUME_TYPE type) const
+Costume* DataManager::getCostume(COSTUME_TYPE type) 
 {
 	return _costumeMgr->getCostume(type);
 }
 
-vector<Item*> DataManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count) const
+vector<Item*> DataManager::getRandomItem(ITEM_RANK startRank, ITEM_RANK endRank, int count)
 {
 	return _itemMgr->getRandomItem(startRank, endRank, count);
 }
 
-Item* DataManager::getItem(int itemCode) const
+Item* DataManager::getItem(int itemCode)
 {
 	return _itemMgr->getItem(itemCode);
 }

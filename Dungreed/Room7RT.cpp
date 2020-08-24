@@ -24,11 +24,11 @@ void Room7RT::init()
 	if (randBox % 10 == 1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
 	else if (randBox % 3 == 1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
-	_spawnChest.pos = Vector2(500, 500);
+	_spawnChest.pos = Vector2(900, 700);
 
 	_respawnPosition[1] = Vector2(900, 570);
 
-	_respawnPosition[2] = Vector2(1550, 600);          
+	     
 	
 	makeDoor(Vector2(900, 475), DIRECTION::UP);
 
@@ -53,5 +53,34 @@ void Room7RT::update(float const elapsedTime)
 
 void Room7RT::render()
 {
-	Stage::render();
+	D2D_RENDERER->fillRectangle(FloatRect(0, 0, TILESIZE * 30, TILESIZE * 20), 51, 49, 67, 1);
+	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
+	{
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
+	}
+
+
+	Image* torture1 = IMAGE_MANAGER->findImage("TortureTable0");
+	torture1->setScale(4);
+	torture1->render(CAMERA->getRelativeV2(Vector2(450, 290)));
+	Image* torture2 = IMAGE_MANAGER->findImage("TortureTable1");
+	torture2->setScale(4);
+	torture2->render(CAMERA->getRelativeV2(Vector2(1150, 280)));
+	Image* cell = IMAGE_MANAGER->findImage("BrokenCell");
+	cell->setScale(4);
+	cell->render(CAMERA->getRelativeV2(Vector2(850, 230)));
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
 }

@@ -14,6 +14,10 @@ void OakBow::init()
 	
 	_addStat.attackSpeed = 1;
 	_addStat.reloadSpeed = 0.1;
+	_addStat.minDamage = 20;
+	_addStat.maxDamage = 25;
+	//_addStat.attackSpeed = 1;
+	//_addStat.reloadSpeed = 1;
 
 	_price = 360;
 
@@ -298,7 +302,6 @@ void OakBow::attack(Player * player)
 	{
 		_isAttack = true;
 	}
-
 
 	_addStat.minDamage = 20;
 	_addStat.maxDamage = 25;

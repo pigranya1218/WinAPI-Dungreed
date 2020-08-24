@@ -29,6 +29,8 @@ HRESULT MainScene::init()
 	_backCloud = IMAGE_MANAGER->findImage("MAIN_SCENE/BACK_CLOUD");
 	_backSpeed = 1;
 
+	SOUND_MANAGER->play("main_title", 1);
+
 	_mouseMove = false;
 	_lastMousePt = _ptMouse;
 
@@ -48,6 +50,7 @@ void MainScene::release()
 
 void MainScene::update()
 {
+	SOUND_MANAGER->setVolume("main_title", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
 	if (CONFIG_MANAGER->isActive()) 
 	{ 
 		CONFIG_MANAGER->update();

@@ -13,7 +13,7 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_position = pos;
 	_direction = direction;
 	_scale = 4;
-	_detectRange = 300;
+	_detectRange = 800;
 
 	// 타격 사이즈 초기화
 	_size = _img->getFrameSize() * _scale;
@@ -41,9 +41,9 @@ void Ghost::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	// 변수 초기화
 	_isDetect = 0;
 	_active = true;
-	_enterCount = 0;
+	
 	// 체력 초기화
-	_curHp = _maxHp = 5;
+	_curHp = _maxHp = 10;
 
 	// 에너미 타입변수 초기화
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::GHOST);
@@ -75,6 +75,7 @@ void Ghost::update(float const timeElapsed)
 			{
 				SOUND_MANAGER->stop("Enemy/Spawn");
 				SOUND_MANAGER->play("Enemy/Spawn", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 				EFFECT_MANAGER->play("Enemy_Destroy", _position, IMAGE_MANAGER->findImage("Enemy_Destroy")->getFrameSize() * _scale);
 				setState(ENEMY_STATE::IDLE);
 			}
@@ -145,9 +146,7 @@ void Ghost::update(float const timeElapsed)
 
 	// 마지막에 체력 확인
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		_enterCount = 0;
-		SOUND_MANAGER->stop("Enemy/Spawn");
+	{			
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -214,6 +213,7 @@ void Ghost::setState(ENEMY_STATE state)
 		case ENEMY_STATE::DIE:
 		{
 			SOUND_MANAGER->stop("Enemy/Spawn");
+			
 			_active = false;
 		}
 		break;

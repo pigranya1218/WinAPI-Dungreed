@@ -14,8 +14,8 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	_direction = direction;
 	_scale = 4;
 	_isDetect = 0;
-	_detectRange = 300;
-	_enterCount = 0;
+	_detectRange = 500;
+	
 	// 피격 렉트 및 사이즈 초기화
 	_size = _img->getFrameSize() * _scale;
 
@@ -26,7 +26,7 @@ void Banshee::init(const Vector2& pos, DIRECTION direction, bool spawnEffect)
 	}
 
 	// 탄막 초기화
-	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2.2, false, true, true, false, false, false);
+	_shooting.init("Banshee/Bullet", "Banshee/Bullet_FX", Vector2(500, 500), _scale, 3, 2, false, true, true, false, false, false);
 	_shooting.attackInit(3,3,10);
 
 	ZeroMemory(&_moving, sizeof(_moving));
@@ -108,10 +108,7 @@ void Banshee::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		SOUND_MANAGER->stop("Enemy/Spawn");
-		SOUND_MANAGER->stop("Banshee/Attack");
-		
+	{				
 		setState(ENEMY_STATE::DIE);
 	}
 }

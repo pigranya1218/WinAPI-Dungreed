@@ -1,15 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+ï»¿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="¼Ò½º ÆÄÀÏ">
+    <Filter Include="ì†ŒìŠ¤ íŒŒì¼">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Çì´õ ÆÄÀÏ">
+    <Filter Include="í—¤ë” íŒŒì¼">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="¸®¼Ò½º ÆÄÀÏ">
+    <Filter Include="ë¦¬ì†ŒìŠ¤ íŒŒì¼">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
@@ -160,9 +160,6 @@
     <Filter Include="Dungreed\GameScene\Enemy\Mob">
       <UniqueIdentifier>{759bebd3-6ec7-4b7f-b645-334b4baa4677}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Dungreed\GameScene\Object\OnlyView">
-      <UniqueIdentifier>{331596e0-74fd-41f5-adc3-346c6f247d9f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Dungreed\GameScene\Npc\Door">
       <UniqueIdentifier>{dae275ec-895b-4bf0-a250-9e97070da4fd}</UniqueIdentifier>
     </Filter>
@@ -178,31 +175,28 @@
     <Filter Include="Dungreed\GameScene\UI">
       <UniqueIdentifier>{9cd0f035-aea3-47ff-91ef-582b4221c0a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2DGameFramework\Manager\CameraManager\Event">
+      <UniqueIdentifier>{c42e6d8d-39f1-4463-815e-773d112f527e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="targetver.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="windowsAPI.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
       <Filter>2DGameFramework\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraEvent.h">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraShakeEvent.h">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="D2DRenderer.h">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -220,7 +214,7 @@
       <Filter>2DGameFramework\Utils</Filter>
     </ClInclude>
     <ClInclude Include="LibraryHeader.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="ProgressBar.h">
       <Filter>2DGameFramework\ProgressBar</Filter>
@@ -370,9 +364,6 @@
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
     </ClInclude>
     <ClInclude Include="IceBall.h">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
-    </ClInclude>
-    <ClInclude Include="miniEarth.h">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClInclude>
     <ClInclude Include="watCher.h">
@@ -527,12 +518,6 @@
     </ClInclude>
     <ClInclude Include="DialogueUI.h">
       <Filter>Dungreed\GameScene\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Lumber.h">
-      <Filter>Dungreed\GameScene\Item\Melee</Filter>
-    </ClInclude>
-    <ClInclude Include="FluteGreatSword.h">
-      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClInclude>
     <ClInclude Include="BreadFood.h">
       <Filter>Dungreed\GameScene\Player\Food\Normal</Filter>
@@ -732,9 +717,6 @@
     <ClInclude Include="ChestNpc.h">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClInclude>
-    <ClInclude Include="ViewObject.h">
-      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
-    </ClInclude>
     <ClInclude Include="GateNpc.h">
       <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClInclude>
@@ -763,10 +745,10 @@
       <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClInclude>
     <ClInclude Include="DoorObject.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="SeeriProjectile.h">
-      <Filter>Çì´õ ÆÄÀÏ</Filter>
+      <Filter>í—¤ë” íŒŒì¼</Filter>
     </ClInclude>
     <ClInclude Include="Room2LR.h">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
@@ -789,19 +771,46 @@
     <ClInclude Include="AbilityNpc.h">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClInclude>
+    <ClInclude Include="CostumeNpc.h">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopUI.h">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemManager.h">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraMoveEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraShakeEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFillEvent.h">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeRatioEvent.h">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Room22LTB.h">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemObject.h">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchObject.h">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="windowsAPI.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="GameNode.cpp">
       <Filter>2DGameFramework\GameNode</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraEvent.cpp">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraShakeEvent.cpp">
-      <Filter>2DGameFramework\Manager\CameraManager</Filter>
     </ClCompile>
     <ClCompile Include="D2DRenderer.cpp">
       <Filter>2DGameFramework\D2DRenderer</Filter>
@@ -940,9 +949,6 @@
     </ClCompile>
     <ClCompile Include="DebugStage.cpp">
       <Filter>Dungreed\GameScene\Stage\Test</Filter>
-    </ClCompile>
-    <ClCompile Include="miniEarth.cpp">
-      <Filter>Dungreed\GameScene\Item\Accessories</Filter>
     </ClCompile>
     <ClCompile Include="watCher.cpp">
       <Filter>Dungreed\GameScene\Item\Accessories</Filter>
@@ -1099,12 +1105,6 @@
     </ClCompile>
     <ClCompile Include="DialogueUI.cpp">
       <Filter>Dungreed\GameScene\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Lumber.cpp">
-      <Filter>Dungreed\GameScene\Item\Melee</Filter>
-    </ClCompile>
-    <ClCompile Include="FluteGreatSword.cpp">
-      <Filter>Dungreed\GameScene\Item\Melee</Filter>
     </ClCompile>
     <ClCompile Include="AccProjectile.cpp">
       <Filter>Dungreed\GameScene\Projectile</Filter>
@@ -1307,9 +1307,6 @@
     <ClCompile Include="ChestNpc.cpp">
       <Filter>Dungreed\GameScene\Npc</Filter>
     </ClCompile>
-    <ClCompile Include="ViewObject.cpp">
-      <Filter>Dungreed\GameScene\Object\OnlyView</Filter>
-    </ClCompile>
     <ClCompile Include="GateNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClCompile>
@@ -1338,16 +1335,16 @@
       <Filter>Dungreed\GameScene\Projectile</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="DoorNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Door</Filter>
     </ClCompile>
     <ClCompile Include="DoorObject.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="SeeriProjectile.cpp">
-      <Filter>¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ClCompile>
     <ClCompile Include="Room12LB.cpp">
       <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
@@ -1373,18 +1370,54 @@
     <ClCompile Include="AbilityNpc.cpp">
       <Filter>Dungreed\GameScene\Npc\Human</Filter>
     </ClCompile>
+    <ClCompile Include="CostumeNpc.cpp">
+      <Filter>Dungreed\GameScene\Npc\Human</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopUI.cpp">
+      <Filter>Dungreed\GameScene\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemManager.cpp">
+      <Filter>Dungreed\GameScene\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraMoveEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraShakeEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFillEvent.cpp">
+      <Filter>2DGameFramework\Manager\CameraManager\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeRatioEvent.cpp">
+      <Filter>Dungreed\GameScene\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Room22LTB.cpp">
+      <Filter>Dungreed\GameScene\Stage\Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemObject.cpp">
+      <Filter>Dungreed\GameScene\Object\Drops</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchObject.cpp">
+      <Filter>Dungreed\GameScene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Costume.cpp">
+      <Filter>Dungreed\GameScene\Player\Costume</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Dungreed.rc">
-      <Filter>¸®¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ë¦¬ì†ŒìŠ¤ íŒŒì¼</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
-      <Filter>¸®¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ë¦¬ì†ŒìŠ¤ íŒŒì¼</Filter>
     </Image>
     <Image Include="Dungreed.ico">
-      <Filter>¸®¼Ò½º ÆÄÀÏ</Filter>
+      <Filter>ë¦¬ì†ŒìŠ¤ íŒŒì¼</Filter>
     </Image>
   </ItemGroup>
 </Project>

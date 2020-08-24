@@ -7,7 +7,6 @@ void ShortSpear::init()
 	_price = 600;
 	
 	_itemName = L"단창";
-	_displayInfos.push_back(L"\"테스트를 위해 제작됨\"");
 	_displayText = L"\"던질 수 있게 제작된 짧은 창\"";
 	_itemCode = 0x02101; // 양손 일반
 
@@ -126,7 +125,11 @@ void ShortSpear::frontRender(Player* player)
 void ShortSpear::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
+
+	CAMERA->pushShakeEvent(10, 0.1f);
+
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
+
 	Vector2 pos = player->getPosition();
 	Vector2 renderPosHand = pos;
 	renderPosHand.x += ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4)); // 손의 위치는 무기의 회전 중심점
@@ -137,8 +140,9 @@ void ShortSpear::attack(Player* player)
 	{
 		angle -= PI2;
 	}
-	_reverseMove = false;
 	_attackAngle = angle;
+
+	_reverseMove = false;
 	_currAttackDelay = _adjustStat.attackSpeed;
 	Vector2 originPos = player->getPosition();
 	originPos.x += ((isLeft) ? (_img->getWidth() * 0.15f * 4) : -(_img->getWidth() * 0.15f * 4)); // 손의 위치는 무기의 회전 중심점

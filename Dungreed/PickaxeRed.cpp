@@ -5,7 +5,7 @@ void PickaxeRed::init()
 {
 	_iconImg = IMAGE_MANAGER->findImage("PickaxeRedIcon");
 	_img = IMAGE_MANAGER->findImage("PickaxeRed");
-	_price = 600;
+	_price = 2600;
 	_itemName = L"붉은 곡괭이";
 	_displayText = L"\"신이 가장 싫어하는 색이 입혀진 곡괭이\"";
 	_itemCode = 0x02300; //양손 에픽 00;
@@ -152,7 +152,6 @@ void PickaxeRed::frontRender(Player* player)
 		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(hand2), 40, 36, 58, 1.f, 2.f, (weaponDegree + _angleOffset), CAMERA->getRelativeV2(pos)); // 손의 렉트를 그린다
 	}
 
-	_attackDebug.render(true);
 
 }
 
@@ -160,12 +159,10 @@ void PickaxeRed::frontRender(Player* player)
 void PickaxeRed::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-	Vector2 renderPosHand = pos;
+
+	CAMERA->pushShakeEvent(10, 0.1f);
+	
 	_oneAttack = true;
-	// 손으로부터 마우스 에임까지의 각도
-	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_drawEffect = true;
 	_currAttackDelay = _adjustStat.attackSpeed;
 	//==========================================================================

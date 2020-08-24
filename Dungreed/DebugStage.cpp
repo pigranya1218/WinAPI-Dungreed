@@ -14,44 +14,8 @@ void DebugStage::init()
 	
 
 	_tileImage = IMAGE_MANAGER->findImage("sampleTile1");
-	loadMap("room/Stage23_LR.map");
+	loadMap("room/Stage20_LB.map");
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_BOMB, Vector2(950, 700) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_BOMB, Vector2(1250, 700) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(650, 400) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(1450, 400) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(600, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(700, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(800, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(900, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1000, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1100, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1200, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1300, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1400, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::GHOST, Vector2(1500, 500) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(670, 900) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(1430, 900) });
-	
-	int randBox = RANDOM->getInt(10);
-	int boxPer = RANDOM->getInt(10);
-	if (boxPer % 5 == 1)_spawnChest.spawn = false;
-	else _spawnChest.spawn = true;
-
-	if (randBox % 10 == 1)_spawnChest.type = NPC_TYPE::CHEST_YELLOW;
-	else if (randBox % 3 == 1)_spawnChest.type = NPC_TYPE::CHEST_BLUE;
-	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
-	_spawnChest.pos = Vector2(1200, 900);
-
-	_objectMgr->spawnObject(0x0001, Vector2(700, 650));
-	_objectMgr->spawnObject(0x0001, Vector2(740, 650));
-	_objectMgr->spawnObject(0x0002, Vector2(780, 670));
-
-	_objectMgr->spawnObject(0x0000, Vector2(1100, 900));
-	_objectMgr->spawnObject(0x0000, Vector2(1140, 900));
-	_objectMgr->spawnObject(0x0001, Vector2(1180, 900));
-
-	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(600, 600), DIRECTION::LEFT);
 	
 
 
@@ -65,19 +29,18 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_DAGGER, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	// 에너미 테스트입니다.
 	
-	/*_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::MINOTAURS, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_RED, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_NORMAL, Vector2(WINSIZEX / 2 + 400, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));	
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 500, WINSIZEY / 2));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));*/
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(WINSIZEX / 2 - 600, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::MINOTAURS, Vector2(WINSIZEX / 2 - 500, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_RED, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_GIANT_NORMAL, Vector2(WINSIZEX / 2 + 400, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));	
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 500, WINSIZEY / 2));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_ICE, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2, WINSIZEY / 2));
@@ -121,7 +84,7 @@ void DebugStage::init()
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::GHOST, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::OVIBOS, Vector2(WINSIZEX / 2 + 100, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_MAGICIAN_ICE, Vector2(WINSIZEX / 2 + 600, WINSIZEY / 2 + 200));
-	_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2 + 30, WINSIZEY / 2 + 300));
+	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BELIAL, Vector2(WINSIZEX / 2 + 30, WINSIZEY / 2 + 300));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::SKEL_DOG, Vector2(WINSIZEX / 2 + 200, WINSIZEY / 2));
 	//_enemyMgr->spawnEnemy(ENEMY_TYPE::BAT_NORMAL, Vector2(WINSIZEX / 2, WINSIZEY / 2));
 
@@ -143,6 +106,12 @@ void DebugStage::init()
 	//_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(900, 500), DIRECTION::LEFT);
 	
 	//makeDoor(Vector2(400, 300), DIRECTION::LEFT);
+	_torchImg = IMAGE_MANAGER->findImage("Torch");
+	_torchAni = new Animation;
+	_torchAni->init(_torchImg->getWidth(), _torchImg->getHeight(), _torchImg->getMaxFrameX(), _torchImg->getMaxFrameY());
+	_torchAni->setDefPlayFrame(false, true);
+	_torchAni->setFPS(15);
+	_torchAni->start();
 }
 
 void DebugStage::release()
@@ -171,14 +140,28 @@ void DebugStage::update(float const elapsedTime)
 			}
 		}
 	}
+	_torchAni->frameUpdate(elapsedTime);
 }
 
 void DebugStage::render()
 {
 	Stage::render();
 
-	
+	int stageWidth = _tile[0].tileX * TILESIZE;
+	int stageHeight = _tile[0].tileY * TILESIZE;
 
+	/*IMAGE_MANAGER->findImage("Tavern")->setScale(4);
+	CAMERA->render(IMAGE_MANAGER->findImage("Tavern"), Vector2(stageWidth / 2, 648));*/
 
-	//CAMERA->frameRender(_tileImage, Vector2(800,400));
+	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1200, 1110)));
+
+	Image* cell = IMAGE_MANAGER->findImage("BrokenCell");
+	cell->setScale(4);
+	cell->render(CAMERA->getRelativeV2(Vector2(300, 2094)));
+
+	Image* table2 = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1000, 794)));
 }

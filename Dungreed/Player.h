@@ -28,11 +28,13 @@ private:
 	int		_currDashCount;			// 현재 남은 대쉬 카운트
 	float	_currDashCoolTime;		// 현재 대쉬 쿨타임
 	float	_currDashTime;			// 현재 대쉬 남은 유지시간
+	float	_currEffectTime;		// 현재 대쉬 이펙트 체크 시간
 	int		_currSatiety;			// 현재 포만감
 	int		_currGold;				// 현재 골드
 	
+	float	_walkEffectDelay = 0;
+
 	float	_currHitTime;			// 피격 타임
-	
 	
 	Vector2 _force;				// 현재 캐릭터에 가해지는 힘
 	
@@ -83,12 +85,13 @@ public:
 	int getLevel() const noexcept { return _level; }
 	int getMaxHp() const noexcept { return _adjustStat.maxHp; }
 	int getCurrHp() const noexcept { return _currHp; }
-	void setCurrHp(int hp) { _currHp = min(_adjustStat.maxHp, hp); }
+	void setCurrHp(int hp) { _currHp = max(0, min(_adjustStat.maxHp, hp)); }
 
 	int getGold() const noexcept { return _currGold; }
 	void setGold(int gold) { _currGold = max(0, gold); }
 	int getMaxSatiety() const noexcept { return _adjustStat.maxSatiety; }
 	int getSatiety() const noexcept { return _currSatiety; }
+	void setSatiety(int satiety) { _currSatiety = max(0, satiety); }
 
 	int getMaxDash() const noexcept { return _adjustStat.maxDashCount; }
 	int getCurrDash() const noexcept { return _currDashCount; }
@@ -103,11 +106,12 @@ public:
 	void unequipWeapon(int index);	// 무기 장착중이던 아이템을 해제함
 	void unequipAcc(int index);		// 악세사리 장착중이던 아이템을 해제함
 	void swapItem(int indexA, int indexB);
+	bool collisionItem(Item* item);
 
 	bool ateFood(Food* food); // true면 먹었음, false면 먹지 못했음
 
 	PlayerStat getCurrStat() { return _adjustStat; };
-	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); }	// 어빌리티 스탯 설정자
+	void setAbilityStat(PlayerStat abilityStat) { _abilityStat = abilityStat; updateAdjustStat(); _currHp = _adjustStat.maxHp; }	// 어빌리티 스탯 설정자
 	void setSpecialAbility(vector<Item*> specialAbility);
 
 	Costume* getCurrCostume() { return _costume; }

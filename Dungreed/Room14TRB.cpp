@@ -29,9 +29,9 @@ void Room14TRB::init()
 
 	_respawnPosition[3] = Vector2(1500, 930);
 
-	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
-	_objectMgr->spawnObject(0x0001, Vector2(350, 500));
-	_objectMgr->spawnObject(0x0002, Vector2(450, 500));
+	_objectMgr->spawnObject(0x0000, Vector2(300, 1020));
+	_objectMgr->spawnObject(0x0001, Vector2(350, 1020));
+	_objectMgr->spawnObject(0x0002, Vector2(450, 1020));
 
 	_npcMgr->spawnNpc(NPC_TYPE::GATE, Vector2(1300, 1000), DIRECTION::LEFT);
 

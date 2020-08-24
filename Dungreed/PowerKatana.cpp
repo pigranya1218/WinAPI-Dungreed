@@ -6,7 +6,7 @@ void PowerKatana::init()
 	_iconImg = IMAGE_MANAGER->findImage("PowerKatana");
 	_img = IMAGE_MANAGER->findImage("PowerKatanaHUD");
 	_imgAttack = IMAGE_MANAGER->findImage("KatanaWhite");
-	_price = 600;
+	_price = 2800;
 	_itemName = L"육도 '가이'";
 	_displayText = L"\"봉인이 되어 있군요. 여덟 개의 문을 열 수 있게 되어 있지만, 네 개 이상은 저희의 힘으론.. -로젠-\"";
 	_itemCode = 0x02301; //양손 희귀 01;
@@ -125,18 +125,17 @@ void PowerKatana::frontRender(Player* player)
 			EFFECT_MANAGER->play("EFFECT_EXKATANAFX", effectPos, Vector2(250, 300), -degree+ 180 , isLeft);
 		}
 	}
-	_attackDebug.render(true);
 }
 
 void PowerKatana::attack(Player* player)
 {
 	if (_currAttackDelay > 0) return;
-	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
-	Vector2 pos = player->getPosition();
-	Vector2 renderPosHand = pos;
+
+	CAMERA->pushShakeEvent(10, 0.1f);
+
+	
 	_oneAttack = false;
 	// 손으로부터 마우스 에임까지의 각도
-	float angle = atan2f(-(CAMERA->getAbsoluteY(_ptMouse.y) - renderPosHand.y), (CAMERA->getAbsoluteX(_ptMouse.x) - renderPosHand.x));
 	_drawEffect = true;
 	_currAttackDelay = _addStat.attackSpeed;
 

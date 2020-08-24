@@ -22,7 +22,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	}
 
 	ZeroMemory(&_attacking, sizeof(_attacking));
-	_attacking.attackInit(3, 8, 1,0,0,50);
+	_attacking.attackInit(3, 5, 3,0,0,50);
 
 	ZeroMemory(&_moving, sizeof(_moving));
 	_moving.force = Vector2(RUSHSPEED, 0.0f);
@@ -34,7 +34,7 @@ void Ovibos::init(const Vector2 & pos, DIRECTION direction, bool spawnEffect)
 	_active = true;
 
 	_curHp = _maxHp = 60;
-	_enterCount = 0;
+	
 	_myEnemyType = static_cast<int>(ENEMY_TYPE::OVIBOS);
 }
 
@@ -138,9 +138,7 @@ void Ovibos::update(float const timeElapsed)
 	_ani->frameUpdate(timeElapsed);
 
 	if (max(0, _curHp) <= 0 && _state != ENEMY_STATE::DIE)
-	{
-		_enterCount = 0;
-		SOUND_MANAGER->stop("Enemy/Spawn");
+	{		
 		setState(ENEMY_STATE::DIE);
 	}
 }
@@ -202,6 +200,7 @@ void Ovibos::setState(ENEMY_STATE state)
 		case ENEMY_STATE::DIE:
 		{
 			SOUND_MANAGER->stop("Enemy/Spawn");
+
 			_active = false;
 		}
 		break;

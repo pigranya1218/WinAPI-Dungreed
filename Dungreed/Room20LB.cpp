@@ -14,14 +14,15 @@ void Room20LB::init()
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_ICE, Vector2(350, 1100) });
 	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_BIG_NORMAL, Vector2(750, 1100) });
 
-	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(670, 1490) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::MINOTAURS, Vector2(400, 2100) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(670, 1670) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(380, 1650) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(970, 1650) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 2100) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 2100) });
-	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(700, 2100) });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BANSHEE, Vector2(670, 1490),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::MINOTAURS, Vector2(400, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::BAT_GIANT_RED, Vector2(670, 1670),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(380, 1650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_SMALL_BOW, Vector2(970, 1650),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(600, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(800, 2100),2 });
+	_spawnEnemies.push_back({ ENEMY_TYPE::SKEL_DOG, Vector2(700, 2100),2 });
+
 	int randBox = RANDOM->getInt(10);
 	int boxPer = RANDOM->getInt(10);
 	if (boxPer % 5 == 1)_spawnChest.spawn = false;
@@ -32,7 +33,7 @@ void Room20LB::init()
 	else _spawnChest.type = NPC_TYPE::CHEST_BASIC;
 	_spawnChest.pos = Vector2(600, 2100);
 
-	_respawnPosition[3] = Vector2(400, 800);
+	//_respawnPosition[3] = Vector2(400, 800);
 
 	_objectMgr->spawnObject(0x0000, Vector2(300, 500));
 	_objectMgr->spawnObject(0x0001, Vector2(350, 500));
@@ -70,5 +71,33 @@ void Room20LB::update(float const elapsedTime)
 
 void Room20LB::render()
 {
-	Stage::render();
+	D2D_RENDERER->fillRectangle(FloatRect(0, 0, TILESIZE * 30, TILESIZE * 20), 51, 49, 67, 1);
+	for (int i = 0; i < _tile[0].tileX * _tile[0].tileY; ++i)
+	{
+		if (_tile[i].tileFrameX[0] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[0], _tile[i].tileFrameY[0]);
+		}
+		if (_tile[i].tileFrameX[1] != -1)
+		{
+			_tileImage->setScale(4);
+			CAMERA->frameRender(_tileImage, _tile[i].rc.getCenter(), _tile[i].tileFrameX[1], _tile[i].tileFrameY[1]);
+		}
+	}
+
+
+	Image* table = IMAGE_MANAGER->findImage("TortureTable1");
+	table->setScale(4);
+	table->render(CAMERA->getRelativeV2(Vector2(1200, 1110)));
+
+	Image* cell = IMAGE_MANAGER->findImage("BrokenCell");
+	cell->setScale(4);
+	cell->render(CAMERA->getRelativeV2(Vector2(300, 2094)));
+
+	_npcMgr->render();
+	_enemyMgr->render();
+	_objectMgr->render();
+	_projectileMgr->render();
+	
 }

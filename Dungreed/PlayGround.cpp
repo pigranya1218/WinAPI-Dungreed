@@ -133,6 +133,11 @@ HRESULT playGround::init()
 	// ** PLAYER
 	IMAGE_MANAGER->addFrameImage("PLAYER/DASH_DUST", L"resources/images/Effect/Dash/DustEffect.png", 6, 1);
 	EFFECT_MANAGER->addEffect("PLAYER/DASH_DUST_EFFECT", "PLAYER/DASH_DUST", 30, 10);
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/BASE", L"resources/images/Effect/Dash/Shadow/base_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/METAL", L"resources/images/Effect/Dash/Shadow/metal_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/ALICE", L"resources/images/Effect/Dash/Shadow/alice_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/RED_LOTUS", L"resources/images/Effect/Dash/Shadow/redLotus_player_jump_shadow.png");
+	IMAGE_MANAGER->addImage("PLAYER/DASH_SHADOW/PICKAX", L"resources/images/Effect/Dash/Shadow/pickax_player_jump_shadow.png");
 	// ** UI
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_BG", L"resources/images/gameScene/ui/PlayerLifeBack.png");
 	IMAGE_MANAGER->addImage("UI/PLAYER_LIFE_FRAME", L"resources/images/gameScene/ui/PlayerLifeBase 1.png");
@@ -166,6 +171,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("UI/INVENTORY/INVEN_INFO", L"resources/images/gameScene/ui/inventory/info.png");
 	// *** STATUS
 	IMAGE_MANAGER->addImage("UI/STAT/BASE", L"resources/images/gameScene/ui/status/Base.png");
+	IMAGE_MANAGER->addImage("UI/STAT/LIST_BASE", L"resources/images/gameScene/ui/status/RestaurantMenu_Withoutmoney.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW", L"resources/images/gameScene/ui/status/Stat_00_Pow.png");
 	IMAGE_MANAGER->addImage("UI/STAT/POW_SELECTED", L"resources/images/gameScene/ui/status/Stat_00_Pow_Selected.png");
 	IMAGE_MANAGER->addImage("UI/STAT/DEF", L"resources/images/gameScene/ui/status/Stat_01_Def.png");
@@ -370,11 +376,16 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addImage("Well", L"resources/images/Map/Well.png");
 	IMAGE_MANAGER->addFrameImage("DungeonEat", L"resources/images/Villiage/DungeonEat.png", 28, 1);
 
-	SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true);
-	SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false);
+	SOUND_MANAGER->addSound("Villiage_BGM", "resources/sound/Ui/bgm/0.Town.wav",true,true); //마을 bmg 
+	SOUND_MANAGER->addSound("DungeonEat", "resources/sound/DungreedSound/DungeonOut.wav", false, false); //던그리드가 입을 벌릴때 소리
 	
 
 	// ** DUNGEON
+	IMAGE_MANAGER->addImage("BrokenCell", L"resources/images/Dungeon/BrokenCell0.png");
+	IMAGE_MANAGER->addImage("TortureTable0", L"resources/images/Dungeon/TortureTable0.png");
+	IMAGE_MANAGER->addImage("TortureTable1", L"resources/images/Dungeon/TortureTable1.png");
+	IMAGE_MANAGER->addImage("UpperCell0", L"resources/images/Dungeon/UpperCell0.png");
+	IMAGE_MANAGER->addImage("UpperCell1", L"resources/images/Dungeon/UpperCell1.png");
 	IMAGE_MANAGER->addImage("InDungeonShop", L"resources/images/Villiage/InDungeonShop.png");
 	IMAGE_MANAGER->addImage("Tavern", L"resources/images/Villiage/Tavern.png");
 	IMAGE_MANAGER->addFrameImage("CandleOn1", L"resources/images/Map/CandleOn1.png", 6, 1);
@@ -391,8 +402,8 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("MetalDoorSound", "resources/sound/Ui/bgm/JailMetalDoorSoundEffect.wav", false, false);
 	SOUND_MANAGER->addSound("Foodshop", "resources/sound/Ui/bgm/Foodshop.wav", true, true);
 	SOUND_MANAGER->addSound("Shop", "resources/sound/Ui/bgm/Shop.wav", true, true);
-	
-
+	SOUND_MANAGER->addSound("BossRoomBef", "resources/sound/Ui/bgm/ambience_prison.wav", true, true);
+	SOUND_MANAGER->addSound("Boss", "resources/sound/Ui/bgm/1.JailBoss.wav", true, true);
 
 	// ** OBJECT
 	// *** BROKEN
@@ -433,30 +444,35 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/IDLE", L"resources/images/costumes/base/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/BASE/MOVE", L"resources/images/costumes/base/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/BASE/JUMP", L"resources/images/costumes/base/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/BASE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/base_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/BASE/DIE", L"resources/images/costumes/base/player_die.png");
 
 	// *** METAL_PLATE
 	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/IDLE", L"resources/images/costumes/metalPlate/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/METAL_PLATE/MOVE", L"resources/images/costumes/metalPlate/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/JUMP", L"resources/images/costumes/metalPlate/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/metal_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/METAL_PLATE/DIE", L"resources/images/costumes/metalPlate/player_die.png");
 
 	// *** PICKAX
 	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/IDLE", L"resources/images/costumes/pickax/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/PICKAX/MOVE", L"resources/images/costumes/pickax/player_run.png", 8, 1);
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP", L"resources/images/costumes/pickax/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/PICKAX/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/pickax_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/PICKAX/DIE", L"resources/images/costumes/pickax/player_die.png");
 
 	// *** ALICE
 	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/IDLE", L"resources/images/costumes/alice/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/ALICE/MOVE", L"resources/images/costumes/alice/player_run.png", 6, 1);
 	IMAGE_MANAGER->addImage("COSTUME/ALICE/JUMP", L"resources/images/costumes/alice/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/ALICE/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/alice_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/ALICE/DIE", L"resources/images/costumes/alice/player_die.png");
 
 	// *** RED_LOTUS
 	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/IDLE", L"resources/images/costumes/redLotus/player_idle.png", 5, 1);
 	IMAGE_MANAGER->addFrameImage("COSTUME/RED_LOTUS/MOVE", L"resources/images/costumes/redLotus/player_run.png", 6, 1);
 	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/JUMP", L"resources/images/costumes/redLotus/player_jump.png");
+	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/JUMP_EFFECT", L"resources/images/Effect/Dash/Shadow/redLotus_player_jump_shadow.png");
 	IMAGE_MANAGER->addImage("COSTUME/RED_LOTUS/DIE", L"resources/images/costumes/redLotus/player_die.png");
 
 	// ** WEAPON
@@ -542,6 +558,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("PowerKatanaEf", L"resources/images/MeleeWeapon/PowerKatanaEf.png",9,1);
 	IMAGE_MANAGER->addFrameImage("PaintSwing", L"resources/images/MeleeWeapon/PaintSwing.png",23,1);
 	IMAGE_MANAGER->addFrameImage("CosmosSlashFX0", L"resources/images/MeleeWeapon/CosmosSlashFX0.png",7,1);
+	IMAGE_MANAGER->addFrameImage("CosmosSwordFx1", L"resources/images/MeleeWeapon/CosmosSwordFx1.png",7,1);
 	
 	//***MeleeWeaponSound
 	SOUND_MANAGER->addSound("SOUND_katana", "resources/sound/MeleeWeapon/katana.wav", false, false);  // 카타나
@@ -626,6 +643,7 @@ HRESULT playGround::init()
 	IMAGE_MANAGER->addFrameImage("Seeri0", L"resources/images/Accessories/Seeri0.png", 9, 1);                  // 자동공격 인형 프레임 이미지
 	IMAGE_MANAGER->addImage("selected", L"resources/images/Accessories/selected.png");                         // 자동공격 인형 조준점
 	IMAGE_MANAGER->addImage("SeeriBullet", L"resources/images/Accessories/SeeriBullet.png");                   // 자동공격 인형 탄
+	IMAGE_MANAGER->addFrameImage("SeeriBullet0", L"resources/images/Accessories/SeeriBullet0.png", 6, 1);                  // 자동공격 인형 프레임 이미지
 
 	// ** SPECIAL ABILITY
 	IMAGE_MANAGER->addFrameImage("ALICE_ABILITY_WARNING", L"resources/images/weapon/specialAbility/alice_warning.png", 4, 1);
@@ -767,7 +785,7 @@ HRESULT playGround::init()
 	EFFECT_MANAGER->addEffect("DemonBootsF", "DemonBoots0", 15, 50);
 	EFFECT_MANAGER->addEffect("DadBatBulletFX", "DadBatBulletFX", 15, 50);
 	EFFECT_MANAGER->addEffect("ArrowHitEffect", "ArrowHitEffect", 15, 20);
-
+	EFFECT_MANAGER->addEffect("SeeriBullet0", "SeeriBullet0", 20, 20);
 	// ** Boss
 	// *  Belial
 	// *  Head
@@ -824,6 +842,14 @@ HRESULT playGround::init()
 
 
 	//사운드
+	//** MAIN SCENE
+	SOUND_MANAGER->addSound("main_title", "resources/sound/Ui/bgm/title.wav", true, false);					//메인 타이틀 화면 bgm
+
+	//** STAGE
+	//SOUND_MANAGER->addSound("Town", "resources/sound/stage/bgm/0.Town.wav", true, false);			//마을 bmg 
+	SOUND_MANAGER->addSound("ambienceTown", "resources/sound/stage/bgm/ambience_town.wav", true, false);	//마을 bmg 효과음
+	
+
 	//** PLAYER / UI
 	SOUND_MANAGER->addSound("Player/Step1", "resources/sounds/player/step_lth1.wav", false, false);			//플레이어 이동1
 	SOUND_MANAGER->addSound("Player/Step2", "resources/sounds/player/step_lth2.wav", false, false);			//플레이어 이동2
@@ -845,6 +871,8 @@ HRESULT playGround::init()
 	// ** ENEMY
 	SOUND_MANAGER->addSound("Enemy/Die"		, "resources/sound/enemy/public/MonsterDie.wav"	, false, false);	// 사망(공용)
 	SOUND_MANAGER->addSound("Enemy/GetHit"	, "resources/sound/enemy/public/Hit_Monster.wav", false, false);	// 피격(공용)
+	SOUND_MANAGER->addSound("Enemy/Spawn", "resources/sound/enemy/public/SpawnMonster.wav", false, false);	// 피격(공용)
+
 
 	// *  박쥐
 	SOUND_MANAGER->addSound("Bat/Attack"		, "resources/sound/enemy/bat/monster-sound2_bat.wav"				, false, false);	// 작은 박쥐 공격
@@ -872,7 +900,6 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("Belial/Bullet"	, "resources/sound/enemy/belial/random5.wav"			, false, false);	// 탄막 발사
 	SOUND_MANAGER->addSound("Belial/Sword"	, "resources/sound/enemy/belial/slimeball.wav"			, false, false);	// 검 소환
 
-	//*	니플헤임
 
 	// * 무기
 	// ** 원거리
@@ -882,6 +909,15 @@ HRESULT playGround::init()
 	SOUND_MANAGER->addSound("bow_attack", "resources/sounds/weapon/LongDistanceWeapon/etc-sound0034_Bow.wav", false, false);
 	SOUND_MANAGER->addSound("boomerang_attack_sound", "resources/sounds/weapon/LongDistanceWeapon/Fantasy_Game_Skill_Axethrow_B.wav", false, false);
 	SOUND_MANAGER->addSound("MagicStick_sound", "resources/sounds/weapon/LongDistanceWeapon/flaunchLightbringer.wav", false, false);
+	SOUND_MANAGER->addSound("RifleFire", "resources/sounds/weapon/LongDistanceWeapon/RifleFire.wav", false, false);
+	SOUND_MANAGER->addSound("Reload", "resources/sounds/weapon/LongDistanceWeapon/Reload.wav", false, false);
+	SOUND_MANAGER->addSound("Reload2", "resources/sounds/weapon/LongDistanceWeapon/Reload2.wav", false, false);
+
+	 //악세서리
+	SOUND_MANAGER->addSound("SeeriBullet1", "resources/sounds/accessories/bigdrummo_MetalJumper_Landing.wav", false, false);
+	SOUND_MANAGER->addSound("SeeriBullet2", "resources/sounds/accessories/fireball(CC-BY3.0) Bart K..wav", false, false);
+	SOUND_MANAGER->addSound("VolspaS", "resources/sounds/accessories/ice_spell_freeze_small_02", false, false);
+	
 
 	TIME_MANAGER->init();
 	CONFIG_MANAGER->init();

@@ -94,6 +94,8 @@ void UIManager::init()
 		_mapUI.infos[i].textRc = FloatRect(Vector2(390, 650 + 36 * i), Vector2(300, 40), PIVOT::CENTER);
 	}
 
+	_dropUI.rc = FloatRect(WINSIZEX / 2 - 250, WINSIZEY - 200, WINSIZEX / 2 + 250, WINSIZEY - 50);
+
 	_bossUI.active = false;
 	_bossUI.bossHpFrameImg = IMAGE_MANAGER->findImage("UI/BOSS/HP_FRAME");
 	_bossUI.bossHpBgImg = IMAGE_MANAGER->findImage("UI/BOSS/HP_BG");
@@ -247,6 +249,8 @@ void UIManager::update(float const elapsedTime)
 	// Inventory Open
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::INVENTORY)))
 	{
+		SOUND_MANAGER->stop("Player/Inven/OpenInven");
+		SOUND_MANAGER->play("Player/Inven/OpenInven", 1);
 		// toggle
 		_inventoryUI.setActive(!_inventoryUI.isActive());
 	}
@@ -281,6 +285,11 @@ void UIManager::update(float const elapsedTime)
 	if (KEY_MANAGER->isOnceKeyDown(VK_ESCAPE))
 	{
 		isClose = true;
+	}
+
+	if (_dropUI.remainTime > 0)
+	{
+		_dropUI.remainTime -= elapsedTime;
 	}
 
 	if (_mapUI.isShow)
@@ -604,6 +613,20 @@ void UIManager::render()
 			}
 		}
 
+		// DROP UI
+		if(_dropUI.remainTime > 0)
+		{
+			D2D_RENDERER->fillRectangle(_dropUI.rc, 0, 0, 0, 0.3);
+			_dropUI.item->getIconImg()->setScale(4);
+			
+			FloatRect iconRc = FloatRect(_dropUI.rc.left + 10, _dropUI.rc.top, _dropUI.rc.left + 100, _dropUI.rc.bottom);
+			_dropUI.item->getIconImg()->render(iconRc.getCenter());
+			FloatRect text1Rc = FloatRect(iconRc.right + 10, _dropUI.rc.top + 10, _dropUI.rc.right - 10, _dropUI.rc.top + 50);
+			D2D_RENDERER->renderTextField(text1Rc.left, text1Rc.top, L"¾ÆÀÌÅÛ È¹µæ", RGB(255, 255, 255), 38, text1Rc.getWidth(), text1Rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+			FloatRect text2Rc = FloatRect(iconRc.right + 10, _dropUI.rc.top + 60, _dropUI.rc.right - 10, _dropUI.rc.bottom - 10);
+			D2D_RENDERER->renderTextField(text2Rc.left, text2Rc.top, _dropUI.item->getItemName(), getItemRankColor(_dropUI.item->getItemRank()), 38, text2Rc.getWidth(), text2Rc.getHeight(), 1, DWRITE_TEXT_ALIGNMENT_CENTER);
+		}
+
 		// Minimap UI
 		{
 			Vector2 playerPos = _player->getPosition() / 16;
@@ -721,19 +744,26 @@ void UIManager::render()
 			{
 				for (int y = 0; y < 4; y++)
 				{
-					if (_mapUI.uiMap[x][y].exist && _mapUI.uiMap[x][y].visible)
+					if (_mapUI.uiMap[x][y].exist)
 					{
 						int offsetX = (x - _mapUI.currIndex.x) * (30 + 114);
 						int offsetY = (y - _mapUI.currIndex.y) * (30 + 114);
-						if (_mapUI.uiMap[x][y].isConnect[2] && _mapUI.uiMap[x + 1][y].visible) // ¿ì
+						if (_mapUI.uiMap[x][y].isConnect[2]) // ¿ì
 						{
-							FloatRect rc = FloatRect(centerX + offsetX + 48, centerY + offsetY - 3, centerX + offsetX + 48 + 30 + 18, centerY + offsetY + 3);
-							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							if (_mapUI.uiMap[x + 1][y].visible)
+							{
+								FloatRect rc = FloatRect(centerX + offsetX + 48, centerY + offsetY - 3, centerX + offsetX + 48 + 30 + 18, centerY + offsetY + 3);
+								D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							}
+							
 						}
-						if (_mapUI.uiMap[x][y].isConnect[3] && _mapUI.uiMap[x][y + 1].visible) // ÇÏ
+						if (_mapUI.uiMap[x][y].isConnect[3] ) // ÇÏ
 						{
-							FloatRect rc = FloatRect(centerX + offsetX - 3, centerY + offsetY + 48, centerX + offsetX + 3, centerY + offsetY + 48 + 30 + 18);
-							D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							if (_mapUI.uiMap[x][y + 1].visible)
+							{
+								FloatRect rc = FloatRect(centerX + offsetX - 3, centerY + offsetY + 48, centerX + offsetX + 3, centerY + offsetY + 48 + 30 + 18);
+								D2D_RENDERER->fillRectangle(rc, 255, 255, 255, 1);
+							}
 						}
 					}
 				}
@@ -927,7 +957,7 @@ void UIManager::setMap(vector<vector<Stage*>> stageMap, string stageName)
 			else
 			{
 				_mapUI.uiMap[x][y].exist = true;
-				_mapUI.uiMap[x][y].visible = true;
+				_mapUI.uiMap[x][y].visible = false;
 				_mapUI.uiMap[x][y].rc = FloatRect(Vector2(-30 + (30 + 114) * (x), -30 + (30 + 114) * y), Vector2(114, 114), PIVOT::LEFT_TOP);
 				_mapUI.uiMap[x][y].isConnect.resize(4);
 				vector<bool> isWall = _mapUI.stageMap[x][y]->getWall();
@@ -1042,6 +1072,39 @@ void UIManager::showEnemyHp(float maxHp, float curHp, Vector2 pos)
 	hpUI.maxHp = maxHp;
 	hpUI.currHp = curHp;
 	_enemyHpUI.push_back(hpUI);
+}
+
+void UIManager::showDropItem(Item* item)
+{
+	_dropUI.item = item;
+	_dropUI.remainTime = 3;
+}
+
+COLORREF UIManager::getItemRankColor(ITEM_RANK rank)
+{
+	switch (rank)
+	{
+	case ITEM_RANK::NORMAL:
+	{
+		return RGB(255, 255, 255);
+	}
+	break;
+	case ITEM_RANK::HIGH:
+	{
+		return RGB(43, 123, 255);
+	}
+	break;
+	case ITEM_RANK::RARE:
+	{
+		return RGB(255, 210, 0);
+	}
+	break;
+	case ITEM_RANK::LEGEND:
+	{
+		return RGB(255, 0, 120);
+	}
+	break;
+	}
 }
 
 void UIManager::setEatFoods(Food* food)

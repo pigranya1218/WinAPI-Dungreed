@@ -93,9 +93,12 @@ void GuidedProjectile::init(const string imgKey, const string collisionEffect, c
 	_timeCount = 0;
 	_afterCount = 0;
 	_mirageCount = 1;
+	_frameIndex = 0;
 
 	if (_afterimage)
 	{
+		_alphaValue = 1.0f;
+		_alphaCount = 0;
 	}
 }
 
@@ -123,7 +126,7 @@ void GuidedProjectile::update(float elapsedTime)
 	}
 
 	// 투사체부터 에너미까지의 각도
-	float guidedAngleRadian = atan2f(-(CAMERA->getAbsoluteY(_enemyPos.y) - _position.y), (CAMERA->getAbsoluteX(_enemyPos.x) - _position.x)) + PI2;
+	float guidedAngleRadian = atan2f(-(_enemyPos.y - _position.y), (_enemyPos.x) - _position.x) + PI2;
 	if (guidedAngleRadian > PI2)
 	{
 		guidedAngleRadian -= PI2;
@@ -212,10 +215,7 @@ void GuidedProjectile::update(float elapsedTime)
 				_collisionCount = 0;
 				_info->attackID = TTYONE_UTIL::getHash(to_string(0x09999) + to_string(TIME_MANAGER->getWorldTime()));
 			}
-			
 			return;
-
-			
 		}
 	}
 	else
@@ -244,15 +244,37 @@ void GuidedProjectile::update(float elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
+	// 잔상 사용시
 	if (_afterimage)
 	{
+		_alphaCount += elapsedTime;
+		_shodow.img = IMAGE_MANAGER->findImage(_img->getLoadInfo().key);
+
+		_alphaValue =-_alphaCount;
+
 		_mirageCount += elapsedTime;
-		if (_mirageCount > 1)
+		if (_mirageCount > 0.15)
 		{
-			_miragePos = _position;
-			_shodow.angleRadian = _angleRadian;
-			//_shodow.pos = Vector2(_position.x );
-			//_shadow.push_back()
+			_alphaCount = 0;
+			_mirageCount -= 0.15;
+			generateAfterImage(elapsedTime);
+			if (_useAni)
+			{
+				_shodow.frameX = _frameIndex;
+				
+			}
+		}
+		for (int i = 0; i < _vShadow.size();)
+		{
+			if (_vShadow[i].remainTime <= 0)
+			{
+				_vShadow.erase(_vShadow.begin() + i);
+			}
+			else
+			{
+				_vShadow[i].remainTime = max(0, _vShadow[i].remainTime - elapsedTime);
+				i++;
+			}
 		}
 	}
 }
@@ -266,31 +288,31 @@ void GuidedProjectile::render()
 	if (_useAni)
 	{
 		_img->aniRender(CAMERA->getRelativeV2(_position), _renderSize, _ani);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 	else
 	{
 		_img->render(CAMERA->getRelativeV2(_position), _renderSize);
-		D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
+		//D2D_RENDERER->drawRectangle(CAMERA->getRelativeFR(FloatRect(_position, _size, PIVOT::CENTER)), D2D1::ColorF::Enum::Red, 5);
 	}
 
 	if (_afterimage)
 	{
-		if (_mirageCount > 1)
+		for (int i = 0; i < _vShadow.size(); i++)
 		{
-			_mirageCount -= 1;
-			_afterImg[0]->render(CAMERA->getRelativeV2(_miragePos), _renderSize);
+			_shodow.img->setScale(4);
+			_shodow.img->setAlpha(_vShadow[i].remainTime / 0.5);
+
+			if (_useAni)
+			{
+				_shodow.img->frameRender(CAMERA->getRelativeV2(_vShadow[i].pos), 0, 0);
+			}
+			if (!_useAni)
+			{
+				_shodow.img->render(CAMERA->getRelativeV2(_vShadow[i].pos));
+			}
 		}
 	}
-	
-	/*if (_afterimage)
-	{
-		if (_afterCount%2 == 0)
-		{
-			_afterImg[_countI]->render(CAMERA->getRelativeV2(_position), _renderSize);
-		}
-	}*/
-	//D2D_RENDERER->renderText(CAMERA->getRelativeX(_position.x), CAMERA->getRelativeY(_position.y - 10), to_wstring(_angleRadian), 20, D2DRenderer::DefaultBrush::Black, DWRITE_TEXT_ALIGNMENT_LEADING, L"둥근모꼴", 0.f);
 }
 
 void GuidedProjectile::aniUpdate(float const elapsedTime)
@@ -299,4 +321,22 @@ void GuidedProjectile::aniUpdate(float const elapsedTime)
 	{
 		_ani->frameUpdate(elapsedTime);
 	}
+}
+
+void GuidedProjectile::generateAfterImage(float elapsedTime)
+{
+	float distance = 2.0f;
+	tagShadow shadow;
+
+	shadow.angleRadian = PI - _angleRadian;
+	shadow.pos.x = _position.x + cosf(shadow.angleRadian) * distance;
+	shadow.pos.y = _position.y + -sinf(shadow.angleRadian) * distance;
+	shadow.remainTime = 0.5;
+	
+	_frameIndex++;
+	if (_frameIndex > 3)
+	{
+		_frameIndex = 0;
+	}
+	_vShadow.push_back(shadow);
 }

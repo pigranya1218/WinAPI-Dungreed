@@ -146,6 +146,11 @@ vector<FloatRect> GameScene::getEnemyRects()
 	return _stageMgr->getEnemyRects();
 }
 
+void GameScene::showDropItem(Item* item)
+{
+	_uiMgr->showDropItem(item);
+}
+
 void GameScene::moveTo(GameObject * object, Vector2 moveDir)
 {
 	_stageMgr->moveTo(object, moveDir);

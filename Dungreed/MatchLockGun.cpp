@@ -44,6 +44,7 @@ void MatchLockGun::update(Player* player, float const elapsedTime)
 	else if (_currReloadDelay > 0) // 재장전 중
 	{
 		_currReloadDelay = max(0, _currReloadDelay - elapsedTime);
+
 		if (_currReloadDelay == 0) // 장전이 끝난 경우
 		{
 			_currBullet = _maxBullet;
@@ -106,18 +107,10 @@ void MatchLockGun::frontRender(Player* player)
 		_drawEffect = false;
 		Vector2 effectPos = renderPosHand; // 손의 위치로부터
 
-		/*Vector2 effectPos;
-		effectPos.x = (isLeft) ? (renderPosHand.x + 18) : (renderPosHand.x - 18);
-		effectPos.y = renderPosHand.y;*/
-
 		Vector2 effectSize = Vector2(220, 220);
 		float length = _img->getWidth() * 0.6f * 4; // 무기 길이만큼
 		effectPos.x += cosf(degree * (PI / 180) + ((isLeft)?(-0.2):(0.2))) * length;
 		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-
-		/*float changeX = cosf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;
-		effectPos.x += (isLeft) ? (changeX + 18) : (changeX - 18);
-		effectPos.y += -sinf(degree * (PI / 180) + ((isLeft) ? (-0.2) : (0.2))) * length;*/
 
 		EFFECT_MANAGER->play("L_Effect_HecateSmoke", effectPos, effectSize, degree);
 
@@ -134,6 +127,9 @@ void MatchLockGun::frontRender(Player* player)
 	// 재장전 중이라면 재장전 UI를 그린다.
 	if (_currReloadDelay > 0)
 	{
+		SOUND_MANAGER->stop("Reload2");
+		SOUND_MANAGER->play("Reload2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 		float ratio = _currReloadDelay / _adjustStat.reloadSpeed;
 		FloatRect reloadBar = FloatRect(Vector2(pos.x, pos.y - 60), Vector2(92, 4), PIVOT::CENTER);
 		FloatRect reloadHandle = FloatRect(Vector2(reloadBar.right - ratio * reloadBar.getSize().x, reloadBar.getCenter().y), Vector2(8, 12), PIVOT::CENTER);
@@ -145,6 +141,7 @@ void MatchLockGun::frontRender(Player* player)
 	{
 		_reloadEffect->setScale(4);
 		_reloadEffect->aniRender(CAMERA->getRelativeV2(Vector2(pos.x, pos.y - 60)), _reloadAni);
+
 	}
 }
 
@@ -164,6 +161,8 @@ void MatchLockGun::attack(Player* player)
 		}
 		return;
 	}
+	SOUND_MANAGER->stop("RifleFire");
+
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
@@ -209,7 +208,11 @@ void MatchLockGun::attack(Player* player)
 	attackInfo->maxDamage = _addStat.maxDamage;
 	attackInfo->knockBack = 30;
 
+	CAMERA->pushShakeEvent(10, 0.1f);
+
 	player->attack(projectile, attackInfo);
+
+	SOUND_MANAGER->play("RifleFire", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	_currAttackDelay = _adjustStat.attackSpeed; // 공격 쿨타임 설정
 	_currBullet -= 1; // 탄환 1 줄임
 	_drawEffect = true; // 이펙트 그리기
@@ -233,6 +236,8 @@ void MatchLockGun::reload(Player * player)
 	if (_currReloadDelay == 0) // 재장전 중이 아니라면
 	{
 		_currReloadDelay = _adjustStat.reloadSpeed; // 재장전 함
+		SOUND_MANAGER->stop("Reload2");
+		SOUND_MANAGER->play("Reload2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 	}
 }
 
