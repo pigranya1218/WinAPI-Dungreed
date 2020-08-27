@@ -282,9 +282,9 @@ void Player::init()
 	////testAcc13->init();
 	////_inventory[5] = testAcc13;
 
-	/*Voluspa* testAcc22 = new Voluspa;
-	testAcc22->init();
-	_inventory[5] = testAcc22;*/
+	//Voluspa* testAcc22 = new Voluspa;
+	//testAcc22->init();
+	//_inventory[5] = testAcc22;
 
 	//MartialArtOfTiger* testAcc14 = new MartialArtOfTiger;
 	//testAcc14->init();
@@ -321,9 +321,9 @@ void Player::init()
 	//testWeapon2->init();
 	//_inventory[11] = testWeapon2;
 
-	CosmosSword* testWeapon3 = new CosmosSword; // 이거 없으면 못깰 지경../
-	testWeapon3->init();
-	_inventory[12] = testWeapon3;
+	//CosmosSword* testWeapon3 = new CosmosSword; // 이거 없으면 못깰 지경../
+	//testWeapon3->init();
+	//_inventory[12] = testWeapon3;
 	////
 	///*PickaxeRed* testWeapon4 = new PickaxeRed;
 	//testWeapon4->init();
@@ -341,37 +341,37 @@ void Player::init()
 	//testWeapon5->init();
 	//_inventory[13] = testWeapon5;
 
-	//Boomerang* testweapon6 = new Boomerang;
-	//testweapon6->init();
-	//_inventory[12] = testweapon6;
+	OakBow* testWeapon1 = new OakBow;
+	testWeapon1->init();
+	_inventory[10] = testWeapon1;
 
-	///*MatchLockGun* testWeapon6 = new MatchLockGun;
-	//testWeapon6->init();
-	//_inventory[14] = testWeapon6;*/
+	MatchLockGun* testWeapon2 = new MatchLockGun;
+	testWeapon2->init();
+	_inventory[11] = testWeapon2;
 
-	/*GatlingGun* testWeapon7 = new GatlingGun;
-	testWeapon7->init();
-	_inventory[3] = testWeapon7;*/
+	Boomerang* testweapon3 = new Boomerang;
+	testweapon3->init();
+	_inventory[12] = testweapon3;
 
-	//MagicStick* testWeapon8 = new MagicStick;
-	//testWeapon8->init();
-	//_inventory[14] = testWeapon8;
+	GatlingGun* testWeapon4 = new GatlingGun;
+	testWeapon4->init();
+	_inventory[13] = testWeapon4;
 
-	//OakBow* testWeapon8 = new OakBow;
-	//testWeapon8->init();
-	//_inventory[14] = testWeapon8;
+	MagicStick* testWeapon5 = new MagicStick;
+	testWeapon5->init();
+	_inventory[14] = testWeapon5;
 
-	///*SilverBullet* testAcc19 = new SilverBullet;
-	//testAcc19->init();
-	//_inventory[14] = testAcc19;*/
+	SilverBullet* testAcc20 = new SilverBullet;
+	testAcc20->init();
+	_inventory[7] = testAcc20;
 
-	//MagnifyingGlass* testAcc18 = new MagnifyingGlass;
-	//testAcc18->init();
-	//_inventory[5] = testAcc18;
+	MagnifyingGlass* testAcc21 = new MagnifyingGlass;
+	testAcc21->init();
+	_inventory[8] = testAcc21;
 
-	//MultiBullet* testAcc19 = new MultiBullet;
-	//testAcc19->init();
-	//_inventory[6] = testAcc19;
+	MultiBullet* testAcc22 = new MultiBullet;
+	testAcc22->init();
+	_inventory[9] = testAcc22;
 
 	_currWeaponIndex = 0;
 	_currWeaponChangeCoolTime = 0;
@@ -422,7 +422,8 @@ void Player::update(float const elapsedTime)
 	// 장비 교체
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::CHANGE_WEAPON)) && _currWeaponChangeCoolTime == 0)
 	{
-		SOUND_MANAGER->play("Player/Swap", 1);
+		SOUND_MANAGER->stop("Player/Swap");
+		SOUND_MANAGER->play("Player/Swap", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
 		updateAdjustStat();
@@ -508,7 +509,8 @@ void Player::update(float const elapsedTime)
 		}
 		else if (_currJumpCount > 0)
 		{
-			SOUND_MANAGER->play("Player/Jump", 1);
+			SOUND_MANAGER->stop("Player/Jump");
+			SOUND_MANAGER->play("Player/Jump", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 			_force.y = -_adjustStat.jumpPower;
 			_currJumpCount -= 1;
 		}
@@ -518,6 +520,7 @@ void Player::update(float const elapsedTime)
 	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		//대쉬 효과음 재생
+		SOUND_MANAGER->stop("Player/Dash");
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		
 
@@ -799,7 +802,8 @@ bool Player::isHit(FloatRect* rc, AttackInfo* info)
 	}
 	_attackedId.push_back(info->attackID); // 맨 뒤에 새로운 공격 ID 추가
 
-	SOUND_MANAGER->play("Player/Hit");
+	SOUND_MANAGER->stop("Player/Hit");
+	SOUND_MANAGER->play("Player/Hit", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }
@@ -837,7 +841,8 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 	}
 	_attackedId.push_back(info->attackID); // 맨 뒤에 새로운 공격 ID 추가
 
-	SOUND_MANAGER->play("Player/Hit");
+	SOUND_MANAGER->stop("Player/Hit");
+	SOUND_MANAGER->play("Player/Hit", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }

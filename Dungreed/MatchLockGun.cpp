@@ -44,6 +44,7 @@ void MatchLockGun::update(Player* player, float const elapsedTime)
 	else if (_currReloadDelay > 0) // 재장전 중
 	{
 		_currReloadDelay = max(0, _currReloadDelay - elapsedTime);
+
 		if (_currReloadDelay == 0) // 장전이 끝난 경우
 		{
 			_currBullet = _maxBullet;
@@ -126,6 +127,9 @@ void MatchLockGun::frontRender(Player* player)
 	// 재장전 중이라면 재장전 UI를 그린다.
 	if (_currReloadDelay > 0)
 	{
+		SOUND_MANAGER->stop("Reload2");
+		SOUND_MANAGER->play("Reload2", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
+
 		float ratio = _currReloadDelay / _adjustStat.reloadSpeed;
 		FloatRect reloadBar = FloatRect(Vector2(pos.x, pos.y - 60), Vector2(92, 4), PIVOT::CENTER);
 		FloatRect reloadHandle = FloatRect(Vector2(reloadBar.right - ratio * reloadBar.getSize().x, reloadBar.getCenter().y), Vector2(8, 12), PIVOT::CENTER);
@@ -137,6 +141,7 @@ void MatchLockGun::frontRender(Player* player)
 	{
 		_reloadEffect->setScale(4);
 		_reloadEffect->aniRender(CAMERA->getRelativeV2(Vector2(pos.x, pos.y - 60)), _reloadAni);
+
 	}
 }
 
@@ -157,6 +162,7 @@ void MatchLockGun::attack(Player* player)
 		return;
 	}
 	SOUND_MANAGER->stop("RifleFire");
+
 
 	bool isLeft = (player->getDirection() == DIRECTION::LEFT);
 	Vector2 pos = player->getPosition();
