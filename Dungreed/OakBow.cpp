@@ -69,18 +69,14 @@ void OakBow::update(Player * player, float const elapsedTime)
 		_ani->frameUpdate(elapsedTime);
 	}
 
-	//if (_ani->getPlayIndex() == 3)
-	//{
-	//	_effectCount++;
-	//	if (_effectCount == 20)
-	//	{
-	//		_drawEffect = true;						// 이펙트 그리기
-	//	}
-	//	else
-	//	{
-	//		_drawEffect = false;
-	//	}
-	//}
+	if (player->getWeapon(player->getWeaponIndex())->getItemCode() == 0x02161)
+	{
+		if (KEY_MANAGER->isOnceKeyUp(CONFIG_MANAGER->getKey(ACTION_TYPE::ATTACK)))
+		{
+			_addStat.minDamage = 20;
+			_addStat.maxDamage = 25;
+		}
+	}
 
 	renderPosHand = pos;
 	renderPosHand.x += ((isLeft) ? (_img->getFrameSize().x * 0.1f * 4) : -(_img->getFrameSize().y * 0.1f * 4)); // 손의 위치는 무기의 회전 중심점
@@ -106,9 +102,6 @@ void OakBow::update(Player * player, float const elapsedTime)
 
 	if (_isAttack)
 	{
-		//_ani->setFPS(1);
-		//_ani->setPlayFrame(0, 4, false);
-		//_ani->start();
 		if (_frameCount == 1)
 		{
 			SOUND_MANAGER->stop("bow_arrow_draw");
@@ -143,7 +136,6 @@ void OakBow::update(Player * player, float const elapsedTime)
 
 			Vector2 arrowPos = renderPosWeapon;
 			arrowPos.x = (isLeft) ? (renderPosWeapon.x + anglePos.x + 5) : (renderPosWeapon.x + anglePos.x - 15);
-			//arrowPos.y = (isLeft) ? (renderPosWeapon.y + 10) : (renderPosWeapon.y);
 			
 			Image* effectImg = IMAGE_MANAGER->findImage("ArrowHitEffect");
 
@@ -152,13 +144,7 @@ void OakBow::update(Player * player, float const elapsedTime)
 			projectile->setSize(Vector2(80, 15));
 			projectile->setTeam(OBJECT_TEAM::PLAYER);
 
-			/*Vector2 ssize = effectImg->getSize();
-			ssize.x *= 4;
-			ssize.y *= 4;*/
-
-			//projectile->init("Arrow00", angleRadian, 30 * 50, false, false, 20, true, "L_Effect_ArrowHit", Vector2(effectImg->getFrameSize().x * 4, effectImg->getFrameSize().y * 4), 800);
 			Image* bulletImg = IMAGE_MANAGER->findImage("Arrow00");
-			//Image* effectImg = IMAGE_MANAGER->findImage("ArrowHitEffect");
 
 			Vector2 bulletSize = bulletImg->getSize();
 			bulletSize.x *= 4;

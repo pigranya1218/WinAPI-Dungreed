@@ -38,13 +38,13 @@ GuidedProjectile::GuidedProjectile(const GuidedProjectile & source)
 	_collisionPlatForm = source._collisionPlatForm;
 
 	_collisionEffect = source._collisionEffect;
-	_renderSize = source._renderSize;
 
 	_useGravity = source._useGravity;
 	_gravity = source._gravity;
 
 	_useRotate = source._useRotate;
 	_length = source._length;
+	_afterimage = source._afterimage;
 }
 
 void GuidedProjectile::init(const string imgKey, const string collisionEffect, const Vector2 & drawSize, const Vector2 & collsionRectSize, const Vector2 & effectSize, const Vector2 & force, const float maxTime, const float angleRadian, bool useAni, bool isAniLoop, int aniFps, bool useRotate, bool useGravity, bool collsionGround, bool collsionPlatForm, bool collsionEnemy, bool afterimage)
@@ -300,16 +300,16 @@ void GuidedProjectile::render()
 	{
 		for (int i = 0; i < _vShadow.size(); i++)
 		{
-			_shodow.img->setScale(4);
+			//_shodow.img->setScale(4);
 			_shodow.img->setAlpha(_vShadow[i].remainTime / 0.5);
 
 			if (_useAni)
 			{
-				_shodow.img->frameRender(CAMERA->getRelativeV2(_vShadow[i].pos), 0, 0);
+				_shodow.img->frameRender(CAMERA->getRelativeV2(_vShadow[i].pos), _renderSize, 0, 0);
 			}
 			if (!_useAni)
 			{
-				_shodow.img->render(CAMERA->getRelativeV2(_vShadow[i].pos));
+				_shodow.img->render(CAMERA->getRelativeV2(_vShadow[i].pos), _renderSize);
 			}
 		}
 	}
