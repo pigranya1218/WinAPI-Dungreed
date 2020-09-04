@@ -332,6 +332,7 @@ void StageManager::moveRoom(Vector2 moveDir)
 		SOUND_MANAGER->stop("Foodshop");
 		SOUND_MANAGER->stop("Shop");
 		SOUND_MANAGER->play("Shop", CONFIG_MANAGER->getVolume(SOUND_TYPE::BGM));
+		
 	}
 	else if (_lastStage->getRoomType() == ROOMTYPE::NORMAL && _currStage->getRoomType() == ROOMTYPE::SHOP)
 	{

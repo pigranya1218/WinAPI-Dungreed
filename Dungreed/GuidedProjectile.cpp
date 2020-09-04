@@ -248,7 +248,6 @@ void GuidedProjectile::update(float elapsedTime)
 	if (_afterimage)
 	{
 		_alphaCount += elapsedTime;
-		_shodow.img = IMAGE_MANAGER->findImage(_img->getLoadInfo().key);
 
 		_alphaValue =-_alphaCount;
 
@@ -258,11 +257,12 @@ void GuidedProjectile::update(float elapsedTime)
 			_alphaCount = 0;
 			_mirageCount -= 0.15;
 			generateAfterImage(elapsedTime);
-			if (_useAni)
+			/*if (_useAni)
 			{
+				_frameIndex = _ani->getPlayIndex();
 				_shodow.frameX = _frameIndex;
 				
-			}
+			}*/
 		}
 		for (int i = 0; i < _vShadow.size();)
 		{
@@ -301,15 +301,15 @@ void GuidedProjectile::render()
 		for (int i = 0; i < _vShadow.size(); i++)
 		{
 			//_shodow.img->setScale(4);
-			_shodow.img->setAlpha(_vShadow[i].remainTime / 0.5);
+			_vShadow[i].img->setAlpha(_vShadow[i].remainTime / 0.5);
 
 			if (_useAni)
 			{
-				_shodow.img->frameRender(CAMERA->getRelativeV2(_vShadow[i].pos), _renderSize, 0, 0);
+				_vShadow[i].img->frameRender(CAMERA->getRelativeV2(_vShadow[i].pos), _renderSize, 0, 0);
 			}
 			if (!_useAni)
 			{
-				_shodow.img->render(CAMERA->getRelativeV2(_vShadow[i].pos), _renderSize);
+				_vShadow[i].img->render(CAMERA->getRelativeV2(_vShadow[i].pos), _renderSize);
 			}
 		}
 	}
@@ -332,11 +332,7 @@ void GuidedProjectile::generateAfterImage(float elapsedTime)
 	shadow.pos.x = _position.x + cosf(shadow.angleRadian) * distance;
 	shadow.pos.y = _position.y + -sinf(shadow.angleRadian) * distance;
 	shadow.remainTime = 0.5;
-	
-	_frameIndex++;
-	if (_frameIndex > 3)
-	{
-		_frameIndex = 0;
-	}
+	shadow.img = IMAGE_MANAGER->findImage(_img->getLoadInfo().key);
+
 	_vShadow.push_back(shadow);
 }

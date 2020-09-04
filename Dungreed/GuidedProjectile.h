@@ -45,7 +45,7 @@ private:
 	float		_collisionCount;
 	float		_alphaCount;
 	float		_alphaValue;
-	tagShadow	_shodow;
+	//tagShadow	_shodow;
 	vector<tagShadow> _vShadow;
 	int			_frameIndex;
 public:

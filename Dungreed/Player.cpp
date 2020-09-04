@@ -216,9 +216,9 @@ void Player::init()
 	testAcc1->init();
 	_equippedWeapon[0] = testAcc1;*/
 
-	Seeri* testAcc24 = new Seeri;
+	/*Seeri* testAcc24 = new Seeri;
 	testAcc24->init();
-	_inventory[1] = testAcc24;
+	_inventory[1] = testAcc24;*/
 
 	////GreenBat* testAcc2 = new GreenBat;
 	////testAcc2->init();
@@ -420,7 +420,8 @@ void Player::update(float const elapsedTime)
 	// 장비 교체
 	if (KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::CHANGE_WEAPON)) && _currWeaponChangeCoolTime == 0)
 	{
-		SOUND_MANAGER->play("Player/Swap", 1);
+		SOUND_MANAGER->stop("Player/Swap");
+		SOUND_MANAGER->play("Player/Swap", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		_currWeaponIndex = !_currWeaponIndex;
 		_currWeaponChangeCoolTime = 1;
 		updateAdjustStat();
@@ -484,7 +485,8 @@ void Player::update(float const elapsedTime)
 		}
 		else if (_currJumpCount > 0)
 		{
-			SOUND_MANAGER->play("Player/Jump", 1);
+			SOUND_MANAGER->stop("Player/Jump");
+			SOUND_MANAGER->play("Player/Jump", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 			_force.y = -_adjustStat.jumpPower;
 			_currJumpCount -= 1;
 		}
@@ -494,6 +496,7 @@ void Player::update(float const elapsedTime)
 	if (!_gameScene->isUIActive() && KEY_MANAGER->isOnceKeyDown(CONFIG_MANAGER->getKey(ACTION_TYPE::DASH)) && _currDashCount > 0)
 	{
 		//대쉬 효과음 재생
+		SOUND_MANAGER->stop("Player/Dash");
 		SOUND_MANAGER->play("Player/Dash", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 		
 
@@ -775,7 +778,8 @@ bool Player::isHit(FloatRect* rc, AttackInfo* info)
 	}
 	_attackedId.push_back(info->attackID); // 맨 뒤에 새로운 공격 ID 추가
 
-	SOUND_MANAGER->play("Player/Hit");
+	SOUND_MANAGER->stop("Player/Hit");
+	SOUND_MANAGER->play("Player/Hit", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }
@@ -813,7 +817,8 @@ bool Player::isHit(FloatCircle* circle, AttackInfo* info)
 	}
 	_attackedId.push_back(info->attackID); // 맨 뒤에 새로운 공격 ID 추가
 
-	SOUND_MANAGER->play("Player/Hit");
+	SOUND_MANAGER->stop("Player/Hit");
+	SOUND_MANAGER->play("Player/Hit", CONFIG_MANAGER->getVolume(SOUND_TYPE::EFFECT));
 
 	return true; // 위 검사 결과 피격 처리가 되어야 함
 }

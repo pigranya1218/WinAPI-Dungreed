@@ -56,8 +56,6 @@ void OakBow::update(Player * player, float const elapsedTime)
 		if (_currReloadDelay == 0) // 장전이 끝난 경우
 		{
 			_currBullet = _maxBullet;
-
-
 		}
 	}
 
@@ -180,6 +178,9 @@ void OakBow::update(Player * player, float const elapsedTime)
 				_isAttack = false;
 				_isFrameUpdate = true;
 				_frameCount = 0;
+
+				_addStat.minDamage = 20;
+				_addStat.maxDamage = 25;
 			}
 		}
 	}

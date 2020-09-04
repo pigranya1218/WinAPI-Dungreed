@@ -272,9 +272,7 @@ void Minotaurs::render()
 		Vector2 renderPos = _position;
 		renderPos.y += _size.y * 0.6f;
 		_enemyManager->showEnemyHp(_maxHp, _curHp, renderPos);
-	}
-
-	_attack.circleDebug.render(true);
+	}	
 }
 
 void Minotaurs::setState(ENEMY_STATE state)
